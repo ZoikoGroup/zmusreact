@@ -1,5 +1,5 @@
 :root {
-  --background: #ffffff;
+  --background: #ededed;
   --foreground: #171717;
 }
 
@@ -34,9 +34,120 @@ a {
   color: inherit;
   text-decoration: none;
 }
+.headbar {
+  background-image: url('/img/headbar_bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: beige;
+  text-align: center;
+  font-size: 22px;
+  padding: 0px;
+}
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.nav-item.dropdownmg {
+  position: inherit;
+}
+.dropdown-menu {
+  width: 100%;
+  --bs-dropdown-min-width: 14rem;
+}
+.nav-item a {
+  color: #0a0a0a;
+}
+.navbar-nav a:hover {
+  color: #DF1E5A;
+}
+.nav-item a:hover {
+  color: #DF1E5A !important;
+}
+.nav-item .active {
+  color: #DF1E5A !important;
+}
+.btnbox {
+  position: absolute;
+  bottom: 120px;
+}
+.txtred {
+  color: #DF1E5A;
+}
+.body22 {
+  font-size: 22px;
+}
+.pinkbox {
+  width: 180px;
+  height: 140px;
+  background-color: #DF1E5A1C;
+  color: #0a0a0a;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  padding-top: 20px;
+}
+.card-header {
+  color: #DF1E5A;
+  font-size: 24px;
+  font-weight: 600;
+}
+.data {
+  font-size: 30px;
+  font-weight: 600;
+}
+.check-bullet {
+  list-style-image: url('/img/icons/check2.svg');
+}
+.curprice {
+  color: #DF1E5A;
+  font-size: 30px;
+  font-weight: 700;
+}
+.bgred {
+  background-color: #DF1E5A;
+  color: #ffffff;
+}
+.footerbox {
+  background-color: #ededed;
+  color: #171717;
+  margin-top: 30px;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  font-size: 16px;
+}
+.footerboxlarge {
+  background-color: #DDDDDD;
+  font-size: 18px;
+}
+.footerboxlarge ul {
+  list-style-type: none;
+  margin-left: -33px;
+  font-size: 16px;
+}
+.footerboxlarge ul ul {
+  list-style-type: disc;
+  margin-left: -10px;
+}
+.footerboxlarge a:hover {
+  color: rgb(1, 77, 23);
+}
+.bglite {
+  background-color: #fff;
+}
+.icw10 {
+  max-height: 110px;
+}
+/* Mobile view CSS */
+@media (max-width: 600px) {
+  .headbar {
+    font-size: 12px;
+  }
+  .btnbox {
+    bottom: 0px;
+  }
+  .custom-button {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+  .carousel-indicators {
+    display: none !important;
   }
 }
