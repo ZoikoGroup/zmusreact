@@ -82,6 +82,13 @@ const Footer = () => {
                             <Form.Control placeholder="Enter your email address" aria-label="Enter your email address" aria-describedby="basic-addon2" />
                             <Button variant="outline-danger" size="lg" id="button-addon2">Subscribe</Button>
                         </InputGroup>
+                        <Link href={'https://www.facebook.com/zoikomobileusa'} target="_blank"><i className="bi bi-facebook"></i></Link>
+                        <Link href={'https://instagram.com/zoikomobileus'} target="_blank" className="px-3"><i className="bi bi-instagram"></i></Link>
+                        <Link href={'https://uk.pinterest.com/zoikomobileusa/'} target="_blank"><i className="bi bi-pinterest"></i></Link>
+                        <Link href={'https://x.com/zoikomobileusa'} target="_blank" className="px-3"><i className="bi bi-twitter-x"></i></Link>
+                        <Link href={'https://www.linkedin.com/company/zoikomobileusa/'} target="_blank"><i className="bi bi-linkedin"></i></Link>
+                        <Link href={'https://www.threads.net/@zoikomobileus'} target="_blank" className="px-3"><i className="bi bi-threads"></i></Link>
+                        <Link href={'https://www.youtube.com/@ZoikoMobileUSA'} target="_blank"><i className="bi bi-youtube"></i></Link>
                     </Col>
                 </Row>
             </Container>
