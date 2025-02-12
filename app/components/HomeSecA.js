@@ -8,7 +8,7 @@ const HomeSecA = () => {
         <Container className="mt-5">
             <h2 className="txtred text-center pt-5">Join Zoiko Mobile Today and Start Something New!</h2>
             <p className="body22 text-center">Reliable Network Coverage at Low Prices | Free International Calls | Free High Speed 5G Data</p>
-            <div className="d-flex flex-row justify-content-center gap-4 mt-5">
+            <div className="pinkboxwraper justify-content-center gap-4 mt-5">
                 <div className="pinkbox align-items-center">
                     <Link href={"#"}>
                         <Image src={"/img/icons/icon1-home.png"} width={80} height={80} alt="Icon 1" className="mx-auto d-block" />

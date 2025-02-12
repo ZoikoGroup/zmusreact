@@ -3,7 +3,7 @@ import { Card, CardBody, Col, Container, Image, Row } from "react-bootstrap";
 
 const WhyChooseZoiko = () => {
     return (
-        <Container fluid className="bglite p-5 my-4">
+        <Container fluid className="bglite p-5 my-4 whychoose">
             <h2 className="text-center pb-3">Why Choose Zoiko Mobile?</h2>
             <Row className="gx-5">
                 <Col md={4} sm={12} xs={12}>
