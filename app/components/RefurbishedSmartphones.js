@@ -5,12 +5,12 @@ const RefurbishedSmartphones = () => {
     return (
         <Container className="py-5">
             <Row className="align-items-center">
-                <Col>
+                <Col md={6} sm={12} xs={12}>
                     <h2>Pick Up A Fantastic Deal On Our Smartphones!</h2>
                     <p className="body22">From Sleek Design to Lightning-Fast Processors, Our Smartphones Have Got It All.</p>
                     <Button variant="danger" size="lg" href="#">View All Smartphones</Button>
                 </Col>
-                <Col>
+                <Col md={6} sm={12} xs={12}>
                     <Image src="/img/refurbished-smartphones.webp" fluid alt="Refurbished Smartphones" />
                 </Col>
             </Row>

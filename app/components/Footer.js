@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <>
         <Container fluid className="footerboxlarge">
-            <Container className="p-5 mt-4">
+            <Container className="py-5 mt-4">
                 <Row>
                     <Col md={3} sm={12} xs={12}>
                         <p className="txtred">About Us</p>
@@ -93,7 +93,7 @@ const Footer = () => {
                 </Row>
             </Container>
         </Container>
-        <Container fluid className="bgred mb-5 pt-3" style={{maxHeight:'400px'}}>
+        <Container fluid className="bgred mb-5 pt-3">
             <Container className="mt-5 px-5 pt-5 footerbox">
                 <Row>
                     <Col md={4} sm={12} xs={12}>

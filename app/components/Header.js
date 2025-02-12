@@ -16,7 +16,7 @@ const Header = () => {
         <>
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary p-0">
             <Container fluid>
-                <Navbar.Brand href="#home"><Image src='/img/zmuslogo.png' width={160} height={90} alt="Logo" /></Navbar.Brand>
+                <Navbar.Brand href="/"><Image src='/img/zmuslogo.png' width={160} height={90} alt="Logo" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mx-auto">
