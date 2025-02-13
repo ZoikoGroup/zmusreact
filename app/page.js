@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import WhyChooseZoiko from "./components/WhyChooseZoiko";
 import RefurbishedSmartphones from "./components/RefurbishedSmartphones";
 import TopHeader from "./components/TopHeader";
+import PhoneSlider from "./components/PhoneSlider";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
     <CarouselPlans />
     <WhyChooseZoiko />
     <RefurbishedSmartphones />
+    <PhoneSlider />
     <Footer />
     </>
   );
