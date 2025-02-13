@@ -162,6 +162,10 @@ a {
 .icw10 {
   max-height: 110px;
 }
+.slick-prev, .slick-next {
+  background-color: #313030 !important;
+  color: #0a0a0a !important;
+}
 /* Mobile view CSS */
 @media (max-width: 600px) {
   .headbar {
