@@ -53,7 +53,7 @@ const PhoneSlider = () => {
                                 <h4 className="py-2">{item.name}</h4>
                                 <div className="mb-3">Starting From: <span className="txtred body22">{item.price}</span><br />
                                 Available colors: {item.color.map((index) => (
-                                    <span key={index}>{index} </span>
+                                    <span key={index} style={{color:`${index}`}}><i className="bi bi-circle-fill"></i> </span>
                                 ))}<br />
                                 Storage: {item.storage.map((index) => (
                                     <span key={index}>{index} </span>
