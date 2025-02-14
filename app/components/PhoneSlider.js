@@ -51,10 +51,15 @@ const PhoneSlider = () => {
                             <CardBody className="text-center">
                                 <Image src={item.image} alt={item.name} width={220} height={300} className="mx-auto d-block" />
                                 <h4 className="py-2">{item.name}</h4>
-                                <p>Starting From: <span className="txtred body22">{item.price}</span><br />
-                                Available colors: {item.color}<br />
-                                Storage: {item.storage}</p>
-                                <Button variant="outline-danger" href={`/products/${item.slug}`}>View Details</Button>&nbsp;<Button variant="outline-danger" href={`/products/${item.slug}`}>Buy Now</Button>
+                                <div className="mb-3">Starting From: <span className="txtred body22">{item.price}</span><br />
+                                Available colors: {item.color.map((index) => (
+                                    <span key={index}>{index} </span>
+                                ))}<br />
+                                Storage: {item.storage.map((index) => (
+                                    <span key={index}>{index} </span>
+                                ))}</div>
+                                <Button variant="outline-danger" href={`/products/${item.slug}`}>View Details</Button>&nbsp;
+                                <Button variant="outline-danger" href={`/products/${item.slug}`}>Buy Now</Button>
                             </CardBody>
                         </Card>
                     ))}
