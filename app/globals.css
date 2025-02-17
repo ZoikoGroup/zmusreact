@@ -124,6 +124,44 @@ a {
   background-color: #DF1E5A;
   color: #ffffff;
 }
+.green24bold {
+  color: #0A5A35;
+  font-size: 24px;
+  font-weight: 600;
+}
+.green32bold {
+  color: #0A5A35;
+  font-size: 34px;
+  font-weight: 700;
+}
+.green18 {
+  color: #0A5A35;
+  font-size: 22px;
+}
+.txtgreen {
+  color: #0A5A35;
+}
+.checkoutliststorage {
+  list-style-type: none;
+  display: inline-block;
+  padding: 6px 36px;
+  border: 1px solid #0A5A35;
+  border-radius: 8px;
+  margin-right: 8px;
+}
+.checkoutlistcolor {
+  list-style-type: none;
+  display: inline-block;
+  padding: 6px 20px;
+  border: 1px solid #0A5A35;
+  border-radius: 8px;
+  margin-right: 8px;
+}
+.midbigred {
+  color: #DF1E5A;
+  font-size: 32px;
+  font-weight: 400;
+}
 .footerbox {
   background-color: #ededed;
   color: #171717;
@@ -160,7 +198,7 @@ a {
   background-color: #fff;
 }
 .icw10 {
-  max-height: 110px;
+  max-height: 100px;
 }
 .slick-prev, .slick-next {
   background-color: #313030 !important;

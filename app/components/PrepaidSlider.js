@@ -1,18 +1,17 @@
 "use client"
 import React from "react";
-import { Card, CardBody, Container, Button } from "react-bootstrap";
-import Image from "next/image";
-import data from '../products/phonedata.json';
+import { Card, CardBody, Container, Button, Image, Row, Col } from "react-bootstrap";
+import data from '../products/prepaidplans.json';
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const PhoneSlider = () => {
+const PrepaidSlider = () => {
     const settings = {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 1,
         initialSlide: 0,
         responsive: [
@@ -48,18 +47,23 @@ const PhoneSlider = () => {
                 <Slider {...settings}>
                     {data.map((item) => (
                         <Card key={item.id} className="border-0">
-                            <CardBody className="text-center">
-                                <Image src={item.image} alt={item.name} width={220} height={300} className="mx-auto d-block" />
-                                <h4 className="py-2">{item.name}</h4>
-                                <div className="mb-3">Starting From: <span className="txtred body22">{item.price}</span><br />
-                                Available colors: {item.color.map((index) => (
-                                    <span key={index} style={{color:`${index}`}}><i className="bi bi-circle-fill"></i> </span>
-                                ))}<br />
-                                Storage: {item.storage.map((index) => (
-                                    <span key={index}>{index} </span>
-                                ))}</div>
+                            <CardBody>
+                                <Image src={`${item.image}`} fluid alt={`${item.name}`} />
+                                <h4 className="pt-2 txtred">{item.name}</h4>
+                                <hr className="separator" />
+                                <Row>
+                                    <Col className="data">{item.data}</Col>
+                                    <Col style={{textAlign:'right'}}><span className="curprice">{item.price}</span><br />{item.rate}</Col>
+                                </Row>
+                                <hr className="separator" />
+                                <ul className='check-bullet'>
+                                    {item.features.map((index) => (
+                                        <li key={index}>{index}</li>
+                                    ))}
+                                </ul>
+                                <hr className="separator" />
                                 <Button variant="outline-danger" href={`/products/${item.slug}`}>View Details</Button>&nbsp;
-                                <Button variant="outline-danger" href={`/products/${item.slug}`}>Buy Now</Button>
+                                <Button variant="outline-danger" href={`/products/${item.slug}`}>Buy This Plan</Button>
                             </CardBody>
                         </Card>
                     ))}
@@ -68,4 +72,4 @@ const PhoneSlider = () => {
         </Container>
     );
 }
-export default PhoneSlider;
+export default PrepaidSlider;
