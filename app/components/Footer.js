@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <>
         <Container fluid className="footerboxlarge">
-            <Container className="py-5 mt-4">
+            <Container className="py-5">
                 <Row>
                     <Col md={3} sm={12} xs={12}>
                         <p className="txtred">About Us</p>

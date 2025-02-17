@@ -7,6 +7,7 @@ import WhyChooseZoiko from "./components/WhyChooseZoiko";
 import RefurbishedSmartphones from "./components/RefurbishedSmartphones";
 import TopHeader from "./components/TopHeader";
 import PhoneSlider from "./components/PhoneSlider";
+import Testimonials from "./components/Testimonials";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
     <WhyChooseZoiko />
     <RefurbishedSmartphones />
     <PhoneSlider />
+    <Testimonials />
     <Footer />
     </>
   );
