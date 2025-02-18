@@ -91,7 +91,7 @@ a {
 }
 .pinkbox {
   width: 180px;
-  height: 140px;
+  height: 180px;
   background-color: #DF1E5A1C;
   color: #0a0a0a;
   font-size: 16px;
@@ -111,9 +111,13 @@ a {
 .data {
   font-size: 30px;
   font-weight: 600;
+  line-height: 34px;
 }
 .check-bullet {
   list-style-image: url('/img/icons/check2.svg');
+}
+ul li::marker {
+  color: red;
 }
 .curprice {
   color: #DF1E5A;
@@ -204,8 +208,13 @@ a {
   background-color: #313030 !important;
   color: #0a0a0a !important;
 }
+.slick-slide>div {padding: 0 15px;}
 /* Mobile view CSS */
 @media (max-width: 600px) {
+  h2 {
+    font-size: 16px;
+    margin-top: 6px;
+  }
   .headbar {
     font-size: 12px;
   }
@@ -234,12 +243,14 @@ a {
     max-height: 60px;
   }
   .body22 {
-    font-size: 16px;
+    font-size: 12px;
   }
   .data, .curprice, .card-header {
     font-size: 20px;
+    line-height: 22px;
   }
   .tabhead {
     font-size: 14px;
   }
+  .slick-slide>div {padding: 0 2px;}
 }

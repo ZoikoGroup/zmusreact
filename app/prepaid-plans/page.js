@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import PrepaidBanner from "../components/PrepaidBanner";
 import PrepaidSlider from "../components/PrepaidSlider";
+import PrepaidBox from "../components/PrepaidBox";
 
 const PrepaidPlans = () => {
     return (
@@ -14,6 +15,7 @@ const PrepaidPlans = () => {
         <HeadBar text="No Contract Best Prepaid Mobile Phone Deals" />
         <PrepaidBanner />
         <PrepaidSlider />
+        <PrepaidBox />
         <Footer />
         </>
     );

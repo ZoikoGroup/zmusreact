@@ -62,8 +62,8 @@ const PrepaidSlider = () => {
                                     ))}
                                 </ul>
                                 <hr className="separator" />
-                                <Button variant="outline-danger" href={`/products/${item.slug}`}>View Details</Button>&nbsp;
-                                <Button variant="outline-danger" href={`/products/${item.slug}`}>Buy This Plan</Button>
+                                <Button variant="danger" href={`/products/${item.slug}`} size="sm">Buy This Plan</Button>&nbsp;
+                                <Button variant="outline-danger" href={`/products/${item.slug}`} size="sm">View Details</Button>
                             </CardBody>
                         </Card>
                     ))}
