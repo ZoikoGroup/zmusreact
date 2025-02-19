@@ -6,6 +6,8 @@ import HeadBar from "../components/HeadBar";
 import PrepaidBanner from "../components/PrepaidBanner";
 import PrepaidSlider from "../components/PrepaidSlider";
 import PrepaidBox from "../components/PrepaidBox";
+import PrepaidFaqs from "../components/PrepaidFaqs";
+import Testimonials from "../components/Testimonials";
 
 const PrepaidPlans = () => {
     return (
@@ -16,6 +18,8 @@ const PrepaidPlans = () => {
         <PrepaidBanner />
         <PrepaidSlider />
         <PrepaidBox />
+        <PrepaidFaqs />
+        <Testimonials />
         <Footer />
         </>
     );
