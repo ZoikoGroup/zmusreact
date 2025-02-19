@@ -90,8 +90,8 @@ a {
   flex-direction: row;
 }
 .pinkbox {
-  width: 180px;
-  height: 180px;
+  width: 16%;
+  max-height: 16%;
   background-color: #DF1E5A1C;
   color: #0a0a0a;
   font-size: 16px;
@@ -99,9 +99,21 @@ a {
   text-align: center;
   padding-top: 20px;
 }
+.pinkbox p {
+  padding: 10px 0;
+  line-height: 20px;
+}
 .pinkbox a {
   text-decoration: none;
   color: #171717;
+}
+.pinkboxLarge {
+  width: 47%;
+  background-color: #DF1E5A1C;
+  color: #0a0a0a;
+  font-size: 16px;
+  text-align: center;
+  padding-top: 20px;
 }
 .card-header {
   color: #DF1E5A;
@@ -115,9 +127,6 @@ a {
 }
 .check-bullet {
   list-style-image: url('/img/icons/check2.svg');
-}
-ul li::marker {
-  color: red;
 }
 .curprice {
   color: #DF1E5A;
@@ -231,6 +240,17 @@ ul li::marker {
   .pinkbox {
     flex: 40%;
     max-width: 40%;
+  }
+  .pinkboxLarge {
+    flex: 80%;
+    max-width: 80%;
+  }
+  .pinkboxLarge p {
+    font-size: 14px;
+  }
+  .pinkboxLarge h5 {
+    font-size: 17px;
+    font-weight: 500;
   }
   .whychoose {
     padding: 10px !important;

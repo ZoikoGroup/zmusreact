@@ -12,31 +12,31 @@ const HomeSecA = () => {
                 <div className="pinkbox align-items-center">
                     <Link href={"#"}>
                         <Image src={"/img/icons/icon1-home.png"} width={80} height={80} alt="Icon 1" className="mx-auto d-block" />
-                        View Plans
+                        <p>View Plans</p>
                     </Link>
                 </div>
                 <div className="pinkbox">
                     <Link href={"#"}>
                         <Image src={"/img/icons/icon2-home.png"} width={80} height={80} alt="Icon 2" className="mx-auto d-block" />
-                        Activate SIM
+                        <p>Activate Your SIM</p>
                     </Link>
                 </div>
                 <div className="pinkbox">
                     <Link href={"#"}>
                         <Image src={"/img/icons/icon3-home.png"} width={80} height={80} alt="Icon 3" className="mx-auto d-block" />
-                        View Plans
+                        <p>Switch &amp; Save</p>
                     </Link>
                 </div>
                 <div className="pinkbox">
                     <Link href={"#"}>
                         <Image src={"/img/icons/icon4-home.png"} width={80} height={80} alt="Icon 4" className="mx-auto d-block" />
-                        Activate SIM
+                        <p>Special Deals</p>
                     </Link>
                 </div>
                 <div className="pinkbox">
                     <Link href={"#"}>
                         <Image src={"/img/icons/icon5-home.png"} width={80} height={80} alt="Icon 5" className="mx-auto d-block" />
-                        View Plans
+                        <p>Redeem Cashback</p>
                     </Link>
                 </div>
             </div>
