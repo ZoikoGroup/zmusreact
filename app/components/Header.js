@@ -21,7 +21,7 @@ const Header = () => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mx-auto">
                         <Nav.Link href="/prepaid-plans">Prepaid Plans</Nav.Link>
-                        <Nav.Link href="#">Postpaid Plans</Nav.Link>
+                        <Nav.Link href="/postpaid-plans">Postpaid Plans</Nav.Link>
                         <Nav.Link href="#">Business Deals</Nav.Link>
                         <Nav.Link href="#">Travel Plans</Nav.Link>
                         <Nav.Link href="#">Animal &amp; Music</Nav.Link>

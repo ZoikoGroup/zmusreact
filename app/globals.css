@@ -213,11 +213,18 @@ a {
 .icw10 {
   max-height: 100px;
 }
+.postpaidsave {
+  list-style-type: square;
+}
+.postpaidsave li::marker {
+  color: #DF1E5A;
+  font-size: 30px;
+}
 .slick-prev, .slick-next {
   background-color: #313030 !important;
   color: #0a0a0a !important;
 }
-.slick-slide>div {padding: 0 15px;}
+.slick-slide>div {padding: 0 5px;}
 /* Mobile view CSS */
 @media (max-width: 600px) {
   h2 {
