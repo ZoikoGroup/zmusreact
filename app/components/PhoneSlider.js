@@ -9,7 +9,8 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const PhoneSlider = () => {
     const settings = {
-        dots: false,
+        dots: true,
+        arrows: true,
         infinite: true,
         speed: 500,
         slidesToShow: 4,

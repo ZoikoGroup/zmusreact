@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import { Card, CardBody, Container, Button, Image, Row, Col } from "react-bootstrap";
-import data from '../products/prepaidplans.json';
+import data from '../products/postpaidplans.json';
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -44,7 +44,7 @@ const PrepaidSlider = () => {
     };
     return (
         <Container fluid className="p-5 bglite">
-            <h2 className="text-center">Zoiko Mobile Prepaid Plans</h2>
+            <h2 className="text-center">Zoiko Mobile Postpaid Plans</h2>
             <div className="slider-container">
                 <Slider {...settings}>
                     {data.map((item) => (
