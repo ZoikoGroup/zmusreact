@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Container, Image } from "react-bootstrap";
 import PostpaidSave from "./PostpaidSave";
 
 const PrepaidBox = () => {
@@ -59,7 +59,6 @@ const PrepaidBox = () => {
         </Container>
         <PostpaidSave />
         <Image src="/img/fullbanner-postpaid.webp" fluid alt="Banner" />
-        
         </>
     );
 }

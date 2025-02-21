@@ -4,25 +4,26 @@ import Image from "next/image";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../globals.css';
 import { useState } from "react";
+import { usePathname} from 'next/navigation';
 
 const Header = () => {
 
     const [show, setShow] = useState(false);
-
+    const pathname = usePathname();
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     
     return (
         <>
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary p-0">
-            <Container fluid>
+            <Container fluid className="px-5">
                 <Navbar.Brand href="/"><Image src='/img/zmuslogo.png' width={160} height={90} alt="Logo" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mx-auto">
-                        <Nav.Link href="/prepaid-plans">Prepaid Plans</Nav.Link>
-                        <Nav.Link href="/postpaid-plans">Postpaid Plans</Nav.Link>
-                        <Nav.Link href="#">Business Deals</Nav.Link>
+                        <Nav.Link href="/prepaid-plans" className={pathname == "/prepaid-plans" ? "active" : "" }>Prepaid Plans</Nav.Link>
+                        <Nav.Link href="/postpaid-plans" className={pathname == "/postpaid-plans" ? "active" : "" }>Postpaid Plans</Nav.Link>
+                        <Nav.Link href="/business-deals" className={pathname == "/business-deals" ? "active" : "" }>Business Deals</Nav.Link>
                         <Nav.Link href="#">Travel Plans</Nav.Link>
                         <Nav.Link href="#">Animal &amp; Music</Nav.Link>
                         <NavDropdown title="Devices" id="collapsible-nav-dropdown">

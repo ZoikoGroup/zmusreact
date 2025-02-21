@@ -34,6 +34,10 @@ a {
   color: #0a0a0a;
   text-decoration: none;
 }
+.active {
+  color: #DF1E5A !important;
+  font-weight: 600;
+}
 .headbar {
   background-image: url('/img/headbar_bg.jpg');
   background-repeat: no-repeat;
@@ -88,6 +92,20 @@ a {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+}
+.redimgbg {
+  background-image: url('/img/bg-business-plan.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 300px;
+  color: #fff;
+}
+.redimgbg .container {
+  width: 50%;
+}
+.redimgbg p {
+  font-size: 18px;
 }
 .pinkbox {
   width: 16%;
@@ -280,4 +298,13 @@ a {
     font-size: 14px;
   }
   .slick-slide>div {padding: 0 2px;}
+  .redimgbg .container {
+    width: 100%;
+  }
+  .redimgbg h4 {
+    font-size: 17px;
+  }
+  .redimgbg p {
+    font-size: 13px;
+  }
 }
