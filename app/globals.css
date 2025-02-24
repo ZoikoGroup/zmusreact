@@ -85,6 +85,9 @@ a {
 .txtred {
   color: #DF1E5A;
 }
+.txtwhite {
+  color: #fff;
+}
 .body22 {
   font-size: 22px;
 }
@@ -243,6 +246,23 @@ a {
   color: #0a0a0a !important;
 }
 .slick-slide>div {padding: 0 5px;}
+.loginbg {
+  background-image: url('/img/login_bg.webp');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px 0 0 20px;
+  height: 60vh;
+  position: relative;
+}
+.loginbg p {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  padding: 10px;
+  line-height: 24px;
+}
+
 /* Mobile view CSS */
 @media (max-width: 600px) {
   h2 {
