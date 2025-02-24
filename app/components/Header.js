@@ -37,8 +37,8 @@ const Header = () => {
                         <Nav.Link href="#" onClick={handleShow}><i className="bi bi-search"></i></Nav.Link>
                         <Nav.Link href="#"><i className="bi bi-cart"></i></Nav.Link>
                         <NavDropdown title="Login" id="collapsible-nav-dropdown">
-                            <NavDropdown.Item href="#">Login</NavDropdown.Item>
-                            <NavDropdown.Item href="#">Register</NavDropdown.Item>
+                            <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                            <NavDropdown.Item href="/register">Register</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
