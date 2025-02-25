@@ -39,7 +39,7 @@ const Login = () => {
         <TopHeader />
         <Header />
         <HeadBar text="Join Buster and flock together with your buddies!" />
-        <Container className="p-5">
+        <Container className="py-5">
             <Card>
                 <CardBody>
                      <Row className="gx-5 align-items-center">
@@ -73,14 +73,14 @@ const Login = () => {
 
         <Container fluid className="p-5 bglite">
             <Container>
-                <h4 className="text-center txtred">Let the Good Times Roll with Zolko Mobile!</h4>
+                <h2 className="text-center txtred">Let the Good Times Roll with Zolko Mobile!</h2>
                 <p className="text-center body22">Upgrade to Zolko Mobile SIM plans today and experience the power of the nation&apos;s most reliable 5G network! Enjoy free eSIM services and seamless connectivity that keeps you connected wherever you go. Say goodbyeto dropped calls and slow speeds &mdash;switch now and feel the difference!</p>
                 <Row className="align-items-center py-4">
                     <Col md={5} sm={12} xs={12}>
                         <Image src="/img/login-benefits.webp" fluid alt="Zoiko Benefits" />
                     </Col>
                     <Col md={7} sm={12} xs={12}>
-                    <h4 className="txtred">Unlock Exclusive Benefits with Zolko Mobile!</h4>
+                    <h3 className="txtred">Unlock Exclusive Benefits with Zolko Mobile!</h3>
                     <p className="body22">Meet Buster, your cheerful guide to savings! Refer a friend to Zolko Mobile, and you&apos;ll both receive a $20 credit. It&apos;s a win-win! Plus, enjoy premium entertainment perks like Spotify, Netflix, and Amazon Prime &mdash; all while staying connected on the best 5G network in the USA.</p>
                     </Col>
                 </Row>

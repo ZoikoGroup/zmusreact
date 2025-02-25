@@ -43,7 +43,7 @@ const PrepaidSlider = () => {
         ]
     };
     return (
-        <Container fluid className="p-5 bglite">
+        <Container fluid className="py-5 bglite">
             <h2 className="text-center">Zoiko Mobile Postpaid Plans</h2>
             <div className="slider-container">
                 <Slider {...settings}>
