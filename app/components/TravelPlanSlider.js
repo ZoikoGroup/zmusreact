@@ -1,12 +1,12 @@
 "use client"
 import React from "react";
 import { Card, CardBody, Container, Button, Image, Row, Col } from "react-bootstrap";
-import data from '../products/prepaidplans.json';
+import data from '../products/travelplans.json';
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const PrepaidSlider = () => {
+const TravelPlanSlider = () => {
     const settings = {
         dots: true,
         arrows: false,
@@ -44,7 +44,7 @@ const PrepaidSlider = () => {
     };
     return (
         <Container fluid className="py-5 bglite">
-            <h2 className="text-center">Zoiko Mobile Prepaid Plans</h2>
+            <h2 className="text-center">Stay Connected Globally - Simple, Affordable Travel Plans</h2>
             <div className="slider-container">
                 <Slider {...settings}>
                     {data.map((item) => (
@@ -64,8 +64,8 @@ const PrepaidSlider = () => {
                                     ))}
                                 </ul>
                                 <hr className="separator" />
-                                <Button variant="danger" href={`/products/${item.slug}`} size="sm">Buy This Plan</Button>&nbsp;
-                                <Button variant="outline-danger" href={`/products/${item.slug}`} size="sm">View Details</Button>
+                                <Button variant="danger" href={`/products/${item.slug}`}>Buy This Plan</Button>&nbsp;
+                                <Button variant="outline-danger" href={`/products/${item.slug}`}>View Details</Button>
                             </CardBody>
                         </Card>
                     ))}
@@ -74,4 +74,4 @@ const PrepaidSlider = () => {
         </Container>
     );
 }
-export default PrepaidSlider;
+export default TravelPlanSlider;

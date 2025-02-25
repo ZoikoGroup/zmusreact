@@ -6,7 +6,7 @@ import HeadBar from "../components/HeadBar";
 import BusinessDealsBanner from "../components/BusinessDealsBanner";
 import BusinessPlans from "../components/BusinessPlans";
 import Testimonials from "../components/Testimonials";
-import PrepaidFaqs from "../components/PrepaidFaqs";
+import BusinessFaqs from "../components/BusinessFaqs";
 
 const BusinessDeals = () => {
     return (
@@ -16,7 +16,7 @@ const BusinessDeals = () => {
         <HeadBar text="Reach out to clients in a great mobility with cellular business postpaid plans" />
         <BusinessDealsBanner />
         <BusinessPlans />
-        <PrepaidFaqs />
+        <BusinessFaqs />
         <Testimonials />
         <Footer />
         </>

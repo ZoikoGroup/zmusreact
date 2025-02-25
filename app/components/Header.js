@@ -16,7 +16,7 @@ const Header = () => {
     return (
         <>
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary p-0">
-            <Container fluid className="px-5">
+            <Container fluid>
                 <Navbar.Brand href="/"><Image src='/img/zmuslogo.png' width={160} height={90} alt="Logo" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
@@ -24,7 +24,7 @@ const Header = () => {
                         <Nav.Link href="/prepaid-plans" className={pathname == "/prepaid-plans" ? "active" : "" }>Prepaid Plans</Nav.Link>
                         <Nav.Link href="/postpaid-plans" className={pathname == "/postpaid-plans" ? "active" : "" }>Postpaid Plans</Nav.Link>
                         <Nav.Link href="/business-deals" className={pathname == "/business-deals" ? "active" : "" }>Business Deals</Nav.Link>
-                        <Nav.Link href="#">Travel Plans</Nav.Link>
+                        <Nav.Link href="/travel-plans" className={pathname == "/travel-plans" ? "active" : "" }>Travel Plans</Nav.Link>
                         <Nav.Link href="#">Animal &amp; Music</Nav.Link>
                         <NavDropdown title="Devices" id="collapsible-nav-dropdown">
                             <NavDropdown.Item href="#">Refurbished Smartphones</NavDropdown.Item>
@@ -40,6 +40,7 @@ const Header = () => {
                             <NavDropdown.Item href="/login">Login</NavDropdown.Item>
                             <NavDropdown.Item href="/register">Register</NavDropdown.Item>
                         </NavDropdown>
+                        <Nav.Link href="#">Español</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

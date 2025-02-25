@@ -110,6 +110,14 @@ a {
 .redimgbg p {
   font-size: 18px;
 }
+.pinkboxtravel {
+  width: 20%;
+  background-color: #DF1E5A1C;
+  color: #0a0a0a;
+  font-size: 16px;
+  text-align: center;
+  padding: 20px;
+}
 .pinkbox {
   width: 16%;
   max-height: 16%;
@@ -282,9 +290,13 @@ a {
   .carousel-indicators {
     display: none !important;
   }
-  .pinkbox {
+  .pinkbox, .pinkboxtravel  {
     flex: 40%;
     max-width: 40%;
+  }
+  .pinkboxtravel {
+    flex: 80%;
+    max-width: 80%;
   }
   .pinkboxLarge {
     flex: 80%;

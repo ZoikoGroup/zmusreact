@@ -9,7 +9,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const PhoneSlider = () => {
     const settings = {
-        dots: true,
+        dots: false,
         arrows: true,
         infinite: true,
         speed: 500,
@@ -44,7 +44,7 @@ const PhoneSlider = () => {
         ]
     };
     return (
-        <Container fluid className="p-5 bglite">
+        <Container fluid className="p-4 bglite">
             <div className="slider-container">
                 <Slider {...settings}>
                     {data.map((item) => (
