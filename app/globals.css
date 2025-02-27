@@ -270,6 +270,35 @@ a {
   padding: 10px;
   line-height: 24px;
 }
+.redborderbox {
+  width: 100%;
+  border: 1px solid #DF1E5A;
+  border-radius: 8px;
+  padding: 18px 18px;
+  background-color: white;
+}
+.greenborderbox {
+  width: 100%;
+  border: 1px solid #0A5A35;
+  border-radius: 8px;
+  padding: 18px 18px;
+  background-color: white;
+}
+.redbordercontainer {
+  border: 1px solid #DF1E5A;
+  border-radius: 8px;
+}
+.yellowbordercontainer {
+  border: 1px solid #FECC00;
+  border-radius: 8px;
+}
+.blackbordercontainer {
+  border: 1px solid black;
+  border-radius: 8px;
+}
+.blackbordercontainer .body22 {
+  line-height: 30px;
+}
 
 /* Mobile view CSS */
 @media (max-width: 600px) {
@@ -290,7 +319,7 @@ a {
   .carousel-indicators {
     display: none !important;
   }
-  .pinkbox, .pinkboxtravel  {
+  .pinkbox, .pinkboxtravel {
     flex: 40%;
     max-width: 40%;
   }
