@@ -27,8 +27,8 @@ const Header = () => {
                         <Nav.Link href="/travel-plans" className={pathname == "/travel-plans" ? "active" : "" }>Travel Plans</Nav.Link>
                         <Nav.Link href="#">Animal &amp; Music</Nav.Link>
                         <NavDropdown title="Devices" id="collapsible-nav-dropdown">
-                            <NavDropdown.Item href="#">Refurbished Smartphones</NavDropdown.Item>
-                            <NavDropdown.Item href="#">Tablets</NavDropdown.Item>
+                            <NavDropdown.Item href="https://phones.zoikomobile.com/" target="_blank">New Smartphones</NavDropdown.Item>
+                            <NavDropdown.Item href="/product-category/refurbished">Refurbished Smartphones</NavDropdown.Item>
                             <NavDropdown.Item href="#">Accessories</NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link href="#">About Us</Nav.Link>
