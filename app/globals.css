@@ -118,6 +118,14 @@ a {
   text-align: center;
   padding: 20px;
 }
+.pinkboxtopup {
+  width: 30%;
+  background-color: #DF1E5A1C;
+  color: #0a0a0a;
+  font-size: 16px;
+  text-align: center;
+  padding: 20px;
+}
 .pinkbox {
   width: 16%;
   max-height: 16%;
@@ -299,6 +307,12 @@ a {
 .blackbordercontainer .body22 {
   line-height: 30px;
 }
+.slick-dots li button:before {
+    font-size: 16px !important;
+}
+.accordion-body {
+  font-weight: 400 !important;
+}
 
 /* Mobile view CSS */
 @media (max-width: 600px) {
@@ -323,7 +337,7 @@ a {
     flex: 40%;
     max-width: 40%;
   }
-  .pinkboxtravel {
+  .pinkboxtravel, .pinkboxtopup {
     flex: 80%;
     max-width: 80%;
   }
@@ -367,5 +381,8 @@ a {
   }
   .redimgbg p {
     font-size: 13px;
+  }
+  .w-sm-100, .w-xs-100 {
+    width: 100% !important;
   }
 }

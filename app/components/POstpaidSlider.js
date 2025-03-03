@@ -48,7 +48,7 @@ const PrepaidSlider = () => {
             <div className="slider-container">
                 <Slider {...settings}>
                     {data.map((item) => (
-                        <Card key={item.id} className="border-0">
+                        <Card key={item.id}>
                             <CardBody>
                                 <Image src={`${item.image}`} fluid alt={`${item.name}`} />
                                 <h4 className="pt-2 txtred">{item.name}</h4>

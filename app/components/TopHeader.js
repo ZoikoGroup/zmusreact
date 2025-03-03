@@ -11,7 +11,8 @@ const TopHeader = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" className="ms-auto" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ms-auto">
-                        <Nav.Link href="#">BYOD</Nav.Link>
+                        <Nav.Link href="/top-up-plan">Top-Up</Nav.Link>
+                        <Nav.Link href="/byod-plans">BYOD</Nav.Link>
                         <Nav.Link href="#">Device Protection</Nav.Link>
                         <NavDropdown title="Special Plans" id="collapsible-nav-dropdown">
                             <NavDropdown.Item href="#">College Students</NavDropdown.Item>
