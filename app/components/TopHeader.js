@@ -3,16 +3,18 @@ import { Container, Nav, Navbar, NavDropdown, Row, Col } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../globals.css';
 import Link from "next/link";
+import { usePathname} from 'next/navigation';
 
 const TopHeader = () => {
+    const pathname = usePathname();
     return (
         <Navbar collapseOnSelect expand="lg" className="bg-lite p-0" style={{fontSize:'12px'}}>
             <Container fluid>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" className="ms-auto" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ms-auto">
-                        <Nav.Link href="/top-up-plan">Top-Up</Nav.Link>
-                        <Nav.Link href="/byod-plans">BYOD</Nav.Link>
+                        <Nav.Link href="/top-up-plan" className={pathname == "/top-up-plan" ? "active" : "" }>Top-Up</Nav.Link>
+                        <Nav.Link href="/byod-plans" className={pathname == "/byod-plans" ? "active" : "" }>BYOD</Nav.Link>
                         <Nav.Link href="#">Device Protection</Nav.Link>
                         <NavDropdown title="Special Plans" id="collapsible-nav-dropdown">
                             <NavDropdown.Item href="#">College Students</NavDropdown.Item>

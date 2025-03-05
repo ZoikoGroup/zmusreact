@@ -110,6 +110,9 @@ a {
 .redimgbg p {
   font-size: 18px;
 }
+.bgpink {
+  background-color: #DF1E5A1C;
+}
 .pinkboxtravel {
   width: 20%;
   background-color: #DF1E5A1C;
@@ -212,6 +215,12 @@ a {
   font-size: 32px;
   font-weight: 400;
 }
+.bigred {
+  color: #DF1E5A;
+  font-size: 62px;
+  font-weight: 600;
+  line-height: 60px;
+}
 .footerbox {
   background-color: #ededed;
   color: #171717;
@@ -313,6 +322,14 @@ a {
 .accordion-body {
   font-weight: 400 !important;
 }
+.byod-banner {
+  background-image: url('/img/byod-banner.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+}
+
 
 /* Mobile view CSS */
 @media (max-width: 600px) {
@@ -384,5 +401,8 @@ a {
   }
   .w-sm-100, .w-xs-100 {
     width: 100% !important;
+  }
+  .byod-banner {
+    height: 160px;
   }
 }
