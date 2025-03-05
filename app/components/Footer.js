@@ -80,7 +80,7 @@ const Footer = () => {
                         <p>Receive the latest offers, updates, and unlock amazing savings on Zoiko Mobile plans and devices.</p>
                         <InputGroup className="mb-3">
                             <Form.Control placeholder="Enter your email address" aria-label="Enter your email address" aria-describedby="basic-addon2" />
-                            <Button variant="outline-danger" size="lg" id="button-addon2">Subscribe</Button>
+                            <Button variant="danger" size="lg" id="button-addon2">Subscribe</Button>
                         </InputGroup>
                         <Link href={'https://www.facebook.com/zoikomobileusa'} target="_blank"><i className="bi bi-facebook"></i></Link>
                         <Link href={'https://instagram.com/zoikomobileus'} target="_blank" className="px-3"><i className="bi bi-instagram"></i></Link>

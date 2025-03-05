@@ -8,7 +8,7 @@ export default function CarouselSimPlan () {
 
     return (
         <>
-        <Container fluid className="py-4">
+        <Container fluid className="py-4 bglite">
             <h2 className="text-center py-4">Choose Your Zoiko Mobile Preferred Plan</h2>
             <ul className="nav nav-tabs nav-justified tabhead" role="tablist" style={{border:'1px solid black',borderRadius:'8px'}}>
                 <li className="nav-item" role="presentation">
@@ -25,7 +25,7 @@ export default function CarouselSimPlan () {
                 </li>
             </ul>
         </Container>
-        <Container fluid className="px-4">
+        <Container fluid className="px-4 bglite">
             <div className="tab-content">
                 <div id="prepaid" className="tab-pane active" aria-current="page">
                     <Row>

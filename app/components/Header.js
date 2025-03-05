@@ -15,7 +15,7 @@ const Header = () => {
     
     return (
         <>
-        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary p-0">
+        <Navbar expand="lg" className="bg-body-tertiary p-0">
             <Container fluid>
                 <Navbar.Brand href="/"><Image src='/img/zmuslogo.png' width={160} height={90} alt="Logo" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -33,7 +33,7 @@ const Header = () => {
                         </NavDropdown>
                         <Nav.Link href="#">About Us</Nav.Link>
                     </Nav>
-                    <Nav>
+                    <Nav className="me-auto">
                         <Nav.Link href="#" onClick={handleShow}><i className="bi bi-search"></i></Nav.Link>
                         <Nav.Link href="#"><i className="bi bi-cart"></i></Nav.Link>
                         <NavDropdown title="Login" id="collapsible-nav-dropdown">

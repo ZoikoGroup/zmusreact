@@ -5,7 +5,7 @@ function PostpaidFaqs() {
     return (
         <Container fluid className='bglite'>
             <Container className="justify-content-center p-5">
-                <Tabs defaultActiveKey="home" id="fill-tab-example" className="mb-4" fill>
+                <Tabs defaultActiveKey="home" id="fill-tab-example" fill>
                     <Tab eventKey="home" title="General Questions">
                         <Row>
                             <Col>
