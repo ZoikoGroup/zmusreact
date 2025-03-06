@@ -15,7 +15,7 @@ const TopHeader = () => {
                     <Nav className="ms-auto">
                         <Nav.Link href="/top-up-plan" className={pathname == "/top-up-plan" ? "active" : "" }>Top-Up</Nav.Link>
                         <Nav.Link href="/byod-plans" className={pathname == "/byod-plans" ? "active" : "" }>BYOD</Nav.Link>
-                        <Nav.Link href="#">Device Protection</Nav.Link>
+                        <Nav.Link href="/device-protection" className={pathname == "/device-protection" ? "active" : "" }>Device Protection</Nav.Link>
                         <NavDropdown title="Special Plans" id="collapsible-nav-dropdown">
                             <NavDropdown.Item href="#">College Students</NavDropdown.Item>
                             <NavDropdown.Item href="#">Millitary &amp; Veterans</NavDropdown.Item>
