@@ -96,6 +96,12 @@ a {
   flex-wrap: wrap;
   flex-direction: row;
 }
+.protectedlist {
+  list-style-image: url('/img/icons/shield.svg');
+}
+.protectedlist li {
+  padding: 5px 0;
+}
 .redimgbg {
   background-image: url('/img/bg-business-plan.webp');
   background-position: center;
@@ -329,7 +335,22 @@ a {
   background-size: cover;
   height: 700px;
 }
-
+.deviceprotbanner {
+  background-image: url('/img/device-protection-banner.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+}
+.protbox {
+  flex: 30%;
+}
+.nav-tabs .nav-link {
+  color: #ff6803 !important;
+}
+.nav-tabs .active {
+  color: #DF1E5A !important;
+}
 
 /* Mobile view CSS */
 @media (max-width: 600px) {
@@ -369,6 +390,9 @@ a {
     font-size: 17px;
     font-weight: 500;
   }
+  .protbox {
+    flex: 80%;
+  }
   .whychoose {
     padding: 10px !important;
   }
@@ -402,7 +426,7 @@ a {
   .w-sm-100, .w-xs-100 {
     width: 100% !important;
   }
-  .byod-banner {
+  .byod-banner, .deviceprotbanner {
     height: 160px;
   }
 }
