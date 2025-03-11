@@ -358,6 +358,13 @@ a {
   background-size: cover;
   height: 700px;
 }
+.militaryveterans {
+  background-image: url('/img/military-veterans.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+}
 .protbox {
   flex: 30%;
 }
@@ -372,6 +379,11 @@ a {
 }
 .nav-tabs .active {
   color: #DF1E5A !important;
+}
+.faqcols {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  gap: 20px;
 }
 
 /* Mobile view CSS */
@@ -448,7 +460,7 @@ a {
   .w-sm-100, .w-xs-100 {
     width: 100% !important;
   }
-  .byod-banner, .deviceprotbanner, .collegestudent {
+  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans {
     height: 160px;
   }
   .bigblack, .bigred {
