@@ -18,7 +18,7 @@ const TopHeader = () => {
                         <Nav.Link href="/device-protection" className={pathname == "/device-protection" ? "active" : "" }>Device Protection</Nav.Link>
                         <NavDropdown title="Special Plans" id="collapsible-nav-dropdown">
                             <NavDropdown.Item href="/college-student">College Students</NavDropdown.Item>
-                            <NavDropdown.Item href="#">Millitary &amp; Veterans</NavDropdown.Item>
+                            <NavDropdown.Item href="/military-veterans">Millitary &amp; Veterans</NavDropdown.Item>
                             <NavDropdown.Item href="#">Postal Service Workers</NavDropdown.Item>
                             <NavDropdown.Item href="#">Animal Charities</NavDropdown.Item>
                             <NavDropdown.Item href="#">Family Plans</NavDropdown.Item>
