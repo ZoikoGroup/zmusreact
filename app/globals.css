@@ -365,6 +365,13 @@ a {
   background-size: cover;
   height: 700px;
 }
+.postalworkers {
+  background-image: url('/img/postal-workers.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+}
 .protbox {
   flex: 30%;
 }
@@ -373,6 +380,7 @@ a {
 }
 .redbullet li::marker {
   color: #DF1E5A;
+  font-size: 24px;
 }
 .nav-tabs .nav-link {
   color: #ff6803 !important;
@@ -460,7 +468,7 @@ a {
   .w-sm-100, .w-xs-100 {
     width: 100% !important;
   }
-  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans {
+  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans, .postalworkers {
     height: 160px;
   }
   .bigblack, .bigred {
