@@ -20,7 +20,7 @@ const TopHeader = () => {
                             <NavDropdown.Item href="/college-student">College Students</NavDropdown.Item>
                             <NavDropdown.Item href="/military-veterans">Millitary &amp; Veterans</NavDropdown.Item>
                             <NavDropdown.Item href="/postal-service-workers">Postal Service Workers</NavDropdown.Item>
-                            <NavDropdown.Item href="#">Animal Charities</NavDropdown.Item>
+                            <NavDropdown.Item href="/animal-charities">Animal Charities</NavDropdown.Item>
                             <NavDropdown.Item href="#">Family Plans</NavDropdown.Item>
                             <NavDropdown.Item href="#">Zoiko Music Hub</NavDropdown.Item>
                         </NavDropdown>

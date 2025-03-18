@@ -372,8 +372,25 @@ a {
   background-size: cover;
   height: 700px;
 }
+.animalcharities {
+  background-image: url('/img/animalcharities.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+}
+.puppybanner {
+  background-image: url('/img/puppy.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+}
 .protbox {
   flex: 30%;
+}
+.animalchbox {
+  flex: 45%;
 }
 .redbullet {
   font-size: 18px;
@@ -392,6 +409,12 @@ a {
   display: grid;
   grid-template-columns: 45% 45%;
   gap: 20px;
+}
+.form-label {
+  margin-bottom: 0px;
+}
+.form-check-input {
+  border: 1px solid #555555;
 }
 
 /* Mobile view CSS */
@@ -424,6 +447,9 @@ a {
   .pinkboxLarge {
     flex: 80%;
     max-width: 80%;
+  }
+  .animalchbox {
+    flex: 90%;
   }
   .pinkboxLarge p {
     font-size: 14px;
@@ -468,8 +494,11 @@ a {
   .w-sm-100, .w-xs-100 {
     width: 100% !important;
   }
-  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans, .postalworkers {
+  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans, .postalworkers, .animalcharities {
     height: 160px;
+  }
+  .puppybanner {
+    height: 200px;
   }
   .bigblack, .bigred {
     font-size: 30px;
