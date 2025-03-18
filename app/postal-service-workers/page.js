@@ -73,11 +73,11 @@ const PostalWorkers = () => {
                 <h2 className="text-center mt-5">Terms and Conditions</h2>
                 <hr className="seperator" />
                 <ul className="redbullet">
-                    <li><b>20% Discount:</b>  Applies to any Zoiko Mobile mobile plan for as long as you remain a customer</li>
+                    <li><b>20% Discount:</b> Applies to any Zoiko Mobile mobile plan for as long as you remain a customer</li>
                     <li><b>Family &amp; Friends Discount:</b> Nominate up to 5 family members or friends to receive a 20% lifetime discount on their BYOD plans.</li>
                     <li><b>Valid Government ID:</b> A valid work ID is required to confirm your U.S. Postal Service Worker status.</li>
                     <li><b>Eligibility:</b> This offer is available to new U.S. Postal Service Worker customers only.</li>
-                    <li><b>Fair Usage Policy:</b> Applies to all plans, including unlimited calls & texts and North America roaming.</li>
+                    <li><b>Fair Usage Policy:</b> Applies to all plans, including unlimited calls &amp; texts and North America roaming.</li>
                     <li><b>5G Coverage:</b> Available in select areas only.</li>
                     <li><b>Wi-Fi Calling:</b> Requires a compatible device and network coverage.</li>
                     <li><b>North America Roaming:</b> Available for use in the U.S., Canada, and Mexico.</li>
