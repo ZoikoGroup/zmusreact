@@ -22,14 +22,14 @@ const AnimalCharities = () => {
                         <div>
                             <Image src="/img/animal-charity1.webp" fluid alt="Animal Charity" />
                             <p>Animal charity employees receive a 20% discount on our plans for as long as they are employed in the sector.</p>
-                            <Button variant="outline-danger" size="sm" href="#">Register Now <i className="bi bi-chevron-right"></i></Button>
+                            <Button variant="outline-danger" size="sm" href="/animal-charity-worker-registration">Register Now <i className="bi bi-chevron-right"></i></Button>
                         </div>
                     </div>
                     <div className="d-flex flex-row animalchbox">
                         <div>
                             <Image src="/img/animal-charity2.webp" fluid alt="Animal Charity" />
                             <p>Up to 5 family members of eligible workers are entitled to the same discount, ensuring the whole family stays connected affordably.</p>
-                            <Button variant="outline-danger" size="sm" href="#">Register Now <i className="bi bi-chevron-right"></i></Button>
+                            <Button variant="outline-danger" size="sm" href="/animal-charity-worker-registration">Register Now <i className="bi bi-chevron-right"></i></Button>
                         </div>
                     </div>
                 </div>
