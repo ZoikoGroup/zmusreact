@@ -386,6 +386,13 @@ a {
   background-size: cover;
   height: 400px;
 }
+.familyplanbg {
+  background-image: url('/img/familyplan.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+}
 .protbox {
   flex: 30%;
 }
@@ -494,7 +501,7 @@ a {
   .w-sm-100, .w-xs-100 {
     width: 100% !important;
   }
-  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans, .postalworkers, .animalcharities {
+  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans, .postalworkers, .animalcharities, .familyplanbg {
     height: 160px;
   }
   .puppybanner {
@@ -503,5 +510,8 @@ a {
   .bigblack, .bigred {
     font-size: 30px;
     line-height: 30px;
+  }
+  .bodysm {
+    font-size: 14px;
   }
 }
