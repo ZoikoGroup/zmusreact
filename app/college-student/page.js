@@ -13,7 +13,14 @@ const CollegeStudent = () => {
         <TopHeader />
         <Header />
         <HeadBar text="Zoiko Mobile College Student Discount Program" />
-        <Container fluid className="collegestudent"></Container>
+        <Container fluid className="collegestudent position-relative">
+            <div className="position-absolute d-none d-md-block" style={{left:'12%', bottom:'16%'}}>
+                <Button variant="danger" size="lg" href="/college-student-discount-form">Register Now</Button>
+            </div>
+            <div className="position-absolute d-sm-block d-md-none" style={{left:'5%', bottom:'5%'}}>
+                <Button variant="danger" size="sm" href="/college-student-discount-form">Register Now</Button>
+            </div>
+        </Container>
         <Container fluid className="py-5 bglite">
             <Container className="w-75 w-sm-100">
                 <h2 className="text-center">Who is Eligible?</h2>
@@ -74,7 +81,7 @@ const CollegeStudent = () => {
         <Container className="py-4 w-50 w-sm-100">
             <Row>
                 <Col md={3} sm={12} xs={12}>
-                    <Button variant="danger" size="lg" href="#">Sign up now</Button>
+                    <Button variant="danger" size="lg" href="/college-student-discount-form">Sign up now</Button>
                 </Col>
                 <Col md={9} sm={12} xs={12}>
                     <p>Get your 20% student discount, and enjoy the freedom of a mobile plan that fits your lifestyle. Stay connected, stay smart, and let Zoiko Mobile help you make the most of your student life!</p>

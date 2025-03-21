@@ -1,5 +1,4 @@
 "use client"
-import Link from "next/link";
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Col, Container, Row } from "react-bootstrap";
 
 export default function FamilyPlanFaqs () {
