@@ -13,7 +13,14 @@ const MilitaryVeterans = () => {
         <TopHeader />
         <Header />
         <HeadBar text={<>Military &amp; Veterans&apos; Lifetime Deals</>} />
-        <Container fluid className="militaryveterans"></Container>
+        <Container fluid className="militaryveterans position-relative">
+            <div className="position-absolute d-none d-md-block" style={{left:'10%', bottom:'16%'}}>
+                <Button variant="danger" size="lg" href="/military-veterans-form">Register Now</Button>
+            </div>
+            <div className="position-absolute d-sm-block d-md-none" style={{left:'5%', bottom:'5%'}}>
+                <Button variant="danger" size="sm" href="/military-veterans-form">Register Now</Button>
+            </div>
+        </Container>
         <Container fluid className="py-4 bglite">
             <h2 className="text-center py-4">Exclusive Benefits</h2>
             <Container>
