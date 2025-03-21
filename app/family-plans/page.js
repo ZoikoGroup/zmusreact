@@ -3,7 +3,7 @@ import TopHeader from "../components/TopHeader";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
-import { Button, Container, Dropdown, Image } from "react-bootstrap";
+import { Container, Dropdown, Image } from "react-bootstrap";
 import Testimonials from "../components/Testimonials";
 import FamilyPlanFaqs from '../components/FamilyPlanFaqs';
 
@@ -18,9 +18,9 @@ const FamilyPlans = () => {
                 <Dropdown>
                     <Dropdown.Toggle variant="danger" size="lg" id="dropdown-basic">Explore Family Plans</Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <Dropdown.Item href="prepaid-plans">Prepaid Plans</Dropdown.Item>
-                        <Dropdown.Item href="postpaid-plans">Postpaid Plans</Dropdown.Item>
-                        <Dropdown.Item href="business-deals">Business Plans</Dropdown.Item>
+                        <Dropdown.Item href="/prepaid-plans">Prepaid Plans</Dropdown.Item>
+                        <Dropdown.Item href="/postpaid-plans">Postpaid Plans</Dropdown.Item>
+                        <Dropdown.Item href="/business-deals">Business Plans</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </div>
