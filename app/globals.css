@@ -372,6 +372,13 @@ a {
   background-size: cover;
   height: 700px;
 }
+.musichub {
+  background-image: url('/img/musichub.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+}
 .animalcharities {
   background-image: url('/img/animalcharities.webp');
   background-position: center;
@@ -501,7 +508,7 @@ a {
   .w-sm-100, .w-xs-100 {
     width: 100% !important;
   }
-  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans, .postalworkers, .animalcharities, .familyplanbg {
+  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans, .postalworkers, .animalcharities, .familyplanbg, .musichub {
     height: 160px;
   }
   .puppybanner {
