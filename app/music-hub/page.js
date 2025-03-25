@@ -142,7 +142,7 @@ const MusicHub = () => {
                             </div>
                             <div className="px-1">
                                 <h4 className="txtred">Unlimited Creator Plans</h4>
-                                <p>Designed for musicians who need seamless connectivity, faster uploads, and priority network access.</p>
+                                <p>Designed for musicians who need seamless connectivity, faster uploads, and priority<br />network access.</p>
                             </div>
                         </div>
                         <div className="d-flex flex-row protbox">

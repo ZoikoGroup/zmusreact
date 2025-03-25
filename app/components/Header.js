@@ -31,7 +31,7 @@ const Header = () => {
                             <NavDropdown.Item href="/product-category/refurbished">Refurbished Smartphones</NavDropdown.Item>
                             <NavDropdown.Item href="#">Accessories</NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link href="#">About Us</Nav.Link>
+                        <Nav.Link href="/about">About Us</Nav.Link>
                     </Nav>
                     <Nav className="me-auto">
                         <Nav.Link href="#" onClick={handleShow}><i className="bi bi-search"></i></Nav.Link>

@@ -148,6 +148,15 @@ a {
   text-align: center;
   padding-top: 20px;
 }
+.pinkboxlite {
+  width: 16%;
+  max-height: 16%;
+  background-color: #DF1E5A1C;
+  color: #0a0a0a;
+  font-size: 14px;
+  text-align: center;
+  padding: 15px;
+}
 .pinkbox p {
   padding: 10px 0;
   line-height: 20px;
@@ -351,6 +360,13 @@ a {
   background-size: cover;
   height: 700px;
 }
+.aboutbg {
+  background-image: url('/img/aboutbg1.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+}
 .collegestudent {
   background-image: url('/img/college-student-banner.webp');
   background-position: center;
@@ -454,7 +470,7 @@ a {
     flex: 40%;
     max-width: 40%;
   }
-  .pinkboxtravel, .pinkboxtopup {
+  .pinkboxtravel, .pinkboxtopup, .pinkboxlite {
     flex: 80%;
     max-width: 80%;
   }
@@ -508,7 +524,7 @@ a {
   .w-sm-100, .w-xs-100 {
     width: 100% !important;
   }
-  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans, .postalworkers, .animalcharities, .familyplanbg, .musichub {
+  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans, .postalworkers, .animalcharities, .familyplanbg, .musichub .aboutbg {
     height: 160px;
   }
   .puppybanner {
