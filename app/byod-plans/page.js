@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import ByodFaqs from "../components/ByodFaqs";
-import { Container, Form, InputGroup, Button, Row, Col } from "react-bootstrap";
+import { Container, Form, InputGroup, Button, Row, Col, DropdownButton, DropdownItem } from "react-bootstrap";
 import CarouselSimPlan from "../components/CarouselPlans";
 import Link from "next/link";
 
@@ -14,7 +14,22 @@ const ByodPlans = () => {
         <TopHeader />
         <Header />
         <HeadBar text={<>Bring Your Own Device (BYOD) to Zoiko Mobile</>} />
-        <Container fluid className="byod-banner p-0"></Container>
+        <Container fluid className="byod-banner p-0 position-relative">
+            <div className="position-absolute d-none d-md-block" style={{left:'11%', bottom:'16%'}}>
+                <DropdownButton variant="danger" size="lg" title="Browse Plans Now">
+                    <DropdownItem href="/prepaid-plans">Prepaid Plans</DropdownItem>
+                    <DropdownItem href="/postpaid-plans">Postpaid Plans</DropdownItem>
+                    <DropdownItem href="/business-deals">Business Deals</DropdownItem>
+                </DropdownButton>
+            </div>
+            <div className="position-absolute d-sm-block d-md-none" style={{left:'5%', bottom:'5%'}}>
+                <DropdownButton variant="danger" size="sm" title="Browse Plans Now">
+                    <DropdownItem href="/prepaid-plans">Prepaid Plans</DropdownItem>
+                    <DropdownItem href="/postpaid-plans">Postpaid Plans</DropdownItem>
+                    <DropdownItem href="/business-deals">Business Deals</DropdownItem>
+                </DropdownButton>
+            </div>
+        </Container>
         <Container fluid className="p-5 bglite">
             <h2 className="text-center">Is My Phone Compatible?</h2>
             <p className="body22">Zoiko Mobile utilizes the same network technologies as <b>Verizon, AT&T, and T-Mobile</b>. Generally, if your phone is compatible with one of these carriers, it should work on our network. We support both GSM and CDMA devices, including 4G LTE and 5G compatible phones. However, compatibility can vary. To guarantee a smooth activation process, please verify your device&apos;s compatibility.</p>

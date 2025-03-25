@@ -3,7 +3,7 @@ import TopHeader from "../components/TopHeader";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
-import { Col, Container, Image, Row, Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-bootstrap";
+import { Col, Container, Image, Row, Accordion, AccordionBody, AccordionHeader, AccordionItem, DropdownButton, DropdownItem } from "react-bootstrap";
 
 const DeviceProtection = () => {
     return (
@@ -11,7 +11,22 @@ const DeviceProtection = () => {
         <TopHeader />
         <Header />
         <HeadBar text="Comprehensive Protection for Every Device" />
-        <Container fluid className="deviceprotbanner"></Container>
+        <Container fluid className="deviceprotbanner position-relative">
+            <div className="position-absolute d-none d-md-block" style={{left:'11%', bottom:'16%'}}>
+                <DropdownButton variant="danger" size="lg" title="Protect Your Device Now">
+                    <DropdownItem href="/prepaid-plans">Prepaid Plans</DropdownItem>
+                    <DropdownItem href="/postpaid-plans">Postpaid Plans</DropdownItem>
+                    <DropdownItem href="/business-deals">Business Deals</DropdownItem>
+                </DropdownButton>
+            </div>
+            <div className="position-absolute d-sm-block d-md-none" style={{left:'5%', bottom:'5%'}}>
+                <DropdownButton variant="danger" size="sm" title="Protect Your Device Now">
+                    <DropdownItem href="/prepaid-plans">Prepaid Plans</DropdownItem>
+                    <DropdownItem href="/postpaid-plans">Postpaid Plans</DropdownItem>
+                    <DropdownItem href="/business-deals">Business Deals</DropdownItem>
+                </DropdownButton>
+            </div>
+        </Container>
         <Container fluid className="py-4 bglite">
             <h2 className="text-center py-4">Why Choose Zoiko Mobile Insurance?</h2>
             <Container>
