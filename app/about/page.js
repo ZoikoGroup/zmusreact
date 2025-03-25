@@ -109,7 +109,7 @@ const AboutUs = () => {
                     </Col>
                 </Row>
                 <h4 className="text-center txtred pt-5">Frequently Asked Questions</h4>
-                <Accordion className="w-50 w-sm-100 mx-auto">
+                <Accordion className="mx-auto">
                     <AccordionItem eventKey="0">
                         <AccordionHeader>Why is Zoiko Mobile known as the animal and music-loving network?</AccordionHeader>
                         <AccordionBody>At Zoiko Mobile, we&apos;re all about celebrating what brings people together—whether it&apos;s the love of animals or the universal connection of music. By blending technology with heart, we create a network built on compassion, creativity, and connection, making us the perfect choice for anyone who shares these passions.</AccordionBody>
