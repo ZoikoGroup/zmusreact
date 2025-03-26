@@ -120,7 +120,7 @@ const PostalWorkersForm = () => {
                     <Row>
                         <Col md={6} sm={12} xs={12}>
                             <FormLabel htmlFor="plan">Select Plan <span className="txtred">*</span></FormLabel>
-                            <Form.Select name="plan">
+                            <Form.Select name="plan" onChange={handleChange}>
                                 <option value={'prepaid'}>Prepaid</option>
                                 <option value={'postpaid'}>Postpaid</option>
                                 <option value={'travel'}>Travel</option>
@@ -130,7 +130,7 @@ const PostalWorkersForm = () => {
                         </Col>
                         <Col md={6} sm={12} xs={12}>
                             <FormLabel htmlFor="cat">Select Category <span className="txtred">*</span></FormLabel>
-                            <Form.Select name="cat">
+                            <Form.Select name="cat" onChange={handleChange}>
                                 <option value={'lite'}>Zoiko Lite</option>
                                 <option value={'essential'}>Zoiko Essential</option>
                                 <option value={'unlimited'}>Zoiko Unlimited One</option>

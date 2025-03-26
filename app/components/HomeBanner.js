@@ -12,7 +12,7 @@ const HomeBanner = () => {
                 <img className="d-block w-100" src="/img/home-banner/Unbeatable-VALUE-banner.webp" alt="Unbeatable Value" />
                 <Carousel.Caption>
                     <div className="text-center">
-                        <Button href='#' variant="danger" size="lg" className="mx-4 custom-button">Switch &amp; Save</Button>
+                        <Button href='/zoiko-mobile-switch-save-form' variant="danger" size="lg" className="mx-4 custom-button">Switch &amp; Save</Button>
                         <Button href='#' variant="outline-danger" className="custom-button" size="lg">Know More</Button>
                     </div>
                 </Carousel.Caption>
@@ -39,7 +39,7 @@ const HomeBanner = () => {
                 <img className="d-block w-100" src="/img/home-banner/Postal-Workers-banner.webp" alt="Postal Workers" />
                 <Carousel.Caption>
                     <div className="btnbox">
-                        <Button href='#' variant="danger" size="lg" className="mx-4 custom-button">Register Now</Button>
+                        <Button href='/postal-service-workers-form' variant="danger" size="lg" className="mx-4 custom-button">Register Now</Button>
                         <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
                     </div>
                 </Carousel.Caption>
@@ -48,7 +48,7 @@ const HomeBanner = () => {
                 <img className="d-block w-100" src="/img/home-banner/Military-Veterans-banner.webp" alt="Military Veterans" />
                 <Carousel.Caption>
                     <div className="btnbox">
-                        <Button href='#' variant="danger" size="lg" className="mx-4 custom-button">Register Now</Button>
+                        <Button href='/military-veterans-form' variant="danger" size="lg" className="mx-4 custom-button">Register Now</Button>
                         <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
                     </div>
                 </Carousel.Caption>
@@ -57,7 +57,7 @@ const HomeBanner = () => {
                 <img className="d-block w-100" src="/img/home-banner/banner-student.webp" alt="Student Banner" />
                 <Carousel.Caption>
                     <div className="btnbox">
-                        <Button href='#' variant="danger" size="lg" className="mx-4 custom-button">Register Now</Button>
+                        <Button href='/college-student-discount-form' variant="danger" size="lg" className="mx-4 custom-button">Register Now</Button>
                         <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
                     </div>
                 </Carousel.Caption>
@@ -66,8 +66,7 @@ const HomeBanner = () => {
                 <img className="d-block w-100" src="/img/home-banner/Family-Plans-Banner.webp" alt="Student Banner" />
                 <Carousel.Caption>
                     <div className="btnbox">
-                        <Button href='#' variant="danger" size="lg" className="mx-4 custom-button">Register Now</Button>
-                        <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
+                        <Button href='/family-plans' variant="danger" size="lg" className="mx-4 custom-button">Learn More</Button>
                     </div>
                 </Carousel.Caption>
             </Carousel.Item>
