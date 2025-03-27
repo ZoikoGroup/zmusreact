@@ -83,7 +83,7 @@ const HomeBanner = () => {
                 <img className="d-block w-100" src="/img/home-banner/Music-Hub-banner.webp" alt="Student Banner" />
                 <Carousel.Caption>
                     <div className="btnbox">
-                        <Button href='#' variant="danger" size="lg" className="mx-4 custom-button">Register Now</Button>
+                        <Button href='/music-hub-registratrion-form' variant="danger" size="lg" className="mx-4 custom-button">Register Now</Button>
                         <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
                     </div>
                 </Carousel.Caption>

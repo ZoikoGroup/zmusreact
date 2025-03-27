@@ -173,7 +173,7 @@ const SwitchSaveForm = () => {
                         </Col>
                     </Row>
                     <br />
-                    <Form.Check label={<>I agree to the <a href="#" className="txtred">Terms and Conditions</a> of Zoiko Mobile.</>} name="concent" onChange={handleChange} value={formData.concent} type="checkbox" />
+                    <Form.Check label={<>I agree to the <a href="/terms-and-conditions" className="txtred">Terms and Conditions</a> of Zoiko Mobile.</>} name="concent" onChange={handleChange} value={formData.concent} type="checkbox" />
                     {errors.concent && <p className="txtred">{errors.concent}</p>}
                     <Form.Check label="I consent to the transfer of my service to Zoiko Mobile and understand that my current service will be terminated once the switch is complete." name="terms" onChange={handleChange} value={formData.terms} type="checkbox" />
                     {errors.terms && <p className="txtred">{errors.terms}</p>}

@@ -200,7 +200,7 @@ export default function CarouselSimPlan () {
                         </Col>
                     </Row>
                     <div className='text-center py-4'>
-                        <Button variant='outline-danger' size='lg' href='#'>View All Plans <i className="bi bi-arrow-right"></i></Button>
+                        <Button variant='outline-danger' size='lg' href='/postpaid-plans'>View All Plans <i className="bi bi-arrow-right"></i></Button>
                     </div>
                 </div>
                 <div id="business" className="tab-pane fade">
@@ -288,7 +288,7 @@ export default function CarouselSimPlan () {
                         </Col>
                     </Row>
                     <div className='text-center py-4'>
-                        <Button variant='outline-danger' size='lg' href='#'>View All Plans <i className="bi bi-arrow-right"></i></Button>
+                        <Button variant='outline-danger' size='lg' href='/business-deals'>View All Plans <i className="bi bi-arrow-right"></i></Button>
                     </div>
                 </div>
                 <div id="travel" className="tab-pane fade">
@@ -376,7 +376,7 @@ export default function CarouselSimPlan () {
                         </Col>
                     </Row>
                     <div className='text-center py-4'>
-                        <Button variant='outline-danger' size='lg' href='#'>View All Plans <i className="bi bi-arrow-right"></i></Button>
+                        <Button variant='outline-danger' size='lg' href='/travel-plans'>View All Plans <i className="bi bi-arrow-right"></i></Button>
                     </div>
                 </div>
             </div>
