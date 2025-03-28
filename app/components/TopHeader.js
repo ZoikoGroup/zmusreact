@@ -24,7 +24,7 @@ const TopHeader = () => {
                             <NavDropdown.Item href="/family-plans">Family Plans</NavDropdown.Item>
                             <NavDropdown.Item href="/music-hub">Zoiko Music Hub</NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link href="#">Contact Us</Nav.Link>
+                        <Nav.Link href="/contact-us">Contact Us</Nav.Link>
                         <NavDropdown title="Support" id="collapsible-nav-dropdown" className="dropdownmg">
                             <Container className="py-4">
                                 <Row>
@@ -49,7 +49,7 @@ const TopHeader = () => {
                                         </ul>
                                     </Col>
                                     <Col md={2} sm={12} xs={12}>
-                                        <p><span className="txtgreen">Customer Dashbpard</span></p>
+                                        <p><span className="txtgreen">Customer Dashboard</span></p>
                                         <ul className="menulist">
                                             <li><Link href="/login">Login</Link></li>
                                         </ul>
