@@ -131,7 +131,7 @@ const MusicHubRegistration = () => {
                         <Form.Label htmlFor="musicjourney">Share Your Music Journey (Optional)</Form.Label>
                         <Form.Control as="textarea" name="musicjourney" onChange={handleChange} value={formData.musicjourney} rows={5} placeholder="What inspires your musical journey?" />
                     </Form.Group>
-                    <Form.Check label="I have read and agree to the terms and conditions." name="concent" onChange={handleChange} value={formData.concent} type="checkbox" />
+                    <Form.Check label={<>I have read and agree to the <a href="/terms-and-conditions" className="txtred">terms and conditions</a>.</>} name="concent" onChange={handleChange} value={formData.concent} type="checkbox" />
                     {errors.concent && <p className="txtred">{errors.concent}</p>}
                     <Form.Check label="I consent to receiving updates, promotions, and opportunities related to the Zoiko Music Hub." name="terms" onChange={handleChange} value={formData.terms} type="checkbox" />
                     {errors.terms && <p className="txtred">{errors.terms}</p>}

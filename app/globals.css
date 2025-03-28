@@ -141,6 +141,13 @@ a {
   text-align: center;
   padding: 20px;
 }
+.pinkboxcontact {
+  width: 30%;
+  color: #0a0a0a;
+  font-size: 16px;
+  text-align: center;
+  padding: 20px;
+}
 .pinkbox {
   width: 16%;
   max-height: 16%;
@@ -383,6 +390,12 @@ a {
   background-repeat: no-repeat;
   background-size: cover;
   height: 700px;
+}
+.contactmapbg {
+  background-image: url('/img/contactmap.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .postalworkers {
   background-image: url('/img/postal-workers.webp');
