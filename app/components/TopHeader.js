@@ -35,7 +35,8 @@ const TopHeader = () => {
                                             <li><Link href={"/reasons-to-love-zoiko-mobile"}>Reasons to love Zoiko</Link></li>
                                             <li><Link href={"https://ee.co.uk/help/mobile-coverage-checker"} target="_blank">Check Network Coverage</Link></li>
                                             <li><Link href={"/faq"}>FAQs</Link></li>
-                                            <li><Link href={"/how-to-activate-sim"}>How to activate SIM Cards</Link></li>
+                                            <li><Link href={"/how-to-activate-sim"}>How to activate Physical SIM</Link></li>
+                                            <li><Link href={"/how-to-activate-your-esim"}>How to activate eSIM</Link></li>
                                         </ul>
                                     </Col>
                                     <Col md={2} sm={12} xs={12}>
