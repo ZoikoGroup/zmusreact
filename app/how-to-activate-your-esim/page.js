@@ -231,7 +231,7 @@ const ActivateESIM = () => {
                                 <p>Watch this tutorial and learn from basics on how to activate eSIM on your Samsung Galaxy Tab S10 Ultra 5G <a href="https://www.youtube.com/watch?v=NZcraTI14Ag" className="txtred">https://www.youtube.com/watch?v=NZcraTI14Ag</a></p>
                             </Col>
                             <Col md={6} sm={12} xs={12}>
-                                <iframe width="100%" height="315" src="https://www.youtube.com/embed/NZcraTI14Ag?si=R9ufoUqNvxXQKRBw" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+                                <iframe width="100%" height="315" src="https://www.youtube.com/embed/NZcraTI14Ag?si=R9ufoUqNvxXQKRBw" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                             </Col>
                         </Row>
                     </Container>
