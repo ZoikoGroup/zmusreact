@@ -183,6 +183,9 @@ a {
   text-align: center;
   padding-top: 20px;
 }
+.zoikolovecard {
+  width: 47%;
+}
 .card-header {
   color: #DF1E5A;
   font-size: 24px;
@@ -439,6 +442,13 @@ a {
   background-size: cover;
   height: 600px;
 }
+.lovezoiko {
+  background-image: url('/img/cityscapebg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 500px;
+}
 .protbox {
   flex: 30%;
 }
@@ -517,7 +527,7 @@ a {
     font-size: 17px;
     font-weight: 500;
   }
-  .protbox {
+  .protbox, .zoikolovecard {
     flex: 80%;
   }
   .whychoose {
@@ -553,7 +563,7 @@ a {
   .w-sm-100, .w-xs-100 {
     width: 100% !important;
   }
-  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans, .postalworkers, .animalcharities, .familyplanbg, .musichub .aboutbg, .esimbanner {
+  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans, .postalworkers, .animalcharities, .familyplanbg, .musichub .aboutbg, .esimbanner, .lovezoiko {
     height: 160px;
   }
   .puppybanner {
