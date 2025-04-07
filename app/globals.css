@@ -122,6 +122,10 @@ a {
 .redimgbg p {
   font-size: 18px;
 }
+.blackbordercontainer {
+  border: 1px solid black;
+  border-radius: 8px;
+}
 .bgpink {
   background-color: #DF1E5A1C;
 }
@@ -452,6 +456,9 @@ a {
 .protbox {
   flex: 30%;
 }
+.box20 {
+  flex: 18%;
+}
 .animalchbox {
   flex: 45%;
 }
@@ -509,7 +516,7 @@ a {
     flex: 40%;
     max-width: 40%;
   }
-  .pinkboxtravel, .pinkboxtopup, .pinkboxlite {
+  .pinkboxtravel, .pinkboxtopup, .pinkboxlite, .box20 {
     flex: 80%;
     max-width: 80%;
   }
