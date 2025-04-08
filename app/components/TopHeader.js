@@ -70,15 +70,15 @@ const TopHeader = () => {
                                         <ul className="menulist">
                                             <li><Link href={"/5G-speed"}>5G Speed</Link></li>
                                             <li><Link href={"/wi-fi-calling"}>Wi-Fi Calling</Link></li>
-                                            <li><Link href={"/eu-roaming"}>EU Roaming</Link></li>
-                                            <li><Link href={"/global-chatter-free-international-calls"}>International Calls</Link></li>
+                                            <li><Link href={"/canada-mexico-roaming-plans"}>Roam Free in Canada &amp; Mexico</Link></li>
+                                            <li><Link href={"/international-callings"}>International Calls</Link></li>
                                             <li><Link href={"/esim"}>eSIM</Link></li>
                                         </ul>
                                     </Col>
                                 </Row>
                             </Container>
                         </NavDropdown>
-                        <Nav.Link href="#">International Calls</Nav.Link>
+                        <Nav.Link href="/international-callings">International Calls</Nav.Link>
                         <Nav.Link href="#">Store Locator</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

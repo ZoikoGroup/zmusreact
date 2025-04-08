@@ -453,6 +453,13 @@ a {
   background-size: cover;
   min-height: 500px;
 }
+.internationalcalls {
+  background-image: url('/img/internationalcalls.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+}
 .protbox {
   flex: 30%;
 }
@@ -570,7 +577,7 @@ a {
   .w-sm-100, .w-xs-100 {
     width: 100% !important;
   }
-  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans, .postalworkers, .animalcharities, .familyplanbg, .musichub .aboutbg, .esimbanner, .lovezoiko {
+  .byod-banner, .deviceprotbanner, .collegestudent, .militaryveterans, .postalworkers, .animalcharities, .familyplanbg, .musichub .aboutbg, .esimbanner, .internationalcalls, .lovezoiko {
     height: 160px;
   }
   .puppybanner {
