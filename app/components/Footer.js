@@ -35,7 +35,7 @@ const Footer = () => {
                     <Col md={3} sm={12} xs={12}>
                         <p className="txtred">Help &amp; Support</p>
                         <ul>
-                            <li><Link href={"#"}>Customer Service</Link></li>
+                            <li><Link href={"/customer-service"}>Customer Service</Link></li>
                             <li><Link href={"#"}>FAQs</Link></li>
                             <li><Link href={"#"}>Coverage Map</Link></li>
                             <li><Link href={"#"}>Network &amp; Service</Link></li>
