@@ -84,12 +84,12 @@ function IntlFaqs() {
                             <AccordionItem eventKey="0">
                                 <AccordionHeader>How do I make an international call with Zoiko Mobile?</AccordionHeader>
                                 <AccordionBody>To make an international call:
-                                    <ul>
-                                        <ol>Dial &quot;+&quot; or &quot;011&quot; (the international dialing code).</ol>
-                                        <ol>Enter the country code of the destination you are calling.</ol>
-                                        <ol>Dial the phone number, including the area code if required.</ol>
-                                        <ol>Press the call button to connect.</ol>
-                                    </ul>
+                                    <ol>
+                                        <li>Dial &quot;+&quot; or &quot;011&quot; (the international dialing code).</li>
+                                        <li>Enter the country code of the destination you are calling.</li>
+                                        <li>Dial the phone number, including the area code if required.</li>
+                                        <li>Press the call button to connect.</li>
+                                    </ol>
                                 </AccordionBody>
                             </AccordionItem>
                             <AccordionItem eventKey="1">
@@ -111,11 +111,11 @@ function IntlFaqs() {
                             <AccordionItem eventKey="0">
                                 <AccordionHeader>What should I do if I cannot make an international call?</AccordionHeader>
                                 <AccordionBody>If you experience issues making an international call:
-                                    <ul>
-                                        <ol>Verify that you have dialed the number correctly, including the country code.</ol>
-                                        <ol>Check your usage to ensure you have not used up your free minutes for the country you are calling.</ol>
-                                        <ol>Contact Zoiko Mobile&apos;s 24/7 customer support for assistance on 800-988-8116</ol>
-                                    </ul>
+                                    <ol>
+                                        <li>Verify that you have dialed the number correctly, including the country code.</li>
+                                        <li>Check your usage to ensure you have not used up your free minutes for the country you are calling.</li>
+                                        <li>Contact Zoiko Mobile&apos;s 24/7 customer support for assistance on 800-988-8116</li>
+                                    </ol>
                                 </AccordionBody>
                             </AccordionItem>
                             <AccordionItem eventKey="1">
