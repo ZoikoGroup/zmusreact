@@ -4,7 +4,7 @@ import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Col, Containe
 export default function WifiFaqs () {
     return (
         <Container fluid className="bglite">
-        <Container className="p-5">
+        <Container className="py-5">
             <h2 className="text-center">Frequently Asked Questions</h2>
             <Row>
                 <Col>

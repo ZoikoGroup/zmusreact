@@ -68,7 +68,7 @@ const TopHeader = () => {
                                     <Col md={2} sm={12} xs={12}>
                                         <p><span className="txtgreen">What&apos;s Included</span></p>
                                         <ul className="menulist">
-                                            <li><Link href={"/5G-speed"}>5G Speed</Link></li>
+                                            <li><Link href={"/5g-data-deals"}>5G Speed</Link></li>
                                             <li><Link href={"/wi-fi-calling"}>Wi-Fi Calling</Link></li>
                                             <li><Link href={"/canada-mexico-roaming-plans"}>Roam Free in Canada &amp; Mexico</Link></li>
                                             <li><Link href={"/international-callings"}>International Calls</Link></li>
