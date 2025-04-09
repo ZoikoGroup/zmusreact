@@ -460,6 +460,13 @@ a {
   background-size: cover;
   height: 700px;
 }
+.wifibg {
+  background-image: url('/img/wifibg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+}
 .protbox {
   flex: 30%;
 }
