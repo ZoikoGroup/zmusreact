@@ -36,20 +36,20 @@ const Footer = () => {
                         <p className="txtred">Help &amp; Support</p>
                         <ul>
                             <li><Link href={"/customer-service"}>Customer Service</Link></li>
-                            <li><Link href={"#"}>FAQs</Link></li>
-                            <li><Link href={"#"}>Coverage Map</Link></li>
+                            <li><Link href={"/faqs"}>FAQs</Link></li>
+                            <li><Link href={"https://mvnoc.ai/coverage-map"} target="_blank">Coverage Map</Link></li>
                             <li><Link href={"#"}>Network &amp; Service</Link></li>
-                            <li><Link href={"#"}>Device Protection</Link></li>
-                            <li><Link href={"#"}>Return &amp; Warranty Policy</Link></li>
-                            <li><Link href={"#"}>Contact Us</Link></li>
+                            <li><Link href={"/device-protection"}>Device Protection</Link></li>
+                            <li><Link href={"/return-policy"}>Return &amp; Warranty Policy</Link></li>
+                            <li><Link href={"/contact-us"}>Contact Us</Link></li>
                         </ul>
                     </Col>
                     <Col md={3} sm={12} xs={12}>
                         <p className="txtred">Zoiko Legal</p>
                         <ul>
-                            <li><Link href={"#"}>Terms &amp; Conditions</Link></li>
-                            <li><Link href={"#"}>Privacy Policy</Link></li>
-                            <li><Link href={"#"}>Cookies Policy</Link></li>
+                            <li><Link href={"/terms-and-conditions"}>Terms &amp; Conditions</Link></li>
+                            <li><Link href={"/privacy-policy"}>Privacy Policy</Link></li>
+                            <li><Link href={"/cookie-policy"}>Cookies Policy</Link></li>
                             <li><Link href={"#"}>Intellectual Property</Link></li>
                             <li><Link href={"#"}>Consumer Information</Link></li>
                             <li><Link href={"#"}>Regulatory Information</Link></li>
