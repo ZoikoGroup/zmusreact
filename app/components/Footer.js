@@ -50,8 +50,8 @@ const Footer = () => {
                             <li><Link href={"/terms-and-conditions"}>Terms &amp; Conditions</Link></li>
                             <li><Link href={"/privacy-policy"}>Privacy Policy</Link></li>
                             <li><Link href={"/cookie-policy"}>Cookies Policy</Link></li>
-                            <li><Link href={"#"}>Intellectual Property</Link></li>
-                            <li><Link href={"#"}>Consumer Information</Link></li>
+                            <li><Link href={"/intellectual-property-notice"}>Intellectual Property</Link></li>
+                            <li><Link href={"/consumer-information"}>Consumer Information</Link></li>
                             <li><Link href={"#"}>Regulatory Information</Link></li>
                             <li><Link href={"#"}>California Consumer Privacy Act (CCPA)</Link>
                                 <ul>

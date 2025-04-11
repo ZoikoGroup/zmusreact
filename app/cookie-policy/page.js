@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import { Container } from "react-bootstrap";
 
-const CookiePOlicy = () => {
+const CookiePolicy = () => {
     return (
         <>
         <TopHeader />
@@ -13,7 +13,7 @@ const CookiePOlicy = () => {
         <HeadBar text="Cookie Policy" />
         <Container fluid className="bglite p-0">
             <Container className="py-5">
-                <h4 className="txtred">Understanding How We Use Cookies</h4>
+            <h4 className="txtred">Understanding How We Use Cookies</h4>
                 <p>At Zoiko Mobile, we use cookies and similar tracking technologies to enhance your browsing experience, analyze website traffic, and personalize content. This Cookies Policy explains what cookies are, how we use them, and your choices regarding cookies.</p>
                 <h4 className="txtred">What are Cookies?</h4>
                 <p>Cookies are small text files that are placed on your computer or mobile device when you visit a website. They are widely used to make websites work more efficiently and to provide information to website owners.</p>
@@ -39,4 +39,4 @@ const CookiePOlicy = () => {
         </>
     );
 }
-export default CookiePOlicy;
+export default CookiePolicy;
