@@ -55,9 +55,9 @@ const Footer = () => {
                             <li><Link href={"/regularity-information"}>Regulatory Information</Link></li>
                             <li><Link href={"/california-consumer-privacy-act"}>California Consumer Privacy Act (CCPA)</Link>
                                 <ul>
-                                    <li><Link href={"#"}>Do Not Sell My Personal Information </Link></li>
+                                    <li><Link href={"/do-not-sell-my-personal-information"}>Do Not Sell My Personal Information </Link></li>
                                     <li><Link href={"#"}>CCPA Privacy Notice</Link></li>
-                                    <li><Link href={"#"}>911 &amp; E911 Disclosure </Link></li>
+                                    <li><Link href={"/911-e911-disclosure"}>911 &amp; E911 Disclosure </Link></li>
                                 </ul>
                             </li>
                         </ul>
