@@ -52,8 +52,8 @@ const Footer = () => {
                             <li><Link href={"/cookie-policy"}>Cookies Policy</Link></li>
                             <li><Link href={"/intellectual-property-notice"}>Intellectual Property</Link></li>
                             <li><Link href={"/consumer-information"}>Consumer Information</Link></li>
-                            <li><Link href={"#"}>Regulatory Information</Link></li>
-                            <li><Link href={"#"}>California Consumer Privacy Act (CCPA)</Link>
+                            <li><Link href={"/regularity-information"}>Regulatory Information</Link></li>
+                            <li><Link href={"/california-consumer-privacy-act"}>California Consumer Privacy Act (CCPA)</Link>
                                 <ul>
                                     <li><Link href={"#"}>Do Not Sell My Personal Information </Link></li>
                                     <li><Link href={"#"}>CCPA Privacy Notice</Link></li>
