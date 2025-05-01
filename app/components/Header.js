@@ -15,7 +15,7 @@ const Header = () => {
     
     return (
         <>
-        <Navbar expand="lg" className="bg-body-tertiary p-0">
+        <Navbar expand="lg" className="bg-body-tertiary p-0 headnav">
             <Container fluid>
                 <Navbar.Brand href="/"><Image src='/img/zmuslogo.png' width={160} height={90} alt="Logo" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />

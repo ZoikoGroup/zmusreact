@@ -43,6 +43,11 @@ a {
   font-weight: 700 !important;
   color: #000000 !important;
 }
+.headnav{
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #000000 !important;
+}
 .headbar {
   background-image: url('/img/headbar_bg.jpg');
   background-repeat: no-repeat;
