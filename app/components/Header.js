@@ -33,7 +33,7 @@ const Header = () => {
                         </NavDropdown>
                         <Nav.Link href="/about">About Us</Nav.Link>
                     </Nav>
-                    <Nav className="me-auto">
+                    <Nav className="ms-auto">
                         <Nav.Link href="#" onClick={handleShow}><i className="bi bi-search"></i></Nav.Link>
                         <Nav.Link href="#"><i className="bi bi-cart"></i></Nav.Link>
                         <NavDropdown title="Login" id="collapsible-nav-dropdown">

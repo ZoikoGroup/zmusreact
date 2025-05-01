@@ -13,7 +13,7 @@ const IntellectualProperty = () => {
         <HeadBar text="Intellectual Property Notice" />
         <Container fluid className="bglite p-0">
             <Container className="py-5">
-            <h4 className="txtred">Protecting Our Intellectual Property</h4>
+                <h4 className="txtred">Protecting Our Intellectual Property</h4>
                 <p>All content, trademarks, logos, and other intellectual property displayed on the Zoiko Mobile website are the property of Zoiko Mobile Inc. or third parties. We take intellectual property rights seriously and take measures to protect our intellectual property.</p>
                 <h4 className="txtred">Trademarks</h4>
                 <p>The Zoiko Mobile name, logo, and all related names, logos, product and service names, designs, and slogans are trademarks of Zoiko Mobile Inc. or its affiliates. You may not use these trademarks without our prior written permission.</p>

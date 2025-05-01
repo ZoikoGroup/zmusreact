@@ -8,7 +8,7 @@ import { usePathname} from 'next/navigation';
 const TopHeader = () => {
     const pathname = usePathname();
     return (
-        <Navbar collapseOnSelect expand="lg" className="bg-lite p-0" style={{fontSize:'12px'}}>
+        <Navbar collapseOnSelect expand="lg" className="bg-lite p-0 topnav">
             <Container fluid>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" className="ms-auto" />
                 <Navbar.Collapse id="responsive-navbar-nav">
