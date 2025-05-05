@@ -125,9 +125,9 @@ a {
   margin-bottom: -50px !important;
 }
 .carousel-indicators [data-bs-target] {
-  width: 8px;
-  height: 8px;
-  background-color: #DF1E5A;
+  width: 8px !important;
+  height: 8px !important;
+  background-color: #DF1E5A !important;
   margin-left: 12px;
   margin-right: 12px;
   border-radius: 6px;
