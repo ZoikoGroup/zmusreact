@@ -7,7 +7,7 @@ const HomeBanner = () => {
     return (
         <>
         <HeadBar text={<>Affordable Plans | No Credit Checks | No Hidden Fees | Unlimited Everything | Reliable Nationwide Coverage</>} />
-        <Carousel controls={false}>
+        <Carousel controls={false} indicators={true}>
             <Carousel.Item>
                 <img className="d-block w-100" src="/img/home-banner/Unbeatable-VALUE-banner.webp" alt="Unbeatable Value" />
                 <Carousel.Caption>
