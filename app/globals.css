@@ -9,6 +9,12 @@
     --foreground: #ededed;
   }
 }
+@font-face {
+	font-family: 'Futura';
+	src: url('../fonts/Futura-Md-BT-Medium.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
 
 html,
 body {
@@ -114,6 +120,17 @@ a {
 }
 .protectedlist {
   list-style-image: url('/img/icons/shield.svg');
+}
+.carousel-indicators {
+  margin-bottom: -50px !important;
+}
+.carousel-indicators [data-bs-target] {
+  width: 8px;
+  height: 8px;
+  background-color: #DF1E5A;
+  margin-left: 12px;
+  margin-right: 12px;
+  border-radius: 6px;
 }
 .protectedlist li {
   padding: 5px 0;
@@ -287,6 +304,8 @@ a {
 .footerboxlarge {
   background-color: #DDDDDD;
   font-size: 18px;
+  font-family: "Futura Md BT", Sans-serif !important;
+  font-weight: 500;
 }
 .footerboxlarge ul {
   list-style-type: none;
