@@ -79,6 +79,10 @@ a {
 .nav-item.dropdownmg {
   position: inherit;
 }
+.nav-item .active {
+  border: 2px solid #DF1E5A !important;
+  border-radius: 12px !important;
+}
 .dropdown-menu {
   width: 100%;
   --bs-dropdown-min-width: 14rem;
