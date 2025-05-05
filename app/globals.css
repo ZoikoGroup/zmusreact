@@ -128,8 +128,8 @@ a {
   width: 8px !important;
   height: 8px !important;
   background-color: #DF1E5A !important;
-  margin-left: 12px;
-  margin-right: 12px;
+  margin-left: 12px !important;
+  margin-right: 12px !important;
   border-radius: 6px;
 }
 .protectedlist li {
