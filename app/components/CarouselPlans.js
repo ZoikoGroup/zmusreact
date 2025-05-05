@@ -10,7 +10,7 @@ export default function CarouselSimPlan () {
         <>
         <Container fluid className="py-4 bglite">
             <h2 className="text-center py-4">Choose Your Zoiko Mobile Preferred Plan</h2>
-            <ul className="nav nav-tabs nav-justified tabhead" role="tablist" style={{border:'1px solid black',borderRadius:'8px'}}>
+            <ul className="nav nav-tabs nav-justified tabhead p-1" role="tablist" style={{border:'1px solid black',borderRadius:'12px'}}>
                 <li className="nav-item" role="presentation">
                     <Link className="nav-link active" id="justified-tab-0" data-bs-toggle="tab" href="#prepaid" role="tab" aria-controls="justified-tabpanel-0" aria-selected="true"> Prepaid Plans </Link>
                 </li>
