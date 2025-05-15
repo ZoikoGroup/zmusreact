@@ -57,44 +57,63 @@ const HomeBanner = () => {
             <Carousel.Item>
                 <img className="d-block w-100" src="/img/home-banner/Military-Veterans-banner.png" alt="Military Veterans" />
                 <Carousel.Caption>
-                    <div className="btnbox">
-                        <Button href='/military-veterans-form' variant="danger" size="lg" className="mx-4 custom-button">Register Now</Button>
-                        <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
+                    <div className="btnbox text-start">
+                        <h1 className="bigred">Military &amp; Veterans&apos;</h1>
+                        <h1 className="txtred verybig">Lifetime Deals</h1>
+                        <ul className="redbullet txtblack midbig" style={{fontSize:'32px'}}>
+                            <li>20% Lifetime Discount</li>
+                            <li>15% Discount For Family &amp; Friends</li>
+                        </ul>
+                        <Button href='/military-veterans-form' variant="danger" size="lg" className="custom-button">Register Now</Button>
+                        <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Learn more</Button>
                     </div>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img className="d-block w-100" src="/img/home-banner/banner-student.png" alt="Student Banner" />
                 <Carousel.Caption>
-                    <div className="btnbox">
-                        <Button href='/college-student-discount-form' variant="danger" size="lg" className="mx-4 custom-button">Register Now</Button>
-                        <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
+                    <div className="btnbox text-start">
+                        <h1 className="txtblack pb-3">Zoiko Mobile College<br />Student Discount Program</h1>
+                        <h4 className="txtblack">Get Exclusive</h4>
+                        <h1 className="txtred verybig">20% Discount</h1>
+                        <h1 className="txtblack pb-3">On Any Of Our Plans</h1>
+                        <Button href='/college-student-discount-form' variant="danger" size="lg" className="custom-button">Register Now</Button>
+                        <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Learn more</Button>
                     </div>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img className="d-block w-100" src="/img/home-banner/Family-Plans-Banner.webp" alt="Student Banner" />
+                <img className="d-block w-100" src="/img/home-banner/Family-Plans-Banner.png" alt="Student Banner" />
                 <Carousel.Caption>
-                    <div className="btnbox">
-                        <Button href='/family-plans' variant="danger" size="lg" className="mx-4 custom-button">Learn More</Button>
+                    <div className="btnbox text-start">
+                        <h1 className="txtred">Stay Connected,</h1>
+                        <h1 className="txtred bigred">Stay Together</h1>
+                        <h2 className="txtblack py-3 midbig"><span style={{fontWeight:'800'}}>Get 20% off</span> your plan when you<br />activate 3 or more plans with Zoiko Mobile</h2>
+                        <Button href='/family-plans' variant="danger" size="lg" className="custom-button">Learn More</Button>
                     </div>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img className="d-block w-100" src="/img/home-banner/Animal-Charities-Banner.webp" alt="Student Banner" />
+                <img className="d-block w-100" src="/img/home-banner/Animal-Charities-Banner.png" alt="Student Banner" />
                 <Carousel.Caption>
-                    <div className="btnbox">
-                        <Button href='#' variant="danger" size="lg" className="mx-4 custom-button">Register Now</Button>
-                        <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
+                    <div className="btnbox text-start">
+                        <h1 className="txtred bigred">Your Connecton</h1>
+                        <h1 className="txtred verybig">Saves Lives</h1>
+                        <h2 className="txtblack midbig py-3">Join Zoiko Mobile - We are supporting animals<br />and animal charities whilst keep you connected!</h2>
+                        <Button href='#' variant="danger" size="lg" className="custom-button">Register Now</Button>
+                        <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Learn more</Button>
                     </div>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img className="d-block w-100" src="/img/home-banner/Music-Hub-banner.webp" alt="Student Banner" />
+                <img className="d-block w-100" src="/img/home-banner/Music-Hub-banner.png" alt="Student Banner" />
                 <Carousel.Caption>
-                    <div className="btnbox">
-                        <Button href='/music-hub-registratrion-form' variant="danger" size="lg" className="mx-4 custom-button">Register Now</Button>
-                        <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
+                    <div className="btnbox text-start">
+                        <h1 className="txtred bigred">Zoiko Music Hub:</h1>
+                        <h1 className="txtred midbig">Empowering Music Creators and Lovers</h1>
+                        <p className="txtblack body22" style={{fontWeight:'200'}}>At Zoiko Mobile, we know music isn&apos;t just entertainment<br />—it&apos;s a way of life. That&apos;s why we created the Zoiko Music<br />Hub, a dedicated space where music lovers and aspiring<br />musicians can find the tools, perks, and community to fuel<br />their passion. Whether you&apos;re producing your next big hit,<br />jamming with friends, or discovering fresh tunes, Zoiko<br />Mobile is here to keep you connected and inspired.</p>
+                        <Button href='/music-hub-registratrion-form' variant="danger" size="lg" className="custom-button">Register Now</Button>
+                        <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Learn more</Button>
                     </div>
                 </Carousel.Caption>
             </Carousel.Item>
