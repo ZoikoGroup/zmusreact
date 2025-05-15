@@ -5,7 +5,7 @@ import Image from "next/image";
 const Testimonials = () => {
     return (
         <Container fluid className="p-5 bglite">
-            <Carousel controls={false}>
+            <Carousel controls={false} indicators={false}>
                 <CarouselItem>
                     <Row>
                         <Col md={4} sm={12} xs={12}>
