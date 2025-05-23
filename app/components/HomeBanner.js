@@ -32,7 +32,8 @@ const HomeBanner = () => {
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img className="d-block w-100" src="/img/home-banner/multiple-plans-banner.png" alt="Unbeatable Value" />
+                <img className="d-none d-md-block w-100" src="/img/home-banner/multiple-plans-banner.png" alt="Unbeatable Value" />
+                <img className="d-sm-block d-md-none" src="/img/home-banner/multiple-plans-banner-mobile.png" alt="Unbeatable Value" />
                 <Carousel.Caption>
                     <div className="btnbox text-start">
                         <h1 className="txtred bannerhead">Stay Connected Your Way:<br />Prepaid <span className="txtblack">|</span> Postpaid <span className="txtblack">|</span> Business</h1>
@@ -43,7 +44,8 @@ const HomeBanner = () => {
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img className="d-block w-100" src="/img/home-banner/Postal-Workers-banner.png" alt="Postal Workers" />
+                <img className="d-none d-md-block w-100" src="/img/home-banner/Postal-Workers-banner.png" alt="Postal Workers" />
+                <img className="d-sm-block d-md-none" src="/img/home-banner/Postal-Workers-banner-mobile.png" alt="Postal Workers" />
                 <Carousel.Caption>
                     <div className="btnbox text-start">
                         <h1 className="txtblack">A Special Thank You To<br />U.S. Postal Service Workers</h1>
@@ -55,12 +57,13 @@ const HomeBanner = () => {
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img className="d-block w-100" src="/img/home-banner/Military-Veterans-banner.png" alt="Military Veterans" />
+                <img className="d-none d-md-block w-100" src="/img/home-banner/Military-Veterans-banner.png" alt="Military Veterans" />
+                <img className="d-sm-block d-md-none" src="/img/home-banner/Military-Veterans-banner-mobile.png" alt="Military Veterans" />
                 <Carousel.Caption>
                     <div className="btnbox text-start">
                         <h1 className="bigred">Military &amp; Veterans&apos;</h1>
                         <h1 className="txtred verybig">Lifetime Deals</h1>
-                        <ul className="redbullet txtblack midbig" style={{fontSize:'32px'}}>
+                        <ul className="redbullet-banner txtblack">
                             <li>20% Lifetime Discount</li>
                             <li>15% Discount For Family &amp; Friends</li>
                         </ul>
@@ -70,7 +73,8 @@ const HomeBanner = () => {
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img className="d-block w-100" src="/img/home-banner/banner-student.png" alt="Student Banner" />
+                <img className="d-none d-md-block w-100" src="/img/home-banner/banner-student.png" alt="Student Banner" />
+                <img className="d-sm-block d-md-none" src="/img/home-banner/banner-student-mobile.png" alt="Student Banner" />
                 <Carousel.Caption>
                     <div className="btnbox text-start">
                         <h1 className="txtblack pb-3">Zoiko Mobile College<br />Student Discount Program</h1>
@@ -83,10 +87,11 @@ const HomeBanner = () => {
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img className="d-block w-100" src="/img/home-banner/Family-Plans-Banner.png" alt="Student Banner" />
+                <img className="d-none d-md-block w-100" src="/img/home-banner/Family-Plans-Banner.png" alt="Student Banner" />
+                <img className="d-sm-block d-md-none" src="/img/home-banner/Family-Plans-Banner-mobile.png" alt="Student Banner" />
                 <Carousel.Caption>
                     <div className="btnbox text-start">
-                        <h1 className="txtred">Stay Connected,</h1>
+                        <h1 className="txtred bannerhead">Stay Connected,</h1>
                         <h1 className="txtred bigred">Stay Together</h1>
                         <h2 className="txtblack py-3 midbig"><span style={{fontWeight:'800'}}>Get 20% off</span> your plan when you<br />activate 3 or more plans with Zoiko Mobile</h2>
                         <Button href='/family-plans' variant="danger" size="lg" className="custom-button">Learn More</Button>
@@ -94,7 +99,8 @@ const HomeBanner = () => {
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img className="d-block w-100" src="/img/home-banner/Animal-Charities-Banner.png" alt="Student Banner" />
+                <img className="d-none d-md-block w-100" src="/img/home-banner/Animal-Charities-Banner.png" alt="Student Banner" />
+                <img className="d-sm-block d-md-none" src="/img/home-banner/Animal-Charities-Banner-mobile.png" alt="Student Banner" />
                 <Carousel.Caption>
                     <div className="btnbox text-start">
                         <h1 className="txtred bigred">Your Connecton</h1>
@@ -106,7 +112,8 @@ const HomeBanner = () => {
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img className="d-block w-100" src="/img/home-banner/Music-Hub-banner.png" alt="Student Banner" />
+                <img className="d-none d-md-block w-100" src="/img/home-banner/Music-Hub-banner.png" alt="Student Banner" />
+                <img className="d-sm-block d-md-none" src="/img/home-banner/Music-Hub-banner-mobile.png" alt="Student Banner" />
                 <Carousel.Caption>
                     <div className="btnbox text-start">
                         <h1 className="txtred bigred">Zoiko Music Hub:</h1>

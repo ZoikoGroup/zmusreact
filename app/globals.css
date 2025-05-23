@@ -536,6 +536,13 @@ a {
   color: #DF1E5A;
   font-size: 24px;
 }
+.redbullet-banner {
+  font-size: 32px;
+}
+.redbullet-banner li::marker {
+  color: #DF1E5A;
+  font-size: 24px;
+}
 .txtblack {
   color: #000000;
 }
@@ -576,7 +583,8 @@ a {
     font-size: 12px;
   }
   .btnbox {
-    bottom: 0px;
+    bottom: 200px;
+    left: -30px;
   }
   .custom-button {
     padding: 8px 16px;
@@ -658,5 +666,26 @@ a {
   }
   .bodysm {
     font-size: 14px;
+  }
+  .bannerhead {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+  }
+  .midbig {
+    font-size: 18px;
+    font-weight: 400;
+  }
+  .verybig {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 26px;
+  }
+  .redbullet-banner {
+    font-size: 18px;
+  }
+  .redbullet-banner li::marker {
+    color: #DF1E5A;
+    font-size: 18px;
   }
 }
