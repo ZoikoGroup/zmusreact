@@ -583,8 +583,11 @@ a {
     font-size: 12px;
   }
   .btnbox {
-    bottom: 200px;
+    bottom: 280px;
     left: -30px;
+  }
+  .btnbox h1 {
+    font-size: 16px;
   }
   .custom-button {
     padding: 8px 16px;

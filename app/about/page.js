@@ -21,11 +21,11 @@ const AboutUs = () => {
         <Header />
         <HeadBar text={<>The Zoiko Philosophy: Innovate | Connect | Communicate</>} />
         <Container fluid className="bglite py-5">
-            <Container className="mt-4">
-                <h2 className="txtred">The Zoiko Mobile Chronicle:</h2>
-                <p className="body22">Connecting Every Possibility! <span className="txtred">Inspired by Animals, Music &amp; Nature.</span></p>
-                <Row>
+            <Container>
+                <Row className="align-items-center">
                     <Col md={6} sm={12} xs={12}>
+                        <h2 className="txtred">The Zoiko Mobile Chronicle:</h2>
+                        <p className="body22">Connecting Every Possibility! <span className="txtred">Inspired by Animals, Music &amp; Nature.</span></p>
                         <p className="body22">Zoiko Mobile is more than a telecommunications company; it is the embodiment of a deeply rooted vision, shaped by intellect, passion, and an intricate blend of influences from philosophy, language, mathematics, and music. Founded by Lennox McLeod, Zoiko Mobile is a living testament to the boundless possibilities that arise when diverse passions converge with professional experience and insight.</p>
                         {isOpen && (
                             <>
@@ -38,7 +38,7 @@ const AboutUs = () => {
                     </Col>
                     <Col md={6} sm={12} xs={12}>
                         <div className="text-center">
-                            <Image src="/img/aboutlogo.png" fluid alt="Logo" className="w-50" />
+                            <Image src="/img/aboutlogo.png" fluid alt="Logo" className="w-100" />
                         </div>
                     </Col>
                 </Row>

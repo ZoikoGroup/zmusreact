@@ -13,13 +13,19 @@ const CollegeStudent = () => {
         <TopHeader />
         <Header />
         <HeadBar text="Zoiko Mobile College Student Discount Program" />
-        <Container fluid className="collegestudent position-relative">
-            <div className="position-absolute d-none d-md-block" style={{left:'12%', bottom:'16%'}}>
-                <Button variant="danger" size="lg" href="/college-student-discount-form">Register Now</Button>
-            </div>
-            <div className="position-absolute d-sm-block d-md-none" style={{left:'5%', bottom:'5%'}}>
-                <Button variant="danger" size="sm" href="/college-student-discount-form">Register Now</Button>
-            </div>
+        <Container fluid className="position-relative">
+            <img className="d-none d-md-block w-100" src="/img/home-banner/banner-student.png" alt="Student Banner" />
+            <img className="d-sm-block d-md-none" src="/img/home-banner/banner-student-mobile.png" alt="Student Banner" />
+            <Container>
+                <div className="btnbox text-start">
+                    <h1 className="txtblack pb-1">Zoiko Mobile College<br />Student Discount Program</h1>
+                    <h4 className="txtblack">Get Exclusive</h4>
+                    <h1 className="txtred verybig">20% Discount</h1>
+                    <h1 className="txtblack pb-1">On Any Of Our Plans</h1>
+                    <Button href='/college-student-discount-form' variant="danger" size="lg" className="custom-button">Register Now</Button>
+                    <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Learn more</Button>
+                </div>
+            </Container>
         </Container>
         <Container fluid className="py-5 bglite">
             <Container className="w-75 w-sm-100">
