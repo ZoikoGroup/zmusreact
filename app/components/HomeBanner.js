@@ -37,9 +37,10 @@ const HomeBanner = () => {
                 <Carousel.Caption>
                     <div className="btnbox text-start">
                         <h1 className="txtred bannerhead">Stay Connected Your Way:<br />Prepaid <span className="txtblack">|</span> Postpaid <span className="txtblack">|</span> Business</h1>
-                        <h2 className="txtblack py-4">Plans built for every lifestyle with global<br />coverage and unbeatable flexibility</h2>
-                        <Button href='#' variant="danger" size="lg" className="custom-button">Explore Plans</Button>
-                        <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Shop Devices</Button>
+                        <h2 className="txtblack d-none d-md-block">Plans built for every lifestyle with global<br />coverage and unbeatable flexibility</h2>
+                        <h2 className="txtblack d-sm-block d-md-none">Plans built for every lifestyle with global coverage and unbeatable flexibility</h2>
+                        <Button href='/prepaid-plans' variant="danger" size="lg" className="custom-button">Explore Plans</Button>
+                        <Button href='/product-category/refurbished' variant="outline-danger" className="mx-4 custom-button" size="lg">Shop Devices</Button>
                     </div>
                 </Carousel.Caption>
             </Carousel.Item>

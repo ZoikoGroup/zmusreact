@@ -17,7 +17,7 @@ const Header = () => {
         <>
         <Navbar expand="lg" className="bg-body-tertiary p-0 headnav">
             <Container fluid>
-                <Navbar.Brand href="/"><Image src='/img/zmuslogo.png' width={160} height={90} alt="Logo" /></Navbar.Brand>
+                <Navbar.Brand href="/"><Image src='/img/zmuslogo-new.png' width={160} height={90} alt="Logo" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mx-auto">
@@ -31,7 +31,7 @@ const Header = () => {
                             <NavDropdown.Item href="/product-category/refurbished">Refurbished Smartphones</NavDropdown.Item>
                             <NavDropdown.Item href="#">Accessories</NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link href="/about">About Us</Nav.Link>
+                        <Nav.Link href="/about" className={pathname == "/about" ? "active" : "" }>About Us</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
                         <Nav.Link href="#" onClick={handleShow}><i className="bi bi-search"></i></Nav.Link>
