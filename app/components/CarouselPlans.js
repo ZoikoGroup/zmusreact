@@ -52,7 +52,7 @@ export default function CarouselSimPlan () {
                                         <li>EU Roaming: 15GB/1000 min/1000 Texts</li>
                                     </ul>
                                     <hr className="separator" />
-                                    <div className="text-center"><Link href="#" className="btn btn-outline-danger px-4">View plan</Link> <Link href="#" className="btn btn-danger">Buy this plan</Link></div>
+                                    <div className="text-center"><Link href="plans" className="btn btn-outline-danger px-4">View plan</Link> <Link href="#" className="btn btn-danger">Buy this plan</Link></div>
                                 </div>
                             </div>
                         </Col>
