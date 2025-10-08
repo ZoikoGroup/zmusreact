@@ -14,7 +14,7 @@ function GetData() {
     }, [])
 
     if (!posts) return <div>Loading...</div>
-    console.log(posts)
+    console.log(posts);
 
     return (
     <ul>
