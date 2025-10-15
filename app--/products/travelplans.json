@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "name": "Daily Adventure Pass",
+        "image": "/img/adventure-pass.webp",
+        "data": "Unlimited 5G Data",
+        "price": "$7.50",
+        "rate": "/mo/line",
+        "features": [
+            "Unlimited 5G and 4G LTE Data",
+            "Unlimited Talk & Text",
+            "Nationwide 5G & 4G Coverage",
+            "Mobile Hotspot Access",
+            "Flexible Contracts with Simple Pricing",
+            "Discounted Device Protection"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Voyager Pass",
+        "image": "/img/voyager-pass.webp",
+        "data": "Unlimited 5G Data",
+        "price": "$16.00",
+        "rate": "/mo/line",
+        "features": [
+            "Unlimited 5G and 4G LTE Data",
+            "Unlimited Talk & Text",
+            "Nationwide 5G & 4G Coverage",
+            "Mobile Hotspot Access",
+            "Flexible Contracts with Simple Pricing",
+            "Discounted Device Protection"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Explorer Pass",
+        "image": "/img/explorer-pass.webp",
+        "data": "Unlimited 5G Data",
+        "price": "$52.00",
+        "rate": "/mo/line",
+        "features": [
+            "Unlimited 5G and 4G LTE Data",
+            "Unlimited Talk & Text",
+            "Nationwide 5G & 4G Coverage",
+            "Mobile Hotspot Access",
+            "Flexible Contracts with Simple Pricing",
+            "Discounted Device Protection"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Zoiko Global Connect",
+        "image": "/img/global-connect.webp",
+        "data": "Unlimited 5G Data",
+        "price": "$65.00",
+        "rate": "/mo/line",
+        "features": [
+            "Unlimited 5G and 4G LTE Data",
+            "Unlimited Talk & Text",
+            "Nationwide 5G & 4G Coverage",
+            "Mobile Hotspot Access",
+            "Flexible Contracts with Simple Pricing",
+            "Discounted Device Protection"
+        ]
+    }
+]
