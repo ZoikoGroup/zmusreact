@@ -87,47 +87,73 @@ const PlanPurchaseModal = ({ show, handleClose, onClose, planTitle, planSlug, pl
   };
 
   const nextStep = () => {
-  // If eSIM is selected and device step not checked, don't proceed
+  // ✅ Validation for porting form (Step 1)
+  if (currentStep === 1 && lineType === "portNumber") {
+    const requiredFields = [
+      "mdn",
+      "first_name",
+      "last_name",
+      "carrier_account",
+      "carrier_password",
+      "city",
+      "address1",
+      "address2",
+      "zip",
+      "state",
+    ];
+
+    for (let field of requiredFields) {
+      if (!formData[field] || formData[field].trim() === "") {
+        alert(`Please fill out ${field.replace(/_/g, " ")}.`);
+        return;
+      }
+    }
+
+    // ✅ mdn validation — must be 10 digits numeric
+    if (!/^\d{10}$/.test(formData.mdn)) {
+      alert("Please enter a valid 10-digit phone number (MDN).");
+      return;
+    }
+  }
+
+  // ✅ If eSIM selected and device not compatible
   if (simType === "eSIM" && currentStep === steps.length) {
     if (deviceCheckStatus !== "compatible") return;
   }
 
-  // Skip porting form for new line
+  // ✅ Skip porting form for new line
   if (lineType === "newLine" && currentStep === 0) {
     setCurrentStep(2);
     return;
   }
 
+  // ✅ Move between steps
   if (currentStep < steps.length - 1) {
     setCurrentStep((s) => s + 1);
     return;
   }
 
-  // If eSIM and device step not added yet, move to device step
+  // ✅ Add device check step if eSIM selected
   if (simType === "eSIM" && currentStep === steps.length - 1) {
     setCurrentStep(currentStep + 1);
     return;
   }
 
-  // ✅ Prepare formData based on the conditions
+  // ✅ Prepare filtered form data
   let filteredData = {};
 
   if (lineType === "newLine" && simType === "pSIM") {
-    // newLine + pSIM → Empty object
     filteredData = {};
   } else if (lineType === "portNumber" && simType === "pSIM") {
-    // portNumber + pSIM → All porting fields except imei
     const { imei, ...rest } = formData;
     filteredData = rest;
   } else if (lineType === "newLine" && simType === "eSIM") {
-    // newLine + eSIM → only imei
     filteredData = { imei: formData.imei };
   } else if (lineType === "portNumber" && simType === "eSIM") {
-    // portNumber + eSIM → all porting fields + imei
     filteredData = { ...formData };
   }
 
-  // ✅ Prepare final cart item
+  // ✅ Save cart to localStorage
   const finalData = {
     planTitle,
     planSlug,
@@ -141,14 +167,14 @@ const PlanPurchaseModal = ({ show, handleClose, onClose, planTitle, planSlug, pl
     formData: filteredData,
   };
 
-  // ✅ Save to session storage
-  let cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
   cart.push(finalData);
-  sessionStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("cart", JSON.stringify(cart));
 
   closeFn();
   router.push("/checkout");
 };
+
 
 
 
@@ -201,78 +227,119 @@ const PlanPurchaseModal = ({ show, handleClose, onClose, planTitle, planSlug, pl
           )}
 
           {currentStep === 1 && lineType === "portNumber" && (
-            <div>
-              <h4>Enter Details For Porting Number</h4>
-              <div className="form_wrapper">
-                {["mdn","first_name","last_name","carrier_account","carrier_password","city","address1","address2","zip"].map((field) => (
-                  <div key={field} className="form_field_group-half validate-required">
-                    <label>{field.replace("_"," ").toUpperCase()}</label>
-                    <input type="text" name={field} value={formData[field]} onChange={handleChange} />
-                  </div>
-                ))}
-                <div className="form_field_group-half validate-required">
-                  <label>State</label>
-                  <select name="state" value={formData.state} onChange={handleChange}>
-                    <option value="">Select state</option>
-                    <option value="AL">Alabama</option>
-  <option value="AK">Alaska</option>
-  <option value="AZ">Arizona</option>
-  <option value="AR">Arkansas</option>
-  <option value="CA">California</option>
-  <option value="CO">Colorado</option>
-  <option value="CT">Connecticut</option>
-  <option value="DE">Delaware</option>
-  <option value="DC">District of Columbia</option>
-  <option value="FL">Florida</option>
-  <option value="GA">Georgia</option>
-  <option value="HI">Hawaii</option>
-  <option value="ID">Idaho</option>
-  <option value="IL">Illinois</option>
-  <option value="IN">Indiana</option>
-  <option value="IA">Iowa</option>
-  <option value="KS">Kansas</option>
-  <option value="KY">Kentucky</option>
-  <option value="LA">Louisiana</option>
-  <option value="ME">Maine</option>
-  <option value="MD">Maryland</option>
-  <option value="MA">Massachusetts</option>
-  <option value="MI">Michigan</option>
-  <option value="MN">Minnesota</option>
-  <option value="MS">Mississippi</option>
-  <option value="MO">Missouri</option>
-  <option value="MT">Montana</option>
-  <option value="NE">Nebraska</option>
-  <option value="NV">Nevada</option>
-  <option value="NH">New Hampshire</option>
-  <option value="NJ">New Jersey</option>
-  <option value="NM">New Mexico</option>
-  <option value="NY">New York</option>
-  <option value="NC">North Carolina</option>
-  <option value="ND">North Dakota</option>
-  <option value="OH">Ohio</option>
-  <option value="OK">Oklahoma</option>
-  <option value="OR">Oregon</option>
-  <option value="PA">Pennsylvania</option>
-  <option value="RI">Rhode Island</option>
-  <option value="SC">South Carolina</option>
-  <option value="SD">South Dakota</option>
-  <option value="TN">Tennessee</option>
-  <option value="TX">Texas</option>
-  <option value="UT">Utah</option>
-  <option value="VT">Vermont</option>
-  <option value="VA">Virginia</option>
-  <option value="WA">Washington</option>
-  <option value="WV">West Virginia</option>
-  <option value="WI">Wisconsin</option>
-  <option value="WY">Wyoming</option>
-  <option value="AA">Armed Forces (AA)</option>
-  <option value="AE">Armed Forces (AE)</option>
-  <option value="AP">Armed Forces (AP)</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          )}
+  <div>
+    <h4>Enter Details For Porting Number</h4>
+    <div className="form_wrapper">
+      {[
+        { name: "mdn", label: "Phone Number (MDN)", type: "tel" },
+        { name: "first_name", label: "First Name", type: "text" },
+        { name: "last_name", label: "Last Name", type: "text" },
+        { name: "carrier_account", label: "Account Number", type: "text" },
+        { name: "carrier_password", label: "PIN", type: "text" },
+        { name: "city", label: "City", type: "text" },
+        { name: "address1", label: "Address 1", type: "text" },
+        { name: "address2", label: "Address 2", type: "text" },
+        { name: "zip", label: "Zip Code", type: "text" },
+      ].map((field) => (
+        <div key={field.name} className="form_field_group-half validate-required">
+          <label>{field.label}</label>
+          <input
+            type={field.type}
+            name={field.name}
+            value={formData[field.name]}
+            onChange={(e) => {
+              const { name, value } = e.target;
+              // ✅ Validation: mdn numeric + 10 digits
+              if (name === "mdn") {
+                const digitsOnly = value.replace(/\D/g, "");
+                if (digitsOnly.length <= 10) {
+                  setFormData((p) => ({ ...p, [name]: digitsOnly }));
+                }
+              } else {
+                setFormData((p) => ({ ...p, [name]: value }));
+              }
+            }}
+            required
+            pattern={field.name === "mdn" ? "\\d{10}" : undefined}
+            maxLength={field.name === "mdn" ? 10 : undefined}
+            placeholder={
+              field.name === "mdn"
+                ? "Enter 10-digit number"
+                : `Enter ${field.label}`
+            }
+          />
+        </div>
+      ))}
+
+      <div className="form_field_group-half validate-required">
+        <label>State</label>
+        <select
+          name="state"
+          value={formData.state}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select state</option>
+          <option value="AL">Alabama</option>
+          <option value="AK">Alaska</option>
+          <option value="AZ">Arizona</option>
+          <option value="AR">Arkansas</option>
+          <option value="CA">California</option>
+          <option value="CO">Colorado</option>
+          <option value="CT">Connecticut</option>
+          <option value="DE">Delaware</option>
+          <option value="DC">District of Columbia</option>
+          <option value="FL">Florida</option>
+          <option value="GA">Georgia</option>
+          <option value="HI">Hawaii</option>
+          <option value="ID">Idaho</option>
+          <option value="IL">Illinois</option>
+          <option value="IN">Indiana</option>
+          <option value="IA">Iowa</option>
+          <option value="KS">Kansas</option>
+          <option value="KY">Kentucky</option>
+          <option value="LA">Louisiana</option>
+          <option value="ME">Maine</option>
+          <option value="MD">Maryland</option>
+          <option value="MA">Massachusetts</option>
+          <option value="MI">Michigan</option>
+          <option value="MN">Minnesota</option>
+          <option value="MS">Mississippi</option>
+          <option value="MO">Missouri</option>
+          <option value="MT">Montana</option>
+          <option value="NE">Nebraska</option>
+          <option value="NV">Nevada</option>
+          <option value="NH">New Hampshire</option>
+          <option value="NJ">New Jersey</option>
+          <option value="NM">New Mexico</option>
+          <option value="NY">New York</option>
+          <option value="NC">North Carolina</option>
+          <option value="ND">North Dakota</option>
+          <option value="OH">Ohio</option>
+          <option value="OK">Oklahoma</option>
+          <option value="OR">Oregon</option>
+          <option value="PA">Pennsylvania</option>
+          <option value="RI">Rhode Island</option>
+          <option value="SC">South Carolina</option>
+          <option value="SD">South Dakota</option>
+          <option value="TN">Tennessee</option>
+          <option value="TX">Texas</option>
+          <option value="UT">Utah</option>
+          <option value="VT">Vermont</option>
+          <option value="VA">Virginia</option>
+          <option value="WA">Washington</option>
+          <option value="WV">West Virginia</option>
+          <option value="WI">Wisconsin</option>
+          <option value="WY">Wyoming</option>
+          <option value="AA">Armed Forces (AA)</option>
+          <option value="AE">Armed Forces (AE)</option>
+          <option value="AP">Armed Forces (AP)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+)}
+
 
           {currentStep === 2 && (
             <div>

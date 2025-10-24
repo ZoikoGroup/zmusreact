@@ -41,3 +41,601 @@
   width: 260px;
   border-radius: 8px;
 }
+
+.dash-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.device-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skeleton {
+  background: #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.skeleton-plan { height: 120px; }
+.skeleton-device { height: 80px; }
+.skeleton-billing { height: 100px; }
+.skeleton-orders { height: 90px; }
+
+.dashboard-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 16px;
+}
+
+.progress {
+  height: 8px;
+  border-radius: 4px;
+  background-color: #e9ecef;
+}
+
+.progress-bar {
+  background-color: #4caf50;
+}
+
+.dashboard-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 16px;
+  color: #202124;
+  font-family: "Inter", sans-serif;
+}
+
+.section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1a1a1a;
+}
+
+
+
+
+
+/* ================================
+   Page Shell & Wrapper
+   ================================ */
+.page-shell {
+  background: #f6f7f8;
+  min-height: calc(100vh - 160px); /* leave space for header/footer */
+  padding: 28px 20px;
+}
+
+.dashboard-wrapper {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* ================================
+   Headers & Titles
+   ================================ */
+.usage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.usage-heading {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2d2d;
+}
+
+.billing-cycle {
+  font-size: 13px;
+  color: #6b6f72;
+  background: #f1f4f5;
+  padding: 8px 12px;
+  border-radius: 18px;
+}
+
+.section-title {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* ================================
+   Cards
+   ================================ */
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 2px 8px rgba(16,24,40,0.06);
+  border: 1px solid #e8ebee;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-highlight {
+  background: #f4fdf7;
+  border-color: #dff6e8;
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-icon {
+  height: 44px;
+  width: 44px;
+  background: #eaf9f0;
+  color: #007a3d;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #122329;
+}
+
+.card-value {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.card-value .big {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0b2b22;
+}
+
+.card-value .small {
+  font-size: 13px;
+  color: #6b6f72;
+  margin-left: 6px;
+}
+
+/* ================================
+   Progress Bar
+   ================================ */
+.progress-wrap {
+  margin-top: 6px;
+}
+
+.progress-track {
+  height: 8px;
+  background: #eef2f3;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 8px;
+  background: #00b86b;
+  width: 0%;
+  border-radius: 6px;
+  transition: width 0.6s ease;
+}
+
+.progress-note {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #6b6f72;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ================================
+   Sections (Plan Preferences, Quick Actions)
+   ================================ */
+.section-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  border: 1px solid #e8ebee;
+  box-shadow: 0 2px 8px rgba(16,24,40,0.04);
+  margin-bottom: 18px;
+}
+
+/* ================================
+   Plan Preferences
+   ================================ */
+.pref-card {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.pref-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pref-header h6 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.pref-sub {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.pref-status {
+  font-size: 14px;
+  margin-top: 8px;
+  color: #198754;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  background: #00b86b;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(0,184,107,0.06);
+}
+
+/* Plan Preferences Layout */
+.pref-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 1px solid #f0f2f3;
+}
+
+.pref-item:first-of-type {
+  border-top: none;
+}
+
+.pref-left {
+  max-width: 72%;
+}
+
+.pref-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #111827;
+}
+
+.pref-desc {
+  font-size: 13px;
+  color: #6b6f72;
+  margin-top: 6px;
+}
+
+.pref-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
+  min-width: 300px;
+}
+
+/* Visually Hidden Toggle */
+.visually-hidden-toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  overflow: hidden;
+}
+
+.visually-hidden-toggle input[type="checkbox"] {
+  opacity: 0 !important;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 44px;
+  height: 24px;
+  pointer-events: none;
+}
+
+/* ================================
+   Toggle Switch
+   ================================ */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 34px;
+  border: none;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.switch input:checked + .slider {
+  background-color: #198754;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+.switch input:focus + .slider {
+  box-shadow: 0 0 1px #198754;
+}
+
+.slider:active:before {
+  width: 20px;
+}
+
+/* ================================
+   Quick Actions
+   ================================ */
+.quick-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-outline {
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 600;
+  border: 1px solid #d9e6e7;
+  background: #fff;
+  cursor: pointer;
+}
+
+.btn-outline.upgrade {
+  color: #00b86b;
+  background: #f3fbf6;
+  border-color: #dff6e8;
+}
+
+.btn-outline.buy {
+  color: #0067ff;
+  background: #f6f9ff;
+  border-color: #e6efff;
+}
+
+/* ================================
+   Helpers
+   ================================ */
+.muted {
+  color: #8b9093;
+}
+
+/* ================================
+   Responsive
+   ================================ */
+@media (max-width: 980px) {
+  .cards-row {
+    grid-template-columns: 1fr;
+  }
+
+  .pref-right {
+    min-width: 0;
+    margin-top: 8px;
+  }
+
+  .pref-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+
+
+/* ===========================
+   Card Styles
+=========================== */
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+}
+
+.card h5 {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+
+
+
+
+/* ===========================
+   Card Styles
+=========================== */
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+}
+
+.card h5 {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+/* ===========================
+   Device Card
+=========================== */
+.device-card {
+  transition: all 0.3s ease;
+  padding: 1rem;
+  border-width: 2px !important;
+  border-color: #198754 !important;
+  border-radius: 10px;
+}
+
+.device-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Device info text */
+.device-info p {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Icons */
+.device-info .icon {
+  color: #198754;
+  vertical-align: middle;
+  font-size: 1rem;
+}
+
+/* ===========================
+   Badges
+=========================== */
+.badge {
+  font-size: 0.85rem;
+  padding: 0.35em 0.7em;
+  border-radius: 12px;
+}
+
+.bg-success {
+  background-color: #198754 !important;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+  color: #212529 !important;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+.btn-block {
+  width: 100%;
+}
+
+.btn-outline-success {
+  transition: all 0.3s ease;
+}
+
+.btn-outline-success:hover {
+  background-color: #198754;
+  color: #fff;
+}
+
+/* ===========================
+   Spinner / Loading
+=========================== */
+.text-center.my-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+}
+
+/* ===========================
+   Data Usage Bar
+=========================== */
+.data-bar {
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
+.data-bar-filled {
+  height: 100%;
+  background-color: #198754;
+  transition: width 0.3s ease;
+}
+
+/* ===========================
+   Responsive Adjustments
+=========================== */
+@media (max-width: 768px) {
+  .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .d-flex.justify-content-between.align-items-center {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .badge {
+    margin-top: 0.5rem;
+  }
+
+  .device-info p {
+    font-size: 0.9rem;
+  }
+}
+
+
+
+
+
+

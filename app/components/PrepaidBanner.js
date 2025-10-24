@@ -1,19 +1,12 @@
 "use client"
-import { Container, Row, Col } from "react-bootstrap";
-import Image from "next/image";
+import { Container, Image, Row, Col } from "react-bootstrap";
 
 const PrepaidBanner = () => {
     return (
         <Container className="pt-5">
             <Row className="align-items-center">
                 <Col md={6} sm={12} xs={12}>
-                    <Image
-                        src="/img/prepaid-plans.webp"
-                        width={500}
-                        height={450}
-                        className="d-block mx-auto"
-                        style={{ maxWidth: '100%', height: 'auto' }}
-                        alt="Prepaid Plans" />
+                    <Image src="/img/prepaid-plans.webp" className="d-block mx-auto" fluid alt="Prepaid Plans" />
                 </Col>
                 <Col md={6} sm={12} xs={12}>
                     <h2 className="txtred">Zoiko Mobile: Premium Wireless, Ultimate Freedom!</h2>

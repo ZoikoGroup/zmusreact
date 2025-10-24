@@ -7,8 +7,11 @@ import HeadBar from "../components/HeadBar";
 import { useEffect, useState } from "react";
 import { usStates } from "../utils/usStates";
 import { processOrder } from "../utils/beQuickApi"; // adjust path
+import { Modal, Button } from "react-bootstrap";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function CheckoutPage() {
+  const [showThankYou, setShowThankYou] = useState(false);
   const [cart, setCart] = useState([]);
   const [showShipping, setShowShipping] = useState(false);
   const [coupon, setCoupon] = useState("");
@@ -19,6 +22,34 @@ export default function CheckoutPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [showTermsPopup, setShowTermsPopup] = useState(false);
+  // / Validation errors
+  const [errors, setErrors] = useState({
+    billingEmail: "",
+    billingPhone: "",
+    shippingEmail: "",
+    shippingPhone: "",
+    cardPhone: "",
+    billingFirstName: "",
+    billingLastName: "",
+    billingState: "",
+    billingCity: "",
+    billingHouseNumber: "",
+    billingZip: "",
+    shippingFirstName: "",
+    shippingLastName: "",
+    shippingState: "",
+    shippingCity: "",
+    shippingHouseNumber: "",
+    shippingZip: "",
+    cardFirstName: "",
+    cardLastName: "",
+    cardState: "",
+    cardCity: "",
+    cardZip: "",
+    cardNumber: "",  
+    cardExpiry: "",  
+    cardCvc: "",    
+  });
   const billingFieldMeta = {
     firstName: { label: "First Name", placeholder: "Enter your first name" },
     lastName: { label: "Last Name", placeholder: "Enter your last name" },
@@ -61,16 +92,22 @@ export default function CheckoutPage() {
       email : "",
   });
 
-  const [cardAddress, setCardAddress] = useState({
-    firstName: "",
-    lastName: "",
-    street: "",
-    city: "",
-    state: "",
-    zip: "",
-    region: "United States (US)",
-    phone: "",
-  });
+const [cardAddress, setCardAddress] = useState({
+  firstName: "",
+  lastName: "",
+  street: "",
+  city: "",
+  state: "",
+  zip: "",
+  region: "United States (US)",
+  phone: "",
+});
+
+const [cardDetails, setCardDetails] = useState({
+  cardNumber: "",
+  expiry: "",
+  cvc: "",
+});
 
   const [sameAsBilling, setSameAsBilling] = useState(false);
   const handleSameAsBilling = (checked) => {
@@ -84,7 +121,7 @@ export default function CheckoutPage() {
         city: billingAddress.city || "",
         state: billingAddress.state || "",
         zip: billingAddress.zip || "",
-        country: billingAddress.region || "United States (US)",
+        region: billingAddress.region || "United States (US)",
         phone: billingAddress.phone || "",
       }));
     } else {
@@ -95,7 +132,7 @@ export default function CheckoutPage() {
         city: "",
         state: "",
         zip: "",
-        country: "United States (US)",
+        region: "United States (US)",
         phone: "",
       });
     }
@@ -104,13 +141,13 @@ export default function CheckoutPage() {
   // Load cart & check login
   useEffect(() => {
     try {
-      const storedCart = JSON.parse(sessionStorage.getItem("cart") || "[]");
+      const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
       setCart(storedCart);
       if (typeof window !== "undefined" && localStorage.getItem("zoiko_token")) {
         setIsLoggedIn(true);
       }
     } catch (err) {
-      console.error("Failed to parse cart from sessionStorage", err);
+      console.error("Failed to parse cart from localStorage", err);
       setCart([]);
     }
   }, []);
@@ -123,19 +160,19 @@ export default function CheckoutPage() {
       priceQty: Math.max(1, curQty + delta),
     };
     setCart(newCart);
-    sessionStorage.setItem("cart", JSON.stringify(newCart));
+    localStorage.setItem("cart", JSON.stringify(newCart));
   };
 
   const handleRemove = (index) => {
     const newCart = [...cart];
     newCart.splice(index, 1);
     setCart(newCart);
-    sessionStorage.setItem("cart", JSON.stringify(newCart));
+    localStorage.setItem("cart", JSON.stringify(newCart));
   };
 
   const handleClearCart = () => {
     setCart([]);
-    sessionStorage.removeItem("cart");
+    localStorage.removeItem("cart");
   };
 
   // ---------------- Coupon Functionality ----------------
@@ -216,12 +253,70 @@ export default function CheckoutPage() {
     simType: item.simType,
     formData: item.formData,
   });
+
+  // ---------------- Validation ----------------
+  const validateFields = () => {
+    const newErrors = {};
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]{7,15}$/; // Basic phone validation
+
+    // Billing
+    newErrors.billingFirstName = billingAddress.firstName ? "" : "First name is required";
+    newErrors.billingLastName = billingAddress.lastName ? "" : "Last name is required";
+    newErrors.billingState = billingAddress.state ? "" : "State is required";
+    newErrors.billingCity = billingAddress.city ? "" : "City is required";
+    newErrors.billingHouseNumber = billingAddress.houseNumber ? "" : "House number is required";
+    newErrors.billingZip = billingAddress.zip ? "" : "ZIP code is required";
+    newErrors.billingEmail = emailRegex.test(billingAddress.email) ? "" : "Invalid email address";
+    newErrors.billingPhone = phoneRegex.test(billingAddress.phone) ? "" : "Invalid phone number";
+
+    // Shipping (if different)
+    if (showShipping) {
+      newErrors.shippingFirstName = shippingAddress.firstName ? "" : "First name is required";
+      newErrors.shippingLastName = shippingAddress.lastName ? "" : "Last name is required";
+      newErrors.shippingState = shippingAddress.state ? "" : "State is required";
+      newErrors.shippingCity = shippingAddress.city ? "" : "City is required";
+      newErrors.shippingHouseNumber = shippingAddress.houseNumber ? "" : "House number is required";
+      newErrors.shippingZip = shippingAddress.zip ? "" : "ZIP code is required";
+      newErrors.shippingEmail = emailRegex.test(shippingAddress.email) ? "" : "Invalid email address";
+      newErrors.shippingPhone = phoneRegex.test(shippingAddress.phone) ? "" : "Invalid phone number";
+    }
+
+    // Card
+    newErrors.cardFirstName = cardAddress.firstName ? "" : "First name is required";
+    newErrors.cardLastName = cardAddress.lastName ? "" : "Last name is required";
+    newErrors.cardState = cardAddress.state ? "" : "State is required";
+    newErrors.cardCity = cardAddress.city ? "" : "City is required";
+    newErrors.cardZip = cardAddress.zip ? "" : "ZIP code is required";
+    newErrors.cardPhone = phoneRegex.test(cardAddress.phone) ? "" : "Invalid phone number";
+    
+    // Card fields validation
+    const cardNumberRegex = /^[0-9]{13,19}$/; // typical card length
+    const expiryRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/; // MM/YY
+    const cvcRegex = /^[0-9]{3,4}$/;
+
+    newErrors.cardNumber = cardNumberRegex.test(cardDetails.cardNumber.replace(/\s+/g, "")) 
+      ? "" 
+      : "Invalid card number";
+    newErrors.cardExpiry = expiryRegex.test(cardDetails.expiry.trim()) 
+      ? "" 
+      : "Invalid expiry format (MM/YY)";
+    newErrors.cardCvc = cvcRegex.test(cardDetails.cvc.trim()) 
+      ? "" 
+      : "Invalid CVC code";
+
+    setErrors(newErrors);
+
+    // Check if any errors exist
+    return !Object.values(newErrors).some((err) => err);
+  };
 const handlePlaceOrder = async() => {
   if (!agreeTerms) {
     setShowTermsPopup(true);
     return;
   }
-
+  if (!validateFields()) return;
   // Define required fields per section
   const billingRequired = ["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"];
   const shippingRequired = ["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"];
@@ -268,7 +363,8 @@ const handlePlaceOrder = async() => {
   const orderData = {
     billingAddress,
     shippingAddress: showShipping ? shippingAddress : billingAddress,
-    cardAddress,
+    cardAddress: { ...cardAddress },
+    cardDetails: { ...cardDetails },
     coupon: discountData ? { ...discountData } : null,
     cart,
     totals: {
@@ -286,26 +382,43 @@ const handlePlaceOrder = async() => {
     setLoading(true);
 
     const response = await processOrder(orderData); // 🔥 Pass full order data
+    console.log("post data:", orderData);
+    const bqResponse = await fetch(`https://zmapi.zoikomobile.co.uk/api/v1/bqorders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(response.data),
+    });
 
-    setLoading(false);
+    const bqResult = await bqResponse.json();
+    console.log("BeQuick Order Response:", bqResult);
+    if (bqResult.success) {
+        setLoading(false);
+    }
 
-    if (response?.success) {
-      alert("✅ Order placed successfully!");
-      console.log("🧾 Server Response:", response);
+
+    
+    if (response.status) {
+      // alert("✅ Order placed successfully!");
+      // console.log("🧾 Server Response:", response);
   // ✅ Example: Print formatted order JSON
-    console.log("🧾 Final Order JSON:", orderData);
-    alert("Order data collected! Check console for JSON output.");
+    // console.log("🧾 Final Order JSON:", orderData);
+    // alert("Order data collected! Check console for JSON output.");
+    // setShowThankYou(true); // Show modal
+    // setCart([]); // Clear cart
+    // localStorage.removeItem("cart");
       // Clear cart after successful order
-      setCart([]);
-      sessionStorage.removeItem("cart");
+      // setCart([]);
+      // localStorage.removeItem("cart");
     } else {
-      alert("⚠️ Failed to place order. Please try again.");
-      console.error("ProcessOrder error:", response);
+      // alert("⚠️ Failed to place order. Please try again.");
+      // console.error("ProcessOrder error:", response);
     }
   } catch (error) {
     setLoading(false);
-    console.error("❌ processOrder() failed:", error);
-    alert("Something went wrong while processing your order.");
+    // console.error("❌ processOrder() failed:", error);
+    // alert("Something went wrong while processing your order.");
   }
 
   
@@ -324,20 +437,12 @@ const handlePlaceOrder = async() => {
       <Header />
       <HeadBar text="Get Our Best Postpaid Mobile Plans & Pay Only for Every Need!" />
 
-      {/* Cart JSON Preview */}
-      <div className="card mt-4">
-        <div className="card-body">
-          <h5 className="fw-bold mb-3">Cart JSON Data</h5>
-          <pre style={{ background: "#f8f9fa", padding: "12px", borderRadius: "6px", maxHeight: "400px", overflow: "auto" }}>
-            {JSON.stringify(cart, null, 2)}
-          </pre>
-        </div>
-      </div>
+      
 
       <div className="container my-5">
         {cart.length === 0 ? (
           <div className="d-flex flex-column justify-content-center align-items-center text-center" style={{ minHeight: "60vh" }}>
-            <img src="/images/empty-cart.png" alt="Empty Cart" style={{ width: "180px", opacity: 0.8 }} onError={(e) => (e.target.style.display = "none")} />
+            <img src="/img/empty-cart.png" alt="Empty Cart" style={{ width: "180px", opacity: 0.8 }} onError={(e) => (e.target.style.display = "none")} />
             <h3 className="mt-3 text-secondary">Your Cart is Empty</h3>
             <p className="text-muted">Looks like you haven’t added anything to your cart yet.</p>
             <a href="/" className="btn btn-primary mt-2">Continue Shopping</a>
@@ -416,6 +521,7 @@ const handlePlaceOrder = async() => {
                         <div className="row g-3">
                           {Object.keys(billingAddress).map((key, i) => {
                             const meta = billingFieldMeta[key] || {};
+                            const errorKey = `billing${key.charAt(0).toUpperCase() + key.slice(1)}`;
                             return (
                               <div className="col-md-6" key={i}>
                                 <label className="form-label fw-semibold">
@@ -427,7 +533,7 @@ const handlePlaceOrder = async() => {
 
                                 {key === "state" ? (
                                   <select
-                                    className="form-select"
+                                    className={`form-select ${errors[errorKey] ? "is-invalid" : ""}`}
                                     value={billingAddress.state}
                                     onChange={(e) =>
                                       setBillingAddress({ ...billingAddress, state: e.target.value })
@@ -442,7 +548,7 @@ const handlePlaceOrder = async() => {
                                 ) : (
                                   <input
                                     type="text"
-                                    className="form-control"
+                                    className={`form-control ${errors[errorKey] ? "is-invalid" : ""}`}
                                     placeholder={meta.placeholder || `Enter ${key}`}
                                     value={billingAddress[key]}
                                     disabled={meta.disabled || false}
@@ -451,6 +557,7 @@ const handlePlaceOrder = async() => {
                                     }
                                   />
                                 )}
+                                {errors[errorKey] && <div className="text-danger small mt-1">{errors[errorKey]}</div>}
                               </div>
                             );
                           })}
@@ -479,6 +586,7 @@ const handlePlaceOrder = async() => {
                       <div className="row g-3">
                         {Object.keys(shippingAddress).map((key, i) => {
                             const meta = billingFieldMeta[key] || {};
+                            const errorKey = `shipping${key.charAt(0).toUpperCase() + key.slice(1)}`;
                             return (
                               <div className="col-md-6" key={i}>
                                 <label className="form-label fw-semibold">
@@ -490,7 +598,7 @@ const handlePlaceOrder = async() => {
 
                                 {key === "state" ? (
                                   <select
-                                    className="form-select"
+                                    className={`form-select ${errors[errorKey] ? "is-invalid" : ""}`}
                                     value={shippingAddress.state}
                                     onChange={(e) =>
                                       setShippingAddress({ ...shippingAddress, state: e.target.value })
@@ -505,7 +613,7 @@ const handlePlaceOrder = async() => {
                                 ) : (
                                   <input
                                     type="text"
-                                    className="form-control"
+                                    className={`form-control ${errors[errorKey] ? "is-invalid" : ""}`}
                                     placeholder={meta.placeholder || `Enter ${key}`}
                                     value={shippingAddress[key]}
                                     disabled={meta.disabled || false}
@@ -514,6 +622,7 @@ const handlePlaceOrder = async() => {
                                     }
                                   />
                                 )}
+                                {errors[errorKey] && <div className="text-danger small mt-1">{errors[errorKey]}</div>}
                               </div>
                             );
                           })}
@@ -567,16 +676,38 @@ const handlePlaceOrder = async() => {
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Card Number *</label>
-                    <input className="form-control" type="text" placeholder="1234 5678 9012 3456" />
+                    <input
+                      className={`form-control ${errors.cardNumber ? "is-invalid" : ""}`}
+                      type="text"
+                      placeholder="1234 5678 9012 3456"
+                      value={cardDetails.cardNumber}
+                      onChange={(e) => setCardDetails({ ...cardDetails, cardNumber: e.target.value })}
+                    />
+                    {errors.cardNumber && <div className="text-danger small mt-1">{errors.cardNumber}</div>}
                   </div>
                   <div className="row g-3">
                     <div className="col-md-6">
                       <label className="form-label">Expiry Date *</label>
-                      <input className="form-control" type="text" placeholder="MM / YY" />
+                      <input
+                        className={`form-control ${errors.cardExpiry ? "is-invalid" : ""}`}
+                        type="text"
+                        placeholder="MM / YY"
+                        value={cardDetails.expiry}
+                        onChange={(e) => setCardDetails({ ...cardDetails, expiry: e.target.value })}
+                      />
+                      {errors.cardExpiry && <div className="text-danger small mt-1">{errors.cardExpiry}</div>}
                     </div>
+
                     <div className="col-md-6">
                       <label className="form-label">CVC *</label>
-                      <input className="form-control" type="text" placeholder="CVC" />
+                      <input
+                        className={`form-control ${errors.cardCvc ? "is-invalid" : ""}`}
+                        type="text"
+                        placeholder="CVC"
+                        value={cardDetails.cvc}
+                        onChange={(e) => setCardDetails({ ...cardDetails, cvc: e.target.value })}
+                      />
+                      {errors.cardCvc && <div className="text-danger small mt-1">{errors.cardCvc}</div>}
                     </div>
                   </div>
                   <div className="form-check mt-3 mb-3">
@@ -600,6 +731,7 @@ const handlePlaceOrder = async() => {
                         <div className="row g-3">
                           {Object.keys(cardAddress).map((key, i) => {
                             const meta = billingFieldMeta[key] || {};
+                            const errorKey = `card${key.charAt(0).toUpperCase() + key.slice(1)}`;
                             return (
                               <div className="col-md-6" key={i}>
                                 <label className="form-label fw-semibold">
@@ -611,7 +743,7 @@ const handlePlaceOrder = async() => {
 
                                 {key === "state" ? (
                                   <select
-                                    className="form-select"
+                                    className={`form-select ${errors[errorKey] ? "is-invalid" : ""}`}
                                     value={cardAddress.state}
                                     onChange={(e) =>
                                       setCardAddress({ ...cardAddress, state: e.target.value })
@@ -626,7 +758,7 @@ const handlePlaceOrder = async() => {
                                 ) : (
                                   <input
                                     type="text"
-                                    className="form-control"
+                                    className={`form-control ${errors[errorKey] ? "is-invalid" : ""}`}
                                     placeholder={meta.placeholder || `Enter ${key}`}
                                     value={cardAddress[key]}
                                     disabled={meta.disabled || false}
@@ -635,6 +767,7 @@ const handlePlaceOrder = async() => {
                                     }
                                   />
                                 )}
+                                {errors[errorKey] && <div className="text-danger small mt-1">{errors[errorKey]}</div>}
                               </div>
                             );
                           })}
@@ -705,6 +838,38 @@ const handlePlaceOrder = async() => {
     </div>
   </div>
 )}
+
+ {/* ✅ Thank You Modal */}
+      <Modal
+        show={showThankYou}
+        onHide={() => setShowThankYou(false)}
+        centered
+        backdrop="static"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Thank You!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center">
+          <div style={{ fontSize: "50px", color: "#28a745" }}>✔️</div>
+          <h5 className="mt-3 text-success">
+            Your order has been successfully placed!
+          </h5>
+          <p className="text-muted">
+            A confirmation email has been sent with your order details.
+          </p>
+        </Modal.Body>
+        <Modal.Footer className="justify-content-center">
+          <Button
+            variant="success"
+            onClick={() => {
+              setShowThankYou(false);
+              window.location.href = "/"; // redirect to homepage
+            }}
+          >
+            Continue Shopping
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

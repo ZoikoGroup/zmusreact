@@ -844,7 +844,6 @@ a {
 
         /* modal sizing */
         .custom-modal .modal-dialog {
-          max-width: 600px;
           max-width: 900px;
           margin: 30px auto;
           height: calc(100vh - 60px);

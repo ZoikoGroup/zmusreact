@@ -1,9 +1,9 @@
-import { tokenizationCard} from "../utils/ziftApi"; // adjust path
+import { tokenizationCard } from "./ziftApi";
 
-// utils/beQuickApi.js
 const API_BASE = "https://zoiko-atom-api.bequickapps.com";
 const BEQUICK_TOKEN = "09ff2d85-a451-47e6-86bc-aba98e1e4629";
 
+/* -------------------- Core Request Wrapper -------------------- */
 async function beQuickRequest(url, method = "GET", data = {}, headers = {}, timeout = 30) {
   let fullUrl = API_BASE + url;
   method = method.toUpperCase();
@@ -35,68 +35,68 @@ async function beQuickRequest(url, method = "GET", data = {}, headers = {}, time
     clearTimeout(id);
     const json = await response.json().catch(() => ({}));
 
-    console.log("BeQuick API:", { url, method, request: data, response: json });
-
-    return { status: true, data: json };
+    console.log("BeQuick API -> '" + url + "' :", { url, method, request: data, response: json });
+    return json;
   } catch (err) {
-    return { status: false, message: err.message };
+    console.error("BeQuick Request Error -> '" + url + "' :", err);
+    return { errors: [{ message: err.message }] };
   }
 }
 
-
+/* -------------------- MAIN ORDER PROCESSOR -------------------- */
 export async function processOrder(postData) {
   try {
-    // Default payment type
     postData.payment_type_id = 3;
 
-    // Step 1: Fetch or create subscriber
+    // 1️⃣ Create or get subscriber
     const customerResponse = await createSubscriberAndFetch(postData);
     if (!customerResponse.status) return customerResponse;
-
-    // Add subscriber ID to post data
     postData.subscriber_id = customerResponse.subscriber_id;
 
-    // Step 2: Handle payment method logic
-    if (postData.payment_method === "zift_custom_payment_gateway") {
-      postData.payment_type_id = 3;
-    }
-
-    // Step 3: Add payment method
+    // 2️⃣ Add payment method
+    const cardData = postData.cardAddress || {}; // Expect cardData from checkout
     const paymentMethodResponse = await addPaymentMethod(postData);
     if (!paymentMethodResponse.status) return paymentMethodResponse;
+    postData.payment_method_id = paymentMethodResponse.payment_method_id;
+    postData.address_id = paymentMethodResponse.service_address_id;
+    postData.address_attributes = paymentMethodResponse.address_attributes;
 
-    // Step 4: Create draft line
-    const draftLineCreateResponse = await createDraftLine(postData);
-    if (!draftLineCreateResponse.status) return draftLineCreateResponse;
 
-    // Store IDs for next step
-    postData.line_id = draftLineCreateResponse.line.id;
-    postData.shipping_address_id = draftLineCreateResponse.shipping_address_id;
+    postData.service_address_id = paymentMethodResponse.service_address_id;
+    postData.address_attributes = paymentMethodResponse.address_attributes;
+    postData.payment_method_id = paymentMethodResponse.payment_method_id;
 
-    // Step 5: Create draft order
+
+
+
+    console.log("Payment Method Response:", paymentMethodResponse);
+    
+    // 3️⃣ Create draft line
+    const draftLineResponse = await createDraftLine(postData);
+    if (!draftLineResponse.status) return draftLineResponse;
+    postData.line_id = draftLineResponse.line.id;
+    postData.shipping_address_id = draftLineResponse.shipping_address_id;
+// console.log("Draft Line Response:", draftLineResponse);
+    // 4️⃣ Create draft order
     const orderResponse = await createDraftOrder(postData);
     if (!orderResponse.status) return orderResponse;
-
-    // Save order info
     postData.bequick_order_id = orderResponse.order.id;
     postData.bequick_order_amount = orderResponse.order.total;
 
-    // Step 6: Make payment
+    // // 5️⃣ Make payment
     const orderPaymentResponse = await orderPayment(postData);
     if (!orderPaymentResponse.status) return orderPaymentResponse;
 
-    // Step 7: Submit order
-    const submitOrderResponse = await submitOrder(postData.bequick_order_id);
-    if (!submitOrderResponse.status) return submitOrderResponse;
+    // 6️⃣ Submit order
+    const submitResponse = await submitOrder(postData.bequick_order_id);
+    if (!submitResponse.status) return submitResponse;
 
-    // ✅ Final success response
     return {
       status: true,
-      message: "BYOD order is processed successfully",
+      message: "Order processed successfully",
       data: postData,
     };
   } catch (error) {
-    // 🧯 Global fallback error handler
     return {
       status: false,
       message: "Unexpected error while processing order",
@@ -105,397 +105,272 @@ export async function processOrder(postData) {
   }
 }
 
-
-
-// ---------- Exported helpers ----------
+/* -------------------- HELPER FUNCTIONS -------------------- */
 export async function storeServiceAddress(
   subscriberId,
   name,
-  phoneNumber,
+  phone,
   address1,
   address2,
   city,
-  stateCode,
+  state,
   zip,
-  countryCode = "US",
+  country = "US",
   isPrimary = false
 ) {
   try {
-    // Validate address
-    const validateData = {
-      "address1" : address1,
-      "address2" : address2,
-      "city" : city,
-      "state" : stateCode,
-      "zip" : zip
+    const validateData = { address1, address2, city, state, zip };
+    const validateResp = await beQuickRequest("/addresses/validate", "POST", validateData);
+
+    const data = {
+      address: {
+        primary: isPrimary,
+        name:name,
+        phone_number: phone,
+        zip:zip,
+        country_code: country,
+        usps_validated: true,
+        subscriber_id: subscriberId,
+        ...validateResp,
+      },
     };
+    console.log("Store Address validate Data skm:", data);
+    const response = await beQuickRequest("/addresses", "POST", data);
+    if (response?.errors){
+      return { status: false, message: "Failed to store address", error: response.errors };
+    }else{
+      console.log("Store Address Response:", response);
+      return {
+        status: true,
+        address_id: response.addresses?.[0]?.id,
+        address_attributes:validateResp,
+      };
+    }
+  } catch (error) {
+    return { status: false, message: "Error storing service address", error };
+  }
+}
 
-    const validatedAddressResponse = await beQuickRequest(
-      "/addresses/validate",
-      "POST",
-      validateData
-    );
+export async function createSubscriberAndFetch(postData) {
+  try {
+    const email = postData.billingAddress?.email || postData.shippingAddress?.email;
+    const firstName = postData.billingAddress?.firstName || "Unknown";
+    const lastName = postData.billingAddress?.lastName || "Unknown";
+    const phone = postData.billingAddress?.phone || "9999999999";
 
-    // Prepare address data
-    let data = {
-      "address" : {
-        "primary" : isPrimary,
-        "name" : name,
-        "phone_number" : phoneNumber,
-        "country_code" : countryCode,
-        "usps_validated" : true,
-        "fed_ex_validated" : false,
-        "subscriber_id": subscriberId,
+    // Try fetch
+    let found = await getSubscriberByEmail(email);
+    if (found && found.subscriber_id) return { status: true, subscriber_id: found.subscriber_id };
+
+    // Create if not exists
+    const data = {
+      action: "create",
+      subscriber: {
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        company_id: "1",
+        phone,
+        addresses_attributes:[
+          {
+            address1: postData.billingAddress?.street || "",
+            address2: postData.billingAddress?.houseNumber || "",
+            city: postData.billingAddress?.city || "",  
+            state: postData.billingAddress?.state || "",
+            zip: postData.billingAddress?.zip || "",
+            country_code: postData.billingAddress?.country || "US",
+          }
+        ]
       },
     };
 
-    // Merge validated response
-    data.address = {
-      ...data.address,
-      ...validatedAddressResponse.data,
-    };
+    const response = await beQuickRequest("/subscribers", "POST", data);
 
-    // Store address
-    const response = await beQuickRequest("/addresses", "POST", data);
+    const id = response?.subscribers?.[0]?.id;
+    if (!id) return { status: false, message: "Failed to create subscriber" };
 
-    if (response?.errors) {
-      return {
-        status: false,
-        message: "Unable to add subscriber address",
-        error: response.errors,
-      };
-    }
-
-    return {
-      status: true,
-      message: validatedAddressResponse,
-      address_id: response.addresses?.[0]?.id,
-    };
-  } catch (error) {
-    console.error("Error storing service address:", error);
-    return {
-      status: false,
-      message: "Unexpected error while storing service address.",
-      error,
-    };
+    return { status: true, subscriber_id: id };
+  } catch (err) {
+    return { status: false, message: err.message };
   }
 }
 
-export const getAllPlans = () =>
-  beQuickRequest(`/products`, "GET");
-
-function normalizeResponse(response) {
-  if (!response) return null;
-
-  if (response?.subscriber?.subscribers) {
-    // POST create response
-    return response.subscriber.subscribers;
-  }
-
-  if (response?.subscriber?.data?.subscribers) {
-    // GET response
-    return response.subscriber.data.subscribers;
-  }
-
-  if (response?.subscribers) {
-    // Alternative shape
-    return response.subscribers;
-  }
-
-  return null;
-}
-
-function extractSubscriberId(response) {
-  const subscribers = normalizeResponse(response);
-  return subscribers?.[0]?.id || null;
-}
-
-
-export async function createSubscriberAndFetch() {
-  try {
-    const email = "reactSumon333@gmail.com";
-
-    // Try to fetch by email
-    let finalResponse = await getSubscriberByEmail(email);
-
-    // If subscriber does not exist, create one
-    if (finalResponse?.errors || !extractSubscriberId(finalResponse)) {
-      const data = {
-        action: "create",
-        subscriber: {
-          first_name: "react",
-          last_name: "Sumon",
-          email,
-          company_id: "1",
-          phone: "9999999999",
-        },
-      };
-      finalResponse = await beQuickRequest("/subscribers", "POST", data);
-
-      // 🔑 Immediately fetch again if no ID in create response
-      if (!extractSubscriberId(finalResponse)) {
-        finalResponse = await getSubscriberByEmail(email);
-      }
-    }
-
-    if (finalResponse?.errors) {
-      return {
-        status: false,
-        message: "Unable to find or create subscriber",
-      };
-    }
-
-    const subscriberId = extractSubscriberId(finalResponse);
-
-    return {
-      status: !!subscriberId,
-      subscriber_id: subscriberId,
-    };
-  } catch (error) {
-    console.error("Error in createSubscriberAndFetch:", error);
-    return {
-      status: false,
-      message: "Unexpected error occurred",
-    };
-  }
-}
-
-
-export async function fetchAddressesBySubscriber(subscriberId) {
-  try {
-    const response = await sendBeQuickRequest(
-      `/addresses?by_subscriber_id=${subscriberId}&archived=false`,
-      "GET"
-    );
-
-    if (response?.addresses) {
-      return response.addresses;
-    }
-
-    return [];
-  } catch (error) {
-    console.error("Error fetching addresses:", error);
-    return [];
-  }
-}
-
-
-export async function addPaymentMethod(postData, cardData) {
+export async function addPaymentMethod(postData) {
   const subscriberId = postData.subscriber_id;
-  const name = `${postData.first_name} ${postData.last_name}`;
-
-  // Destructure card + billing data (instead of pulling from PHP session/meta)
-  const {
-    cardNumber,
-    expiryMonth,
-    expiryYear,
-    cvc,
-    address1,
-    address2,
-    city,
-    state,
-    zip,
-    country,
-  } = cardData;
-
-  const street = `${address1} ${address2 || ""}`.trim();
-
-  // Step 1: Tokenize the card
+  const name = `${postData.cardAddress?.firstName } ${postData.cardAddress?.lastName}`.trim();
+  const cardNumber = postData.cardDetails?.cardNumber || "";
+  const cardExpiry = postData.cardDetails?.expiry || "";
+  const cvc = postData.cardDetails?.cvc || "";
+  const street = postData.cardAddress?.street || "";
+  const city = postData.cardAddress?.city || "";  
+  const state = postData.cardAddress?.state || "";  
+  const zip = postData.cardAddress?.zip || "";
+  const country = postData.cardAddress?.country || "US";
+  const phone = postData.billingAddress?.phone || "9999999999";
+  const email = postData.billingAddress?.email || "skm@gmail.com";
+  // 1️⃣ Tokenize
   const tokenResponse = await tokenizationCard(
     name,
     cardNumber,
-    expiryMonth,
-    expiryYear,
+    cardExpiry,
     street,
     city,
     state,
     zip,
-    postData.phone_number,
-    postData.email
+    phone,
+    email
   );
 
-  if (!tokenResponse.status) {
-    return tokenResponse; // { status: false, message: ... }
-  }
+  if (!tokenResponse.status) return tokenResponse;
 
-  // Step 2: Store service address
-  const storeAddressResponse = await storeServiceAddress(
+  // 2️⃣ Store address
+  const addrResponse = await storeServiceAddress(
     subscriberId,
-    name,
-    postData.phone_number,
-    address1,
-    address2,
+    `${postData.billingAddress?.firstName} ${postData.billingAddress?.lastName}`,
+    phone,
+    street,
+    "",
     city,
     state,
     zip,
-    country || "US",
-    false
+    country,
   );
 
-  if (!storeAddressResponse.status) {
-    return storeAddressResponse; // error from BeQuick
-  }
+  if (!addrResponse.status) return addrResponse;
+  // if (addrResponse.status) return addrResponse;
+  console.log("Address Response skm:", addrResponse);
+  // postData.service_address_id = addrResponse.address_id;
+  // postData.address_attributes = addrResponse.address_attributes;
+  console.log("payment method storeServiceAddress skm:", addrResponse);
+  console.log(postData);
+  const cleanedExpiry = cardExpiry.replace(/\D/g, ""); // "01/23" -> "0123"
+  const [expiryMonth, expiryYear] = cleanedExpiry.match(/.{1,2}/g) || ["", ""];
 
-  // Assign service address ID to postData
-  postData.service_address_id = storeAddressResponse.address_id;
-
-  // Step 3: Prepare payment method payload
+  // 3️⃣ Create payment method
   const data = {
-    "payment_method" : {
-      "type" : "CreditCard",
-      "payment_method_nonce" : tokenResponse.token,
-      "cvv" : cvc,
-      "expiration_month" : expiryMonth,
-      "expiration_year" : expiryYear,
-      "address_id" : postData.service_address_id,
-      "payment_type_id" : 3,
-      "subscriber_id": subscriberId
+    payment_method: {
+      type: "CreditCard",
+      payment_method_nonce: tokenResponse.token,
+      cvv: cvc,
+      expiration_month: expiryMonth,
+      expiration_year: expiryYear,
+      address_id: addrResponse.address_id,
+      payment_type_id: 3,
+      subscriber_id: subscriberId,
     },
   };
+  console.log("Payment Method Data:", data);
+  const response = await beQuickRequest("/payment_methods", "POST", data);
+  if (response?.errors)
+    return { status: false, message: response.errors?.base?.join("<br>") || "Payment failed" };
 
-  // Step 4: Send request to BeQuick
-  const paymentMethodResponse = await beQuickRequest(
-    "/payment_methods",
-    "POST",
-    data
-  );
-
-  // Step 5: Handle response
-  if (paymentMethodResponse?.errors) {
-    return {
-      status: false,
-      message: paymentMethodResponse.errors.base?.join("<br>") || "Failed",
-    };
-  }
-
-  postData.payment_method_id =
-    paymentMethodResponse?.payment_methods?.[0]?.id || null;
-
-  return {
-    status: true,
-    message: "Payment method added successfully",
-  };
+  // postData.payment_method_id = response?.payment_methods?.[0]?.id || null;
+  return { status: true, message: "Payment method added successfully",   service_address_id :addrResponse.address_id, address_attributes: addrResponse.address_attributes,payment_method_id:response?.payment_methods?.[0]?.id };
 }
 
 export async function createDraftLine(postData) {
-  // Prepare shipping details
-  const shippingFullName = `${postData.shipping_address.first_name} ${postData.shipping_address.last_name}`;
-
-  const {
-    "address_1": shippingAddress1,
-    "address_2": shippingAddress2,
-    "city": shippingCity,
-    "state": shippingState,
-    "postcode": shippingZip,
-    "country": shippingCountry,
-  } = postData.shipping_address;
-
-  // Store service address
-  const storeAddressResponse = await storeServiceAddress(
-    postData.subscriber_id,
-    shippingFullName,
-    postData.phone_number,
-    shippingAddress1,
-    shippingAddress2 || "",
-    shippingCity,
-    shippingState,
-    shippingZip,
-    shippingCountry,
-    false
-  );
-
-  if (storeAddressResponse.status === false) {
-    return storeAddressResponse;
-  }
-
-  // Prepare line data
-  const data = {
-    "line": {
-      "subscriber_id": 203,
-      "carrier_id": 1,
-      "service_address_id":296,
-      "status": "draft",
+  let data = {
+    line: {
+      subscriber_id: postData.subscriber_id,
+      carrier_id: 1,
+      service_address_id: postData.address_id,
+      status: "draft",
     },
   };
 
-  // Add porting attributes if present
-  if (
-    postData.products_prepaid &&
-    postData.products_prepaid[0]?.porting &&
-    Object.keys(postData.products_prepaid[0].porting).length > 0
-  ) {
-    data.line.number_port_attributes = postData.products_prepaid[0].porting;
+  const cart = postData.cart || [];
+  if (cart.length === 0) return { status: false, message: "Empty cart" };
+  const i = 0;
+  for (const item of cart) {
+    if (item.lineType === "portNumber") {
+      data.line.device_serial = item.formData.imei;
+      const number_port_attributes = {
+        mdn: item.formData.mdn,
+        first_name: item.formData.firstName || "Unknown",
+        last_name: item.formData.lastName || "Unknown",
+        carrier_account: item.formData.carrier_account,
+        carrier_password: item.formData.carrier_password,
+        address_attributes : postData.address_attributes
+      };
+      data.line.number_port_attributes = number_port_attributes;
+      // Merge into the line data
+      data.line.number_port_attributes.address_attributes = postData.address_attributes;
+    }
+     console.log("Draft Line Data:", data);
+       // Send to API
+      const response = await beQuickRequest("/lines", "POST", data);
+      if (response?.errors)
+        return { status: false, message: "Unable to create draft line", error: response.errors };
+      postData.cart[i].line_id = response.lines?.[0]?.id; 
+      return {
+        status: true,
+        line: response.lines?.[0],
+        shipping_address_id: postData.service_address_id,
+      };
+      i++;
   }
 
-  // Send request
-  const response = await beQuickRequest("/lines", "POST", data);
+ 
 
-  if (response.errors) {
-    return {
-      status: false,
-      message: "Unable to create line.",
-      error: response.errors,
-    };
-  }
 
-  return {
-    status: true,
-    line: response.lines[0],
-    shipping_address_id: storeAddressResponse.address_id,
-  };
 }
 
 export async function createDraftOrder(postData) {
-  let orderDetailsAttributes = [];
   let planCount = 0;
   let simCount = 0;
 
-  // Fetch products
-  const productsList = await fetchProducts();
-  if (!productsList.status) {
-    return {
-      status: false,
-      message: "Unable to load product from BeQuick",
-    };
+  const ESIM_PRODUCT_ID = 20; // replace with real ID
+  const PSIM_PRODUCT_ID = 19; // replace with real ID
+
+  const cart = postData.cart || [];
+  if (cart.length === 0) {
+    return { status: false, message: "Empty cart" };
   }
 
-  // Process prepaid products
-  if (Array.isArray(postData.products_prepaid)) {
-    for (const product of postData.products_prepaid) {
-      orderDetailsAttributes.push({
-        product_id: product.bequick_product_id,
-        line_id: postData.line_id,
-      });
-      planCount++;
+  let orderDetailsAttributes = []; // should be an array (since you're pushing per product)
 
-      const simType = product.sim_type?.toUpperCase();
-      if (simType === "ESIM") {
-        orderDetailsAttributes.push({
-          product_id: ESIM_PRODUCT_ID,
-          line_id: postData.line_id,
-        });
-        simCount++;
-      } else if (simType === "PSIM") {
-        orderDetailsAttributes.push({
-          product_id: PSIM_PRODUCT_ID,
-          line_id: postData.line_id,
-        });
-        simCount++;
-      }
+  for (const product of cart) {
+    const simType = (product.simType || "").trim();
+    // console.log("simType:", simType);
+
+    // Add plan first
+    orderDetailsAttributes.push({
+      product_id: parseInt(product.planBqid),
+      line_id: product.line_id,
+    });
+    planCount++;
+
+    // Then add SIM type
+    if (simType === "eSIM") {
+      orderDetailsAttributes.push({
+        product_id: ESIM_PRODUCT_ID,
+        line_id: product.line_id,
+      });
+      simCount++;
+      console.log("Added eSIM:", orderDetailsAttributes);
+    } else if (simType === "pSIM") {
+      orderDetailsAttributes.push({
+        product_id: PSIM_PRODUCT_ID,
+        line_id: product.line_id,
+      });
+      simCount++;
+      console.log("Added pSIM:", orderDetailsAttributes);
+    } else {
+      console.warn("Unknown SIM type:", simType);
     }
   }
+  //  console.log("orderDetailsAttributes:", orderDetailsAttributes);
+  // ----- Process device protection products -----
+  // if (Array.isArray(postData.device_protection)) {
+  //   postData.device_protection.forEach((product) => {
+  //     orderDetailsAttributes.push({
+  //       product_id: parseInt(product.planBqid),
+  //       line_id: product.line_id,
+  //     });
+  //   });
+  // }
 
-  // Process device protection products
-  if (Array.isArray(postData.device_protection)) {
-    for (const product of postData.device_protection) {
-      orderDetailsAttributes.push({
-        product_id: product.bequick_product_id,
-        line_id: postData.line_id,
-      });
-    }
-  }
-
-  // Validate required products
+  // ----- Validate plan and SIM presence -----
   if (planCount === 0 && simCount === 0) {
     return {
       status: false,
@@ -504,7 +379,7 @@ export async function createDraftOrder(postData) {
     };
   }
 
-  // Prepare payload
+  // ----- Final data structure -----
   const data = {
     order: {
       subscriber_id: postData.subscriber_id,
@@ -513,10 +388,12 @@ export async function createDraftOrder(postData) {
     },
   };
 
-  // Send API request
-  const response = await beQuickRequest("/orders", "POST", data);
+  // console.log("Draft Order Data:", data);
 
-  // Handle API errors
+  // ----- Send API request -----
+  const response = await beQuickRequest("/orders", "POST", data);
+console.log("Draft Order Response:", response);
+  // ----- Handle errors -----
   if (response?.errors) {
     return {
       status: false,
@@ -527,9 +404,10 @@ export async function createDraftOrder(postData) {
 
   return {
     status: true,
-    order: response?.orders?.[0],
+    order: response.orders?.[0],
   };
 }
+
 
 export async function orderPayment(postData) {
   const data = {
@@ -540,81 +418,28 @@ export async function orderPayment(postData) {
       amount: postData.bequick_order_amount,
     },
   };
-
+  // console.log("Order Payment Data:", data);
   const response = await beQuickRequest("/order_payments", "POST", data);
-
-  if (response?.errors) {
-    return {
-      status: false,
-      message: "Unable to create order for subscriber",
-      error: response.errors,
-    };
-  }
-
+  if (response?.errors)
+    return { status: false, message: "Order payment failed", error: response.errors };
   return { status: true };
 }
 
 export async function submitOrder(orderId) {
   const response = await beQuickRequest(`/orders/${orderId}/submit`, "POST");
-
-  if (response?.errors) {
-    return {
-      status: false,
-      message: "Unable to create order for subscriber",
-      error: response.errors,
-    };
-  }
-
+  if (response?.errors) return { status: false, message: "Submit failed", error: response.errors };
   return { status: true };
 }
 
-export async function fetchProducts() {
-  const url = `/products?by_orderable=true&page=1&per=100`;
+export async function getSubscriberByEmail(email) {
+  const result = await beQuickRequest(
+    `/subscribers?filter_by[0][value]=${encodeURIComponent(email)}&filter_by[0][column]=email`,
+    "GET"
+  );
 
-  try {
-    const response = await beQuickRequest(url, "GET");
-
-    // Check if products exist in the response
-    if (response && response.products) {
-      return {
-        status: true,
-        product: response.products,
-      };
-    }
-
-    return {
-      status: false,
-      message: "Invalid product selected and not found on BeQuick",
-    };
-  } catch (error) {
-    return {
-      status: false,
-      message: "Error fetching products from BeQuick",
-      error: error.message || error,
-    };
-  }
-}
-export const getPlanDetails = (planId) =>
-  beQuickRequest(`/plans/${planId}`, "GET");
-
-export const createOrder = (orderData) =>
-  beQuickRequest(`/orders`, "POST", orderData);
-
-export const getSubscriber = (subscriberId) =>
-  beQuickRequest(`/subscribers/${subscriberId}`, "GET");
-
-export const updateSubscriber = (subscriberId, data) =>
-  beQuickRequest(`/subscribers/${subscriberId}`, "PATCH", data);
-
-export async function getSubscriberByEmail(subscriberEmail) {
-  const url = `/subscribers?filter_by[0][value]=${encodeURIComponent(
-    subscriberEmail
-  )}&filter_by[0][column]=email`;
-
-  const result = await beQuickRequest(url, "GET");
-
-  if (result?.data?.subscribers && result.data.subscribers.length > 0) {
-    return { subscribers: [result.data.subscribers[0]] };
-  }
-  return false;
+  const id =
+    result?.data?.subscribers?.[0]?.id ||
+    result?.subscribers?.[0]?.id ||
+    result?.subscriber?.subscribers?.[0]?.id;
+  return id ? { subscriber_id: id } : false;
 }
