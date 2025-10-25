@@ -157,8 +157,8 @@ export default function DashboardPage() {
   }
 
   // Render helpers
-  const currentBill = paymentMethods?.currentAmount || 15.98;
-  const nextPayment = planDetails?.service?.next_payment_date || "Nov 09";
+  const currentBill = paymentMethods?.currentAmount || 0;
+  const nextPayment = planDetails?.service?.next_payment_date || "-";
 
   const usageData = planDetails?.usage_summary?.data || {};
   const servicePeriod = planDetails?.service_period || {};
