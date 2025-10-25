@@ -12,6 +12,7 @@ import Link from "next/link";
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [subscriber, setSubscriber] = useState(null);
+  const [subscriberNotFound, setSubscriberNotFound] = useState(false);
   const [plans, setPlans] = useState([]);
   const [planDetails, setPlanDetails] = useState(null);
   const [lineUsage, setLineUsage] = useState(null);
@@ -19,9 +20,7 @@ export default function DashboardPage() {
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
   const [primaryLineId, setPrimaryLineId] = useState(null);
-  const [devices, setDevices] = useState([]); // Start empty, will fetch dynamically
-
-  const SUBSCRIBER_ID = 55; // Can be replaced with dynamic subscriber_id later
+  const [devices, setDevices] = useState([]);
 
   // Helper: format date and remaining days
   function formatDateAndRemaining(endAt) {
@@ -69,14 +68,42 @@ export default function DashboardPage() {
     }
   }
 
-  // Load dashboard data
+  // Load dashboard data dynamically by subscriber email
   useEffect(() => {
     (async () => {
       setLoading(true);
+
       try {
+        // Get user email from localStorage
+        const userData = JSON.parse(localStorage.getItem("user") || "{}");
+        const userEmail = userData?.email;
+
+        if (!userEmail) {
+          setSubscriberNotFound(true);
+          setLoading(false);
+          return;
+        }
+
+        // Get subscriber_id dynamically
+        const subscriberResult = await beQuick.getSubscriberByEmail(userEmail);
+
+        if (!subscriberResult || !subscriberResult.subscriber_id) {
+          setSubscriberNotFound(true);
+          setLoading(false);
+          return;
+        }
+
+        const SUBSCRIBER_ID = subscriberResult.subscriber_id;
+
+        // Fetch subscriber details
         const subDetails = await beQuick.getSubscriberDetails(SUBSCRIBER_ID);
         const subscriberInfo = subDetails?.subscribers?.[0];
-        if (!subscriberInfo) throw new Error("Subscriber not found");
+
+        if (!subscriberInfo) {
+          setSubscriberNotFound(true);
+          setLoading(false);
+          return;
+        }
 
         setSubscriber(subscriberInfo);
         setPrimaryLineId(subscriberInfo.primary_line_id);
@@ -113,6 +140,22 @@ export default function DashboardPage() {
     })();
   }, []);
 
+  // Show "subscriber not found" message
+  if (subscriberNotFound) {
+    return (
+      <>
+        <TopHeader />
+        <Header />
+        <div className="container py-5">
+          <div className="alert alert-danger text-center">
+            Subscriber not found for your account.
+          </div>
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
   // Render helpers
   const currentBill = paymentMethods?.currentAmount || 15.98;
   const nextPayment = planDetails?.service?.next_payment_date || "Nov 09";
@@ -133,19 +176,10 @@ export default function DashboardPage() {
       <HeadBar text="Get Our Best Postpaid Mobile Plans & Pay Only for Every Need!" />
 
       <div className="dashboard-container container py-4">
-        <div className="d-flex justify-content-between align-items-center mb-4">
-          <h3 className="fw-bold mb-0">Dashboard</h3>
-          <div className="d-flex align-items-center gap-3">
-            <select className="form-select form-select-sm w-auto">
-              <option>{subscriber?.mdn || subscriber?.primary_mdn || "4258303132"} (Primary)</option>
-            </select>
-            <input type="text" className="form-control form-control-sm search-input" placeholder="Search Device" />
-          </div>
-        </div>
-
         {loading && <div className="alert alert-info">Loading your data…</div>}
         {error && <div className="alert alert-danger">{error}</div>}
 
+        {!loading && subscriber && (
         <div className="row g-4">
           {/* Plans & Usage */}
           <div className="col-lg-4 col-md-6">
@@ -304,6 +338,7 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
+        )}
       </div>
 
       <Footer />

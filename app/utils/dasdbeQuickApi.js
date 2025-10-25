@@ -22,7 +22,6 @@ async function request(path, { method = "GET", body = null, rawBody = false } = 
   }
 }
 
-
 // --- Basic API Functions ---
 export async function getSubscriberDetails(subscriberId) {
   const { data } = await request(`/subscribers/${subscriberId}`);
@@ -54,6 +53,18 @@ export async function getPaymentMethods(subscriberId) {
 export async function getOrders(subscriberId) {
   const { data } = await request(`/orders?by_subscriber_id=${subscriberId}`);
   return data;
+}
+
+// --- Get subscriber by email ---
+export async function getSubscriberByEmail(email) {
+  const { data: result } = await request(
+    `/subscribers?filter_by[0][value]=${encodeURIComponent(email)}&filter_by[0][column]=email`
+  );
+
+  const id =
+    result?.subscribers?.[0]?.id ||
+    result?.subscriber?.subscribers?.[0]?.id;
+  return id ? { subscriber_id: id } : false;
 }
 
 // --- Cache Utilities ---
@@ -220,4 +231,5 @@ export default {
   getLineBuckets,
   getPaymentMethods,
   getOrders,
+  getSubscriberByEmail, // <-- added here
 };
