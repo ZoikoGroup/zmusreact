@@ -88,8 +88,8 @@ export async function processOrder(postData) {
     if (!orderPaymentResponse.status) return orderPaymentResponse;
 
     // 6️⃣ Submit order
-    const submitResponse = await submitOrder(postData.bequick_order_id);
-    if (!submitResponse.status) return submitResponse;
+    //const submitResponse = await submitOrder(postData.bequick_order_id);
+    //if (!submitResponse.status) return submitResponse;
 
     return {
       status: true,
