@@ -1,5 +1,5 @@
 "use client";
-import { Container, Button, Nav, Navbar, NavDropdown, Modal } from "react-bootstrap";
+import { Container, Button, Nav, Navbar, NavDropdown, Modal, Badge } from "react-bootstrap"; // ✅ Added Badge import
 import Image from "next/image";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../globals.css';
@@ -22,9 +22,13 @@ const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
 
+    // ✅ New state for cart quantity
+    const [cartCount, setCartCount] = useState(0); 
+
     const pathname = usePathname();
 
     useEffect(() => {
+        // Check login
         if (typeof window !== "undefined") {
             const token = localStorage.getItem("zoiko_token");
             const userData = localStorage.getItem("user");
@@ -33,13 +37,24 @@ const Header = () => {
                 setUser(JSON.parse(userData));
             }
         }
+
+        // ✅ Load initial cart count from localStorage
+        const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+        const totalQty = storedCart.reduce((sum, item) => sum + (Number(item.formData?.priceQty ?? 1)), 0);
+        setCartCount(totalQty);
+
+        // ✅ Listen for cart updates (custom event)
+        window.addEventListener("cartUpdated", () => {
+            const updatedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+            const updatedQty = updatedCart.reduce((sum, item) => sum + (Number(item.formData?.priceQty ?? 1)), 0);
+            setCartCount(updatedQty);
+        });
     }, []);
 
     const handleLogout = () => {
         localStorage.removeItem("zoiko_token");
         localStorage.removeItem("user");
-        // alert("You have been logged out successfully.");
-        window.location.href = "/login"; // redirect to homepage
+        window.location.href = "/login"; // redirect
     };
 
     const handleCloseSearch = () => setShowSearch(false);
@@ -76,7 +91,16 @@ const Header = () => {
                         </Nav>
                         <Nav className="ms-auto">
                             <Nav.Link href="#" onClick={handleShowSearch}><i className="bi bi-search"></i></Nav.Link>
-                            <Nav.Link href="/checkout"><i className="bi bi-cart"></i></Nav.Link>
+
+                            {/* ✅ Cart icon with quantity badge */}
+                            <Nav.Link href="/checkout" className="position-relative">
+                                <i className="bi bi-cart"></i>
+                                {cartCount > 0 && (
+                                    <Badge pill bg="danger" className="position-absolute top-0 start-100 translate-middle">
+                                        {cartCount}
+                                    </Badge>
+                                )}
+                            </Nav.Link>
 
                             {isLoggedIn ? (
                                 <NavDropdown title={user?.name || "Account"} id="user-nav-dropdown">
