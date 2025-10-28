@@ -65,7 +65,7 @@ const Footer = () => {
                 </Row>
                 <Row>
                     <Col md={3} sm={12} xs={12}>
-                        <Image src="/img/footer-logo.webp" fluid className="w-75" alt="Footer Logo" />
+                        <Image src="/img/footer-logo.png" fluid className="w-75" alt="Footer Logo" />
                     </Col>
                     <Col md={4} sm={12} xs={12}>
                         <p className="txtred">Partner Programs</p>

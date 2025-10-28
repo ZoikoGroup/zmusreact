@@ -81,7 +81,7 @@ const Header = () => {
                             <Nav.Link href="/postpaid-plans" className={pathname == "/postpaid-plans" ? "active" : ""}>Postpaid Plans</Nav.Link>
                             <Nav.Link href="/business-deals" className={pathname == "/business-deals" ? "active" : ""}>Business Deals</Nav.Link>
                             <Nav.Link href="/travel-plans" className={pathname == "/travel-plans" ? "active" : ""}>Travel Plans</Nav.Link>
-                            <Nav.Link href="#">Animal &amp; Music</Nav.Link>
+                            <Nav.Link href="/animal-charities" className={pathname == "/animal-charities" ? "active" : ""}>Animal &amp; Music</Nav.Link>
                             <NavDropdown title="Devices" id="collapsible-nav-dropdown">
                                 <NavDropdown.Item href="https://phones.zoikomobile.com/" target="_blank">New Smartphones</NavDropdown.Item>
                                 <NavDropdown.Item href="/product-category/refurbished">Refurbished Smartphones</NavDropdown.Item>
