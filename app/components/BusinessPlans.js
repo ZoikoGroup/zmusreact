@@ -88,7 +88,7 @@ const BusinessPlans = () => {
                       <Col className="data">{plan.sub_title || "Unlimited Data"}</Col>
                       <Col className="text-end">
                         <span className="curprice">
-                          {plan.currency} {plan.price}
+                          {plan.currency}{plan.price}
                         </span>
                         <br />
                         /{plan.duration_type || "month"}/line
@@ -99,11 +99,13 @@ const BusinessPlans = () => {
 
                     {/* FEATURES */}
                     <ul className="check-bullet">
-                      {Array.isArray(plan.features) && plan.features.length > 0
-                        ? plan.features.slice(0, 7).map((feature, idx) => (
-                            <li key={idx}>{feature.text || feature}</li>
-                          ))
-                        : <li>No features listed</li>}
+
+                        {plan.features.slice(0, 6).map((ftrs, index) => (
+                              <li key={index}>
+                                {index === 1 ? "Unlimited Talk & Text" : ftrs.text}
+                              </li>
+                            ))}
+                            <li>Discounted Device Protection</li>
                     </ul>
 
                     <hr className="separator" />

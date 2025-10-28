@@ -97,9 +97,12 @@ export default function CarouselSimPlan() {
                           </Row>
                           <hr className="separator" />
                           <ul className="check-bullet">
-                            {item.features.slice(0, 7).map((ftrs, index) => (
-                              <li key={index}>{ftrs.text}</li>
+                            {item.features.slice(0, 6).map((ftrs, index) => (
+                              <li key={index}>
+                                {index === 1 ? "Unlimited Talk & Text" : ftrs.text}
+                              </li>
                             ))}
+                            <li>Discounted Device Protection</li>
                           </ul>
                           <hr className="separator" />
                           <div className="text-center">

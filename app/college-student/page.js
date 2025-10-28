@@ -28,6 +28,7 @@ const CollegeStudent = () => {
                 </div>
             </Container>
         </Container>
+        
         <Container fluid className="py-5 bglite">
             <Container className="w-75 w-sm-100">
                 <h2 className="text-center">Who is Eligible?</h2>

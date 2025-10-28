@@ -101,7 +101,7 @@ const TravelPlanSlider = ({ planType = "travel-plans" }) => {
                   <Row>
                     <Col className="data">{item.sub_title || "Global Roaming Data"}</Col>
                     <Col className="text-end">
-                      <span className="curprice">{item.currency} {item.price}</span>
+                      <span className="curprice">{item.currency}{item.price}</span>
                       <br />
                       <span>{`/${item?.duration_type || "month"}/line`}</span>
                     </Col>
@@ -111,11 +111,14 @@ const TravelPlanSlider = ({ planType = "travel-plans" }) => {
 
                   {/* FEATURES */}
                   <ul className="check-bullet">
-                    {Array.isArray(item.features) && item.features.length > 0
-                      ? item.features.slice(0, 8).map((feature, idx) => (
-                          <li key={idx}>{feature.text || feature}</li>
-                        ))
-                      : <li>No features listed</li>}
+                    {item.features.slice(0, 6).map((ftrs, index) => (
+                                <li key={index}>
+                                    {index === 1 ? "Unlimited Talk & Text" : ftrs.text}
+                                </li>
+                                ))}
+                                <li>Discounted Device Protection</li>
+
+                      
                   </ul>
 
                   <hr className="separator" />

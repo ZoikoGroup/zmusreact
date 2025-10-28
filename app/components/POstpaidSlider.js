@@ -108,7 +108,7 @@ const PostpaidSlider = ({ planType = "postpaid-plans" }) => {
                     <Col className="data">{item.sub_title || "Unlimited Data"}</Col>
                     <Col className="text-end">
                       <span className="curprice">
-                        {item.currency} {item.price}
+                        {item.currency}{item.price}
                       </span>
                       <br />
                       /{item.duration_type || "month"}/line
@@ -119,11 +119,12 @@ const PostpaidSlider = ({ planType = "postpaid-plans" }) => {
 
                   {/* FEATURES */}
                   <ul className="check-bullet">
-                    {Array.isArray(item.features) && item.features.length > 0
-                      ? item.features.slice(0, 7).map((feature, idx) => (
-                          <li key={idx}>{feature.text || feature}</li>
-                        ))
-                      : <li>No features listed</li>}
+                    {item.features.slice(0, 6).map((ftrs, index) => (
+                              <li key={index}>
+                                {index === 1 ? "Unlimited Talk & Text" : ftrs.text}
+                              </li>
+                            ))}
+                            <li>Discounted Device Protection</li>
                   </ul>
 
                   <hr className="separator" />
