@@ -859,3 +859,7 @@ a {
           padding: 20px;
           flex: 1 1 auto;
         }
+
+        .check-bullet li {
+            padding: 6px 0;
+          }
