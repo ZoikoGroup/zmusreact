@@ -108,7 +108,7 @@ const PrepaidSlider = ({ planType = "prepaid-plans" }) => {
                                 {/* FEATURES */}
                                 <ul className="check-bullet">
                                     {Array.isArray(item.features) && item.features.length > 0 ? (
-                                        item.features.slice(0, 8).map((feature, idx) => (
+                                        item.features.slice(0, 7).map((feature, idx) => (
                                             <li key={idx}>{feature.text}</li>
                                         ))
                                     ) : (

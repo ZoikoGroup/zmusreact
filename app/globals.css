@@ -245,6 +245,9 @@ a {
 .check-bullet {
   list-style-image: url('/img/icons/check2.svg');
 }
+.check-bullet li {
+  padding: 6px 0;
+}
 .curprice {
   color: #DF1E5A;
   font-size: 30px;

@@ -100,7 +100,7 @@ const BusinessPlans = () => {
                     {/* FEATURES */}
                     <ul className="check-bullet">
                       {Array.isArray(plan.features) && plan.features.length > 0
-                        ? plan.features.slice(0, 6).map((feature, idx) => (
+                        ? plan.features.slice(0, 7).map((feature, idx) => (
                             <li key={idx}>{feature.text || feature}</li>
                           ))
                         : <li>No features listed</li>}

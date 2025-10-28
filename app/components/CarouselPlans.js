@@ -88,16 +88,16 @@ export default function CarouselSimPlan() {
                             <Col>
                               <p style={{ textAlign: "right" }}>
                                 <span className="curprice">
-                                  ${item.price}/{item.duration_type}
+                                  ${item.price}
                                 </span>
                                 <br />
-                                per line
+                                /{item.duration_type}/line
                               </p>
                             </Col>
                           </Row>
                           <hr className="separator" />
                           <ul className="check-bullet">
-                            {item.features.slice(0, 6).map((ftrs, index) => (
+                            {item.features.slice(0, 7).map((ftrs, index) => (
                               <li key={index}>{ftrs.text}</li>
                             ))}
                           </ul>
