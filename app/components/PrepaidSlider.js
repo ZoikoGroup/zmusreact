@@ -68,7 +68,7 @@ const PrepaidSlider = ({ planType = "prepaid-plans" }) => {
 
     return (
         <Container fluid className="py-5 bglite">
-            <h2 className="text-center">Zoiko Mobile {planType.replace("-", " ").toUpperCase()}</h2>
+            <h2 className="text-center">Zoiko Mobile {planType.replace("-", " ").split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ")}</h2>
             <div className="slider-container">
                 <Slider {...settings}>
                     {plans.map((item) => (
@@ -119,18 +119,17 @@ const PrepaidSlider = ({ planType = "prepaid-plans" }) => {
                                 <hr className="separator" />
 
                                 {/* BUTTONS */}
+                                <div className="gap-3 d-flex justify-content-center">
                                 <Button
-                                    variant="danger"
-                                    size="sm"
+                                    variant="danger" className="px-5"
                                     onClick={() => openPlanPurchaseModal(item.title, item.slug, item.id, item.price, item.duration_type, item.bq_id, item.plan_type)}
                                 >
                                     Buy This Plan
                                 </Button>
-
-                                &nbsp;
-                                <Button variant="outline-danger" href={`/plans/${item.slug}`} size="sm">
+                                <Button variant="outline-danger" href={`/plans/${item.slug}`} className="px-5">
                                     View Details
                                 </Button>
+                                </div>
                             </CardBody>
                         </Card>
                     ))}

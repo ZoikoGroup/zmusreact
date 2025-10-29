@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import { Card, CardBody, Container, Button, Image, Row, Col, Spinner } from "react-bootstrap";
 import Slider from "react-slick";
@@ -70,7 +69,7 @@ const TravelPlanSlider = ({ planType = "travel-plans" }) => {
   return (
     <Container fluid className="py-5 bglite">
       <h2 className="text-center mb-4">
-        Stay Connected Globally – Simple, Affordable {planType.replace("-", " ").toUpperCase()}
+        Stay Connected Globally - Simple, Affordable {planType.replace("-", " ").split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ")}
       </h2>
 
       {plans.length === 0 ? (
@@ -124,9 +123,9 @@ const TravelPlanSlider = ({ planType = "travel-plans" }) => {
                   <hr className="separator" />
 
                   {/* BUTTONS */}
+                  <div className="gap-3 d-flex justify-content-center">
                   <Button
-                    variant="danger"
-                    size="sm"
+                    variant="danger" className="px-5"
                     onClick={() =>
                       openPlanPurchaseModal(
                         item.title,
@@ -141,10 +140,10 @@ const TravelPlanSlider = ({ planType = "travel-plans" }) => {
                   >
                     Buy This Plan
                   </Button>
-                  &nbsp;
-                  <Button variant="outline-danger" href={`/plans/${item.slug}`} size="sm">
+                  <Button variant="outline-danger" href={`/plans/${item.slug}`} className="px-5">
                     View Details
                   </Button>
+                  </div>
                 </CardBody>
               </Card>
             ))}

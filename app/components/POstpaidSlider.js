@@ -76,7 +76,7 @@ const PostpaidSlider = ({ planType = "postpaid-plans" }) => {
   return (
     <Container fluid className="py-5 bglite">
       <h2 className="text-center mb-4">
-        Zoiko Mobile {planType.replace("-", " ").toUpperCase()}
+        Zoiko Mobile {planType.replace("-", " ").split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ")}
       </h2>
 
       {plans.length === 0 ? (
@@ -130,9 +130,9 @@ const PostpaidSlider = ({ planType = "postpaid-plans" }) => {
                   <hr className="separator" />
 
                   {/* BUTTONS */}
+                  <div className="gap-3 d-flex justify-content-center">
                   <Button
-                    variant="danger"
-                    size="sm"
+                    variant="danger" className="px-5"
                     onClick={() =>
                       openPlanPurchaseModal(
                         item.title,
@@ -147,14 +147,13 @@ const PostpaidSlider = ({ planType = "postpaid-plans" }) => {
                   >
                     Buy This Plan
                   </Button>
-                  &nbsp;
                   <Button
-                    variant="outline-danger"
+                    variant="outline-danger" className="px-5"
                     href={`/plans/${item.slug}`}
-                    size="sm"
                   >
                     View Details
                   </Button>
+                  </div>
                 </CardBody>
               </Card>
             ))}

@@ -10,19 +10,19 @@ const HomeSecA = () => {
             <p className="body22 text-center">Reliable Network Coverage at Low Prices | Free International Calls | Free High Speed 5G Data</p>
             <div className="pinkboxwraper justify-content-center gap-4 mt-5">
                 <div className="pinkbox align-items-center">
-                    <Link href={"#"}>
+                    <Link href={"/all-plans"}>
                         <Image src={"/img/icons/icon1-home.png"} width={80} height={80} alt="Icon 1" className="mx-auto d-block" />
                         <p>View Plans</p>
                     </Link>
                 </div>
                 <div className="pinkbox">
-                    <Link href={"#"}>
+                    <Link href={"/activate"}>
                         <Image src={"/img/icons/icon2-home.png"} width={80} height={80} alt="Icon 2" className="mx-auto d-block" />
                         <p>Activate Your SIM</p>
                     </Link>
                 </div>
                 <div className="pinkbox">
-                    <Link href={"#"}>
+                    <Link href={"/zoiko-mobile-switch-save-form"}>
                         <Image src={"/img/icons/icon3-home.png"} width={80} height={80} alt="Icon 3" className="mx-auto d-block" />
                         <p>Switch &amp; Save</p>
                     </Link>
