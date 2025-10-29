@@ -105,15 +105,12 @@ export default function CarouselSimPlan() {
                             <li>Discounted Device Protection</li>
                           </ul>
                           <hr className="separator" />
-                          <div className="text-center">
-                            <Link
-                              href={`/plans/${item.slug}`}
-                              className="btn btn-outline-danger px-4 me-2"
-                            >
+                          <div className="gap-3 d-flex justify-content-center">
+                            <Button variant="outline-danger" href={`/plans/${item.slug}`} className="px-5">
                               View plan
-                            </Link>
+                            </Button>
                             <Button
-                              variant="danger"
+                              variant="danger" className="px-5"
                               onClick={() =>
                                 openPlanPurchaseModal(
                                   item.title,
