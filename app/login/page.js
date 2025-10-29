@@ -46,8 +46,8 @@ const Login = () => {
 
   const validate = () => {
     let formErrors = {};
-    if (!formData.username) formErrors.username = "Username is required";
-    if (!formData.passwd) formErrors.passwd = "Password is required";
+    if (!formData.username) formErrors.username = "⚠️ Username is required";
+    if (!formData.passwd) formErrors.passwd = "⚠️ Password is required";
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
   };
@@ -73,7 +73,7 @@ const Login = () => {
       setLoading(false);
 
       if (!response.ok || !data.success) {
-        setErrors({ api: "Invalid credentials, please try again." });
+        setErrors({ api: "⚠️ Invalid credentials, please try again." });
         return;
       }
 
@@ -83,7 +83,7 @@ const Login = () => {
     } catch (error) {
       console.error("Login error:", error);
       setLoading(false);
-      setErrors({ api: "Something went wrong. Please try again later." });
+      setErrors({ api: "⚠️ Something went wrong. Please try again later." });
     }
   };
 
@@ -97,7 +97,7 @@ const Login = () => {
   };
 
   const handleForgotEmail = async () => {
-    if (!forgotData.email) return setForgotMessage("Email is required.");
+    if (!forgotData.email) return setForgotMessage("⚠️ Email is required.");
     setForgotMessage("Sending reset code...");
     try {
       const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/password/email", {
@@ -113,15 +113,15 @@ const Login = () => {
         setForgotStep(2);
         setForgotMessage("A verification code has been sent to your email.");
       } else {
-        setForgotMessage(data.message || "Failed to send reset code.");
+        setForgotMessage(data.message || "⚠️ Failed to send reset code.");
       }
     } catch (err) {
-      setForgotMessage("Error sending email. Please try again.");
+      setForgotMessage("⚠️ Error sending email. Please try again.");
     }
   };
 
   const handleForgotCodeCheck = async () => {
-    if (!forgotData.code) return setForgotMessage("Please enter the code.");
+    if (!forgotData.code) return setForgotMessage("⚠️ Please enter the code.");
     setForgotMessage("Verifying code...");
     try {
       const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/password/code/check", {
@@ -136,16 +136,16 @@ const Login = () => {
         setForgotStep(3);
         setForgotMessage("Code verified. You can now reset your password.");
       } else {
-        setForgotMessage(data.message || "Invalid code.");
+        setForgotMessage(data.message || "⚠️ Invalid code.");
       }
     } catch (err) {
-      setForgotMessage("Error verifying code.");
+      setForgotMessage("⚠️ Error verifying code.");
     }
   };
 
   const handleForgotReset = async () => {
     if (!forgotData.password)
-      return setForgotMessage("Please enter a new password.");
+      return setForgotMessage("⚠️ Please enter a new password.");
 
     setForgotMessage("Resetting password...");
     try {
@@ -161,16 +161,16 @@ const Login = () => {
       });
       const data = await res.json();
       if (res.ok) {
-        setForgotMessage("Password reset successful! You can now log in.");
+        setForgotMessage("✅ Password reset successful! You can now log in.");
         setTimeout(() => {
           setShowForgot(false);
           setForgotStep(1);
         }, 2000);
       } else {
-        setForgotMessage(data.message || "Failed to reset password.");
+        setForgotMessage(data.message || "⚠️ Failed to reset password.");
       }
     } catch (err) {
-      setForgotMessage("Error resetting password.");
+      setForgotMessage("⚠️ Error resetting password.");
     }
   };
 
@@ -195,6 +195,18 @@ const Login = () => {
                 <p className="body22">
                   Simply fill in the form below to get started.
                 </p>
+
+                {/* ⚠️ Invalid Credentials Message above the form */}
+                {errors.api && (
+                  <div
+                    className="alert alert-danger d-flex align-items-center py-2 px-3 mb-3"
+                    role="alert"
+                  >
+                    <span style={{ fontSize: "1.2rem", marginRight: "0.5rem" }}>⚠️</span>
+                    <span>{errors.api.replace(/^⚠️\s*/, "")}</span>
+                  </div>
+                )}
+
                 <Form onSubmit={handleSubmit}>
                   <label>Username or Email</label>
                   <input
@@ -237,8 +249,6 @@ const Login = () => {
                       Forgot Password?
                     </Button>
                   </div>
-
-                  {errors.api && <p className="txtred">{errors.api}</p>}
 
                   <div className="mt-3">
                     <input
