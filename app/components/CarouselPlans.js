@@ -106,11 +106,11 @@ export default function CarouselSimPlan() {
                           </ul>
                           <hr className="separator" />
                           <div className="gap-3 d-flex justify-content-center">
-                            <Button variant="outline-danger" href={`/plans/${item.slug}`} className="px-5">
+                            <Button variant="outline-danger" href={`/plans/${item.slug}`}>
                               View plan
                             </Button>
                             <Button
-                              variant="danger" className="px-5"
+                              variant="danger"
                               onClick={() =>
                                 openPlanPurchaseModal(
                                   item.title,

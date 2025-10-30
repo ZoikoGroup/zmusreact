@@ -113,7 +113,7 @@ const BusinessPlans = () => {
                     {/* BUTTONS */}
                     <div className="gap-3 d-flex justify-content-center">
                     <Button
-                      variant="danger" className="px-5"
+                      variant="danger"
                       onClick={() =>
                         openPlanPurchaseModal(
                           plan.title,
@@ -128,7 +128,7 @@ const BusinessPlans = () => {
                     >
                       Buy This Plan
                     </Button>
-                    <Button variant="outline-danger" href={`/plans/${plan.slug}`} className="px-5">
+                    <Button variant="outline-danger" href={`/plans/${plan.slug}`}>
                       View Details
                     </Button>
                     </div>

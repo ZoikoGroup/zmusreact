@@ -13,7 +13,7 @@ const HomeBanner = () => {
                 <Carousel.Caption>
                     <div className="bannertxt text-start">
                         <h1 className="verybig txtred">UNBEATABLE VALUE</h1>
-                        <h2 className="py-4"><span className="txtred">ZOIKO MOBILE</span><span className="txtblack">: AMAZING BYOD DEALS | SUPPORTING<br />ANIMALS | ENJOYING MUSIC</span></h2>
+                        <h2 className="py-2"><span className="txtred">ZOIKO MOBILE</span><span className="txtblack">: AMAZING BYOD DEALS | SUPPORTING<br />ANIMALS | ENJOYING MUSIC</span></h2>
                         <Button href='/zoiko-mobile-switch-save-form' variant="danger" size="lg" className="custom-button">Switch &amp; Save</Button>
                         <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Know More</Button>
                     </div>
@@ -22,10 +22,10 @@ const HomeBanner = () => {
             <Carousel.Item>
                 <img className="d-block w-100" src="/img/home-banner/smartphone-deals-banner.png" alt="Unbeatable Value" />
                 <Carousel.Caption>
-                    <div className="btnbox text-start">
-                        <h1 className="bigblack">Fantstic Deals On<br />Refurbished Smartphones<span className="txtred">!</span></h1>
+                    <div className="bannertxt-2 text-start">
+                        <h1 className="txtbig txtblack">Fantstic Deals On<br />Refurbished Smartphones<span className="txtred">!</span></h1>
                         <h2 className="txtblack py-2">Expertly Tested <span className="txtred">|</span> Easy Payment Options</h2>
-                        <h2 className="txtblack pb-3">Premium Quality <span className="txtred">|</span> Free Delivery</h2>
+                        <h2 className="txtblack pb-2">Premium Quality <span className="txtred">|</span> Free Delivery</h2>
                         <Button href='#' variant="danger" size="lg" className="custom-button">Buy Now</Button>
                         <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Know More</Button>
                     </div>

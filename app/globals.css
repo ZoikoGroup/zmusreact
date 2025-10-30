@@ -111,6 +111,11 @@ a {
   left: 20px;
   bottom: 100px;
 }
+.bannertxt-2 {
+  position: absolute;
+  left: 20px;
+  bottom: 100px;
+}
 .txtred {
   color: #DF1E5A;
 }
@@ -603,6 +608,19 @@ a {
   }
   .bannertxt {
     padding-left: 1%;
+    top: -60px;
+  }
+  .bannertxt-2 {
+      padding-left: 1%;
+      top: -80px;
+  }
+  .bannertxt-2 .txtbig{
+    font-size: 12px;
+    line-height: 12px;
+  }
+  .bannertxt h2, .bannertxt-2 h2 {
+    font-size: 12px;
+    line-height: 12px;
   }
   .carousel-indicators {
     display: none !important;
@@ -688,9 +706,9 @@ a {
     font-weight: 400;
   }
   .verybig {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
-    line-height: 26px;
+    line-height: 16px;
   }
   .redbullet-banner {
     font-size: 18px;
