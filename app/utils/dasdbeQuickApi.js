@@ -223,6 +223,16 @@ export async function refreshDevicesSection(subscriberId, currentLineId) {
   return { html, devices: enhancedLines };
 }
 
+// --- Get Billing Summary ---
+export async function getBillingSummary(subscriberId) {
+  // Fetch invoices or payment summary for a given subscriber
+  const { data } = await request(`/invoices?by_subscriber_id=${subscriberId}&per=50`);
+  
+  // Optional: transform or fallback if API returns nothing
+  return data?.invoices || data?.data || [];
+}
+
+
 export default {
   request,
   getSubscriberDetails,
@@ -231,5 +241,6 @@ export default {
   getLineBuckets,
   getPaymentMethods,
   getOrders,
-  getSubscriberByEmail, // <-- added here
+  getSubscriberByEmail, 
+  getBillingSummary,
 };

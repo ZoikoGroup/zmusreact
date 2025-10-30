@@ -88,13 +88,14 @@ export async function processOrder(postData) {
     if (!orderPaymentResponse.status) return orderPaymentResponse;
 
     // 6️⃣ Submit order
-    //const submitResponse = await submitOrder(postData.bequick_order_id);
-    //if (!submitResponse.status) return submitResponse;
+    const submitResponse = await submitOrder(postData.bequick_order_id);
+    if (!submitResponse.status) return submitResponse.response;
 
     return {
       status: true,
       message: "Order processed successfully",
       data: postData,
+      orderresponse: submitResponse,
     };
   } catch (error) {
     return {
@@ -321,6 +322,7 @@ export async function createDraftOrder(postData) {
 
   const ESIM_PRODUCT_ID = 20; // replace with real ID
   const PSIM_PRODUCT_ID = 19; // replace with real ID
+  const DEVICE_PROTECTION_PRODUCT_ID = 19; 
 
   const cart = postData.cart || [];
   if (cart.length === 0) {
@@ -355,20 +357,19 @@ export async function createDraftOrder(postData) {
       });
       simCount++;
       console.log("Added pSIM:", orderDetailsAttributes);
+    } else if (simType === "device_protection") {
+      orderDetailsAttributes.push({
+        product_id: DEVICE_PROTECTION_PRODUCT_ID,
+        line_id: product.line_id,
+      });
+      simCount++;
+      console.log("Added Device_Protection:", orderDetailsAttributes);
     } else {
       console.warn("Unknown SIM type:", simType);
     }
   }
   //  console.log("orderDetailsAttributes:", orderDetailsAttributes);
-  // ----- Process device protection products -----
-  // if (Array.isArray(postData.device_protection)) {
-  //   postData.device_protection.forEach((product) => {
-  //     orderDetailsAttributes.push({
-  //       product_id: parseInt(product.planBqid),
-  //       line_id: product.line_id,
-  //     });
-  //   });
-  // }
+
 
   // ----- Validate plan and SIM presence -----
   if (planCount === 0 && simCount === 0) {
@@ -428,7 +429,7 @@ export async function orderPayment(postData) {
 export async function submitOrder(orderId) {
   const response = await beQuickRequest(`/orders/${orderId}/submit`, "POST");
   if (response?.errors) return { status: false, message: "Submit failed", error: response.errors };
-  return { status: true };
+  return { status: true,response: response  };
 }
 
 export async function getSubscriberByEmail(email) {
@@ -442,4 +443,32 @@ export async function getSubscriberByEmail(email) {
     result?.subscribers?.[0]?.id ||
     result?.subscriber?.subscribers?.[0]?.id;
   return id ? { subscriber_id: id } : false;
+}
+
+
+export async function activateSim(simDetails) {
+  console.log("Activating SIM with details:", simDetails);
+  const data = {
+                  delivery: {
+                      tracking_number: simDetails,
+                      delivery_details_attributes: [{
+                        label: "IMEI",
+                        value: simDetails.imei,
+                        order_detail_id: 0
+                      }, {
+                        label: "ICCID",
+                        value: simDetails.iccid,
+                        order_detail_id: 0
+                      }]
+                    },
+                };
+
+  try {
+    const response = await beQuickRequest("/deliveries/"+simDetails.deliveriesID+"/deliver", "PUT", data);
+    console.log("Activation Response:", response);
+    return response;
+  } catch (error) {
+    console.error("Error activating SIM:", error);
+    throw error;
+  }
 }
