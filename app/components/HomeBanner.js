@@ -45,7 +45,7 @@ const HomeBanner = () => {
                         <h2 className="txtblack d-sm-block d-md-none">Plans built for every lifestyle with global coverage and unbeatable flexibility</h2>
                         <div class="d-flex flex-nowrap gap-3">
                             <Button href='/prepaid-plans' variant="danger" size="lg" className="custom-button">Explore Plans</Button>
-                            <Button href='/product-category/refurbished' variant="outline-danger" className="mx-4 custom-button" size="lg">Shop Devices</Button>
+                            <Button href='/product-category/refurbished' variant="outline-danger" className="custom-button" size="lg">Shop Devices</Button>
                         </div>
                     </div>
                 </Carousel.Caption>
@@ -60,7 +60,7 @@ const HomeBanner = () => {
                         <h1 className="txtblack">On Any Of Our Plans</h1>
                         <div class="d-flex flex-nowrap gap-3">
                             <Button href='/postal-service-workers-form' variant="danger" size="lg" className="custom-button">Register Now</Button>
-                            <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Learn more</Button>
+                            <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
                         </div>
                     </div>
                 </Carousel.Caption>
@@ -78,7 +78,7 @@ const HomeBanner = () => {
                         </ul>
                         <div class="d-flex flex-nowrap gap-3">
                             <Button href='/military-veterans-form' variant="danger" size="lg" className="custom-button">Register Now</Button>
-                            <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Learn more</Button>
+                            <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
                         </div>
                     </div>
                 </Carousel.Caption>
@@ -94,7 +94,7 @@ const HomeBanner = () => {
                         <h1 className="txtblack pb-3">On Any Of Our Plans</h1>
                         <div class="d-flex flex-nowrap gap-3">
                             <Button href='/college-student-discount-form' variant="danger" size="lg" className="custom-button">Register Now</Button>
-                            <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Learn more</Button>
+                            <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
                         </div>
                     </div>
                 </Carousel.Caption>
@@ -121,7 +121,7 @@ const HomeBanner = () => {
                         <h2 className="txtblack midbig py-3">Join Zoiko Mobile - We are supporting animals<br />and animal charities whilst keep you connected!</h2>
                         <div class="d-flex flex-nowrap gap-3">
                             <Button href='#' variant="danger" size="lg" className="custom-button">Register Now</Button>
-                            <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Learn more</Button>
+                            <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
                         </div>
                     </div>
                 </Carousel.Caption>
@@ -136,7 +136,7 @@ const HomeBanner = () => {
                         <p className="txtblack body22" style={{fontWeight:'200'}}>At Zoiko Mobile, we know music isn&apos;t just entertainment<br />—it&apos;s a way of life. That&apos;s why we created the Zoiko Music<br />Hub, a dedicated space where music lovers and aspiring<br />musicians can find the tools, perks, and community to fuel<br />their passion. Whether you&apos;re producing your next big hit,<br />jamming with friends, or discovering fresh tunes, Zoiko<br />Mobile is here to keep you connected and inspired.</p>
                         <div class="d-flex flex-nowrap gap-3">
                             <Button href='/music-hub-registratrion-form' variant="danger" size="lg" className="custom-button">Register Now</Button>
-                            <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Learn more</Button>
+                            <Button href='#' variant="outline-danger" className="custom-button" size="lg">Learn more</Button>
                         </div>
                     </div>
                 </Carousel.Caption>
