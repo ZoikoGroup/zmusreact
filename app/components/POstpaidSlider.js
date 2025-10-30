@@ -132,7 +132,7 @@ const PostpaidSlider = ({ planType = "postpaid-plans" }) => {
                   {/* BUTTONS */}
                   <div className="gap-3 d-flex justify-content-center">
                   <Button
-                    variant="danger" className="px-5"
+                    variant="danger"
                     onClick={() =>
                       openPlanPurchaseModal(
                         item.title,
@@ -148,7 +148,7 @@ const PostpaidSlider = ({ planType = "postpaid-plans" }) => {
                     Buy This Plan
                   </Button>
                   <Button
-                    variant="outline-danger" className="px-5"
+                    variant="outline-danger"
                     href={`/plans/${item.slug}`}
                   >
                     View Details

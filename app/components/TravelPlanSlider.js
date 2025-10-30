@@ -125,7 +125,7 @@ const TravelPlanSlider = ({ planType = "travel-plans" }) => {
                   {/* BUTTONS */}
                   <div className="gap-3 d-flex justify-content-center">
                   <Button
-                    variant="danger" className="px-5"
+                    variant="danger"
                     onClick={() =>
                       openPlanPurchaseModal(
                         item.title,
@@ -140,7 +140,7 @@ const TravelPlanSlider = ({ planType = "travel-plans" }) => {
                   >
                     Buy This Plan
                   </Button>
-                  <Button variant="outline-danger" href={`/plans/${item.slug}`} className="px-5">
+                  <Button variant="outline-danger" href={`/plans/${item.slug}`}>
                     View Details
                   </Button>
                   </div>
