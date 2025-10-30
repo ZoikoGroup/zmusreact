@@ -46,7 +46,9 @@ const SwitchSaveForm = () => {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const response = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/plans");
+        const response = await fetch(
+          "https://zmapi.zoikomobile.co.uk/api/v1/plans"
+        );
         const data = await response.json();
 
         if (data.success && Array.isArray(data.data)) {
@@ -63,7 +65,7 @@ const SwitchSaveForm = () => {
     fetchPlans();
   }, []);
 
-  // ✅ Handle input change
+  // ✅ Handle input changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -78,7 +80,7 @@ const SwitchSaveForm = () => {
     }
   };
 
-  // ✅ Validation rules
+  // ✅ Validation
   const validate = () => {
     const formErrors = {};
 
@@ -88,20 +90,17 @@ const SwitchSaveForm = () => {
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       formErrors.email = "⚠️ Enter a valid email address";
     }
-
     if (!formData.msisdn) {
       formErrors.msisdn = "⚠️ Mobile number is required";
     } else if (!/^\d{10}$/.test(formData.msisdn)) {
-      formErrors.msisdn = "⚠️ Enter a valid 10-digit mobile number";
+      formErrors.msisdn = "⚠️ Enter a valid 10-digit number";
     }
-
     if (!formData.simno) formErrors.simno = "⚠️ SIM number is required";
     if (!formData.plan) formErrors.plan = "⚠️ Please select a plan type";
     if (!formData.cat) formErrors.cat = "⚠️ Please select a plan";
     if (!formData.ospno) formErrors.ospno = "⚠️ This field is required";
     if (!formData.osppass) formErrors.osppass = "⚠️ This field is required";
     if (!formData.addr1) formErrors.addr1 = "⚠️ This field is required";
-    if (!formData.addr2) formErrors.addr2 = "⚠️ This field is required";
     if (!formData.city) formErrors.city = "⚠️ This field is required";
     if (!formData.state) formErrors.state = "⚠️ This field is required";
     if (!formData.zip) formErrors.zip = "⚠️ This field is required";
@@ -127,7 +126,7 @@ const SwitchSaveForm = () => {
     const [firstName, ...rest] = formData.fname.split(" ");
     const lastName = rest.join(" ") || "";
 
-    const payload = {
+    const bequickPayload = {
       line: {
         subscriber_id: 96,
         carrier_id: 3,
@@ -140,7 +139,6 @@ const SwitchSaveForm = () => {
           carrier_account: formData.ospno,
           carrier_password: formData.osppass,
           ssn: "1234",
-          line_id: null,
           address_attributes: {
             primary: false,
             address1: formData.addr1,
@@ -154,34 +152,62 @@ const SwitchSaveForm = () => {
     };
 
     try {
+      // ✅ Step 1: BeQuick API call
       const res = await fetch("https://zoiko-atom-api.bequickapps.com/lines", {
         method: "POST",
         headers: {
           "X-AUTH-TOKEN": "09ff2d85-a451-47e6-86bc-aba98e1e4629",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(bequickPayload),
       });
 
       const data = await res.json();
-      console.log("BeQuick Response:", data);
 
-      if (res.ok) {
+      if (!res.ok) throw new Error(data?.error || "BeQuick API Error");
+
+      // ✅ Step 2: Send data to Laravel API
+      const saveRes = await fetch(
+        "https://zmapi.zoikomobile.co.uk/api/v1/switch-save",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...formData, bequick_response: data }),
+        }
+      );
+
+      const saveData = await saveRes.json();
+
+      if (saveRes.ok) {
         setApiResponse({
           type: "success",
-          message: `✅ Successfully submitted! Line ID: ${data?.lines?.[0]?.id || "N/A"}`,
+          message: "✅ Thank you! Your request has been submitted successfully.",
+        });
+        setFormData({
+          fname: "",
+          email: "",
+          msisdn: "",
+          simno: "",
+          plan: "",
+          cat: "",
+          ospno: "",
+          osppass: "",
+          addr1: "",
+          addr2: "",
+          city: "",
+          state: "",
+          zip: "",
+          concent: false,
+          terms: false,
         });
       } else {
-        setApiResponse({
-          type: "danger",
-          message: data?.error || "⚠️ Something went wrong while submitting. Please try again.",
-        });
+        throw new Error(saveData?.message || "Switch & Save API Error");
       }
     } catch (error) {
-      console.error("API Error:", error);
+      console.error("Error:", error);
       setApiResponse({
         type: "danger",
-        message: "⚠️ Network or server error occurred.",
+        message: `⚠️ ${error.message || "Something went wrong, please try again."}`,
       });
     } finally {
       setSubmitting(false);
@@ -197,11 +223,17 @@ const SwitchSaveForm = () => {
         text={
           <>
             Switch to Simplicity:{" "}
-            <span className="txtyellow"><i className="bi bi-music-note-beamed"></i></span>{" "}
+            <span className="txtyellow">
+              <i className="bi bi-music-note-beamed"></i>
+            </span>{" "}
             More Data{" "}
-            <span className="txtyellow"><i className="bi bi-music-note-beamed"></i></span>{" "}
+            <span className="txtyellow">
+              <i className="bi bi-music-note-beamed"></i>
+            </span>{" "}
             More Savings{" "}
-            <span className="txtyellow"><i className="bi bi-music-note-beamed"></i></span>{" "}
+            <span className="txtyellow">
+              <i className="bi bi-music-note-beamed"></i>
+            </span>{" "}
             Less Hassle
           </>
         }

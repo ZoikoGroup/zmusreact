@@ -23,6 +23,10 @@ export default function DashboardPage() {
   const [devices, setDevices] = useState([]);
   const [userName, setUserName] = useState("Customer");
 
+  const [billingSummary, setBillingSummary] = useState([]);
+
+
+
   // Helper: format date and remaining days
   function formatDateAndRemaining(endAt) {
     if (!endAt) return { formatted: "N/A", remainingDays: "N/A" };
@@ -114,7 +118,9 @@ export default function DashboardPage() {
           return;
         }
 
-        const SUBSCRIBER_ID = subscriberResult.subscriber_id;
+       // const SUBSCRIBER_ID = subscriberResult.subscriber_id;
+          const SUBSCRIBER_ID = 54;
+
 
         const subDetails = await beQuick.getSubscriberDetails(SUBSCRIBER_ID);
         const subscriberInfo = subDetails?.subscribers?.[0];
@@ -150,6 +156,12 @@ export default function DashboardPage() {
         const pm = await beQuick.getPaymentMethods(SUBSCRIBER_ID);
         setPaymentMethods(pm);
 
+        const billingData = await beQuick.getBillingSummary(SUBSCRIBER_ID);
+        console.log("Billing Summary:", billingData);
+        setBillingSummary(billingData);
+
+      console.log("📦 billingSummary data:", billingSummary);
+
         const ord = await beQuick.getOrders(SUBSCRIBER_ID);
         setOrders(ord?.orders || ord?.data || []);
       } catch (err) {
@@ -161,8 +173,22 @@ export default function DashboardPage() {
     })();
   }, []);
 
-  const currentBill = paymentMethods?.currentAmount || 0;
-  const nextPayment = planDetails?.service?.next_payment_date || "-";
+  //const currentBill = paymentMethods?.currentAmount || 0;
+  //const nextPayment = planDetails?.service?.next_payment_date || "-";
+
+  // ✅ Extract "Current" bill from billingSummary dynamically
+const currentBillData = billingSummary.find(
+  (bill) => bill.state?.toLowerCase() === "Current"
+);
+
+const currentBill = currentBillData
+  ? Number(currentBillData.total || currentBillData.amount_due || 0)
+  : 0;
+
+const nextPayment = currentBillData?.due_at
+  ? new Date(currentBillData.due_at).toLocaleDateString("en-US")
+  : "-";
+
 
   const usageData = planDetails?.usage_summary?.data || {};
   const servicePeriod = planDetails?.service_period || {};
@@ -175,6 +201,9 @@ export default function DashboardPage() {
 
   const { formatted: activeUntil, remainingDays } =
     formatDateAndRemaining(servicePeriod?.end_at);
+
+
+    
 
   return (
     <>
@@ -240,9 +269,10 @@ export default function DashboardPage() {
                   >
                     View Details
                   </Link>
-                  <button className="btn btn-warning btn-sm text-white">
-                    Upgrade Plan
-                  </button>
+                  <Link
+                    className="btn btn-warning btn-sm text-white"
+                    href={`/business-deals`}
+                  >Upgrade Plan</Link>
                 </div>
               </div>
             </div>
@@ -321,9 +351,13 @@ export default function DashboardPage() {
 
                 <div className="d-flex gap-2">
                   <button className="btn btn-success btn-sm">Pay Now</button>
-                  <button className="btn btn-outline-secondary btn-sm">
-                    View Invoices
-                  </button>
+                  {subscriber?.id && (
+                    <Link href={`/dashboard/billing-payment/${subscriber.id}`}>
+                      <button className="btn btn-outline-secondary btn-sm">
+                        View Invoices
+                      </button>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
