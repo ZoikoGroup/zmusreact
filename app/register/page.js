@@ -36,23 +36,23 @@ const Register = () => {
     if (!formData.email.trim()) {
       formErrors.email = "⚠️ Please enter your email address.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      formErrors.email = "⚠️ Please enter a valid email address.";
+      formErrors.email = "⚠️ The email address you entered is not valid. Please check and try again.";
     }
 
     if (!formData.password) {
       formErrors.password =
         "⚠️ Password is required and must be at least 8 characters.";
     } else if (formData.password.length < 8) {
-      formErrors.password = "⚠️ Password too short. Minimum 8 characters required.";
+      formErrors.password = "⚠️ Password must be at least 8 characters long and include a number and special character.";
     } else if (!/(?=.*\d)(?=.*[!@#$%^&*])/.test(formData.password)) {
       formErrors.password =
-        "⚠️ Password must include a number and a special character.";
+        "⚠️ Password must be at least 8 characters long and include a number and special character.";
     }
 
     if (!formData.confirmPassword) {
       formErrors.confirmPassword = "⚠️ Please confirm your password.";
     } else if (formData.password !== formData.confirmPassword) {
-      formErrors.confirmPassword = "⚠️ Passwords do not match.";
+      formErrors.confirmPassword = "⚠️ Passwords do not match. Please re-enter to confirm.";
     }
 
     setErrors(formErrors);
@@ -62,7 +62,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) {
-      showMessage("error", "Please check the highlighted fields below.");
+      showMessage("error", "Please complete all required fields before continuing.");
       return;
     }
 
@@ -98,21 +98,20 @@ const Register = () => {
       if (data.errors) {
         let newErrors = {};
         if (data.errors.name) newErrors.name = "⚠️ " + data.errors.name[0];
-        if (data.errors.email) newErrors.email = "⚠️ " + data.errors.email[0];
+        if (data.errors.email) newErrors.email = " ";
         if (data.errors.password) newErrors.password = "⚠️ " + data.errors.password[0];
         setErrors(newErrors);
 
         // More human-friendly top message
         if (
-          (data.errors.email && data.errors.email[0].includes("taken")) ||
-          (data.errors.name && data.errors.name[0].includes("taken"))
+          (data.errors.email && data.errors.email[0].includes("taken"))
         ) {
           showMessage(
             "error",
-            "An account with this name or email already exists. Please log in instead."
+            "It looks like you already have an account with Zoiko Mobile. Please sign in or reset your password to continue."
           );
         } else {
-          showMessage("error", "Please correct the highlighted fields below.");
+          showMessage("error", "Please complete all required fields before continuing.");
         }
         return;
       }

@@ -223,15 +223,31 @@ export async function refreshDevicesSection(subscriberId, currentLineId) {
   return { html, devices: enhancedLines };
 }
 
-// --- Get Billing Summary ---
-export async function getBillingSummary(subscriberId) {
-  // Fetch invoices or payment summary for a given subscriber
-  const { data } = await request(`/invoices?by_subscriber_id=${subscriberId}&per=50`);
-  
-  // Optional: transform or fallback if API returns nothing
-  return data?.invoices || data?.data || [];
-}
+// --- 🧾 Get Current Bill ---
+export async function getCurrentBill(subscriberId) {
+  try {
+    const { data } = await request(`/billing_statements?by_subscriber_id=${subscriberId}`);
+    const billingStatements = data?.billing_statements || [];
 
+    if (!billingStatements.length) return null;
+
+    const currentBill = billingStatements.find(
+      (bill) =>
+        bill?.status?.toLowerCase() === "current" ||
+        bill?.state?.toLowerCase() === "open"
+    );
+
+    if (currentBill) return currentBill;
+
+    // fallback to latest by id
+    return billingStatements.reduce((prev, curr) =>
+      curr.id > prev.id ? curr : prev
+    );
+  } catch (err) {
+    console.error("Error fetching current bill:", err);
+    return null;
+  }
+}
 
 export default {
   request,
@@ -241,6 +257,9 @@ export default {
   getLineBuckets,
   getPaymentMethods,
   getOrders,
-  getSubscriberByEmail, 
-  getBillingSummary,
+  getSubscriberByEmail,
+  getUserLines,
+  getSingleLineDetails,
+  refreshDevicesSection,
+  getCurrentBill,
 };

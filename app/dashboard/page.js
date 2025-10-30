@@ -16,16 +16,12 @@ export default function DashboardPage() {
   const [plans, setPlans] = useState([]);
   const [planDetails, setPlanDetails] = useState(null);
   const [lineUsage, setLineUsage] = useState(null);
-  const [paymentMethods, setPaymentMethods] = useState(null);
+  const [currentBill, setCurrentBill] = useState(null);
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
   const [primaryLineId, setPrimaryLineId] = useState(null);
   const [devices, setDevices] = useState([]);
   const [userName, setUserName] = useState("Customer");
-
-  const [billingSummary, setBillingSummary] = useState([]);
-
-
 
   // Helper: format date and remaining days
   function formatDateAndRemaining(endAt) {
@@ -43,39 +39,36 @@ export default function DashboardPage() {
   // Fetch devices dynamically
   async function fetchDevices(subscriberInfo, planDetailsInfo) {
     try {
-      let devicesList = [];
-      const deviceIds = subscriberInfo?.primary_line_id
-        ? planDetailsInfo?.line?.device_identifier_ids || []
-        : [];
+      const deviceIds =
+        planDetailsInfo?.line?.device_identifier_ids || [];
 
       if (deviceIds.length > 0) {
-        devicesList = deviceIds.map((id, index) => ({
+        return deviceIds.map((id, index) => ({
           label: `Device ${id}`,
           note:
             index === 0
               ? "pSIM • Primary Line (Selected)"
               : "pSIM • Secondary Line",
           status:
-            planDetailsInfo?.line?.status === "active" ? "Active" : "Pending",
+            planDetailsInfo?.line?.status === "active"
+              ? "Active"
+              : "Pending",
         }));
       }
 
-      if (devicesList.length === 0) {
-        devicesList = [
-          {
-            label: "Device 3132",
-            note: "pSIM • Primary Line (Selected)",
-            status: "Active",
-          },
-          {
-            label: "Device #77",
-            note: "pSIM • Secondary Line",
-            status: "Pending",
-          },
-        ];
-      }
-
-      return devicesList;
+      // fallback
+      return [
+        {
+          label: "Device 3132",
+          note: "pSIM • Primary Line (Selected)",
+          status: "Active",
+        },
+        {
+          label: "Device #77",
+          note: "pSIM • Secondary Line",
+          status: "Pending",
+        },
+      ];
     } catch (err) {
       console.error("Error fetching devices:", err);
       return [
@@ -97,7 +90,6 @@ export default function DashboardPage() {
   useEffect(() => {
     (async () => {
       setLoading(true);
-
       try {
         const userData = JSON.parse(localStorage.getItem("user") || "{}");
         const userEmail = userData?.email;
@@ -118,10 +110,7 @@ export default function DashboardPage() {
           return;
         }
 
-       // const SUBSCRIBER_ID = subscriberResult.subscriber_id;
-          const SUBSCRIBER_ID = 54;
-
-
+        const SUBSCRIBER_ID = subscriberResult.subscriber_id;
         const subDetails = await beQuick.getSubscriberDetails(SUBSCRIBER_ID);
         const subscriberInfo = subDetails?.subscribers?.[0];
 
@@ -137,6 +126,7 @@ export default function DashboardPage() {
         const plansData = await beQuick.getAllPlans();
         setPlans(plansData?.products || plansData?.data || []);
 
+        // Fetch Plan Details and Usage
         if (subscriberInfo.primary_line_id) {
           const pDetails = await beQuick.getPlanDetails(
             subscriberInfo.primary_line_id,
@@ -153,15 +143,12 @@ export default function DashboardPage() {
           setDevices(dynamicDevices);
         }
 
-        const pm = await beQuick.getPaymentMethods(SUBSCRIBER_ID);
-        setPaymentMethods(pm);
+        // ✅ Fetch Current Bill (dynamic by subscriber id)
+        const bill = await beQuick.getCurrentBill(SUBSCRIBER_ID);
+        console.log("Current Bill:", bill);
+        setCurrentBill(bill || null);
 
-        const billingData = await beQuick.getBillingSummary(SUBSCRIBER_ID);
-        console.log("Billing Summary:", billingData);
-        setBillingSummary(billingData);
-
-      console.log("📦 billingSummary data:", billingSummary);
-
+        // Fetch Orders
         const ord = await beQuick.getOrders(SUBSCRIBER_ID);
         setOrders(ord?.orders || ord?.data || []);
       } catch (err) {
@@ -173,20 +160,14 @@ export default function DashboardPage() {
     })();
   }, []);
 
-  //const currentBill = paymentMethods?.currentAmount || 0;
-  //const nextPayment = planDetails?.service?.next_payment_date || "-";
-
-  // ✅ Extract "Current" bill from billingSummary dynamically
-const currentBillData = billingSummary.find(
-  (bill) => bill.state?.toLowerCase() === "Current"
-);
-
-const currentBill = currentBillData
-  ? Number(currentBillData.total || currentBillData.amount_due || 0)
-  : 0;
-
-const nextPayment = currentBillData?.due_at
-  ? new Date(currentBillData.due_at).toLocaleDateString("en-US")
+  const currentBilli = currentBill?.total || 0;
+  const nextPayment = currentBill?.due_at
+  ? new Date(currentBill.due_at).toLocaleString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      
+    })
   : "-";
 
 
@@ -202,9 +183,6 @@ const nextPayment = currentBillData?.due_at
   const { formatted: activeUntil, remainingDays } =
     formatDateAndRemaining(servicePeriod?.end_at);
 
-
-    
-
   return (
     <>
       <TopHeader />
@@ -217,7 +195,7 @@ const nextPayment = currentBillData?.due_at
           👋 Welcome, {userName}!
         </div>
 
-        {/* ⚠️ Subscriber not found alert */}
+        {/* ⚠️ Subscriber not found */}
         {subscriberNotFound && (
           <div className="alert alert-danger text-center">
             ⚠️ Subscriber not found for your account. Please contact support.
@@ -247,7 +225,7 @@ const nextPayment = currentBillData?.due_at
 
                 <div className="usage-info mb-3">
                   <div className="d-flex justify-content-between small mb-1">
-                    <span>{usedGB.toFixed(2)} GB Used This Month</span>
+                    <span>{usedGB.toFixed(2)} GB Used</span>
                     <span>{remainingGB.toFixed(2)} GB Remaining</span>
                   </div>
                   <div className="progress" style={{ height: "6px" }}>
@@ -272,7 +250,9 @@ const nextPayment = currentBillData?.due_at
                   <Link
                     className="btn btn-warning btn-sm text-white"
                     href={`/business-deals`}
-                  >Upgrade Plan</Link>
+                  >
+                    Upgrade Plan
+                  </Link>
                 </div>
               </div>
             </div>
@@ -291,8 +271,8 @@ const nextPayment = currentBillData?.due_at
                     className="device-item mb-3 d-flex justify-content-between align-items-center"
                   >
                     <div>
-                      <strong>{d.label || `Device ${i + 1}`}</strong>
-                      <p className="text-muted small mb-0">{d.note || ""}</p>
+                      <strong>{d.label}</strong>
+                      <p className="text-muted small mb-0">{d.note}</p>
                     </div>
                     <span
                       className={`badge ${
@@ -334,7 +314,7 @@ const nextPayment = currentBillData?.due_at
                 <div className="d-flex justify-content-between align-items-center mb-2">
                   <div>
                     <h5 className="fw-bold mb-0">
-                      ${Number(currentBill).toFixed(2)}
+                      ${Number(currentBilli).toFixed(2)}
                     </h5>
                     <small className="text-muted">Current Bill</small>
                   </div>
@@ -397,9 +377,7 @@ const nextPayment = currentBillData?.due_at
             <div className="col-lg-4 col-md-6">
               <div className="dash-card">
                 <h6 className="card-title">Order History</h6>
-                <p className="text-muted small mb-3">
-                  Track previous orders
-                </p>
+                <p className="text-muted small mb-3">Track previous orders</p>
 
                 {orders.slice(0, 3).map((o, i) => (
                   <div key={i} className="mb-3">
@@ -408,8 +386,7 @@ const nextPayment = currentBillData?.due_at
                     </p>
                     <p>
                       <strong>
-                        Order {o.id || o.order_id || ""} -{" "}
-                        {o.description || ""}
+                        Order {o.id || o.order_id || ""} - {o.description || ""}
                       </strong>{" "}
                       <span className="text-muted">
                         ${Number(o.amount || o.total || 0).toFixed(2)}

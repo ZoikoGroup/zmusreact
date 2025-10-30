@@ -73,7 +73,7 @@ const Login = () => {
       setLoading(false);
 
       if (!response.ok || !data.success) {
-        setErrors({ api: "⚠️ Invalid credentials, please try again." });
+        setErrors({ api: "⚠️ No account found with these details. Try again or register a new account." });
         return;
       }
 
