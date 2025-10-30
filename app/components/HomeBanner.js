@@ -14,8 +14,10 @@ const HomeBanner = () => {
                     <div className="bannertxt text-start">
                         <h1 className="verybig txtred">UNBEATABLE VALUE</h1>
                         <h2 className="py-2"><span className="txtred">ZOIKO MOBILE</span><span className="txtblack">: AMAZING BYOD DEALS | SUPPORTING<br />ANIMALS | ENJOYING MUSIC</span></h2>
-                        <Button href='/zoiko-mobile-switch-save-form' variant="danger" size="lg" className="custom-button">Switch &amp; Save</Button>
-                        <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Know More</Button>
+                        <div class="d-flex flex-nowrap gap-3">
+                            <Button href='/zoiko-mobile-switch-save-form' variant="danger" size="lg" className="custom-button">Switch &amp; Save</Button>
+                            <Button href='#' variant="outline-danger" className="custom-button" size="lg">Know More</Button>
+                        </div>
                     </div>
                 </Carousel.Caption>
             </Carousel.Item>
