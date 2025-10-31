@@ -14,7 +14,7 @@ const HomeBanner = () => {
                     <div className="bannertxt text-start">
                         <h1 className="verybig txtred">UNBEATABLE VALUE</h1>
                         <h2 className="py-2"><span className="txtred">ZOIKO MOBILE</span><span className="txtblack">: AMAZING BYOD DEALS | SUPPORTING<br />ANIMALS | ENJOYING MUSIC</span></h2>
-                        <div class="d-flex flex-nowrap gap-3">
+                        <div className="d-flex flex-nowrap gap-3">
                             <Button href='/zoiko-mobile-switch-save-form' variant="danger" size="lg">Switch &amp; Save</Button>
                             <Button href='#' variant="outline-danger" size="lg">Know More</Button>
                         </div>
@@ -28,7 +28,7 @@ const HomeBanner = () => {
                         <h1 className="txtbig txtblack">Fantstic Deals On<br />Refurbished Smartphones<span className="txtred">!</span></h1>
                         <h2 className="txtblack py-2">Expertly Tested <span className="txtred">|</span> Easy Payment Options</h2>
                         <h2 className="txtblack pb-2">Premium Quality <span className="txtred">|</span> Free Delivery</h2>
-                        <div class="d-flex flex-nowrap gap-3">
+                        <div className="d-flex flex-nowrap gap-3">
                             <Button href='#' variant="danger" size="lg">Buy Now</Button>
                             <Button href='#' variant="outline-danger" size="lg">Know More</Button>
                         </div>
@@ -43,8 +43,8 @@ const HomeBanner = () => {
                         <h1 className="txtred bannerhead">Stay Connected Your Way:<br />Prepaid <span className="txtblack">|</span> Postpaid <span className="txtblack">|</span> Business</h1>
                         <h2 className="txtblack d-none d-md-block">Plans built for every lifestyle with global<br />coverage and unbeatable flexibility</h2>
                         <h2 className="txtblack d-sm-block d-md-none">Plans built for every lifestyle with global coverage and unbeatable flexibility</h2>
-                        <div class="d-flex flex-nowrap gap-3">
-                            <Button href='/prepaid-plans' variant="danger" size="lg">Explore Plans</Button>
+                        <div className="d-flex flex-nowrap gap-2">
+                            <Button href='/prepaid-plans' variant="danger" size="lg">Show Plans</Button>
                             <Button href='/product-category/refurbished' variant="outline-danger" size="lg">Shop Devices</Button>
                         </div>
                     </div>
@@ -58,7 +58,7 @@ const HomeBanner = () => {
                         <h1 className="txtblack">A Special Thank You To<br />U.S. Postal Service Workers</h1>
                         <h2 className="verybig txtred">20% Discount</h2>
                         <h1 className="txtblack">On Any Of Our Plans</h1>
-                        <div class="d-flex flex-nowrap gap-3">
+                        <div className="d-flex flex-nowrap gap-3">
                             <Button href='/postal-service-workers-form' variant="danger" size="lg">Register Now</Button>
                             <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
                         </div>
@@ -76,7 +76,7 @@ const HomeBanner = () => {
                             <li>20% Lifetime Discount</li>
                             <li>15% Discount For Family &amp; Friends</li>
                         </ul>
-                        <div class="d-flex flex-nowrap gap-3">
+                        <div className="d-flex flex-nowrap gap-3">
                             <Button href='/military-veterans-form' variant="danger" size="lg">Register Now</Button>
                             <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
                         </div>
@@ -92,7 +92,7 @@ const HomeBanner = () => {
                         <h4 className="txtblack">Get Exclusive</h4>
                         <h1 className="txtred verybig">20% Discount</h1>
                         <h1 className="txtblack pb-3">On Any Of Our Plans</h1>
-                        <div class="d-flex flex-nowrap gap-3">
+                        <div className="d-flex flex-nowrap gap-3">
                             <Button href='/college-student-discount-form' variant="danger" size="lg">Register Now</Button>
                             <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
                         </div>
@@ -119,7 +119,7 @@ const HomeBanner = () => {
                         <h1 className="txtred bigred">Your Connecton</h1>
                         <h1 className="txtred verybig">Saves Lives</h1>
                         <h2 className="txtblack midbig py-3">Join Zoiko Mobile - We are supporting animals<br />and animal charities whilst keep you connected!</h2>
-                        <div class="d-flex flex-nowrap gap-3">
+                        <div className="d-flex flex-nowrap gap-3">
                             <Button href='#' variant="danger" size="lg">Register Now</Button>
                             <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
                         </div>
@@ -134,7 +134,7 @@ const HomeBanner = () => {
                         <h1 className="txtred bigred">Zoiko Music Hub:</h1>
                         <h1 className="txtred midbig">Empowering Music Creators and Lovers</h1>
                         <p className="txtblack body22" style={{fontWeight:'200'}}>At Zoiko Mobile, we know music isn&apos;t just entertainment<br />—it&apos;s a way of life. That&apos;s why we created the Zoiko Music<br />Hub, a dedicated space where music lovers and aspiring<br />musicians can find the tools, perks, and community to fuel<br />their passion. Whether you&apos;re producing your next big hit,<br />jamming with friends, or discovering fresh tunes, Zoiko<br />Mobile is here to keep you connected and inspired.</p>
-                        <div class="d-flex flex-nowrap gap-3">
+                        <div className="d-flex flex-nowrap gap-3">
                             <Button href='/music-hub-registratrion-form' variant="danger" size="lg">Register Now</Button>
                             <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
                         </div>
