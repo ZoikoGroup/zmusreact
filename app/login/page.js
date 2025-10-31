@@ -10,11 +10,10 @@ import {
   Container,
   Form,
   Row,
-  Image,
   Col,
   Modal,
 } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Login = () => {
   const [errors, setErrors] = useState({});
@@ -25,6 +24,19 @@ const Login = () => {
     remember: false,
   });
 
+  const [verifyMessage, setVerifyMessage] = useState(null);
+  const [verifyType, setVerifyType] = useState(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get("status");
+    const message = params.get("message");
+    if (message) {
+      setVerifyMessage(decodeURIComponent(message));
+      setVerifyType(status);
+    }
+  }, []);
+
   // Forgot Password States
   const [showForgot, setShowForgot] = useState(false);
   const [forgotStep, setForgotStep] = useState(1);
@@ -32,6 +44,7 @@ const Login = () => {
     email: "",
     code: "",
     password: "",
+    password_confirmation: "",
   });
   const [forgotMessage, setForgotMessage] = useState("");
 
@@ -46,8 +59,10 @@ const Login = () => {
 
   const validate = () => {
     let formErrors = {};
-    if (!formData.username) formErrors.username = "⚠️ Username is required";
-    if (!formData.passwd) formErrors.passwd = "⚠️ Password is required";
+    if (!formData.username)
+      formErrors.username = "⚠️ Please complete all required fields before continuing.";
+    if (!formData.passwd)
+      formErrors.passwd = "⚠️ Please complete all required fields before continuing.";
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
   };
@@ -60,9 +75,7 @@ const Login = () => {
       setLoading(true);
       const response = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: formData.username,
           password: formData.passwd,
@@ -73,7 +86,9 @@ const Login = () => {
       setLoading(false);
 
       if (!response.ok || !data.success) {
-        setErrors({ api: "⚠️ No account found with these details. Try again or register a new account." });
+        setErrors({
+          api: "⚠️ No account found with these details. Try again or register a new account.",
+        });
         return;
       }
 
@@ -83,7 +98,9 @@ const Login = () => {
     } catch (error) {
       console.error("Login error:", error);
       setLoading(false);
-      setErrors({ api: "⚠️ Something went wrong. Please try again later." });
+      setErrors({
+        api: "⚠️ Something went wrong. Please try again later.",
+      });
     }
   };
 
@@ -97,8 +114,9 @@ const Login = () => {
   };
 
   const handleForgotEmail = async () => {
-    if (!forgotData.email) return setForgotMessage("⚠️ Email is required.");
-    setForgotMessage("Sending reset code...");
+    if (!forgotData.email)
+      return setForgotMessage("⚠️ Please complete all required fields before continuing.");
+    setForgotMessage("📩 Sending reset code...");
     try {
       const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/password/email", {
         method: "POST",
@@ -111,9 +129,11 @@ const Login = () => {
       const data = await res.json();
       if (res.ok) {
         setForgotStep(2);
-        setForgotMessage("A verification code has been sent to your email.");
+        setForgotMessage("📨 Verification code sent! Check your inbox.");
       } else {
-        setForgotMessage(data.message || "⚠️ Failed to send reset code.");
+        setForgotMessage(
+          data.message || "⚠️ Failed to send reset code. Please check and try again."
+        );
       }
     } catch (err) {
       setForgotMessage("⚠️ Error sending email. Please try again.");
@@ -121,56 +141,70 @@ const Login = () => {
   };
 
   const handleForgotCodeCheck = async () => {
-    if (!forgotData.code) return setForgotMessage("⚠️ Please enter the code.");
-    setForgotMessage("Verifying code...");
+    if (!forgotData.code)
+      return setForgotMessage("⚠️ Please complete all required fields before continuing.");
+    setForgotMessage("🔎 Verifying code...");
     try {
       const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/password/code/check", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code: forgotData.code }),
       });
       const data = await res.json();
       if (res.ok) {
         setForgotStep(3);
-        setForgotMessage("Code verified. You can now reset your password.");
+        setForgotMessage("✅ Code verified successfully. You can now reset your password.");
       } else {
-        setForgotMessage(data.message || "⚠️ Invalid code.");
+        setForgotMessage(
+          data.message ||
+            "⚠️ That code is invalid or has expired. Please request a new verification code."
+        );
       }
     } catch (err) {
-      setForgotMessage("⚠️ Error verifying code.");
+      setForgotMessage("⚠️ Error verifying code. Please try again.");
     }
   };
 
-  const handleForgotReset = async () => {
-    if (!forgotData.password)
-      return setForgotMessage("⚠️ Please enter a new password.");
+  const passwordPolicy = (password) => {
+    const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+    return regex.test(password);
+  };
 
-    setForgotMessage("Resetting password...");
+  const handleForgotReset = async () => {
+    if (!forgotData.password || !forgotData.password_confirmation)
+      return setForgotMessage("⚠️ Please complete all required fields before continuing.");
+
+    if (!passwordPolicy(forgotData.password))
+      return setForgotMessage(
+        "⚠️ Password must be at least 8 characters long and include a number and special character."
+      );
+
+    if (forgotData.password !== forgotData.password_confirmation)
+      return setForgotMessage("⚠️ Passwords do not match. Please re-enter to confirm.");
+
+    setForgotMessage("🔐 Resetting password...");
     try {
       const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/password/reset", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: forgotData.email,
+          code: forgotData.code,
           password: forgotData.password,
+          password_confirmation: forgotData.password_confirmation,
         }),
       });
       const data = await res.json();
       if (res.ok) {
-        setForgotMessage("✅ Password reset successful! You can now log in.");
+        setForgotMessage("🔐 Password updated successfully. You can now sign in with your new credentials.");
         setTimeout(() => {
           setShowForgot(false);
           setForgotStep(1);
         }, 2000);
       } else {
-        setForgotMessage(data.message || "⚠️ Failed to reset password.");
+        setForgotMessage(data.message || "⚠️ Failed to reset password. Please try again.");
       }
     } catch (err) {
-      setForgotMessage("⚠️ Error resetting password.");
+      setForgotMessage("⚠️ Error resetting password. Please try again.");
     }
   };
 
@@ -186,7 +220,9 @@ const Login = () => {
               <Col md={6} className="d-none d-md-block d-lg-block">
                 <div className="loginbg">
                   <p className="txtwhite text-center body22">
-                    Hello Buddies! Our well-loved character 'Budgie', our first-of-its-kind animal-friendly network, is set to arrive at your place.
+                    Hello Buddies! Our well-loved character 'Budgie', our
+                    first-of-its-kind animal-friendly network, is set to arrive
+                    at your place.
                   </p>
                 </div>
               </Col>
@@ -196,13 +232,41 @@ const Login = () => {
                   Simply fill in the form below to get started.
                 </p>
 
-                {/* ⚠️ Invalid Credentials Message above the form */}
+                {/* ✅ Verification message */}
+                {verifyMessage && (
+                  <div
+                    className={`alert ${
+                      verifyType === "success"
+                        ? "alert-success"
+                        : verifyType === "error"
+                        ? "alert-danger"
+                        : "alert-info"
+                    } d-flex align-items-center py-2 px-3 mb-3`}
+                    role="alert"
+                  >
+                    <span
+                      style={{ fontSize: "1.2rem", marginRight: "0.5rem" }}
+                    >
+                      {verifyType === "success"
+                        ? "✅"
+                        : verifyType === "error"
+                        ? "⚠️"
+                        : "ℹ️"}
+                    </span>
+                    <span>{verifyMessage}</span>
+                  </div>
+                )}
+
                 {errors.api && (
                   <div
                     className="alert alert-danger d-flex align-items-center py-2 px-3 mb-3"
                     role="alert"
                   >
-                    <span style={{ fontSize: "1.2rem", marginRight: "0.5rem" }}>⚠️</span>
+                    <span
+                      style={{ fontSize: "1.2rem", marginRight: "0.5rem" }}
+                    >
+                      ⚠️
+                    </span>
                     <span>{errors.api.replace(/^⚠️\s*/, "")}</span>
                   </div>
                 )}
@@ -216,7 +280,9 @@ const Login = () => {
                     onChange={handleChange}
                     value={formData.username}
                   />
-                  {errors.username && <small className="txtred">{errors.username}</small>}
+                  {errors.username && (
+                    <small className="txtred">{errors.username}</small>
+                  )}
                   <br />
 
                   <label>Password</label>
@@ -227,7 +293,9 @@ const Login = () => {
                     onChange={handleChange}
                     value={formData.passwd}
                   />
-                  {errors.passwd && <small className="txtred">{errors.passwd}</small>}
+                  {errors.passwd && (
+                    <small className="txtred">{errors.passwd}</small>
+                  )}
                   <br />
 
                   <div className="d-flex justify-content-between align-items-center">
@@ -289,7 +357,11 @@ const Login = () => {
                   onChange={handleForgotChange}
                 />
               </Form.Group>
-              <Button variant="danger" className="mt-3" onClick={handleForgotEmail}>
+              <Button
+                variant="danger"
+                className="mt-3"
+                onClick={handleForgotEmail}
+              >
                 Send Reset Code
               </Button>
             </>
@@ -307,7 +379,11 @@ const Login = () => {
                   onChange={handleForgotChange}
                 />
               </Form.Group>
-              <Button variant="danger" className="mt-3" onClick={handleForgotCodeCheck}>
+              <Button
+                variant="danger"
+                className="mt-3"
+                onClick={handleForgotCodeCheck}
+              >
                 Verify Code
               </Button>
             </>
@@ -325,7 +401,21 @@ const Login = () => {
                   onChange={handleForgotChange}
                 />
               </Form.Group>
-              <Button variant="danger" className="mt-3" onClick={handleForgotReset}>
+              <Form.Group className="mt-2">
+                <label>Confirm New Password</label>
+                <input
+                  type="password"
+                  name="password_confirmation"
+                  className="form-control"
+                  value={forgotData.password_confirmation}
+                  onChange={handleForgotChange}
+                />
+              </Form.Group>
+              <Button
+                variant="danger"
+                className="mt-3"
+                onClick={handleForgotReset}
+              >
                 Reset Password
               </Button>
             </>

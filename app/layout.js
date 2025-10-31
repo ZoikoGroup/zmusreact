@@ -1,10 +1,11 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import BootstrapClient from "./components/BootstrapClient";
+import Script from "next/script"; // 👈 Add this import
 
 const roboto = Roboto({
   subsets: ["latin"],
-  weight: [ '500', '700' ],
+  weight: ["500", "700"],
 });
 
 export const metadata = {
@@ -18,6 +19,22 @@ export default function RootLayout({ children }) {
       <body className={`${roboto.variable}`}>
         {children}
         <BootstrapClient />
+
+        {/* 👇 Add the Tawk.to chat script here */}
+        <Script id="tawkto-script" strategy="afterInteractive">
+          {`
+            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+            (function(){
+              var s1 = document.createElement("script"),
+                  s0 = document.getElementsByTagName("script")[0];
+              s1.async = true;
+              s1.src = 'https://embed.tawk.to/677d17e049e2fd8dfe03ae53/1ih544pk7';
+              s1.charset = 'UTF-8';
+              s1.setAttribute('crossorigin', '*');
+              s0.parentNode.insertBefore(s1, s0);
+            })();
+          `}
+        </Script>
       </body>
     </html>
   );
