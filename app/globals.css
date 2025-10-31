@@ -108,12 +108,10 @@ a {
 }
 .bannertxt {
   position: absolute;
-  left: 20px;
   bottom: 100px;
 }
 .bannertxt-2 {
   position: absolute;
-  left: 20px;
   bottom: 100px;
 }
 .txtred {
@@ -607,7 +605,6 @@ a {
     font-size: 12px;
   }
   .bannertxt {
-    padding-left: 1%;
     top: -60px;
   }
   .bannertxt-2 {
