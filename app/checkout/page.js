@@ -803,7 +803,7 @@ export default function CheckoutPage() {
                       />
 
                       <label className="form-check-label" htmlFor="terms">
-                        I have read and agree to the website terms and conditions.
+                        I have read and agree to the website <a href="/terms-and-conditions">terms and conditions</a>.
                       </label>
                     </div>
 
