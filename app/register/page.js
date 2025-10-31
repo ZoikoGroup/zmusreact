@@ -77,6 +77,7 @@ const Register = () => {
           name: formData.name,
           email: formData.email,
           password: formData.password,
+          frontend_url: window.location.origin // ✅ capture current frontend domain
         }),
       });
 
@@ -87,7 +88,7 @@ const Register = () => {
       if (data.success) {
         showMessage(
           "success",
-          "Welcome to Zoiko Mobile! Your account has been created successfully."
+          "Welcome to Zoiko Mobile! Your account has been created successfully. Please verify your email to activate your service."
         );
         setFormData({ name: "", email: "", password: "", confirmPassword: "" });
         setErrors({});
