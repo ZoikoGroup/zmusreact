@@ -82,12 +82,12 @@ const Header = () => {
                             <Nav.Link href="/business-deals" className={pathname == "/business-deals" ? "active" : ""}>Business Deals</Nav.Link>
                             <Nav.Link href="/travel-plans" className={pathname == "/travel-plans" ? "active" : ""}>Travel Plans</Nav.Link>
                             <Nav.Link href="/animal-charities" className={pathname == "/animal-charities" ? "active" : ""}>Animal &amp; Music</Nav.Link>
-                            <NavDropdown title="Devices" id="collapsible-nav-dropdown" style={{ width: 'auto' }}>
-                                <NavDropdown.Item href="https://phones.zoikomobile.com/" target="_blank">New Smartphones</NavDropdown.Item>
-                                <NavDropdown.Item href="/product-category/refurbished">Refurbished Smartphones</NavDropdown.Item>
-                                <NavDropdown.Item href="#">Accessories</NavDropdown.Item>
+                            <NavDropdown title="Devices" id="collapsible-nav-dropdown" style={{ width: 'auto !important' }}>
+                                <NavDropdown.Item href="https://phones.zoikomobile.com/" target="_blank"  style={{ width: 'auto !important' }}>New Smartphones</NavDropdown.Item>
+                                <NavDropdown.Item href="/product-category/refurbished"  style={{ width: 'auto !important' }}>Refurbished Smartphones</NavDropdown.Item>
+                                <NavDropdown.Item href="#"  style={{ width: 'auto !important' }}>Accessories</NavDropdown.Item>
                             </NavDropdown>
-                            <Nav.Link href="/about" className={pathname == "/about" ? "active" : ""}>About Us</Nav.Link>
+                            <Nav.Link href="/about" className={pathname == "/about" ? "active" : ""} >About Us</Nav.Link>
                         </Nav>
                         <Nav className="ms-auto">
                             <Nav.Link href="#" onClick={handleShowSearch}><i className="bi bi-search"></i></Nav.Link>
