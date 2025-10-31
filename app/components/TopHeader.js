@@ -33,7 +33,7 @@ const TopHeader = () => {
                                         <ul className="menulist">
                                             <li><Link href={"/support"}>Help &amp; Support</Link></li>
                                             <li><Link href={"/reasons-to-love-zoiko-mobile"}>Reasons to love Zoiko</Link></li>
-                                            <li><Link href={"https://mvnoc.ai/coverage-map"} target="_blank">Check Network Coverage</Link></li>
+                                            <li><Link href={"https://ee.co.uk/help/mobile-coverage-checker"} target="_blank">Check Network Coverage</Link></li>
                                             <li><Link href={"/faq"}>FAQs</Link></li>
                                             <li><Link href={"/how-to-activate-sim"}>How to activate Physical SIM</Link></li>
                                             <li><Link href={"/how-to-activate-your-esim"}>How to activate eSIM</Link></li>
@@ -59,10 +59,11 @@ const TopHeader = () => {
                                         <p><span className="txtgreen">Tariffs &amp; Prices</span></p>
                                         <ul className="menulist">
                                             <li><Link href={"/roaming-rates"}>Roaming Charges</Link></li>
-                                            <li><Link href={"/bundled-offers"}>Bundled Offers</Link></li>
+                                            <li><Link href={"/bundled-offers/"}>Bundled Offers</Link></li>
                                             <li><Link href={"/free-international-minutes"}>Free International Calls</Link></li>
-                                            <li><Link href={"/international-out-of-bundle-rates"}>Out-of-Bundle Rates</Link></li>
-                                            <li><Link href={"/civilservants"}>Public Sector Lifetime Deals</Link></li>
+                                            <li><Link href={"/out-of-bundle-rates"}>Out-of-Bundle Rates</Link></li>
+                                            <li><Link href={"/postal-service-workers"}>Postal Service Workers Deals</Link></li>
+                                            <li><Link href={"/device-protection"}>Device Protection</Link></li> 
                                         </ul>
                                     </Col>
                                     <Col md={2} sm={12} xs={12}>
