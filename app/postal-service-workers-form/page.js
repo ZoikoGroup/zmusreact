@@ -264,7 +264,7 @@ const PostalWorkersForm = () => {
               </Col>
 
               <Col md={6}>
-                <FormLabel>Plan *</FormLabel>
+                <FormLabel>Category *</FormLabel>
                 <Form.Select
                   name="cat"
                   onChange={handleChange}
