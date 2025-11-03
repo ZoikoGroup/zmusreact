@@ -13,7 +13,20 @@ const AnimalCharities = () => {
         <TopHeader />
         <Header />
         <HeadBar text={<>Zoiko Mobile - Animal Charities Discount Program</>} />
-        <Container fluid className="animalcharities"></Container>
+        <Container fluid>
+            <img className="d-none d-md-block w-100" src="/img/home-banner/Animal-Charities-Banner.png" alt="Student Banner" />
+            <img className="d-sm-block d-md-none" src="/img/home-banner/Animal-Charities-Banner-mobile.png" alt="Student Banner" />
+            <Container className="w-75" style={{marginTop:'-360px', marginBottom:'100px'}}>
+                <div>
+                    <h1 className="txtred">Your Connecton<br />Saves Lives</h1>
+                    <p className="txtblack py-3">Join Zoiko Mobile - We are supporting animals<br />and animal charities whilst keep you connected!</p>
+                    <div className="d-flex flex-nowrap gap-3">
+                        <Button href='#' variant="danger" size="lg">Register Now</Button>
+                        <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
+                    </div>
+                </div>
+            </Container>
+        </Container>
         <Container fluid className="bglite">
             <Container className="py-5">
                 <h2 className="text-center pb-4">Exclusive Discounts for Charity Workers</h2>

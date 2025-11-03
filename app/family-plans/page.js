@@ -13,8 +13,14 @@ const FamilyPlans = () => {
         <TopHeader />
         <Header />
         <HeadBar text={<>Zoiko Mobile - We have a Plan for Every American Family</>} />
-        <Container fluid className="familyplanbg position-relative">
-            <div className="position-absolute d-none d-md-block" style={{left:'12%', bottom:'26%'}}>
+        <Container fluid>
+            <img className="d-none d-md-block w-100" src="/img/home-banner/Family-Plans-Banner.png" alt="Student Banner" />
+            <img className="d-sm-block d-md-none" src="/img/home-banner/Family-Plans-Banner-mobile.png" alt="Student Banner" />
+            <Container className="w-75" style={{marginTop:'-360px', marginBottom:'100px'}}>
+                <div>
+                    <h1 className="txtred">Stay Connected,<br />Stay Together</h1>
+                    <p className="body22 py-3">Get 20% off your plan when you<br />activate 3 or more plans with Zoiko Mobile</p>
+                </div>
                 <Dropdown>
                     <Dropdown.Toggle variant="danger" size="lg" id="dropdown-basic">Explore Family Plans</Dropdown.Toggle>
                     <Dropdown.Menu>
@@ -23,7 +29,7 @@ const FamilyPlans = () => {
                         <Dropdown.Item href="/business-deals">Business Plans</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
-            </div>
+            </Container>
             <div className="position-absolute d-sm-block d-md-none" style={{left:'5%', bottom:'5%'}}>
                 <Dropdown>
                     <Dropdown.Toggle variant="danger" size="sm" id="dropdown-basic-sm">Explore Family Plans</Dropdown.Toggle>
