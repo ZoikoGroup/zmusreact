@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import {
   Button,
@@ -31,13 +30,12 @@ const PostalWorkersForm = () => {
     statusproof: "",
     plan: "",
     cat: "",
-    famname: "",
-    famemail: "",
     concent: false,
     terms: false,
+    familyFriends: [{ famname: "", famemail: "" }], // ✅ Initialize properly
   });
 
-  // Fetch all plans and derive unique plan types
+  // Fetch all plans
   useEffect(() => {
     const fetchPlans = async () => {
       try {
@@ -46,8 +44,6 @@ const PostalWorkersForm = () => {
 
         if (data?.data?.length) {
           setPlans(data.data);
-
-          // Extract unique plan types dynamically
           const uniqueTypes = [
             ...new Set(data.data.map((p) => p.plan_type).filter(Boolean)),
           ];
@@ -61,7 +57,7 @@ const PostalWorkersForm = () => {
     fetchPlans();
   }, []);
 
-  // Filter plans based on selected plan type
+  // Filter plans based on selected type
   useEffect(() => {
     if (formData.plan) {
       const filtered = plans.filter((p) => p.plan_type === formData.plan);
@@ -71,15 +67,14 @@ const PostalWorkersForm = () => {
     }
   }, [formData.plan, plans]);
 
-  // Handle form field changes
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
 
-    // Ensure only digits for phone input
     if (name === "phone") {
-      const cleanedValue = value.replace(/\D/g, ""); // remove non-digits
-      if (cleanedValue.length <= 10) {
-        setFormData({ ...formData, [name]: cleanedValue });
+      const cleaned = value.replace(/\D/g, "");
+      if (cleaned.length <= 10) {
+        setFormData({ ...formData, [name]: cleaned });
       }
       return;
     }
@@ -90,67 +85,123 @@ const PostalWorkersForm = () => {
     });
   };
 
+  // Handle family/friend field changes
+  const handleFamilyFriendChange = (index, field, value) => {
+    const updated = [...formData.familyFriends];
+    updated[index][field] = value;
+    setFormData({ ...formData, familyFriends: updated });
+  };
+
+  // Add new family/friend row
+  const addFamilyFriendRow = () => {
+    if (formData.familyFriends.length < 5) {
+      setFormData({
+        ...formData,
+        familyFriends: [...formData.familyFriends, { famname: "", famemail: "" }],
+      });
+    } else {
+      alert("⚠️ You can add up to 5 family or friends only.");
+    }
+  };
+
+  // Remove family/friend row
+  const removeFamilyFriendRow = (index) => {
+    const updated = formData.familyFriends.filter((_, i) => i !== index);
+    setFormData({ ...formData, familyFriends: updated });
+  };
+
   // Validation
   const validate = () => {
     const formErrors = {};
 
     if (!formData.fname.trim()) formErrors.fname = "⚠️ Full name is required.";
-    if (!formData.email) {
+    if (!formData.email)
       formErrors.email = "⚠️ Email is required.";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    else if (!/\S+@\S+\.\S+/.test(formData.email))
       formErrors.email = "⚠️ Invalid Email Format.";
-    }
     if (!formData.dob) formErrors.dob = "⚠️ Date of birth is required.";
-    if (!formData.countrycode) formErrors.countrycode = "⚠️ Country code is required.";
-    if (!formData.phone) {
+    if (!formData.countrycode)
+      formErrors.countrycode = "⚠️ Country code is required.";
+    if (!formData.phone)
       formErrors.phone = "⚠️ Phone number is required.";
-    } else if (!/^\d{10}$/.test(formData.phone)) {
+    else if (!/^\d{10}$/.test(formData.phone))
       formErrors.phone = "⚠️ Phone number must be exactly 10 digits.";
-    }
-    if (!formData.statusproof) formErrors.statusproof = "⚠️ Upload of ID or Proof is required.";
+    if (!formData.statusproof)
+      formErrors.statusproof = "⚠️ Upload of ID or Proof is required.";
     if (!formData.plan) formErrors.plan = "⚠️ Please select a plan type.";
     if (!formData.cat) formErrors.cat = "⚠️ Please select a plan.";
-    if (formData.famemail && !/\S+@\S+\.\S+/.test(formData.famemail)) {
-      formErrors.famemail = "⚠️ Invalid Family/Friend Email.";
-    }
-    if (!formData.concent) formErrors.concent = "⚠️ Please confirm your selected plan.";
-    if (!formData.terms) formErrors.terms = "⚠️ Please agree to terms.";
+    if (!formData.concent)
+      formErrors.concent = "⚠️ Please confirm your selected plan.";
+    if (!formData.terms)
+      formErrors.terms = "⚠️ Please agree to terms.";
+
+    // Validate family/friend emails if provided
+    formData.familyFriends.forEach((f, i) => {
+      if (f.famemail && !/\S+@\S+\.\S+/.test(f.famemail)) {
+        formErrors[`famemail_${i}`] = "⚠️ Invalid Family/Friend Email.";
+      }
+    });
 
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
   };
 
-  // Submit form
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validate()) return;
+  // Submit
+  // Submit
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!validate()) return;
 
-    const formDataToSend = new FormData();
-    for (const key in formData) {
-      formDataToSend.append(key, formData[key]);
+  try {
+    // Build JSON data exactly like your Postman body
+    const jsonData = {
+      fname: formData.fname,
+      email: formData.email,
+      dob: formData.dob,
+      countrycode: formData.countrycode,
+      phone: formData.phone,
+      statusproof: formData.statusproof?.name || "",
+      plan: formData.plan,
+      cat: formData.cat,
+      familyFriends: formData.familyFriends.map(f => ({
+        famname: f.famname,
+        famemail: f.famemail
+      })),
+      concent: formData.concent,
+      terms: formData.terms,
+    };
+
+    const fd = new FormData();
+    fd.append("data", JSON.stringify(jsonData));
+
+    // ✅ Append file properly
+    if (formData.statusproof) {
+      fd.append("file", formData.statusproof);
     }
 
-    try {
-      const response = await fetch(
-        "https://zmapi.zoikomobile.co.uk/api/v1/postal-service-workers-form",
-        {
-          method: "POST",
-          body: formDataToSend,
-        }
-      );
+    const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/postal-service-workers", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: fd,
+    });
 
-      const data = await response.json();
-      if (response.ok) {
-        alert("✅ Application submitted successfully!");
-        console.log("Response:", data);
-      } else {
-        alert(`⚠️ ${data.message || "Submission failed. Please try again."}`);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("⚠️ Network error. Please check your connection.");
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("✅ Application submitted successfully!");
+      console.log("Response:", data);
+    } else {
+      alert(`⚠️ ${data.message || "Submission failed. Please try again."}`);
+      console.error("Server response:", data);
     }
-  };
+  } catch (err) {
+    console.error("Error:", err);
+    alert("⚠️ Network error. Please check your connection.");
+  }
+};
+
 
   return (
     <>
@@ -226,7 +277,9 @@ const PostalWorkersForm = () => {
                     maxLength={10}
                   />
                 </InputGroup>
-                <div className="form-error">{errors.countrycode || errors.phone || ""}</div>
+                <div className="form-error">
+                  {errors.countrycode || errors.phone || ""}
+                </div>
               </Col>
 
               <Col md={6}>
@@ -243,7 +296,7 @@ const PostalWorkersForm = () => {
               </Col>
             </Row>
 
-            {/* Dynamic Plan Type & Plan Dropdowns */}
+            {/* Plan Type */}
             <h4 className="text-center pt-4">Choose the Perfect Plan</h4>
             <Row className="mb-3">
               <Col md={6}>
@@ -256,7 +309,9 @@ const PostalWorkersForm = () => {
                   <option value="">-- Select Plan Type --</option>
                   {planTypes.map((type, idx) => (
                     <option key={idx} value={type}>
-                      {type.replace("-", " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+                      {type.replace("-", " ").replace(/\b\w/g, (c) =>
+                        c.toUpperCase()
+                      )}
                     </option>
                   ))}
                 </Form.Select>
@@ -286,30 +341,62 @@ const PostalWorkersForm = () => {
             {/* Family Section */}
             <h4 className="text-center pt-4">Add Family or Friends (Optional)</h4>
             <p className="text-center text-muted">
-              Nominate up to 5 family members or friends to enjoy the same 20% discount.
+              Nominate up to 5 family members or friends to enjoy the same 20%
+              discount.
             </p>
 
-            <Row className="mb-3">
-              <Col md={6}>
-                <FormLabel>Full Name</FormLabel>
-                <Form.Control
-                  type="text"
-                  name="famname"
-                  value={formData.famname}
-                  onChange={handleChange}
-                  placeholder="Full name"
-                />
-              </Col>
-              <Col md={6}>
-                <FormLabel>Email</FormLabel>
-                <Form.Control
-                  type="email"
-                  name="famemail"
-                  value={formData.famemail}
-                  onChange={handleChange}
-                  placeholder="Email address"
-                />
-                <div className="form-error">{errors.famemail || ""}</div>
+            {formData.familyFriends.map((friend, index) => (
+              <Row className="mb-3" key={index}>
+                <Col md={6}>
+                  <FormLabel>Full Name</FormLabel>
+                  <Form.Control
+                    type="text"
+                    name="famname"
+                    value={friend.famname}
+                    onChange={(e) =>
+                      handleFamilyFriendChange(index, "famname", e.target.value)
+                    }
+                    placeholder="Full name"
+                  />
+                </Col>
+                <Col md={6}>
+                  <FormLabel>Email</FormLabel>
+                  <InputGroup>
+                    <Form.Control
+                      type="email"
+                      name="famemail"
+                      value={friend.famemail}
+                      onChange={(e) =>
+                        handleFamilyFriendChange(
+                          index,
+                          "famemail",
+                          e.target.value
+                        )
+                      }
+                      placeholder="Email address"
+                    />
+                    {formData.familyFriends.length > 1 && (
+                      <Button
+                        variant="outline-danger"
+                        onClick={() => removeFamilyFriendRow(index)}
+                        title="Remove this row"
+                      >
+                        -
+                      </Button>
+                    )}
+                  </InputGroup>
+                  <div className="form-error">
+                    {errors[`famemail_${index}`] || ""}
+                  </div>
+                </Col>
+              </Row>
+            ))}
+
+            <Row className="mb-4">
+              <Col>
+                <Button variant="outline-primary" onClick={addFamilyFriendRow}>
+                  + Add Family / Friend
+                </Button>
               </Col>
             </Row>
 
@@ -333,7 +420,11 @@ const PostalWorkersForm = () => {
             <div className="form-error">{errors.terms || ""}</div>
 
             <div className="text-center mt-4">
-              <Button variant="danger" type="submit" className="px-5 py-2 rounded-pill fw-bold">
+              <Button
+                variant="danger"
+                type="submit"
+                className="px-5 py-2 rounded-pill fw-bold"
+              >
                 Submit Your Application
               </Button>
             </div>
