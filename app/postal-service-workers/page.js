@@ -13,13 +13,15 @@ const PostalWorkers = () => {
         <TopHeader />
         <Header />
         <HeadBar text={<>U.S. Postal Service Workers</>} />
-        <Container fluid className="postalworkers position-relative">
-            <div className="position-absolute d-none d-md-block" style={{left:'10%', bottom:'16%'}}>
+        <Container fluid className="position-relative">
+            <img className="d-none d-md-block w-100" src="/img/home-banner/Postal-Workers-banner.png" alt="Postal Workers" />
+            <img className="d-sm-block d-md-none" src="/img/home-banner/Postal-Workers-banner-mobile.png" alt="Postal Workers" />
+            <Container className="w-75" style={{marginTop:'-360px', marginBottom:'100px'}}>
+                <h2 className="txtblack">A Special Thank You To<br />U.S. Postal Service Workers</h2>
+                <p className="verybig txtred">20% Discount</p>
+                <h2 className="txtblack">On Any Of Our Plans</h2>
                 <Button variant="danger" size="lg" href="/postal-service-workers-form">Sign Up Today</Button>
-            </div>
-            <div className="position-absolute d-sm-block d-md-none" style={{left:'5%', bottom:'5%'}}>
-                <Button variant="danger" size="sm" href="/postal-service-workers-form">Sign Up Today</Button>
-            </div>
+            </Container>
         </Container>
         <Container fluid className="py-5 bglite">
             <h2 className="text-center py-4">How to Claim Your Discount</h2>
