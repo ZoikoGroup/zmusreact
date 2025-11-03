@@ -864,9 +864,10 @@ export default function CheckoutPage() {
 
       {showTermsPopup && (
         <div style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.5)", zIndex: 1060 }}>
-          <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
+          <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
             <div className="card text-center p-3" style={{ maxWidth: 400, width: "90%" }}>
-              <h5 className="text-danger fw-bold mb-3">Terms &amp; Conditions Required</h5>
+              <h5 className="text-danger fw-bold mb-3">Terms & Conditions Required</h5>
+
               <p className="text-muted">You must agree to the website <a href="/terms-and-conditions"> terms and conditions</a> before placing your order.</p>
               <button className="btn btn-primary w-100" onClick={() => setShowTermsPopup(false)}>
                 OK
