@@ -13,13 +13,19 @@ const MusicHub = () => {
         {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Zoiko Music Hub: Empowering Music Creators and Lovers</>} />
-        <Container fluid className="musichub position-relative">
-            <div className="position-absolute d-none d-md-block" style={{left:'10%', bottom:'16%'}}>
-                <Button variant="danger" size="lg" href="/music-hub-registratrion-form">Register Now</Button>
-            </div>
-            <div className="position-absolute d-sm-block d-md-none" style={{left:'5%', bottom:'5%'}}>
-                <Button variant="danger" size="sm" href="/music-hub-registratrion-form">Register Now</Button>
-            </div>
+        <Container fluid>
+            <img className="d-none d-md-block w-100" src="/img/home-banner/Music-Hub-banner.png" alt="Student Banner" />
+            <img className="d-sm-block d-md-none" src="/img/home-banner/Music-Hub-banner-mobile.png" alt="Student Banner" />
+            <Container className="w-75" style={{marginTop:'-360px', marginBottom:'30px'}}>
+                <div>
+                    <h4 className="txtred">Zoiko Music Hub:<br />Empowering Music Creators &amp; Lovers</h4>
+                    <p className="txtblack body20">At Zoiko Mobile, we know music isn&apos;t just entertainment<br />—it&apos;s a way of life. That&apos;s why we created the Zoiko Music<br />Hub, a dedicated space where music lovers and aspiring<br />musicians can find the tools, perks, and community to fuel<br />their passion. Whether you&apos;re producing your next big hit,<br />jamming with friends, or discovering fresh tunes, Zoiko<br />Mobile is here to keep you connected and inspired.</p>
+                    <div className="d-flex flex-nowrap gap-3">
+                        <Button href='/music-hub-registratrion-form' variant="danger" size="lg">Register Now</Button>
+                        <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
+                    </div>
+                </div>
+            </Container>
         </Container>
         <Container fluid className="bglite py-5">
             <h2 className="text-center">Exclusive Benefits for Music Enthusiasts</h2>

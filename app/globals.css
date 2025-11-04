@@ -104,11 +104,21 @@ a {
 }
 .btnbox {
   position: absolute;
-  bottom: 120px;
+  bottom: 80px;
+  left: -40px;
+}
+.btnbox h2 {
+  font-size: 20px;
+}
+.btnbox .body22 {
+  font-size: 14px;
 }
 .bannertxt {
   position: absolute;
-  left: 20px;
+  bottom: 100px;
+}
+.bannertxt-2 {
+  position: absolute;
   bottom: 100px;
 }
 .txtred {
@@ -306,12 +316,12 @@ a {
   line-height: 60px;
 }
 .bannerhead {
-  font-size: 50px;
+  font-size: 36px;
   font-weight: 600;
-  line-height: 60px;
+  line-height: 40px;
 }
 .verybig {
-  font-size: 92px;
+  font-size: 62px;
   font-weight: 600;
   line-height: 80px;
 }
@@ -545,7 +555,7 @@ a {
   font-size: 24px;
 }
 .redbullet-banner {
-  font-size: 32px;
+  font-size: 18px;
 }
 .redbullet-banner li::marker {
   color: #DF1E5A;
@@ -592,7 +602,7 @@ a {
   }
   .btnbox {
     bottom: 280px;
-    left: -30px;
+    left: -40px;
   }
   .btnbox h1 {
     font-size: 16px;
@@ -602,7 +612,19 @@ a {
     font-size: 12px;
   }
   .bannertxt {
-    padding-left: 1%;
+    top: -60px;
+  }
+  .bannertxt-2 {
+      padding-left: 1%;
+      top: -80px;
+  }
+  .bannertxt-2 .txtbig{
+    font-size: 12px;
+    line-height: 12px;
+  }
+  .bannertxt h2, .bannertxt-2 h2 {
+    font-size: 12px;
+    line-height: 12px;
   }
   .carousel-indicators {
     display: none !important;
@@ -688,16 +710,16 @@ a {
     font-weight: 400;
   }
   .verybig {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
-    line-height: 26px;
+    line-height: 16px;
   }
   .redbullet-banner {
-    font-size: 18px;
+    font-size: 14px;
   }
   .redbullet-banner li::marker {
     color: #DF1E5A;
-    font-size: 18px;
+    font-size: 14px;
   }
 }
 

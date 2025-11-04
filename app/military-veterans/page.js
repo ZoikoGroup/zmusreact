@@ -13,13 +13,17 @@ const MilitaryVeterans = () => {
         {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Military &amp; Veterans&apos; Lifetime Deals</>} />
-        <Container fluid className="militaryveterans position-relative">
-            <div className="position-absolute d-none d-md-block" style={{left:'10%', bottom:'16%'}}>
+        <Container fluid className="p-0">
+            <img className="d-none d-md-block w-100" src="/img/home-banner/Military-Veterans-banner.png" alt="Military Veterans" />
+            <img className="d-sm-block d-md-none" src="/img/home-banner/Military-Veterans-banner-mobile.png" alt="Military Veterans" />
+            <Container className="w-75" style={{marginTop:'-360px', marginBottom:'100px'}}>
+                <h1 className="txtred">Military &amp; Veterans&apos;<br />Lifetime Deals</h1>
+                <ul className="redbullet-banner txtblack">
+                    <li>20% Lifetime Discount</li>
+                    <li>15% Discount For Family &amp; Friends</li>
+                </ul>
                 <Button variant="danger" size="lg" href="/military-veterans-form">Register Now</Button>
-            </div>
-            <div className="position-absolute d-sm-block d-md-none" style={{left:'5%', bottom:'5%'}}>
-                <Button variant="danger" size="sm" href="/military-veterans-form">Register Now</Button>
-            </div>
+            </Container>
         </Container>
         <Container fluid className="py-4 bglite">
             <h2 className="text-center py-4">Exclusive Benefits</h2>
