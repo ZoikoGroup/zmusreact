@@ -133,7 +133,7 @@ const Header = () => {
                             <Nav.Link href="/business-deals" className={pathname === "/business-deals" ? "active" : ""}>Business Deals</Nav.Link>
                             <Nav.Link href="/travel-plans" className={pathname === "/travel-plans" ? "active" : ""}>Travel Plans</Nav.Link>
                             <Nav.Link href="#">Animal &amp; Music</Nav.Link>
-                            <NavDropdown title="Devices" id="collapsible-nav-dropdown">
+                            <NavDropdown title="Devices" id="collapsible-nav-dropdown" style={{ textAlign: "center",width: "fit-content" }}>
                                 <NavDropdown.Item href="https://phones.zoikomobile.com/" target="_blank">New Smartphones</NavDropdown.Item>
                                 <NavDropdown.Item href="/product-category/refurbished">Refurbished Smartphones</NavDropdown.Item>
                                 <NavDropdown.Item href="#">Accessories</NavDropdown.Item>
@@ -143,7 +143,7 @@ const Header = () => {
 
                         {/* Mobile-only Explore section */}
                         <div className="d-lg-none px-3 mt-4 mb-3">
-                            <h6 className="border-bottom pb-2">Explore More</h6>
+                            <h6 className="border-bottom pb-2 text-center text-center">Explore More</h6>
                             <Nav className="flex-column">
                                 <Nav.Link href="/top-up-plan">Top-Up</Nav.Link>
                                 <Nav.Link href="/byod-plans">BYOD</Nav.Link>
