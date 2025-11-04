@@ -11,21 +11,27 @@ const DeviceProtection = () => {
         {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Comprehensive Protection for Every Device" />
-        <Container fluid className="deviceprotbanner position-relative">
-            <div className="position-absolute d-none d-md-block" style={{left:'11%', bottom:'16%'}}>
+        <Container fluid className="p-0">
+            <img className="d-none d-md-block w-100" src="/img/home-banner/device-protection.png" alt="Student Banner" />
+            <img className="d-sm-block d-md-none" src="/img/home-banner/device-protection-m.png" alt="Student Banner" />
+            <Container className="w-75 d-none d-md-block" style={{marginTop:'-360px', marginBottom:'100px'}}>
+                <h1 className="txtblack">Total device Protection<br />with Zoiko Mobile Insurance</h1>
+                <p className="txtblack body20 w-50">One plan to protect your phones Bring Your Own Device and other Electronics at home backed by AKKO the trusted leader in device protection.</p>
                 <DropdownButton variant="danger" size="lg" title="Protect Your Device Now">
                     <DropdownItem href="/prepaid-plans">Prepaid Plans</DropdownItem>
                     <DropdownItem href="/postpaid-plans">Postpaid Plans</DropdownItem>
                     <DropdownItem href="/business-deals">Business Deals</DropdownItem>
                 </DropdownButton>
-            </div>
-            <div className="position-absolute d-sm-block d-md-none" style={{left:'5%', bottom:'5%'}}>
-                <DropdownButton variant="danger" size="sm" title="Protect Your Device Now">
+            </Container>
+            <Container className="d-sm-block d-md-none" style={{marginTop:'-480px', marginBottom:'260px'}}>
+                <h2 className="txtblack body22">Total device Protection<br />with Zoiko Mobile Insurance</h2>
+                <p className="txtblack body20">One plan to protect your phones Bring Your Own Device and other Electronics at home backed by AKKO the trusted leader in device protection.</p>
+                <DropdownButton variant="danger" size="lg" title="Protect Your Device Now">
                     <DropdownItem href="/prepaid-plans">Prepaid Plans</DropdownItem>
                     <DropdownItem href="/postpaid-plans">Postpaid Plans</DropdownItem>
                     <DropdownItem href="/business-deals">Business Deals</DropdownItem>
                 </DropdownButton>
-            </div>
+            </Container>
         </Container>
         <Container fluid className="py-4 bglite">
             <h2 className="text-center py-4">Why Choose Zoiko Mobile Insurance?</h2>
