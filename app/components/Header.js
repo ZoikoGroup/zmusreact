@@ -63,9 +63,9 @@ const Header = () => {
     return (
         <>
             {/* Desktop-only Top Header */}
-            <div className="d-none d-lg-block">
+            {/* <div className="d-none d-lg-block">
                 <TopHeader />
-            </div>
+            </div> */}
 
             <Navbar expand="lg" className="bg-body-tertiary p-0 headnav">
                 <Container fluid>
