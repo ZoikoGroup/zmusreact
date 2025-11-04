@@ -10,7 +10,7 @@ import MilitaryFaqs from "../components/MilitaryFaqs";
 const MilitaryVeterans = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Military &amp; Veterans&apos; Lifetime Deals</>} />
         <Container fluid className="p-0">

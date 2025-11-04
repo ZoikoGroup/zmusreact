@@ -12,7 +12,7 @@ import TravelPlanSlider from "../components/TravelPlanSlider";
 const PrepaidPlans = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Affordable Plans | No Credit Checks | No Hidden Fees | Unlimited Everything | Reliable Nationwide Coverage" />
         <PrepaidSlider />

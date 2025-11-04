@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 const CustomerService = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Customer Service" />
         <Container fluid className="bglite">

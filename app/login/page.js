@@ -210,7 +210,7 @@ const Login = () => {
 
   return (
     <>
-      <TopHeader />
+      {/* <TopHeader /> */}
       <Header />
       <HeadBar text="Join Buster and flock together with your buddies!" />
       <Container className="p-5">

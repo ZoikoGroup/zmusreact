@@ -235,7 +235,7 @@ export default function AddDevicePage() {
 
   return (
     <>
-      <TopHeader />
+      {/* <TopHeader /> */}
       <Header />
       <HeadBar text="My Devices & SIMs" />
 

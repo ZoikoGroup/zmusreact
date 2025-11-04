@@ -53,7 +53,7 @@ const ByodPlans = () => {
 
   return (
     <>
-      <TopHeader />
+      {/* <TopHeader /> */}
       <Header />
       <HeadBar text={<>Bring Your Own Device (BYOD) to Zoiko Mobile</>} />
 

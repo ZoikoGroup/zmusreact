@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 const ConsumerInfo = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Consumer Information" />
         <Container fluid className="bglite p-0">

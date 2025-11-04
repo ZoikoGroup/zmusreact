@@ -25,7 +25,7 @@ const PrepaidPlans = () => {
 
     return (
         <>
-            <TopHeader />
+            {/* <TopHeader /> */}
             <Header />
             {/* ✅ Dynamically show the slug in title case */}
             <HeadBar text={`No Contract Best ${titleCaseSlug} Mobile Phone Deals`} />

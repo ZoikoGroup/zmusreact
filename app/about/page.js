@@ -17,7 +17,7 @@ const AboutUs = () => {
 
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>The Zoiko Philosophy: Innovate | Connect | Communicate</>} />
         <Container fluid className="bglite py-5">

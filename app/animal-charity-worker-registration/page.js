@@ -82,7 +82,7 @@ const AnimalWorkerRegistration = () => {
 
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Animal Charity Worker Registration</>} />
         <Container fluid className="bglite py-5">

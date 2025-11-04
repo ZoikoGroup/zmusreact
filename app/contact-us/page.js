@@ -139,7 +139,7 @@ const ContactUs = () => {
 
   return (
     <>
-      <TopHeader />
+      {/* <TopHeader /> */}
       <Header />
       <HeadBar text="Have You got Any Questions? At Zoiko Mobile We Offer Solutions!" />
 

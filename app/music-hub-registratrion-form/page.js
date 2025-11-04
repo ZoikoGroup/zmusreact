@@ -64,7 +64,7 @@ const MusicHubRegistration = () => {
 
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Join the Zoiko Music Hub and unlock exclusive perks, tools, and opportunities designed for music lovers and aspiring musicians!</>} />
         <Container fluid className="bglite py-5">

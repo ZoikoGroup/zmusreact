@@ -65,7 +65,7 @@ const StudentDiscountForm = () => {
 
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Zoiko Mobile College Student Discount Program Registration Form</>} />
         <Container fluid className="bglite py-5">

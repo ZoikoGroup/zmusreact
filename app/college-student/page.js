@@ -11,7 +11,7 @@ import GetData from "../components/GetData";
 const CollegeStudent = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Zoiko Mobile College Student Discount Program" />
         <Container fluid className="p-0">

@@ -12,7 +12,7 @@ import Testimonials from "../components/Testimonials";
 const PrepaidPlans = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="No Contract Best Prepaid Mobile Phone Deals" />
         <PrepaidBanner />

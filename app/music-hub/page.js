@@ -10,7 +10,7 @@ import { Container, Button, Row, Col, Image } from "react-bootstrap";
 const MusicHub = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Zoiko Music Hub: Empowering Music Creators and Lovers</>} />
         <Container fluid>

@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 const CaliforniaAct = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Regulatory Information" />
         <Container fluid className="bglite p-0">

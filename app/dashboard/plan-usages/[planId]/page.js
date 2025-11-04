@@ -106,7 +106,7 @@ const billingCycle = formatBillingCycle();
 
   return (
     <>
-      <TopHeader />
+      {/* <TopHeader /> */}
       <Header />
       <HeadBar />
 

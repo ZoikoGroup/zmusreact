@@ -1,5 +1,5 @@
 "use client";
-import { Container, Button, Nav, Navbar, NavDropdown, Modal } from "react-bootstrap";
+import { Container, Button, Nav, Navbar, NavDropdown, Modal,Badge } from "react-bootstrap";
 import Image from "next/image";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../globals.css';
@@ -27,14 +27,30 @@ const Header = () => {
 
     const navbarCollapseRef = useRef(null);
     const toggleButtonRef = useRef(null);
-
+// ✅ New state for cart quantity
+    const [cartCount, setCartCount] = useState(0); 
     useEffect(() => {
-        const token = localStorage.getItem("zoiko_token");
-        const userData = localStorage.getItem("user");
-        if (token && userData) {
-            setIsLoggedIn(true);
-            setUser(JSON.parse(userData));
+         // Check login
+        if (typeof window !== "undefined") {
+            const token = localStorage.getItem("zoiko_token");
+            const userData = localStorage.getItem("user");
+            if (token && userData) {
+                setIsLoggedIn(true);
+                setUser(JSON.parse(userData));
+            }
         }
+
+        // ✅ Load initial cart count from localStorage
+        const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+        const totalQty = storedCart.reduce((sum, item) => sum + (Number(item.formData?.priceQty ?? 1)), 0);
+        setCartCount(totalQty);
+
+        // ✅ Listen for cart updates (custom event)
+        window.addEventListener("cartUpdated", () => {
+            const updatedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+            const updatedQty = updatedCart.reduce((sum, item) => sum + (Number(item.formData?.priceQty ?? 1)), 0);
+            setCartCount(updatedQty);
+        });
     }, []);
 
     const handleLogout = () => {
@@ -63,9 +79,9 @@ const Header = () => {
     return (
         <>
             {/* Desktop-only Top Header */}
-            {/* <div className="d-none d-lg-block">
+            <div className="d-none d-lg-block">
                 <TopHeader />
-            </div> */}
+            </div>
 
             <Navbar expand="lg" className="bg-body-tertiary p-0 headnav">
                 <Container fluid>
@@ -76,7 +92,16 @@ const Header = () => {
                     {/* Mobile Right Icons */}
                     <div className="d-flex d-lg-none ms-auto align-items-center gap-3">
                         <Nav.Link href="#" onClick={handleShowSearch}><i className="bi bi-search fs-5"></i></Nav.Link>
-                        <Nav.Link href="/checkout"><i className="bi bi-cart fs-5"></i></Nav.Link>
+                        {/* <Nav.Link href="/checkout"><i className="bi bi-cart fs-5"></i></Nav.Link> */}
+                         {/* ✅ Cart icon with quantity badge */}
+                            <Nav.Link href="/checkout" className="position-relative">
+                                <i className="bi bi-cart"></i>
+                                {cartCount > 0 && (
+                                    <Badge pill bg="danger" className="position-absolute top-0 start-100 translate-middle">
+                                        {cartCount}
+                                    </Badge>
+                                )}
+                            </Nav.Link>
                         {isLoggedIn ? (
                             <NavDropdown title={<i className="bi bi-person fs-5"></i>} id="user-nav-dropdown-mobile" align="end">
                                 <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
@@ -176,7 +201,15 @@ const Header = () => {
                         {/* Desktop Right Icons */}
                         <Nav className="ms-auto d-none d-lg-flex align-items-center gap-3">
                             <Nav.Link href="#" onClick={handleShowSearch}><i className="bi bi-search"></i></Nav.Link>
-                            <Nav.Link href="/checkout"><i className="bi bi-cart"></i></Nav.Link>
+                            {/* <Nav.Link href="/checkout"><i className="bi bi-cart"></i></Nav.Link> */}
+                            <Nav.Link href="/checkout" className="position-relative">
+                                <i className="bi bi-cart"></i>
+                                {cartCount > 0 && (
+                                    <Badge pill bg="danger" className="position-absolute top-0 start-100 translate-middle">
+                                        {cartCount}
+                                    </Badge>
+                                )}
+                            </Nav.Link>
                             {isLoggedIn ? (
                                 <NavDropdown title={user?.name || "Account"} id="user-nav-dropdown">
                                     <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>

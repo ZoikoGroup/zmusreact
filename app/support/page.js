@@ -8,7 +8,7 @@ import { Container, InputGroup, Row, Col, Button, Form, Card, CardBody } from "r
 const HelpSupport = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Zoiko Mobile - Support You May Find Here" />
         <Container fluid className="bglite p-0">

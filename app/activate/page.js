@@ -81,7 +81,7 @@ export default function ActivateSim() {
 }
       `}</style>
 
-      <TopHeader />
+      {/* <TopHeader /> */}
       <Header />
       <HeadBar text="Zoiko Mobile SIM Activation" />
 

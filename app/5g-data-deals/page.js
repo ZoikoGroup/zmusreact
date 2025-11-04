@@ -8,7 +8,7 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 const DataDeals = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Toggle Today on Your Favorite Zoiko Mobile 5G Network." />
         <Container fluid className="bglite p-0">
