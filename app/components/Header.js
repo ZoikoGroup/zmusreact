@@ -143,7 +143,7 @@ const Header = () => {
 
                         {/* Mobile-only Explore section */}
                         <div className="d-lg-none px-3 mt-4 mb-3">
-                            <h6 className="border-bottom pb-2">Explore More</h6>
+                            <h6 className="border-bottom pb-2 text-center">Explore More</h6>
                             <Nav className="flex-column">
                                 <Nav.Link href="/top-up-plan">Top-Up</Nav.Link>
                                 <Nav.Link href="/byod-plans">BYOD</Nav.Link>
