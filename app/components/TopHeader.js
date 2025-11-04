@@ -58,11 +58,12 @@ const TopHeader = () => {
                                     <Col md={3} sm={12} xs={12}>
                                         <p><span className="txtgreen">Tariffs &amp; Prices</span></p>
                                         <ul className="menulist">
-                                            <li><Link href={"/roaming-and-overage"}>Roaming Charges</Link></li>
-                                            <li><Link href={"/bundled-sim-plan-offer"}>Bundled Offers</Link></li>
-                                            <li><Link href={"/free-international-calling"}>Free International Calls</Link></li>
-                                            <li><Link href={"/international-out-of-bundle-rates"}>Out-of-Bundle Rates</Link></li>
-                                            <li><Link href={"/civilservants"}>Public Sector Lifetime Deals</Link></li>
+                                            <li><Link href={"/roaming-rates"}>Roaming Charges</Link></li>
+                                            <li><Link href={"/bundled-offers/"}>Bundled Offers</Link></li>
+                                            <li><Link href={"/free-international-minutes"}>Free International Calls</Link></li>
+                                            <li><Link href={"/out-of-bundle-rates"}>Out-of-Bundle Rates</Link></li>
+                                            <li><Link href={"/postal-service-workers"}>Postal Service Workers Deals</Link></li>
+                                            <li><Link href={"/device-protection"}>Device Protection</Link></li> 
                                         </ul>
                                     </Col>
                                     <Col md={2} sm={12} xs={12}>

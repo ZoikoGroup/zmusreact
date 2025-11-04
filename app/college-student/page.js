@@ -14,17 +14,19 @@ const CollegeStudent = () => {
         {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Zoiko Mobile College Student Discount Program" />
-        <Container fluid className="position-relative">
+        <Container fluid className="p-0">
             <img className="d-none d-md-block w-100" src="/img/home-banner/banner-student.png" alt="Student Banner" />
             <img className="d-sm-block d-md-none" src="/img/home-banner/banner-student-mobile.png" alt="Student Banner" />
             <Container>
-                <div className="btnbox text-start">
-                    <h1 className="txtblack pb-1">Zoiko Mobile College<br />Student Discount Program</h1>
+                <div className="btnbox text-start" style={{left:'120px'}}>
+                    <h2 className="txtblack">Zoiko Mobile College<br />Student Discount Program</h2>
                     <h4 className="txtblack">Get Exclusive</h4>
-                    <h1 className="txtred verybig">20% Discount</h1>
-                    <h1 className="txtblack pb-1">On Any Of Our Plans</h1>
-                    <Button href='/college-student-discount-form' variant="danger" size="lg" className="custom-button">Register Now</Button>
-                    <Button href='#' variant="outline-danger" className="mx-4 custom-button" size="lg">Learn more</Button>
+                    <h2 className="txtred verybig">20% Discount</h2>
+                    <h2 className="txtblack pb-1">On Any Of Our Plans</h2>
+                    <div className="d-flex flex-nowrap gap-3">
+                    <Button href='/college-student-discount-form' variant="danger" size="lg">Register Now</Button>
+                    <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
+                    </div>
                 </div>
             </Container>
         </Container>

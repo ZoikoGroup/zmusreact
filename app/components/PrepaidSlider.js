@@ -121,12 +121,12 @@ const PrepaidSlider = ({ planType = "prepaid-plans" }) => {
                                 {/* BUTTONS */}
                                 <div className="gap-3 d-flex justify-content-center">
                                 <Button
-                                    variant="danger" className="px-5"
+                                    variant="danger"
                                     onClick={() => openPlanPurchaseModal(item.title, item.slug, item.id, item.price, item.duration_type, item.bq_id, item.plan_type)}
                                 >
                                     Buy This Plan
                                 </Button>
-                                <Button variant="outline-danger" href={`/plans/${item.slug}`} className="px-5">
+                                <Button variant="outline-danger" href={`/plans/${item.slug}`}>
                                     View Details
                                 </Button>
                                 </div>
