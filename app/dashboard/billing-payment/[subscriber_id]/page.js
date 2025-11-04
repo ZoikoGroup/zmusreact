@@ -100,7 +100,7 @@ export default function BillingPaymentPage({ params }) {
 
   return (
     <>
-      <TopHeader />
+      {/* <TopHeader /> */}
       <Header />
       <HeadBar text="Billing & Payment" />
 

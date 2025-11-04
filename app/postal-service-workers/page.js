@@ -10,7 +10,7 @@ import PostalFaqs from "../components/PostalFaqs";
 const PostalWorkers = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>U.S. Postal Service Workers</>} />
         <Container fluid className="postalworkers position-relative">

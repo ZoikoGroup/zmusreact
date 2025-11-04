@@ -15,7 +15,7 @@ export default function PlanDetail ({ params }) {
 
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Zoiko Prepaid Plan</>} />
         <Container></Container>

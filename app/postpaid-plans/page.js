@@ -12,7 +12,7 @@ import PostpaidFaqs from "../components/PostpaidFaqs";
 const PostpaidPlans = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Get Our Best Postpaid Mobile Plans & Pay Only for Every Need!" />
         <PostpaidBanner />

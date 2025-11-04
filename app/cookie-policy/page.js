@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 const CookiePolicy = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Cookie Policy" />
         <Container fluid className="bglite p-0">

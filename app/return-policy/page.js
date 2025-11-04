@@ -8,7 +8,7 @@ import { Container, Image } from "react-bootstrap";
 const ReturnPolicy = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Return & Warranty Policy" />
         <Container fluid className="bglite py-5 px-0">

@@ -69,7 +69,7 @@ export default function DevicesPage({ params }) {
 
   return (
     <>
-      <TopHeader />
+      {/* <TopHeader /> */}
       <Header />
       <HeadBar text="My Devices & SIMs" />
 

@@ -10,7 +10,7 @@ import Link from "next/link";
 const TopUpPlan = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Instant Top-Ups | Unstoppable Coverage | Powered by America&apos;s Best Network</>} />
         <Container fluid className="bglite">

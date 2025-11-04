@@ -70,7 +70,7 @@ export default function PlanDetailsPage() {
   if (loading) {
     return (
       <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <Container className="text-center mt-5 py-5">
           <Spinner animation="border" variant="danger" />
@@ -83,7 +83,7 @@ export default function PlanDetailsPage() {
   if (!plan) {
     return (
       <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Plan Details" />
         <Container className="text-center mt-5 py-5">
@@ -97,7 +97,7 @@ export default function PlanDetailsPage() {
 
   return (
     <>
-      <TopHeader />
+      {/* <TopHeader /> */}
       <Header />
       <HeadBar text={plan.title} />
 
@@ -115,7 +115,7 @@ export default function PlanDetailsPage() {
                   color: "#d32f2f",
                 }}
               >
-                {plan.currency} {plan.price}
+                {plan.currency}{plan.price}
               </div>
               <div>/{plan.duration_type}/line</div>
             </Col>

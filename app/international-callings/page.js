@@ -10,7 +10,7 @@ import { Container, Button, Image, InputGroup, Form, Row, Col } from "react-boot
 const InternationalCallings = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Zoiko Mobile International Calling" />
         <Container fluid className="internationalcalls position-relative">

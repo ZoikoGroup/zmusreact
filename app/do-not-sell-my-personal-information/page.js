@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 const DoNotTell = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Do Not Sell My Personal Information" />
         <Container fluid className="bglite p-0">

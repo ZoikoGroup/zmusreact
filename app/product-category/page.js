@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 const ProductCategory = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Product Categories" />
         <Container>

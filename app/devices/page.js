@@ -69,7 +69,7 @@ const DevicesPage = () => {
 
   return (
     <>
-      <TopHeader />
+      {/* <TopHeader /> */}
       <Header />
       <HeadBar text="My Devices & SIMs" />
 

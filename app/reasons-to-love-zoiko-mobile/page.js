@@ -8,7 +8,7 @@ import { Button, Card, CardBody, Col, Container, Image, Row } from "react-bootst
 const LoveZoiko = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Reasons Zoiko Stands Out: Affordable Plans | Top-Notch Customer Service | Nationwide Coverage" />
         <Container fluid className="lovezoiko p-0">

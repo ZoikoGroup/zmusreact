@@ -8,7 +8,7 @@ import { Col, Container, Image, Row, Accordion, AccordionBody, AccordionHeader, 
 const DeviceProtection = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Comprehensive Protection for Every Device" />
         <Container fluid className="deviceprotbanner position-relative">

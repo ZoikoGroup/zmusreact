@@ -10,7 +10,7 @@ import AnimalFaqs from "../components/AnimalFaqs";
 const AnimalCharities = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Zoiko Mobile - Animal Charities Discount Program</>} />
         <Container fluid className="animalcharities"></Container>

@@ -17,7 +17,7 @@ const Switch = () => {
 
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Switch & Save to Zoiko Mobile: Value Meets Exceptional Service" />
         <Container fluid className="bglite py-5 px-0">

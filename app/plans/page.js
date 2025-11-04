@@ -9,7 +9,7 @@ import Testimonials from "../components/Testimonials";
 export default function Plans () {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Zoiko Prepaid Plan</>} />
         <Container fluid className="bglite">

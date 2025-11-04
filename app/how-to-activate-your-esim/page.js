@@ -12,7 +12,7 @@ const ActivateESIM = () => {
 
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="eSIM Card Activation Guides for Smartphone, Tabs & Smartwatch!" />
         <Container fluid className="esimbanner p-0"></Container>

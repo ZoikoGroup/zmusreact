@@ -10,7 +10,7 @@ import FamilyPlanFaqs from '../components/FamilyPlanFaqs';
 const FamilyPlans = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Zoiko Mobile - We have a Plan for Every American Family</>} />
         <Container fluid className="familyplanbg position-relative">

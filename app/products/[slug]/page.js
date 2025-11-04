@@ -15,7 +15,7 @@ export default function ProductDetail ({ params }) {
 
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Discover Premium Quality Refurbished Smartphones @ Zoiko Mobile</>} />
         <Container fluid className="bglite">

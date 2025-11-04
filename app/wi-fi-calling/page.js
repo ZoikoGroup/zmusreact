@@ -9,7 +9,7 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 const WifiCalling = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Go places. Do everything. Use everywhere. Enjoy Life." />
         <Container fluid className="wifibg p-0">

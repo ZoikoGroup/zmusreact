@@ -8,7 +8,7 @@ import { Container, Image } from "react-bootstrap";
 const FreeDeliveryPolicy = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Zoiko Mobile Free Delivery Policy" />
         <Container fluid className="bglite py-5 px-0">

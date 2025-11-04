@@ -12,7 +12,7 @@ import BusinessBottonLine from "../components/BusinessBottonLine";
 const BusinessDeals = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Reach out to clients in a great mobility with cellular business postpaid plans" />
         <BusinessDealsBanner />

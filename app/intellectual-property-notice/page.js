@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 const IntellectualProperty = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Intellectual Property Notice" />
         <Container fluid className="bglite p-0">

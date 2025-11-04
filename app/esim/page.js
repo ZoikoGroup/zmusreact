@@ -9,7 +9,7 @@ import { Col, Container, Row, Image } from "react-bootstrap";
 const Esim = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Go places. Do everything. Use everywhere. Enjoy Life." />
         <Container fluid className="bglite p-0">

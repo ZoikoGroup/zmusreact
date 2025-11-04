@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 const Terms = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Terms And Conditions" />
         <Container fluid className="bglite py-5">

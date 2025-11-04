@@ -12,7 +12,7 @@ import TravelFaqs from "../components/TravelFaqs";
 const TravelPlans = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Travel Around, no regrets, no excuses!" />
         <TravelPlansBanner />

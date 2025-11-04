@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 const PrivacyPolicy = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Privacy Policy" />
         <Container fluid className="bglite p-0">

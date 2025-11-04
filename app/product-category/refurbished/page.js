@@ -10,7 +10,7 @@ import PhoneSlider from "../../components/PhoneSlider";
 const Refurbished = () => {
     return (
         <>
-        <TopHeader />
+        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Stress less & Buy Premium Quality Refurbished Smartphones @ Zoiko Mobile" />
         <Container fluid className="py-4">
