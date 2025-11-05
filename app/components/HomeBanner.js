@@ -64,29 +64,11 @@ const HomeBanner = () => {
                         <h2 className="txtblack">On Any Of Our Plans</h2>
                         <div className="d-flex flex-nowrap gap-3">
                             <Button href='/postal-service-workers-form' variant="danger">Register Now</Button>
-                            <Button href='#' variant="outline-danger">Learn more</Button>
+                            <Button href='/postal-service-workers' variant="outline-danger">Learn more</Button>
                         </div>
                     </div>
                 </Carousel.Caption>
             </Carousel.Item>
-
-
-
-            {/* <Carousel.Item>
-                <img className="d-none d-md-block w-100" src="/img/home-banner/Postal-Workers-banner.png" alt="Postal Workers" />
-                <img className="d-sm-block d-md-none" src="/img/home-banner/Postal-Workers-banner-mobile.png" alt="Postal Workers" />
-                <Carousel.Caption>
-                    <div className="btnbox text-start">
-                        <h1 className="txtred bannerhead">A Special Thank You To<br />U.S. Postal Service Workers</h1>
-                        <h2 className="txtblack d-none d-md-block">20% Discount</h2>
-                        <h2 className="txtblack d-sm-block d-md-none">On Any Of Our Plans</h2>
-                        <div className="d-flex flex-nowrap gap-2">
-                            <Button href='/postal-service-workers-form' variant="danger">Register Now</Button>
-                            <Button href='#' variant="outline-danger">Learn more</Button>
-                        </div>
-                    </div>
-                </Carousel.Caption>
-            </Carousel.Item> */}
             <Carousel.Item>
                 <img className="d-none d-md-block w-100" src="/img/home-banner/Military-Veterans-banner.png" alt="Military Veterans" />
                 <img className="d-sm-block d-md-none" src="/img/home-banner/Military-Veterans-banner-mobile.png" alt="Military Veterans" />
@@ -99,7 +81,7 @@ const HomeBanner = () => {
                         </ul>
                         <div className="d-flex flex-nowrap gap-3">
                             <Button href='/military-veterans-form' variant="danger">Register Now</Button>
-                            <Button href='#' variant="outline-danger">Learn more</Button>
+                            <Button href='/military-veterans/' variant="outline-danger">Learn more</Button>
                         </div>
                     </div>
                 </Carousel.Caption>
@@ -115,7 +97,7 @@ const HomeBanner = () => {
                         <h1 className="txtblack pb-3">On Any Of Our Plans</h1>
                         <div className="d-flex flex-nowrap gap-3">
                             <Button href='/college-student-discount-form' variant="danger">Register Now</Button>
-                            <Button href='#' variant="outline-danger">Learn more</Button>
+                            <Button href='/college-student/' variant="outline-danger">Learn more</Button>
                         </div>
                     </div>
                 </Carousel.Caption>
@@ -136,25 +118,13 @@ const HomeBanner = () => {
                 <img className="d-none d-md-block w-100" src="/img/home-banner/Animal-Charities-Banner.png" alt="Student Banner" />
                 <img className="d-sm-block d-md-none" src="/img/home-banner/Animal-Charities-Banner-mobile.png" alt="Student Banner" />
                 <Carousel.Caption>
-                    {/* <div className="btnbox text-start">
-                        <h1 className="txtred bannerhead px-3">Your Connecton<br />Saves Lives</h1>
-                        <h2 className="txtblack">Join Zoiko Mobile - We are supporting animals<br />and animal charities whilst keep you connected!</h2>
-                        <div className="d-flex flex-nowrap gap-3">
-                            <Button href='#' variant="danger" >Register Now</Button>
-                            <Button href='#' variant="outline-danger" >Learn more</Button>
-                        </div>
-                    </div> */}
-
-
-
-
                     <div className="btnbox text-start" style={{bottom: "200px"}}>
                         <h1 className="txtred bannerhead">Your Connecton</h1>
                         <h1 className="txtred bigred">Saves Lives</h1>
                         <h2 className="txtblack py-3 midbig"><span style={{fontWeight:'800'}}>Join Zoiko Mobile - We are supporting animals<br />and animal charities whilst keep you connected!</span></h2>
                         <div className="d-flex flex-nowrap gap-3">
                             <Button href='/postal-service-workers-form' variant="danger">Register Now</Button>
-                            <Button href='#' variant="outline-danger">Learn more</Button>
+                            <Button href='/animal-charities' variant="outline-danger">Learn more</Button>
                         </div>
                     </div>
                 </Carousel.Caption>
@@ -169,7 +139,7 @@ const HomeBanner = () => {
                         <p className="txtblack body22" style={{fontWeight:'200'}}>At Zoiko Mobile, we know music isn&apos;t just entertainment<br />—it&apos;s a way of life. That&apos;s why we created the Zoiko Music<br />Hub, a dedicated space where music lovers and aspiring<br />musicians can find the tools, perks, and community to fuel<br />their passion. Whether you&apos;re producing your next big hit,<br />jamming with friends, or discovering fresh tunes, Zoiko<br />Mobile is here to keep you connected and inspired.</p>
                         <div className="d-flex flex-nowrap gap-3">
                             <Button href='/music-hub-registratrion-form' variant="danger">Register Now</Button>
-                            <Button href='#' variant="outline-danger">Learn more</Button>
+                            <Button href='/music-hub' variant="outline-danger">Learn more</Button>
                         </div>
                     </div>
                 </Carousel.Caption>
