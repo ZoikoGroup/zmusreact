@@ -6,7 +6,6 @@ import HeadBar from "../components/HeadBar";
 import CollegeFaqs from '../components/CollegeFaqs';
 import { Button, Col, Container, DropdownButton, DropdownItem, Row } from "react-bootstrap";
 import Testimonials from "../components/Testimonials";
-import GetData from "../components/GetData";
 
 const CollegeStudent = () => {
     return (
@@ -18,14 +17,14 @@ const CollegeStudent = () => {
             <img className="d-none d-md-block w-100" src="/img/home-banner/banner-student.png" alt="Student Banner" />
             <img className="d-sm-block d-md-none" src="/img/home-banner/banner-student-mobile.png" alt="Student Banner" />
             <Container>
-                <div className="btnbox text-start" style={{left:'120px'}}>
-                    <h2 className="txtblack">Zoiko Mobile College<br />Student Discount Program</h2>
-                    <h4 className="txtblack">Get Exclusive</h4>
-                    <h2 className="txtred verybig">20% Discount</h2>
-                    <h2 className="txtblack pb-1">On Any Of Our Plans</h2>
+                <div style={{marginTop:'-460px', marginBottom:'200px'}}>
+                    <h1 className="txtblack">Zoiko Mobile College<br />Student Discount Program</h1>
+                    <h2 className="txtblack">Get Exclusive</h2>
+                    <p className="verybig txtred">20% Discount</p>
+                    <h2 className="txtblack">On Any Of Our Plans</h2>
                     <div className="d-flex flex-nowrap gap-3">
-                    <Button href='/college-student-discount-form' variant="danger" size="lg">Register Now</Button>
-                    <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
+                        <Button href='/college-student-discount-form' variant="danger" size="lg">Register Now</Button>
+                        <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
                     </div>
                 </div>
             </Container>

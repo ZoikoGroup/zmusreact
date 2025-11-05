@@ -13,13 +13,14 @@ const MusicHub = () => {
         {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Zoiko Music Hub: Empowering Music Creators and Lovers</>} />
-        <Container fluid>
+        <Container fluid className="p-0">
             <img className="d-none d-md-block w-100" src="/img/home-banner/Music-Hub-banner.png" alt="Student Banner" />
             <img className="d-sm-block d-md-none" src="/img/home-banner/Music-Hub-banner-mobile.png" alt="Student Banner" />
-            <Container className="w-75" style={{marginTop:'-360px', marginBottom:'30px'}}>
+            <Container style={{marginTop:'-460px', marginBottom:'190px'}}>
                 <div>
                     <h4 className="txtred">Zoiko Music Hub:<br />Empowering Music Creators &amp; Lovers</h4>
-                    <p className="txtblack body20">At Zoiko Mobile, we know music isn&apos;t just entertainment<br />—it&apos;s a way of life. That&apos;s why we created the Zoiko Music<br />Hub, a dedicated space where music lovers and aspiring<br />musicians can find the tools, perks, and community to fuel<br />their passion. Whether you&apos;re producing your next big hit,<br />jamming with friends, or discovering fresh tunes, Zoiko<br />Mobile is here to keep you connected and inspired.</p>
+                    <p className="d-none d-md-block txtblack body20 w-50">At Zoiko Mobile, we know music isn&apos;t just entertainment —it&apos;s a way of life. That&apos;s why we created the Zoiko Music Hub, a dedicated space where music lovers and aspiring musicians can find the tools, perks, and community to fuel their passion. Whether you&apos;re producing your next big hit, jamming with friends, or discovering fresh tunes, Zoiko Mobile is here to keep you connected and inspired.</p>
+                    <p className="d-sm-block d-md-none txtblack body20">At Zoiko Mobile, we know music isn&apos;t just entertainment —it&apos;s a way of life. That&apos;s why we created the Zoiko Music Hub, a dedicated space where music lovers and aspiring musicians can find the tools, perks, and community to fuel their passion. Whether you&apos;re producing your next big hit, jamming with friends, or discovering fresh tunes, Zoiko Mobile is here to keep you connected and inspired.</p>
                     <div className="d-flex flex-nowrap gap-3">
                         <Button href='/music-hub-registratrion-form' variant="danger" size="lg">Register Now</Button>
                         <Button href='#' variant="outline-danger" size="lg">Learn more</Button>

@@ -13,7 +13,7 @@ const FamilyPlans = () => {
         {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Zoiko Mobile - We have a Plan for Every American Family</>} />
-        <Container fluid>
+        <Container fluid className="p-0">
             <img className="d-none d-md-block w-100" src="/img/home-banner/Family-Plans-Banner.png" alt="Student Banner" />
             <img className="d-sm-block d-md-none" src="/img/home-banner/Family-Plans-Banner-mobile.png" alt="Student Banner" />
             <Container className="w-75" style={{marginTop:'-360px', marginBottom:'100px'}}>
