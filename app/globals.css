@@ -593,6 +593,9 @@ a {
 
 /* Mobile view CSS */
 @media (max-width: 600px) {
+  .musicbanner{
+            bottom: 220px !important;
+          }
   h2 {
     font-size: 16px;
     margin-top: 6px;
@@ -865,8 +868,17 @@ a {
           .steps-bar { flex-direction:column; }
           .label { font-size:12px; }
           .form_wrapper { flex-direction:column; }
+
+          .musicbanner p{
+            font-size: 11px !important;
+          }
+           .musicbanner{
+            bottom: 220px !important;
+          }
         }
 
+
+       
         /* modal sizing */
         .custom-modal .modal-dialog {
           max-width: 900px;
@@ -924,6 +936,9 @@ a {
 
 /* Mobile Overlay Menu */
 @media (max-width: 991.98px) {
+  .musicbanner{
+            bottom: 220px !important;
+          }
   .navbar-collapse.mobile-overlay {
     position: fixed;
     top: 0;
@@ -957,3 +972,6 @@ a {
   width:100%;
   left: 0;
 }
+ /* .musicbanner{      
+    bottom: 60px !important;
+} */
