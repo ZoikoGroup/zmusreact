@@ -12,13 +12,19 @@ const HomeBanner = () => {
                 <img className="d-none d-md-block w-100" src="/img/home-banner/Unbeatable-VALUE-banner.png" alt="Unbeatable Value" />
                 <img className="d-sm-block d-md-none" src="/img/home-banner/Unbeatable-VALUE-mobile-banner.png" alt="Unbeatable Value" />
                 <Carousel.Caption>
-                    <div className="btnbox text-start unbeatablevaluebanner">
-                        <h1 className="txtred bannerhead">UNBEATABLE VALUE:<br /><span className="txtblack">AMAZING BYOD DEALS | SUPPORTING<br />ANIMALS | ENJOYING MUSIC</span></h1>
-                        <div className="d-flex flex-nowrap gap-2">
-                            <Button href='/zoiko-mobile-switch-save-form' variant="danger">Show Plans</Button>
-                            <Button href='/about' variant="outline-danger" >Know More</Button>
-                        </div>
-                    </div>
+                    <div className="btnbox text-start unbeatablevaluebanner banner-text-desktop">
+    <h1 className="txtred bannerhead">
+        UNBEATABLE VALUE:<br />
+        <span className="txtblack">
+            AMAZING BYOD DEALS | SUPPORTING<br />
+            ANIMALS | ENJOYING MUSIC
+        </span>
+    </h1>
+    <div className="d-flex flex-nowrap gap-2">
+        <Button href='/zoiko-mobile-switch-save-form' variant="danger">Show Plans</Button>
+        <Button href='/about' variant="outline-danger">Know More</Button>
+    </div>
+</div>
                 </Carousel.Caption>
             </Carousel.Item>
 

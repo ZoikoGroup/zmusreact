@@ -605,7 +605,7 @@ a {
   }
   .btnbox {
     bottom: 280px;
-    left: -40px;
+    left: -20px;
   }
   .btnbox h1 {
     font-size: 16px;
@@ -977,7 +977,31 @@ a {
 } */
  @media (min-width: 992px) {
 .unbeatablevaluebanner{
-      bottom: 0200px !important;
+      bottom: 140px !important;
     left: 150px !important;
 }
  }
+
+ /* Desktop-only spacing for Music Hub intro text */
+@media (min-width: 992px) {
+  .music-hub-intro h4 {
+    line-height: 1.5; /* Adjust as needed */
+    margin-bottom: 20px; /* Space below heading */
+  }
+  .music-hub-intro p {
+    line-height: 1.8; /* More space between lines */
+    margin-bottom: 25px; /* Space below paragraph */
+  }
+  .music-hub-intro .btn {
+    margin-top: 10px; /* Space above buttons */
+  }
+
+  .banner-text-desktop h1 {
+    line-height: 1.4; /* Adjust for more space between lines */
+    margin-bottom: 25px; /* Adds space below the heading */
+  }
+
+  .banner-text-desktop .btn {
+    margin-top: 10px; /* Space above button group */
+  }
+}
