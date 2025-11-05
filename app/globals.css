@@ -975,3 +975,9 @@ a {
  /* .musicbanner{      
     bottom: 60px !important;
 } */
+ @media (min-width: 992px) {
+.unbeatablevaluebanner{
+      bottom: 0200px !important;
+    left: 150px !important;
+}
+ }
