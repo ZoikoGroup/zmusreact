@@ -84,7 +84,7 @@ a {
   border-radius: 12px !important;
 }
 .dropdown-menu {
-  width: 100%;
+  width: fit-content;
   --bs-dropdown-min-width: 14rem;
 }
 .dropdown-item:hover {

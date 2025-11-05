@@ -671,6 +671,26 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+        {/* ✅ JSON-LD structured data (WebSite) */}
+        <Script
+          id="zoiko-website-jsonld"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Zoiko Mobile",
+              url: "https://zoikomobile.com/",
+            }),
+          }}
+        />
+
+        {/* ✅ Open Graph site name */}
+        <meta property="og:site_name" content="Zoiko Mobile" />
+      </head>
+
       <body className={roboto.className}>
         {children}
         <BootstrapClient />
