@@ -142,7 +142,7 @@ const HomeBanner = () => {
                     <div className="btnbox text-start musicbanner">
                         <h1 className="txtred">Zoiko Music Hub:</h1>
                         <h2 className="txtred">Empowering Music Creators and Lovers</h2>
-                        <p className="txtblack body22" style={{fontWeight:'200'}}>At Zoiko Mobile, we know music isn&apos;t just entertainment<br />—it&apos;s a way of life. That&apos;s why we created the Zoiko Music<br />Hub, a dedicated space where music lovers and aspiring<br />musicians can find the tools, perks, and community to fuel<br />their passion. Whether you&apos;re producing your next big hit,<br />jamming with friends, or discovering fresh tunes, Zoiko<br />Mobile is here to keep you connected and inspired.</p>
+                        <p className="txtblack body22" style={{fontWeight:'200'}}>At Zoiko Mobile, we know music isn&apos;t just entertainment<br />—it&apos;s a way of life. That&apos;s why we created the Zoiko Music Hub, a dedicated space where music lovers and aspiring musicians can find the tools, perks, and community to fuel their passion. Whether you&apos;re producing your next big hit, jamming with friends, or discovering fresh tunes, Zoiko Mobile is here to keep you connected and inspired.</p>
                         <div className="d-flex flex-nowrap gap-3">
                             <Button href='/music-hub-registratrion-form' variant="danger">Register Now</Button>
                             <Button href='/music-hub' variant="outline-danger">Learn more</Button>
