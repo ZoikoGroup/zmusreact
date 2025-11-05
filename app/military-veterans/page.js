@@ -16,7 +16,7 @@ const MilitaryVeterans = () => {
         <Container fluid className="p-0">
             <img className="d-none d-md-block w-100" src="/img/home-banner/Military-Veterans-banner.png" alt="Military Veterans" />
             <img className="d-sm-block d-md-none" src="/img/home-banner/Military-Veterans-banner-mobile.png" alt="Military Veterans" />
-            <Container className="w-75" style={{marginTop:'-360px', marginBottom:'100px'}}>
+            <Container className="w-75" style={{marginTop:'-410px', marginBottom:'160px'}}>
                 <h1 className="txtred">Military &amp; Veterans&apos;<br />Lifetime Deals</h1>
                 <ul className="redbullet-banner txtblack">
                     <li>20% Lifetime Discount</li>
