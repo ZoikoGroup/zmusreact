@@ -715,6 +715,16 @@ export default function RootLayout({ children }) {
         <Script id="zoiko-jsonld" type="application/ld+json" strategy="afterInteractive">
           {JSON.stringify(jsonLd)}
         </Script>
+        <Script id="chunk-error-recovery" strategy="afterInteractive">
+          {`
+            window.addEventListener('error', (e) => {
+              if (e?.message?.includes('ChunkLoadError')) {
+                console.warn('ChunkLoadError detected, reloading...');
+                window.location.reload();
+              }
+            });
+          `}
+          </Script>
       </body>
     </html>
   );
