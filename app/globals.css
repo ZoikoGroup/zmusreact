@@ -1010,6 +1010,10 @@ a {
   .musicbanner p{
     width: 45% !important;
   }
+  .animalslider1{
+      margin: 0px 25% 50px 25% !important;
+
+  }
 }
 
 @media (max-width: 767px) {
@@ -1035,4 +1039,47 @@ a {
   .growing-section {
     padding: 2rem 1rem !important;
   }
+}
+
+.animal-banner {
+  background-image: url("/img/animal-music-bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 420px; /* ✅ ensures image is visible */
+  display: flex;
+  align-items: center;
+  padding: 60px 0;
+}
+
+/* Mobile image swap */
+@media (max-width: 767px) {
+  .animal-banner {
+    background-image: url("/img/animal-music-bg-mobile.png");
+    min-height: 480px;
+    background-position: top;
+    padding: 40px 0;
+  }
+  .animalslider1{
+    margin:10px !important;
+  }
+}
+
+/* Text styling */
+.banner-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #d9233f;
+}
+
+.banner-subtitle {
+  font-size: 28px;
+  font-weight: 600;
+  color: #000;
+}
+
+.banner-desc {
+  font-size: 18px;
+  color: #333;
 }

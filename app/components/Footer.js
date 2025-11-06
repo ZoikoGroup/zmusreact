@@ -12,11 +12,11 @@ const Footer = () => {
                     <Col md={3} sm={12} xs={12}>
                         <p className="txtred">About Us</p>
                         <ul>
-                            <li><Link href={"#"}>Our Story</Link></li>
-                            <li><Link href={"#"}>Press &amp; Media</Link></li>
+                            <li><Link href={"/about"}>Our Story</Link></li>
+                            <li><Link href={"/news"}>Press &amp; Media</Link></li>
                             <li><Link href={"#"}>Blogs</Link></li>
                             <li><Link href={"#"}>Sustainablity</Link></li>
-                            <li><Link href={"#"}>Animal Charities</Link></li>
+                            <li><Link href={"/animal-charities"}>Animal Charities</Link></li>
                             <li><Link href={"#"}>Zoiko Music Hub</Link></li>
                         </ul>
                     </Col>
