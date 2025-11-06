@@ -31,7 +31,7 @@ const artists = [
   },
   {
     name: "Doug Carroll",
-    image: "../img/doug-carroll.jpg" ,
+    image: "../img/Doug-Carroll.jpg" ,
     link: "https://open.spotify.com/artist/6zqgWTRnDo30IxlYwVHXLH",
   },
   {
