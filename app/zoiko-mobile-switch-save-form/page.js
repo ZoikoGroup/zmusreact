@@ -14,6 +14,7 @@ import {
   Alert,
 } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
+import beQuick from "../utils/dasdbeQuickApi"; // ✅ Import lookup API
 
 const SwitchSaveForm = () => {
   const [errors, setErrors] = useState({});
@@ -23,6 +24,11 @@ const SwitchSaveForm = () => {
   const [loadingPlans, setLoadingPlans] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [apiResponse, setApiResponse] = useState(null);
+
+  // ✅ New states for subscriber lookup
+  const [subscriberId, setSubscriberId] = useState("");
+  const [subscriberNotFound, setSubscriberNotFound] = useState(false);
+  const [loadingSubscriber, setLoadingSubscriber] = useState(false);
 
   const [formData, setFormData] = useState({
     fname: "",
@@ -46,9 +52,7 @@ const SwitchSaveForm = () => {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const response = await fetch(
-          "https://zmapi.zoikomobile.co.uk/api/v1/plans"
-        );
+        const response = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/plans");
         const data = await response.json();
 
         if (data.success && Array.isArray(data.data)) {
@@ -80,16 +84,52 @@ const SwitchSaveForm = () => {
     }
   };
 
+  // ✅ Search subscriber by email
+  const handleSearchSubscriber = async () => {
+    if (!formData.email) return;
+    setLoadingSubscriber(true);
+    setSubscriberNotFound(false);
+
+    try {
+      const subscriberResult = await beQuick.getSubscriberByEmail(formData.email);
+
+      if (!subscriberResult || !subscriberResult.subscriber_id) {
+        setSubscriberNotFound(true);
+        setSubscriberId("");
+        return;
+      }
+
+      setSubscriberId(subscriberResult.subscriber_id);
+      setSubscriberNotFound(false);
+    } catch (error) {
+      console.error("Error:", error);
+      setSubscriberNotFound(true);
+    } finally {
+      setLoadingSubscriber(false);
+    }
+  };
+
+  // ✅ Trigger lookup automatically when email entered & valid
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      if (formData.email && /\S+@\S+\.\S+/.test(formData.email)) {
+        handleSearchSubscriber();
+      }
+    }, 800);
+    return () => clearTimeout(delayDebounce);
+  }, [formData.email]);
+
   // ✅ Validation
   const validate = () => {
     const formErrors = {};
-
     if (!formData.fname) formErrors.fname = "⚠️ Name is required";
     if (!formData.email) {
       formErrors.email = "⚠️ Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       formErrors.email = "⚠️ Enter a valid email address";
     }
+    if (!subscriberId || subscriberId === "")
+      formErrors.subscriberId = "⚠️ Subscriber ID is required";
     if (!formData.msisdn) {
       formErrors.msisdn = "⚠️ Mobile number is required";
     } else if (!/^\d{10}$/.test(formData.msisdn)) {
@@ -112,112 +152,147 @@ const SwitchSaveForm = () => {
   };
 
   // ✅ Submit form
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validate()) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
+ // ✅ Submit form
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    setSubmitting(true);
-    setApiResponse(null);
+  if (!validate()) {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
 
-    const [firstName, ...rest] = formData.fname.split(" ");
-    const lastName = rest.join(" ") || "";
+  // ✅ Check for missing or invalid subscriberId
+  const subscriberIdStr = subscriberId ? String(subscriberId).trim() : "";
+  if (!subscriberIdStr) {
+    setApiResponse({
+      type: "danger",
+      message: "⚠️ Subscriber ID is missing or invalid. Please enter a valid one before submitting.",
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
 
-    const bequickPayload = {
-      line: {
-        subscriber_id: 96,
-        carrier_id: 3,
-        service_address_id: 1,
-        status: "draft",
-        number_port_attributes: {
-          mdn: formData.msisdn,
-          first_name: firstName,
-          last_name: lastName,
-          carrier_account: formData.ospno,
-          carrier_password: formData.osppass,
-          ssn: "1234",
-          address_attributes: {
-            primary: false,
-            address1: formData.addr1,
-            address2: formData.addr2,
-            city: formData.city,
-            state: formData.state,
-            zip: formData.zip,
-          },
+  setSubmitting(true);
+  setApiResponse(null);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  const [firstName, ...rest] = formData.fname.split(" ");
+  const lastName = rest.join(" ") || "";
+
+  const bequickPayload = {
+    line: {
+      subscriber_id: subscriberId,
+      carrier_id: 3,
+      service_address_id: 1,
+      status: "draft",
+      number_port_attributes: {
+        mdn: formData.msisdn,
+        first_name: firstName,
+        last_name: lastName,
+        carrier_account: formData.ospno,
+        carrier_password: formData.osppass,
+        ssn: "1234",
+        address_attributes: {
+          primary: false,
+          address1: formData.addr1,
+          address2: formData.addr2,
+          city: formData.city,
+          state: formData.state,
+          zip: formData.zip,
         },
       },
-    };
-
-    try {
-      // ✅ Step 1: BeQuick API call
-      const res = await fetch("https://zoiko-atom-api.bequickapps.com/lines", {
-        method: "POST",
-        headers: {
-          "X-AUTH-TOKEN": "09ff2d85-a451-47e6-86bc-aba98e1e4629",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bequickPayload),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data?.error || "BeQuick API Error");
-
-      // ✅ Step 2: Send data to Laravel API
-      const saveRes = await fetch(
-        "https://zmapi.zoikomobile.co.uk/api/v1/switch-save",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...formData, bequick_response: data }),
-        }
-      );
-
-      const saveData = await saveRes.json();
-
-      if (saveRes.ok) {
-        setApiResponse({
-          type: "success",
-          message: "✅ Thank you! Your request has been submitted successfully.",
-        });
-        setFormData({
-          fname: "",
-          email: "",
-          msisdn: "",
-          simno: "",
-          plan: "",
-          cat: "",
-          ospno: "",
-          osppass: "",
-          addr1: "",
-          addr2: "",
-          city: "",
-          state: "",
-          zip: "",
-          concent: false,
-          terms: false,
-        });
-      } else {
-        throw new Error(saveData?.message || "Switch & Save API Error");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setApiResponse({
-        type: "danger",
-        message: `⚠️ ${error.message || "Something went wrong, please try again."}`,
-      });
-    } finally {
-      setSubmitting(false);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    },
   };
+
+  try {
+    // ✅ Step 1: BeQuick API call
+    const res = await fetch("https://zoiko-atom-api.bequickapps.com/lines", {
+      method: "POST",
+      headers: {
+        "X-AUTH-TOKEN": "09ff2d85-a451-47e6-86bc-aba98e1e4629",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bequickPayload),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok || data.error) {
+      throw new Error(data.error || "BeQuick API returned an error.");
+    }
+
+    // ✅ Step 2: Send data to Laravel API
+    const saveRes = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/switch-save", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...formData, bequick_response: data }),
+    });
+
+    const saveData = await saveRes.json();
+
+    if (saveRes.ok) {
+  const lineData = data?.lines?.[0] || {};
+  const lineId = lineData.id || "N/A";
+  const subId = lineData.subscriber_id || subscriberId || "N/A";
+  const portId = lineData.number_port_id || "N/A";
+
+  setApiResponse({
+    type: "success",
+    message: (
+      <>
+        ✅ Thank you! Your request has been submitted successfully.
+        <br />
+        <strong>Port ID:</strong> {portId}
+        <br />
+        <strong>Request Line ID:</strong> {lineId}
+        <br />
+        <strong>Subscriber ID:</strong> {subId}
+        <br />
+
+      </>
+    ),
+  });
+
+  // ✅ Reset form & subscriber state
+  setFormData({
+    fname: "",
+    email: "",
+    msisdn: "",
+    simno: "",
+    plan: "",
+    cat: "",
+    ospno: "",
+    osppass: "",
+    addr1: "",
+    addr2: "",
+    city: "",
+    state: "",
+    zip: "",
+    concent: false,
+    terms: false,
+  });
+  setSubscriberId("");
+  setSubscriberNotFound(false);
+}
+
+ else {
+      throw new Error(saveData?.message || "Switch & Save API Error");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    setApiResponse({
+      type: "danger",
+      message: `⚠️ ${error.message || "Something went wrong, please try again."}`,
+    });
+  } finally {
+    setSubmitting(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+};
+
 
   return (
     <>
-      {/* <TopHeader /> */}
       <Header />
       <HeadBar
         text={
@@ -258,7 +333,7 @@ const SwitchSaveForm = () => {
           ) : (
             <Form onSubmit={handleSubmit}>
               {/* Name & Email */}
-              <Row>
+              <Row className="mt-3">
                 <Col md={6}>
                   <FormLabel>Full Name *</FormLabel>
                   <Form.Control
@@ -279,9 +354,46 @@ const SwitchSaveForm = () => {
                     value={formData.email}
                     placeholder="Email"
                   />
+                  {loadingSubscriber && (
+                    <small className="text-primary d-block mt-1">
+                      <Spinner size="sm" animation="border" /> Checking subscriber...
+                    </small>
+                  )}
+                  {subscriberId && (
+                    <Alert variant="success" className="mt-2 py-1">
+                      ✅ Subscriber found! ID: <strong>{subscriberId}</strong>
+                    </Alert>
+                  )}
+                  {subscriberNotFound && (
+                    <Alert variant="danger" className="mt-2 py-1">
+                      Subscriber not found — please enter manually below.
+                    </Alert>
+                  )}
                   <div className="form-error">{errors.email || ""}</div>
                 </Col>
               </Row>
+
+              {/* Manual Subscriber ID Field */}
+              {(subscriberId || subscriberNotFound) && (
+                <Row className="mt-1">
+                  <Col md={12}>
+                    <FormLabel>Subscriber ID *</FormLabel>
+                    <Form.Control
+                      type="text"
+                      value={subscriberId}
+                      onChange={(e) => setSubscriberId(e.target.value)}
+                      placeholder="Enter or edit subscriber ID"
+                    />
+                    <div className="form-error">{errors.subscriberId || ""}</div>
+                  </Col>
+                </Row>
+              )}
+
+
+
+
+              {/* Rest of your existing form remains unchanged */}
+
 
               {/* Mobile & SIM */}
               <Row className="mt-3">
@@ -452,8 +564,9 @@ const SwitchSaveForm = () => {
                 checked={formData.terms}
               />
               <div className="form-error">{errors.terms || ""}</div>
+              {/* Mobile, SIM, Plan, Address, Terms, etc... */}
+              {/* ... (keep your existing code as-is) */}
 
-              {/* Submit */}
               <br />
               <Button variant="danger" type="submit" disabled={submitting}>
                 {submitting ? (
@@ -470,21 +583,6 @@ const SwitchSaveForm = () => {
       </Container>
 
       <Footer />
-
-      <style jsx global>{`
-        .form-error {
-          color: #d9534f;
-          font-size: 13px;
-          line-height: 1;
-          margin-top: 3px;
-          height: 14px;
-          display: block;
-          transition: opacity 0.2s ease;
-        }
-        .form-error:empty {
-          opacity: 0;
-        }
-      `}</style>
     </>
   );
 };
