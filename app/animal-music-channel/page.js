@@ -83,6 +83,25 @@ const videos = [
     title: "Adorable Pals",
   },
 ];
+
+const videos2 = [
+  {
+    id: "hkBhJxZupeE",
+    thumb: "../img/Rectangle-747.webp",
+    title: "Wake Up",
+  },
+  {
+    id: "e_BYraHQmns",
+    thumb: "../img/maxresdefault-5.jpg",
+    title: "Playful Chimp",
+  },
+  {
+    id: "RZ_0ImDYrPY",
+    thumb: "../img/maxresdefault-6.jpg",
+    title: "Cute Kittens",
+  },
+ 
+];
 const videos3 = [
   {
     img: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Group-1144.webp",
@@ -470,8 +489,8 @@ return (
               }}
             >
               <img
-                src={videos[activeIndex2].thumb}
-                alt={videos[activeIndex2].title}
+                src={videos2[activeIndex2].thumb}
+                alt={videos2[activeIndex2].title}
                 className="w-100 h-100"
                 style={{ objectFit: "cover" }}
               />
@@ -489,7 +508,7 @@ return (
                   cursor: "pointer",
                   transition: "all 0.3s ease",
                 }}
-                onClick={() => openVideo(videos[activeIndex2].id)}
+                onClick={() => openVideo(videos2[activeIndex2].id)}
               >
                 <svg width="34" height="34" viewBox="0 0 24 24" fill="red">
                   <path d="M5 3v18l15-9-15-9z" />
@@ -507,7 +526,7 @@ return (
                 scrollbarWidth: "none",
               }}
             >
-              {videos.map((v, i) => (
+              {videos2.map((v, i) => (
                 <div
                   key={v.id}
                   onClick={() => setActiveIndex2(i)}
@@ -544,7 +563,7 @@ return (
 
             {/* Dots indicator */}
             <div className="d-flex justify-content-center mt-3">
-              {videos.map((_, i) => (
+              {videos2.map((_, i) => (
                 <div
                   key={i}
                   onClick={() => setActiveIndex2(i)}
@@ -1078,7 +1097,7 @@ return (
                         </AccordionItem>
                         <AccordionItem eventKey="1">
                             <AccordionHeader>How can I get involved in animal advocacy?</AccordionHeader>
-                            <AccordionBody><p>We welcome all animal lovers to <strong>be part of the movement!</strong> Whether it’s adopting, fostering, donating, or simply sharing awareness, every small act makes a big impact.</p><p><img width="10px" draggable="false" role="img" class="emoji" alt="🐾" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f43e.svg"/> <strong>Together, we can create a kinder world for animals.</strong></p></AccordionBody>
+                            <AccordionBody><p>We welcome all animal lovers to <strong>be part of the movement!</strong> Whether it’s adopting, fostering, donating, or simply sharing awareness, every small act makes a big impact.</p><p><img width="10px" draggable="false" role="img" className="emoji" alt="🐾" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f43e.svg"/> <strong>Together, we can create a kinder world for animals.</strong></p></AccordionBody>
                         </AccordionItem>
                         <AccordionItem eventKey="2">
                             <AccordionHeader>Does Zoiko Mobile offer any pet-friendly perks?</AccordionHeader>
