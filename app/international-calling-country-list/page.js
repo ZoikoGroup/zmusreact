@@ -118,7 +118,7 @@ export default function FreeInternationalMinutes() {
     <>
       {/* <TopHeader /> */}
       <Header />
-      <HeadBar text="ZZOIKO MOBILE INTERNATIONAL CALLING BUNDLES" />
+      <HeadBar text="ZOIKO MOBILE INTERNATIONAL CALLING BUNDLES" />
 
       <Container className="py-5">
 
