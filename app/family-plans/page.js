@@ -16,9 +16,9 @@ const FamilyPlans = () => {
         <Container fluid className="p-0">
             <img className="d-none d-md-block w-100" src="/img/home-banner/Family-Plans-Banner.png" alt="Student Banner" />
             <img className="d-sm-block d-md-none" src="/img/home-banner/Family-Plans-Banner-mobile.png" alt="Student Banner" />
-            <Container className="w-75" style={{marginTop:'-360px', marginBottom:'100px'}}>
+            <Container className="d-none d-md-block w-75" style={{marginTop:'-360px', marginBottom:'140px'}}>
                 <div>
-                    <h1 className="txtred">Stay Connected,<br />Stay Together</h1>
+                    <h1 className="txtred midbig">Stay Connected, Stay Together</h1>
                     <p className="body22 py-3">Get 20% off your plan when you<br />activate 3 or more plans with Zoiko Mobile</p>
                 </div>
                 <Dropdown>
@@ -30,7 +30,11 @@ const FamilyPlans = () => {
                     </Dropdown.Menu>
                 </Dropdown>
             </Container>
-            <div className="position-absolute d-sm-block d-md-none" style={{left:'5%', bottom:'5%'}}>
+            <Container className="d-sm-block d-md-none" style={{marginTop:'-460px', marginBottom:'280px'}}>
+                <div>
+                    <h1 className="txtred">Stay Connected, Stay Together</h1>
+                    <h2 className="py-2">Get 20% off your plan when you activate 3 or more plans with Zoiko Mobile</h2>
+                </div>
                 <Dropdown>
                     <Dropdown.Toggle variant="danger" size="sm" id="dropdown-basic-sm">Explore Family Plans</Dropdown.Toggle>
                     <Dropdown.Menu>
@@ -39,7 +43,7 @@ const FamilyPlans = () => {
                         <Dropdown.Item href="business-deals">Business Plans</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
-            </div>
+            </Container>
         </Container>
         <Container fluid className="bglite py-5">
             <h4 className="text-center">Why Choose Zoiko Mobile Family Plans?</h4>
