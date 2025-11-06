@@ -1004,4 +1004,7 @@ a {
   .banner-text-desktop .btn {
     margin-top: 10px; /* Space above button group */
   }
+  .musicbanner p{
+    width: 45% !important;
+  }
 }
