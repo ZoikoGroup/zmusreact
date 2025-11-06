@@ -84,7 +84,7 @@ a {
   border-radius: 12px !important;
 }
 .dropdown-menu {
-  width: 100%;
+  width: fit-content;
   --bs-dropdown-min-width: 14rem;
 }
 .dropdown-item:hover {
@@ -593,6 +593,9 @@ a {
 
 /* Mobile view CSS */
 @media (max-width: 600px) {
+  .musicbanner{
+            bottom: 220px !important;
+          }
   h2 {
     font-size: 16px;
     margin-top: 6px;
@@ -602,7 +605,7 @@ a {
   }
   .btnbox {
     bottom: 280px;
-    left: -40px;
+    left: -20px;
   }
   .btnbox h1 {
     font-size: 16px;
@@ -865,8 +868,17 @@ a {
           .steps-bar { flex-direction:column; }
           .label { font-size:12px; }
           .form_wrapper { flex-direction:column; }
+
+          .musicbanner p{
+            font-size: 11px !important;
+          }
+           .musicbanner{
+            bottom: 220px !important;
+          }
         }
 
+
+       
         /* modal sizing */
         .custom-modal .modal-dialog {
           max-width: 900px;
@@ -924,6 +936,9 @@ a {
 
 /* Mobile Overlay Menu */
 @media (max-width: 991.98px) {
+  .musicbanner{
+            bottom: 220px !important;
+          }
   .navbar-collapse.mobile-overlay {
     position: fixed;
     top: 0;
@@ -948,8 +963,429 @@ a {
   body.nav-open {
     overflow: hidden;
   }
+  .banner8{
+    bottom: 250px !important;
+  }
 }
 .navbar>.container-fluid{
   flex-wrap: unset;
 }
 
+.supportmegamenu .dropdown-menu{
+  width:100%;
+  left: 0;
+}
+ /* .musicbanner{      
+    bottom: 60px !important;
+} */
+ @media (min-width: 992px) {
+.unbeatablevaluebanner{
+      bottom: 140px !important;
+    left: 150px !important;
+}
+ }
+
+ /* Desktop-only spacing for Music Hub intro text */
+@media (min-width: 992px) {
+  .music-hub-intro h4 {
+    line-height: 1.5; /* Adjust as needed */
+    margin-bottom: 20px; /* Space below heading */
+  }
+  .music-hub-intro p {
+    line-height: 1.8; /* More space between lines */
+    margin-bottom: 25px; /* Space below paragraph */
+  }
+  .music-hub-intro .btn {
+    margin-top: 10px; /* Space above buttons */
+  }
+
+  .banner-text-desktop h1 {
+    line-height: 1.4; /* Adjust for more space between lines */
+    margin-bottom: 25px; /* Adds space below the heading */
+  }
+
+  .banner-text-desktop .btn {
+    margin-top: 10px; /* Space above button group */
+  }
+  .musicbanner p{
+    width: 45% !important;
+  }
+  .animalslider1{
+      margin: 0px 25% 50px 25% !important;
+
+  }
+}
+
+@media (max-width: 767px) {
+  .growing-section h1 {
+    font-size: 2rem !important;
+    line-height: 1.3;
+  }
+  .growing-section h2 {
+    font-size: 1.5rem !important;
+  }
+  .growing-section p {
+    font-size: 1rem !important;
+  }
+}
+@media (max-width: 767px) {
+  .growing-section img {
+    max-width: 80%;
+    margin: 0 auto;
+    display: block;
+  }
+}
+@media (max-width: 767px) {
+  .growing-section {
+    padding: 2rem 1rem !important;
+  }
+}
+
+.animal-banner {
+  background-image: url("/img/animal-music-bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 420px; /* ✅ ensures image is visible */
+  display: flex;
+  align-items: center;
+  padding: 60px 0;
+}
+
+/* Mobile image swap */
+@media (max-width: 767px) {
+  .animal-banner {
+    background-image: url("/img/animal-music-bg-mobile.png");
+    min-height: 480px;
+    background-position: top;
+    padding: 40px 0;
+  }
+  .animalslider1{
+    margin:10px !important;
+  }
+}
+
+/* Text styling */
+.banner-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #d9233f;
+}
+
+.banner-subtitle {
+  font-size: 28px;
+  font-weight: 600;
+  color: #000;
+}
+
+.banner-desc {
+  font-size: 18px;
+  color: #333;
+}
+.spotify-slider-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.spotify-slider-track {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.spotify-slide {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .spotify-slide {
+    flex: 0 0 100%;
+  }
+  .spotify-slide{
+  width:100%;
+}
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .spotify-slide {
+    flex: 0 0 50%;
+  }
+  .spotify-slide{
+  width:50%;
+}
+}
+
+@media (min-width: 992px) {
+  .spotify-slide {
+    flex: 0 0 25%;
+  }
+  .spotify-slide{
+  width:25%;
+}
+}
+.spotify-dots {
+  margin-top: 15px;
+}
+
+
+.spotify-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, width 0.3s ease;
+}
+
+.spotify-dot.active {
+  background: #0A5A35;
+  width: 30px;
+  border-radius: 10px;
+}
+
+.animal-love-section {
+  background: #f8f8f8 url("/img/Group-1257.png") no-repeat center/cover;
+
+  background-size: cover;
+  border-radius: 12px;
+}
+
+.half-star {
+  width: 100px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .half-star {
+    width: 70px;
+  }
+
+  .animal-love-section p {
+    font-size: 1rem;
+  }
+}
+
+.video-slider-container {
+  background: #fff;
+}
+
+.video-card {
+  max-width: 600px;
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.video-card:hover {
+  transform: scale(1.02);
+}
+
+.video-thumbnail {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-control-prev-icon-custom,
+.carousel-control-next-icon-custom {
+  color: #000;
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.carousel-control-prev-icon-custom {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.carousel-control-next-icon-custom {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .video-card {
+    max-width: 30%;
+  }
+
+  .play-button {
+    padding: 12px;
+  }
+
+  .carousel-control-prev-icon-custom,
+  .carousel-control-next-icon-custom {
+    padding: 6px;
+  }
+}
+
+.video-slider-container {
+  position: relative;
+  padding: 1rem 0;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* viewport (visible area) */
+.carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* track is long flex row that we'll translate */
+.carousel-track {
+  display: flex;
+  align-items: stretch;
+  will-change: transform;
+}
+
+/* each item takes flex-basis depending on slidesToShow via inline style */
+.carousel-item {
+  padding: 0 10px; /* spacing between items */
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+/* thumbnail card */
+.video-card {
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  transition: transform 0.25s ease;
+}
+
+.video-card:hover {
+  transform: scale(1.02);
+}
+
+/* clickable thumbnail button */
+.thumb-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* image */
+.video-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  display: block;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  pointer-events: none; /* button handles clicks */
+}
+
+/* play overlay */
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* arrows */
+.custom-arrow {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  z-index: 20;
+  border: none;
+  background: #fff;
+  color: #111;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  cursor: pointer;
+}
+
+.custom-arrow.left {
+  left: -12px;
+}
+
+.custom-arrow.right {
+  right: -12px;
+}
+
+.custom-arrow:focus {
+  outline: none;
+}
+
+/* smaller screens adjust arrows */
+@media (max-width: 992px) {
+  .custom-arrow.left {
+    left: 0;
+  }
+  .custom-arrow.right {
+    right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-arrow {
+    width: 36px;
+    height: 36px;
+  }
+  .play-button {
+    width: 36px;
+    height: 36px;
+  }
+  .carousel-item {
+    padding: 0 6px;
+  }
+}
+.chat-section {
+  background-color: #fff;
+}
+
+.chat-section h2 {
+  color: #e6005c;
+  font-size: 2rem;
+}
+
+.chat-section p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
