@@ -16,11 +16,20 @@ const MusicHub = () => {
         <Container fluid className="p-0">
             <img className="d-none d-md-block w-100" src="/img/home-banner/Music-Hub-banner.png" alt="Student Banner" />
             <img className="d-sm-block d-md-none" src="/img/home-banner/Music-Hub-banner-mobile.png" alt="Student Banner" />
-            <Container style={{marginTop:'-460px', marginBottom:'190px'}}>
+            <Container className="d-none d-md-block w-75" style={{marginTop:'-460px', marginBottom:'40px'}}>
+                <div>
+                    <h2 className="txtred" style={{fontSize:'26px'}}>Zoiko Music Hub:<br />Empowering Music Creators &amp; Lovers</h2>
+                    <p className="txtblack body22 w-50">At Zoiko Mobile, we know music isn&apos;t just entertainment —it&apos;s a way of life. That&apos;s why we created the Zoiko Music Hub, a dedicated space where music lovers and aspiring musicians can find the tools, perks, and community to fuel their passion. Whether you&apos;re producing your next big hit, jamming with friends, or discovering fresh tunes, Zoiko Mobile is here to keep you connected and inspired.</p>
+                    <div className="d-flex flex-nowrap gap-3">
+                        <Button href='/music-hub-registratrion-form' variant="danger" size="lg">Register Now</Button>
+                        <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
+                    </div>
+                </div>
+            </Container>
+            <Container className="d-sm-block d-md-none" style={{marginTop:'-480px', marginBottom:'190px'}}>
                 <div>
                     <h4 className="txtred">Zoiko Music Hub:<br />Empowering Music Creators &amp; Lovers</h4>
-                    <p className="d-none d-md-block txtblack body20 w-50">At Zoiko Mobile, we know music isn&apos;t just entertainment —it&apos;s a way of life. That&apos;s why we created the Zoiko Music Hub, a dedicated space where music lovers and aspiring musicians can find the tools, perks, and community to fuel their passion. Whether you&apos;re producing your next big hit, jamming with friends, or discovering fresh tunes, Zoiko Mobile is here to keep you connected and inspired.</p>
-                    <p className="d-sm-block d-md-none txtblack body20">At Zoiko Mobile, we know music isn&apos;t just entertainment —it&apos;s a way of life. That&apos;s why we created the Zoiko Music Hub, a dedicated space where music lovers and aspiring musicians can find the tools, perks, and community to fuel their passion. Whether you&apos;re producing your next big hit, jamming with friends, or discovering fresh tunes, Zoiko Mobile is here to keep you connected and inspired.</p>
+                    <p className="txtblack" style={{fontSize:'smaller', lineHeight:'18px'}}>At Zoiko Mobile, we know music isn&apos;t just entertainment —it&apos;s a way of life. That&apos;s why we created the Zoiko Music Hub, a dedicated space where music lovers and aspiring musicians can find the tools, perks, and community to fuel their passion. Whether you&apos;re producing your next big hit, jamming with friends, or discovering fresh tunes, Zoiko Mobile is here to keep you connected and inspired.</p>
                     <div className="d-flex flex-nowrap gap-3">
                         <Button href='/music-hub-registratrion-form' variant="danger" size="lg">Register Now</Button>
                         <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
