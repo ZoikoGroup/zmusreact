@@ -51,6 +51,21 @@ const Header = () => {
             const updatedQty = updatedCart.reduce((sum, item) => sum + (Number(item.formData?.priceQty ?? 1)), 0);
             setCartCount(updatedQty);
         });
+
+        // ✅ Detect and reload on ChunkLoadError
+  const handleChunkError = (e) => {
+    if (e?.message?.includes('ChunkLoadError')) {
+      console.warn('Chunk load error detected, reloading...');
+      window.location.reload();
+    }
+  };
+
+  window.addEventListener('error', handleChunkError);
+
+  // ✅ Cleanup
+  return () => {
+    window.removeEventListener('error', handleChunkError);
+  };
     }, []);
 
     const handleLogout = () => {
