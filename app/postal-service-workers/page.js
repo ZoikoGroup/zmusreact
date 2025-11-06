@@ -16,12 +16,20 @@ const PostalWorkers = () => {
         <Container fluid className="p-0 bglite">
             <img className="d-none d-md-block w-100" src="/img/home-banner/Postal-Workers-banner.png" alt="Postal Workers" />
             <img className="d-sm-block d-md-none" src="/img/home-banner/Postal-Workers-banner-mobile.png" alt="Postal Workers" />
-            <Container className="w-75">
-                <div style={{marginTop:'-460px', marginBottom:'240px'}}>
-                <h2 className="txtblack">A Special Thank You To<br />U.S. Postal Service Workers</h2>
-                <p className="verybig txtred">20% Discount</p>
-                <h2 className="txtblack">On Any Of Our Plans</h2>
-                <Button variant="danger" size="lg" href="/postal-service-workers-form">Sign Up Today</Button>
+            <Container className="d-none d-md-block w-75">
+                <div style={{marginTop:'-400px', marginBottom:'100px'}}>
+                    <h2 className="txtblack">A Special Thank You To<br />U.S. Postal Service Workers</h2>
+                    <p className="verybig txtred">20% Discount</p>
+                    <h2 className="txtblack">On Any Of Our Plans</h2>
+                    <Button variant="danger" size="lg" href="/postal-service-workers-form">Sign Up Today</Button>
+                </div>
+            </Container>
+            <Container className="d-sm-block d-md-none">
+                <div style={{marginTop:'-490px', marginBottom:'260px'}}>
+                    <h1 className="txtblack">A Special Thank You To<br />U.S. Postal Service Workers</h1>
+                    <h1 className="txtred">20% Discount</h1>
+                    <h2 className="txtblack">On Any Of Our Plans</h2>
+                    <Button variant="danger" size="lg" href="/postal-service-workers-form">Sign Up Today</Button>
                 </div>
             </Container>
         </Container>
