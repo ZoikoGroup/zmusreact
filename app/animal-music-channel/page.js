@@ -457,7 +457,7 @@ return (
         </div>
       </Modal>
 
-      {/* === SLIDER 2 === */}
+      {/* === SLIDER 2 === 
       <Container className="my-5 py-5">
         <div className="row align-items-center">
           <div className="col-md-6 mb-4 mb-md-0">
@@ -516,7 +516,6 @@ return (
               </div>
             </div>
 
-            {/* Thumbnails */}
             <div
               className="d-flex justify-content-center gap-2 flex-wrap"
               style={{
@@ -561,7 +560,7 @@ return (
               ))}
             </div>
 
-            {/* Dots indicator */}
+            
             <div className="d-flex justify-content-center mt-3">
               {videos2.map((_, i) => (
                 <div
@@ -582,7 +581,7 @@ return (
             </div>
           </div>
         </div>
-      </Container>
+      </Container>*/}
       
        <Container className="py-5 text-center">
       {/* Top Row */}
