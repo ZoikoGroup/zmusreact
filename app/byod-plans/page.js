@@ -61,12 +61,21 @@ const ByodPlans = () => {
       <Container fluid className="p-0">
         <img className="d-none d-md-block w-100" src="/img/home-banner/byod-banner.png" alt="Student Banner" />
         <img className="d-sm-block d-md-none" src="/img/home-banner/byod-banner-m.png" alt="Student Banner" />
-        <Container>
-          <div style={{marginTop:'-440px', marginBottom:'200px'}}>
-            <h1 className="d-none d-md-block txtblack w-50">Bring Your Own Device (BYOD) to Zoiko Mobile</h1>
-            <h1 className="d-sm-block d-md-none txtblack">Bring Your Own Device (BYOD) to Zoiko Mobile</h1>
-            <p className="d-none d-md-block body22 w-50">Ready to experience seamless connectivity on Zoiko Mobile&apos;s nationwide network? Bringing your own device is easy! Check the simple steps below to ensure your phone is compatible and ready to go.</p>
-            <p className="d-sm-block d-md-none body22">Ready to experience seamless connectivity on Zoiko Mobile&apos;s nationwide network? Bringing your own device is easy! Check the simple steps below to ensure your phone is compatible and ready to go.</p>
+        <Container className="d-none d-md-block txtblack w-75">
+          <div style={{marginTop:'-440px', marginBottom:'140px'}}>
+            <h1 className="txtblack w-50">Bring Your Own Device (BYOD) to Zoiko Mobile</h1>
+            <p className="body22 w-50">Ready to experience seamless connectivity on Zoiko Mobile&apos;s nationwide network? Bringing your own device is easy! Check the simple steps below to ensure your phone is compatible and ready to go.</p>
+            <DropdownButton variant="danger" size="lg" title="Browse Plans Now">
+              <DropdownItem href="/prepaid-plans">Prepaid Plans</DropdownItem>
+              <DropdownItem href="/postpaid-plans">Postpaid Plans</DropdownItem>
+              <DropdownItem href="/business-deals">Business Deals</DropdownItem>
+            </DropdownButton>
+          </div>
+        </Container>
+        <Container className="d-sm-block d-md-none">
+          <div style={{marginTop:'-480px', marginBottom:'260px'}}>
+            <h1 className="txtblack">Bring Your Own Device (BYOD) to Zoiko Mobile</h1>
+            <p className="body22">Ready to experience seamless connectivity on Zoiko Mobile&apos;s nationwide network? Bringing your own device is easy! Check the simple steps below to ensure your phone is compatible and ready to go.</p>
             <DropdownButton variant="danger" size="lg" title="Browse Plans Now">
               <DropdownItem href="/prepaid-plans">Prepaid Plans</DropdownItem>
               <DropdownItem href="/postpaid-plans">Postpaid Plans</DropdownItem>
