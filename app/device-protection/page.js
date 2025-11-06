@@ -24,7 +24,7 @@ const DeviceProtection = () => {
                 </DropdownButton>
             </Container>
             <Container className="d-sm-block d-md-none" style={{marginTop:'-480px', marginBottom:'260px'}}>
-                <h2 className="txtblack body22">Total device Protection<br />with Zoiko Mobile Insurance</h2>
+                <h1 className="txtblack">Total device Protection<br />with Zoiko Mobile Insurance</h1>
                 <p className="txtblack body20">One plan to protect your phones Bring Your Own Device and other Electronics at home backed by AKKO the trusted leader in device protection.</p>
                 <DropdownButton variant="danger" size="lg" title="Protect Your Device Now">
                     <DropdownItem href="/prepaid-plans">Prepaid Plans</DropdownItem>
