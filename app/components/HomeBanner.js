@@ -15,8 +15,8 @@ const HomeBanner = () => {
                         <h1 className="verybig txtred">UNBEATABLE VALUE</h1>
                         <h2 className="py-2"><span className="txtred">ZOIKO MOBILE</span><span className="txtblack">: AMAZING BYOD DEALS | SUPPORTING<br />ANIMALS | ENJOYING MUSIC</span></h2>
                         <div className="d-flex flex-nowrap gap-3">
-                            <Button href='/zoiko-mobile-switch-save-form' variant="danger" size="lg">Switch &amp; Save</Button>
-                            <Button href='#' variant="outline-danger" size="lg">Know More</Button>
+                            <Button href='/all-plans' variant="danger" size="lg">Show Plans</Button>
+                            <Button href='/about' variant="outline-danger" size="lg">Know More</Button>
                         </div>
                     </div>
                 </Carousel.Caption>
