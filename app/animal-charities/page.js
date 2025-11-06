@@ -13,13 +13,23 @@ const AnimalCharities = () => {
         {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Zoiko Mobile - Animal Charities Discount Program</>} />
-        <Container fluid>
+        <Container fluid className="p-0">
             <img className="d-none d-md-block w-100" src="/img/home-banner/Animal-Charities-Banner.png" alt="Student Banner" />
             <img className="d-sm-block d-md-none" src="/img/home-banner/Animal-Charities-Banner-mobile.png" alt="Student Banner" />
-            <Container style={{marginTop:'-360px', marginBottom:'100px'}}>
+            <Container className="d-none d-md-block" style={{marginTop:'-420px', marginBottom:'180px'}}>
                 <div>
-                    <h1 className="txtred">Your Connecton<br />Saves Lives</h1>
-                    <p className="txtblack py-3">Join Zoiko Mobile - We are supporting animals<br />and animal charities whilst keep you connected!</p>
+                    <h1 className="txtred">Your Connecton Saves Lives</h1>
+                    <p className="txtblack py-3 w-50 body22">Join Zoiko Mobile - We are supporting animals and animal charities whilst keep you connected!</p>
+                    <div className="d-flex flex-nowrap gap-3">
+                        <Button href='#' variant="danger" size="lg">Register Now</Button>
+                        <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
+                    </div>
+                </div>
+            </Container>
+            <Container className="d-sm-block d-md-none" style={{marginTop:'-460px', marginBottom:'250px'}}>
+                <div>
+                    <h1 className="txtred">Your Connecton Saves Lives</h1>
+                    <p className="txtblack py-2">Join Zoiko Mobile - We are supporting animals<br />and animal charities whilst keep you connected!</p>
                     <div className="d-flex flex-nowrap gap-3">
                         <Button href='#' variant="danger" size="lg">Register Now</Button>
                         <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
