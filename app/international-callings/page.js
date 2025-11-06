@@ -13,13 +13,19 @@ const InternationalCallings = () => {
         {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Zoiko Mobile International Calling" />
-        <Container fluid className="internationalcalls position-relative">
-            <div className="position-absolute d-none d-md-block" style={{left:'10%', bottom:'16%'}}>
+        <Container fluid className="p-0">
+            <img className="d-none d-md-block w-100" src="/img/home-banner/international-calling-banner.png" alt="International Banner" />
+            <img className="d-sm-block d-md-none w-100" src="/img/home-banner/international-calling-banner-mobile.jpg" alt="International Banner" />
+            <Container className="d-none d-md-block w-75" style={{marginTop:'-360px', marginBottom:'160px'}}>
+                <h1 className="txtwhite">Stay Connected Wherever You Are</h1>
+                <p className="txtwhite body22 w-50">Unlimited international calls to over 240 destinations. Simple, affordable, reliable</p>
                 <Button variant="danger" size="lg" href="/international-calling-country-list">Discover Calling Options</Button>
-            </div>
-            <div className="position-absolute d-sm-block d-md-none" style={{left:'5%', bottom:'5%'}}>
-                <Button variant="danger" size="sm" href="/international-calling-country-list">Discover Calling Options</Button>
-            </div>
+            </Container>
+            <Container className="d-sm-block d-md-none" style={{marginTop:'-400px', marginBottom:'180px'}}>
+                <h1 className="txtwhite">Stay Connected Wherever You Are</h1>
+                <p className="txtwhite body22">Unlimited international calls to over 240 destinations. Simple, affordable, reliable</p>
+                <Button variant="danger" size="lg" href="/international-calling-country-list">Discover Calling Options</Button>
+            </Container>
         </Container>
         <Container fluid className="bglite py-5">
             <h2 className="text-center pb-5">The Zoiko Advantage: International Calling Made Easy</h2>
