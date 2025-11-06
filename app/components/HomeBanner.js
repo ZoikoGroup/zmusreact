@@ -125,8 +125,9 @@ const HomeBanner = () => {
                 <img className="d-sm-block d-md-none" src="/img/home-banner/Animal-Charities-Banner-mobile.png" alt="Student Banner" />
                 <Carousel.Caption>
                     <div className="btnbox text-start banner8" style={{bottom: "200px"}}>
-                        <h1 className="txtred bannerhead">Your Connecton</h1>
-                        <h1 className="txtred bigred">Saves Lives</h1>
+                        <h1 className="txtred bannerhead d-none d-sm-none d-md-block">Your Connecton</h1>
+                        <h1 className="txtred bigred d-none d-sm-none d-md-block">Saves Lives</h1>
+                        <h1 className="txtred bigred d-block d-sm-block d-md-none">Your Connecton Saves Lives</h1>
                         <h2 className="txtblack py-3 midbig"><span style={{fontWeight:'800'}}>Join Zoiko Mobile - We are supporting animals<br />and animal charities whilst keep you connected!</span></h2>
                         <div className="d-flex flex-nowrap gap-3">
                             <Button href='/postal-service-workers-form' variant="danger">Register Now</Button>

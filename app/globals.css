@@ -963,6 +963,9 @@ a {
   body.nav-open {
     overflow: hidden;
   }
+  .banner8{
+    bottom: 250px !important;
+  }
 }
 .navbar>.container-fluid{
   flex-wrap: unset;
@@ -1006,5 +1009,30 @@ a {
   }
   .musicbanner p{
     width: 45% !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .growing-section h1 {
+    font-size: 2rem !important;
+    line-height: 1.3;
+  }
+  .growing-section h2 {
+    font-size: 1.5rem !important;
+  }
+  .growing-section p {
+    font-size: 1rem !important;
+  }
+}
+@media (max-width: 767px) {
+  .growing-section img {
+    max-width: 80%;
+    margin: 0 auto;
+    display: block;
+  }
+}
+@media (max-width: 767px) {
+  .growing-section {
+    padding: 2rem 1rem !important;
   }
 }

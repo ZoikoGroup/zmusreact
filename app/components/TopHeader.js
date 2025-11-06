@@ -80,7 +80,7 @@ const TopHeader = () => {
                             </Container>
                         </NavDropdown>
                         <Nav.Link href="/international-callings">International Calls</Nav.Link>
-                        <Nav.Link href="#">Store Locator</Nav.Link>
+                        <Nav.Link href="/store-locator">Store Locator</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
