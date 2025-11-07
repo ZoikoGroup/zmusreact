@@ -146,7 +146,10 @@ const Header = () => {
                                 <i className="bi bi-x-lg"></i>
                             </button>
                         </div>
-<CustomLanguageSwitcher />
+                        
+                        <div className="d-block d-lg-none">
+               <CustomLanguageSwitcher />
+            </div>
                         <Nav className="mx-auto mt-3 mt-lg-0">
                             <Nav.Link href="/prepaid-plans" className={pathname === "/prepaid-plans" ? "active" : ""}>Prepaid Plans</Nav.Link>
                             <Nav.Link href="/postpaid-plans" className={pathname === "/postpaid-plans" ? "active" : ""}>Postpaid Plans</Nav.Link>
