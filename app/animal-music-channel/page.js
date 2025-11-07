@@ -283,7 +283,7 @@ return (
             <Button variant="danger" href="/zoiko-mobile-switch-save-form/" size="lg">
               Switch to Save
             </Button>
-            <Button href="/all-plans" variant="outline-danger" size="lg">
+            <Button href="/all-plans/" variant="outline-danger" size="lg">
               View All Plans
             </Button>
           </div>

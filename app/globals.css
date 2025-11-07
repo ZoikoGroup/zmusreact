@@ -1390,3 +1390,44 @@ a {
   font-size: 1rem;
   line-height: 1.6;
 }
+
+/* Google Translate Widget Styles */
+.google-translate-widget {
+  display: inline-block;
+}
+
+/* Hide Google Translate banner */
+.skiptranslate iframe {
+  display: none !important;
+}
+
+/* Style the translate dropdown */
+.goog-te-combo {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.goog-te-combo:hover {
+  border-color: #0d6efd;
+}
+
+/* Hide Google Translate toolbar */
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+/* Style for mobile */
+@media (max-width: 991px) {
+  .google-translate-widget {
+    margin: 10px 0;
+  }
+}

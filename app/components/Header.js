@@ -7,7 +7,8 @@ import { useState, useEffect, useRef } from "react";
 import { usePathname } from 'next/navigation';
 import PlanPurchaseModal from "./PlanPurchaseModal";
 import TopHeader from "./TopHeader"; // Desktop-only
-
+// Import the custom switcher
+import CustomLanguageSwitcher from "./CustomLanguageSwitcher";
 let openPlanModalCallback = null;
 
 export function openPlanPurchaseModal(planTitle, planSlug, planId, planPrice, planDuration, planBqid, planType) {
@@ -94,19 +95,23 @@ const Header = () => {
     return (
         <>
             {/* Desktop-only Top Header */}
+            
             <div className="d-none d-lg-block">
                 <TopHeader />
             </div>
 
             <Navbar expand="lg" className="bg-body-tertiary p-0 headnav">
                 <Container fluid>
+                    
                     <Navbar.Brand href="/">
+                    
                         <Image src='/img/zmuslogo-new.png' width={160} height={70} alt="Logo" />
                     </Navbar.Brand>
 
                     {/* Mobile Right Icons */}
                     <div className="d-flex d-lg-none ms-auto align-items-center gap-3">
                         <Nav.Link href="#" onClick={handleShowSearch}><i className="bi bi-search fs-5"></i></Nav.Link>
+                         
                         {/* <Nav.Link href="/checkout"><i className="bi bi-cart fs-5"></i></Nav.Link> */}
                          {/* ✅ Cart icon with quantity badge */}
                             <Nav.Link href="/checkout" className="position-relative">
@@ -141,7 +146,7 @@ const Header = () => {
                                 <i className="bi bi-x-lg"></i>
                             </button>
                         </div>
-
+<CustomLanguageSwitcher />
                         <Nav className="mx-auto mt-3 mt-lg-0">
                             <Nav.Link href="/prepaid-plans" className={pathname === "/prepaid-plans" ? "active" : ""}>Prepaid Plans</Nav.Link>
                             <Nav.Link href="/postpaid-plans" className={pathname === "/postpaid-plans" ? "active" : ""}>Postpaid Plans</Nav.Link>
@@ -233,7 +238,9 @@ const Header = () => {
                             ) : (
                                 <Nav.Link href="/login">Login</Nav.Link>
                             )}
-                            <Nav.Link href="#">Spanish</Nav.Link>
+                       
+                            <CustomLanguageSwitcher />
+
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
