@@ -233,7 +233,7 @@ const Header = () => {
                             ) : (
                                 <Nav.Link href="/login">Login</Nav.Link>
                             )}
-                            <Nav.Link href="#">Español</Nav.Link>
+                            <Nav.Link href="#">Spanish</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
