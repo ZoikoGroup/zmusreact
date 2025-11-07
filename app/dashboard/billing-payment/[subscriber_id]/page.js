@@ -1,15 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import TopHeader from "../../../components/TopHeader";
-import Header from "../../../components/Header";
+import React, { use, useEffect, useState } from "react";
+import Header, { openPaymentModal } from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import HeadBar from "../../../components/HeadBar";
 import "../../Dashboard.css";
-import Link from "next/link";
 
 export default function BillingPaymentPage({ params }) {
-  const { subscriber_id } = params;
+  const { subscriber_id } = use(params);
+
 
   const [loading, setLoading] = useState(true);
   const [billingData, setBillingData] = useState({
@@ -21,56 +20,86 @@ export default function BillingPaymentPage({ params }) {
   });
   const [error, setError] = useState(null);
 
+  // ✅ Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const billsPerPage = 5;
+
   const API_URL = `https://zoiko-atom-api.bequickapps.com/billing_statements?by_subscriber_id=${subscriber_id}`;
   const TOKEN = "09ff2d85-a451-47e6-86bc-aba98e1e4629";
 
   useEffect(() => {
     async function fetchBillingData() {
       try {
+        setLoading(true);
+        setError(null);
+
         const res = await fetch(API_URL, {
           headers: { "X-AUTH-TOKEN": TOKEN },
         });
+
         if (!res.ok) throw new Error("Failed to fetch billing data");
+
         const data = await res.json();
+        console.log("Billing data:", data);
 
-        const bills = data.billing_statements.map((b, index) => ({
-          id: b.id,
-          period: `${new Date(b.start_at).toLocaleDateString()} - ${new Date(
-            b.closed_at
-          ).toLocaleDateString()}`,
-          amount: `$${b.total}`,
-          due: new Date(b.due_at).toLocaleDateString(),
-          status: b.status,
-          attachmentUrl: b.statement_attachment_url,
-        }));
+        const statements = data?.billing_statements || [];
 
-        const latest = data.billing_statements[data.billing_statements.length - 1];
+        if (statements.length === 0) {
+          setBillingData({
+            bills: [],
+            currentBalance: "$0.00",
+            daysLeft: 0,
+            recentSummary: "$0.00",
+            billingAlerts: ["No billing statements found"],
+          });
+          return;
+        }
+
+        // ✅ Build bills list (latest first)
+        const bills = statements
+          .map((b) => ({
+            id: b.id,
+            period: `${new Date(b.start_at).toLocaleDateString()} - ${new Date(
+              b.closed_at
+            ).toLocaleDateString()}`,
+            amount: `$${b.total}`,
+            due: new Date(b.due_at).toLocaleDateString(),
+            status: b.status || "Unknown",
+            attachmentUrl: b.statement_attachment_url,
+          }))
+          .reverse();
+
+        const latest = statements[statements.length - 1] || {};
+
         const alerts = [];
-        if (latest.past_due) alerts.push("Payment overdue");
-        if (!latest.paid) alerts.push("Pending payment for the latest bill");
+        if (latest?.past_due) alerts.push("Payment overdue");
+        if (!latest?.paid) alerts.push("Pending payment for the latest bill");
         else alerts.push("Auto-renew is enabled");
+
+        const dueDate = latest?.due_at ? new Date(latest.due_at) : null;
+        const daysLeft = dueDate
+          ? Math.max(
+              0,
+              Math.ceil((dueDate - new Date()) / (1000 * 60 * 60 * 24))
+            )
+          : 0;
 
         setBillingData({
           bills,
-          currentBalance: `$${latest.total}`,
-          daysLeft: Math.max(
-            0,
-            Math.ceil(
-              (new Date(latest.due_at) - new Date()) / (1000 * 60 * 60 * 24)
-            )
-          ),
-          recentSummary: `$${latest.net_received}`,
+          currentBalance: `$${latest?.total || "0.00"}`,
+          daysLeft,
+          recentSummary: `$${latest?.net_received || "0.00"}`,
           billingAlerts: alerts,
         });
       } catch (err) {
-        console.error(err);
+        console.error("Billing fetch error:", err);
         setError("Unable to load billing data.");
       } finally {
         setLoading(false);
       }
     }
 
-    fetchBillingData();
+    if (subscriber_id) fetchBillingData();
   }, [subscriber_id]);
 
   // ✅ Download bill as PDF
@@ -98,9 +127,21 @@ export default function BillingPaymentPage({ params }) {
     }
   };
 
+  // ✅ Pagination logic
+  const totalBills = billingData.bills.length;
+  const totalPages = Math.ceil(totalBills / billsPerPage);
+  const startIndex = (currentPage - 1) * billsPerPage;
+  const currentBills = billingData.bills.slice(
+    startIndex,
+    startIndex + billsPerPage
+  );
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) setCurrentPage(page);
+  };
+
   return (
     <>
-      {/* <TopHeader /> */}
       <Header />
       <HeadBar text="Billing & Payment" />
 
@@ -115,8 +156,9 @@ export default function BillingPaymentPage({ params }) {
           <div className="alert alert-danger text-center my-5">{error}</div>
         ) : (
           <>
-            {/* Top Summary Cards */}
+            {/* ✅ Summary Cards */}
             <div className="row g-3 mb-4">
+              {/* Current Balance */}
               <div className="col-md-4">
                 <div className="card p-3 shadow-sm border-0 rounded-3">
                   <h6 className="text-muted">Current Balance</h6>
@@ -124,12 +166,18 @@ export default function BillingPaymentPage({ params }) {
                   <p className="small text-secondary">
                     {billingData.daysLeft} days left
                   </p>
-                  <button className="btn btn-success w-100 mt-2">
-                    Pay Now
-                  </button>
+
+                  <button
+                            className="btn btn-success"
+                            onClick={() => openPaymentModal("ORD1234", parseFloat(billingData.currentBalance.replace(/[^0-9.]/g, "")) || 0
+)}
+                          >
+                            Pay Now
+                          </button>
                 </div>
               </div>
 
+              {/* Recent Summary */}
               <div className="col-md-4">
                 <div className="card p-3 shadow-sm border-0 rounded-3">
                   <h6 className="text-muted">Recent Summary</h6>
@@ -140,6 +188,7 @@ export default function BillingPaymentPage({ params }) {
                 </div>
               </div>
 
+              {/* Billing Alerts */}
               <div className="col-md-4">
                 <div className="card p-3 shadow-sm border-0 rounded-3">
                   <h6 className="text-muted">Billing Alerts</h6>
@@ -158,11 +207,10 @@ export default function BillingPaymentPage({ params }) {
               </div>
             </div>
 
-            {/* Bill History Table */}
+            {/* ✅ Bill History Table */}
             <div className="card p-3 mb-4 shadow-sm border-0 rounded-3">
               <div className="d-flex justify-content-between align-items-center mb-2">
                 <h6 className="fw-bold mb-0">Bill History</h6>
-                
               </div>
 
               <div className="table-responsive">
@@ -178,59 +226,71 @@ export default function BillingPaymentPage({ params }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {billingData.bills.map((bill, i) => (
-                      <tr key={i}>
-                        <td>{bill.id}</td>
-                        <td>{bill.period}</td>
-                        <td>{bill.amount}</td>
-                        <td>{bill.due}</td>
-                        <td>
-                          <span
-                            className={`badge ${
-                              bill.status === "Paid"
-                                ? "bg-success"
-                                : "bg-warning"
-                            }`}
-                          >
-                            {bill.status}
-                          </span>
-                        </td>
-                        <td>
-                          {bill.attachmentUrl ? (
-                            <button
-                              className="btn btn-sm btn-outline-success"
-                              onClick={() => handleDownload(bill.id)}
+                    {currentBills.length > 0 ? (
+                      currentBills.map((bill, i) => (
+                        <tr key={i}>
+                          <td>{bill.id}</td>
+                          <td>{bill.period}</td>
+                          <td>{bill.amount}</td>
+                          <td>{bill.due}</td>
+                          <td>
+                            <span
+                              className={`badge ${
+                                bill.status?.toLowerCase() === "paid"
+                                  ? "bg-success"
+                                  : "bg-warning"
+                              }`}
                             >
-                              Download
-                            </button>
-                          ) : (
-                            <span className="text-muted small">N/A</span>
-                          )}
+                              {bill.status}
+                            </span>
+                          </td>
+                          <td>
+                            {bill.attachmentUrl ? (
+                              <button
+                                className="btn btn-sm btn-outline-success"
+                                onClick={() => handleDownload(bill.id)}
+                              >
+                                Download
+                              </button>
+                            ) : (
+                              <span className="text-muted small">N/A</span>
+                            )}
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="6" className="text-center text-muted py-3">
+                          No billing records found.
                         </td>
                       </tr>
-                    ))}
+                    )}
                   </tbody>
                 </table>
               </div>
-            </div>
 
-            {/* Manage Billing */}
-            <div className="card p-3 shadow-sm mb-5 border-0 rounded-3">
-              <h6 className="fw-bold mb-3">Manage Billing</h6>
-              <div className="d-flex flex-wrap gap-2">
-                <button className="btn btn-outline-success btn-sm">
-                  Enroll in Paperless Billing
-                </button>
-                <button className="btn btn-outline-success btn-sm">
-                  Update Payment Method
-                </button>
-                <button className="btn btn-outline-success btn-sm">
-                  Billing Preferences
-                </button>
-                <button className="btn btn-outline-success btn-sm">
-                  Contact Support
-                </button>
-              </div>
+              {/* ✅ Pagination */}
+              {totalPages > 1 && (
+                <div className="d-flex justify-content-center mt-3">
+                  <button
+                    className="btn btn-outline-success btn-sm me-2"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                  >
+                    Previous
+                  </button>
+                  <span className="align-self-center">
+                    Page {currentPage} of {totalPages}
+                  </span>
+                  <button
+                    className="btn btn-outline-success btn-sm ms-2"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
             </div>
           </>
         )}

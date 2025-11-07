@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import TopHeader from "../components/TopHeader";
-import Header from "../components/Header";
+import Header, { openPaymentModal } from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import "./Dashboard.css";
@@ -330,7 +330,16 @@ export default function DashboardPage() {
                 </button>
 
                 <div className="d-flex gap-2">
-                  <button className="btn btn-success btn-sm">Pay Now</button>
+
+        <button
+          className="btn btn-success"
+          onClick={() => openPaymentModal("ORD1234", currentBilli)}
+        >
+          Pay Now
+        </button>
+
+
+
                   {subscriber?.id && (
                     <Link href={`/dashboard/billing-payment/${subscriber.id}`}>
                       <button className="btn btn-outline-secondary btn-sm">
