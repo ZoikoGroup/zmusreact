@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
@@ -25,5 +25,5 @@ const PrepaidPlans = () => {
         <Footer />
         </>
     );
-}
+};
 export default PrepaidPlans;

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
@@ -79,5 +79,5 @@ const AnimalCharities = () => {
         <Footer />
         </>
     );
-}
+};
 export default AnimalCharities;
