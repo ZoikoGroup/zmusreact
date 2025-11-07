@@ -981,48 +981,7 @@ return (
           </Row>
         </Container>
       </div>
-      <section className="chat-section py-5">
-      <Container>
-        <Row className="align-items-center">
-          {/* Left Content */}
-          <Col lg={6} md={12} className="text-center text-lg-start mb-4 mb-lg-0">
-            <img width="70%"
-              src="https://assets.zoikomobile.com/wp-content/uploads/2024/08/Rectangle-799.png"
-              alt="Chat Bubble"
-              className="img-fluid mb-4"
-            />
-            <h1 className="fw-bold text-danger mb-3">Let's have a chat</h1>
-            <p className="text-muted">
-              Welcome to our happiest animal and music loving network in USA,
-              which endures animal love, swaps up in hilarious pet fails, and
-              animals hop on their feet with toe-tapping tunes! Share your deep
-              experience, emotional videos, and stories, alongside, connect with
-              fellow animal and music lovers, and unleash the fun! Our community
-              is so warm and friendly, you'll think you've slipped into a giant
-              furry hug!
-            </p>
-            <p className="text-muted">
-              Join a pet-friendly wireless provider today! Grab your smartphone,
-              capture your goofy pets or pet's quirks, and let's put your high
-              fives, and more. Don't be a wallflower—jump in a party - are you
-              with us?
-            </p>
-            
-          </Col>
-
-          {/* Right Chat Image */}
-          <Col lg={6} md={12} className="text-center">
-            <img
-              src="https://assets.zoikomobile.com/wp-content/uploads/2024/08/Group-1231.png"
-              alt="Chat Mockup"
-              className="img-fluid rounded shadow"
-              
-            />
-
-          </Col>
-        </Row>
-      </Container>
-    </section>
+      
     <Container fluid className="bglite">
         <Container className="p-5">
             <h2 className="text-center text-red">Frequently Asked Questions</h2>

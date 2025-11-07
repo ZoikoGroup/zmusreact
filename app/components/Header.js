@@ -150,7 +150,7 @@ const Header = () => {
                         <div className="d-block d-lg-none">
                <CustomLanguageSwitcher />
             </div>
-                        <Nav className="mx-auto mt-3 mt-lg-0">
+                        <Nav className="mx-auto mt-3 mt-lg-0" id="langNav">
                             <Nav.Link href="/prepaid-plans" className={pathname === "/prepaid-plans" ? "active" : ""}>Prepaid Plans</Nav.Link>
                             <Nav.Link href="/postpaid-plans" className={pathname === "/postpaid-plans" ? "active" : ""}>Postpaid Plans</Nav.Link>
                             <Nav.Link href="/business-deals" className={pathname === "/business-deals" ? "active" : ""}>Business Deals</Nav.Link>
