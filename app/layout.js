@@ -533,6 +533,14 @@ export default function RootLayout({ children }) {
   const metaObj = staticMeta ? { ...staticMeta, image: defaultMeta.image } : generateDynamicMeta(pathname);
 
   useEffect(() => {
+
+     if (typeof window !== "undefined") {
+      window.addEventListener("error", (e) => {
+        if (e.message.includes("ChunkLoadError")) {
+          window.location.reload(true);
+        }
+      });
+    }
     // Title
     if (metaObj?.title) document.title = metaObj.title;
 

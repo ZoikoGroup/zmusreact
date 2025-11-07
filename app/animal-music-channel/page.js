@@ -84,24 +84,24 @@ const videos = [
   },
 ];
 
-const videos2 = [
-  {
-    id: "hkBhJxZupeE",
-    thumb: "../img/Rectangle-747.webp",
-    title: "Wake Up",
-  },
-  {
-    id: "e_BYraHQmns",
-    thumb: "../img/maxresdefault-5.jpg",
-    title: "Playful Chimp",
-  },
-  {
-    id: "RZ_0ImDYrPY",
-    thumb: "../img/maxresdefault-6.jpg",
-    title: "Cute Kittens",
-  },
+// const videos2 = [
+//   {
+//     id: "hkBhJxZupeE",
+//     thumb: "../img/Rectangle-747.webp",
+//     title: "Wake Up",
+//   },
+//   {
+//     id: "e_BYraHQmns",
+//     thumb: "../img/maxresdefault-5.jpg",
+//     title: "Playful Chimp",
+//   },
+//   {
+//     id: "RZ_0ImDYrPY",
+//     thumb: "../img/maxresdefault-6.jpg",
+//     title: "Cute Kittens",
+//   },
  
-];
+// ];
 const videos3 = [
   {
     img: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Group-1144.webp",
@@ -174,7 +174,7 @@ export default function FreeInternationalMinutes() {
   const AUTOPLAY_INTERVAL = 10000;
 
   // === SLIDER 2 STATES ===
-  const [activeIndex2, setActiveIndex2] = useState(0);
+  // const [activeIndex2, setActiveIndex2] = useState(0);
   const autoplayRef2 = useRef(null);
 const [activeVideo, setActiveVideo] = useState(null);
 
@@ -191,7 +191,7 @@ const [activeVideo, setActiveVideo] = useState(null);
 
   const goPrev1 = () => setActiveIndex1((i) => prevIndex(i));
   const goNext1 = () => setActiveIndex1((i) => nextIndex(i));
-  const goNext2 = () => setActiveIndex2((i) => nextIndex(i));
+  // const goNext2 = () => setActiveIndex2((i) => nextIndex(i));
 
   // autoplay for slider 1
   const startAutoplay1 = () => {
