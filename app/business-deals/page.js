@@ -1,5 +1,4 @@
 "use client"
-import TopHeader from "../components/TopHeader";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
@@ -12,7 +11,6 @@ import BusinessBottonLine from "../components/BusinessBottonLine";
 const BusinessDeals = () => {
     return (
         <>
-        {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Reach out to clients in a great mobility with cellular business postpaid plans" />
         <BusinessDealsBanner />

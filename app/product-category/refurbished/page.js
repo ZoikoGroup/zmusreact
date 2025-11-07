@@ -1,5 +1,4 @@
 "use client"
-import TopHeader from "../../components/TopHeader";
 import Header from "../../components/Header";
 import HeadBarSmall from '../../components/HeadBarSmall';
 import Footer from "../../components/Footer";
