@@ -271,7 +271,7 @@ return (
 
       {/* Hero Banner */}
       <div className="animal-banner">
-        <Container className="text-center py-5">
+        <Container className="text-center bannerTxt">
           <h1 className="banner-title">Sync your love for animals</h1>
           <h2 className="banner-subtitle">
             Love the tempo on all the right notes
@@ -279,11 +279,11 @@ return (
           <p className="banner-desc">
             Explore the Unique Bond Between Animals and Music
           </p>
-          <div className="d-flex justify-content-center gap-3 mt-3 flex-wrap">
+          <div className="d-flex justify-content-center gap-3 mt-3 flex-wrap bannerButtons">
             <Button variant="danger" href="/zoiko-mobile-switch-save-form/" size="lg">
               Switch to Save
             </Button>
-            <Button href="/all-plans/" variant="outline-danger" size="lg">
+            <Button className="vewAll" href="/all-plans/" variant="outline-danger" size="lg">
               View All Plans
             </Button>
           </div>
@@ -803,11 +803,11 @@ return (
     </Container>
     <div className="animal-love-section d-flex align-items-center justify-content-center py-5 px-3">
       <div className="container text-center text-md-start d-flex flex-column flex-md-row align-items-center">
-        <img
+        {/* <img
           src="https://assets.zoikomobile.com/wp-content/uploads/2024/08/Rectangle-784.png" // <-- Replace with your correct path
           alt="Half Star"
           className="half-star mb-3 mb-md-0 me-md-3"
-        />
+        /> */}
         <div>
           <h2 className="fw-bold text-danger mb-3">
             Turn Up Your Love For Animals!
