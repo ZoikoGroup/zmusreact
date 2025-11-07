@@ -2,14 +2,11 @@
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 
-/**
- * CustomLanguageSwitcher Component
- * Single toggle button for Google Translate
- */
 const CustomLanguageSwitcher = () => {
   const [currentLang, setCurrentLang] = useState("en");
 
   useEffect(() => {
+    // Initialize Google Translate
     const initGoogleTranslate = () => {
       if (window.google && window.google.translate) {
         new window.google.translate.TranslateElement(
@@ -23,6 +20,7 @@ const CustomLanguageSwitcher = () => {
       }
     };
 
+    // Load script
     if (!document.getElementById("google-translate-script")) {
       const script = document.createElement("script");
       script.id = "google-translate-script";
@@ -35,6 +33,7 @@ const CustomLanguageSwitcher = () => {
       initGoogleTranslate();
     }
 
+    // Check language from cookie
     const checkCurrentLanguage = () => {
       const cookies = document.cookie.split(";");
       const googleTransCookie = cookies.find((c) =>
@@ -55,6 +54,7 @@ const CustomLanguageSwitcher = () => {
     };
   }, []);
 
+  // Change language function
   const changeLanguage = (lang) => {
     const selectElement = document.querySelector(".goog-te-combo");
     if (selectElement) {
@@ -64,16 +64,28 @@ const CustomLanguageSwitcher = () => {
     }
   };
 
+  // Toggle between English / Spanish
   const toggleLanguage = () => {
     const newLang = currentLang === "en" ? "es" : "en";
     changeLanguage(newLang);
   };
 
+  // 🔹 Add class to navbar when Spanish is active
+  useEffect(() => {
+    const navbar = document.querySelector("#langNav");
+    if (navbar) {
+      if (currentLang === "es") {
+        navbar.classList.add("navbar-spanish");
+      } else {
+        navbar.classList.remove("navbar-english");
+      }
+    }
+  }, [currentLang]);
+
   return (
     <>
       <div id="google_translate_element_hidden" style={{ display: "none" }}></div>
 
-      {/* Toggle Button (not translated by Google) */}
       <Button
         variant="link"
         className="notranslate text-decoration-none text-dark p-0"
