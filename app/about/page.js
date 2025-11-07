@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -12,7 +12,7 @@ const AboutUs = () => {
     const toggleView = () => {
         setOpen(!isOpen);
         setIsToggled(!isToggled);
-    }
+    };
 
     return (
         <>
@@ -126,5 +126,5 @@ const AboutUs = () => {
         <Footer />
         </>
     );
-}
+};
 export default AboutUs;
