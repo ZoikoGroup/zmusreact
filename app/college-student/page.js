@@ -23,7 +23,6 @@ const CollegeStudent = () => {
                     <h2 className="txtblack">On Any Of Our Plans</h2>
                     <div className="d-flex flex-nowrap gap-3">
                         <Button href='/college-student-discount-form' variant="danger" size="lg">Register Now</Button>
-                        <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
                     </div>
                 </div>
             </Container>
