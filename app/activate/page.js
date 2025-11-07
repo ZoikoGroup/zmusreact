@@ -39,7 +39,7 @@ export default function ActivateSim() {
       e.stopPropagation();
     } else {
       activateSim(formData);
-      console.log("Submitted:", formData);
+      // console.log("Submitted:", formData);
     }
 
     setValidated(true);
