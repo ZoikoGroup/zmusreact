@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import TopHeader from "../../components/TopHeader";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import HeadBar from "../../components/HeadBar";

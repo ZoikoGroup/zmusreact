@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import TopHeader from "../../../components/TopHeader";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import HeadBar from "../../../components/HeadBar";
 import "../../Dashboard.css";
-import Link from "next/link";
 
 export default function BillingPaymentPage({ params }) {
   const { subscriber_id } = params;

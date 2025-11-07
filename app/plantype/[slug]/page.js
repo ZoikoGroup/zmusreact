@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import TopHeader from "../../components/TopHeader";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import HeadBar from "../../components/HeadBar";

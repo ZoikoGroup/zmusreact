@@ -3,7 +3,6 @@ import Header from "../components/Header";
 import HeadBar from "../components/HeadBar";
 import Footer from "../components/Footer";
 import { Button, Col, Container, Row, Card, CardBody, Image } from "react-bootstrap";
-import TopHeader from "../components/TopHeader";
 import Testimonials from "../components/Testimonials";
 
 export default function Plans () {

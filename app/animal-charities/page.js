@@ -1,9 +1,8 @@
 "use client"
-import TopHeader from "../components/TopHeader";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
-import { Button, Col, Container, Row, Image } from "react-bootstrap";
+import { Button,  Container, Image } from "react-bootstrap";
 import Testimonials from "../components/Testimonials";
 import AnimalFaqs from "../components/AnimalFaqs";
 
