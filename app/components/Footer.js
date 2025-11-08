@@ -80,7 +80,7 @@ const Footer = () => {
                         <p className="txtred">Help &amp; Support</p>
                         <ul>
                             <li><Link href={"/customer-service"}>Customer Service</Link></li>
-                            <li><Link href={"/faqs"}>FAQs</Link></li>
+                            <li><Link href={"/faq"}>FAQs</Link></li>
                             <li><Link href={"https://mvnoc.ai/coverage-map"} target="_blank">Coverage Map</Link></li>
                             <li><Link href={"#"}>Network &amp; Service</Link></li>
                             <li><Link href={"/device-protection"}>Device Protection</Link></li>
