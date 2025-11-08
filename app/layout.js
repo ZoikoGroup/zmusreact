@@ -690,6 +690,8 @@ export default function RootLayout({ children }) {
 
         {/* ✅ Open Graph site name */}
         <meta property="og:site_name" content="Zoiko Mobile" />
+         {/* Google Translate meta tag */}
+  <meta name="google-translate-customization" content="notranslate" />
       </head>
 
       <body className={roboto.className}>

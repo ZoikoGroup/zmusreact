@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { FaSimCard, FaMobileAlt, FaDatabase } from "react-icons/fa";
-import TopHeader from "../../../components/TopHeader";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import HeadBar from "../../../components/HeadBar";

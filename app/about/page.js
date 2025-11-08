@@ -1,6 +1,5 @@
-"use client"
+"use client";
 import React, { useState } from "react";
-import TopHeader from "../components/TopHeader";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
@@ -13,11 +12,10 @@ const AboutUs = () => {
     const toggleView = () => {
         setOpen(!isOpen);
         setIsToggled(!isToggled);
-    }
+    };
 
     return (
         <>
-        {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>The Zoiko Philosophy: Innovate | Connect | Communicate</>} />
         <Container fluid className="bglite py-5">
@@ -128,5 +126,5 @@ const AboutUs = () => {
         <Footer />
         </>
     );
-}
+};
 export default AboutUs;

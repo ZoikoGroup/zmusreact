@@ -125,7 +125,7 @@ const HomeBanner = () => {
                         <h1 className="txtred bigred d-block d-sm-block d-md-none">Your Connecton Saves Lives</h1>
                         <h2 className="txtblack py-3 midbig"><span style={{fontWeight:'800'}}>Join Zoiko Mobile - We are supporting animals<br />and animal charities whilst keep you connected!</span></h2>
                         <div className="d-flex flex-nowrap gap-3">
-                            <Button href='/postal-service-workers-form' variant="danger">Register Now</Button>
+                            {/* <Button href='/postal-service-workers-form' variant="danger">Register Now</Button> */}
                             <Button href='/animal-charities' variant="outline-danger">Learn more</Button>
                         </div>
                     </div>

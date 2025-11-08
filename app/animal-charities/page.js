@@ -1,9 +1,8 @@
-"use client"
-import TopHeader from "../components/TopHeader";
+"use client";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
-import { Button, Col, Container, Row, Image } from "react-bootstrap";
+import { Button,  Container, Image } from "react-bootstrap";
 import Testimonials from "../components/Testimonials";
 import AnimalFaqs from "../components/AnimalFaqs";
 
@@ -21,8 +20,8 @@ const AnimalCharities = () => {
                     <h1 className="txtred">Your Connecton Saves Lives</h1>
                     <p className="txtblack py-3 w-50 body22">Join Zoiko Mobile - We are supporting animals and animal charities whilst keep you connected!</p>
                     <div className="d-flex flex-nowrap gap-3">
-                        <Button href='#' variant="danger" size="lg">Register Now</Button>
-                        <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
+                        <Button href='/zoiko-mobile-animal-welfare-partnership/' variant="danger" size="lg">Partner With Us Today</Button>
+                        {/* <Button href='#' variant="outline-danger" size="lg">Learn more</Button> */}
                     </div>
                 </div>
             </Container>
@@ -80,5 +79,5 @@ const AnimalCharities = () => {
         <Footer />
         </>
     );
-}
+};
 export default AnimalCharities;

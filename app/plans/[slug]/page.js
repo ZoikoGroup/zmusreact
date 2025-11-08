@@ -13,7 +13,6 @@ import {
   Image,
 } from "react-bootstrap";
 
-import TopHeader from "../../components/TopHeader";
 import Header from "../../components/Header";
 import HeadBar from "../../components/HeadBar";
 import Footer from "../../components/Footer";

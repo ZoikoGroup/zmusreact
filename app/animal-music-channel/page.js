@@ -84,24 +84,24 @@ const videos = [
   },
 ];
 
-const videos2 = [
-  {
-    id: "hkBhJxZupeE",
-    thumb: "../img/Rectangle-747.webp",
-    title: "Wake Up",
-  },
-  {
-    id: "e_BYraHQmns",
-    thumb: "../img/maxresdefault-5.jpg",
-    title: "Playful Chimp",
-  },
-  {
-    id: "RZ_0ImDYrPY",
-    thumb: "../img/maxresdefault-6.jpg",
-    title: "Cute Kittens",
-  },
+// const videos2 = [
+//   {
+//     id: "hkBhJxZupeE",
+//     thumb: "../img/Rectangle-747.webp",
+//     title: "Wake Up",
+//   },
+//   {
+//     id: "e_BYraHQmns",
+//     thumb: "../img/maxresdefault-5.jpg",
+//     title: "Playful Chimp",
+//   },
+//   {
+//     id: "RZ_0ImDYrPY",
+//     thumb: "../img/maxresdefault-6.jpg",
+//     title: "Cute Kittens",
+//   },
  
-];
+// ];
 const videos3 = [
   {
     img: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Group-1144.webp",
@@ -174,7 +174,7 @@ export default function FreeInternationalMinutes() {
   const AUTOPLAY_INTERVAL = 10000;
 
   // === SLIDER 2 STATES ===
-  const [activeIndex2, setActiveIndex2] = useState(0);
+  // const [activeIndex2, setActiveIndex2] = useState(0);
   const autoplayRef2 = useRef(null);
 const [activeVideo, setActiveVideo] = useState(null);
 
@@ -191,7 +191,7 @@ const [activeVideo, setActiveVideo] = useState(null);
 
   const goPrev1 = () => setActiveIndex1((i) => prevIndex(i));
   const goNext1 = () => setActiveIndex1((i) => nextIndex(i));
-  const goNext2 = () => setActiveIndex2((i) => nextIndex(i));
+  // const goNext2 = () => setActiveIndex2((i) => nextIndex(i));
 
   // autoplay for slider 1
   const startAutoplay1 = () => {
@@ -238,13 +238,7 @@ const goToSlide = (i) => setCurrentIndex(i);
   
 
   // autoplay for slider 2
-  useEffect(() => {
-    clearInterval(autoplayRef2.current);
-    autoplayRef2.current = setInterval(() => {
-      setActiveIndex2((i) => nextIndex(i));
-    }, 6000);
-    return () => clearInterval(autoplayRef2.current);
-  }, []);
+
 
   // swipe for slider 1
   const handleTouchStart1 = (e) => (touchStartX1.current = e.touches[0].clientX);
@@ -286,10 +280,10 @@ return (
             Explore the Unique Bond Between Animals and Music
           </p>
           <div className="d-flex justify-content-center gap-3 mt-3 flex-wrap">
-            <Button variant="danger" size="lg">
+            <Button variant="danger" href="/zoiko-mobile-switch-save-form/" size="lg">
               Switch to Save
             </Button>
-            <Button variant="outline-danger" size="lg">
+            <Button href="/all-plans/" variant="outline-danger" size="lg">
               View All Plans
             </Button>
           </div>
@@ -611,7 +605,7 @@ return (
 
         <Col md={4} className="text-center mb-4 mb-md-0">
           <h3 className="fw-bold text-danger">
-            Let’s Have Gifts <br /> That Deeply Change Us!
+            Let's Have Gifts <br /> That Deeply Change Us!
           </h3>
           <p className="mt-3">
             Animals snuggling is really special! <br />
@@ -914,14 +908,14 @@ return (
                 loving animals.
               </p>
               <div className="mt-4">
-                <Button
+                <Button href="/zoiko-mobile-animal-welfare-partnership/"
                   variant="danger"
                   className="me-3 px-4"
                   style={{ borderRadius: "8px" }}
                 >
                   Partner With Us
                 </Button>
-                <Button
+                <Button href="/animal-charities/"
                   variant="outline-danger"
                   className="px-4"
                   style={{ borderRadius: "8px" }}
@@ -968,14 +962,14 @@ return (
                 kindness!
               </p>
               <div className="mt-4">
-                <Button
+                <Button href="/all-plans/"
                   variant="danger"
                   className="me-3 px-4"
                   style={{ borderRadius: "8px" }}
                 >
                   Buy USA SIM plans today!
                 </Button>
-                <Button
+                <Button href="/animal-charities/"
                   variant="outline-danger"
                   className="px-4"
                   style={{ borderRadius: "8px" }}
@@ -987,52 +981,7 @@ return (
           </Row>
         </Container>
       </div>
-      <section className="chat-section py-5">
-      <Container>
-        <Row className="align-items-center">
-          {/* Left Content */}
-          <Col lg={6} md={12} className="text-center text-lg-start mb-4 mb-lg-0">
-            <img
-              src="https://assets.zoikomobile.com/wp-content/uploads/2024/08/Rectangle-799.png"
-              alt="Chat Bubble"
-              className="img-fluid mb-4"
-            />
-            <h1 className="fw-bold text-danger mb-3">Let's have a chat</h1>
-            <p className="text-muted">
-              Welcome to our happiest animal and music loving network in USA,
-              which endures animal love, swaps up in hilarious pet fails, and
-              animals hop on their feet with toe-tapping tunes! Share your deep
-              experience, emotional videos, and stories, alongside, connect with
-              fellow animal and music lovers, and unleash the fun! Our community
-              is so warm and friendly, you'll think you’ve slipped into a giant
-              furry hug!
-            </p>
-            <p className="text-muted">
-              Join a pet-friendly wireless provider today! Grab your smartphone,
-              capture your goofy pets or pet’s quirks, and let’s put your high
-              fives, and more. Don’t be a wallflower—jump in a party - are you
-              with us?
-            </p>
-            <Button variant="danger" className="rounded-pill px-4 py-2 fw-semibold">
-              Share your story
-            </Button>
-          </Col>
-
-          {/* Right Chat Image */}
-          <Col lg={6} md={12} className="text-center">
-            <img
-              src="https://assets.zoikomobile.com/wp-content/uploads/2024/08/Group-1231.png"
-              alt="Chat Mockup"
-              className="img-fluid rounded shadow"
-              
-            />
-            <p className="mt-3 text-danger fw-semibold">
-              Login/Register to start sending messages
-            </p>
-          </Col>
-        </Row>
-      </Container>
-    </section>
+      
     <Container fluid className="bglite">
         <Container className="p-5">
             <h2 className="text-center text-red">Frequently Asked Questions</h2>
@@ -1071,7 +1020,7 @@ return (
                         <AccordionItem eventKey="2">
                             <AccordionHeader>Can I share my own animal videos?</AccordionHeader>
                             <AccordionBody>
-                                <p>Absolutely! We’d love to see your furry, feathered, or scaly friends in action. Share your pet’s quirky moves, funny fails, or musical talents with the community.</p>
+                                <p>Absolutely! We'd love to see your furry, feathered, or scaly friends in action. Share your pet's quirky moves, funny fails, or musical talents with the community.</p>
                                 <p>
                                     <img width="10px" draggable="false" role="img" className="emoji" alt="📸" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f4f8.svg" />
                                     <img width="10px"draggable="false" role="img" className="emoji" alt="🐕" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f415.svg" />
@@ -1081,7 +1030,7 @@ return (
                         </AccordionItem>
                         <AccordionItem eventKey="3">
                             <AccordionHeader>Is there a specific playlist for pets?</AccordionHeader>
-                            <AccordionBody><p>Yes! We’ve curated special <strong>pet-friendly playlists</strong> with calming tunes, upbeat dance tracks, and even songs <strong>scientifically proven</strong> to make your pets happy.</p><p><img draggable="false" width="10px" role="img" className="emoji" alt="🎵" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f3b5.svg" /><img draggable="false" width="10px" role="img" className="emoji" alt="🐾" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f43e.svg" /> <strong>Pick your pet’s favorite beats and watch them groove!</strong></p></AccordionBody>
+                            <AccordionBody><p>Yes! We've curated special <strong>pet-friendly playlists</strong> with calming tunes, upbeat dance tracks, and even songs <strong>scientifically proven</strong> to make your pets happy.</p><p><img draggable="false" width="10px" role="img" className="emoji" alt="🎵" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f3b5.svg" /><img draggable="false" width="10px" role="img" className="emoji" alt="🐾" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f43e.svg" /> <strong>Pick your pet's favorite beats and watch them groove!</strong></p></AccordionBody>
                         </AccordionItem>
                         
                     </Accordion>
@@ -1096,7 +1045,7 @@ return (
                         </AccordionItem>
                         <AccordionItem eventKey="1">
                             <AccordionHeader>How can I get involved in animal advocacy?</AccordionHeader>
-                            <AccordionBody><p>We welcome all animal lovers to <strong>be part of the movement!</strong> Whether it’s adopting, fostering, donating, or simply sharing awareness, every small act makes a big impact.</p><p><img width="10px" draggable="false" role="img" className="emoji" alt="🐾" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f43e.svg"/> <strong>Together, we can create a kinder world for animals.</strong></p></AccordionBody>
+                            <AccordionBody><p>We welcome all animal lovers to <strong>be part of the movement!</strong> Whether it's adopting, fostering, donating, or simply sharing awareness, every small act makes a big impact.</p><p><img width="10px" draggable="false" role="img" className="emoji" alt="🐾" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f43e.svg"/> <strong>Together, we can create a kinder world for animals.</strong></p></AccordionBody>
                         </AccordionItem>
                         <AccordionItem eventKey="2">
                             <AccordionHeader>Does Zoiko Mobile offer any pet-friendly perks?</AccordionHeader>
@@ -1104,7 +1053,7 @@ return (
                         </AccordionItem>
                         <AccordionItem eventKey="3">
                             <AccordionHeader>How do I join this amazing community?</AccordionHeader>
-                            <AccordionBody><p>It’s easy! Just grab your smartphone, record your pet’s <strong>funniest, cutest, or most musical moments</strong>, and <strong>join the party!</strong></p><p><img draggable="false" role="img" className="emoji" alt="📲"width="10px" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f4f2.svg" /> <strong>Follow us, share your love, and let’s make the world a </strong></p>
+                            <AccordionBody><p>It's easy! Just grab your smartphone, record your pet's <strong>funniest, cutest, or most musical moments</strong>, and <strong>join the party!</strong></p><p><img draggable="false" role="img" className="emoji" alt="📲"width="10px" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f4f2.svg" /> <strong>Follow us, share your love, and let's make the world a </strong></p>
                             </AccordionBody>
                         </AccordionItem>
                         

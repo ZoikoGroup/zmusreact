@@ -6,23 +6,21 @@ import '../globals.css';
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from 'next/navigation';
 import PlanPurchaseModal from "./PlanPurchaseModal";
-import TopHeader from "./TopHeader"; // Desktop-only
+import TopHeader from "./TopHeader";
 import PaymentModal from "./PaymentModal";
+import CustomLanguageSwitcher from "./CustomLanguageSwitcher";
 
-// =====================
-// 🔹 Modal Triggers (Global)
-// =====================
 let openPlanModalCallback = null;
 let openPaymentModalCallback = null;
 
-// ✅ Expose function to open Payment Modal globally
+// ✅ Global Payment Modal trigger
 export function openPaymentModal(orderId, amount) {
   if (openPaymentModalCallback) {
     openPaymentModalCallback(orderId, amount);
   }
 }
 
-// ✅ Expose function to open Plan Purchase Modal globally
+// ✅ Global Plan Purchase Modal trigger
 export function openPlanPurchaseModal(planTitle, planSlug, planId, planPrice, planDuration, planBqid, planType) {
   if (openPlanModalCallback) {
     openPlanModalCallback(planTitle, planSlug, planId, planPrice, planDuration, planBqid, planType);
@@ -32,8 +30,8 @@ export function openPlanPurchaseModal(planTitle, planSlug, planId, planPrice, pl
 const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [showPlanModal, setShowPlanModal] = useState(false);
-  const [showPaymentModal, setShowPaymentModal] = useState(false); // ✅ New Payment Modal state
-  const [paymentData, setPaymentData] = useState({ orderId: "", amount: 0 }); // ✅ Payment data
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [paymentData, setPaymentData] = useState({ orderId: "", amount: 0 });
   const [modalData, setModalData] = useState({ title: "", slug: "", id: "", bq_id: "", plan_type: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
@@ -43,9 +41,6 @@ const Header = () => {
   const navbarCollapseRef = useRef(null);
   const toggleButtonRef = useRef(null);
 
-  // =====================
-  // 🔹 Initial setup
-  // =====================
   useEffect(() => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("zoiko_token");
@@ -56,19 +51,16 @@ const Header = () => {
       }
     }
 
-    // ✅ Load initial cart count
     const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
     const totalQty = storedCart.reduce((sum, item) => sum + (Number(item.formData?.priceQty ?? 1)), 0);
     setCartCount(totalQty);
 
-    // ✅ Listen for cart updates
     window.addEventListener("cartUpdated", () => {
       const updatedCart = JSON.parse(localStorage.getItem("cart") || "[]");
       const updatedQty = updatedCart.reduce((sum, item) => sum + (Number(item.formData?.priceQty ?? 1)), 0);
       setCartCount(updatedQty);
     });
 
-    // ✅ Handle chunk errors
     const handleChunkError = (e) => {
       if (e?.message?.includes('ChunkLoadError')) {
         console.warn('Chunk load error detected, reloading...');
@@ -82,42 +74,27 @@ const Header = () => {
     };
   }, []);
 
-  // =====================
-  // 🔹 Logout
-  // =====================
   const handleLogout = () => {
     localStorage.removeItem("zoiko_token");
     localStorage.removeItem("user");
     window.location.href = "/login";
   };
 
-  // =====================
-  // 🔹 Search Modal handlers
-  // =====================
   const handleCloseSearch = () => setShowSearch(false);
   const handleShowSearch = () => setShowSearch(true);
 
-  // =====================
-  // 🔹 Plan Modal handler
-  // =====================
   const handleOpenPlanModal = (title, slug, id, price, duration, bq_id, plan_type) => {
     setModalData({ title, slug, id, price, duration, bq_id, plan_type });
     setShowPlanModal(true);
   };
   openPlanModalCallback = handleOpenPlanModal;
 
-  // =====================
-  // 🔹 Payment Modal handler
-  // =====================
   const handleOpenPaymentModal = (orderId, amount) => {
     setPaymentData({ orderId, amount });
     setShowPaymentModal(true);
   };
   openPaymentModalCallback = handleOpenPaymentModal;
 
-  // =====================
-  // 🔹 Mobile Menu Close
-  // =====================
   const closeMobileMenu = () => {
     const navbar = navbarCollapseRef.current;
     if (navbar?.classList.contains("show") && toggleButtonRef.current) {
@@ -125,9 +102,6 @@ const Header = () => {
     }
   };
 
-  // =====================
-  // 🔹 Render
-  // =====================
   return (
     <>
       {/* Desktop-only Top Header */}
@@ -162,18 +136,18 @@ const Header = () => {
             )}
           </div>
 
-          <Navbar.Toggle
-            aria-controls="responsive-navbar-nav"
-            className="ms-2"
-            ref={toggleButtonRef}
-          />
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" className="ms-2" ref={toggleButtonRef} />
 
-          {/* Mobile menu */}
+          {/* Mobile Menu */}
           <Navbar.Collapse id="responsive-navbar-nav" className="mobile-overlay" ref={navbarCollapseRef}>
             <div className="d-lg-none text-end pe-3 pb-3">
               <button className="btn btn-link text-dark fs-3 p-0" onClick={closeMobileMenu}>
                 <i className="bi bi-x-lg"></i>
               </button>
+            </div>
+
+            <div className="d-block d-lg-none mb-3 px-3">
+              <CustomLanguageSwitcher />
             </div>
 
             <Nav className="mx-auto mt-3 mt-lg-0">
@@ -182,7 +156,7 @@ const Header = () => {
               <Nav.Link href="/business-deals" className={pathname === "/business-deals" ? "active" : ""}>Business Deals</Nav.Link>
               <Nav.Link href="/travel-plans" className={pathname === "/travel-plans" ? "active" : ""}>Travel Plans</Nav.Link>
               <Nav.Link href="/animal-music-channel" className={pathname === "/animal-music-channel" ? "active" : ""}>Animal &amp; Music</Nav.Link>
-              <NavDropdown title="Devices" id="collapsible-nav-dropdown" style={{ width: "fit-content" }}>
+              <NavDropdown title="Devices" id="collapsible-nav-dropdown">
                 <NavDropdown.Item href="https://phones.zoikomobile.com/" target="_blank">New Smartphones</NavDropdown.Item>
                 <NavDropdown.Item href="/product-category/refurbished">Refurbished Smartphones</NavDropdown.Item>
                 <NavDropdown.Item href="#">Accessories</NavDropdown.Item>
@@ -190,7 +164,6 @@ const Header = () => {
               <Nav.Link href="/about" className={pathname === "/about" ? "active" : ""}>About Us</Nav.Link>
             </Nav>
 
-            {/* Desktop Right Icons */}
             <Nav className="ms-auto d-none d-lg-flex align-items-center gap-3">
               <Nav.Link href="#" onClick={handleShowSearch}><i className="bi bi-search"></i></Nav.Link>
               <Nav.Link href="/checkout" className="position-relative">
@@ -209,7 +182,7 @@ const Header = () => {
               ) : (
                 <Nav.Link href="/login">Login</Nav.Link>
               )}
-              <Nav.Link href="#">Español</Nav.Link>
+              <CustomLanguageSwitcher />
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -228,7 +201,6 @@ const Header = () => {
         </Modal.Body>
       </Modal>
 
-      {/* Plan Purchase Modal */}
       <PlanPurchaseModal
         show={showPlanModal}
         onClose={() => setShowPlanModal(false)}
@@ -241,7 +213,6 @@ const Header = () => {
         planType={modalData.plan_type}
       />
 
-      {/* ✅ Payment Modal */}
       <PaymentModal
         show={showPaymentModal}
         onClose={() => setShowPaymentModal(false)}

@@ -1,14 +1,13 @@
 "use client";
 
-import React, { use, useEffect, useState } from "react";
-import Header, { openPaymentModal } from "../../../components/Header";
+import React, { useEffect, useState } from "react";
+import Header, { openPaymentModal } from "../../../components/Header"; // make sure Header exports openPaymentModal
 import Footer from "../../../components/Footer";
 import HeadBar from "../../../components/HeadBar";
 import "../../Dashboard.css";
 
 export default function BillingPaymentPage({ params }) {
   const { subscriber_id } = use(params);
-
 
   const [loading, setLoading] = useState(true);
   const [billingData, setBillingData] = useState({
@@ -20,7 +19,7 @@ export default function BillingPaymentPage({ params }) {
   });
   const [error, setError] = useState(null);
 
-  // ✅ Pagination state
+  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const billsPerPage = 5;
 
@@ -55,7 +54,7 @@ export default function BillingPaymentPage({ params }) {
           return;
         }
 
-        // ✅ Build bills list (latest first)
+        // Build bills list (latest first)
         const bills = statements
           .map((b) => ({
             id: b.id,
@@ -102,7 +101,7 @@ export default function BillingPaymentPage({ params }) {
     if (subscriber_id) fetchBillingData();
   }, [subscriber_id]);
 
-  // ✅ Download bill as PDF
+  // Download bill as PDF
   const handleDownload = async (billId) => {
     try {
       const res = await fetch(
@@ -127,7 +126,7 @@ export default function BillingPaymentPage({ params }) {
     }
   };
 
-  // ✅ Pagination logic
+  // Pagination logic
   const totalBills = billingData.bills.length;
   const totalPages = Math.ceil(totalBills / billsPerPage);
   const startIndex = (currentPage - 1) * billsPerPage;
@@ -156,7 +155,7 @@ export default function BillingPaymentPage({ params }) {
           <div className="alert alert-danger text-center my-5">{error}</div>
         ) : (
           <>
-            {/* ✅ Summary Cards */}
+            {/* Summary Cards */}
             <div className="row g-3 mb-4">
               {/* Current Balance */}
               <div className="col-md-4">
@@ -168,12 +167,18 @@ export default function BillingPaymentPage({ params }) {
                   </p>
 
                   <button
-                            className="btn btn-success"
-                            onClick={() => openPaymentModal("ORD1234", parseFloat(billingData.currentBalance.replace(/[^0-9.]/g, "")) || 0
-)}
-                          >
-                            Pay Now
-                          </button>
+                    className="btn btn-success"
+                    onClick={() =>
+                      openPaymentModal(
+                        "ORD1234",
+                        parseFloat(
+                          billingData.currentBalance.replace(/[^0-9.]/g, "")
+                        ) || 0
+                      )
+                    }
+                  >
+                    Pay Now
+                  </button>
                 </div>
               </div>
 
@@ -182,9 +187,7 @@ export default function BillingPaymentPage({ params }) {
                 <div className="card p-3 shadow-sm border-0 rounded-3">
                   <h6 className="text-muted">Recent Summary</h6>
                   <h4 className="fw-bold">{billingData.recentSummary}</h4>
-                  <p className="small text-success">
-                    ✓ Last payment successful
-                  </p>
+                  <p className="small text-success">✓ Last payment successful</p>
                 </div>
               </div>
 
@@ -199,15 +202,13 @@ export default function BillingPaymentPage({ params }) {
                       </p>
                     ))
                   ) : (
-                    <p className="small text-success mb-0">
-                      ✓ No pending alerts
-                    </p>
+                    <p className="small text-success mb-0">✓ No pending alerts</p>
                   )}
                 </div>
               </div>
             </div>
 
-            {/* ✅ Bill History Table */}
+            {/* Bill History Table */}
             <div className="card p-3 mb-4 shadow-sm border-0 rounded-3">
               <div className="d-flex justify-content-between align-items-center mb-2">
                 <h6 className="fw-bold mb-0">Bill History</h6>
@@ -269,7 +270,7 @@ export default function BillingPaymentPage({ params }) {
                 </table>
               </div>
 
-              {/* ✅ Pagination */}
+              {/* Pagination */}
               {totalPages > 1 && (
                 <div className="d-flex justify-content-center mt-3">
                   <button

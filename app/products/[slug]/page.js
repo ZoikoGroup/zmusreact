@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import data from "../../products/phonedata.json";
 import Image from "next/image";
 import { use } from "react";
-import TopHeader from "../../components/TopHeader";
 
 export default function ProductDetail ({ params }) {
     const router = useRouter();

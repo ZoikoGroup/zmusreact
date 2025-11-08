@@ -1,6 +1,4 @@
 "use client";
-
-import TopHeader from "../components/TopHeader";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
@@ -41,7 +39,7 @@ export default function ActivateSim() {
       e.stopPropagation();
     } else {
       activateSim(formData);
-      console.log("Submitted:", formData);
+      // console.log("Submitted:", formData);
     }
 
     setValidated(true);
