@@ -17,19 +17,19 @@ const Footer = () => {
                             <li><Link href={"#"}>Blogs</Link></li>
                             <li><Link href={"#"}>Sustainablity</Link></li>
                             <li><Link href={"/animal-charities"}>Animal Charities</Link></li>
-                            <li><Link href={"#"}>Zoiko Music Hub</Link></li>
+                            <li><Link href={"/music-hub"}>Zoiko Music Hub</Link></li>
                         </ul>
                     </Col>
                     <Col md={3} sm={12} xs={12}>
                         <p className="txtred">Shop</p>
                         <ul>
-                            <li><Link href={"#"}>Mobile Plans</Link></li>
-                            <li><Link href={"#"}>BYOD</Link></li>
-                            <li><Link href={"#"}>New Smart Phones</Link></li>
-                            <li><Link href={"#"}>Accessories</Link></li>
+                            <li><Link href={"/all-plans"}>Mobile Plans</Link></li>
+                            <li><Link href={"/byod-plans"}>BYOD</Link></li>
+                            <li><Link href={"https://phones.zoikomobile.com"} target="_blank">New Smart Phones</Link></li>
+                            <li><Link href={"/accessories"}>Accessories</Link></li>
                             <li><Link href={"#"}>Tablets</Link></li>
-                            <li><Link href={"#"}>Refurbished Smartphones</Link></li>
-                            <li><Link href={"#"}>Special Offers</Link></li>
+                            <li><Link href={"/product-category/refurbished"}>Refurbished Smartphones</Link></li>
+                            <li><Link href={"/offer-page"}>Special Offers</Link></li>
                         </ul>
                     </Col>
                     <Col md={3} sm={12} xs={12}>
@@ -56,7 +56,7 @@ const Footer = () => {
                             <li><Link href={"/california-consumer-privacy-act"}>California Consumer Privacy Act (CCPA)</Link>
                                 <ul>
                                     <li><Link href={"/do-not-sell-my-personal-information"}>Do Not Sell My Personal Information </Link></li>
-                                    <li><Link href={"#"}>CCPA Privacy Notice</Link></li>
+                                    <li><Link href={"/california-consumer-privacy-act"}>CCPA Privacy Notice</Link></li>
                                     <li><Link href={"/911-e911-disclosure"}>911 &amp; E911 Disclosure </Link></li>
                                 </ul>
                             </li>
@@ -70,7 +70,7 @@ const Footer = () => {
                     <Col md={4} sm={12} xs={12}>
                         <p className="txtred">Partner Programs</p>
                         <ul>
-                            <li><Link href={"#"}>Affiliate Program</Link></li>
+                            <li><Link href={"#"}>Become A Partner</Link></li>
                             <li><Link href={"#"}>Wholesale</Link></li>
                             <li><Link href={"#"}>Partner With Us</Link></li>
                         </ul>
