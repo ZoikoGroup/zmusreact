@@ -6,6 +6,7 @@ import Script from "next/script";
 import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
 
+
 /**
  * app/layout.js
  * - Client-side dynamic metadata (title, description, canonical, OG, Twitter)
@@ -694,9 +695,8 @@ export default function RootLayout({ children }) {
       </head>
 
       <body className={roboto.className}>
-        {children}
         <BootstrapClient />
-
+         {children}
         {/* Tawk.to chat */}
         <Script id="tawkto-script" strategy="afterInteractive">
           {`

@@ -35,7 +35,7 @@ export default function DashboardPage() {
       const usageSummary = data.usage_summary || {};
 
       const mobileData = {
-  used: Math.round(parseFloat(usageSummary.data?.used || 0) / 1024), // KB -> GB
+  used: Math.round(parseFloat(usageSummary.data?.used || 0) / 1024), // KB -> MB
   total: Math.round(
     (parseFloat(usageSummary.data?.used || 0) +
       parseFloat(usageSummary.data?.remaining || 0)) /
@@ -135,7 +135,7 @@ const billingCycle = formatBillingCycle();
               <div className="card-value">
                 <span className="big">{usage.mobileData.used}</span>
                 <span className="small">
-                  GB / {usage.mobileData.total} GB
+                  MB / {usage.mobileData.total} MB
                 </span>
               </div>
 
@@ -157,7 +157,7 @@ const billingCycle = formatBillingCycle();
                   </span>
                   <span className="muted">
                     {" "}
-                    · {Math.max(0, usage.mobileData.total - usage.mobileData.used)} GB
+                    · {Math.max(0, usage.mobileData.total - usage.mobileData.used)} MB
                     remaining
                   </span>
                 </div>
@@ -176,7 +176,7 @@ const billingCycle = formatBillingCycle();
               <div className="card-value">
                 <span className="big">{usage.hotspot.used}</span>
                 <span className="small">
-                  GB / {usage.hotspot.total} GB
+                  MB / {usage.hotspot.total} MB
                 </span>
               </div>
 
@@ -195,7 +195,7 @@ const billingCycle = formatBillingCycle();
                   </span>
                   <span className="muted">
                     {" "}
-                    · {Math.max(0, usage.hotspot.total - usage.hotspot.used)} GB
+                    · {Math.max(0, usage.hotspot.total - usage.hotspot.used)} MB
                     remaining
                   </span>
                 </div>

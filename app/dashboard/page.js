@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Header from "../components/Header";
+import Header, { openPaymentModal } from "../components/Header"; // ensure Header exports openPaymentModal
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import "./Dashboard.css";
@@ -38,8 +38,7 @@ export default function DashboardPage() {
   // Fetch devices dynamically
   async function fetchDevices(subscriberInfo, planDetailsInfo) {
     try {
-      const deviceIds =
-        planDetailsInfo?.line?.device_identifier_ids || [];
+      const deviceIds = planDetailsInfo?.line?.device_identifier_ids || [];
 
       if (deviceIds.length > 0) {
         return deviceIds.map((id, index) => ({
@@ -49,9 +48,7 @@ export default function DashboardPage() {
               ? "pSIM • Primary Line (Selected)"
               : "pSIM • Secondary Line",
           status:
-            planDetailsInfo?.line?.status === "active"
-              ? "Active"
-              : "Pending",
+            planDetailsInfo?.line?.status === "active" ? "Active" : "Pending",
         }));
       }
 
@@ -142,9 +139,8 @@ export default function DashboardPage() {
           setDevices(dynamicDevices);
         }
 
-        // ✅ Fetch Current Bill (dynamic by subscriber id)
+        // Fetch Current Bill
         const bill = await beQuick.getCurrentBill(SUBSCRIBER_ID);
-        console.log("Current Bill:", bill);
         setCurrentBill(bill || null);
 
         // Fetch Orders
@@ -161,14 +157,12 @@ export default function DashboardPage() {
 
   const currentBilli = currentBill?.total || 0;
   const nextPayment = currentBill?.due_at
-  ? new Date(currentBill.due_at).toLocaleString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      
-    })
-  : "-";
-
+    ? new Date(currentBill.due_at).toLocaleString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    : "-";
 
   const usageData = planDetails?.usage_summary?.data || {};
   const servicePeriod = planDetails?.service_period || {};
@@ -184,17 +178,16 @@ export default function DashboardPage() {
 
   return (
     <>
-      {/* <TopHeader /> */}
       <Header />
       <HeadBar text="Get Our Best Postpaid Mobile Plans & Pay Only for Every Need!" />
 
       <div className="dashboard-container container py-4">
-        {/* ✅ Welcome message */}
+        {/* Welcome message */}
         <div className="alert alert-success text-center mb-4 fw-bold">
           👋 Welcome, {userName}!
         </div>
 
-        {/* ⚠️ Subscriber not found */}
+        {/* Subscriber not found */}
         {subscriberNotFound && (
           <div className="alert alert-danger text-center">
             ⚠️ Subscriber not found for your account. Please contact support.
@@ -224,8 +217,8 @@ export default function DashboardPage() {
 
                 <div className="usage-info mb-3">
                   <div className="d-flex justify-content-between small mb-1">
-                    <span>{usedGB.toFixed(2)} GB Used</span>
-                    <span>{remainingGB.toFixed(2)} GB Remaining</span>
+                    <span>{usedGB.toFixed(2)} MB Used</span>
+                    <span>{remainingGB.toFixed(2)} MB Remaining</span>
                   </div>
                   <div className="progress" style={{ height: "6px" }}>
                     <div
@@ -248,7 +241,7 @@ export default function DashboardPage() {
                   </Link>
                   <Link
                     className="btn btn-warning btn-sm text-white"
-                    href={`/business-deals`}
+                    href={`/all-plans`}
                   >
                     Upgrade Plan
                   </Link>
@@ -329,7 +322,15 @@ export default function DashboardPage() {
                 </button>
 
                 <div className="d-flex gap-2">
-                  <button className="btn btn-success btn-sm">Pay Now</button>
+                  <button
+                    className="btn btn-success"
+                    onClick={() =>
+                      openPaymentModal("ORD1234", Number(currentBilli))
+                    }
+                  >
+                    Pay Now
+                  </button>
+
                   {subscriber?.id && (
                     <Link href={`/dashboard/billing-payment/${subscriber.id}`}>
                       <button className="btn btn-outline-secondary btn-sm">
@@ -337,107 +338,6 @@ export default function DashboardPage() {
                       </button>
                     </Link>
                   )}
-                </div>
-              </div>
-            </div>
-
-            {/* Account Settings */}
-            <div className="col-lg-4 col-md-6">
-              <div className="dash-card">
-                <h6 className="card-title">Account Settings</h6>
-                <p className="text-muted small mb-3">
-                  Manage password, contact info, and security
-                </p>
-                <p className="small mb-1 fw-bold">Contact Info</p>
-                <p className="text-muted small mb-0">
-                  {subscriber?.email || "info@zoikomobile.com"}
-                </p>
-                <p className="text-muted small mb-3">
-                  {subscriber?.contact_number || "800-988-8116"}
-                </p>
-                <p className="small mb-1 fw-bold">Security</p>
-                <p className="text-muted small mb-3">
-                  Two-factor authentication{" "}
-                  {subscriber?.two_fa ? "enabled" : "disabled"}
-                </p>
-
-                <div className="d-flex gap-2">
-                  <button className="btn btn-outline-secondary btn-sm">
-                    Edit Profile
-                  </button>
-                  <button className="btn btn-outline-success btn-sm">
-                    Security Settings
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Order History */}
-            <div className="col-lg-4 col-md-6">
-              <div className="dash-card">
-                <h6 className="card-title">Order History</h6>
-                <p className="text-muted small mb-3">Track previous orders</p>
-
-                {orders.slice(0, 3).map((o, i) => (
-                  <div key={i} className="mb-3">
-                    <p className="small mb-1 text-muted">
-                      {o.date || o.created_at || ""}
-                    </p>
-                    <p>
-                      <strong>
-                        Order {o.id || o.order_id || ""} - {o.description || ""}
-                      </strong>{" "}
-                      <span className="text-muted">
-                        ${Number(o.amount || o.total || 0).toFixed(2)}
-                      </span>
-                    </p>
-                  </div>
-                ))}
-
-                <div className="d-flex gap-2">
-                  <button className="btn btn-outline-success btn-sm">
-                    View All Orders
-                  </button>
-                  <button className="btn btn-outline-secondary btn-sm">
-                    Track Shipment
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Support */}
-            <div className="col-lg-4 col-md-6">
-              <div className="dash-card">
-                <h6 className="card-title text-danger">Request Support</h6>
-                <p className="text-muted small mb-3">
-                  Instant access to help with account pre-filled
-                </p>
-                <div className="alert alert-warning py-2 small mb-3">
-                  Need help? Our driver support team is available 24/7
-                </div>
-
-                <div className="d-grid gap-2">
-                  <button className="btn btn-outline-success btn-sm">
-                    Live Chat
-                  </button>
-                  <button className="btn btn-outline-success btn-sm">
-                    Call Support
-                  </button>
-                  <button className="btn btn-outline-success btn-sm">
-                    Email Help
-                  </button>
-                  <button className="btn btn-outline-secondary btn-sm">
-                    FAQ
-                  </button>
-                </div>
-
-                <div className="d-flex gap-2 mt-3">
-                  <button className="btn btn-success btn-sm">
-                    Contact Support
-                  </button>
-                  <button className="btn btn-outline-warning btn-sm text-dark">
-                    Browse Help Center
-                  </button>
                 </div>
               </div>
             </div>
