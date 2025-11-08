@@ -1044,26 +1044,65 @@ a {
 
 .animal-banner {
   background-image: url("/img/animal-music-bg.webp");
-  background-size: cover;
-  background-position: center;
+  background-size: contain;
+  /* background-position: center; */
   background-repeat: no-repeat;
-  width: 100%;
-  min-height: 420px; /* ✅ ensures image is visible */
-  display: flex;
-  align-items: center;
-  padding: 60px 0;
+  /* width: 100%; */
+  /* min-height: 420px; ✅ ensures image is visible */
+  /* display: flex; */
+  /* align-items: center; */
+  /* padding: 60px 0; */
 }
+.animal-banner .bannerTxt {
+          padding-top: 5rem;
+}
+.animal-banner .bannerButtons{
+  padding-bottom: 5rem;
+}
+.animal-banner a.vewAll{
+  background-color: #fff;
+}
+  .animal-banner h1{
+    font-size: 2vw;
+  }
+    .animal-banner h2{
+    font-size: 2.5vw;
+  }
+
+    .animal-banner a, .animal-banner p{
+    font-size: 1.5vw;
+  }
+  .animalslider1{
+    margin:10px !important;
+  }
 
 /* Mobile image swap */
 @media (max-width: 767px) {
   .animal-banner {
     background-image: url("/img/animal-music-bg-mobile.png");
-    min-height: 480px;
-    background-position: top;
-    padding: 40px 0;
+    background-size: contain;
+  }
+  .animal-banner h1{
+    font-size: 6vw;
+  }
+    .animal-banner h2{
+    font-size: 8vw;
+  }
+
+    .animal-banner a, .animal-banner p{
+    font-size: 4vw;
   }
   .animalslider1{
     margin:10px !important;
+  }
+  .animal-banner .bannerTxt {
+          padding-top: 5rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-bottom: 0;
+  }
+  .animal-banner .bannerButtons{
+        padding-bottom: 25rem;
   }
 }
 
