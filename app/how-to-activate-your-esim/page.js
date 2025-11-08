@@ -14,7 +14,16 @@ const ActivateESIM = () => {
         {/* <TopHeader /> */}
         <Header />
         <HeadBar text="eSIM Card Activation Guides for Smartphone, Tabs & Smartwatch!" />
-        <Container fluid className="esimbanner p-0"></Container>
+        <Container fluid className="p-0">
+            <img className="d-none d-md-block w-100" src="/img/home-banner/esim-activation.png" alt="Postal Workers" />
+            <img className="d-sm-block d-md-none" style={{maxHeight:'600px'}} src="/img/home-banner/esim-activation-m.png" alt="Postal Workers" />
+            <Container className="d-none d-md-block" style={{marginTop:'-400px', marginBottom:'80px'}}>
+                <h1 className="verybig w-50"><span className="txtred">eSIM Card</span> Activation Guides for Smartphone, Tab &amp; Smartwatch</h1>
+            </Container>
+            <Container className="d-sm-block d-md-none" style={{marginTop:'-500px', marginBottom:'380px'}}>
+                <h1 className="txtblack"><span className="txtred">eSIM Card</span> Activation Guides for Smartphone, Tab &amp; Smartwatch</h1>
+            </Container>
+        </Container>
         <Container fluid className="bglite py-5 px-4">
             <div className="text-center">
                 <h2 className="txtred">How to activate your Zoiko Mobile&apos;s eSIM?</h2>

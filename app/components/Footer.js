@@ -50,6 +50,91 @@ const Footer = () => {
 
     return (
         <>
+        <Container fluid className="footerboxlarge">
+            <Container className="py-5">
+                <Row>
+                    <Col md={3} sm={12} xs={12}>
+                        <p className="txtred">About Us</p>
+                        <ul>
+                            <li><Link href={"/about"}>Our Story</Link></li>
+                            <li><Link href={"/news"}>Press &amp; Media</Link></li>
+                            <li><Link href={"#"}>Blogs</Link></li>
+                            <li><Link href={"#"}>Sustainablity</Link></li>
+                            <li><Link href={"/animal-charities"}>Animal Charities</Link></li>
+                            <li><Link href={"/music-hub"}>Zoiko Music Hub</Link></li>
+                        </ul>
+                    </Col>
+                    <Col md={3} sm={12} xs={12}>
+                        <p className="txtred">Shop</p>
+                        <ul>
+                            <li><Link href={"/all-plans"}>Mobile Plans</Link></li>
+                            <li><Link href={"/byod-plans"}>BYOD</Link></li>
+                            <li><Link href={"https://phones.zoikomobile.com"} target="_blank">New Smart Phones</Link></li>
+                            <li><Link href={"/accessories"}>Accessories</Link></li>
+                            <li><Link href={"#"}>Tablets</Link></li>
+                            <li><Link href={"/product-category/refurbished"}>Refurbished Smartphones</Link></li>
+                            <li><Link href={"/offer-page"}>Special Offers</Link></li>
+                        </ul>
+                    </Col>
+                    <Col md={3} sm={12} xs={12}>
+                        <p className="txtred">Help &amp; Support</p>
+                        <ul>
+                            <li><Link href={"/customer-service"}>Customer Service</Link></li>
+                            <li><Link href={"/faqs"}>FAQs</Link></li>
+                            <li><Link href={"https://mvnoc.ai/coverage-map"} target="_blank">Coverage Map</Link></li>
+                            <li><Link href={"#"}>Network &amp; Service</Link></li>
+                            <li><Link href={"/device-protection"}>Device Protection</Link></li>
+                            <li><Link href={"/return-policy"}>Return &amp; Warranty Policy</Link></li>
+                            <li><Link href={"/contact-us"}>Contact Us</Link></li>
+                        </ul>
+                    </Col>
+                    <Col md={3} sm={12} xs={12}>
+                        <p className="txtred">Zoiko Legal</p>
+                        <ul>
+                            <li><Link href={"/terms-and-conditions"}>Terms &amp; Conditions</Link></li>
+                            <li><Link href={"/privacy-policy"}>Privacy Policy</Link></li>
+                            <li><Link href={"/cookie-policy"}>Cookies Policy</Link></li>
+                            <li><Link href={"/intellectual-property-notice"}>Intellectual Property</Link></li>
+                            <li><Link href={"/consumer-information"}>Consumer Information</Link></li>
+                            <li><Link href={"/regularity-information"}>Regulatory Information</Link></li>
+                            <li><Link href={"/california-consumer-privacy-act"}>California Consumer Privacy Act (CCPA)</Link>
+                                <ul>
+                                    <li><Link href={"/do-not-sell-my-personal-information"}>Do Not Sell My Personal Information </Link></li>
+                                    <li><Link href={"/california-consumer-privacy-act"}>CCPA Privacy Notice</Link></li>
+                                    <li><Link href={"/911-e911-disclosure"}>911 &amp; E911 Disclosure </Link></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={3} sm={12} xs={12}>
+                        <Image src="/img/footer-logo.png" fluid className="w-75" alt="Footer Logo" />
+                    </Col>
+                    <Col md={4} sm={12} xs={12}>
+                        <p className="txtred">Partner Programs</p>
+                        <ul>
+                            <li><Link href={"#"}>Become A Partner</Link></li>
+                            <li><Link href={"#"}>Wholesale</Link></li>
+                            <li><Link href={"#"}>Partner With Us</Link></li>
+                        </ul>
+                    </Col>
+                    <Col md={5} sm={12} xs={12}>
+                        <p className="txtred">Latest News &amp; Offers</p>
+                        <p>Receive the latest offers, updates, and unlock amazing savings on Zoiko Mobile plans and devices.</p>
+                        <InputGroup className="mb-3">
+                            <Form.Control placeholder="Enter your email address" aria-label="Enter your email address" aria-describedby="basic-addon2" />
+                            <Button variant="danger" size="lg" id="button-addon2">Subscribe</Button>
+                        </InputGroup>
+                        <Link href={'https://www.facebook.com/zoikomobileusa'} target="_blank"><i className="bi bi-facebook"></i></Link>
+                        <Link href={'https://instagram.com/zoikomobileus'} target="_blank" className="px-3"><i className="bi bi-instagram"></i></Link>
+                        <Link href={'https://uk.pinterest.com/zoikomobileusa/'} target="_blank"><i className="bi bi-pinterest"></i></Link>
+                        <Link href={'https://x.com/zoikomobileusa'} target="_blank" className="px-3"><i className="bi bi-twitter-x"></i></Link>
+                        <Link href={'https://www.linkedin.com/company/zoikomobileusa/'} target="_blank"><i className="bi bi-linkedin"></i></Link>
+                        <Link href={'https://www.threads.net/@zoikomobileus'} target="_blank" className="px-3"><i className="bi bi-threads"></i></Link>
+                        <Link href={'https://www.youtube.com/@ZoikoMobileUSA'} target="_blank"><i className="bi bi-youtube"></i></Link>
+                    </Col>
+                </Row>
             <Container fluid className="footerboxlarge">
                 <Container className="py-5">
                     <Row>
