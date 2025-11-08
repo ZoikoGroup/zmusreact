@@ -7,7 +7,7 @@ import HeadBar from "../../../components/HeadBar";
 import "../../Dashboard.css";
 
 export default function BillingPaymentPage({ params }) {
-  const { subscriber_id } = use(params);
+  const { subscriber_id } = React.use(params);
 
   const [loading, setLoading] = useState(true);
   const [billingData, setBillingData] = useState({
