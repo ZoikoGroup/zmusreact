@@ -301,7 +301,6 @@ export default function DashboardPage() {
         }
 
         const SUBSCRIBER_ID = subscriberResult.subscriber_id;
-        //const SUBSCRIBER_ID = 54;
         const subDetails = await beQuick.getSubscriberDetails(SUBSCRIBER_ID);
         const subscriberInfo = subDetails?.subscribers?.[0];
 
@@ -552,7 +551,7 @@ export default function DashboardPage() {
                   <div className="d-flex gap-2 mt-3">
                     <button
                       className="btn btn-success"
-                      onClick={() => openPaymentModal(planDetails?.current_plans?.[0]?.id, Number(currentBilli))}
+                      onClick={() => openPaymentModal("ORD1234", Number(currentBilli))}
                     >
                       Pay Now
                     </button>

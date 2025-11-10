@@ -5,6 +5,8 @@ import Header, { openPaymentModal } from "../../../components/Header"; // make s
 import Footer from "../../../components/Footer";
 import HeadBar from "../../../components/HeadBar";
 import "../../Dashboard.css";
+import beQuick from "../../../utils/dasdbeQuickApi";
+import { getPlanDetails } from "../../../utils/dasdbeQuickApi";
 
 export default function BillingPaymentPage({ params }) {
   const { subscriber_id } = React.use(params);
@@ -19,6 +21,9 @@ export default function BillingPaymentPage({ params }) {
   });
   const [error, setError] = useState(null);
 
+  const [planDetails, setPlanDetails] = useState(null);
+  const [primaryLineId, setPrimaryLineId] = useState(null);
+
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const billsPerPage = 5;
@@ -26,6 +31,7 @@ export default function BillingPaymentPage({ params }) {
   const API_URL = `https://zoiko-atom-api.bequickapps.com/billing_statements?by_subscriber_id=${subscriber_id}`;
   const TOKEN = "09ff2d85-a451-47e6-86bc-aba98e1e4629";
 
+  // Fetch Billing Data
   useEffect(() => {
     async function fetchBillingData() {
       try {
@@ -101,6 +107,31 @@ export default function BillingPaymentPage({ params }) {
     if (subscriber_id) fetchBillingData();
   }, [subscriber_id]);
 
+  // Fetch Plan Details
+  useEffect(() => {
+    async function fetchPlan() {
+      try {
+        if (!subscriber_id) return;
+
+        const subDetails = await beQuick.getSubscriberDetails(subscriber_id);
+        const subscriberInfo = subDetails?.subscribers?.[0];
+        if (!subscriberInfo) return;
+
+        const lineId = subscriberInfo.primary_line_id;
+        setPrimaryLineId(lineId);
+
+        if (lineId) {
+          const data = await getPlanDetails(lineId, true);
+          setPlanDetails(data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch plan details:", err);
+      }
+    }
+
+    fetchPlan();
+  }, [subscriber_id]);
+
   // Download bill as PDF
   const handleDownload = async (billId) => {
     try {
@@ -139,6 +170,10 @@ export default function BillingPaymentPage({ params }) {
     if (page >= 1 && page <= totalPages) setCurrentPage(page);
   };
 
+  const currentPlan = planDetails?.current_plans?.[0] || {};
+  const currentPlanName = currentPlan?.name || "N/A";
+  const currentPlanId = currentPlan?.id || "N/A";
+
   return (
     <>
       <Header />
@@ -155,6 +190,8 @@ export default function BillingPaymentPage({ params }) {
           <div className="alert alert-danger text-center my-5">{error}</div>
         ) : (
           <>
+          
+
             {/* Summary Cards */}
             <div className="row g-3 mb-4">
               {/* Current Balance */}
@@ -163,14 +200,14 @@ export default function BillingPaymentPage({ params }) {
                   <h6 className="text-muted">Current Balance</h6>
                   <h4 className="fw-bold">{billingData.currentBalance}</h4>
                   <p className="small text-secondary">
-                    {billingData.daysLeft} days left
+                    {billingData.daysLeft} days left ({currentPlanName})
                   </p>
-
+                  
                   <button
                     className="btn btn-success"
                     onClick={() =>
                       openPaymentModal(
-                        "ORD1234",
+                        currentPlanId,
                         parseFloat(
                           billingData.currentBalance.replace(/[^0-9.]/g, "")
                         ) || 0
