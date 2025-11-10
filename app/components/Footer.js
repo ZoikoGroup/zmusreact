@@ -122,10 +122,43 @@ const Footer = () => {
                     <Col md={5} sm={12} xs={12}>
                         <p className="txtred">Latest News &amp; Offers</p>
                         <p>Receive the latest offers, updates, and unlock amazing savings on Zoiko Mobile plans and devices.</p>
-                        <InputGroup className="mb-3">
-                            <Form.Control placeholder="Enter your email address" aria-label="Enter your email address" aria-describedby="basic-addon2" />
-                            <Button variant="danger" size="lg" id="button-addon2">Subscribe</Button>
+                        <InputGroup className="mb-2">
+                            <Form.Control
+                                placeholder="Enter your email address"
+                                aria-label="Enter your email address"
+                                aria-describedby="basic-addon2"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <Button
+                                variant="danger"
+                                size="lg"
+                                id="button-addon2"
+                                disabled={loading}
+                                onClick={handleSubscribe}
+                            >
+                                {loading ? "Subscribing..." : "Subscribe"}
+                            </Button>
                         </InputGroup>
+
+                        {/* Message container with fixed height */}
+                        <div style={{ minHeight: "24px", marginBottom: "8px" }}>
+                            {message && (
+                                <p
+                                    style={{
+                                        color:
+                                            message.includes("✅") ||
+                                            message.includes("successful")
+                                                ? "#28a745"
+                                                : "#ff6666",
+                                        fontSize: "14px",
+                                        margin: 0,
+                                    }}
+                                >
+                                    {message}
+                                </p>
+                            )}
+                        </div>
                         <Link href={'https://www.facebook.com/zoikomobileusa'} target="_blank"><i className="bi bi-facebook"></i></Link>
                         <Link href={'https://instagram.com/zoikomobileus'} target="_blank" className="px-3"><i className="bi bi-instagram"></i></Link>
                         <Link href={'https://uk.pinterest.com/zoikomobileusa/'} target="_blank"><i className="bi bi-pinterest"></i></Link>
