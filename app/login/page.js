@@ -328,10 +328,9 @@ const Login = () => {
                       Register
                     </Button>{" "}
                     <Button className="google-btn" href="/api/auth/google">
-                    <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" />
+                      <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" />
                       Sign in with Google
-                    </Button>
-                    
+                    </Button>                    
                   </div>
                 </Form>
               </Col>
