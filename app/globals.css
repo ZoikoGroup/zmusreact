@@ -1483,3 +1483,32 @@ body {
   /* .navbar-spanish{
     font-size: 12px !important;
   } */
+
+
+  .google-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #fff;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 20px;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.google-btn:hover {
+  background-color: #f7f7f7;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  text-decoration: none;
+  color: #555;
+}
+
+.google-btn img {
+  width: 18px;
+  height: 18px;
+}
