@@ -1514,3 +1514,11 @@ body {
   width: 18px;
   height: 18px;
 }
+.wholesale-banner-section{
+  background-image: url("/img/cityscapebg.jpg");
+    background-position: "center center";
+    background-size: "cover";
+}
+.wholesale-banner-image{
+      height: 25vw;
+}
