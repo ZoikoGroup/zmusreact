@@ -114,8 +114,8 @@ const Footer = () => {
                     <Col md={4} sm={12} xs={12}>
                         <p className="txtred">Partner Programs</p>
                         <ul>
-                            <li><Link href={"#"}>Become A Partner</Link></li>
-                            <li><Link href={"#"}>Wholesale</Link></li>
+                            <li><Link href={"/become-a-partner"}>Become A Partner</Link></li>
+                            <li><Link href={"/wholesale"}>Wholesale</Link></li>
                             <li><Link href={"/partner-with-us"}>Partner With Us</Link></li>
                         </ul>
                     </Col>
