@@ -2,7 +2,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
-import { Button, Col, Container, Row, Image } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 export default function NetworkService() {
     return (
