@@ -82,7 +82,7 @@ const Footer = () => {
                             <li><Link href={"/customer-service"}>Customer Service</Link></li>
                             <li><Link href={"/faq"}>FAQs</Link></li>
                             <li><Link href={"https://mvnoc.ai/coverage-map"} target="_blank">Coverage Map</Link></li>
-                            <li><Link href={"#"}>Network &amp; Service</Link></li>
+                            <li><Link href={"/network-service"}>Network &amp; Service</Link></li>
                             <li><Link href={"/device-protection"}>Device Protection</Link></li>
                             <li><Link href={"/return-policy"}>Return &amp; Warranty Policy</Link></li>
                             <li><Link href={"/contact-us"}>Contact Us</Link></li>
