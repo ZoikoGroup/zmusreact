@@ -413,6 +413,13 @@ a {
   background-size: cover;
   height: 200px;
 }
+.wholesalebg {
+  background-image: url('/img/home-banner/wholesalebg.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 300px;
+}
 .redborderbox {
   width: 100%;
   border: 1px solid #DF1E5A;
