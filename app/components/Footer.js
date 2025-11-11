@@ -82,7 +82,7 @@ const Footer = () => {
                             <li><Link href={"/customer-service"}>Customer Service</Link></li>
                             <li><Link href={"/faq"}>FAQs</Link></li>
                             <li><Link href={"https://mvnoc.ai/coverage-map"} target="_blank">Coverage Map</Link></li>
-                            <li><Link href={"#"}>Network &amp; Service</Link></li>
+                            <li><Link href={"/network-service"}>Network &amp; Service</Link></li>
                             <li><Link href={"/device-protection"}>Device Protection</Link></li>
                             <li><Link href={"/return-policy"}>Return &amp; Warranty Policy</Link></li>
                             <li><Link href={"/contact-us"}>Contact Us</Link></li>
@@ -115,17 +115,50 @@ const Footer = () => {
                         <p className="txtred">Partner Programs</p>
                         <ul>
                             <li><Link href={"/become-a-partner"}>Become A Partner</Link></li>
-                            <li><Link href={"/wholesale"}>Become a Retailer</Link></li>
+                            <li><Link href={"/wholesale"}>Wholesale</Link></li>
                             <li><Link href={"/partner-with-us"}>Partner With Us</Link></li>
                         </ul>
                     </Col>
                     <Col md={5} sm={12} xs={12}>
                         <p className="txtred">Latest News &amp; Offers</p>
                         <p>Receive the latest offers, updates, and unlock amazing savings on Zoiko Mobile plans and devices.</p>
-                        <InputGroup className="mb-3">
-                            <Form.Control placeholder="Enter your email address" aria-label="Enter your email address" aria-describedby="basic-addon2" />
-                            <Button variant="danger" size="lg" id="button-addon2">Subscribe</Button>
+                        <InputGroup className="mb-2">
+                            <Form.Control
+                                placeholder="Enter your email address"
+                                aria-label="Enter your email address"
+                                aria-describedby="basic-addon2"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <Button
+                                variant="danger"
+                                size="lg"
+                                id="button-addon2"
+                                disabled={loading}
+                                onClick={handleSubscribe}
+                            >
+                                {loading ? "Subscribing..." : "Subscribe"}
+                            </Button>
                         </InputGroup>
+
+                        {/* Message container with fixed height */}
+                        <div style={{ minHeight: "24px", marginBottom: "8px" }}>
+                            {message && (
+                                <p
+                                    style={{
+                                        color:
+                                            message.includes("✅") ||
+                                            message.includes("successful")
+                                                ? "#28a745"
+                                                : "#ff6666",
+                                        fontSize: "14px",
+                                        margin: 0,
+                                    }}
+                                >
+                                    {message}
+                                </p>
+                            )}
+                        </div>
                         <Link href={'https://www.facebook.com/zoikomobileusa'} target="_blank"><i className="bi bi-facebook"></i></Link>
                         <Link href={'https://instagram.com/zoikomobileus'} target="_blank" className="px-3"><i className="bi bi-instagram"></i></Link>
                         <Link href={'https://uk.pinterest.com/zoikomobileusa/'} target="_blank"><i className="bi bi-pinterest"></i></Link>
