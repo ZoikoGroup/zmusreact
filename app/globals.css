@@ -1528,3 +1528,8 @@ body {
   width: 18px;
   height: 18px;
 }
+.wholesaleBanner{
+  background-image: url(https://assets.zoikomobile.com/wp-content/uploads/2025/02/bebfda5993-1.jpg);
+    background-position: center center;
+    background-size: cover;
+}
