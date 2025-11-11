@@ -522,14 +522,11 @@ export default function DashboardPage() {
                           <div>
                             <strong>{card.card_holder_name || card.card_holder}</strong>
                             <p className="mb-0 small text-muted">
-                              **** **** **** {card.last4 || (card.card_number?.slice(-4) ?? "0000")} • Exp{" "}
-                              {card.exp_month || card.expiry_month}/{card.exp_year || card.expiry_year}
+                              **** **** **** {card.last4 || (card.card_number?.slice(-4) ?? "0000")} 
+                              &nbsp; • Exp{" "} {card.exp_month || card.expiry_month}/{card.exp_year || card.expiry_year}
                             </p>
                           </div>
                           <div className="d-flex gap-2">
-                            <button className="btn btn-sm btn-outline-success" onClick={() => useCard(card.id)}>
-                              Use
-                            </button>
                             <button className="btn btn-sm btn-outline-danger" onClick={() => deleteCard(card.id)}>
                               Delete
                             </button>
@@ -558,8 +555,8 @@ export default function DashboardPage() {
                     </button>
 
                     {subscriber?.id && (
-                      <Link href={`/dashboard/billing-payment/${subscriber.id}`}>
-                        <button className="btn btn-outline-secondary btn-sm">View Invoices</button>
+                      <Link href={`/dashboard/billing-payment/${subscriber.id}`} className="btn btn-outline-secondary">
+                        View Invoices
                       </Link>
                     )}
                   </div>
