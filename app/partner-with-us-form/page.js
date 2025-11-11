@@ -53,7 +53,7 @@ const PartnerWithUsForm = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.companyName) newErrors.companyName = "Company Name is required";
+    if (!formData.companyName) newErrors.companyName = "Enter Your Full registered name of your organization";
     if (!formData.street) newErrors.street = "Street is required";
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
@@ -64,14 +64,14 @@ const PartnerWithUsForm = () => {
     if (!formData.monthlySales) newErrors.monthlySales = "Select monthly sales volume";
     if (!formData.agreeEligibility) newErrors.agreeEligibility = "Required";
     if (!formData.agreeTerms) newErrors.agreeTerms = "Required";
-    if (!formData.name) newErrors.name = "Required";
-    if (!formData.job) newErrors.job = "Required";
-    if (!formData.billingContact) newErrors.billingContact = "Required";
-    if (!formData.billingEmail) newErrors.billingEmail = "Required";
-    if (!formData.preferredShippingMethod) newErrors.preferredShippingMethod = "Required";
-    if (!formData.saleOtherCarriers) newErrors.saleOtherCarriers = "Required";
-    if (!formData.targetMarket) newErrors.targetMarket = "Required";
-    if (!formData.preferredPartnershipModel) newErrors.preferredPartnershipModel = "Required";
+    if (!formData.name) newErrors.name = "Name is required";
+    if (!formData.job) newErrors.job = "Enter Your Full registered name of your organization";
+    if (!formData.billingContact) newErrors.billingContact = "Billing contact is required";
+    if (!formData.billingEmail) newErrors.billingEmail = "Billing email is required";
+    if (!formData.preferredShippingMethod) newErrors.preferredShippingMethod = "This field is required.";
+    if (!formData.saleOtherCarriers) newErrors.saleOtherCarriers = "This field is required.";
+    if (!formData.targetMarket) newErrors.targetMarket = "This field is required.";
+    if (!formData.preferredPartnershipModel) newErrors.preferredPartnershipModel = "This field is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -83,7 +83,7 @@ const PartnerWithUsForm = () => {
     console.log("Form Submitted:", formData);
 
     try {
-      const res = await fetch("/api/partner", {
+      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/partner-with-us-form", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
