@@ -115,7 +115,7 @@ const Footer = () => {
                         <p className="txtred">Partner Programs</p>
                         <ul>
                                <li><Link href={"/become-a-retailer"}>Become A Retailer</Link></li>
-                            <li><Link href={"/wholesale"}>Become an Affiliate</Link></li>
+                            <li><Link href={"/become-affiliate"}>Become an Affiliate</Link></li>
                             <li><Link href={"/partner-with-us"}>Partner With Us</Link></li>
                         </ul>
                     </Col>

@@ -77,7 +77,7 @@ const PartnerWithUsForm = () => {
     console.log("Form Submitted:", formData);
 
     try {
-      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/partner-with-us-form", {
+      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/become-affiliate-form", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
