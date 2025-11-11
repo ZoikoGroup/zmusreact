@@ -10,26 +10,21 @@ const PartnerWithUsForm = () => {
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     companyName: "",
-    website: "",
+    businessType: "",
+    name: "",
+    job: "",
+    email: "",
+    phone: "",
+    countrycode: "",
     street: "",
     city: "",
     state: "",
     zip: "",
-    job: "",
-    name: "",
-    email: "",
-    phone: "",
-    countrycode: "",
-    yearsInBusiness: "",
+    yearsInBusiness: "",    
     monthlySales: "",
     businessTypes: [],
-    solutions: [],
-    otherCarriers: "",
     saleOtherCarriers: "",
-    targetMarket: "",
-    preferredPartnershipModel: "",  
-    targetMarket: "",
-    partnershipModel: "",
+    planToSell: [],
     bankTransfer: "",
     billingContact: "",
     billingEmail: "",
@@ -53,7 +48,7 @@ const PartnerWithUsForm = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.companyName) newErrors.companyName = "Enter Your Full registered name of your organization";
+     if (!formData.companyName) newErrors.companyName = "Enter Your Full registered name of your organization";
     if (!formData.street) newErrors.street = "Street is required";
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
@@ -62,16 +57,15 @@ const PartnerWithUsForm = () => {
     if (!formData.phone) newErrors.phone = "Phone number is required";
     if (!formData.yearsInBusiness) newErrors.yearsInBusiness = "Select years in business";
     if (!formData.monthlySales) newErrors.monthlySales = "Select monthly sales volume";
-    if (!formData.agreeEligibility) newErrors.agreeEligibility = "Required";
-    if (!formData.agreeTerms) newErrors.agreeTerms = "Required";
+    
     if (!formData.name) newErrors.name = "Name is required";
     if (!formData.job) newErrors.job = "Enter Your Full registered name of your organization";
-    if (!formData.billingContact) newErrors.billingContact = "Billing contact is required";
+    if (!formData.agreeEligibility) newErrors.agreeEligibility = "This field is required.";
+    if (!formData.businessType) newErrors.businessType = "This field is required.";
     if (!formData.billingEmail) newErrors.billingEmail = "Billing email is required";
-    if (!formData.preferredShippingMethod) newErrors.preferredShippingMethod = "This field is required.";
-    if (!formData.saleOtherCarriers) newErrors.saleOtherCarriers = "This field is required.";
-    if (!formData.targetMarket) newErrors.targetMarket = "This field is required.";
-    if (!formData.preferredPartnershipModel) newErrors.preferredPartnershipModel = "This field is required.";
+    if (!formData.shippingMethod) newErrors.shippingMethod = "This field is required.";
+    if (!formData.agreeEligibility) newErrors.agreeEligibility = "This field is required.";
+    if (!formData.agreeTerms) newErrors.agreeTerms = "This field is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -280,58 +274,36 @@ const PartnerWithUsForm = () => {
                 {errors.companyName && <p className="txtred">{errors.companyName}</p>}
               </Col>
               <Col md={6}>
-                <FormLabel>Website (if any)</FormLabel>
-                <Form.Control
-                  name="website"
-                  value={formData.website}
+                <FormLabel>Business Type *</FormLabel>
+                <Form.Select
+                  name="businessType"
+                  value={formData.businessType}
                   onChange={handleChange}
-                  placeholder="www.example.com"
-                />
+                >
+                  <option value="">Select</option>
+                  <option>Wireless Retailer</option>
+                  <option>Mobile Service Provider</option>
+                  <option>E-commerce Business</option>
+                  <option>E-commerce Business B2B Reseller</option>
+                </Form.Select>
+                {errors.businessType && <p className="txtred">{errors.businessType}</p>}
               </Col>
-            </Row>
-            <Row className="mt-3">
-              <Col md={3}>
-                <FormLabel>Street *</FormLabel>
-                <Form.Control name="street" value={formData.street} onChange={handleChange} />
-                {errors.street && <p className="txtred">{errors.street}</p>}
-              </Col>
-              <Col md={3}>
-                <FormLabel>City *</FormLabel>
-                <Form.Control name="city" value={formData.city} onChange={handleChange} />
-                {errors.city && <p className="txtred">{errors.city}</p>}
-              </Col>
-              <Col md={3}>
-                <FormLabel>State *</FormLabel>
-                <Form.Control name="state" value={formData.state} onChange={handleChange} />
-                {errors.state && <p className="txtred">{errors.state}</p>}
-              </Col>
-              <Col md={3}>
-                <FormLabel>ZIP *</FormLabel>
-                <Form.Control name="zip" value={formData.zip} onChange={handleChange} />
-                {errors.zip && <p className="txtred">{errors.zip}</p>}
-              </Col>
-            </Row>
-
-            <h4 className="mt-5 mb-3 fw-bold text-center">Primary Contact Person</h4>
-            <Row>
-                <Col md={6}>
+              <Col md={6} className="mt-3">
                 <FormLabel>Full Name  *</FormLabel>
                 <Form.Control name="name" value={formData.name} onChange={handleChange} />
                 {errors.name && <p className="txtred">{errors.name}</p>}
               </Col>
-              <Col md={6}>
+              <Col md={6}  className="mt-3">
                 <FormLabel>Job Title *</FormLabel>
                 <Form.Control name="job" value={formData.job} onChange={handleChange} />
                 {errors.job && <p className="txtred">{errors.job}</p>}
               </Col>
-              </Row>
-              <Row className="mt-3">
-              <Col md={6}>
+              <Col md={6}   className="mt-3">
                 <FormLabel>Email Address *</FormLabel>
                 <Form.Control name="email" value={formData.email} onChange={handleChange} />
                 {errors.email && <p className="txtred">{errors.email}</p>}
               </Col>
-              <Col md={6}>
+              <Col md={6}   className="mt-3">
                 <FormLabel>Phone Number *</FormLabel>
                 <InputGroup>
                   <Form.Select
@@ -357,7 +329,30 @@ const PartnerWithUsForm = () => {
                 {errors.phone && <p className="txtred">{errors.phone}</p>}
               </Col>
             </Row>
+            <Row className="mt-3">
+              <Col md={3}>
+                <FormLabel>Street *</FormLabel>
+                <Form.Control name="street" value={formData.street} onChange={handleChange} />
+                {errors.street && <p className="txtred">{errors.street}</p>}
+              </Col>
+              <Col md={3}>
+                <FormLabel>City *</FormLabel>
+                <Form.Control name="city" value={formData.city} onChange={handleChange} />
+                {errors.city && <p className="txtred">{errors.city}</p>}
+              </Col>
+              <Col md={3}>
+                <FormLabel>State *</FormLabel>
+                <Form.Control name="state" value={formData.state} onChange={handleChange} />
+                {errors.state && <p className="txtred">{errors.state}</p>}
+              </Col>
+              <Col md={3}>
+                <FormLabel>ZIP *</FormLabel>
+                <Form.Control name="zip" value={formData.zip} onChange={handleChange} />
+                {errors.zip && <p className="txtred">{errors.zip}</p>}
+              </Col>
+            </Row>
 
+            
             <h4 className="mt-5 mb-3 fw-bold text-center">Business Details</h4>
             <Row>
               <Col md={6}>
@@ -376,29 +371,30 @@ const PartnerWithUsForm = () => {
                 {errors.yearsInBusiness && <p className="txtred">{errors.yearsInBusiness}</p>}
               </Col>
               <Col md={6}>
-                <FormLabel>Current Monthly Sales Volume *</FormLabel>
+                <FormLabel>Current Monthly Sales Volume (Mobile Plans & Devices): *</FormLabel>
                 <Form.Select
                   name="monthlySales"
                   value={formData.monthlySales}
                   onChange={handleChange}
                 >
                   <option value="">Select</option>
-                  <option>$0 - $10,000</option>
-                  <option>$10,000 - $50,000</option>
-                  <option>$50,000+</option>
+                  <option>Under 100 units</option>
+                  <option>100-500 units</option>
+                  <option>500-1,000 units</option>
+                  <option>1,000+ units</option>
                 </Form.Select>
                 {errors.monthlySales && <p className="txtred">{errors.monthlySales}</p>}
               </Col>
             </Row>
 
-            <h4 className="mt-5 mb-3 fw-bold text-center">Business Type (Check all that apply)</h4>
+            <h5 className="mt-5 mb-3 fw-bold text-center">Which products/services are you interested in wholesaling? (Check all that apply)</h5>
             <div className="d-flex flex-wrap checkbox-group-center  stylish-checkboxes">
               {[
-                "Wireless Retailer",
-                "Mobile Service Provider",
-                "E-commerce Business",
-                "Telecom Distributor",
-                "Digital Marketing Agency",
+                "Prepaid & Postpaid SIM Cards (Bulk activations available)",
+                "Mobile Plans & Bundles",
+                "Unlocked Smartphones",
+                "5G Hotspots & Wireless Devices",
+                "Mobile Accessories (Cases, chargers, headphones, etc.)",
               ].map((item) => (
                 <Form.Check
                   key={item}
@@ -421,32 +417,8 @@ const PartnerWithUsForm = () => {
                 onChange={handleChange}
               />
             </div>
-
-            <h4 className="mt-5 mb-3 fw-bold text-center">
-              Which Zoiko Mobile solutions are you interested in offering?
-            </h4>
-            <div className="d-flex flex-wrap checkbox-group-center  stylish-checkboxes">
-              {[
-                "Prepaid & Postpaid SIM Plans",
-                "5G Data Plans & Bundles",
-                "Unlocked Smartphones & Devices",
-                "IoT & Enterprise Solutions",
-                "White Label Mobile Solutions",
-              ].map((item) => (
-                <Form.Check
-                  key={item}
-                  inline
-                  label={item}
-                  name={item}
-                  value={item}
-                  data-group="solutions"
-                  checked={formData.solutions.includes(item)}
-                  onChange={handleChange}
-                />
-              ))}
-            </div>
             <Row>
-              <Col md={4}>
+              <Col md={12}>
                 <FormLabel>Do you currently sell other carrier services? *</FormLabel>
                 <Form.Select
                   name="saleOtherCarriers"
@@ -459,37 +431,50 @@ const PartnerWithUsForm = () => {
                 </Form.Select>
                 {errors.saleOtherCarriers && <p className="txtred">{errors.saleOtherCarriers}</p>}
               </Col>
-              <Col md={4}>
-                <FormLabel>What is your target market? *</FormLabel>
-                <Form.Select
-                  name="targetMarket"
-                  value={formData.targetMarket}
+
+            </Row>
+
+            <h5 className="mt-5 mb-3 fw-bold text-center">
+              How do you plan to sell Zoiko Mobile products? (Check all that apply)
+            </h5>
+            <div className="d-flex flex-wrap checkbox-group-center  stylish-checkboxes">
+              {[
+                "In-store Retail Sales",
+                "Online E-commerce",
+                "B2B Sales (Business Clients & Corporate Accounts)",
+                "Subscription-based Model",
+              ].map((item) => (
+                <Form.Check
+                  key={item}
+                  inline
+                  label={item}
+                  name={item}
+                  value={item}
+                  data-group="planToSell"
+                  checked={formData.planToSell.includes(item)}
                   onChange={handleChange}
-                >
-                  <option value={"General Consumers"}>General Consumers</option>
-                  <option value={"Small Businesses & Enterprises"}>Small Businesses & Enterprises</option>
-                  <option value={"International Customers"}>International Customers</option>
-                  <option value={"Niche Markets (e.g., Travelers, Expats, Digital Nomads)"}>Niche Markets (e.g., Travelers, Expats, Digital Nomads)</option>
-                </Form.Select>
-                {errors.targetMarket && <p className="txtred">{errors.targetMarket}</p>}
-              </Col>
-              <Col md={4}>
-                <FormLabel>Preferred Partnership Model *</FormLabel>
+                />
+              ))}
+            </div>
+            <Row>
+              <Col md={12}>
+                <FormLabel>Estimated Monthly Purchase Volume with Zoiko Mobile *</FormLabel>
                 <Form.Select
-                  name="preferredPartnershipModel"
-                  value={formData.preferredPartnershipModel}
+                  name="saleOtherCarriers"
+                  value={formData.saleOtherCarriers}
                   onChange={handleChange}
                 >
                   <option value="">Select</option>
-                  <option value={"Wholesale Reseller"}>Wholesale Reseller</option>
-                  <option value={"Affiliate Program"}>Affiliate Program</option>
-                  <option value={"White Label / Private Label Partner"}>White Label / Private Label Partner</option>
-                  <option value={"Corporate & Enterprise Solutions"}>Corporate & Enterprise Solutions</option>
-                  <option value={"Other"}> Other</option>
+                  <option value={"50 - 200 units"}>50 - 200 units</option>
+                  <option value={"200 - 500 units"}>200 - 500 units</option>
+                  <option value={"500 -1000 units"}>500 -1000 units</option>
+                  <option value={"1000+ units"}>1000+ units</option>
                 </Form.Select>
-                {errors.preferredPartnershipModel && <p className="txtred">{errors.preferredPartnershipModel}</p>}
+                {errors.saleOtherCarriers && <p className="txtred">{errors.saleOtherCarriers}</p>}
               </Col>
+
             </Row>
+            
             <h4 className="mt-5 mb-3 fw-bold text-center">Preferred Payment Method</h4>
             <Row>
                 <Col md={12} className="mt-3">
@@ -531,11 +516,9 @@ const PartnerWithUsForm = () => {
                   onChange={handleChange}
                 >
                   <option value="">Select</option>
-                  <option value={"Wholesale Reseller"}>Wholesale Reseller</option>
-                  <option value={"Affiliate Program"}>Affiliate Program</option>
-                  <option value={"White Label / Private Label Partner"}>White Label / Private Label Partner</option>
-                  <option value={"Corporate & Enterprise Solutions"}>Corporate & Enterprise Solutions</option>
-                  <option value={"Other"}> Other</option>
+                  <option value={"Standard Ground"}>Standard Ground</option>
+                  <option value={"Expedited Shipping"}>Expedited Shipping</option>
+                  <option value={"Local Pickup (if available)"}>Local Pickup (if available)</option>
                 </Form.Select>
                 {errors.preferredShippingMethod && <p className="txtred">{errors.preferredShippingMethod}</p>}
               </Col>
@@ -544,7 +527,7 @@ const PartnerWithUsForm = () => {
             <Form.Check
               className="mt-4"
               type="checkbox"
-              label="I understand that partnership eligibility is subject to approval by Zoiko Mobile."
+              label="I understand that wholesale purchases require a minimum order quantity (MOQ) and are subject to Zoiko Mobile’s approval."
               name="agreeEligibility"
               checked={formData.agreeEligibility}
               onChange={handleChange}
