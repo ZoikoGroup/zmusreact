@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import * as beQuick from "../utils/beQuickApiPay";
 
 const PaymentModal = ({ show, onClose, amount, orderId }) => {
@@ -11,6 +10,8 @@ const PaymentModal = ({ show, onClose, amount, orderId }) => {
   const [processingPayment, setProcessingPayment] = useState(false);
   const [orderResponse, setOrderResponse] = useState(null);
   const [errors, setErrors] = useState({});
+  const [cards, setCards] = useState([]);
+  const [loadingCards, setLoadingCards] = useState(false);
 
   const [form, setForm] = useState({
     cardNumber: "",
@@ -29,6 +30,7 @@ const PaymentModal = ({ show, onClose, amount, orderId }) => {
     email: "",
   });
 
+  /* ---------------- Fetch Subscriber ---------------- */
   useEffect(() => {
     const fetchSubscriber = async () => {
       try {
@@ -60,24 +62,82 @@ const PaymentModal = ({ show, onClose, amount, orderId }) => {
       }
     };
 
-    if (show) fetchSubscriber();
+    if (show) {
+      fetchSubscriber();
+      fetchSavedCards();
+    }
   }, [show]);
 
+  /* ---------------- Fetch Saved Cards ---------------- */
+  const fetchSavedCards = async () => {
+    try {
+      setLoadingCards(true);
+      const token = localStorage.getItem("zoiko_token");
+      if (!token) return;
+
+      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/customer/cards", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      if (data?.success && Array.isArray(data.cards)) {
+        setCards(data.cards);
+      }
+    } catch (err) {
+      console.error("Error fetching saved cards:", err);
+    } finally {
+      setLoadingCards(false);
+    }
+  };
+
+  /* ---------------- Use Saved Card ---------------- */
+  const useSavedCard = async (cardId) => {
+    try {
+      const token = localStorage.getItem("zoiko_token");
+      if (!token) return;
+
+      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/customer/cards/use", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ card_id: cardId }),
+      });
+      const data = await res.json();
+
+      if (data?.success && data.card) {
+        const { card_number, cvv, exp_month, exp_year, card_holder_name } = data.card;
+        setForm((prev) => ({
+          ...prev,
+          cardNumber: formatCardNumber(card_number),
+          cvc: cvv,
+          expiry: `${exp_month}/${exp_year.slice(-2)}`,
+          firstName: card_holder_name?.split(" ")[0] || prev.firstName,
+          lastName: card_holder_name?.split(" ")[1] || prev.lastName,
+        }));
+      }
+    } catch (err) {
+      console.error("Error using saved card:", err);
+    }
+  };
+
+  /* ---------------- Utilities ---------------- */
   const formatCardNumber = (value) => {
     return value.replace(/\D/g, "").replace(/(.{4})/g, "$1 ").trim();
   };
 
+  /* ---------------- Handle Payment ---------------- */
   const handlePayment = async () => {
     const newErrors = {};
     const cardNumClean = form.cardNumber.replace(/\s+/g, "");
     if (!/^\d{13,19}$/.test(cardNumClean)) newErrors.cardNumber = "Card number must be 13-19 digits";
     if (!/^\d{2}\/\d{2,4}$/.test(form.expiry)) newErrors.expiry = "Expiry must be MM/YY";
     if (!/^\d{3,4}$/.test(form.cvc)) newErrors.cvc = "CVC must be 3 or 4 digits";
-    ["firstName", "lastName", "street", "city", "state", "zip", "phone", "email"].forEach(
-      (field) => {
-        if (!form[field]) newErrors[field] = "This field is required";
-      }
-    );
+    ["firstName", "lastName", "street", "city", "state", "zip", "phone", "email"].forEach((field) => {
+      if (!form[field]) newErrors[field] = "This field is required";
+    });
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -155,12 +215,43 @@ const PaymentModal = ({ show, onClose, amount, orderId }) => {
     }
   };
 
+  /* ---------------- UI ---------------- */
   return (
     <Modal show={show} onHide={onClose} centered className="payment-modal">
       <div className="p-4">
         <h6 className="text-muted mb-2 text-center">Pay</h6>
         <div className="payment-amount-box mx-auto mb-3 text-center">${amount}</div>
 
+        {/* Saved Cards */}
+        <div className="mb-3">
+          <h6>Saved Cards</h6>
+          {loadingCards ? (
+            <p className="text-muted small">Loading saved cards...</p>
+          ) : cards.length === 0 ? (
+            <p className="text-muted small mb-2">No saved cards yet.</p>
+          ) : (
+            cards.map((card) => (
+              <div
+                key={card.id}
+                className="d-flex justify-content-between align-items-center border rounded p-2 mb-2"
+                style={{ cursor: "pointer" }}
+                onClick={() => useSavedCard(card.id)}
+              >
+                <div>
+                  <strong>{card.card_holder_name}</strong> <br />
+                  <small>
+                    **** **** **** {card.last4} — Exp: {card.exp_month}/{card.exp_year}
+                  </small>
+                </div>
+                <Button variant="outline-primary" size="sm">
+                  Use
+                </Button>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Payment Form */}
         <Form>
           {/* Card Details */}
           <Form.Group className="mb-2">
@@ -294,7 +385,6 @@ const PaymentModal = ({ show, onClose, amount, orderId }) => {
           <div className="alert alert-success mt-3">
             <strong>Success!</strong> Order created with ID:{" "}
             <strong>{orderResponse.data.order_id}</strong>
-            {/* {orderResponse.message && <p>{orderResponse.message}</p>} */}
           </div>
         )}
 
