@@ -41,7 +41,7 @@ const PartnershipPage = () => {
             <Button
               variant="danger"
               size="lg"
-              href="/wholesale-form"  
+              href="/become-affiliate-form"  
               className="mt-3 px-4"
               style={{ backgroundColor: "#DF1E5A", border: "none" }}
             >
