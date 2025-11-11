@@ -690,11 +690,12 @@ export default function RootLayout({ children }) {
 
         {/* ✅ Open Graph site name */}
         <meta property="og:site_name" content="Zoiko Mobile" />
-         {/* Google Translate meta tag */}
-  <meta name="google-translate-customization" content="notranslate" />
-  {typeof window !== "undefined" && window.location.pathname === "/" && (
-    <meta name="google-site-verification" content="U_E87KEtgWSC9YqTlXs8tN41X6j60af1_HXlKOYFrU4" />
-  )}
+
+        {/* Google Translate meta tag */}
+        <meta name="google-translate-customization" content="notranslate" />
+
+        {/* Google Site Verification */}
+        <meta name="google-site-verification" content="U_E87KEtgWSC9YqTlXs8tN41X6j60af1_HXlKOYFrU4" />
       </head>
 
       <body className={roboto.className}>
