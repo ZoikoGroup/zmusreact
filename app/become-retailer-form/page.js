@@ -6,34 +6,26 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 
-const PartnerWithUsForm = () => {
+const BecomeRetailerForm = () => {
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     companyName: "",
-    website: "",
+    website:"" ,
+    businessTypes: [],
+    name: "",
+    job: "",
+    email: "",
+    phone: "",
+    countrycode: "",
     street: "",
     city: "",
     state: "",
     zip: "",
-    job: "",
-    name: "",
-    email: "",
-    phone: "",
-    countrycode: "",
-    yearsInBusiness: "",
-    monthlySales: "",
-    businessTypes: [],
-    solutions: [],
-    otherCarriers: "",
-    saleOtherCarriers: "",
-    targetMarket: "",
-    preferredPartnershipModel: "",  
-    targetMarket: "",
-    partnershipModel: "",
-    bankTransfer: "",
-    billingContact: "",
-    billingEmail: "",
-    shippingMethod: "",
+   marketingChannels: [],
+   monthlyActivations: "",
+   monthlyTraffic: "",
+    promotoBrands: "",
+   planToPromotes: [],   
     agreeEligibility: false,
     agreeTerms: false,
   });
@@ -42,7 +34,7 @@ const PartnerWithUsForm = () => {
   const handleChange = (e) => {
     const { name, value, type, checked, dataset } = e.target;
 
-    if (dataset.group === "businessTypes" || dataset.group === "solutions") {
+    if (dataset.group === "businessTypes" || dataset.group === "planToPromotes" || dataset.group === "marketingChannels") {
       const arr = formData[dataset.group];
       const updated = checked ? [...arr, value] : arr.filter((item) => item !== value);
       setFormData({ ...formData, [dataset.group]: updated });
@@ -53,54 +45,88 @@ const PartnerWithUsForm = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.companyName) newErrors.companyName = "Enter Your Full registered name of your organization";
+     if (!formData.companyName) newErrors.companyName = "Enter Your Full registered name of your organization";
+      if (!formData.website) newErrors.website = "Enter Company Website URL";
     if (!formData.street) newErrors.street = "Street is required";
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.zip) newErrors.zip = "ZIP is required";
     if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.phone) newErrors.phone = "Phone number is required";
-    if (!formData.yearsInBusiness) newErrors.yearsInBusiness = "Select years in business";
-    if (!formData.monthlySales) newErrors.monthlySales = "Select monthly sales volume";
-    if (!formData.agreeEligibility) newErrors.agreeEligibility = "Required";
-    if (!formData.agreeTerms) newErrors.agreeTerms = "Required";
+    if (!formData.phone) newErrors.phone = "Phone number is required";    
     if (!formData.name) newErrors.name = "Name is required";
     if (!formData.job) newErrors.job = "Enter Your Full registered name of your organization";
-    if (!formData.billingContact) newErrors.billingContact = "Billing contact is required";
-    if (!formData.billingEmail) newErrors.billingEmail = "Billing email is required";
-    if (!formData.preferredShippingMethod) newErrors.preferredShippingMethod = "This field is required.";
-    if (!formData.saleOtherCarriers) newErrors.saleOtherCarriers = "This field is required.";
-    if (!formData.targetMarket) newErrors.targetMarket = "This field is required.";
-    if (!formData.preferredPartnershipModel) newErrors.preferredPartnershipModel = "This field is required.";
+    if (!formData.businessTypes) newErrors.businessTypes = "This field is required.";
+    if (!formData.marketingChannels || formData.marketingChannels.length === 0)
+      newErrors.marketingChannels = "Select at least one marketing channel.";
+    if (!formData.planToPromotes || formData.planToPromotes.length === 0)
+      newErrors.planToPromotes = "Select at least one promotion plan.";
+    if (!formData.monthlyActivations) newErrors.monthlyActivations = "This field is required.";
+    if (!formData.monthlyTraffic) newErrors.monthlyTraffic = "This field is required.";
+    if (!formData.promotoBrands) newErrors.promotoBrands = "This field is required.";
+    if (!formData.agreeEligibility) newErrors.agreeEligibility = "This field is required.";
+    if (!formData.agreeTerms) newErrors.agreeTerms = "This field is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validate()) return;
+  e.preventDefault();
 
-    console.log("Form Submitted:", formData);
+  console.log(formData);
 
+  if (!validate()) {
+    console.log("Validation failed", errors);
+    return;
+  }
+
+  try {
+    console.log("Sending request to API...");
+    const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/become-retailer-form", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    let result;
     try {
-      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/partner-with-us-form", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await res.json();
-      if (res.ok) {
-        alert("Application submitted successfully!");
-        console.log(result);
-      } else {
-        alert("Submission failed: " + result.message);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Error submitting form.");
+      result = await res.json();
+    } catch {
+      result = { message: "No JSON body received" };
     }
-  };
+
+    console.log("Response:", res.status, result);
+
+    if (res.ok) {
+      alert("✅ Application submitted successfully!");
+      setFormData({
+        companyName: "",
+        website: "",
+        name: "",
+        job: "",
+        email: "",
+        phone: "",
+        countrycode: "",
+        street: "",
+        city: "",
+        state: "",
+        zip: "",
+        businessTypes: [],
+        marketingChannels: [],
+        planToPromotes: [],
+        monthlyActivations: "",
+        monthlyTraffic: "",
+        promotoBrands: "",
+        agreeEligibility: false,
+        agreeTerms: false,
+      });
+    } else {
+      alert("❌ Submission failed: " + result.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("⚠️ Error submitting form. Check console for details.");
+  }
+};
 
   return (
     <>
@@ -280,58 +306,31 @@ const PartnerWithUsForm = () => {
                 {errors.companyName && <p className="txtred">{errors.companyName}</p>}
               </Col>
               <Col md={6}>
-                <FormLabel>Website (if any)</FormLabel>
+                <FormLabel>Website  *</FormLabel>
                 <Form.Control
                   name="website"
                   value={formData.website}
                   onChange={handleChange}
-                  placeholder="www.example.com"
+                  placeholder="Enter company name"
                 />
+                {errors.website && <p className="txtred">{errors.website}</p>}
               </Col>
-            </Row>
-            <Row className="mt-3">
-              <Col md={3}>
-                <FormLabel>Street *</FormLabel>
-                <Form.Control name="street" value={formData.street} onChange={handleChange} />
-                {errors.street && <p className="txtred">{errors.street}</p>}
-              </Col>
-              <Col md={3}>
-                <FormLabel>City *</FormLabel>
-                <Form.Control name="city" value={formData.city} onChange={handleChange} />
-                {errors.city && <p className="txtred">{errors.city}</p>}
-              </Col>
-              <Col md={3}>
-                <FormLabel>State *</FormLabel>
-                <Form.Control name="state" value={formData.state} onChange={handleChange} />
-                {errors.state && <p className="txtred">{errors.state}</p>}
-              </Col>
-              <Col md={3}>
-                <FormLabel>ZIP *</FormLabel>
-                <Form.Control name="zip" value={formData.zip} onChange={handleChange} />
-                {errors.zip && <p className="txtred">{errors.zip}</p>}
-              </Col>
-            </Row>
-
-            <h4 className="mt-5 mb-3 fw-bold text-center">Primary Contact Person</h4>
-            <Row>
-                <Col md={6}>
+              <Col md={6} className="mt-3">
                 <FormLabel>Full Name  *</FormLabel>
                 <Form.Control name="name" value={formData.name} onChange={handleChange} />
                 {errors.name && <p className="txtred">{errors.name}</p>}
               </Col>
-              <Col md={6}>
+              <Col md={6}  className="mt-3">
                 <FormLabel>Job Title *</FormLabel>
                 <Form.Control name="job" value={formData.job} onChange={handleChange} />
                 {errors.job && <p className="txtred">{errors.job}</p>}
               </Col>
-              </Row>
-              <Row className="mt-3">
-              <Col md={6}>
+              <Col md={6}   className="mt-3">
                 <FormLabel>Email Address *</FormLabel>
                 <Form.Control name="email" value={formData.email} onChange={handleChange} />
                 {errors.email && <p className="txtred">{errors.email}</p>}
               </Col>
-              <Col md={6}>
+              <Col md={6}   className="mt-3">
                 <FormLabel>Phone Number *</FormLabel>
                 <InputGroup>
                   <Form.Select
@@ -357,48 +356,39 @@ const PartnerWithUsForm = () => {
                 {errors.phone && <p className="txtred">{errors.phone}</p>}
               </Col>
             </Row>
-
-            <h4 className="mt-5 mb-3 fw-bold text-center">Business Details</h4>
-            <Row>
-              <Col md={6}>
-                <FormLabel>Years in Business *</FormLabel>
-                <Form.Select
-                  name="yearsInBusiness"
-                  value={formData.yearsInBusiness}
-                  onChange={handleChange}
-                >
-                  <option value="">Select</option>
-                  <option>Less than 1 year</option>
-                  <option>1-3 years</option>
-                  <option>3-5 years</option>
-                  <option>5+ years</option>
-                </Form.Select>
-                {errors.yearsInBusiness && <p className="txtred">{errors.yearsInBusiness}</p>}
+            <Row className="mt-3">
+              <Col md={3}>
+                <FormLabel>Street *</FormLabel>
+                <Form.Control name="street" value={formData.street} onChange={handleChange} />
+                {errors.street && <p className="txtred">{errors.street}</p>}
               </Col>
-              <Col md={6}>
-                <FormLabel>Current Monthly Sales Volume *</FormLabel>
-                <Form.Select
-                  name="monthlySales"
-                  value={formData.monthlySales}
-                  onChange={handleChange}
-                >
-                  <option value="">Select</option>
-                  <option>$0 - $10,000</option>
-                  <option>$10,000 - $50,000</option>
-                  <option>$50,000+</option>
-                </Form.Select>
-                {errors.monthlySales && <p className="txtred">{errors.monthlySales}</p>}
+              <Col md={3}>
+                <FormLabel>City *</FormLabel>
+                <Form.Control name="city" value={formData.city} onChange={handleChange} />
+                {errors.city && <p className="txtred">{errors.city}</p>}
+              </Col>
+              <Col md={3}>
+                <FormLabel>State *</FormLabel>
+                <Form.Control name="state" value={formData.state} onChange={handleChange} />
+                {errors.state && <p className="txtred">{errors.state}</p>}
+              </Col>
+              <Col md={3}>
+                <FormLabel>ZIP *</FormLabel>
+                <Form.Control name="zip" value={formData.zip} onChange={handleChange} />
+                {errors.zip && <p className="txtred">{errors.zip}</p>}
               </Col>
             </Row>
 
-            <h4 className="mt-5 mb-3 fw-bold text-center">Business Type (Check all that apply)</h4>
+            
+ <h4 className="mt-5 mb-3 fw-bold text-center">Business Type</h4>
             <div className="d-flex flex-wrap checkbox-group-center  stylish-checkboxes">
               {[
-                "Wireless Retailer",
-                "Mobile Service Provider",
+                "Individual Affiliate",
+                "Marketing Agency",
+                "Online Publisher",
+                "Social Media Influencer",
                 "E-commerce Business",
-                "Telecom Distributor",
-                "Digital Marketing Agency",
+                "Other",
               ].map((item) => (
                 <Form.Check
                   key={item}
@@ -411,27 +401,17 @@ const PartnerWithUsForm = () => {
                   onChange={handleChange}
                 />
               ))}
-              <Form.Check
-                inline
-                label="Other (please specify)"
-                name="businessTypes"
-                value="Other"
-                data-group="businessTypes"
-                checked={formData.businessTypes.includes("Other")}
-                onChange={handleChange}
-              />
             </div>
 
-            <h4 className="mt-5 mb-3 fw-bold text-center">
-              Which Zoiko Mobile solutions are you interested in offering?
-            </h4>
-            <div className="d-flex flex-wrap checkbox-group-center  stylish-checkboxes">
+            <h4 className="mt-5 mb-3 fw-bold text-center">Primary Marketing Channel(s): (Check all that apply)</h4>
+            <div className="d-flex flex-wrap checkbox-group-center  stylish-checkboxes border-bottom mb-4" style={{ borderColor: "#ff0000" }}>
               {[
-                "Prepaid & Postpaid SIM Plans",
-                "5G Data Plans & Bundles",
-                "Unlocked Smartphones & Devices",
-                "IoT & Enterprise Solutions",
-                "White Label Mobile Solutions",
+                "Website / Blog",
+                "Social Media (Facebook, Instagram, TikTok, YouTube)",
+                "Email Marketing",
+                "Paid Advertising",
+                "SEO / Organic Traffic",
+                "Referral / Word of Mouth",
               ].map((item) => (
                 <Form.Check
                   key={item}
@@ -439,112 +419,90 @@ const PartnerWithUsForm = () => {
                   label={item}
                   name={item}
                   value={item}
-                  data-group="solutions"
-                  checked={formData.solutions.includes(item)}
+                  data-group="marketingChannels"
+                  checked={formData.marketingChannels.includes(item)}
                   onChange={handleChange}
                 />
               ))}
             </div>
+
+            <h4 className="mt-5 mb-3 fw-bold text-center">How do you plan to promote Zoiko Mobile?</h4>
+            <div className="d-flex flex-wrap checkbox-group-center  stylish-checkboxes border-bottom mb-4" style={{ borderColor: "#ff0000" }}>
+              {[
+                "Content Marketing (Blog Posts, Reviews)",
+                "Social Media Advertising",
+                "Video Marketing (YouTube, TikTok)",
+                "Email Campaigns",
+                "SEO & Organic Promotion",
+                "Other",
+              ].map((item) => (
+                <Form.Check
+                  key={item}
+                  inline
+                  label={item}
+                  name={item}
+                  value={item}
+                  data-group="planToPromotes"
+                  checked={formData.planToPromotes.includes(item)}
+                  onChange={handleChange}
+                />
+              ))}
+            </div>
+
+           
             <Row>
-              <Col md={4}>
-                <FormLabel>Do you currently sell other carrier services? *</FormLabel>
+              <Col md={4} className="mt-3">
+                <FormLabel>Expected Monthly Traffic / Audience Size *</FormLabel>
                 <Form.Select
-                  name="saleOtherCarriers"
-                  value={formData.saleOtherCarriers}
+                  name="monthlyTraffic"
+                  value={formData.monthlyTraffic}
+                  onChange={handleChange}
+                >
+                  <option value="">Seelct</option>
+                  <option value={"Under 10,000"}>Under 10,000</option>
+                  <option value={"10,000 - 50,000"}>10,000 - 50,000</option>
+                  <option value={"50,000 - 100,000"}>50,000 - 100,000</option>
+                  <option value={"100,000+"}>100,000+</option>
+                </Form.Select>
+                {errors.monthlyTraffic && <p className="txtred">{errors.monthlyTraffic}</p>}
+              </Col>
+              <Col md={4} className="mt-3">
+                <FormLabel>Do you currently promote other telecom brands? *</FormLabel>
+                <Form.Select
+                  name="promotoBrands"
+                  value={formData.promotoBrands}
                   onChange={handleChange}
                 >
                   <option value="">Select</option>
                   <option value={"yes"}>Yes</option>
                   <option value={"no"}>No</option>
                 </Form.Select>
-                {errors.saleOtherCarriers && <p className="txtred">{errors.saleOtherCarriers}</p>}
+                {errors.promotoBrands && <p className="txtred">{errors.promotoBrands}</p>}
               </Col>
-              <Col md={4}>
-                <FormLabel>What is your target market? *</FormLabel>
+              <Col md={4} className="mt-3">
+                <FormLabel>Estimated Monthly Activations You Can Drive: *</FormLabel>
                 <Form.Select
-                  name="targetMarket"
-                  value={formData.targetMarket}
-                  onChange={handleChange}
-                >
-                  <option value={"General Consumers"}>General Consumers</option>
-                  <option value={"Small Businesses & Enterprises"}>Small Businesses & Enterprises</option>
-                  <option value={"International Customers"}>International Customers</option>
-                  <option value={"Niche Markets (e.g., Travelers, Expats, Digital Nomads)"}>Niche Markets (e.g., Travelers, Expats, Digital Nomads)</option>
-                </Form.Select>
-                {errors.targetMarket && <p className="txtred">{errors.targetMarket}</p>}
-              </Col>
-              <Col md={4}>
-                <FormLabel>Preferred Partnership Model *</FormLabel>
-                <Form.Select
-                  name="preferredPartnershipModel"
-                  value={formData.preferredPartnershipModel}
+                  name="monthlyActivations"
+                  value={formData.monthlyActivations}
                   onChange={handleChange}
                 >
                   <option value="">Select</option>
-                  <option value={"Wholesale Reseller"}>Wholesale Reseller</option>
-                  <option value={"Affiliate Program"}>Affiliate Program</option>
-                  <option value={"White Label / Private Label Partner"}>White Label / Private Label Partner</option>
-                  <option value={"Corporate & Enterprise Solutions"}>Corporate & Enterprise Solutions</option>
-                  <option value={"Other"}> Other</option>
+                  <option value={"1-10"}>1-10</option>
+                  <option value={"10 - 50"}>10 - 50</option>
+                  <option value={"50 - 100"}>50 - 100</option>
+                  <option value={"100+"}>100+</option>
                 </Form.Select>
-                {errors.preferredPartnershipModel && <p className="txtred">{errors.preferredPartnershipModel}</p>}
+                {errors.monthlyActivations && <p className="txtred">{errors.monthlyActivations}</p>}
               </Col>
+
             </Row>
-            <h4 className="mt-5 mb-3 fw-bold text-center">Preferred Payment Method</h4>
-            <Row>
-                <Col md={12} className="mt-3">
-                <Form.Select
-                  name="bankTransfer"
-                  value={formData.bankTransfer}
-                  onChange={handleChange}
-                >
-                  <option value={"Bank Transfer"}>Bank Transfer</option>
-                  <option value={"Credit/Debiit Card"}>Credit/Debiit Card</option>
-                  <option value={"Paypal"}>Paypal</option>
-                  <option value={"Net-30 Terms (Subject to Approval)"}>Net-30 Terms (Subject to Approval)</option>
-                </Form.Select>
-              </Col>
-              <Col md={6} className="mt-3">
-                <FormLabel>Billing Contact Name *</FormLabel>
-                <Form.Control
-                  name="billingContact"
-                  value={formData.billingContact}
-                  onChange={handleChange}
-                />
-                {errors.billingContact && <p className="txtred">{errors.billingContact}</p>}
-              </Col>
-              <Col md={6}  className="mt-3" >
-                <FormLabel>Billing Email *</FormLabel>
-                <Form.Control
-                  name="billingEmail"
-                  value={formData.billingEmail}
-                  onChange={handleChange}
-                />
-                {errors.billingEmail && <p className="txtred">{errors.billingEmail}</p>}
-              </Col>
-              
-              <Col md={12} className="mt-3">
-                <FormLabel>Preferred Shipping Method for Devices/SIMs *</FormLabel>
-                <Form.Select
-                  name="preferredShippingMethod"
-                  value={formData.preferredShippingMethod}
-                  onChange={handleChange}
-                >
-                  <option value="">Select</option>
-                  <option value={"Wholesale Reseller"}>Wholesale Reseller</option>
-                  <option value={"Affiliate Program"}>Affiliate Program</option>
-                  <option value={"White Label / Private Label Partner"}>White Label / Private Label Partner</option>
-                  <option value={"Corporate & Enterprise Solutions"}>Corporate & Enterprise Solutions</option>
-                  <option value={"Other"}> Other</option>
-                </Form.Select>
-                {errors.preferredShippingMethod && <p className="txtred">{errors.preferredShippingMethod}</p>}
-              </Col>
-            </Row>
+
+            
 
             <Form.Check
               className="mt-4"
               type="checkbox"
-              label="I understand that partnership eligibility is subject to approval by Zoiko Mobile."
+              label="I understand that wholesale purchases require a minimum order quantity (MOQ) and are subject to Zoiko Mobile’s approval."
               name="agreeEligibility"
               checked={formData.agreeEligibility}
               onChange={handleChange}
@@ -585,4 +543,4 @@ const PartnerWithUsForm = () => {
   );
 };
 
-export default PartnerWithUsForm;
+export default BecomeRetailerForm;

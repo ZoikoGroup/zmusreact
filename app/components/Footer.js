@@ -114,9 +114,9 @@ const Footer = () => {
                     <Col md={4} sm={12} xs={12}>
                         <p className="txtred">Partner Programs</p>
                         <ul>
-                               <li><Link href={"/become-a-retailer"}>Become A Retailer</Link></li>
+                               <li><Link href={"/become-retailer"}>Become A Retailer</Link></li>
                             <li><Link href={"/become-affiliate"}>Become an Affiliate</Link></li>
-                            <li><Link href={"/partner-with-us"}>Partner With Us</Link></li>
+                            <li><Link href={"/become-partner"}>Partner With Us</Link></li>
                         </ul>
                     </Col>
                     <Col md={5} sm={12} xs={12}>

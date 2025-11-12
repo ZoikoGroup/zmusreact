@@ -4,22 +4,22 @@ import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 
-const BecomeAffiliatePage = () => {
+const BecomePartnerPage = () => {
     const data = [
     {
-      icon: "./img/Group-691314698.png",
-      title: "Retailers",
-      text: "Expand your product portfolio and attract new customers by offering Zoiko Mobile products and services in your retail stores.",
+      icon: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Icon_1.png",
+      title: "Quality Products:",
+      text: "Access high-quality mobile devices, accessories, and services from leading brands in the industry.",
     },
     {
-      icon: "./img/Group-691314699-1.png",
-      title: "Distributors",
-      text: "Increase your product distribution channels and reach a broader market by distributing Zoiko Mobile products to retailers and resellers.",
+      icon: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Icon_2.png",
+      title: "Competitive Pricing:",
+      text: "Benefit from competitive pricing and attractive discounts to maximize your profitability.",
     },
     {
-      icon: "./img/Group-691314700-1.png",
-      title: "Businesses",
-      text: "Enhance your corporate offerings by providing employees with access to exclusive discounts on mobile devices, accessories, and services.",
+      icon: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Icon_3.png",
+      title: "Dedicated Support:",
+      text: "Receive personalized support and guidance from our experienced team to help you succeed in your partnership with Zoiko Mobile America.",
     },
   ];
 
@@ -29,19 +29,24 @@ const BecomeAffiliatePage = () => {
       <HeadBar text="Join Buster and flock together with your buddies!" />
       <section className="py-5" style={{ backgroundColor: "#fff" }}>
       <Container>
-        <Row className="align-items-center wholesaleBanner">
+        <Row className="align-items-center">
           {/* Text Section */}
           <Col md={6}>
             <h2 className="fw-bold" style={{ color: "#DF1E5A" }}>
-              Partner with Zoiko Mobile for Wholesale Opportunities
+              Join Forces with Zoiko Mobile
             </h2>
             <p className="mt-3">
-              Zoiko Mobile offers wholesale opportunities for retailers, distributors, and businesses looking to expand their product offerings and provide their customers with high-quality mobile devices, accessories, and services. Join us as a wholesale partner and benefit from competitive pricing, extensive product selection, and dedicated support.
+              Zoiko Mobile invites you to join forces with us and become a valued
+              partner. Whether you're a retailer, distributor, affiliate
+              marketer, or technology enthusiast, there are numerous
+              opportunities to collaborate and grow together. Partner with us
+              and unlock a world of possibilities in the dynamic mobile
+              technology industry.
             </p>
             <Button
               variant="danger"
               size="lg"
-              href="/become-affiliate-form"  
+              href="/partner-with-us-form"
               className="mt-3 px-4"
               style={{ backgroundColor: "#DF1E5A", border: "none" }}
             >
@@ -52,7 +57,7 @@ const BecomeAffiliatePage = () => {
           {/* Image Section */}
           <Col md={6} className="text-center">
             <img
-              src="./img/md.webp"
+              src="./img/Rectangle-665.webp"
               alt="Join Forces with Zoiko Mobile"
               className="img-fluid"
             />
@@ -64,23 +69,25 @@ const BecomeAffiliatePage = () => {
       <section className="py-5 bg-light">
       <Container>
         <h2 className="text-center fw-bold mb-5">
-          Why Partner with Us
+          Opportunities for Collaboration
         </h2>
         <Row className="gy-4">
           {/* Retail Partnership */}
           <Col md={6}>
             <div className="d-flex align-items-center">
               <img
-                src="./img/Vector-1.png"
+                src="./img//Rectangle-667.png"
                 alt="Retail Partnership"
                 className="me-3"
                 width="60"
                 height="60"
               />
               <div>
-                <h5 className="fw-bold text-danger">Competitive Pricing</h5>
+                <h5 className="fw-bold text-danger">Retail Partnership</h5>
                 <p className="mb-0">
-                  Take advantage of wholesale pricing and competitive discounts on our wide range of mobile devices, accessories, and services.
+                  Expand your product offerings by retailing Zoiko Mobile
+                  America's extensive range of mobile devices, accessories,
+                  and services in your stores or online platforms.
                 </p>
               </div>
             </div>
@@ -90,16 +97,18 @@ const BecomeAffiliatePage = () => {
           <Col md={6}>
             <div className="d-flex align-items-center">
               <img
-                src="./img/x30_8.png"
+                src="./img//Rectangle-668.png"
                 alt="Wholesale Partnership"
                 className="me-3"
                 width="60"
                 height="60"
               />
               <div>
-                <h5 className="fw-bold text-danger">Extensive Product Selection</h5>
+                <h5 className="fw-bold text-danger">Wholesale Partnership</h5>
                 <p className="mb-0">
-                  Access a diverse selection of the latest smartphones, tablets, accessories, and mobile plans to meet the needs of your customers.
+                  Access competitive pricing and extensive product selection as
+                  a wholesale partner, catering to retailers, distributors,
+                  and businesses seeking quality mobile products.
                 </p>
               </div>
             </div>
@@ -109,16 +118,18 @@ const BecomeAffiliatePage = () => {
           <Col md={6}>
             <div className="d-flex align-items-center">
               <img
-                src="./img/Vector-2.png"
+                src="./img//Rectangle-669.png"
                 alt="Affiliate Program"
                 className="me-3"
                 width="60"
                 height="60"
               />
               <div>
-                <h5 className="fw-bold text-danger">Quality Assurance</h5>
+                <h5 className="fw-bold text-danger">Affiliate Program</h5>
                 <p className="mb-0">
-                  Rest assured that all products offered through our wholesale program are of the highest quality and sourced from reputable manufacturers.
+                  Monetize your online presence by joining our affiliate program
+                  and earning commissions for promoting Zoiko Mobile America's
+                  products and services to your audience.
                 </p>
               </div>
             </div>
@@ -128,16 +139,18 @@ const BecomeAffiliatePage = () => {
           <Col md={6}>
             <div className="d-flex align-items-center">
               <img
-                src="./img/Group-691315067.png"
+                src="./img/Rectangle-670.png"
                 alt="Corporate Collaboration"
                 className="me-3"
                 width="60"
                 height="60"
               />
               <div>
-                <h5 className="fw-bold text-danger">Dedicated Support</h5>
+                <h5 className="fw-bold text-danger">Corporate Collaboration</h5>
                 <p className="mb-0">
-                  Receive personalized support from our dedicated wholesale team, who are committed to helping you succeed and grow your business.
+                  Enhance your corporate offerings by providing employees with
+                  exclusive discounts on mobile devices, accessories, and
+                  services through our corporate program.
                 </p>
               </div>
             </div>
@@ -148,7 +161,7 @@ const BecomeAffiliatePage = () => {
 <section className="py-5" style={{ backgroundColor: "#ffffffff",}}>
       <Container>
         <h2 className="text-center fw-bold mb-5">
-          Why Partner with <span className="text-dark">Who Can Benefit</span>
+          Why Partner with <span className="text-dark">Zoiko Mobile America?</span>
         </h2>
         <Row className="justify-content-center">
           {data.map((item, index) => (
@@ -216,40 +229,35 @@ const BecomeAffiliatePage = () => {
             <div className="circle c1">1</div>
             <div className="circle c2">2</div>
             <div className="circle c3">3</div>
-            <div className="circle c4">4</div>
           </div>
 
           {/* Text columns */}
           <Row className="mt-5 steps-text text-start">
             
-            <Col md={3} className="mb-4">
+            <Col md={4} className="mb-4">
             <div className="circle1 c1 mx-auto mb-3">1</div>
-              <h5 className="step-heading">Apply</h5>
+              <h5 className="step-heading">Explore Opportunities:</h5>
               <p className="step-desc">
-                Complete the wholesale application form on our website to apply for a wholesale account.
+                Explore the various partnership opportunities available and determine
+                which aligns best with your business goals and interests.
               </p>
             </Col>
 
-            <Col md={3} className="mb-4">
+            <Col md={4} className="mb-4">
             <div className="circle1 c1 mx-auto mb-3">2</div>
-              <h5 className="step-heading">Approval</h5>
+              <h5 className="step-heading">Apply or Inquire:</h5>
               <p className="step-desc">
-                Our wholesale team will review your application and notify you of your account status.
+                Complete the application process for the partnership program of your
+                choice or reach out to us directly for more information and guidance.
               </p>
             </Col>
 
-            <Col md={3} className="mb-4">
+            <Col md={4} className="mb-4">
             <div className="circle1 c1 mx-auto mb-3">3</div>
-              <h5 className="step-heading">Order</h5>
+              <h5 className="step-heading">Collaborate and Grow:</h5>
               <p className="step-desc">
-                Once approved, you can place wholesale orders directly through our online portal or contact our wholesale team for assistance.
-              </p>
-            </Col>
-            <Col md={3} className="mb-4">
-            <div className="circle1 c1 mx-auto mb-3">4</div>
-              <h5 className="step-heading">Grow</h5>
-              <p className="step-desc">
-                Expand your product offerings, attract new customers, and grow your business with Zoiko Mobile.
+                Once approved, collaborate closely with our team to leverage resources,
+                drive growth, and achieve mutual success.
               </p>
             </Col>
           </Row>
@@ -259,10 +267,13 @@ const BecomeAffiliatePage = () => {
         <div className="contact-block mt-5">
           <h4 className="contact-title">Contact Us</h4>
           <p className="lead contact-body">
-            
-
-            If you're interested in partnering with Zoiko Mobile for wholesale opportunities or have any questions about our wholesale program, please contact us at <a href="mailto:wholesale@zoikomobile.com" className="mailto">wholesale@zoikomobile.com</a>. Our team is here to assist you and provide you with the support you need.
-
+            Ready to embark on a journey of collaboration and growth with Zoiko Mobile
+            America? Contact us today at{" "}
+            <a href="mailto:partnership@zoikomobile.com" className="mailto">
+              partnership@zoikomobile.com
+            </a>{" "}
+            to discuss partnership opportunities and take the first step towards a
+            rewarding partnership.
           </p>
 
           <p className="company-name">Zoiko Mobile America</p>
@@ -299,8 +310,8 @@ const BecomeAffiliatePage = () => {
 
         .steps-visual .line {
           position: absolute;
-          left: 1%;
-          right: 23%;
+          left: 0%;
+          right: 30%;
           top: 36px; /* center line vertically inside steps-visual */
           height: 4px;
           background: #e81f5a; /* pink */
@@ -341,15 +352,11 @@ const BecomeAffiliatePage = () => {
           transform: translateX(-50%);
         }
         .circle.c2 {
-          left: 28%;
+          left: 36%;
           transform: translateX(-50%);
         }
         .circle.c3 {
-          right: 47%;
-          transform: translateX(50%);
-        }
-           .circle.c4 {
-          right: 22%;
+          right: 30%;
           transform: translateX(50%);
         }
 
@@ -450,11 +457,6 @@ const BecomeAffiliatePage = () => {
               text-align: center !important;
           }
         }
-          @media (min-width: 766px) and (max-width: 991px){
-            .steps-visual{
-                display: none;
-            }
-          }
       `}</style>
     </div>
       <Footer />
@@ -462,4 +464,4 @@ const BecomeAffiliatePage = () => {
   );
 };
 
-export default BecomeAffiliatePage;
+export default BecomePartnerPage;
