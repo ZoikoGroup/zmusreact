@@ -460,8 +460,8 @@ const PartnerWithUsForm = () => {
               <Col md={12}>
                 <FormLabel>Estimated Monthly Purchase Volume with Zoiko Mobile *</FormLabel>
                 <Form.Select
-                  name="saleOtherCarriers"
-                  value={formData.saleOtherCarriers}
+                  name="estimatedMonthlyPurchase"
+                  value={formData.estimatedMonthlyPurchase}
                   onChange={handleChange}
                 >
                   <option value="">Select</option>
