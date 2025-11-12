@@ -6,12 +6,12 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 
-const PartnerWithUsForm = () => {
+const BecomeRetailerForm = () => {
   const [errors, setErrors] = useState({});
-  const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     companyName: "",
-    businessType: "",
+    website:"" ,
+    businessTypes: [],
     name: "",
     job: "",
     email: "",
@@ -21,23 +21,20 @@ const PartnerWithUsForm = () => {
     city: "",
     state: "",
     zip: "",
-    yearsInBusiness: "",
-    monthlySales: "",
-    businessTypes: [],
-    saleOtherCarriers: "",
-    planToSell: [],
-    estimatedMonthlyPurchase: "",
-    bankTransfer: "",
-    billingContact: "",
-    billingEmail: "",
-    preferredShippingMethod: "",
+   marketingChannels: [],
+   monthlyActivations: "",
+   monthlyTraffic: "",
+    promotoBrands: "",
+   planToPromotes: [],   
     agreeEligibility: false,
     agreeTerms: false,
   });
 
+  // Handle input and checkbox
   const handleChange = (e) => {
     const { name, value, type, checked, dataset } = e.target;
-    if (dataset.group === "businessTypes" || dataset.group === "planToSell") {
+
+    if (dataset.group === "businessTypes" || dataset.group === "planToPromotes" || dataset.group === "marketingChannels") {
       const arr = formData[dataset.group];
       const updated = checked ? [...arr, value] : arr.filter((item) => item !== value);
       setFormData({ ...formData, [dataset.group]: updated });
@@ -48,82 +45,88 @@ const PartnerWithUsForm = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.companyName) newErrors.companyName = "Enter your registered company name";
-    if (!formData.businessType) newErrors.businessType = "Business type is required";
-    if (!formData.name) newErrors.name = "Full name is required";
-    if (!formData.job) newErrors.job = "Job title is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.phone) newErrors.phone = "Phone number is required";
+     if (!formData.companyName) newErrors.companyName = "Enter Your Full registered name of your organization";
+      if (!formData.website) newErrors.website = "Enter Company Website URL";
     if (!formData.street) newErrors.street = "Street is required";
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.zip) newErrors.zip = "ZIP is required";
-    if (!formData.yearsInBusiness) newErrors.yearsInBusiness = "Select years in business";
-    if (!formData.monthlySales) newErrors.monthlySales = "Select monthly sales volume";
-    if (!formData.saleOtherCarriers) newErrors.saleOtherCarriers = "This field is required";
-    if (!formData.estimatedMonthlyPurchase) newErrors.estimatedMonthlyPurchase = "Select estimated monthly purchase";
-    if (!formData.bankTransfer) newErrors.bankTransfer = "Select payment method";
-    if (!formData.billingContact) newErrors.billingContact = "Billing contact is required";
-    if (!formData.billingEmail) newErrors.billingEmail = "Billing email is required";
-    if (!formData.preferredShippingMethod) newErrors.preferredShippingMethod = "Select a shipping method";
-    if (!formData.agreeEligibility) newErrors.agreeEligibility = "You must confirm eligibility";
-    if (!formData.agreeTerms) newErrors.agreeTerms = "You must agree to terms";
-
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.phone) newErrors.phone = "Phone number is required";    
+    if (!formData.name) newErrors.name = "Name is required";
+    if (!formData.job) newErrors.job = "Enter Your Full registered name of your organization";
+    if (!formData.businessTypes) newErrors.businessTypes = "This field is required.";
+    if (!formData.marketingChannels || formData.marketingChannels.length === 0)
+      newErrors.marketingChannels = "Select at least one marketing channel.";
+    if (!formData.planToPromotes || formData.planToPromotes.length === 0)
+      newErrors.planToPromotes = "Select at least one promotion plan.";
+    if (!formData.monthlyActivations) newErrors.monthlyActivations = "This field is required.";
+    if (!formData.monthlyTraffic) newErrors.monthlyTraffic = "This field is required.";
+    if (!formData.promotoBrands) newErrors.promotoBrands = "This field is required.";
+    if (!formData.agreeEligibility) newErrors.agreeEligibility = "This field is required.";
+    if (!formData.agreeTerms) newErrors.agreeTerms = "This field is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validate()) return;
+  e.preventDefault();
 
-    setSubmitting(true);
+  console.log(formData);
+
+  if (!validate()) {
+    console.log("Validation failed", errors);
+    return;
+  }
+
+  try {
+    console.log("Sending request to API...");
+    const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/become-retailer-form", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    let result;
     try {
-      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/become-affiliate-form", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const result = await res.json();
-
-      if (res.ok) {
-        alert("✅ Application submitted successfully!");
-        console.log(result);
-        setFormData({
-          companyName: "",
-          businessType: "",
-          name: "",
-          job: "",
-          email: "",
-          phone: "",
-          countrycode: "",
-          street: "",
-          city: "",
-          state: "",
-          zip: "",
-          yearsInBusiness: "",
-          monthlySales: "",
-          businessTypes: [],
-          saleOtherCarriers: "",
-          planToSell: [],
-          estimatedMonthlyPurchase: "",
-          bankTransfer: "",
-          billingContact: "",
-          billingEmail: "",
-          preferredShippingMethod: "",
-          agreeEligibility: false,
-          agreeTerms: false,
-        });
-      } else {
-        alert("❌ Submission failed: " + (result.message || "Unknown error"));
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("❌ Error submitting form.");
-    } finally {
-      setSubmitting(false);
+      result = await res.json();
+    } catch {
+      result = { message: "No JSON body received" };
     }
-  };
+
+    console.log("Response:", res.status, result);
+
+    if (res.ok) {
+      alert("✅ Application submitted successfully!");
+      setFormData({
+        companyName: "",
+        website: "",
+        name: "",
+        job: "",
+        email: "",
+        phone: "",
+        countrycode: "",
+        street: "",
+        city: "",
+        state: "",
+        zip: "",
+        businessTypes: [],
+        marketingChannels: [],
+        planToPromotes: [],
+        monthlyActivations: "",
+        monthlyTraffic: "",
+        promotoBrands: "",
+        agreeEligibility: false,
+        agreeTerms: false,
+      });
+    } else {
+      alert("❌ Submission failed: " + result.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("⚠️ Error submitting form. Check console for details.");
+  }
+};
 
   return (
     <>
@@ -182,7 +185,7 @@ const PartnerWithUsForm = () => {
   cursor: pointer;
   transition: all 0.25s ease-in-out;
   position: relative;
-  margin: 0;             /* ✅ Removes unwanted offset  ss u*/
+  margin: 0;             /* ✅ Removes unwanted offset */
 }
 
 /* Hover effect */
