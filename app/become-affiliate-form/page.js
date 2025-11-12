@@ -6,10 +6,12 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 
-const BecomeAffiliateForm = () => {
+const PartnerWithUsForm = () => {
   const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     companyName: "",
+    businessType: "",
     name: "",
     job: "",
     email: "",
@@ -19,23 +21,22 @@ const BecomeAffiliateForm = () => {
     city: "",
     state: "",
     zip: "",
-    yearsInBusiness: "",    
+    yearsInBusiness: "",
     monthlySales: "",
     businessTypes: [],
     saleOtherCarriers: "",
     planToSell: [],
+    estimatedMonthlyPurchase: "",
     bankTransfer: "",
     billingContact: "",
     billingEmail: "",
-    shippingMethod: "",
+    preferredShippingMethod: "",
     agreeEligibility: false,
     agreeTerms: false,
   });
 
-  // Handle input and checkbox
   const handleChange = (e) => {
     const { name, value, type, checked, dataset } = e.target;
-
     if (dataset.group === "businessTypes" || dataset.group === "planToSell") {
       const arr = formData[dataset.group];
       const updated = checked ? [...arr, value] : arr.filter((item) => item !== value);
@@ -47,87 +48,82 @@ const BecomeAffiliateForm = () => {
 
   const validate = () => {
     const newErrors = {};
-     if (!formData.companyName) newErrors.companyName = "Enter Your Full registered name of your organization";
+    if (!formData.companyName) newErrors.companyName = "Enter your registered company name";
+    if (!formData.businessType) newErrors.businessType = "Business type is required";
+    if (!formData.name) newErrors.name = "Full name is required";
+    if (!formData.job) newErrors.job = "Job title is required";
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.phone) newErrors.phone = "Phone number is required";
     if (!formData.street) newErrors.street = "Street is required";
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.zip) newErrors.zip = "ZIP is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.phone) newErrors.phone = "Phone number is required";
     if (!formData.yearsInBusiness) newErrors.yearsInBusiness = "Select years in business";
     if (!formData.monthlySales) newErrors.monthlySales = "Select monthly sales volume";
-    
-    if (!formData.name) newErrors.name = "Name is required";
-    if (!formData.job) newErrors.job = "Enter Your Full registered name of your organization";
-    if (!formData.agreeEligibility) newErrors.agreeEligibility = "This field is required.";
-    if (!formData.businessTypes) newErrors.businessTypes = "This field is required.";
+    if (!formData.saleOtherCarriers) newErrors.saleOtherCarriers = "This field is required";
+    if (!formData.estimatedMonthlyPurchase) newErrors.estimatedMonthlyPurchase = "Select estimated monthly purchase";
+    if (!formData.bankTransfer) newErrors.bankTransfer = "Select payment method";
+    if (!formData.billingContact) newErrors.billingContact = "Billing contact is required";
     if (!formData.billingEmail) newErrors.billingEmail = "Billing email is required";
-    if (!formData.shippingMethod) newErrors.shippingMethod = "This field is required.";
-    if (!formData.agreeEligibility) newErrors.agreeEligibility = "This field is required.";
-    if (!formData.agreeTerms) newErrors.agreeTerms = "This field is required.";
+    if (!formData.preferredShippingMethod) newErrors.preferredShippingMethod = "Select a shipping method";
+    if (!formData.agreeEligibility) newErrors.agreeEligibility = "You must confirm eligibility";
+    if (!formData.agreeTerms) newErrors.agreeTerms = "You must agree to terms";
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
+    if (!validate()) return;
 
-  console.log("Submitting form...");
-  if (!validate()) {
-    console.log("Validation failed", errors);
-    return;
-  }
-
-  try {
-    console.log("Sending request to API...");
-    const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/become-affiliate-form", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-
-    let result;
+    setSubmitting(true);
     try {
-      result = await res.json();
-    } catch {
-      result = { message: "No JSON body received" };
-    }
-
-    console.log("Response:", res.status, result);
-
-    if (res.ok) {
-      alert("✅ Application submitted successfully!");
-      setFormData({
-        companyName: "",
-        name: "",
-        job: "",
-        email: "",
-        phone: "",
-        countrycode: "",
-        street: "",
-        city: "",
-        state: "",
-        zip: "",
-        yearsInBusiness: "",
-        monthlySales: "",
-        businessTypes: [],
-        saleOtherCarriers: "",
-        planToSell: [],
-        bankTransfer: "",
-        billingContact: "",
-        billingEmail: "",
-        shippingMethod: "",
-        agreeEligibility: false,
-        agreeTerms: false,
+      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/become-affiliate-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-    } else {
-      alert("❌ Submission failed: " + result.message);
+      const result = await res.json();
+
+      if (res.ok) {
+        alert("✅ Application submitted successfully!");
+        console.log(result);
+        setFormData({
+          companyName: "",
+          businessType: "",
+          name: "",
+          job: "",
+          email: "",
+          phone: "",
+          countrycode: "",
+          street: "",
+          city: "",
+          state: "",
+          zip: "",
+          yearsInBusiness: "",
+          monthlySales: "",
+          businessTypes: [],
+          saleOtherCarriers: "",
+          planToSell: [],
+          estimatedMonthlyPurchase: "",
+          bankTransfer: "",
+          billingContact: "",
+          billingEmail: "",
+          preferredShippingMethod: "",
+          agreeEligibility: false,
+          agreeTerms: false,
+        });
+      } else {
+        alert("❌ Submission failed: " + (result.message || "Unknown error"));
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("❌ Error submitting form.");
+    } finally {
+      setSubmitting(false);
     }
-  } catch (error) {
-    console.error("Error:", error);
-    alert("⚠️ Error submitting form. Check console for details.");
-  }
-};
+  };
 
   return (
     <>
@@ -309,8 +305,8 @@ const BecomeAffiliateForm = () => {
               <Col md={6}>
                 <FormLabel>Business Type *</FormLabel>
                 <Form.Select
-                  name="businessTypes"
-                  value={formData.businessTypes}
+                  name="businessType"
+                  value={formData.businessType}
                   onChange={handleChange}
                 >
                   <option value="">Select</option>
@@ -319,7 +315,7 @@ const BecomeAffiliateForm = () => {
                   <option>E-commerce Business</option>
                   <option>E-commerce Business B2B Reseller</option>
                 </Form.Select>
-                {errors.businessTypes && <p className="txtred">{errors.businessTypes}</p>}
+                {errors.businessType && <p className="txtred">{errors.businessType}</p>}
               </Col>
               <Col md={6} className="mt-3">
                 <FormLabel>Full Name  *</FormLabel>
@@ -493,8 +489,8 @@ const BecomeAffiliateForm = () => {
               <Col md={12}>
                 <FormLabel>Estimated Monthly Purchase Volume with Zoiko Mobile *</FormLabel>
                 <Form.Select
-                  name="saleOtherCarriers"
-                  value={formData.saleOtherCarriers}
+                  name="estimatedMonthlyPurchase"
+                  value={formData.estimatedMonthlyPurchase}
                   onChange={handleChange}
                 >
                   <option value="">Select</option>
@@ -503,7 +499,7 @@ const BecomeAffiliateForm = () => {
                   <option value={"500 -1000 units"}>500 -1000 units</option>
                   <option value={"1000+ units"}>1000+ units</option>
                 </Form.Select>
-                {errors.saleOtherCarriers && <p className="txtred">{errors.saleOtherCarriers}</p>}
+                {errors.estimatedMonthlyPurchase && <p className="txtred">{errors.estimatedMonthlyPurchase}</p>}
               </Col>
 
             </Row>
@@ -544,8 +540,8 @@ const BecomeAffiliateForm = () => {
               <Col md={12} className="mt-3">
                 <FormLabel>Preferred Shipping Method for Devices/SIMs *</FormLabel>
                 <Form.Select
-                  name="shippingMethod"
-                  value={formData.shippingMethod}
+                  name="preferredShippingMethod"
+                  value={formData.preferredShippingMethod}
                   onChange={handleChange}
                 >
                   <option value="">Select</option>
@@ -553,7 +549,7 @@ const BecomeAffiliateForm = () => {
                   <option value={"Expedited Shipping"}>Expedited Shipping</option>
                   <option value={"Local Pickup (if available)"}>Local Pickup (if available)</option>
                 </Form.Select>
-                {errors.shippingMethod && <p className="txtred">{errors.shippingMethod}</p>}
+                {errors.preferredShippingMethod && <p className="txtred">{errors.preferredShippingMethod}</p>}
               </Col>
             </Row>
 
@@ -601,4 +597,4 @@ const BecomeAffiliateForm = () => {
   );
 };
 
-export default BecomeAffiliateForm;
+export default PartnerWithUsForm;
