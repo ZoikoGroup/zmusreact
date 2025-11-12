@@ -160,7 +160,7 @@ const PartnerWithUsForm = () => {
   margin-bottom: 2rem;
   display: flex;
   align-items: center;   /* ✅ Vertically aligns checkbox + label */
-  gap: 8px;              /* space between box and text text */
+  gap: 8px;              /* space between box and text ttt*/
   position: relative;
   cursor: pointer;
 }
