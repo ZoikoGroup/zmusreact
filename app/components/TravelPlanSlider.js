@@ -138,7 +138,7 @@ const TravelPlanSlider = ({ planType = "travel-plans" }) => {
                       )
                     }
                   >
-                    Buy This Plan
+                    Buy this plan
                   </Button>
                   <Button variant="outline-danger" href={`/plans/${item.slug}`}>
                     View Details
