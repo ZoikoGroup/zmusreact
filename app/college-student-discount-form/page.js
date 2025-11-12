@@ -4,7 +4,8 @@ import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import { Button, Col, Container, Form, FormLabel, Row, InputGroup } from "react-bootstrap";
 import React, { useState } from "react";
-import Countrycode from "../products/countrycode.json";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const StudentDiscountForm = () => {
 
@@ -241,17 +242,12 @@ console.log(formData);
             <Row>
               <Col md={6}>
                 <FormLabel htmlFor="phone">Phone no <span className="txtred">*</span></FormLabel>
-                <InputGroup>
-                  <Form.Select name="countrycode" onChange={handleChange} value={formData.countrycode}>
-                    <option>Select Country</option>
-                    {Countrycode.map((code) => (
-                      <option key={code.code} value={code.dial_code}>{code.dial_code}, {code.name}</option>
-                    ))}
-                  </Form.Select>
-                  <Form.Control name="phone" onChange={handleChange} value={formData.phone} placeholder="Phone no" style={{ width: '40%' }} />
-                </InputGroup>
+                
+                  
+                  <Form.Control name="phone" onChange={handleChange} value={formData.phone} placeholder="Phone no"/>
+                
                 {/* {errors.phone && <p className="txtred">{errors.phone}</p>} */}
-                {errors.countrycode || errors.phone && <p className="txtred">{errors.phone}</p>}
+                { errors.phone && <p className="txtred">{errors.phone}</p>}
               </Col>
               <Col md={6}>
                 <Form.Group controlId="formFileLg" className="mb-3">
@@ -268,9 +264,20 @@ console.log(formData);
                 <Form.Control type="text" name="school" onChange={handleChange} value={formData.school} placeholder="Name of school" />
                 {errors.school && <p className="txtred">{errors.school}</p>}
               </Col>
-              <Col md={6}>
+              <Col md={6} className="d-grid">
                 <FormLabel htmlFor="yos">Year of study <span className="txtred">*</span></FormLabel>
-                <Form.Control type="date" name="yos" onChange={handleChange} value={formData.yos} placeholder="Year of study" />
+                {/* <Form.Control type="date" name="yos" onChange={handleChange} value={formData.yos} placeholder="Year of study" /> */}
+                <DatePicker
+                    selected={formData.yos ? new Date(formData.yos) : null}
+                    onChange={(date) =>
+                        setFormData({ ...formData, yos: date.toISOString().split("T")[0] })
+                    }
+                    
+                    name="yos"
+                    dateFormat="MM/dd/yyyy"
+                    placeholderText="MM/DD/YYYY"
+                    className="form-control"
+                    />
                 {errors.yos && <p className="txtred">{errors.yos}</p>}
               </Col>
             </Row>
