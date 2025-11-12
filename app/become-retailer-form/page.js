@@ -185,7 +185,7 @@ const BecomeRetailerForm = () => {
   cursor: pointer;
   transition: all 0.25s ease-in-out;
   position: relative;
-  margin: 0;             /* ✅ Removes unwanted offset */
+  margin: 0;             /* ✅ Removes unwanted offset  ss */
 }
 
 /* Hover effect */
