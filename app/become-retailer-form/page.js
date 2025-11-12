@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 
-const PartnerWithUsForm = () => {
+const BecomeRetailerForm = () => {
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     companyName: "",
@@ -475,4 +475,4 @@ const PartnerWithUsForm = () => {
   );
 };
 
-export default PartnerWithUsForm;
+export default BecomeRetailerForm;
