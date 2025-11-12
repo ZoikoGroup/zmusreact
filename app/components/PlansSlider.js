@@ -72,7 +72,7 @@ const PlansSlider = ({ slug }) => {
                                 </ul>
                                 <hr className="separator" />
                                 <Button variant="danger" href={`/plans/${item.slug}`} size="sm">
-                                    Buy This Plan
+                                    Buy this plan
                                 </Button>
                                 &nbsp;
                                 <Button variant="outline-danger" href={`/plans/${item.slug}`} size="sm">
