@@ -46,7 +46,7 @@ const BecomePartnerPage = () => {
             <Button
               variant="danger"
               size="lg"
-              href="/partner-with-us-form"
+              href="/become-partner-form"
               className="mt-3 px-4"
               style={{ backgroundColor: "#DF1E5A", border: "none" }}
             >
