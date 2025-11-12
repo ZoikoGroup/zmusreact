@@ -145,7 +145,7 @@ const PostpaidSlider = ({ planType = "postpaid-plans" }) => {
                       )
                     }
                   >
-                    Buy This Plan
+                    Buy this plan
                   </Button>
                   <Button
                     variant="outline-danger"

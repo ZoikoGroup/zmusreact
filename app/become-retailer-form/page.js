@@ -11,7 +11,6 @@ const PartnerWithUsForm = () => {
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     companyName: "",
-    businessType: "",
     name: "",
     job: "",
     email: "",
@@ -21,22 +20,22 @@ const PartnerWithUsForm = () => {
     city: "",
     state: "",
     zip: "",
-    yearsInBusiness: "",
+    yearsInBusiness: "",    
     monthlySales: "",
     businessTypes: [],
     saleOtherCarriers: "",
     planToSell: [],
-    estimatedMonthlyPurchase: "",
     bankTransfer: "",
     billingContact: "",
     billingEmail: "",
-    preferredShippingMethod: "",
+    shippingMethod: "",
     agreeEligibility: false,
     agreeTerms: false,
   });
 
   const handleChange = (e) => {
     const { name, value, type, checked, dataset } = e.target;
+
     if (dataset.group === "businessTypes" || dataset.group === "planToSell") {
       const arr = formData[dataset.group];
       const updated = checked ? [...arr, value] : arr.filter((item) => item !== value);
@@ -48,27 +47,24 @@ const PartnerWithUsForm = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.companyName) newErrors.companyName = "Enter your registered company name";
-    if (!formData.businessType) newErrors.businessType = "Business type is required";
-    if (!formData.name) newErrors.name = "Full name is required";
-    if (!formData.job) newErrors.job = "Job title is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.phone) newErrors.phone = "Phone number is required";
+     if (!formData.companyName) newErrors.companyName = "Enter Your Full registered name of your organization";
     if (!formData.street) newErrors.street = "Street is required";
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.zip) newErrors.zip = "ZIP is required";
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.phone) newErrors.phone = "Phone number is required";
     if (!formData.yearsInBusiness) newErrors.yearsInBusiness = "Select years in business";
     if (!formData.monthlySales) newErrors.monthlySales = "Select monthly sales volume";
-    if (!formData.saleOtherCarriers) newErrors.saleOtherCarriers = "This field is required";
-    if (!formData.estimatedMonthlyPurchase) newErrors.estimatedMonthlyPurchase = "Select estimated monthly purchase";
-    if (!formData.bankTransfer) newErrors.bankTransfer = "Select payment method";
-    if (!formData.billingContact) newErrors.billingContact = "Billing contact is required";
+    
+    if (!formData.name) newErrors.name = "Name is required";
+    if (!formData.job) newErrors.job = "Enter Your Full registered name of your organization";
+    if (!formData.agreeEligibility) newErrors.agreeEligibility = "This field is required.";
+    if (!formData.businessTypes) newErrors.businessTypes = "This field is required.";
     if (!formData.billingEmail) newErrors.billingEmail = "Billing email is required";
-    if (!formData.preferredShippingMethod) newErrors.preferredShippingMethod = "Select a shipping method";
-    if (!formData.agreeEligibility) newErrors.agreeEligibility = "You must confirm eligibility";
-    if (!formData.agreeTerms) newErrors.agreeTerms = "You must agree to terms";
-
+    if (!formData.shippingMethod) newErrors.shippingMethod = "This field is required.";
+    if (!formData.agreeEligibility) newErrors.agreeEligibility = "This field is required.";
+    if (!formData.agreeTerms) newErrors.agreeTerms = "This field is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -77,12 +73,53 @@ const PartnerWithUsForm = () => {
     e.preventDefault();
     if (!validate()) return;
 
-    setSubmitting(true);
+  console.log("Submitting form...");
+  if (!validate()) {
+    console.log("Validation failed", errors);
+    return;
+  }
+
+  try {
+    console.log("Sending request to API...");
+    const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/become-affiliate-form", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    let result;
     try {
-      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/become-affiliate-form", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      result = await res.json();
+    } catch {
+      result = { message: "No JSON body received" };
+    }
+
+    console.log("Response:", res.status, result);
+
+    if (res.ok) {
+      alert("✅ Application submitted successfully!");
+      setFormData({
+        companyName: "",
+        name: "",
+        job: "",
+        email: "",
+        phone: "",
+        countrycode: "",
+        street: "",
+        city: "",
+        state: "",
+        zip: "",
+        yearsInBusiness: "",
+        monthlySales: "",
+        businessTypes: [],
+        saleOtherCarriers: "",
+        planToSell: [],
+        bankTransfer: "",
+        billingContact: "",
+        billingEmail: "",
+        shippingMethod: "",
+        agreeEligibility: false,
+        agreeTerms: false,
       });
       const result = await res.json();
 
@@ -305,8 +342,8 @@ const PartnerWithUsForm = () => {
               <Col md={6}>
                 <FormLabel>Business Type *</FormLabel>
                 <Form.Select
-                  name="businessType"
-                  value={formData.businessType}
+                  name="businessTypes"
+                  value={formData.businessTypes}
                   onChange={handleChange}
                 >
                   <option value="">Select</option>
@@ -315,7 +352,7 @@ const PartnerWithUsForm = () => {
                   <option>E-commerce Business</option>
                   <option>E-commerce Business B2B Reseller</option>
                 </Form.Select>
-                {errors.businessType && <p className="txtred">{errors.businessType}</p>}
+                {errors.businessTypes && <p className="txtred">{errors.businessTypes}</p>}
               </Col>
               <Col md={6} className="mt-3">
                 <FormLabel>Full Name  *</FormLabel>
@@ -489,8 +526,8 @@ const PartnerWithUsForm = () => {
               <Col md={12}>
                 <FormLabel>Estimated Monthly Purchase Volume with Zoiko Mobile *</FormLabel>
                 <Form.Select
-                  name="estimatedMonthlyPurchase"
-                  value={formData.estimatedMonthlyPurchase}
+                  name="saleOtherCarriers"
+                  value={formData.saleOtherCarriers}
                   onChange={handleChange}
                 >
                   <option value="">Select</option>
@@ -499,7 +536,7 @@ const PartnerWithUsForm = () => {
                   <option value={"500 -1000 units"}>500 -1000 units</option>
                   <option value={"1000+ units"}>1000+ units</option>
                 </Form.Select>
-                {errors.estimatedMonthlyPurchase && <p className="txtred">{errors.estimatedMonthlyPurchase}</p>}
+                {errors.saleOtherCarriers && <p className="txtred">{errors.saleOtherCarriers}</p>}
               </Col>
 
             </Row>
@@ -540,8 +577,8 @@ const PartnerWithUsForm = () => {
               <Col md={12} className="mt-3">
                 <FormLabel>Preferred Shipping Method for Devices/SIMs *</FormLabel>
                 <Form.Select
-                  name="preferredShippingMethod"
-                  value={formData.preferredShippingMethod}
+                  name="shippingMethod"
+                  value={formData.shippingMethod}
                   onChange={handleChange}
                 >
                   <option value="">Select</option>
@@ -549,7 +586,7 @@ const PartnerWithUsForm = () => {
                   <option value={"Expedited Shipping"}>Expedited Shipping</option>
                   <option value={"Local Pickup (if available)"}>Local Pickup (if available)</option>
                 </Form.Select>
-                {errors.preferredShippingMethod && <p className="txtred">{errors.preferredShippingMethod}</p>}
+                {errors.shippingMethod && <p className="txtred">{errors.shippingMethod}</p>}
               </Col>
             </Row>
 
