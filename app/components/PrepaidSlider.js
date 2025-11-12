@@ -124,7 +124,7 @@ const PrepaidSlider = ({ planType = "prepaid-plans" }) => {
                                     variant="danger"
                                     onClick={() => openPlanPurchaseModal(item.title, item.slug, item.id, item.price, item.duration_type, item.bq_id, item.plan_type)}
                                 >
-                                    Buy This Plan
+                                    Buy this plan
                                 </Button>
                                 <Button variant="outline-danger" href={`/plans/${item.slug}`}>
                                     View Details

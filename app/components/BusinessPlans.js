@@ -126,7 +126,7 @@ const BusinessPlans = () => {
                         )
                       }
                     >
-                      Buy This Plan
+                      Buy this plan
                     </Button>
                     <Button variant="outline-danger" href={`/plans/${plan.slug}`}>
                       View Details
