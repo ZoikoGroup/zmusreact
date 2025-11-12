@@ -26,22 +26,22 @@ const BecomeRetailerPage = () => {
   return (
     <>
       <Header />
-      <HeadBar text="Earn More with a Reliable Nationwide Mobile Network" />
+      <HeadBar text="Join Buster and flock together with your buddies!" />
       <section className="py-5" style={{ backgroundColor: "#fff" }}>
       <Container>
-        <Row className="align-items-center">
+        <Row className="align-items-center wholesaleBanner">
           {/* Text Section */}
           <Col md={6}>
             <h2 className="fw-bold" style={{ color: "#DF1E5A" }}>
-              Join Our Affiliate Program and Earn Rewards
+              Partner with Zoiko Mobile for Wholesale Opportunities
             </h2>
             <p className="mt-3">
-              At Zoiko Mobile, we value partnerships and collaborations with individuals and organizations who share our passion for connecting people. Our Affiliate Program offers an opportunity for you to earn rewards while promoting our products and services to your audience.
+              Zoiko Mobile offers wholesale opportunities for retailers, distributors, and businesses looking to expand their product offerings and provide their customers with high-quality mobile devices, accessories, and services. Join us as a wholesale partner and benefit from competitive pricing, extensive product selection, and dedicated support.
             </p>
             <Button
               variant="danger"
               size="lg"
-              href="/become-retailer-form"  
+              href="/become-affiliate-form"  
               className="mt-3 px-4"
               style={{ backgroundColor: "#DF1E5A", border: "none" }}
             >
@@ -52,7 +52,7 @@ const BecomeRetailerPage = () => {
           {/* Image Section */}
           <Col md={6} className="text-center">
             <img
-              src="./img/Rectangle-665-1.webp"
+              src="./img/md.webp"
               alt="Join Forces with Zoiko Mobile"
               className="img-fluid"
             />
@@ -60,10 +60,152 @@ const BecomeRetailerPage = () => {
         </Row>
       </Container>
     </section>
-       <div className="partner-section">
+      
+      <section className="py-5 bg-light">
+      <Container>
+        <h2 className="text-center fw-bold mb-5">
+          Why Partner with Us
+        </h2>
+        <Row className="gy-4">
+          {/* Retail Partnership */}
+          <Col md={6}>
+            <div className="d-flex align-items-center">
+              <img
+                src="./img/Vector-1.png"
+                alt="Retail Partnership"
+                className="me-3"
+                width="60"
+                height="60"
+              />
+              <div>
+                <h5 className="fw-bold text-danger">Competitive Pricing</h5>
+                <p className="mb-0">
+                  Take advantage of wholesale pricing and competitive discounts on our wide range of mobile devices, accessories, and services.
+                </p>
+              </div>
+            </div>
+          </Col>
+
+          {/* Wholesale Partnership */}
+          <Col md={6}>
+            <div className="d-flex align-items-center">
+              <img
+                src="./img/x30_8.png"
+                alt="Wholesale Partnership"
+                className="me-3"
+                width="60"
+                height="60"
+              />
+              <div>
+                <h5 className="fw-bold text-danger">Extensive Product Selection</h5>
+                <p className="mb-0">
+                  Access a diverse selection of the latest smartphones, tablets, accessories, and mobile plans to meet the needs of your customers.
+                </p>
+              </div>
+            </div>
+          </Col>
+
+          {/* Affiliate Program */}
+          <Col md={6}>
+            <div className="d-flex align-items-center">
+              <img
+                src="./img/Vector-2.png"
+                alt="Affiliate Program"
+                className="me-3"
+                width="60"
+                height="60"
+              />
+              <div>
+                <h5 className="fw-bold text-danger">Quality Assurance</h5>
+                <p className="mb-0">
+                  Rest assured that all products offered through our wholesale program are of the highest quality and sourced from reputable manufacturers.
+                </p>
+              </div>
+            </div>
+          </Col>
+
+          {/* Corporate Collaboration */}
+          <Col md={6}>
+            <div className="d-flex align-items-center">
+              <img
+                src="./img/Group-691315067.png"
+                alt="Corporate Collaboration"
+                className="me-3"
+                width="60"
+                height="60"
+              />
+              <div>
+                <h5 className="fw-bold text-danger">Dedicated Support</h5>
+                <p className="mb-0">
+                  Receive personalized support from our dedicated wholesale team, who are committed to helping you succeed and grow your business.
+                </p>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </section>
+<section className="py-5" style={{ backgroundColor: "#ffffffff",}}>
+      <Container>
+        <h2 className="text-center fw-bold mb-5">
+          Why Partner with <span className="text-dark">Who Can Benefit</span>
+        </h2>
+        <Row className="justify-content-center">
+          {data.map((item, index) => (
+            <Col key={index} md={4} sm={12} className="d-flex justify-content-center mb-4">
+              <Card
+                className="text-center border-0"
+                style={{
+                  backgroundColor: "#ffe6ee",
+                  borderRadius: "15px",
+                  padding: "40px 25px",
+                  width: "100%",
+                  maxWidth: "500px",
+                }}
+              >
+                <div className="d-flex justify-content-center mb-3">
+                  <img
+                    src={item.icon}
+                    alt={item.title}
+                    style={{
+                      width: "200px",
+                      height: "160px",
+                      backgroundColor: "#fff",
+                      borderRadius: "15px",
+                      padding: "15px",
+                      boxShadow: "0 0 10px rgba(0,0,0,0.05)",
+                    }}
+                  />
+                </div>
+                <Card.Title
+                  style={{
+                    color: "#e20074",
+                    fontWeight: "700",
+                    fontSize: "20px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {item.title}
+                </Card.Title>
+                <Card.Text
+                  style={{
+                    fontSize: "17px",
+                    color: "#000",
+                    lineHeight: "1.5",
+                  }}
+                >
+                  {item.text}
+                </Card.Text>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </section>
+        <div className="partner-section">
       <Container className="pt-5 pb-5">
         <div className="card-wrap">
-          <h2 className="section-title">How It Works</h2>
+          <h2 className="section-title">How to Get Started</h2>
 
           {/* Steps visual */}
           <div className="steps-visual">
@@ -74,173 +216,44 @@ const BecomeRetailerPage = () => {
             <div className="circle c1">1</div>
             <div className="circle c2">2</div>
             <div className="circle c3">3</div>
+            <div className="circle c4">4</div>
           </div>
 
           {/* Text columns */}
           <Row className="mt-5 steps-text text-start">
             
-            <Col md={4} className="mb-4">
+            <Col md={3} className="mb-4">
             <div className="circle1 c1 mx-auto mb-3">1</div>
-              <h5 className="step-heading">Sign Up:</h5>
+              <h5 className="step-heading">Apply</h5>
               <p className="step-desc">
-                Joining our Affiliate Program is easy and free. Simply complete the online application form on our website to become an affiliate partner.
+                Complete the wholesale application form on our website to apply for a wholesale account.
               </p>
             </Col>
 
-            <Col md={4} className="mb-4">
+            <Col md={3} className="mb-4">
             <div className="circle1 c1 mx-auto mb-3">2</div>
-              <h5 className="step-heading">Promote:</h5>
+              <h5 className="step-heading">Approval</h5>
               <p className="step-desc">
-                Once approved, you will receive unique tracking links and promotional materials that you can share with your audience through your website, blog, social media channels, or other marketing channels.
+                Our wholesale team will review your application and notify you of your account status.
               </p>
             </Col>
 
-            <Col md={4} className="mb-4">
+            <Col md={3} className="mb-4">
             <div className="circle1 c1 mx-auto mb-3">3</div>
-              <h5 className="step-heading">Earn Rewards:</h5>
+              <h5 className="step-heading">Order</h5>
               <p className="step-desc">
-                Earn commissions for every qualified sale generated through your affiliate links. The more referrals you make, the more rewards you can earn.
+                Once approved, you can place wholesale orders directly through our online portal or contact our wholesale team for assistance.
+              </p>
+            </Col>
+            <Col md={3} className="mb-4">
+            <div className="circle1 c1 mx-auto mb-3">4</div>
+              <h5 className="step-heading">Grow</h5>
+              <p className="step-desc">
+                Expand your product offerings, attract new customers, and grow your business with Zoiko Mobile.
               </p>
             </Col>
           </Row>
         </div>
-      <section className="py-5 bg-light">
-      <Container>
-        <h2 className="text-center fw-bold mb-5">
-          Benefits of Joining
-        </h2>
-        <Row className="gy-4">
-          {/* Retail Partnership */}
-          <Col md={6}>
-            <div className="d-flex align-items-center">
-              <img
-                src="./img/Rectangle-667-1.png"
-                alt="Retail Partnership"
-                className="me-3"
-                width="60"
-                height="60"
-              />
-              <div>
-                <h5 className="fw-bold text-danger">Earn Commissions</h5>
-                <p className="mb-0">
-                  Receive competitive commissions on sales generated through your affiliate links.
-                </p>
-              </div>
-            </div>
-          </Col>
-
-          {/* Wholesale Partnership */}
-          <Col md={6}>
-            <div className="d-flex align-items-center">
-              <img
-                src="./img/Rectangle-669.png"
-                alt="Wholesale Partnership"
-                className="me-3"
-                width="60"
-                height="60"
-              />
-              <div>
-                <h5 className="fw-bold text-danger">Support and Guidance</h5>
-                <p className="mb-0">
-                  Receive dedicated support from our affiliate management team to help you maximize your earning potential and optimize your marketing efforts.
-                </p>
-              </div>
-            </div>
-          </Col>
-
-          {/* Affiliate Program */}
-          <Col md={6}>
-            <div className="d-flex align-items-center">
-              <img
-                src="./img/Rectangle-668.png"
-                alt="Affiliate Program"
-                className="me-3"
-                width="60"
-                height="60"
-              />
-              <div>
-                <h5 className="fw-bold text-danger">Access to Resources</h5>
-                <p className="mb-0">
-                  Gain access to a variety of marketing materials, including banners, text links, and product images, to help you promote Zoiko Mobile America effectively.
-                </p>
-              </div>
-            </div>
-          </Col>
-
-          {/* Corporate Collaboration */}
-          <Col md={6}>
-            <div className="d-flex align-items-center">
-              <img
-                src="./img/Rectangle-670-1.png"
-                alt="Corporate Collaboration"
-                className="me-3"
-                width="60"
-                height="60"
-              />
-              <div>
-                <h5 className="fw-bold text-danger">Track Performancex</h5>
-                <p className="mb-0">
-                  Monitor your performance and earnings in real-time through our affiliate dashboard, providing you with valuable insights into your campaign effectiveness.
-                </p>
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </section>
-
-            <section style={{ padding: "60px 0" }}>
-      <Container>
-        {/* Who Can Join Section */}
-        <Row className="text-center mb-5">
-          <Col>
-            <h3 style={{ color: "#E91E63", fontWeight: "700" }}>Who Can Join</h3>
-            <p style={{ fontSize: "18px", color: "#333", marginTop: "20px", lineHeight: "1.7" }}>
-              Our Affiliate Program is open to individuals, influencers, bloggers, content creators,
-              website owners, and businesses who are passionate about mobile technology and want to
-              promote Zoiko Mobile America to their audience.
-            </p>
-          </Col>
-        </Row>
-
-        {/* Join Today Section */}
-        <Row className="justify-content-center">
-          <Col md={10}>
-            <div
-              style={{
-                backgroundColor: "#fafafa",
-                borderRadius: "10px",
-                padding: "40px 30px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexWrap: "wrap",
-                boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
-              }}
-            >
-              <div
-                style={{
-                  flex: "0 0 200px",
-                  textAlign: "center",
-                  borderRight: "2px solid #E91E63",
-                  marginRight: "30px",
-                }}
-              >
-                <h3 style={{ color: "#E91E63", fontWeight: "700", marginBottom: "0" }}>Join</h3>
-                <h3 style={{ color: "#E91E63", fontWeight: "700" }}>Today</h3>
-              </div>
-              <div style={{ flex: "1", minWidth: "250px" }}>
-                <p style={{ fontSize: "18px", color: "#333", margin: "0", lineHeight: "1.6" }}>
-                  Ready to start earning rewards as a Zoiko Mobile America affiliate? Visit our
-                  website and sign up for our Affiliate Program today. We look forward to partnering
-                  with you and growing together.
-                </p>
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </section>
 
         {/* Contact block */}
         <div className="contact-block mt-5">
@@ -286,8 +299,8 @@ const BecomeRetailerPage = () => {
 
         .steps-visual .line {
           position: absolute;
-          left: 0%;
-          right: 30%;
+          left: 1%;
+          right: 23%;
           top: 36px; /* center line vertically inside steps-visual */
           height: 4px;
           background: #e81f5a; /* pink */
@@ -328,11 +341,15 @@ const BecomeRetailerPage = () => {
           transform: translateX(-50%);
         }
         .circle.c2 {
-          left: 36%;
+          left: 28%;
           transform: translateX(-50%);
         }
         .circle.c3 {
-          right: 30%;
+          right: 47%;
+          transform: translateX(50%);
+        }
+           .circle.c4 {
+          right: 22%;
           transform: translateX(50%);
         }
 
@@ -433,6 +450,11 @@ const BecomeRetailerPage = () => {
               text-align: center !important;
           }
         }
+          @media (min-width: 766px) and (max-width: 991px){
+            .steps-visual{
+                display: none;
+            }
+          }
       `}</style>
     </div>
       <Footer />
