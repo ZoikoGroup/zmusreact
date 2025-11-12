@@ -512,4 +512,4 @@ const BecomeRetailerForm = () => {
   );
 };
 
-export default PartnerWithUsForm;
+export default BecomeRetailerForm;
