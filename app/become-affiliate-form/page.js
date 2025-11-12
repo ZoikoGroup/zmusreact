@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 
-const BecomeAffiliateForm = () => {
+const BecomeRetailerForm = () => {
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     companyName: "",
@@ -543,4 +543,4 @@ const BecomeAffiliateForm = () => {
   );
 };
 
-export default BecomeAffiliateForm;
+export default BecomeRetailerForm;
