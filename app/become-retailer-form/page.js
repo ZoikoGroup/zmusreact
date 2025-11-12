@@ -16,6 +16,7 @@ const BecomeRetailerForm = () => {
     email: "",
     phone: "",
     countrycode: "",
+    website: "",
     street: "",
     city: "",
     state: "",
@@ -25,6 +26,11 @@ const BecomeRetailerForm = () => {
     businessTypes: [],
     saleOtherCarriers: "",
     planToSell: [],
+    marketingChannels: [],
+    planToPromotes: [],
+    monthlyTraffic: "",
+    promotoBrands: "",
+    monthlyActivations: "",
     estimatedMonthlyPurchase: "",
     bankTransfer: "",
     billingContact: "",
@@ -112,6 +118,37 @@ const BecomeRetailerForm = () => {
       if (res.ok) {
         alert("Application submitted successfully!");
         console.log(result);
+        setFormData({
+          companyName: "",
+          businessType: "",
+          name: "",
+          job: "",
+          email: "",
+          phone: "",
+          countrycode: "",
+          website: "",
+          street: "",
+          city: "",
+          state: "",
+          zip: "",
+          yearsInBusiness: "",
+          monthlySales: "",
+          businessTypes: [],
+          saleOtherCarriers: "",
+          planToSell: [],
+          marketingChannels: [],
+          planToPromotes: [],
+          monthlyTraffic: "",
+          promotoBrands: "",
+          monthlyActivations: "",
+          estimatedMonthlyPurchase: "",
+          bankTransfer: "",
+          billingContact: "",
+          billingEmail: "",
+          preferredShippingMethod: "",
+          agreeEligibility: false,
+          agreeTerms: false,
+        });
       } else {
         alert("Submission failed: " + (result.message || "Unknown error"));
       }
