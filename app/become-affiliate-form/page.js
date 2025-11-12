@@ -37,7 +37,7 @@ const PartnerWithUsForm = () => {
   const handleChange = (e) => {
     const { name, value, type, checked, dataset } = e.target;
 
-    if (dataset.group === "businessTypes" || dataset.group === "solutions") {
+    if (dataset.group === "businessTypes" || dataset.group === "planToSell") {
       const arr = formData[dataset.group];
       const updated = checked ? [...arr, value] : arr.filter((item) => item !== value);
       setFormData({ ...formData, [dataset.group]: updated });
