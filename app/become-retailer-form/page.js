@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 
-const PartnerWithUsForm = () => {
+const BecomeRetailerForm = () => {
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -17,6 +17,7 @@ const PartnerWithUsForm = () => {
     email: "",
     phone: "",
     countrycode: "",
+    website: "",
     street: "",
     city: "",
     state: "",
@@ -26,6 +27,11 @@ const PartnerWithUsForm = () => {
     businessTypes: [],
     saleOtherCarriers: "",
     planToSell: [],
+    marketingChannels: [],
+    planToPromotes: [],
+    monthlyTraffic: "",
+    promotoBrands: "",
+    monthlyActivations: "",
     estimatedMonthlyPurchase: "",
     bankTransfer: "",
     billingContact: "",
@@ -97,6 +103,7 @@ const PartnerWithUsForm = () => {
           email: "",
           phone: "",
           countrycode: "",
+          website: "",
           street: "",
           city: "",
           state: "",
@@ -106,6 +113,11 @@ const PartnerWithUsForm = () => {
           businessTypes: [],
           saleOtherCarriers: "",
           planToSell: [],
+          marketingChannels: [],
+          planToPromotes: [],
+          monthlyTraffic: "",
+          promotoBrands: "",
+          monthlyActivations: "",
           estimatedMonthlyPurchase: "",
           bankTransfer: "",
           billingContact: "",
