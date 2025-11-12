@@ -4,49 +4,44 @@ import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 
-const PartnershipPage = () => {
+const BecomeRetailerPage = () => {
     const data = [
     {
-      icon: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Icon_1.png",
-      title: "Quality Products:",
-      text: "Access high-quality mobile devices, accessories, and services from leading brands in the industry.",
+      icon: "./img/Group-691314698.png",
+      title: "Retailers",
+      text: "Expand your product portfolio and attract new customers by offering Zoiko Mobile products and services in your retail stores.",
     },
     {
-      icon: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Icon_2.png",
-      title: "Competitive Pricing:",
-      text: "Benefit from competitive pricing and attractive discounts to maximize your profitability.",
+      icon: "./img/Group-691314699-1.png",
+      title: "Distributors",
+      text: "Increase your product distribution channels and reach a broader market by distributing Zoiko Mobile products to retailers and resellers.",
     },
     {
-      icon: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Icon_3.png",
-      title: "Dedicated Support:",
-      text: "Receive personalized support and guidance from our experienced team to help you succeed in your partnership with Zoiko Mobile America.",
+      icon: "./img/Group-691314700-1.png",
+      title: "Businesses",
+      text: "Enhance your corporate offerings by providing employees with access to exclusive discounts on mobile devices, accessories, and services.",
     },
   ];
 
   return (
     <>
       <Header />
-      <HeadBar text="Join Buster and flock together with your buddies!" />
+      <HeadBar text="Earn More with a Reliable Nationwide Mobile Network" />
       <section className="py-5" style={{ backgroundColor: "#fff" }}>
       <Container>
         <Row className="align-items-center">
           {/* Text Section */}
           <Col md={6}>
             <h2 className="fw-bold" style={{ color: "#DF1E5A" }}>
-              Join Forces with Zoiko Mobile
+              Join Our Affiliate Program and Earn Rewards
             </h2>
             <p className="mt-3">
-              Zoiko Mobile invites you to join forces with us and become a valued
-              partner. Whether you're a retailer, distributor, affiliate
-              marketer, or technology enthusiast, there are numerous
-              opportunities to collaborate and grow together. Partner with us
-              and unlock a world of possibilities in the dynamic mobile
-              technology industry.
+              At Zoiko Mobile, we value partnerships and collaborations with individuals and organizations who share our passion for connecting people. Our Affiliate Program offers an opportunity for you to earn rewards while promoting our products and services to your audience.
             </p>
             <Button
               variant="danger"
               size="lg"
-              href="/partner-with-us-form"
+              href="/become-retailer-form"  
               className="mt-3 px-4"
               style={{ backgroundColor: "#DF1E5A", border: "none" }}
             >
@@ -57,7 +52,7 @@ const PartnershipPage = () => {
           {/* Image Section */}
           <Col md={6} className="text-center">
             <img
-              src="./img/Rectangle-665.webp"
+              src="./img/Rectangle-665-1.webp"
               alt="Join Forces with Zoiko Mobile"
               className="img-fluid"
             />
@@ -65,160 +60,10 @@ const PartnershipPage = () => {
         </Row>
       </Container>
     </section>
-      
-      <section className="py-5 bg-light">
-      <Container>
-        <h2 className="text-center fw-bold mb-5">
-          Opportunities for Collaboration
-        </h2>
-        <Row className="gy-4">
-          {/* Retail Partnership */}
-          <Col md={6}>
-            <div className="d-flex align-items-center">
-              <img
-                src="./img//Rectangle-667.png"
-                alt="Retail Partnership"
-                className="me-3"
-                width="60"
-                height="60"
-              />
-              <div>
-                <h5 className="fw-bold text-danger">Retail Partnership</h5>
-                <p className="mb-0">
-                  Expand your product offerings by retailing Zoiko Mobile
-                  America's extensive range of mobile devices, accessories,
-                  and services in your stores or online platforms.
-                </p>
-              </div>
-            </div>
-          </Col>
-
-          {/* Wholesale Partnership */}
-          <Col md={6}>
-            <div className="d-flex align-items-center">
-              <img
-                src="./img//Rectangle-668.png"
-                alt="Wholesale Partnership"
-                className="me-3"
-                width="60"
-                height="60"
-              />
-              <div>
-                <h5 className="fw-bold text-danger">Wholesale Partnership</h5>
-                <p className="mb-0">
-                  Access competitive pricing and extensive product selection as
-                  a wholesale partner, catering to retailers, distributors,
-                  and businesses seeking quality mobile products.
-                </p>
-              </div>
-            </div>
-          </Col>
-
-          {/* Affiliate Program */}
-          <Col md={6}>
-            <div className="d-flex align-items-center">
-              <img
-                src="./img//Rectangle-669.png"
-                alt="Affiliate Program"
-                className="me-3"
-                width="60"
-                height="60"
-              />
-              <div>
-                <h5 className="fw-bold text-danger">Affiliate Program</h5>
-                <p className="mb-0">
-                  Monetize your online presence by joining our affiliate program
-                  and earning commissions for promoting Zoiko Mobile America's
-                  products and services to your audience.
-                </p>
-              </div>
-            </div>
-          </Col>
-
-          {/* Corporate Collaboration */}
-          <Col md={6}>
-            <div className="d-flex align-items-center">
-              <img
-                src="./img/Rectangle-670.png"
-                alt="Corporate Collaboration"
-                className="me-3"
-                width="60"
-                height="60"
-              />
-              <div>
-                <h5 className="fw-bold text-danger">Corporate Collaboration</h5>
-                <p className="mb-0">
-                  Enhance your corporate offerings by providing employees with
-                  exclusive discounts on mobile devices, accessories, and
-                  services through our corporate program.
-                </p>
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </section>
-<section className="py-5" style={{ backgroundColor: "#ffffffff",}}>
-      <Container>
-        <h2 className="text-center fw-bold mb-5">
-          Why Partner with <span className="text-dark">Zoiko Mobile America?</span>
-        </h2>
-        <Row className="justify-content-center">
-          {data.map((item, index) => (
-            <Col key={index} md={4} sm={12} className="d-flex justify-content-center mb-4">
-              <Card
-                className="text-center border-0"
-                style={{
-                  backgroundColor: "#ffe6ee",
-                  borderRadius: "15px",
-                  padding: "40px 25px",
-                  width: "100%",
-                  maxWidth: "500px",
-                }}
-              >
-                <div className="d-flex justify-content-center mb-3">
-                  <img
-                    src={item.icon}
-                    alt={item.title}
-                    style={{
-                      width: "200px",
-                      height: "160px",
-                      backgroundColor: "#fff",
-                      borderRadius: "15px",
-                      padding: "15px",
-                      boxShadow: "0 0 10px rgba(0,0,0,0.05)",
-                    }}
-                  />
-                </div>
-                <Card.Title
-                  style={{
-                    color: "#e20074",
-                    fontWeight: "700",
-                    fontSize: "20px",
-                    marginBottom: "10px",
-                  }}
-                >
-                  {item.title}
-                </Card.Title>
-                <Card.Text
-                  style={{
-                    fontSize: "17px",
-                    color: "#000",
-                    lineHeight: "1.5",
-                  }}
-                >
-                  {item.text}
-                </Card.Text>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </Container>
-    </section>
-        <div className="partner-section">
+       <div className="partner-section">
       <Container className="pt-5 pb-5">
         <div className="card-wrap">
-          <h2 className="section-title">How to Get Started</h2>
+          <h2 className="section-title">How It Works</h2>
 
           {/* Steps visual */}
           <div className="steps-visual">
@@ -236,44 +81,175 @@ const PartnershipPage = () => {
             
             <Col md={4} className="mb-4">
             <div className="circle1 c1 mx-auto mb-3">1</div>
-              <h5 className="step-heading">Explore Opportunities:</h5>
+              <h5 className="step-heading">Sign Up:</h5>
               <p className="step-desc">
-                Explore the various partnership opportunities available and determine
-                which aligns best with your business goals and interests.
+                Joining our Affiliate Program is easy and free. Simply complete the online application form on our website to become an affiliate partner.
               </p>
             </Col>
 
             <Col md={4} className="mb-4">
             <div className="circle1 c1 mx-auto mb-3">2</div>
-              <h5 className="step-heading">Apply or Inquire:</h5>
+              <h5 className="step-heading">Promote:</h5>
               <p className="step-desc">
-                Complete the application process for the partnership program of your
-                choice or reach out to us directly for more information and guidance.
+                Once approved, you will receive unique tracking links and promotional materials that you can share with your audience through your website, blog, social media channels, or other marketing channels.
               </p>
             </Col>
 
             <Col md={4} className="mb-4">
             <div className="circle1 c1 mx-auto mb-3">3</div>
-              <h5 className="step-heading">Collaborate and Grow:</h5>
+              <h5 className="step-heading">Earn Rewards:</h5>
               <p className="step-desc">
-                Once approved, collaborate closely with our team to leverage resources,
-                drive growth, and achieve mutual success.
+                Earn commissions for every qualified sale generated through your affiliate links. The more referrals you make, the more rewards you can earn.
               </p>
             </Col>
           </Row>
         </div>
+      <section className="py-5 bg-light">
+      <Container>
+        <h2 className="text-center fw-bold mb-5">
+          Benefits of Joining
+        </h2>
+        <Row className="gy-4">
+          {/* Retail Partnership */}
+          <Col md={6}>
+            <div className="d-flex align-items-center">
+              <img
+                src="./img/Rectangle-667-1.png"
+                alt="Retail Partnership"
+                className="me-3"
+                width="60"
+                height="60"
+              />
+              <div>
+                <h5 className="fw-bold text-danger">Earn Commissions</h5>
+                <p className="mb-0">
+                  Receive competitive commissions on sales generated through your affiliate links.
+                </p>
+              </div>
+            </div>
+          </Col>
+
+          {/* Wholesale Partnership */}
+          <Col md={6}>
+            <div className="d-flex align-items-center">
+              <img
+                src="./img/Rectangle-669.png"
+                alt="Wholesale Partnership"
+                className="me-3"
+                width="60"
+                height="60"
+              />
+              <div>
+                <h5 className="fw-bold text-danger">Support and Guidance</h5>
+                <p className="mb-0">
+                  Receive dedicated support from our affiliate management team to help you maximize your earning potential and optimize your marketing efforts.
+                </p>
+              </div>
+            </div>
+          </Col>
+
+          {/* Affiliate Program */}
+          <Col md={6}>
+            <div className="d-flex align-items-center">
+              <img
+                src="./img/Rectangle-668.png"
+                alt="Affiliate Program"
+                className="me-3"
+                width="60"
+                height="60"
+              />
+              <div>
+                <h5 className="fw-bold text-danger">Access to Resources</h5>
+                <p className="mb-0">
+                  Gain access to a variety of marketing materials, including banners, text links, and product images, to help you promote Zoiko Mobile America effectively.
+                </p>
+              </div>
+            </div>
+          </Col>
+
+          {/* Corporate Collaboration */}
+          <Col md={6}>
+            <div className="d-flex align-items-center">
+              <img
+                src="./img/Rectangle-670-1.png"
+                alt="Corporate Collaboration"
+                className="me-3"
+                width="60"
+                height="60"
+              />
+              <div>
+                <h5 className="fw-bold text-danger">Track Performancex</h5>
+                <p className="mb-0">
+                  Monitor your performance and earnings in real-time through our affiliate dashboard, providing you with valuable insights into your campaign effectiveness.
+                </p>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </section>
+
+            <section style={{ padding: "60px 0" }}>
+      <Container>
+        {/* Who Can Join Section */}
+        <Row className="text-center mb-5">
+          <Col>
+            <h3 style={{ color: "#E91E63", fontWeight: "700" }}>Who Can Join</h3>
+            <p style={{ fontSize: "18px", color: "#333", marginTop: "20px", lineHeight: "1.7" }}>
+              Our Affiliate Program is open to individuals, influencers, bloggers, content creators,
+              website owners, and businesses who are passionate about mobile technology and want to
+              promote Zoiko Mobile America to their audience.
+            </p>
+          </Col>
+        </Row>
+
+        {/* Join Today Section */}
+        <Row className="justify-content-center">
+          <Col md={10}>
+            <div
+              style={{
+                backgroundColor: "#fafafa",
+                borderRadius: "10px",
+                padding: "40px 30px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+              }}
+            >
+              <div
+                style={{
+                  flex: "0 0 200px",
+                  textAlign: "center",
+                  borderRight: "2px solid #E91E63",
+                  marginRight: "30px",
+                }}
+              >
+                <h3 style={{ color: "#E91E63", fontWeight: "700", marginBottom: "0" }}>Join</h3>
+                <h3 style={{ color: "#E91E63", fontWeight: "700" }}>Today</h3>
+              </div>
+              <div style={{ flex: "1", minWidth: "250px" }}>
+                <p style={{ fontSize: "18px", color: "#333", margin: "0", lineHeight: "1.6" }}>
+                  Ready to start earning rewards as a Zoiko Mobile America affiliate? Visit our
+                  website and sign up for our Affiliate Program today. We look forward to partnering
+                  with you and growing together.
+                </p>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </section>
 
         {/* Contact block */}
         <div className="contact-block mt-5">
           <h4 className="contact-title">Contact Us</h4>
           <p className="lead contact-body">
-            Ready to embark on a journey of collaboration and growth with Zoiko Mobile
-            America? Contact us today at{" "}
-            <a href="mailto:partnership@zoikomobile.com" className="mailto">
-              partnership@zoikomobile.com
-            </a>{" "}
-            to discuss partnership opportunities and take the first step towards a
-            rewarding partnership.
+            
+
+            If you're interested in partnering with Zoiko Mobile for wholesale opportunities or have any questions about our wholesale program, please contact us at <a href="mailto:wholesale@zoikomobile.com" className="mailto">wholesale@zoikomobile.com</a>. Our team is here to assist you and provide you with the support you need.
+
           </p>
 
           <p className="company-name">Zoiko Mobile America</p>
@@ -464,4 +440,4 @@ const PartnershipPage = () => {
   );
 };
 
-export default PartnershipPage;
+export default BecomeRetailerPage;
