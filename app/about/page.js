@@ -21,24 +21,24 @@ const AboutUs = () => {
         <Container fluid className="bglite py-5">
             <Container>
                 <Row className="align-items-center">
-                    <Col md={6} sm={12} xs={12}>
+                    <Col md={12} sm={12} xs={12}>
                         <h2 className="txtred">The Zoiko Mobile Chronicle:</h2>
                         <p className="body22">Connecting Every Possibility! <span className="txtred">Inspired by Animals, Music &amp; Nature.</span></p>
                         <p className="body22">Zoiko Mobile is more than a telecommunications company; it is the embodiment of a deeply rooted vision, shaped by intellect, passion, and an intricate blend of influences from philosophy, language, mathematics, and music. Founded by Lennox McLeod, Zoiko Mobile is a living testament to the boundless possibilities that arise when diverse passions converge with professional experience and insight.</p>
-                        {isOpen && (
+                       
                             <>
                             <p className="body22"><b>Lennox&apos;s</b> formative years were defined by a profound connection to animals and a rich theological education. While studying theology, he was introduced to the ancient Greek language, a discovery that sparked a lifelong admiration for its elegance and complexity. During his career, Lennox spent years working on projects at Vodafone, where he gained invaluable experience and first encountered the concept of an MVNO (Mobile Virtual Network Operator). This exposure planted the seed for what would eventually become Zoiko Mobile.</p>
                             <p className="body22"><b>A Name Born of Passion, Experience, and Intellect</b><br />To symbolize animals, Lennox drew upon the Greek language he so deeply revered. He discovered two ancient Greek words: Zoion (ζῷον), meaning &quot;a living being or animal,&quot; and Zoologikos (ζῳολογικός), meaning &quot;pertaining to animals.&quot; However, neither word, in isolation, fully captured the depth and dynamism of his vision.</p>
                             <p className="body22">This challenge led Lennox to mathematics, another of his great passions, and specifically to the principles of permutations and combinations. Drawing on his professional experience and intellectual creativity, he devised a solution by merging fragments of the two Greek words to create something entirely new. He took &apos;zoi&apos; from Zoion and &apos;ko&apos; from Zoologikos. The resulting name, Zoiko, is a linguistic innovation that embodies the vibrancy of life and the interconnectedness of all living beings. It symbolizes the core message of Zoiko Mobile: a network that values life, connection, and harmony.</p>
                             </>
-                        )}
-                        <div className="py-4"><a className="txtred" href="#" onClick={toggleView}>{isToggled ? 'Read Less' : 'Read More'}</a></div>
+                       
+                        {/* <div className="py-4"><a className="txtred" href="#" onClick={toggleView}>{isToggled ? 'Read Less' : 'Read More'}</a></div> */}
                     </Col>
-                    <Col md={6} sm={12} xs={12}>
+                    {/* <Col md={6} sm={12} xs={12}>
                         <div className="text-center">
                             <Image src="/img/aboutlogo.png" fluid alt="Logo" className="w-100" />
                         </div>
-                    </Col>
+                    </Col> */}
                 </Row>
             </Container>
             <h4 className="text-center pt-5 txtred">Why Zoiko Mobile Is Your First Choice?</h4>
