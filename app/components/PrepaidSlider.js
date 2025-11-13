@@ -127,7 +127,7 @@ const PrepaidSlider = ({ planType = "prepaid-plans" }) => {
                                     Buy this plan
                                 </Button>
                                 <Button variant="outline-danger" href={`/plans/${item.slug}`}>
-                                    View Details
+                                    View details
                                 </Button>
                                 </div>
                             </CardBody>

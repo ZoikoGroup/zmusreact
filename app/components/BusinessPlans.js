@@ -129,7 +129,7 @@ const BusinessPlans = () => {
                       Buy this plan
                     </Button>
                     <Button variant="outline-danger" href={`/plans/${plan.slug}`}>
-                      View Details
+                      View details
                     </Button>
                     </div>
                   </CardBody>

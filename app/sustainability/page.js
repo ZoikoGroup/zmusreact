@@ -30,7 +30,7 @@ export default function SustainabilityPage() {
                     </li>
                     <li className="txtred">Transparency &amp; Accountability<br /><span className="txtblack">While we&apos;re just getting started, we are committed to being transparent about our sustainability journey. We&apos;re focused on continuous improvement, and we&apos;ll keep you updated on our progress.</span></li>
                     <li className="txtred">Join Us in Making a Difference<br /><span className="txtblack">We know that every small action counts. We invite you to join us in supporting sustainability and animal welfare as we work towards a better future.</span></li>
-                    <li className="txtred">Learn More<br /><span className="txtblack">For more information on our sustainability initiatives or to get involved, reach out to us at <a href="mailto:sustainability@zoikomobile.com" style={{color:'#DF1E5A'}}>sustainability@zoikomobile.com</a>.<br />Zoiko Mobile<br />5900 Balcones Drive, Suite 100<br />Austin, TX 78731<br />Tel: 800-988-8116</span></li>
+                    <li className="txtred">Learn more<br /><span className="txtblack">For more information on our sustainability initiatives or to get involved, reach out to us at <a href="mailto:sustainability@zoikomobile.com" style={{color:'#DF1E5A'}}>sustainability@zoikomobile.com</a>.<br />Zoiko Mobile<br />5900 Balcones Drive, Suite 100<br />Austin, TX 78731<br />Tel: 800-988-8116</span></li>
                 </ol>
             </Container>
         </Container>

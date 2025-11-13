@@ -151,7 +151,7 @@ const PostpaidSlider = ({ planType = "postpaid-plans" }) => {
                     variant="outline-danger"
                     href={`/plans/${item.slug}`}
                   >
-                    View Details
+                    View details
                   </Button>
                   </div>
                 </CardBody>

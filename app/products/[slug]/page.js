@@ -80,7 +80,7 @@ export default function ProductDetail ({ params }) {
                                     </Col>
                                 </Row>
                                 <div className="mt-4">
-                                    <Button variant="outline-danger" href={`/products/${item.slug}`}>View Details</Button>&nbsp;<Button variant="outline-danger" href={`/products/${item.slug}`}>Buy Now</Button>
+                                    <Button variant="outline-danger" href={`/products/${item.slug}`}>View details</Button>&nbsp;<Button variant="outline-danger" href={`/products/${item.slug}`}>Buy Now</Button>
                                 </div>
                             </Card>
                         </Col>
