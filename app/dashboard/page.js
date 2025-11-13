@@ -439,7 +439,7 @@ export default function DashboardPage() {
                       className="btn btn-success btn-sm"
                       href={`/dashboard/plan-usages/${primaryLineId}`}
                     >
-                      View Details
+                      View details
                     </Link>
                     <Link className="btn btn-warning btn-sm text-white" href={`/all-plans`}>
                       Upgrade Plan
