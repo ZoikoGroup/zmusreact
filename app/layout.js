@@ -144,7 +144,7 @@ const metaMap = {
       "Zoiko Mobile offers 20% off mobile plans to animal charity workers. Get connected with great service and savings while supporting animal welfare.",
   },
   "/terms-and-conditions": {
-    title: "Discover Zoiko Mobile’s Terms and Conditions | Learn More",
+    title: "Discover Zoiko Mobile’s Terms and Conditions | Learn more",
     description:
       "Read Zoiko Mobile’s terms and conditions to understand the guidelines and policies for using our services. Stay informed about your rights and obligations.",
   },

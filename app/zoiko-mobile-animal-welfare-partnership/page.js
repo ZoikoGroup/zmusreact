@@ -14,7 +14,6 @@ import {
   Spinner,
 } from "react-bootstrap";
 import React, { useState } from "react";
-import Countrycode from "../products/countrycode.json";
 
 const AnimalPartnership = () => {
   const [errors, setErrors] = useState({});
@@ -36,7 +35,6 @@ const AnimalPartnership = () => {
     role: "",
     email: "",
     phone: "",
-    countrycode: "",
     prefcontact: "",
     discount: false,
     support: false,
@@ -142,7 +140,7 @@ const AnimalPartnership = () => {
     box-shadow: 3px 4px 19px 14px rgba(0, 0, 0, 0.1) !important;
     border-radius: 15px !important;
     padding: 2rem !important;
-    margin: 2rem !important;
+    // margin: 2rem !important;
 }
 
 .form-control, .form-select{
@@ -299,7 +297,7 @@ const AnimalPartnership = () => {
         <Container>
           <Form onSubmit={handleSubmit} className="specialForm">
             <Row>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Organization Name *</FormLabel>
                 <Form.Control
                   name="orgname"
@@ -310,7 +308,7 @@ const AnimalPartnership = () => {
                 {errors.orgname && <p className="txtred">{errors.orgname}</p>}
               </Col>
 
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Organization Type *</FormLabel>
                 <Form.Select
                   name="orgtype"
@@ -328,9 +326,8 @@ const AnimalPartnership = () => {
               </Col>
             </Row>
 
-            <br />
             <Row>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Primary Focus *</FormLabel>
                 <Form.Control
                   name="focus"
@@ -341,7 +338,7 @@ const AnimalPartnership = () => {
                 {errors.focus && <p className="txtred">{errors.focus}</p>}
               </Col>
 
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Website *</FormLabel>
                 <Form.Control
                   name="website"
@@ -356,7 +353,7 @@ const AnimalPartnership = () => {
             <hr />
             <h4 className="text-center pt-3">Headquarter's Address</h4>
             <Row>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Street *</FormLabel>
                 <Form.Control
                   name="street"
@@ -365,7 +362,7 @@ const AnimalPartnership = () => {
                 />
                 {errors.street && <p className="txtred">{errors.street}</p>}
               </Col>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>City *</FormLabel>
                 <Form.Control
                   name="city"
@@ -375,10 +372,8 @@ const AnimalPartnership = () => {
                 {errors.city && <p className="txtred">{errors.city}</p>}
               </Col>
             </Row>
-
-            <br />
             <Row>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>State *</FormLabel>
                 <Form.Control
                   name="state"
@@ -387,7 +382,7 @@ const AnimalPartnership = () => {
                 />
                 {errors.state && <p className="txtred">{errors.state}</p>}
               </Col>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>ZIP *</FormLabel>
                 <Form.Control
                   name="zipcode"
@@ -398,7 +393,6 @@ const AnimalPartnership = () => {
               </Col>
             </Row>
 
-            <br />
             <Form.Group>
               <Form.Label>Mission Statement *</Form.Label>
               <Form.Control
@@ -414,7 +408,7 @@ const AnimalPartnership = () => {
             <hr />
             <h4 className="text-center pt-3">Primary Contact Details</h4>
             <Row>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Name *</FormLabel>
                 <Form.Control
                   name="name"
@@ -423,7 +417,7 @@ const AnimalPartnership = () => {
                 />
                 {errors.name && <p className="txtred">{errors.name}</p>}
               </Col>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Role *</FormLabel>
                 <Form.Control
                   name="role"
@@ -434,9 +428,8 @@ const AnimalPartnership = () => {
               </Col>
             </Row>
 
-            <br />
             <Row>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Email *</FormLabel>
                 <Form.Control
                   name="email"
@@ -446,33 +439,20 @@ const AnimalPartnership = () => {
                 />
                 {errors.email && <p className="txtred">{errors.email}</p>}
               </Col>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Phone *</FormLabel>
-                <InputGroup>
-                  <Form.Select
-                    name="countrycode"
-                    value={formData.countrycode}
-                    onChange={handleChange}
-                  >
-                    <option value="">Select Country</option>
-                    {Countrycode.map((c) => (
-                      <option key={c.code} value={c.dial_code}>
-                        {c.dial_code}, {c.name}
-                      </option>
-                    ))}
-                  </Form.Select>
+                
                   <Form.Control
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
                   />
-                </InputGroup>
+
                 {errors.phone && <p className="txtred">{errors.phone}</p>}
               </Col>
             </Row>
 
-            <br />
-            <FormLabel>Preferred Contact Method *</FormLabel>
+            <FormLabel className="mt-2">Preferred Contact Method *</FormLabel>
             <Form.Select
               name="prefcontact"
               value={formData.prefcontact}

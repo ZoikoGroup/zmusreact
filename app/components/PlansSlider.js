@@ -76,7 +76,7 @@ const PlansSlider = ({ slug }) => {
                                 </Button>
                                 &nbsp;
                                 <Button variant="outline-danger" href={`/plans/${item.slug}`} size="sm">
-                                    View Details
+                                    View details
                                 </Button>
                             </CardBody>
                         </Card>

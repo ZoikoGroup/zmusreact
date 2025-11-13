@@ -22,7 +22,7 @@ const LoveZoiko = () => {
                             <li>Zoikon is enjoying the ease and convenience of ZoikoMobile&apos;s reliable service!</li>
                             <li>Get your hands on a simple, straightforward plan and experience the difference today.</li>
                         </ul>
-                        <Button variant="danger" href="#">Join Our Network Today</Button>
+                        <Button variant="danger" href="/login">Join Our Network Today</Button>
                     </Col>
                 </Row>
             </Container>

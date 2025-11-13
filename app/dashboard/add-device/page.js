@@ -44,7 +44,13 @@ export default function AddDevicePage() {
     setValidationMsg("✅ IMEI/EID validated successfully!");
     return true;
   };
-
+const openChat = () => {
+    if (window.Tawk_API) {
+      window.Tawk_API.maximize(); // Opens chat box
+    } else {
+      alert("Chat is loading... please try again in a moment!");
+    }
+  };
   const validateAndCheckDevice = async () => {
     if (!validateIMEI()) return;
 
@@ -270,7 +276,7 @@ export default function AddDevicePage() {
                 <p className="small text-muted mb-2">
                   Our support team is available 24/7. Chat with us for help or questions about device compatibility or activation.
                 </p>
-                <button className="btn btn-warning w-100 fw-semibold">
+                <button className="btn btn-warning w-100 fw-semibold"  onClick={openChat}>
                   Chat with Support
                 </button>
               </div>

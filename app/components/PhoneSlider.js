@@ -59,7 +59,7 @@ const PhoneSlider = () => {
                                 Storage: {item.storage.map((index) => (
                                     <span key={index}>{index} </span>
                                 ))}</div>
-                                <Button variant="outline-danger" href={`/products/${item.slug}`}>View Details</Button>&nbsp;
+                                <Button variant="outline-danger" href={`/products/${item.slug}`}>View details</Button>&nbsp;
                                 <Button variant="outline-danger" href={`/products/${item.slug}`}>Buy Now</Button>
                             </CardBody>
                         </Card>

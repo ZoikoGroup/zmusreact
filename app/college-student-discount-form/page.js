@@ -14,7 +14,6 @@ const StudentDiscountForm = () => {
   const [formData, setFormData] = useState({
     fname: "",
     email: "",
-    countrycode: "",
     phone: "",
     statusproof: "",
     school: "",
@@ -39,7 +38,6 @@ const StudentDiscountForm = () => {
     let formErrors = {};
 
     if (!formData.fname) formErrors.fname = "Your name is required";
-    if (!formData.countrycode) formErrors.countrycode = "Your country code is required";
     if (!formData.phone) formErrors.phone = "Phone number is required";
     if (!formData.school) formErrors.school = "This field is required";
     if (!formData.yos) formErrors.yos = "Date of birth is required";
@@ -90,7 +88,6 @@ console.log(formData);
         setFormData({
           fname: "",
           email: "",
-          countrycode: "",
           phone: "",
           statusproof: "",
           school: "",
@@ -227,20 +224,19 @@ console.log(formData);
         <Container>
           <Form onSubmit={handleSubmit} className="specialPlanForm">
             <Row>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel htmlFor="fname">Full Name <span className="txtred">*</span></FormLabel>
                 <Form.Control type="text" name="fname" onChange={handleChange} value={formData.fname} placeholder="First name and last name" />
                 {errors.fname && <p className="txtred">{errors.fname}</p>}
               </Col>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel htmlFor="email">Email <span className="txtred">*</span></FormLabel>
                 <Form.Control type="email" name="email" onChange={handleChange} value={formData.email} placeholder="Email" />
                 {errors.email && <p className="txtred">{errors.email}</p>}
               </Col>
             </Row>
-            <br />
             <Row>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel htmlFor="phone">Phone no <span className="txtred">*</span></FormLabel>
                 
                   
@@ -249,22 +245,21 @@ console.log(formData);
                 {/* {errors.phone && <p className="txtred">{errors.phone}</p>} */}
                 { errors.phone && <p className="txtred">{errors.phone}</p>}
               </Col>
-              <Col md={6}>
-                <Form.Group controlId="formFileLg" className="mb-3">
+              <Col md={6} className="mt-2">
+                <Form.Group controlId="formFileLg">
                   <Form.Label>Upload Student ID <span className="txtred">*</span></Form.Label>
                   <Form.Control type="file" name="statusproof" onChange={handleChange} />
                   {errors.statusproof && <p className="txtred">{errors.statusproof}</p>}
                 </Form.Group>
               </Col>
             </Row>
-            <br />
             <Row>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel htmlFor="school">School Name <span className="txtred">*</span></FormLabel>
                 <Form.Control type="text" name="school" onChange={handleChange} value={formData.school} placeholder="Name of school" />
                 {errors.school && <p className="txtred">{errors.school}</p>}
               </Col>
-              <Col md={6} className="d-grid">
+              <Col md={6} className="d-grid mt-2">
                 <FormLabel htmlFor="yos">Year of study <span className="txtred">*</span></FormLabel>
                 {/* <Form.Control type="date" name="yos" onChange={handleChange} value={formData.yos} placeholder="Year of study" /> */}
                 <DatePicker
@@ -281,9 +276,8 @@ console.log(formData);
                 {errors.yos && <p className="txtred">{errors.yos}</p>}
               </Col>
             </Row>
-            <br />
             <Row>
-              <Col md={4}>
+              <Col md={4}  className="mt-2">
                 <FormLabel htmlFor="keepnumber">Do you want to keep your current number? <span className="txtred">*</span></FormLabel>
                 <Form.Select name="keepnumber" onChange={handleChange} value={formData.keepnumber}>
                   <option value="">Select</option>
@@ -292,7 +286,7 @@ console.log(formData);
                 </Form.Select>
                 {errors.keepnumber && <p className="txtred">{errors.keepnumber}</p>}
               </Col>
-              <Col md={4}>
+              <Col md={4} className="mt-2">
                 <FormLabel htmlFor="plan">Select Plan <span className="txtred">*</span></FormLabel>
                 <Form.Select name="plan" onChange={handleChange} value={formData.plan}>
                   <option value="">Select</option>
@@ -303,7 +297,7 @@ console.log(formData);
                 </Form.Select>
                 {errors.plan && <p className="txtred">{errors.plan}</p>}
               </Col>
-              <Col md={4}>
+              <Col md={4} className="mt-2">
                 <FormLabel htmlFor="cat">Select Category <span className="txtred">*</span></FormLabel>
                 <Form.Select name="cat" onChange={handleChange} value={formData.cat}>
                   <option value="">Select</option>
@@ -316,13 +310,13 @@ console.log(formData);
                 {errors.cat && <p className="txtred">{errors.cat}</p>}
               </Col>
             </Row>
-            <br />
             <Form.Check
               label="I hereby declare that the information provided is accurate and complete to the best of my knowledge. I understand that providing false information may result in the termination of services."
               name="concent"
               onChange={handleChange}
               checked={formData.concent}
               type="checkbox"
+               className="mt-2"
             />
             {errors.concent && <p className="txtred">{errors.concent}</p>}
             <Form.Check
@@ -331,11 +325,12 @@ console.log(formData);
               onChange={handleChange}
               checked={formData.terms}
               type="checkbox"
+               className="mt-2"
             />
             {errors.terms && <p className="txtred">{errors.terms}</p>}
             <br />
             <div className="text-center mt-5">
-              <Button variant="danger" type="submit" name="submit">
+              <Button variant="danger" type="submit"  className="mt-2" name="submit">
                 Submit Your Application
               </Button>
             </div>

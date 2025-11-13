@@ -16,7 +16,7 @@ const HomeBanner = () => {
                         <h1 className="verybig txtred">UNBEATABLE VALUE</h1>
                         <h2 className="py-2"><span className="txtred">ZOIKO MOBILE</span><span className="txtblack">: AMAZING BYOD DEALS | SUPPORTING<br />ANIMALS | ENJOYING MUSIC</span></h2>
                         <div className="d-flex flex-nowrap gap-3">
-                            <Button href='/all-plans' variant="danger" size="lg">Show Plans</Button>
+                            <Button href='/all-plans' variant="danger" size="lg">Show plans</Button>
                             <Button href='/about' variant="outline-danger" size="lg">Know More</Button>
                         </div>
                     </div>
@@ -48,7 +48,7 @@ const HomeBanner = () => {
                         <h2 className="txtblack d-none d-md-block">Plans built for every lifestyle with global<br />coverage and unbeatable flexibility</h2>
                         <h2 className="txtblack d-sm-block d-md-none">Plans built for every lifestyle with global coverage and unbeatable flexibility</h2>
                         <div className="d-flex flex-nowrap gap-2">
-                            <Button href='/prepaid-plans' variant="danger">Show Plans</Button>
+                            <Button href='/prepaid-plans' variant="danger">Show plans</Button>
                             <Button href='/product-category/refurbished' variant="outline-danger">Shop Devices</Button>
                         </div>
                     </div>
@@ -111,7 +111,7 @@ const HomeBanner = () => {
                         <h1 className="txtred bannerhead">Stay Connected,</h1>
                         <h1 className="txtred bigred">Stay Together</h1>
                         <h2 className="txtblack py-3 midbig"><span style={{fontWeight:'800'}}>Get 20% off</span> your plan when you<br />activate 3 or more plans with Zoiko Mobile</h2>
-                        <Button href='/family-plans' variant="danger" >Learn More</Button>
+                        <Button href='/family-plans' variant="danger" >Learn more</Button>
                     </div>
                 </Carousel.Caption>
             </Carousel.Item>
