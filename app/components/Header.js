@@ -163,7 +163,62 @@ const Header = () => {
               </NavDropdown>
               <Nav.Link href="/about" className={pathname === "/about" ? "active" : ""}>About Us</Nav.Link>
             </Nav>
+{/* Mobile-only Explore section */}
+                        <div className="d-lg-none px-3 mt-4 mb-3">
+                            <h6 className="border-bottom pb-2 text-center text-center">Explore More</h6>
+                            <Nav className="flex-column">
+                                <Nav.Link href="/top-up-plan">Top-Up</Nav.Link>
+                                <Nav.Link href="/byod-plans">BYOD</Nav.Link>
+                                <Nav.Link href="/device-protection">Device Protection</Nav.Link>
+                                <NavDropdown title="Special Plans">
+                                    <NavDropdown.Item href="/college-student">College Students</NavDropdown.Item>
+                                    <NavDropdown.Item href="/military-veterans">Military &amp; Veterans</NavDropdown.Item>
+                                    <NavDropdown.Item href="/postal-service-workers">Postal Service Workers</NavDropdown.Item>
+                                    <NavDropdown.Item href="/animal-charities">Animal Charities</NavDropdown.Item>
+                                    <NavDropdown.Item href="/family-plans">Family Plans</NavDropdown.Item>
+                                    <NavDropdown.Item href="/music-hub">Zoiko Music Hub</NavDropdown.Item>
+                                </NavDropdown>
+                                <Nav.Link href="/international-callings">International Calls</Nav.Link>
+                                <Nav.Link href="/contact-us">Contact Us</Nav.Link>
+                                <NavDropdown title="Support" >
+                                    <NavDropdown title="Customer Support" >
+                                        <NavDropdown.Item href="/support">Help & Support</NavDropdown.Item>
+                                        <NavDropdown.Item href="/reasons-to-love-zoiko-mobile">Reasons to love Zoiko</NavDropdown.Item>
+                                        <NavDropdown.Item href="https://ee.co.com/help/mobile-coverage-checker">Check Network Coverage</NavDropdown.Item>
+                                        <NavDropdown.Item href="/faq">FAQs</NavDropdown.Item>
+                                        <NavDropdown.Item href="/activate">How to activate Physical SIM</NavDropdown.Item>
+                                        <NavDropdown.Item href="/how-to-activate-your-esim">How to activate eSIM</NavDropdown.Item>
+                                    </NavDropdown>
+                                    <NavDropdown title="Get Started">
+                                        <NavDropdown.Item href="/switch">Switch &amp; Save</NavDropdown.Item>
+                                        <NavDropdown.Item href="/login">Join Zoiko Family</NavDropdown.Item>
+                                        <NavDropdown.Item href="/free-delivery-policy">Free Delivery</NavDropdown.Item>
+                                        <NavDropdown.Item href="/product-category/refurbished">Refurbished Smartphones</NavDropdown.Item>
+                                        <NavDropdown.Item href="/return-policy">Return Policy</NavDropdown.Item>
+                                    </NavDropdown>
+                                    <NavDropdown title="Customer Dashboard">
+                                        <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                                    </NavDropdown>
+                                    <NavDropdown title="Tariffs & Prices">
+                                        <NavDropdown.Item href="/roaming-rates">Roaming Charges</NavDropdown.Item>
+                                        <NavDropdown.Item href="/bundled-offers">Bundled Offers</NavDropdown.Item>
+                                        <NavDropdown.Item href="/free-international-minutes">Free International Calls</NavDropdown.Item>
+                                        <NavDropdown.Item href="/out-of-bundle-rates">Out-of-Bundle Rates</NavDropdown.Item>
+                                        <NavDropdown.Item href="/postal-service-workers">Postal Service Workers Deals</NavDropdown.Item>
+                                        <NavDropdown.Item href="/device-protection">Device Protection</NavDropdown.Item>
+                                    </NavDropdown>
+                                    <NavDropdown title="What's Included">
+                                        <NavDropdown.Item href="/5g-data-deals">5G Speed</NavDropdown.Item>
+                                        <NavDropdown.Item href="/wi-fi-calling">Wi-Fi Calling</NavDropdown.Item>
+                                        <NavDropdown.Item href="/canada-mexico-roaming-plans">Roam Free in Canada & Mexico</NavDropdown.Item>
+                                        <NavDropdown.Item href="/international-callings">International Calls</NavDropdown.Item>
+                                        <NavDropdown.Item href="/esim">eSIM</NavDropdown.Item>
+                                    </NavDropdown>
 
+                                </NavDropdown>
+                                <Nav.Link href="#">Store Locator</Nav.Link>
+                            </Nav>
+                        </div>
             <Nav className="ms-auto d-none d-lg-flex align-items-center gap-3">
               <Nav.Link href="#" onClick={handleShowSearch}><i className="bi bi-search"></i></Nav.Link>
               <Nav.Link href="/checkout" className="position-relative">
