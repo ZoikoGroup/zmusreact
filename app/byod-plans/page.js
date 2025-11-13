@@ -64,7 +64,7 @@ const ByodPlans = () => {
           <div style={{marginTop:'-440px', marginBottom:'140px'}}>
             <h1 className="txtblack"  style={{ width: "40%" }}>Bring Your Own Device (BYOD) to Zoiko Mobile</h1>
             <p className="body22" style={{ width: "40%" }}>Ready to experience seamless connectivity on Zoiko Mobile&apos;s nationwide network? Bringing your own device is easy! Check the simple steps below to ensure your phone is compatible and ready to go.</p>
-            <DropdownButton variant="danger" size="lg" title="Browse Plans Now">
+            <DropdownButton variant="danger" size="lg" title="Browse Plans Now" style={{width: "20%"}}>
               <DropdownItem href="/prepaid-plans">Prepaid Plans</DropdownItem>
               <DropdownItem href="/postpaid-plans">Postpaid Plans</DropdownItem>
               <DropdownItem href="/business-deals">Business Deals</DropdownItem>
