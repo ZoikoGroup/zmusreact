@@ -6,11 +6,14 @@ import { Button, Col, Container, Row, Card } from "react-bootstrap";
 import { useRouter } from "next/navigation";
 import data from "../../products/phonedata.json";
 import Image from "next/image";
-import { use } from "react";
+import { use, useState } from "react";
 
 export default function ProductDetail ({ params }) {
     const router = useRouter();
     const paramUrl = use(params).slug;
+    const [selectedColor, setSelectedColor] = useState(null);
+    const [selectedStorage, setSelectedStorage] = useState(null);
+    const [selectedCondition, setSelectedCondition] = useState(null);
 
     return (
         <>
@@ -31,15 +34,60 @@ export default function ProductDetail ({ params }) {
                                 <hr />
                                 <h4 className="pt-3">Color</h4>
                                 <div>{item.color.map((name, index) => (
-                                    <li className="checkoutlistcolor" key={index} style={{color:`${name}`}}><i className="bi bi-circle-fill"></i></li>
+                                    <button
+                                        key={index}
+                                        className="checkoutlistcolor"
+                                        onClick={() => setSelectedColor(name)}
+                                        style={{
+                                            color: name,
+                                            border: selectedColor === name ? '2px solid black' : '1px solid gray',
+                                            background: 'none',
+                                            cursor: 'pointer',
+                                            padding: '5px 10px',
+                                            borderRadius: '4px',
+                                            marginRight: '8px'
+                                        }}
+                                    >
+                                        <i className="bi bi-circle-fill"></i>
+                                    </button>
                                 ))}</div>
                                 <h4 className="pt-3">Storage</h4>
                                 <div className="pb-3">{item.storage.map((name, index) => (
-                                    <li className="checkoutliststorage" key={index}>{name}</li>
+                                    <button
+                                        key={index}
+                                        className="checkoutliststorage"
+                                        onClick={() => setSelectedStorage(name)}
+                                        style={{
+                                            border: selectedStorage === name ? '2px solid #dc3545' : '1px solid #ccc',
+                                            background: selectedStorage === name ? '#f8f9fa' : 'white',
+                                            padding: '8px 12px',
+                                            cursor: 'pointer',
+                                            borderRadius: '4px',
+                                            marginRight: '8px',
+                                            marginBottom: '8px'
+                                        }}
+                                    >
+                                        {name}
+                                    </button>
                                 ))}</div>
                                 <h4 className="pt-3">Condition</h4>
                                 <div className="pb-4">{item.condition.map((name, index) => (
-                                    <li className="checkoutliststorage" key={index}>{name}</li>
+                                    <button
+                                        key={index}
+                                        className="checkoutliststorage"
+                                        onClick={() => setSelectedCondition(name)}
+                                        style={{
+                                            border: selectedCondition === name ? '2px solid #dc3545' : '1px solid #ccc',
+                                            background: selectedCondition === name ? '#f8f9fa' : 'white',
+                                            padding: '8px 12px',
+                                            cursor: 'pointer',
+                                            borderRadius: '4px',
+                                            marginRight: '8px',
+                                            marginBottom: '8px'
+                                        }}
+                                    >
+                                        {name}
+                                    </button>
                                 ))}</div>
                                 <Button variant="outline-danger" href="#" size="lg">Go To Checkout</Button>
                             </Col>
