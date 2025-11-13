@@ -426,14 +426,11 @@ const handleSubmit = async (e) => {
                 />
                 <div className="form-error">{errors.email || ""}</div>
               </Col>
-              <Col md={4} className="mt-2">
-                <FormLabel>Date of Birth *</FormLabel>
-                {/* <Form.Control
-                  type="date"
-                  name="dob"
-                  value={formData.dob}
-                  onChange={handleChange}
-                /> */}
+              <Col md={4} className="d-grid mt-2">
+
+                              
+                <FormLabel htmlFor="yos">Date of Birth *</FormLabel>
+
                 <DatePicker
                                     selected={formData.yos ? new Date(formData.yos) : null}
                                     onChange={(date) =>
