@@ -14,6 +14,8 @@ import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import Countrycode from "../products/countrycode.json";
 import { FaTrashAlt } from "react-icons/fa";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const PostalWorkersForm = () => {
   const [errors, setErrors] = useState({});
@@ -402,7 +404,7 @@ const handleSubmit = async (e) => {
           <Form onSubmit={handleSubmit} encType="multipart/form-data">
             {/* Basic Details */}
             <Row className="mb-3">
-              <Col md={4}>
+              <Col md={4} className="mt-2">
                 <FormLabel>Full Name *</FormLabel>
                 <Form.Control
                   type="text"
@@ -413,7 +415,7 @@ const handleSubmit = async (e) => {
                 />
                 <div className="form-error">{errors.fname || ""}</div>
               </Col>
-              <Col md={4}>
+              <Col md={4} className="mt-2">
                 <FormLabel>Email *</FormLabel>
                 <Form.Control
                   type="email"
@@ -424,21 +426,32 @@ const handleSubmit = async (e) => {
                 />
                 <div className="form-error">{errors.email || ""}</div>
               </Col>
-              <Col md={4}>
+              <Col md={4} className="mt-2">
                 <FormLabel>Date of Birth *</FormLabel>
-                <Form.Control
+                {/* <Form.Control
                   type="date"
                   name="dob"
                   value={formData.dob}
                   onChange={handleChange}
-                />
+                /> */}
+                <DatePicker
+                                    selected={formData.yos ? new Date(formData.yos) : null}
+                                    onChange={(date) =>
+                                        setFormData({ ...formData, yos: date.toISOString().split("T")[0] })
+                                    }
+                                    
+                                    name="dob"
+                                    dateFormat="MM/dd/yyyy"
+                                    placeholderText="MM/DD/YYYY"
+                                    className="form-control"
+                                    />
                 <div className="form-error">{errors.dob || ""}</div>
               </Col>
             </Row>
 
             {/* Phone */}
             <Row className="mb-3">
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Phone Number *</FormLabel>
                 <InputGroup>
                   <Form.Select
@@ -446,7 +459,7 @@ const handleSubmit = async (e) => {
                     onChange={handleChange}
                     value={formData.countrycode}
                   >
-                    <option value="">Select Country</option>
+                    <option value="">Country</option>
                     {Countrycode.map((code) => (
                       <option key={code.code} value={code.dial_code}>
                         {code.dial_code}, {code.name}
@@ -459,6 +472,7 @@ const handleSubmit = async (e) => {
                     value={formData.phone}
                     onChange={handleChange}
                     maxLength={10}
+                    style={{width:"60%"}}
                   />
                 </InputGroup>
                 <div className="form-error">
@@ -466,7 +480,7 @@ const handleSubmit = async (e) => {
                 </div>
               </Col>
 
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <Form.Group controlId="formFileLg" className="mb-3">
                   <FormLabel>Upload ID / Proof *</FormLabel>
                   <Form.Control
@@ -483,7 +497,7 @@ const handleSubmit = async (e) => {
             {/* Plan Type */}
             <h4 className="text-center pt-4">Choose the Perfect Plan</h4>
             <Row className="mb-3">
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Plan Type *</FormLabel>
                 <Form.Select
                   name="plan"
@@ -502,7 +516,7 @@ const handleSubmit = async (e) => {
                 <div className="form-error">{errors.plan || ""}</div>
               </Col>
 
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Category *</FormLabel>
                 <Form.Select
                   name="cat"
@@ -531,7 +545,7 @@ const handleSubmit = async (e) => {
 
             {formData.familyFriends.map((friend, index) => (
               <Row className="mb-3" key={index}>
-                <Col md={6}>
+                <Col md={6} className="mt-2">
                   <FormLabel>Full Name</FormLabel>
                   <Form.Control
                     type="text"
@@ -543,7 +557,7 @@ const handleSubmit = async (e) => {
                     placeholder="Full name"
                   />
                 </Col>
-                <Col md={6}>
+                <Col md={6} className="mt-2">
                   <FormLabel>Email</FormLabel>
                   <InputGroup>
                     <Form.Control
@@ -599,6 +613,7 @@ const handleSubmit = async (e) => {
               checked={formData.concent}
               onChange={handleChange}
               type="checkbox"
+               className="mt-2"
             />
             <div className="form-error">{errors.concent || ""}</div>
 
@@ -608,6 +623,7 @@ const handleSubmit = async (e) => {
               checked={formData.terms}
               onChange={handleChange}
               type="checkbox"
+               className="mt-2"
             />
             <div className="form-error">{errors.terms || ""}</div>
 
@@ -615,7 +631,7 @@ const handleSubmit = async (e) => {
               <Button
                 variant="danger"
                 type="submit"
-                className="px-5 py-2 rounded-pill fw-bold"
+                className="px-5 py-2 rounded-pill fw-bold mt-3"
               >
                 Submit Your Application
               </Button>
