@@ -14,8 +14,6 @@ import {
   Button,
 } from "react-bootstrap";
 import React, { useState } from "react";
-import Countrycode from "../products/countrycode.json";
-
 const ContactUs = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -23,7 +21,6 @@ const ContactUs = () => {
   const [formData, setFormData] = useState({
     fname: "",
     email: "",
-    countrycode: "",
     phone: "",
     msg: "",
     terms: false,
@@ -50,9 +47,6 @@ const ContactUs = () => {
     const formErrors = {};
 
     if (!formData.fname.trim()) formErrors.fname = "Name is required";
-
-    if (!formData.countrycode)
-      formErrors.countrycode = "Your country code is required";
 
     if (!formData.phone) {
       formErrors.phone = "Mobile number is required";
@@ -90,7 +84,7 @@ const ContactUs = () => {
           body: JSON.stringify({
             name: formData.fname,
             email: formData.email,
-            phone: `${formData.countrycode}${formData.phone}`,
+            phone: formData.phone,
             message: formData.msg,
           }),
         }
@@ -103,7 +97,6 @@ const ContactUs = () => {
         setFormData({
           fname: "",
           email: "",
-          countrycode: "",
           phone: "",
           msg: "",
           terms: false,
@@ -370,19 +363,7 @@ const ContactUs = () => {
                 <FormLabel htmlFor="phone">
                   Phone No <span className="txtred">*</span>
                 </FormLabel>
-                {/* <InputGroup> */}
-                  {/* <Form.Select
-                    name="countrycode"
-                    onChange={handleChange}
-                    value={formData.countrycode}
-                  >
-                    <option value="">Country</option>
-                    {Countrycode.map((code) => (
-                      <option key={code.code} value={code.dial_code}>
-                        {code.dial_code}, {code.name}
-                      </option>
-                    ))}
-                  </Form.Select> */}
+                
                   <Form.Control
                     name="phone"
                     onChange={handleChange}
@@ -391,8 +372,7 @@ const ContactUs = () => {
                     maxLength={10}
                    
                   />
-                {/* </InputGroup>  */}
-                <ErrorText text={errors.countrycode} />
+
                 <ErrorText text={errors.phone} />
 
                 {/* Message */}
