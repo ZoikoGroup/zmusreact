@@ -51,7 +51,7 @@ const TravelPlanBox = () => {
                             <li>Fast and easy to add-ons</li>
                             <li>Connect devices automatically</li>
                         </ul>
-                        <p className="txtred">Check your phone&apos;s eSIM compaitability <i className="bi bi-arrow-right"></i></p>
+                        <a href="/byod-plans#deviceCompatibility" className="txtred">Check your phone&apos;s eSIM compaitability <i className="bi bi-arrow-right"></i></a>
                     </Col>
                 </Row>
             </Container>

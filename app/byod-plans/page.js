@@ -96,7 +96,7 @@ const ByodPlans = () => {
       </Container>
 
       {/* IMEI Checker */}
-      <Container className="my-5 p-4 redborderbox text-center" style={{ backgroundColor: "#DF1E5A1C" }}>
+      <Container className="my-5 p-4 redborderbox text-center" id="deviceCompatibility" style={{ backgroundColor: "#DF1E5A1C" }}>
         <h2>Check If Phone is Compatible</h2>
         <p className="body22">
           Enter your IMEI or MEID below to see if your device is compatible with the Zoiko Mobile network
