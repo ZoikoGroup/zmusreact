@@ -348,6 +348,7 @@ export default function DashboardPage() {
         setLoading(false);
       }
     })();
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -372,7 +373,13 @@ export default function DashboardPage() {
 
   const { formatted: activeUntil, remainingDays } =
     formatDateAndRemaining(servicePeriod?.end_at);
-
+const openChat = () => {
+    if (window.Tawk_API) {
+      window.Tawk_API.maximize(); // Opens chat box
+    } else {
+      alert("Chat is loading... please try again in a moment!");
+    }
+  };
   // ---------------- Render ----------------
   return (
     <>
@@ -617,7 +624,7 @@ export default function DashboardPage() {
                     Need help? Our driver support team is available 24/7
                   </div>
                   <div className="d-grid gap-2">
-                    <button className="btn btn-outline-success btn-sm">Live Chat</button>
+                    <button className="btn btn-outline-success btn-sm"  onClick={openChat}>Live Chat</button>
                     <button className="btn btn-outline-success btn-sm">Call Support</button>
                     <button className="btn btn-outline-success btn-sm">Email Help</button>
                     <button className="btn btn-outline-secondary btn-sm">FAQ</button>
