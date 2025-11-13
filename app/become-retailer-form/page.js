@@ -314,12 +314,7 @@ const BecomeRetailerForm = () => {
   box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
 }
 
-/* Optional: when dropdown is disabled */
-.form-select:disabled {
-  background-color: #f8f9fa;
-  opacity: 0.8;
-  cursor: not-allowed;
-}
+   
 
 `}</style>
 
