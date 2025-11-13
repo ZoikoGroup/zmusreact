@@ -13,6 +13,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import Countrycode from "../products/countrycode.json";
+import { FaTrashAlt } from "react-icons/fa";
 
 const PostalWorkersForm = () => {
   const [errors, setErrors] = useState({});
@@ -207,7 +208,191 @@ const handleSubmit = async (e) => {
       {/* <TopHeader /> */}
       <Header />
       <HeadBar text={<>U.S. Postal Service Workers Registration</>} />
+<style>{`  
+ h4 {border-bottom: 1px solid #9a9696;
+    padding-bottom: 20px;
+}
+.specialForm{
+    box-shadow: 3px 4px 19px 14px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 15px !important;
+    padding: 2rem !important;
+    margin: 2rem !important;
+}
 
+.form-control, .form-select{
+    height: 50px;
+    background: #fafafa;
+}
+    
+.checkbox-group-center {
+
+  justify-content: center;
+
+}
+
+.stylish-checkboxes .form-check {
+  position: relative;
+  padding-right: 2rem;
+  padding-left: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;   /* ✅ Vertically aligns checkbox + label */
+  gap: 8px;              /* space between box and text */
+  position: relative;
+  cursor: pointer;
+}
+
+.stylish-checkboxes .form-check-label {
+  cursor: pointer;
+  font-weight: 500;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.stylish-checkboxes .form-check-input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  position: relative;
+  margin: 0;             /* ✅ Removes unwanted offset */
+}
+
+/* Hover effect */
+.stylish-checkboxes .form-check-input:hover {
+  border-color: #dc3545;
+}
+
+/* Checked state */
+.form-check-input:checked {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+/* Custom tick mark */
+.form-check-input:checked::after {
+  
+  color: #fff;
+  font-size: 14px;
+  position: absolute;
+  left: 3px;
+  top: -2px;
+}
+
+/* Label hover */
+ .form-check:hover .form-check-label {
+  color: #dc3545;
+}
+
+.form-check-inline {
+    margin-right: 5rem !important;
+}
+
+.form-control,
+.form-select {
+  border: 1.5px solid #ced4da !important;
+  border-radius: 8px !important;
+  min-height: 50px;
+  transition: all 0.25s ease-in-out !important;
+  box-shadow: none !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #dc3545 !important; /* Red border */
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important; /* Red glow */
+  outline: none !important;
+}
+
+
+.form-label {
+  font-weight: 500;
+  color: #222;
+}
+
+/* Placeholder color */
+.form-control::placeholder {
+  color: #999 !important;
+}
+/* Base select styling */
+.form-select {
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 14px;
+  height: 50px;
+  transition: all 0.25s ease-in-out;
+  background-color: #fff;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+/* On focus or when opened */
+.form-select:focus {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+  outline: none !important;
+  background-color: #fff;
+}
+
+/* Add subtle icon animation */
+.form-select {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 20 20' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M5.516 7.548l4.484 4.484 4.484-4.484L16 9.048l-6 6-6-6z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+}
+
+/* On open — make arrow red and give dropdown "glow" */
+.form-select:focus-visible,
+.form-select:focus-within {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23dc3545' height='16' viewBox='0 0 20 20' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M5.516 7.548l4.484 4.484 4.484-4.484L16 9.048l-6 6-6-6z'/></svg>");
+  background-color: #fff;
+  border-color: #dc3545;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
+}
+
+/* Optional: when dropdown is disabled */
+.form-select:disabled {
+  background-color: #f8f9fa;
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+  // .form-check-input:focus{
+  // background-color: #dc3545;
+  // }
+#formFileLg{line-height: 2.3rem !important;}
+ .add-more-btn {
+          font-size: 18px;
+          text-decoration: none !important;
+          color: #e91e63;
+        }
+        .add-more-btn:hover {
+          color: #d81b60;
+        }
+          .remove-btn {
+          background: #fff !important;
+          color: #dc3545;
+          border: none;
+          font-size: 14px;
+          padding: 5px 10px;
+          border-radius: 6px;
+        }
+          .remove-btn:hover {
+          color: #8d0e1bff !important;
+          background: #ffffffff;
+          border: none;
+          font-size: 14px;
+          padding: 5px 10px;
+          border-radius: 6px;
+        }
+`}</style>
       <Container fluid className="bglite py-5">
         <Container className="bg-white shadow-lg rounded-4 p-5">
           <h3 className="text-center mb-4 fw-bold text-uppercase">
@@ -374,7 +559,7 @@ const handleSubmit = async (e) => {
                       }
                       placeholder="Email address"
                     />
-                    {formData.familyFriends.length > 1 && (
+                    {/* {formData.familyFriends.length > 1 && (
                       <Button
                         variant="outline-danger"
                         onClick={() => removeFamilyFriendRow(index)}
@@ -382,7 +567,15 @@ const handleSubmit = async (e) => {
                       >
                         -
                       </Button>
-                    )}
+                    )} */}
+
+                    {formData.familyFriends.length > 1 && (
+                    <Col md={12} className="text-end">
+                        <Button className="remove-btn ms-2 mt-2" onClick={() => removeFamilyFriendRow(index)}><FaTrashAlt size={16} /></Button>
+                        </Col>
+                      )}
+
+
                   </InputGroup>
                   <div className="form-error">
                     {errors[`famemail_${index}`] || ""}
@@ -391,13 +584,13 @@ const handleSubmit = async (e) => {
               </Row>
             ))}
 
-            <Row className="mb-4">
-              <Col>
-                <Button variant="outline-primary" onClick={addFamilyFriendRow}>
-                  + Add Family / Friend
-                </Button>
-              </Col>
-            </Row>
+
+                <div className="text-left mt-3 mb-3">
+              <Button variant="link" className="add-more-btn p-0" onClick={addFamilyFriendRow}>
+                + Add More
+              </Button>
+            </div>
+
 
             {/* Checkboxes */}
             <Form.Check

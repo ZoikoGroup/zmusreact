@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import { Button, Col, Container, Form, FormLabel, Row, InputGroup } from "react-bootstrap";
 import React, { useState } from "react";
-import Countrycode from "../products/countrycode.json";
 import { FaTrashAlt } from "react-icons/fa";
 const MilitaryVeteransForm = () => {
   const [errors, setErrors] = useState({});
