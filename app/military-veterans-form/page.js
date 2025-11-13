@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import { Button, Col, Container, Form, FormLabel, Row, InputGroup } from "react-bootstrap";
 import React, { useState } from "react";
-import Countrycode from "../products/countrycode.json";
 import { FaTrashAlt } from "react-icons/fa";
 const MilitaryVeteransForm = () => {
   const [errors, setErrors] = useState({});
@@ -269,21 +268,19 @@ const MilitaryVeteransForm = () => {
         <Container className="w-100">
           <Form onSubmit={handleSubmit} className="specialPlanForm">
             <Row>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Full Name <span className="txtred">*</span></FormLabel>
                 <Form.Control type="text" name="fname" value={formData.fname} onChange={handleChange} placeholder="First name and last name" />
                 {errors.fname && <p className="txtred">{errors.fname}</p>}
               </Col>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Email <span className="txtred">*</span></FormLabel>
                 <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
                 {errors.email && <p className="txtred">{errors.email}</p>}
               </Col>
             </Row>
-
-            <br />
             <Row>
-              <Col md={6}>
+              <Col md={6} className="mt-2">
                 <FormLabel>Phone no <span className="txtred">*</span></FormLabel>
                
                   
@@ -292,20 +289,19 @@ const MilitaryVeteransForm = () => {
                 {/* {errors.countrycode && <p className="txtred">{errors.countrycode}</p>} */}
                 {errors.phone && <p className="txtred">{errors.phone}</p>}
               </Col>
-              <Col md={6}>
-                <FormLabel>Upload a valid military ID or proof of veteran status to qualify.<span className="txtred">*</span></FormLabel>
+              <Col md={6} className="mt-2">
+                <FormLabel>Upload a valid ID<span className="txtred">*</span></FormLabel>
                 <Form.Control type="file" name="statusproof" onChange={handleChange} />
                 {errors.statusproof && <p className="txtred">{errors.statusproof}</p>}
               </Col>
             </Row>
 
-            <br />
             <h4 className="text-center pt-5">Nominated Family and Friends (up to 5)</h4>
 
             {formData.family.map((member, index) => (
               <div key={index} className="mb-4 p-3 border rounded">
                 <Row>
-                  <Col md={6}>
+                  <Col md={6} className="mt-2">
                     <FormLabel>Full Name <span className="txtred">*</span></FormLabel>
                     <Form.Control
                       type="text"
@@ -317,7 +313,7 @@ const MilitaryVeteransForm = () => {
                     />
                     {errors[`famname_${index}`] && <p className="txtred">{errors[`famname_${index}`]}</p>}
                   </Col>
-                  <Col md={6}>
+                  <Col md={6} className="mt-2">
                     <FormLabel>Email <span className="txtred">*</span></FormLabel>
                     <Form.Control
                       type="email"
@@ -331,9 +327,8 @@ const MilitaryVeteransForm = () => {
                   </Col>
                 </Row>
 
-                <br />
                 <Row>
-                  <Col md={6}>
+                  <Col md={6} className="mt-2">
                     <FormLabel>Contact no <span className="txtred">*</span></FormLabel>
                     <Form.Control
                       type="text"
@@ -345,7 +340,7 @@ const MilitaryVeteransForm = () => {
                     />
                     {errors[`famphone_${index}`] && <p className="txtred">{errors[`famphone_${index}`]}</p>}
                   </Col>
-                  <Col md={6}>
+                  <Col md={6} className="mt-2">
                     <FormLabel>Relationship <span className="txtred">*</span></FormLabel>                    
                       <Form.Control
                         type="text"
@@ -360,7 +355,7 @@ const MilitaryVeteransForm = () => {
                     {errors[`famrelation_${index}`] && <p className="txtred">{errors[`famrelation_${index}`]}</p>}
                   </Col>
                   {formData.family.length > 1 && (
-                    <Col md={12} className="text-end">
+                    <Col md={12} className="text-end mt-2">
                         <Button className="remove-btn ms-2 mt-2" onClick={() => removeFamilyMember(index)}><FaTrashAlt size={16} /></Button>
                         </Col>
                       )}
@@ -375,14 +370,12 @@ const MilitaryVeteransForm = () => {
               </Button>
             </div>
 
-            <br />
             <Form.Check label="Confirm your selected BYOD plan and verify the details." name="concent" checked={formData.concent} onChange={handleChange} type="checkbox" />
             {errors.concent && <p className="txtred">{errors.concent}</p>}
             <Form.Check label="Agree to Zoiko Saver Deals' terms and conditions." name="terms" checked={formData.terms} onChange={handleChange} type="checkbox" />
             {errors.terms && <p className="txtred">{errors.terms}</p>}
 
-            <br />
-            <Button variant="danger" type="submit">Submit Your Application</Button>
+            <Button variant="danger" className="mt-2" type="submit">Submit Your Application</Button>
           </Form>
         </Container>
       </Container>
