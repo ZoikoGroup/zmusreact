@@ -35,7 +35,6 @@ const AnimalPartnership = () => {
     role: "",
     email: "",
     phone: "",
-    countrycode: "",
     prefcontact: "",
     discount: false,
     support: false,
