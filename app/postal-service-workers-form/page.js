@@ -12,7 +12,6 @@ import {
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
-import Countrycode from "../products/countrycode.json";
 import { FaTrashAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -27,7 +26,6 @@ const PostalWorkersForm = () => {
     fname: "",
     email: "",
     dob: "",
-    countrycode: "",
     phone: "",
     statusproof: "",
     plan: "",
@@ -122,8 +120,6 @@ const PostalWorkersForm = () => {
     else if (!/\S+@\S+\.\S+/.test(formData.email))
       formErrors.email = "⚠️ Invalid Email Format.";
     if (!formData.dob) formErrors.dob = "⚠️ Date of birth is required.";
-    if (!formData.countrycode)
-      formErrors.countrycode = "⚠️ Country code is required.";
     if (!formData.phone)
       formErrors.phone = "⚠️ Phone number is required.";
     else if (!/^\d{10}$/.test(formData.phone))
@@ -160,7 +156,6 @@ const handleSubmit = async (e) => {
       fname: formData.fname,
       email: formData.email,
       dob: formData.dob,
-      countrycode: formData.countrycode,
       phone: formData.phone,
       statusproof: formData.statusproof?.name || "",
       plan: formData.plan,
@@ -450,19 +445,7 @@ const handleSubmit = async (e) => {
             <Row className="mb-3">
               <Col md={6} className="mt-2">
                 <FormLabel>Phone Number *</FormLabel>
-                <InputGroup>
-                  <Form.Select
-                    name="countrycode"
-                    onChange={handleChange}
-                    value={formData.countrycode}
-                  >
-                    <option value="">Country</option>
-                    {Countrycode.map((code) => (
-                      <option key={code.code} value={code.dial_code}>
-                        {code.dial_code}, {code.name}
-                      </option>
-                    ))}
-                  </Form.Select>
+                
                   <Form.Control
                     name="phone"
                     placeholder="10-digit phone number"
@@ -471,9 +454,9 @@ const handleSubmit = async (e) => {
                     maxLength={10}
                     style={{width:"60%"}}
                   />
-                </InputGroup>
+           
                 <div className="form-error">
-                  {errors.countrycode || errors.phone || ""}
+                  { errors.phone || ""}
                 </div>
               </Col>
 

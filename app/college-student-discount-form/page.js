@@ -14,7 +14,6 @@ const StudentDiscountForm = () => {
   const [formData, setFormData] = useState({
     fname: "",
     email: "",
-    countrycode: "",
     phone: "",
     statusproof: "",
     school: "",
@@ -39,7 +38,6 @@ const StudentDiscountForm = () => {
     let formErrors = {};
 
     if (!formData.fname) formErrors.fname = "Your name is required";
-    if (!formData.countrycode) formErrors.countrycode = "Your country code is required";
     if (!formData.phone) formErrors.phone = "Phone number is required";
     if (!formData.school) formErrors.school = "This field is required";
     if (!formData.yos) formErrors.yos = "Date of birth is required";
@@ -90,7 +88,6 @@ console.log(formData);
         setFormData({
           fname: "",
           email: "",
-          countrycode: "",
           phone: "",
           statusproof: "",
           school: "",

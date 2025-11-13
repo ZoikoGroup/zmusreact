@@ -10,7 +10,6 @@ const MilitaryVeteransForm = () => {
   const [formData, setFormData] = useState({
     fname: "",
     email: "",
-    countrycode: "",
     phone: "",
     statusproof: "",
     plan: "",
@@ -61,7 +60,6 @@ const MilitaryVeteransForm = () => {
   const validate = () => {
     let formErrors = {};
     if (!formData.fname) formErrors.fname = "Your name is required";
-    // if (!formData.countrycode) formErrors.countrycode = "Your country code is required";
     if (!formData.phone) formErrors.phone = "Phone number is required";
     if (!formData.statusproof) formErrors.statusproof = "This field is required";
     if (!formData.plan) formErrors.plan = "This field is required";
@@ -110,7 +108,6 @@ const MilitaryVeteransForm = () => {
         setFormData({
           fname: "",
           email: "",
-          countrycode: "",
           phone: "",
           statusproof: "",
           plan: "",
@@ -285,8 +282,6 @@ const MilitaryVeteransForm = () => {
                
                   
                   <Form.Control name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone no" />
-              
-                {/* {errors.countrycode && <p className="txtred">{errors.countrycode}</p>} */}
                 {errors.phone && <p className="txtred">{errors.phone}</p>}
               </Col>
               <Col md={6} className="mt-2">
