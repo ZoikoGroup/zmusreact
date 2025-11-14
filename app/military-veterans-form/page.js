@@ -2,18 +2,26 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
-import { Button, Col, Container, Form, FormLabel, Row, InputGroup } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  FormLabel,
+  Row,
+} from "react-bootstrap";
 import React, { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
+
 const MilitaryVeteransForm = () => {
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false); // <-- LOADING STATE
+
   const [formData, setFormData] = useState({
     fname: "",
     email: "",
     phone: "",
-    statusproof: "",
-    plan: "",
-    cat: "",
+    statusproof: null,
     concent: false,
     terms: false,
     family: [
@@ -21,22 +29,37 @@ const MilitaryVeteransForm = () => {
     ],
   });
 
+  // -------------------------
+  // HANDLE FORM INPUT CHANGE
+  // -------------------------
   const handleChange = (e) => {
-    const { name, value, type, checked, dataset } = e.target;
+    const { name, value, type, checked, dataset, files } = e.target;
     const index = dataset.index ? parseInt(dataset.index) : null;
+
+    if (type === "file") {
+      setFormData({
+        ...formData,
+        [name]: files[0],
+      });
+      return;
+    }
 
     if (index !== null && name.startsWith("fam")) {
       const updatedFamily = [...formData.family];
       updatedFamily[index][name] = value;
       setFormData({ ...formData, family: updatedFamily });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: type === "checkbox" ? checked : value,
-      });
+      return;
     }
+
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
   };
 
+  // -------------------------
+  // ADD FAMILY MEMBER
+  // -------------------------
   const addFamilyMember = () => {
     if (formData.family.length < 5) {
       setFormData({
@@ -51,19 +74,27 @@ const MilitaryVeteransForm = () => {
     }
   };
 
+  // -------------------------
+  // REMOVE FAMILY MEMBER
+  // -------------------------
   const removeFamilyMember = (index) => {
     const updatedFamily = [...formData.family];
     updatedFamily.splice(index, 1);
     setFormData({ ...formData, family: updatedFamily });
   };
 
+  // -------------------------
+  // VALIDATION
+  // -------------------------
   const validate = () => {
     let formErrors = {};
+
     if (!formData.fname) formErrors.fname = "Your name is required";
     if (!formData.phone) formErrors.phone = "Phone number is required";
-    if (!formData.statusproof) formErrors.statusproof = "This field is required";
-    if (!formData.plan) formErrors.plan = "This field is required";
-    if (!formData.cat) formErrors.cat = "This field is required";
+
+    if (!formData.statusproof)
+      formErrors.statusproof = "This field is required";
+
     if (!formData.concent) formErrors.concent = "This field is required";
     if (!formData.terms) formErrors.terms = "This field is required";
 
@@ -74,54 +105,87 @@ const MilitaryVeteransForm = () => {
     }
 
     formData.family.forEach((member, i) => {
-      if (!member.famname) formErrors[`famname_${i}`] = "Name required";
-      if (!member.famemail) formErrors[`famemail_${i}`] = "Email required";
+      if (!member.famname)
+        formErrors[`famname_${i}`] = "Name required";
+
+      if (!member.famemail)
+        formErrors[`famemail_${i}`] = "Email required";
       else if (!/\S+@\S+\.\S+/.test(member.famemail))
         formErrors[`famemail_${i}`] = "Invalid email";
-      if (!member.famphone) formErrors[`famphone_${i}`] = "Phone required";
-      if (!member.famrelation) formErrors[`famrelation${i}`] = "Relation required";
+
+      if (!member.famphone)
+        formErrors[`famphone_${i}`] = "Phone required";
+
+      if (!member.famrelation)
+        formErrors[`famrelation_${i}`] = "Relation required";
     });
 
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
   };
 
+  // -------------------------
+  // SUBMIT FORM
+  // -------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validate()) {
-      console.log("Validation failed", errors);
-      return;
-    }
+    if (!validate()) return;
+
+    setLoading(true); // <-- START LOADING
 
     try {
-      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/military-discount-form", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      const formDataToSend = new FormData();
+
+      formDataToSend.append("fname", formData.fname);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("phone", formData.phone);
+      formDataToSend.append("concent", formData.concent ? 1 : 0);
+      formDataToSend.append("terms", formData.terms ? 1 : 0);
+
+      if (formData.statusproof) {
+        formDataToSend.append("statusproof", formData.statusproof);
+      }
+
+      formData.family.forEach((member, i) => {
+        formDataToSend.append(`family[${i}][famname]`, member.famname);
+        formDataToSend.append(`family[${i}][famemail]`, member.famemail);
+        formDataToSend.append(`family[${i}][famphone]`, member.famphone);
+        formDataToSend.append(`family[${i}][famrelation]`, member.famrelation);
       });
 
-      const result = await res.json();
+      const response = await fetch(
+        "https://zmapi.zoikomobile.co.uk/api/v1/military-discount-form",
+        {
+          method: "POST",
+          body: formDataToSend,
+        }
+      );
 
-      if (res.ok) {
+      const result = await response.json();
+
+      if (response.ok) {
         alert("✅ Application submitted successfully!");
+
         setFormData({
           fname: "",
           email: "",
           phone: "",
-          statusproof: "",
-          plan: "",
-          cat: "",
+          statusproof: null,
           concent: false,
           terms: false,
-          family: [{ famname: "", famemail: "", famphone: "", famrelation: "" }],
+          family: [
+            { famname: "", famemail: "", famphone: "", famrelation: "" },
+          ],
         });
       } else {
         alert("❌ Submission failed: " + result.message);
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("⚠️ Error submitting form. Check console for details.");
+      console.error("Error submitting:", error);
+      alert("⚠️ Network or server error. Check console.");
+    } finally {
+      setLoading(false); // <-- STOP LOADING
     }
   };
 
@@ -264,40 +328,80 @@ const MilitaryVeteransForm = () => {
       <Container fluid className="bglite py-5">
         <Container className="w-100">
           <Form onSubmit={handleSubmit} className="specialPlanForm">
+
+            {/* Your Name + Email */}
             <Row>
               <Col md={6} className="mt-2">
-                <FormLabel>Full Name <span className="txtred">*</span></FormLabel>
-                <Form.Control type="text" name="fname" value={formData.fname} onChange={handleChange} placeholder="First name and last name" />
+                <FormLabel>
+                  Full Name <span className="txtred">*</span>
+                </FormLabel>
+                <Form.Control
+                  type="text"
+                  name="fname"
+                  value={formData.fname}
+                  onChange={handleChange}
+                  placeholder="First name and last name"
+                />
                 {errors.fname && <p className="txtred">{errors.fname}</p>}
               </Col>
+
               <Col md={6} className="mt-2">
-                <FormLabel>Email <span className="txtred">*</span></FormLabel>
-                <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
+                <FormLabel>
+                  Email <span className="txtred">*</span>
+                </FormLabel>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email"
+                />
                 {errors.email && <p className="txtred">{errors.email}</p>}
               </Col>
             </Row>
+
+            {/* Phone + File Upload */}
             <Row>
               <Col md={6} className="mt-2">
-                <FormLabel>Phone no <span className="txtred">*</span></FormLabel>
-               
-                  
-                  <Form.Control name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone no" />
+                <FormLabel>
+                  Phone no <span className="txtred">*</span>
+                </FormLabel>
+                <Form.Control
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="Phone no"
+                />
                 {errors.phone && <p className="txtred">{errors.phone}</p>}
               </Col>
+
               <Col md={6} className="mt-2">
-                <FormLabel>Upload a valid ID<span className="txtred">*</span></FormLabel>
-                <Form.Control type="file" name="statusproof" onChange={handleChange} />
-                {errors.statusproof && <p className="txtred">{errors.statusproof}</p>}
+                <FormLabel>
+                  Upload a valid ID <span className="txtred">*</span>
+                </FormLabel>
+                <Form.Control
+                  type="file"
+                  name="statusproof"
+                  onChange={handleChange}
+                />
+                {errors.statusproof && (
+                  <p className="txtred">{errors.statusproof}</p>
+                )}
               </Col>
             </Row>
 
-            <h4 className="text-center pt-5">Nominated Family and Friends (up to 5)</h4>
+            {/* FAMILY SECTION */}
+            <h4 className="text-center pt-5">
+              Nominated Family and Friends (up to 5)
+            </h4>
 
             {formData.family.map((member, index) => (
               <div key={index} className="mb-4 p-3 border rounded">
                 <Row>
                   <Col md={6} className="mt-2">
-                    <FormLabel>Full Name <span className="txtred">*</span></FormLabel>
+                    <FormLabel>
+                      Full Name <span className="txtred">*</span>
+                    </FormLabel>
                     <Form.Control
                       type="text"
                       name="famname"
@@ -306,10 +410,15 @@ const MilitaryVeteransForm = () => {
                       onChange={handleChange}
                       placeholder="Full name"
                     />
-                    {errors[`famname_${index}`] && <p className="txtred">{errors[`famname_${index}`]}</p>}
+                    {errors[`famname_${index}`] && (
+                      <p className="txtred">{errors[`famname_${index}`]}</p>
+                    )}
                   </Col>
+
                   <Col md={6} className="mt-2">
-                    <FormLabel>Email <span className="txtred">*</span></FormLabel>
+                    <FormLabel>
+                      Email <span className="txtred">*</span>
+                    </FormLabel>
                     <Form.Control
                       type="email"
                       name="famemail"
@@ -318,13 +427,17 @@ const MilitaryVeteransForm = () => {
                       onChange={handleChange}
                       placeholder="Email"
                     />
-                    {errors[`famemail_${index}`] && <p className="txtred">{errors[`famemail_${index}`]}</p>}
+                    {errors[`famemail_${index}`] && (
+                      <p className="txtred">{errors[`famemail_${index}`]}</p>
+                    )}
                   </Col>
                 </Row>
 
                 <Row>
                   <Col md={6} className="mt-2">
-                    <FormLabel>Contact no <span className="txtred">*</span></FormLabel>
+                    <FormLabel>
+                      Contact no <span className="txtred">*</span>
+                    </FormLabel>
                     <Form.Control
                       type="text"
                       name="famphone"
@@ -333,47 +446,94 @@ const MilitaryVeteransForm = () => {
                       onChange={handleChange}
                       placeholder="Phone"
                     />
-                    {errors[`famphone_${index}`] && <p className="txtred">{errors[`famphone_${index}`]}</p>}
+                    {errors[`famphone_${index}`] && (
+                      <p className="txtred">{errors[`famphone_${index}`]}</p>
+                    )}
                   </Col>
+
                   <Col md={6} className="mt-2">
-                    <FormLabel>Relationship <span className="txtred">*</span></FormLabel>                    
-                      <Form.Control
-                        type="text"
-                        name="famrelation"
-                        data-index={index}
-                        value={member.famrelation}
-                        onChange={handleChange}
-                        placeholder="Relation"
-                      />
-                      
-                    
-                    {errors[`famrelation_${index}`] && <p className="txtred">{errors[`famrelation_${index}`]}</p>}
+                    <FormLabel>
+                      Relationship <span className="txtred">*</span>
+                    </FormLabel>
+                    <Form.Control
+                      type="text"
+                      name="famrelation"
+                      data-index={index}
+                      value={member.famrelation}
+                      onChange={handleChange}
+                      placeholder="Relation"
+                    />
+                    {errors[`famrelation_${index}`] && (
+                      <p className="txtred">
+                        {errors[`famrelation_${index}`]}
+                      </p>
+                    )}
                   </Col>
+
                   {formData.family.length > 1 && (
                     <Col md={12} className="text-end mt-2">
-                        <Button className="remove-btn ms-2 mt-2" onClick={() => removeFamilyMember(index)}><FaTrashAlt size={16} /></Button>
-                        </Col>
-                      )}
+                      <Button
+                        className="remove-btn ms-2 mt-2"
+                        onClick={() => removeFamilyMember(index)}
+                      >
+                        <FaTrashAlt size={16} />
+                      </Button>
+                    </Col>
+                  )}
                 </Row>
-                
               </div>
             ))}
 
+            {/* ADD MORE */}
             <div className="text-left mt-3">
               <Button variant="link" className="add-more-btn p-0" onClick={addFamilyMember}>
                 + Add More
               </Button>
             </div>
 
-            <Form.Check label="Confirm your selected BYOD plan and verify the details." name="concent" checked={formData.concent} onChange={handleChange} type="checkbox" />
+            {/* CHECKBOXES */}
+            <Form.Check
+              label="Confirm your selected BYOD plan and verify the details."
+              name="concent"
+              checked={formData.concent}
+              onChange={handleChange}
+              type="checkbox"
+            />
             {errors.concent && <p className="txtred">{errors.concent}</p>}
-            <Form.Check label="Agree to Zoiko Saver Deals' terms and conditions." name="terms" checked={formData.terms} onChange={handleChange} type="checkbox" />
+
+            <Form.Check
+              label="Agree to Zoiko Saver Deals' terms and conditions."
+              name="terms"
+              checked={formData.terms}
+              onChange={handleChange}
+              type="checkbox"
+            />
             {errors.terms && <p className="txtred">{errors.terms}</p>}
 
-            <Button variant="danger" className="mt-2" type="submit">Submit Your Application</Button>
+            {/* SUBMIT BUTTON WITH LOADING SPINNER */}
+            <Button
+              variant="danger"
+              className="mt-2"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <span
+                    className="spinner-border spinner-border-sm me-2"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Submitting...
+                </>
+              ) : (
+                "Submit Your Application"
+              )}
+            </Button>
           </Form>
         </Container>
       </Container>
+
       <Footer />
     </>
   );
