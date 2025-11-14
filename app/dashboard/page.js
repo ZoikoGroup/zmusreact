@@ -277,13 +277,7 @@ export default function DashboardPage() {
 
   // ---------------- Load Dashboard + Cards ----------------
   useEffect(() => {
-    const token = localStorage.getItem("zoiko_token");
-
-  // If no token, redirect to login
-  if (!token) {
-    router.push("/login");
-    return;
-  }
+    
     (async () => {
       setLoading(true);
       try {
