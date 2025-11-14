@@ -142,7 +142,40 @@ export default function CheckoutPage() {
   useEffect(() => {
     try {
       const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-      setCart(storedCart);
+      // Normalize legacy or different cart item shapes so checkout can render them
+      const normalized = (storedCart || []).map((item) => {
+        // If already in expected shape, return as-is
+        if (item && (item.planId || item.planTitle)) return item;
+
+        // Otherwise, map common product fields into checkout shape
+        const numericPrice = (() => {
+          if (!item) return 0;
+          if (typeof item.price === "number") return item.price;
+          if (typeof item.price === "string") {
+            const n = parseFloat(item.price.replace(/[^0-9.-]+/g, ""));
+            return Number.isFinite(n) ? n : 0;
+          }
+          return 0;
+        })();
+
+        return {
+          planId: item.id || item.planId || null,
+          planSlug: item.slug || item.planSlug || null,
+          planTitle: item.name || item.planTitle || item.title || item.slug || "",
+          planPrice: numericPrice,
+          planDuration: item.planDuration || "1",
+          lineType: item.lineType || "device",
+          simType: item.simType || "N/A",
+          formData: {
+            priceQty: item.qty || (item.formData && item.formData.priceQty) || 1,
+            price: (item.formData && item.formData.price) || numericPrice,
+          },
+          // keep original fields for reference
+          _raw: item,
+        };
+      });
+
+      setCart(normalized);
       if (typeof window !== "undefined" && localStorage.getItem("zoiko_token")) {
         setIsLoggedIn(true);
       }
