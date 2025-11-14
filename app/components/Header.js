@@ -9,6 +9,7 @@ import PlanPurchaseModal from "./PlanPurchaseModal";
 import TopHeader from "./TopHeader";
 import PaymentModal from "./PaymentModal";
 import CustomLanguageSwitcher from "./CustomLanguageSwitcher";
+import GetInTouchSidebar from "./GetInTouchSidebar";
 
 let openPlanModalCallback = null;
 let openPaymentModalCallback = null;
@@ -108,7 +109,7 @@ const Header = () => {
       <div className="d-none d-lg-block">
         <TopHeader />
       </div>
-
+<GetInTouchSidebar />
       <Navbar expand="lg" className="bg-body-tertiary p-0 headnav">
         <Container fluid>
           <Navbar.Brand href="/">

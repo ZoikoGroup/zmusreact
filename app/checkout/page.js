@@ -6,7 +6,16 @@ import HeadBar from "../components/HeadBar";
 import { useEffect, useState } from "react";
 import { usStates } from "../utils/usStates";
 import { processOrder } from "../utils/beQuickApi"; // adjust path if needed
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Container, Row, Col } from "react-bootstrap";
+import {
+  Phone,
+  PhoneFill,
+  PhoneVibrate,
+  PhoneLandscape,
+  Wifi,
+  Tablet,
+  Router
+} from "react-bootstrap-icons"
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function CheckoutPage() {
@@ -457,9 +466,47 @@ export default function CheckoutPage() {
         {cart.length === 0 ? (
           <div className="d-flex flex-column justify-content-center align-items-center text-center" style={{ minHeight: "60vh" }}>
             <img src="/img/empty-cart.png" alt="Empty Cart" style={{ width: "180px", opacity: 0.8 }} onError={(e) => (e.target.style.display = "none")} />
-            <h3 className="mt-3 text-secondary">Your Cart is Empty</h3>
-            <p className="text-muted">Looks like you haven’t added anything to your cart yet.</p>
-            <a href="/" className="btn btn-primary mt-2">Continue Shopping</a>
+            <h3 className="mt-3 text-secondary">Your cart is empty</h3>
+            <p className="text-muted">Looks like you haven't added anything to your cart yet.</p>
+             
+    <Container className="py-4">
+      <Row className="g-3">
+        <Col md={3} sm={6} xs={12}>
+          <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white"
+            style={{ background: "#e60000" }} href="/prepaid-plans">
+            <Phone className="me-2" />
+            Prepaid plans
+          </Button>
+        </Col>
+
+        <Col md={3} sm={6} xs={12}>
+          <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white"
+            style={{ background: "#e60000" }} href="/postpaid-plans">
+            <PhoneFill className="me-2" />
+            Postpaid plans
+          </Button>
+        </Col>
+
+        <Col md={3} sm={6} xs={12}>
+          <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white"
+            style={{ background: "#e60000" }} href="/business-deals">
+            <PhoneVibrate className="me-2" />
+            Business Deals
+          </Button>
+        </Col>
+
+        <Col md={3} sm={6} xs={12}>
+          <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white"
+            style={{ background: "#e60000" }} href="/travel-plans">
+            <PhoneLandscape className="me-2" />
+            Travel Plans
+          </Button>
+        </Col>
+
+        
+      </Row>
+    </Container>
+
           </div>
         ) : (
           <>
