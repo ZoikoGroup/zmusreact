@@ -9,32 +9,103 @@ import { Container, Button, Row, Col, Image } from "react-bootstrap";
 const MusicHub = () => {
     return (
         <>
+         <style>{`
+        @media (max-width: 768px) {
+            .specialBanner{
+                background-image: url(/img/home-banner/Music-Hub-banner-mobile.png) !important;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 100vw;
+            }
+            .bannerText{
+                padding-top: 6vw;            
+            }
+            .specialBanner h1{
+                font-size: 4.5vw;
+                text-align: center;
+            }
+            .specialBanner h2{
+                font-size: 3vw;
+                text-align: center;
+            }
+            .specialBanner p{
+                font-size: 2vw;
+                text-align: center;
+                padding-bottom: 1vw;
+                margin-bottom: 0vw !important;
+            }
+            .specialBanner a{
+                width: 30vw;
+                padding: 2vw;
+                font-size: 2.5vw;
+            }
+            .zoiko-btn {
+                display: flex;
+                justify-content: center;
+            }
+            .specialBanner ul{
+                display:grid;
+                padding-left:0px;
+                justify-items: center;
+            }
+            .pinkboxwraper {
+            text-align: center;
+            }
+           
+        }
+        @media (min-width: 769px) {
+            .specialBanner {
+                background-image: url(/img/home-banner/Music-Hub-banner.png);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 35vw;
+            }
+            .bannerText{
+                padding-top: 2vw;            
+            }
+            .specialBanner h1{
+                font-size: 2.5vw;
+            }
+            .specialBanner h2{
+                font-size: 2vw;
+            }
+            .specialBanner p{
+                       font-size: 1.5vw;
+        padding-right: 1vw;
+            width: 50% !important;
+            }
+            .specialBanner a{
+                width: 20vw;
+                padding: 1vw;
+                font-size: 1.5vw;
+            }
+           
+            .specialBanner ul li{
+                font-size: 1.5rem;
+            }
+            .specialBanner ul{
+                width: 50%;
+            }
+                
+        }
+        `}</style>
         {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Zoiko Music Hub: Empowering Music Creators and Lovers</>} />
-        <Container fluid className="p-0">
-            <img className="d-none d-md-block w-100" src="/img/home-banner/Music-Hub-banner.png" alt="Student Banner" />
-            <img className="d-sm-block d-md-none" src="/img/home-banner/Music-Hub-banner-mobile.png" alt="Student Banner" />
-            <Container className="d-none d-md-block w-75" style={{marginTop:'-460px', marginBottom:'40px'}}>
-                <div>
-                    <h2 className="txtred" style={{fontSize:'26px'}}>Zoiko Music Hub:<br />Empowering Music Creators &amp; Lovers</h2>
-                    <p className="txtblack body22 w-50">At Zoiko Mobile, we know music isn&apos;t just entertainment —it&apos;s a way of life. That&apos;s why we created the Zoiko Music Hub, a dedicated space where music lovers and aspiring musicians can find the tools, perks, and community to fuel their passion. Whether you&apos;re producing your next big hit, jamming with friends, or discovering fresh tunes, Zoiko Mobile is here to keep you connected and inspired.</p>
-                    <div className="d-flex flex-nowrap gap-3">
+        <Container fluid className="p-0 specialBanner">
+            
+            <Container className="w-75">
+                <div className="bannerText">
+                    <h2 className="txtred">Zoiko Music Hub:<br />Empowering Music Creators &amp; Lovers</h2>
+                    <p className="txtblack ">At Zoiko Mobile, we know music isn&apos;t just entertainment —it&apos;s a way of life. That&apos;s why we created the Zoiko Music Hub, a dedicated space where music lovers and aspiring musicians can find the tools, perks, and community to fuel their passion. Whether you&apos;re producing your next big hit, jamming with friends, or discovering fresh tunes, Zoiko Mobile is here to keep you connected and inspired.</p>
+                    <div className="d-flex flex-nowrap gap-3 zoiko-btn">
                         <Button href='/music-hub-registratrion-form' variant="danger" size="lg">Register Now</Button>
-                        <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
                     </div>
                 </div>
             </Container>
-            <Container className="d-sm-block d-md-none" style={{marginTop:'-480px', marginBottom:'190px'}}>
-                <div>
-                    <h4 className="txtred">Zoiko Music Hub:<br />Empowering Music Creators &amp; Lovers</h4>
-                    <p className="txtblack" style={{fontSize:'smaller', lineHeight:'18px'}}>At Zoiko Mobile, we know music isn&apos;t just entertainment —it&apos;s a way of life. That&apos;s why we created the Zoiko Music Hub, a dedicated space where music lovers and aspiring musicians can find the tools, perks, and community to fuel their passion. Whether you&apos;re producing your next big hit, jamming with friends, or discovering fresh tunes, Zoiko Mobile is here to keep you connected and inspired.</p>
-                    <div className="d-flex flex-nowrap gap-3">
-                        <Button href='/music-hub-registratrion-form' variant="danger" size="lg">Register Now</Button>
-                        <Button href='#' variant="outline-danger" size="lg">Learn more</Button>
-                    </div>
-                </div>
-            </Container>
+            
         </Container>
         <Container fluid className="bglite py-5">
             <h2 className="text-center">Exclusive Benefits for Music Enthusiasts</h2>
