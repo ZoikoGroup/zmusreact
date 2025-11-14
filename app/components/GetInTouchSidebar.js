@@ -4,7 +4,13 @@ import { Offcanvas, Button } from "react-bootstrap";
 
 const GetInTouchSidebar = () => {
   const [show, setShow] = useState(false);
-
+const openChat = () => {
+    if (window.Tawk_API) {
+      window.Tawk_API.maximize(); // Opens chat box
+    } else {
+      alert("Chat is loading... please try again in a moment!");
+    }
+  };
   return (
     <>
       {/* Sticky Tab */}
@@ -117,12 +123,12 @@ ease;
           <h5>Live chat</h5>
           <p>Click below to speak to a specialist on live chat.</p>
           <p><strong>We're open 8am to 10pm, 7 days a week.</strong></p>
-          <Button variant="danger" className="chatNowBtn w-100 mb-4">Chat now</Button>
+          <Button variant="danger" onClick={openChat} className="chatNowBtn w-100 mb-4">Chat now</Button>
 
           <hr />
 
           <h5>Call us</h5>
-          <h3 className="fw-bold">08080 408 408</h3>
+          <h3 className="fw-bold">800 988 8116</h3>
           <p><strong>Monday to Friday:</strong> 8am to 10pm</p>
           <p><strong>Saturday and Sunday:</strong> 8am to 8pm</p>
 

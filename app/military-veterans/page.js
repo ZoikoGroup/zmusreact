@@ -10,18 +10,100 @@ const MilitaryVeterans = () => {
     return (
         <>
         {/* <TopHeader /> */}
+        <style>{`
+        @media (max-width: 768px) {
+            .specialBanner{
+                background-image: url(/img/home-banner/Military-Veterans-banner-mobile.png) !important;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 100vw;
+            }
+            .bannerText{
+                padding-top: 6vw;            
+            }
+            .specialBanner h1{
+                font-size: 4.5vw;
+                text-align: center;
+            }
+            .specialBanner h2{
+                font-size: 3vw;
+                text-align: center;
+            }
+            .specialBanner p{
+                font-size: 8vw;
+                text-align: center;
+                padding-bottom: 1vw;
+                margin-bottom: 0vw !important;
+            }
+            .specialBanner a{
+                width: 30vw;
+                padding: 2vw;
+                font-size: 2.5vw;
+            }
+            .zoiko-btn {
+                display: flex;
+                justify-content: center;
+            }
+            .specialBanner ul{
+                display:grid;
+                padding-left:0px;
+                justify-items: center;
+            }
+            .pinkboxwraper {
+            text-align: center;
+            }
+           
+        }
+        @media (min-width: 769px) {
+            .specialBanner {
+                background-image: url(/img/home-banner/Military-Veterans-banner.png);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 35vw;
+            }
+            .bannerText{
+                padding-top: 6vw;            
+            }
+            .specialBanner h1{
+                font-size: 2.5vw;
+            }
+            .specialBanner h2{
+                font-size: 2vw;
+            }
+            .specialBanner p{
+                font-size: 4vw;
+            }
+            .specialBanner a{
+                width: 20vw;
+                padding: 1vw;
+                font-size: 1.5vw;
+            }
+           
+            .specialBanner ul li{
+                font-size: 1.5rem;
+            }
+            .specialBanner ul{
+                width: 50%;
+            }
+                
+        }
+        `}</style>
         <Header />
         <HeadBar text={<>Military &amp; Veterans&apos; Lifetime Deals</>} />
-        <Container fluid className="p-0">
-            <img className="d-none d-md-block w-100" src="/img/home-banner/Military-Veterans-banner.png" alt="Military Veterans" />
-            <img className="d-sm-block d-md-none" src="/img/home-banner/Military-Veterans-banner-mobile.png" alt="Military Veterans" />
-            <Container className="w-75" style={{marginTop:'-410px', marginBottom:'160px'}}>
-                <h1 className="txtred">Military &amp; Veterans&apos;<br />Lifetime Deals</h1>
-                <ul className="redbullet-banner txtblack">
-                    <li>20% Lifetime Discount</li>
-                    <li>15% Discount For Family &amp; Friends</li>
-                </ul>
-                <Button variant="danger" size="lg" href="/military-veterans-form">Register Now</Button>
+        <Container fluid className="p-0 specialBanner">
+            <Container className="w-75">
+                <div className="bannerText">
+                    <h1 className="txtred">Military &amp; Veterans&apos;<br />Lifetime Deals</h1>
+                    <ul className="redbullet-banner txtblack">
+                        <li>20% Lifetime Discount</li>
+                        <li>15% Discount For Family &amp; Friends</li>
+                    </ul>
+                    <div className="d-flex flex-nowrap gap-3 zoiko-btn">
+                        <Button variant="danger" size="lg" href="/military-veterans-form">Register Now</Button>
+                    </div>
+                </div>
             </Container>
         </Container>
         <Container fluid className="py-4 bglite">

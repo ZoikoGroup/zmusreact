@@ -105,11 +105,15 @@ const Header = () => {
 
   return (
     <>
+    {/* <style>{`
+    .nav-link{
+    font-size:1vw !important;}
+    `}</style> */}
       {/* Desktop-only Top Header */}
       <div className="d-none d-lg-block">
         <TopHeader />
       </div>
-<GetInTouchSidebar />
+      <GetInTouchSidebar />
       <Navbar expand="lg" className="bg-body-tertiary p-0 headnav">
         <Container fluid>
           <Navbar.Brand href="/">

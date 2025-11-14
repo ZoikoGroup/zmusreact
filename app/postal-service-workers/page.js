@@ -9,28 +9,101 @@ import PostalFaqs from "../components/PostalFaqs";
 const PostalWorkers = () => {
     return (
         <>
+        <style>{`
+        @media (max-width: 768px) {
+            .specialBanner{
+                background-image: url(/img/home-banner/Postal-Workers-banner-mobile.png) !important;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 100vw;
+            }
+            .bannerText{
+                padding-top: 6vw;            
+            }
+            .specialBanner h1{
+                font-size: 4.5vw;
+                text-align: center;
+            }
+            .specialBanner h2{
+                font-size: 3vw;
+                text-align: center;
+            }
+            .specialBanner p{
+                font-size: 8vw;
+                text-align: center;
+                padding-bottom: 1vw;
+                margin-bottom: 0vw !important;
+            }
+            .specialBanner a{
+                width: 30vw;
+                padding: 2vw;
+                font-size: 2.5vw;
+            }
+            .zoiko-btn {
+                display: flex;
+                justify-content: center;
+            }
+            .specialBanner ul{
+                display:grid;
+                padding-left:0px;
+                justify-items: center;
+            }
+            .pinkboxwraper {
+            text-align: center;
+            }
+           
+        }
+        @media (min-width: 769px) {
+            .specialBanner {
+                background-image: url(/img/home-banner/Postal-Workers-banner.png);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 35vw;
+            }
+            .bannerText{
+                padding-top: 6vw;            
+            }
+            .specialBanner h1{
+                font-size: 2.5vw;
+            }
+            .specialBanner h2{
+                font-size: 2vw;
+            }
+            .specialBanner p{
+                font-size: 4vw;
+            }
+            .specialBanner a{
+                width: 20vw;
+                padding: 1vw;
+                font-size: 1.5vw;
+            }
+           
+            .specialBanner ul li{
+                font-size: 1.5rem;
+            }
+            .specialBanner ul{
+                width: 50%;
+            }
+                
+        }
+        `}</style>
         {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>U.S. Postal Service Workers</>} />
-        <Container fluid className="p-0 bglite">
-            <img className="d-none d-md-block w-100" src="/img/home-banner/Postal-Workers-banner.png" alt="Postal Workers" />
-            <img className="d-sm-block d-md-none" src="/img/home-banner/Postal-Workers-banner-mobile.png" alt="Postal Workers" />
-            <Container className="d-none d-md-block w-75">
-                <div style={{marginTop:'-400px', marginBottom:'100px'}}>
+        <Container fluid className="p-0 bglite specialBanner">
+            <Container className=" w-75">
+                <div className="bannerText">
                     <h2 className="txtblack">A Special Thank You To<br />U.S. Postal Service Workers</h2>
                     <p className="verybig txtred">20% Discount</p>
                     <h2 className="txtblack">On Any Of Our Plans</h2>
-                    <Button variant="danger" size="lg" href="/postal-service-workers-form">Sign Up Today</Button>
+                    <div className="d-flex flex-nowrap gap-3 zoiko-btn">
+                        <Button variant="danger" size="lg" href="/postal-service-workers-form">Sign Up Today</Button>
+                    </div>
                 </div>
             </Container>
-            <Container className="d-sm-block d-md-none">
-                <div style={{marginTop:'-490px', marginBottom:'260px'}}>
-                    <h1 className="txtblack">A Special Thank You To<br />U.S. Postal Service Workers</h1>
-                    <h1 className="txtred">20% Discount</h1>
-                    <h2 className="txtblack">On Any Of Our Plans</h2>
-                    <Button variant="danger" size="lg" href="/postal-service-workers-form">Sign Up Today</Button>
-                </div>
-            </Container>
+            
         </Container>
         <Container fluid className="py-5 bglite">
             <h2 className="text-center py-4">How to Claim Your Discount</h2>

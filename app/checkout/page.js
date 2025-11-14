@@ -506,7 +506,7 @@ export default function CheckoutPage() {
       <Row className="g-3">
         <Col md={3} sm={6} xs={12}>
           <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white"
-            style={{ background: "#e60000" }} href="/prepaid-plans">
+            style={{ background: "#DF1E5A" }} href="/prepaid-plans">
             <Phone className="me-2" />
             Prepaid plans
           </Button>
@@ -514,7 +514,7 @@ export default function CheckoutPage() {
 
         <Col md={3} sm={6} xs={12}>
           <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white"
-            style={{ background: "#e60000" }} href="/postpaid-plans">
+            style={{ background: "#DF1E5A" }} href="/postpaid-plans">
             <PhoneFill className="me-2" />
             Postpaid plans
           </Button>
@@ -522,7 +522,7 @@ export default function CheckoutPage() {
 
         <Col md={3} sm={6} xs={12}>
           <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white"
-            style={{ background: "#e60000" }} href="/business-deals">
+            style={{ background: "#DF1E5A" }} href="/business-deals">
             <PhoneVibrate className="me-2" />
             Business Deals
           </Button>
@@ -530,7 +530,7 @@ export default function CheckoutPage() {
 
         <Col md={3} sm={6} xs={12}>
           <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white"
-            style={{ background: "#e60000" }} href="/travel-plans">
+            style={{ background: "#DF1E5A" }} href="/travel-plans">
             <PhoneLandscape className="me-2" />
             Travel Plans
           </Button>
@@ -543,13 +543,31 @@ export default function CheckoutPage() {
           </div>
         ) : (
           <>
+          <style>{`
+          // .btn-outline-red{
+          // border:1px solid #df1e5b8d;
+          // coloer:#DF1E5A;
+          // }
+          .btn-red{
+            color:#fff;
+            background-color: #dc3545;
+            }
+            .btn-red:hover{
+            color:#fff;
+            background-color: #dc3545;
+            }
+            .form-check-input:checked {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+          `}</style>
             <div className="d-flex justify-content-between align-items-center mb-4">
-              <h3 className="text-success">
+              <h3 className="text-danger">
                 Checkout <small className="text-muted">Connecting Every Possibility with Zoiko Mobile!</small>
               </h3>
               <div>
                 <button className="btn btn-danger me-2" onClick={handleClearCart} disabled={loading}>Clear Cart</button>
-                <a href="/" className="btn btn-outline-primary">+ Continue Shopping</a>
+                {/* <a href="/" className="btn btn-outline-red">+ Continue Shopping</a> */}
               </div>
             </div>
 
@@ -593,7 +611,7 @@ export default function CheckoutPage() {
                         onChange={(e) => setCoupon(e.target.value)}
                         disabled={loading}
                       />
-                      <button className="btn btn-primary" onClick={handleApplyCoupon} disabled={loading}>
+                      <button className="btn btn-red" onClick={handleApplyCoupon} disabled={loading}>
                         {loading ? "Applying..." : "Apply Coupon"}
                       </button>
                       {discountData && (
@@ -674,7 +692,7 @@ export default function CheckoutPage() {
 
                     {showShipping && (
                       <div className="mt-4 p-3 border rounded bg-light">
-                        <h6 className="fw-bold mb-3 text-primary">Shipping Address</h6>
+                        <h6 className="fw-bold mb-3 text-red">Shipping Address</h6>
                         <div className="row g-3">
                           {Object.keys(shippingAddress).map((key, i) => {
                             const meta = billingFieldMeta[key] || {};
@@ -924,8 +942,14 @@ export default function CheckoutPage() {
               </div>
               <div className="card-body text-center">
                 <p>You need to login to apply your coupon code.</p>
+                <style>{`
+          .btn-outline-red{
+          border:1px solid #DF1E5A;
+          coloer:#DF1E5A;
+          }
+          `}</style>
                 <a
-                  className="btn btn-primary"
+                  className="btn btn-red"
                   href={`/login?redirect=${encodeURIComponent(typeof window !== "undefined" ? window.location.href : "/")}`}
                 >
                   Go to Login
@@ -948,7 +972,7 @@ export default function CheckoutPage() {
               <h5 className="text-danger fw-bold mb-3">Terms & Conditions Required</h5>
 
               <p className="text-muted">You must agree to the website <a href="/terms-and-conditions"> terms and conditions</a> before placing your order.</p>
-              <button className="btn btn-primary w-100" onClick={() => setShowTermsPopup(false)}>
+              <button className="btn btn-red w-100" onClick={() => setShowTermsPopup(false)}>
                 OK
               </button>
             </div>

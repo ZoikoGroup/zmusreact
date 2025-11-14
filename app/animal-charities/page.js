@@ -9,19 +9,100 @@ import AnimalFaqs from "../components/AnimalFaqs";
 const AnimalCharities = () => {
     return (
         <>
+         <style>{`
+        @media (max-width: 768px) {
+            .specialBanner{
+                background-image: url(/img/home-banner/Animal-Charities-Banner-mobile.png) !important;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 100vw;
+            }
+            .bannerText{
+                padding-top: 6vw;            
+            }
+            .specialBanner h1{
+                font-size: 4.5vw;
+                text-align: center;
+            }
+            .specialBanner h2{
+                font-size: 3vw;
+                text-align: center;
+            }
+            .specialBanner p{
+                font-size: 4vw;
+                text-align: center;
+                padding-bottom: 1vw;
+                margin-bottom: 0vw !important;
+            }
+            .specialBanner a{
+                width: 30vw;
+                padding: 2vw;
+                font-size: 2.5vw;
+            }
+            .zoiko-btn {
+                display: flex;
+                justify-content: center;
+            }
+            .specialBanner ul{
+                display:grid;
+                padding-left:0px;
+                justify-items: center;
+            }
+            .pinkboxwraper {
+            text-align: center;
+            }
+           
+        }
+        @media (min-width: 769px) {
+            .specialBanner {
+                background-image: url(/img/home-banner/Animal-Charities-Banner.png);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 35vw;
+            }
+            .bannerText{
+                padding-top: 6vw;            
+            }
+            .specialBanner h1{
+                font-size: 2.5vw;
+            }
+            .specialBanner h2{
+                font-size: 2vw;
+            }
+            .specialBanner p{
+                font-size: 2vw;
+                        width: 50%;
+            }
+            .specialBanner a{
+                width: 20vw;
+                padding: 1vw;
+                font-size: 1.5vw;
+            }
+           
+            .specialBanner ul li{
+                font-size: 1.5rem;
+            }
+            .specialBanner ul{
+                width: 50%;
+            }
+                
+        }
+        `}</style>
         {/* <TopHeader /> */}
         <Header />
         <HeadBar text={<>Zoiko Mobile - Animal Charities Discount Program</>} />
-        <Container fluid className="p-0">
-            <img className="d-none d-md-block w-100" src="/img/home-banner/Animal-Charities-Banner.png" alt="Student Banner" />
-            <img className="d-sm-block d-md-none" src="/img/home-banner/Animal-Charities-Banner-mobile.png" alt="Student Banner" />
-            <Container className="d-none d-md-block" style={{marginTop:'-420px', marginBottom:'180px'}}>
-                <div>
+        <Container fluid className="p-0 specialBanner">
+            
+            <Container className="w-75">
+                <div className="bannerText">
                     <h1 className="txtred">Your Connecton Saves Lives</h1>
-                    <p className="txtblack py-3 w-50 body22">Join Zoiko Mobile - We are supporting animals and animal charities whilst keep you connected!</p>
-                    <div className="d-flex flex-nowrap gap-3">
+                    <p className="txtblack">Join Zoiko Mobile - We are supporting animals and animal charities whilst keep you connected!</p>
+                    
+                    <div className="d-flex flex-nowrap gap-3 zoiko-btn">
                         <Button href='/zoiko-mobile-animal-welfare-partnership/' variant="danger" size="lg">Partner With Us Today</Button>
-                        {/* <Button href='#' variant="outline-danger" size="lg">Learn more</Button> */}
+                    
                     </div>
                 </div>
             </Container>

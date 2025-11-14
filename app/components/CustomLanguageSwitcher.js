@@ -85,7 +85,8 @@ const CustomLanguageSwitcher = () => {
   return (
     <>
       <div id="google_translate_element_hidden" style={{ display: "none" }}></div>
-
+{currentLang === "es" && (<style>{`.nav-link{
+    font-size:1vw !important;}`}</style>)}
       <Button
         variant="link"
         className="notranslate text-decoration-none text-dark p-0"
