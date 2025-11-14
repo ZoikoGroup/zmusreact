@@ -10,7 +10,7 @@ import {
   FormLabel,
   Row,
 } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -30,13 +30,61 @@ const StudentDiscountForm = () => {
     cat: "",
     concent: false,
     terms: false,
-
-    // ✅ Static country code (US)
     countrycode: "+1",
   });
 
+  // ===========================================================
+  // ⭐ NEW STATES FOR DYNAMIC DATA
+  // ===========================================================
+  const [plans, setPlans] = useState([]);
+  const [planTypes, setPlanTypes] = useState([]);
+  const [filteredPlans, setFilteredPlans] = useState([]);
+  const [loadingPlans, setLoadingPlans] = useState(true);
+
+  // ===========================================================
+  // ⭐ FETCH PLANS API
+  // ===========================================================
+  useEffect(() => {
+    const fetchPlans = async () => {
+      try {
+        const response = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/plans");
+        const data = await response.json();
+
+        if (data.success && Array.isArray(data.data)) {
+          setPlans(data.data);
+
+          // Extract unique plan types
+          const uniqueTypes = [...new Set(data.data.map((p) => p.plan_type))];
+          setPlanTypes(uniqueTypes);
+        }
+      } catch (error) {
+        console.error("Error fetching plans:", error);
+      } finally {
+        setLoadingPlans(false);
+      }
+    };
+
+    fetchPlans();
+  }, []);
+
+  // ===========================================================
+  // ⭐ UPDATED HANDLE CHANGE (ONLY FOR PLAN RESET)
+  // ===========================================================
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
+
+    // When plan changes → update category list
+    if (name === "plan") {
+      const filtered = plans.filter((p) => p.plan_type === value);
+      setFilteredPlans(filtered);
+
+      setFormData({
+        ...formData,
+        plan: value,
+        cat: "", // auto-reset category
+      });
+      return;
+    }
 
     setFormData({
       ...formData,
@@ -44,6 +92,9 @@ const StudentDiscountForm = () => {
     });
   };
 
+  // ===========================================================
+  // (NO CHANGES IN VALIDATE, SUBMIT, STYLING, FIELDS, ETC)
+  // ===========================================================
   const validate = () => {
     let formErrors = {};
 
@@ -77,9 +128,7 @@ const StudentDiscountForm = () => {
     try {
       const bodyData = new FormData();
 
-      // ✅ Static country code always sent
       bodyData.append("countrycode", formData.countrycode);
-
       bodyData.append("fname", formData.fname);
       bodyData.append("email", formData.email);
       bodyData.append("phone", formData.phone);
@@ -96,14 +145,11 @@ const StudentDiscountForm = () => {
         "https://zmapi.zoikomobile.co.uk/api/v1/collage-student-discount-form",
         {
           method: "POST",
-          headers: {
-            "Accept": "application/json", // Important
-          },
+          headers: { Accept: "application/json" },
           body: bodyData,
         }
       );
 
-      // Read raw response first
       const text = await response.text();
       console.log("RAW RESPONSE:", text);
 
@@ -112,7 +158,7 @@ const StudentDiscountForm = () => {
         result = JSON.parse(text);
       } catch (err) {
         console.error("JSON parse error:", err);
-        alert("Server returned invalid response. Check console.");
+        alert("Server returned invalid response.");
         return;
       }
 
@@ -149,6 +195,7 @@ const StudentDiscountForm = () => {
       <Header />
       <HeadBar text={<>Zoiko Mobile College Student Discount Program Registration Form</>} />
       <style>{`
+        h4 {border-bottom: 1px solid #9a9696; padding-bottom: 20px;}
         .specialPlanForm {
           box-shadow: 3px 4px 19px 14px rgba(0, 0, 0, 0.1) !important;
           border-radius: 15px !important;
@@ -219,7 +266,7 @@ const StudentDiscountForm = () => {
           box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
           outline: none !important;
         }
-        .form-label { font-weight: 500; color: #222; }
+        .form-label { font-weight: 500; color: #222; margin-bottom: .5rem;  }
         .form-control::placeholder { color: #999 !important; }
         .form-select {
           border: 1.5px solid #ccc;
@@ -253,30 +300,6 @@ const StudentDiscountForm = () => {
           background-color: #f8f9fa;
           opacity: 0.8;
           cursor: not-allowed;
-        }
-        .add-more-btn {
-          font-size: 18px;
-          text-decoration: none !important;
-          color: #e91e63;
-        }
-        .add-more-btn:hover {
-          color: #d81b60;
-        }
-        .remove-btn {
-          background: #fff !important;
-          color: #dc3545;
-          border: none;
-          font-size: 14px;
-          padding: 5px 10px;
-          border-radius: 6px;
-        }
-          .remove-btn:hover {
-          color: #8d0e1bff !important;
-          background: #ffffffff;
-          border: none;
-          font-size: 14px;
-          padding: 5px 10px;
-          border-radius: 6px;
         }
       `}</style>
 
@@ -346,7 +369,7 @@ const StudentDiscountForm = () => {
                 {errors.school && <p className="txtred">{errors.school}</p>}
               </Col>
 
-              <Col md={6} className="mt-2">
+              <Col md={6} className="d-grid mt-2">
                 <FormLabel>Year of Study *</FormLabel>
                 <DatePicker
                   selected={formData.yos ? new Date(formData.yos) : null}
@@ -375,32 +398,52 @@ const StudentDiscountForm = () => {
                 {errors.keepnumber && <p className="txtred">{errors.keepnumber}</p>}
               </Col>
 
-              <Col md={4} className="mt-2">
+              
+            
+
+            <Col md={4} className="mt-2">
                 <FormLabel>Select Plan *</FormLabel>
+
+                {/* ⭐ Dynamic Plan List */}
                 <Form.Select name="plan" onChange={handleChange} value={formData.plan}>
                   <option value="">Select</option>
-                  <option value="prepaid">Prepaid</option>
-                  <option value="postpaid">Postpaid</option>
-                  <option value="travel">Travel</option>
-                  <option value="business">Business</option>
+
+                  {loadingPlans && <option>Loading...</option>}
+
+                  {!loadingPlans &&
+                    planTypes.map((type, index) => (
+                      <option value={type} key={index}>
+                        {type.replace("-", " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+                      </option>
+                    ))}
                 </Form.Select>
+
                 {errors.plan && <p className="txtred">{errors.plan}</p>}
               </Col>
 
               <Col md={4} className="mt-2">
                 <FormLabel>Select Category *</FormLabel>
-                <Form.Select name="cat" onChange={handleChange} value={formData.cat}>
+
+                {/* ⭐ Dynamic category based on selected plan */}
+                <Form.Select
+                  name="cat"
+                  onChange={handleChange}
+                  value={formData.cat}
+                  disabled={!formData.plan}
+                >
                   <option value="">Select</option>
-                  <option value="lite">Zoiko Lite</option>
-                  <option value="essential">Zoiko Essential</option>
-                  <option value="unlimited">Zoiko Unlimited One</option>
-                  <option value="plus">Zoiko Unlimited Plus</option>
-                  <option value="premium">Zoiko Premium Unlimited</option>
+
+                  {filteredPlans.map((p) => (
+                    <option value={p.slug} key={p.id}>
+                      {p.title} ({p.currency}
+                        {p.price}/{p.duration_type})
+                    </option>
+                  ))}
                 </Form.Select>
+
                 {errors.cat && <p className="txtred">{errors.cat}</p>}
               </Col>
             </Row>
-
             <Form.Check
               label="I confirm the information provided is accurate."
               name="concent"
