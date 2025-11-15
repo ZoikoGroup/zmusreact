@@ -4,13 +4,22 @@ import { Offcanvas, Button } from "react-bootstrap";
 
 const GetInTouchSidebar = () => {
   const [show, setShow] = useState(false);
+// const openChat = () => {
+//     if (window.Tawk_API) {
+//       window.Tawk_API.maximize(); // Opens chat box
+//     } else {
+//       alert("Chat is loading... please try again in a moment!");
+//     }
+//   };
+
 const openChat = () => {
-    if (window.Tawk_API) {
-      window.Tawk_API.maximize(); // Opens chat box
-    } else {
-      alert("Chat is loading... please try again in a moment!");
-    }
-  };
+  if (window.Tawk_API) {
+    window.Tawk_API.showWidget(); // show widget
+    window.Tawk_API.maximize();   // open chat box
+  } else {
+    alert("Chat is loading... please try again in a moment!");
+  }
+};
   return (
     <>
       {/* Sticky Tab */}
@@ -137,9 +146,8 @@ ease;
           <h5>Information</h5>
           <ul className="list-unstyled">
             <li><a href="#">Returns policy</a></li>
-            <li><a href="#">Store locator</a></li>
             <li><a href="#">Help and support</a></li>
-            <li><a href="#">UK coverage checker</a></li>
+            <li><a href="https://mvnoc.ai/coverage-map">Coverage checker</a></li>
           </ul>
         </Offcanvas.Body>
       </Offcanvas>
