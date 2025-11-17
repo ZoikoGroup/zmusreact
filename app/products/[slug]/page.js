@@ -1,204 +1,273 @@
-"use client"
+"use client";
+
 import Header from "../../components/Header";
 import HeadBar from "../../components/HeadBar";
 import Footer from "../../components/Footer";
 import { Button, Col, Container, Row, Card } from "react-bootstrap";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useParams } from "next/navigation";
-import data from "../../products/phonedata.json";
-import Image from "next/image";
-import { useState } from "react";
+import { useRouter, useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default function ProductDetail () {
-    const router = useRouter();
-    const params = useParams();
-    const paramUrl = params?.slug;
-    const [selectedColor, setSelectedColor] = useState(null);
-    const [selectedStorage, setSelectedStorage] = useState(null);
-    const [selectedCondition, setSelectedCondition] = useState(null);
+export default function ProductDetail() {
+  const router = useRouter();
+  const params = useParams();
+  const slug = params?.slug;
 
-    const handleGoToCheckout = (item) => {
-        // prepare cart item with selected options (fallback to first available)
-        // Normalize cart item to match checkout's expected shape
-        const numericPrice = (() => {
-            if (typeof item.price === 'number') return item.price;
-            if (typeof item.price === 'string') {
-                // strip currency symbols and commas
-                const n = parseFloat(item.price.replace(/[^0-9.-]+/g, ""));
-                return Number.isFinite(n) ? n : 0;
-            }
-            return 0;
-        })();
+  const [product, setProduct] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [relatedLoading, setRelatedLoading] = useState(false);
 
-        const cartItem = {
-            // original product fields
-            id: item.id,
-            slug: item.slug,
-            name: item.name,
-            price: item.price,
-            image: item.image,
-            color: selectedColor || (item.color && item.color[0]) || null,
-            storage: selectedStorage || (item.storage && item.storage[0]) || null,
-            condition: selectedCondition || (item.condition && item.condition[0]) || null,
-            qty: 1,
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedStorage, setSelectedStorage] = useState(null);
+  const [selectedCondition, setSelectedCondition] = useState(null);
 
-            // checkout-compatible fields
-            planId: item.id,
-            planSlug: item.slug,
-            planTitle: item.name,
-            planPrice: numericPrice,
-            planDuration: "1",
-            lineType: "device",
-            simType: "N/A",
-            formData: {
-                priceQty: 1,
-                price: numericPrice,
-            },
-        };
+  /* ----------------------------------------
+        FETCH PRODUCT BY SLUG
+  ----------------------------------------- */
+  useEffect(() => {
+    if (!slug) return;
 
-        // simple validation: require storage and condition (you can adjust rules)
-        if (!cartItem.storage || !cartItem.condition) {
-            alert('Please select storage and condition before checkout.');
-            return;
+    setLoading(true);
+    fetch(`https://zmapi.zoikomobile.co.uk/api/v1/products/slug/${slug}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.success && data.product) {
+          setProduct(data.product);
+        } else {
+          setProduct(null);
         }
+      })
+      .catch(() => setProduct(null))
+      .finally(() => setLoading(false));
+  }, [slug]);
 
-        try {
-            console.log('Adding to cart:', cartItem);
-            const existing = JSON.parse(localStorage.getItem('cart')) || [];
-            existing.push(cartItem);
-            localStorage.setItem('cart', JSON.stringify(existing));
-        } catch (e) {
-            // if localStorage unavailable, just set fresh
-            console.log('localStorage unavailable, setting cart fresh');
-            localStorage.setItem('cart', JSON.stringify([cartItem]));
-        }
+  /* ----------------------------------------
+        FETCH RELATED PRODUCTS
+  ----------------------------------------- */
+  useEffect(() => {
+    if (!product?.product_category_id) return;
 
-        // go to checkout page
-        router.push('/checkout');
+    setRelatedLoading(true);
+    fetch(
+      `https://zmapi.zoikomobile.co.uk/api/v1/products/category/1`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const list = data?.products?.products || [];
+        const filtered = list.filter((p) => p.id !== product.id);
+        setRelatedProducts(list);
+      })
+      .catch(() => setRelatedProducts([]))
+      .finally(() => setRelatedLoading(false));
+  }, [product]);
+
+  /* ----------------------------------------
+        ADD TO CART + CHECKOUT
+  ----------------------------------------- */
+  const handleGoToCheckout = () => {
+    if (!product) return;
+
+    const v = product.variants?.[0] || {};
+    const price = parseFloat(v.starting_price || 0);
+
+    if (!selectedColor || !selectedStorage || !selectedCondition) {
+      alert("Please select Color, Storage and Condition.");
+      return;
     }
 
-    return (
-        <>
-        {/* <TopHeader /> */}
-        <Header />
-        <HeadBar text={<>Discover Premium Quality Refurbished Smartphones @ Zoiko Mobile</>} />
-        <Container fluid className="bglite">
-            {data.filter(item => item.slug === paramUrl).map((item) => {
-                return(
-                    <Container key={item.id} className="py-4">
-                        <Row>
-                            <Col md={6} sm={12} xs={12} className="p-4 text-center">
-                                <Image src={item.image} alt={item.name} width={300} height={400} style={{width:'70%',height:'auto'}} />
-                            </Col>
-                            <Col md={6} sm={12} xs={12} className="p-4">
-                                <h2 className="green24bold">{item.name}</h2>
-                                <div className="midbigred">{item.price}</div>
-                                <hr />
-                                <h4 className="pt-3">Color</h4>
-                                <div>{item.color.map((name, index) => (
-                                    <button
-                                        key={index}
-                                        className="checkoutlistcolor"
-                                        onClick={() => setSelectedColor(name)}
-                                        style={{
-                                            color: name,
-                                            border: selectedColor === name ? '2px solid black' : '1px solid gray',
-                                            background: 'none',
-                                            cursor: 'pointer',
-                                            padding: '5px 10px',
-                                            borderRadius: '4px',
-                                            marginRight: '8px'
-                                        }}
-                                    >
-                                        <i className="bi bi-circle-fill"></i>
-                                    </button>
-                                ))}</div>
-                                <h4 className="pt-3">Storage</h4>
-                                <div className="pb-3">{item.storage.map((name, index) => (
-                                    <button
-                                        key={index}
-                                        className="checkoutliststorage"
-                                        onClick={() => setSelectedStorage(name)}
-                                        style={{
-                                            border: selectedStorage === name ? '2px solid #dc3545' : '1px solid #ccc',
-                                            background: selectedStorage === name ? '#f8f9fa' : 'white',
-                                            padding: '8px 12px',
-                                            cursor: 'pointer',
-                                            borderRadius: '4px',
-                                            marginRight: '8px',
-                                            marginBottom: '8px'
-                                        }}
-                                    >
-                                        {name}
-                                    </button>
-                                ))}</div>
-                                <h4 className="pt-3">Condition</h4>
-                                <div className="pb-4">{item.condition.map((name, index) => (
-                                    <button
-                                        key={index}
-                                        className="checkoutliststorage"
-                                        onClick={() => setSelectedCondition(name)}
-                                        style={{
-                                            border: selectedCondition === name ? '2px solid #dc3545' : '1px solid #ccc',
-                                            background: selectedCondition === name ? '#f8f9fa' : 'white',
-                                            padding: '8px 12px',
-                                            cursor: 'pointer',
-                                            borderRadius: '4px',
-                                            marginRight: '8px',
-                                            marginBottom: '8px'
-                                        }}
-                                    >
-                                        {name}
-                                    </button>
-                                ))}</div>
-                                <Button variant="outline-danger" size="lg" onClick={() => handleGoToCheckout(item)}>Go To Checkout</Button>
-                            </Col>
-                        </Row>
-                    </Container>
-                );
-            })}
+    const cartItem = {
+      id: product.id,
+      slug: product.slug,
+      name: product.name,
+      image: `https://zmapi.zoikomobile.co.uk/storage/${product.image_url}`,
+      color: selectedColor,
+      storage: selectedStorage,
+      condition: selectedCondition,
+      qty: 1,
 
-            <Container className="p-5">
-                <h3 className="green24bold">You may also like</h3>
-                <Row>
-                    {data.map((item) => (
-                        <Col key={item.id} md={4}>
-                            <Card className="p-4 mb-4" style={{height:'430px'}}>
-                                <h3 dangerouslySetInnerHTML={{ __html: item.name }} className="green24bold" />
-                                <Row>
-                                    <Col md={6} sm={6} xs={6}>
-                                        Starting From:<p dangerouslySetInnerHTML={{ __html: item.price }} className="txtred" />
-                                    </Col>
-                                    <Col md={6} sm={6} xs={6}>
-                                        Device condition:<p dangerouslySetInnerHTML={{ __html: item.condition }} />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col md={6} sm={6} xs={6}>
-                                        <Image src={item.image} alt={item.name} width={130} height={180} />
-                                    </Col>
-                                    <Col md={6} sm={6} xs={6}>
-                                        Available colors:<br />
-                                        {item.color.map((index) => (
-                                            <span key={index} style={{color:`${index}`}}><i className="bi bi-circle-fill"></i> </span>
-                                        ))}<br />
-                                        Internal Storage:<br />
-                                        {item.storage.map((index) => (
-                                            <span key={index}>{index} </span>
-                                        ))}<br />
-                                        <p dangerouslySetInnerHTML={{ __html: item.quality }} />
-                                    </Col>
-                                </Row>
-                                <div className="mt-4">
-                                    <Button variant="outline-danger" href={`/products/${item.slug}`}>View details</Button>&nbsp;<Button variant="outline-danger" href={`/products/${item.slug}`}>Buy Now</Button>
-                                </div>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
+      planId: product.id,
+      planSlug: product.slug,
+      planTitle: product.name,
+      planPrice: price,
+      lineType: "device",
+      simType: "N/A",
+      formData: { priceQty: 1, price },
+    };
+
+    const existing = JSON.parse(localStorage.getItem("cart") || "[]");
+    existing.push(cartItem);
+    localStorage.setItem("cart", JSON.stringify(existing));
+
+    router.push("/checkout");
+  };
+
+  if (loading) return <div className="text-center p-5">Loading product...</div>;
+  if (!product) return <div className="text-center p-5">Product not found</div>;
+
+  const variant = product.variants?.[0] || {};
+
+  return (
+    <>
+      <Header />
+      <HeadBar text={<>Discover Premium Quality Refurbished Smartphones @ Zoiko Mobile</>} />
+
+      <Container fluid className="bglite">
+        <Container className="py-4">
+          <Row>
+            {/* IMAGE SECTION */}
+            <Col md={6} sm={12} className="p-4 text-center">
+              <img
+                src={`https://zmapi.zoikomobile.co.uk/storage/${product.image_url}`}
+                alt={product.name}
+                style={{ width: "70%", objectFit: "contain" }}
+              />
+            </Col>
+
+            {/* PRODUCT DETAILS */}
+            <Col md={6} sm={12} className="p-4">
+              <h2 className="green24bold">{product.name}</h2>
+              <div className="midbigred">${variant.starting_price || "0.00"}</div>
+              <hr />
+
+              {/* COLORS */}
+              <h4 className="pt-3">Color</h4>
+              <div>
+                {(variant.colors || []).map((color, i) => (
+                  <span
+                    key={i}
+                    onClick={() => setSelectedColor(color)}
+                    style={{
+                      display: "inline-block",
+                      width: 30,
+                      height: 30,
+                      borderRadius: "50%",
+                      background: color,
+                      border: selectedColor === color ? "3px solid #000" : "2px solid #ccc",
+                      marginRight: 10,
+                      cursor: "pointer",
+                    }}
+                  ></span>
+                ))}
+              </div>
+
+              {/* STORAGE */}
+              <h4 className="pt-3">Storage</h4>
+              <div className="pb-3">
+                {(variant.storages || []).map((s, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedStorage(s)}
+                    className={`btn me-2 mb-2 ${
+                      selectedStorage === s ? "btn-danger" : "btn-outline-secondary"
+                    }`}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+
+              {/* CONDITION */}
+              <h4 className="pt-3">Condition</h4>
+              <div className="pb-4">
+                {(variant.device_conditions || []).map((c, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedCondition(c)}
+                    className={`btn me-2 mb-2 ${
+                      selectedCondition === c ? "btn-danger" : "btn-outline-secondary"
+                    }`}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
+
+              <Button variant="danger" size="lg" onClick={handleGoToCheckout}>
+                Go To Checkout
+              </Button>
+            </Col>
+          </Row>
         </Container>
-        <Footer />
-        </>
-    );
+
+        {/* RELATED PRODUCTS */}
+        <Container className="p-5">
+          <h3 className="green24bold">You may also like</h3>
+
+          {relatedLoading ? (
+            <div>Loading suggestions...</div>
+          ) : (
+            <Row>
+              {relatedProducts.map((p) => {
+                const v = p.variants?.[0] || {};
+
+                return (
+                  <Col md={4} className="mb-4" key={p.id}>
+                    <Card className="p-3 h-100 shadow-sm">
+                      <div onClick={() => router.push(`/products/${p.slug}`)} style={{ cursor: "pointer" }}>
+                        <img
+                          src={`https://zmapi.zoikomobile.co.uk/storage/${p.image_url}`}
+                          alt={p.name}
+                          className="img-fluid"
+                          style={{ height: 180, width: "100%", objectFit: "cover" }}
+                        />
+
+                        <h5 className="mt-3">{p.name}</h5>
+                      </div>
+
+                      <Row className="mt-2">
+                        <Col md={6}>
+                          <div className="text-muted small">Starting From:</div>
+                          <div className="txtred fw-bold">${v.starting_price}</div>
+                        </Col>
+                        <Col md={6}>
+                          <div className="text-muted small">Condition:</div>
+                          <div>{(v.device_conditions || []).join(", ")}</div>
+                        </Col>
+                      </Row>
+
+                      {/* COLOR CIRCLES */}
+                      <div className="mt-2">
+                        {(v.colors || []).map((color, ci) => (
+                          <span
+                            key={ci}
+                            style={{
+                              display: "inline-block",
+                              width: 16,
+                              height: 16,
+                              borderRadius: "50%",
+                              background: color,
+                              marginRight: 6,
+                            }}
+                          ></span>
+                        ))}
+                      </div>
+
+                      <div className="mt-3">
+                        <Button
+                          variant="outline-danger"
+                          size="sm"
+                          onClick={() => router.push(`/products/${p.slug}`)}
+                        >
+                          View details
+                        </Button>{" "}
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          onClick={() => router.push(`/products/${p.slug}`)}
+                        >
+                          Buy Now
+                        </Button>
+                      </div>
+                    </Card>
+                  </Col>
+                );
+              })}
+            </Row>
+          )}
+        </Container>
+      </Container>
+
+      <Footer />
+    </>
+  );
 }
