@@ -178,7 +178,7 @@ const MilitaryVeterans = () => {
                     <p>At Zoiko Mobile, we are committed to keeping you connected with those who matter most. Join today and discover why so many military families trust Zoiko Mobile as their wireless provider of choice.</p>
                 </Col>
                 <Col md={3} sm={12} xs={12}>
-                    <Button variant="danger" size="lg" href="#">Register Now</Button>
+                    <Button variant="danger" size="lg" href="/military-veterans-form">Register Now</Button>
                 </Col>
             </Row>
         </Container>
