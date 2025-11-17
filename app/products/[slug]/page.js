@@ -3,14 +3,79 @@ import Header from "../../components/Header";
 import HeadBar from "../../components/HeadBar";
 import Footer from "../../components/Footer";
 import { Button, Col, Container, Row, Card } from "react-bootstrap";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import data from "../../products/phonedata.json";
 import Image from "next/image";
-import { use } from "react";
+import { useState } from "react";
 
-export default function ProductDetail ({ params }) {
+export default function ProductDetail () {
     const router = useRouter();
-    const paramUrl = use(params).slug;
+    const params = useParams();
+    const paramUrl = params?.slug;
+    const [selectedColor, setSelectedColor] = useState(null);
+    const [selectedStorage, setSelectedStorage] = useState(null);
+    const [selectedCondition, setSelectedCondition] = useState(null);
+
+    const handleGoToCheckout = (item) => {
+        // prepare cart item with selected options (fallback to first available)
+        // Normalize cart item to match checkout's expected shape
+        const numericPrice = (() => {
+            if (typeof item.price === 'number') return item.price;
+            if (typeof item.price === 'string') {
+                // strip currency symbols and commas
+                const n = parseFloat(item.price.replace(/[^0-9.-]+/g, ""));
+                return Number.isFinite(n) ? n : 0;
+            }
+            return 0;
+        })();
+
+        const cartItem = {
+            // original product fields
+            id: item.id,
+            slug: item.slug,
+            name: item.name,
+            price: item.price,
+            image: item.image,
+            color: selectedColor || (item.color && item.color[0]) || null,
+            storage: selectedStorage || (item.storage && item.storage[0]) || null,
+            condition: selectedCondition || (item.condition && item.condition[0]) || null,
+            qty: 1,
+
+            // checkout-compatible fields
+            planId: item.id,
+            planSlug: item.slug,
+            planTitle: item.name,
+            planPrice: numericPrice,
+            planDuration: "1",
+            lineType: "device",
+            simType: "N/A",
+            formData: {
+                priceQty: 1,
+                price: numericPrice,
+            },
+        };
+
+        // simple validation: require storage and condition (you can adjust rules)
+        if (!cartItem.storage || !cartItem.condition) {
+            alert('Please select storage and condition before checkout.');
+            return;
+        }
+
+        try {
+            console.log('Adding to cart:', cartItem);
+            const existing = JSON.parse(localStorage.getItem('cart')) || [];
+            existing.push(cartItem);
+            localStorage.setItem('cart', JSON.stringify(existing));
+        } catch (e) {
+            // if localStorage unavailable, just set fresh
+            console.log('localStorage unavailable, setting cart fresh');
+            localStorage.setItem('cart', JSON.stringify([cartItem]));
+        }
+
+        // go to checkout page
+        router.push('/checkout');
+    }
 
     return (
         <>
@@ -31,17 +96,62 @@ export default function ProductDetail ({ params }) {
                                 <hr />
                                 <h4 className="pt-3">Color</h4>
                                 <div>{item.color.map((name, index) => (
-                                    <li className="checkoutlistcolor" key={index} style={{color:`${name}`}}><i className="bi bi-circle-fill"></i></li>
+                                    <button
+                                        key={index}
+                                        className="checkoutlistcolor"
+                                        onClick={() => setSelectedColor(name)}
+                                        style={{
+                                            color: name,
+                                            border: selectedColor === name ? '2px solid black' : '1px solid gray',
+                                            background: 'none',
+                                            cursor: 'pointer',
+                                            padding: '5px 10px',
+                                            borderRadius: '4px',
+                                            marginRight: '8px'
+                                        }}
+                                    >
+                                        <i className="bi bi-circle-fill"></i>
+                                    </button>
                                 ))}</div>
                                 <h4 className="pt-3">Storage</h4>
                                 <div className="pb-3">{item.storage.map((name, index) => (
-                                    <li className="checkoutliststorage" key={index}>{name}</li>
+                                    <button
+                                        key={index}
+                                        className="checkoutliststorage"
+                                        onClick={() => setSelectedStorage(name)}
+                                        style={{
+                                            border: selectedStorage === name ? '2px solid #dc3545' : '1px solid #ccc',
+                                            background: selectedStorage === name ? '#f8f9fa' : 'white',
+                                            padding: '8px 12px',
+                                            cursor: 'pointer',
+                                            borderRadius: '4px',
+                                            marginRight: '8px',
+                                            marginBottom: '8px'
+                                        }}
+                                    >
+                                        {name}
+                                    </button>
                                 ))}</div>
                                 <h4 className="pt-3">Condition</h4>
                                 <div className="pb-4">{item.condition.map((name, index) => (
-                                    <li className="checkoutliststorage" key={index}>{name}</li>
+                                    <button
+                                        key={index}
+                                        className="checkoutliststorage"
+                                        onClick={() => setSelectedCondition(name)}
+                                        style={{
+                                            border: selectedCondition === name ? '2px solid #dc3545' : '1px solid #ccc',
+                                            background: selectedCondition === name ? '#f8f9fa' : 'white',
+                                            padding: '8px 12px',
+                                            cursor: 'pointer',
+                                            borderRadius: '4px',
+                                            marginRight: '8px',
+                                            marginBottom: '8px'
+                                        }}
+                                    >
+                                        {name}
+                                    </button>
                                 ))}</div>
-                                <Button variant="outline-danger" href="#" size="lg">Go To Checkout</Button>
+                                <Button variant="outline-danger" size="lg" onClick={() => handleGoToCheckout(item)}>Go To Checkout</Button>
                             </Col>
                         </Row>
                     </Container>
