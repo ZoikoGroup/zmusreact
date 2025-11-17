@@ -11,7 +11,7 @@ const HomeBanner = () => {
     return (
         <>
         <HeadBar text={<>Affordable Plans | No Credit Checks | No Hidden Fees | Unlimited Everything | Reliable Nationwide Coverage</>} />
-        <Carousel controls={false} indicators={true}>
+        <Carousel controls={false} indicators={true}  className="homeBanner">
             <Carousel.Item className="bannerItem banner1">
                             
                             <Carousel.Caption className="bannerContent">
