@@ -715,6 +715,7 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
+        <script id="bp-wa-script" src="https://cdn.botpenguin.com/whatsapp-widget.js">1d7581d3-034a-4279-a26b-c3cac2106314</script>
       </head>
 
       <body className={roboto.className}>
