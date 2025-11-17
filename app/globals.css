@@ -1533,3 +1533,203 @@ body {
     background-position: center center;
     background-size: cover;
 }
+
+
+@media (max-width: 768px) {
+  .homeBanner .bannerItem{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vw;
+    top: 0 !important;
+  }
+  .homeBanner .banner9{
+    background-image: url(/img/home-banner/Music-Hub-banner-mobile.png) !important;
+  }
+
+  .homeBanner .banner8{
+    background-image: url(/img/home-banner/Animal-Charities-Banner-mobile.png) !important;
+  }
+  .homeBanner .banner7{
+    background-image: url(/img/home-banner/Family-Plans-Banner-mobile.png) !important;
+  }
+  .homeBanner .banner6{
+    background-image: url(/img/home-banner/banner-student-mobile.png) !important;
+  }
+  .homeBanner .banner5{
+    background-image: url(/img/home-banner/Military-Veterans-banner-mobile.png) !important;
+  }
+  .homeBanner .banner4{
+    background-image: url(/img/home-banner/Postal-Workers-banner-mobile.png) !important;
+  }
+  .homeBanner .banner3{
+    background-image: url(/img/home-banner/multiple-plans-banner-mobile.png) !important;
+  }
+
+  .homeBanner .banner2{
+    background-image: url(/img/home-banner/smartphone-deals-mobile-banner.png) !important;
+  }
+  .homeBanner .banner1{
+    background-image: url(/img/home-banner/Unbeatable-VALUE-mobile-banner.png) !important;
+  }
+  .homeBanner ul{
+    text-align: center;
+    list-style: none;
+  }
+  .homeBannerBtn{
+
+      justify-content: center !important;
+  }
+
+  .homeBanner .bannerContent{
+      /* padding-top: 6vw;             */
+      bottom: unset !important;
+  }
+
+  .homeBanner .banner6 .bannerContent h4{
+      font-size: 4.5vw;
+      text-align: center;
+  }
+
+  .homeBanner .bannerContent h1{
+      font-size: 4.5vw;
+      text-align: center;
+  }
+  .homeBanner .bannerContent h2{
+      font-size: 3vw;
+      text-align: center;
+  }
+  .homeBanner .bannerContent p{
+      font-size: 2vw;
+      text-align: center;
+      padding-bottom: 1vw;
+      margin-bottom: 0vw !important;
+  }
+
+  .homeBanner .banner4 .bannerContent p{
+      font-size: 4vw !important;
+      line-height: 7vw !important;
+  }
+
+  .homeBanner .bannerContent a{
+      width: 30vw;
+      padding: 2vw;
+      font-size: 2.5vw;
+  }
+
+  .homeBanner .bannerContent button {
+      display: flex;
+  }
+           
+           
+}
+@media (min-width: 769px) {
+  .homeBanner .bannerItem{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 35vw;
+    top: 0 !important;
+  }
+  .homeBanner .banner9{
+    background-image: url(/img/home-banner/Music-Hub-banner.png) !important;
+  }
+
+  .homeBanner .banner8{
+    background-image: url(/img/home-banner/Animal-Charities-Banner.png) !important;
+  }
+
+  .homeBanner .banner7{
+    background-image: url(/img/home-banner/Family-Plans-Banner.png) !important;
+  }
+  .homeBanner .banner6{
+    background-image: url(/img/home-banner/banner-student.png) !important;
+  }
+  .homeBanner .banner5{
+    background-image: url(/img/home-banner/Military-Veterans-banner.png) !important;
+  }
+  .homeBanner .banner4{
+    background-image: url(/img/home-banner/Postal-Workers-banner.png) !important;
+  }
+  .homeBanner .banner3{
+    background-image: url(/img/home-banner/multiple-plans-banner.png) !important;
+  }
+  .homeBanner .banner2{
+    background-image: url(/img/home-banner/smartphone-deals-banner.png) !important;
+  }
+  .homeBanner .banner1{
+    background-image: url(/img/home-banner/Unbeatable-VALUE-banner.png) !important;
+  }
+
+
+  .homeBanner .banner6 .bannerContent{
+    padding-top:7.25vw !important
+  }
+
+   .homeBanner .banner6 .bannerContent p{
+    line-height:6vw !important
+  }
+  .homeBanner .banner5 .bannerContent{
+    padding-top:7vw !important
+  }
+
+   .homeBanner .banner4 .bannerContent{
+            left: 13% !important;
+        padding-top: 6vw !important;
+  }
+
+  .homeBanner .banner4 .bannerContent p{
+      font-size: 4vw !important;
+      line-height: 7vw !important;
+  }
+
+  .homeBanner .banner3 .bannerContent h2{
+    width: 50%;
+    padding-top: 3vw;
+    padding-bottom: 3vw;
+  }
+
+  .homeBanner .banner3 .bannerContent{
+
+    padding-top: 7.25vw !important;
+  }
+
+  .homeBanner .banner2 .bannerContent{
+    left: 15% !important;
+        padding-top: 8.25vw !important;
+  }
+  .homeBanner .bannerContent{
+    bottom: unset !important;
+    left: 10% !important;
+    padding-top: 4.25vw !important;
+  }
+  .homeBanner .banner1 .bannerContent{
+    left: 25% !important;
+    padding-top: 8.25vw !important;
+  }
+  .homeBanner .banner7 .bannerContent {
+    padding-top: 3.25rem !important;
+    left: 15% !important;
+  }
+
+  .homeBanner .banner7 .bannerContent h1{
+    width: 30%;
+  }
+  .homeBanner .bannerContent h1{
+      font-size: 2.5vw;
+  }
+  .homeBanner .bannerContent h2{
+      font-size: 1.75vw;
+  }
+  .homeBanner .bannerContent p{
+      font-size: 1.25vw;
+      width: 45%;
+  }
+  .homeBanner .bannerContent a{
+      width: 13vw;
+      padding: 1vw;
+      font-size: 1.5vw;
+      
+  }
+
+}
