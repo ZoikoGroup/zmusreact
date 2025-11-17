@@ -158,7 +158,7 @@ const PostalWorkers = () => {
                     </Col>
                     <Col md={9} sm={12} xs={12}>
                         <p className="body22">Take advantage of this special offer and get a fantastic deal on mobile service for you and your loved ones. With Zoiko Mobile, you&apos;ll enjoy reliable coverage, affordable pricing, and the flexibility you need.</p>
-                        <Button variant="danger" href="#">Browsw Plans Now</Button>
+                        <Button variant="danger" href="/all-plans">Browsw Plans Now</Button>
                     </Col>
                 </Row>
                 <h2 className="text-center mt-5">Terms and Conditions</h2>
@@ -178,7 +178,7 @@ const PostalWorkers = () => {
             <Container className="py-5 w-50">
                 <Row className="align-items-center">
                     <Col md={3} sm={12} xs={12}>
-                        <Button variant="danger" href="#">Sign up today</Button>
+                        <Button variant="danger" href="/postal-service-workers-form">Sign up today</Button>
                     </Col>
                     <Col md={9} sm={12} xs={12}>
                         <p>At Zoiko Mobile, we&apos;re proud to support U.S. Postal Service Workers and their families. We look forward to keeping you connected with great service and unbeatable prices.</p>
