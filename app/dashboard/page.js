@@ -9,9 +9,11 @@ import beQuick from "../utils/dasdbeQuickApi";
 import Link from "next/link";
 import { Modal, Button, Form, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useRouter } from "next/navigation"; 
 
 export default function DashboardPage() {
   // --- Dashboard states (BeQuick + UI) ---
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [subscriber, setSubscriber] = useState(null);
   const [subscriberNotFound, setSubscriberNotFound] = useState(false);
@@ -275,6 +277,7 @@ export default function DashboardPage() {
 
   // ---------------- Load Dashboard + Cards ----------------
   useEffect(() => {
+    
     (async () => {
       setLoading(true);
       try {

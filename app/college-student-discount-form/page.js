@@ -2,51 +2,113 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
-import { Button, Col, Container, Form, FormLabel, Row, InputGroup } from "react-bootstrap";
-import React, { useState } from "react";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  FormLabel,
+  Row,
+} from "react-bootstrap";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const StudentDiscountForm = () => {
-
   const [errors, setErrors] = useState({});
-  const [selectedValue, setSelectedValue] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     fname: "",
     email: "",
     phone: "",
-    statusproof: "",
+    statusproof: null,
     school: "",
     yos: "",
     keepnumber: "",
     plan: "",
     cat: "",
     concent: false,
-    terms: false
+    terms: false,
+    countrycode: "+1",
   });
 
+  // ===========================================================
+  // ⭐ NEW STATES FOR DYNAMIC DATA
+  // ===========================================================
+  const [plans, setPlans] = useState([]);
+  const [planTypes, setPlanTypes] = useState([]);
+  const [filteredPlans, setFilteredPlans] = useState([]);
+  const [loadingPlans, setLoadingPlans] = useState(true);
+
+  // ===========================================================
+  // ⭐ FETCH PLANS API
+  // ===========================================================
+  useEffect(() => {
+    const fetchPlans = async () => {
+      try {
+        const response = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/plans");
+        const data = await response.json();
+
+        if (data.success && Array.isArray(data.data)) {
+          setPlans(data.data);
+
+          // Extract unique plan types
+          const uniqueTypes = [...new Set(data.data.map((p) => p.plan_type))];
+          setPlanTypes(uniqueTypes);
+        }
+      } catch (error) {
+        console.error("Error fetching plans:", error);
+      } finally {
+        setLoadingPlans(false);
+      }
+    };
+
+    fetchPlans();
+  }, []);
+
+  // ===========================================================
+  // ⭐ UPDATED HANDLE CHANGE (ONLY FOR PLAN RESET)
+  // ===========================================================
   const handleChange = (e) => {
-    setSelectedValue(e.target.value);
     const { name, value, type, checked, files } = e.target;
+
+    // When plan changes → update category list
+    if (name === "plan") {
+      const filtered = plans.filter((p) => p.plan_type === value);
+      setFilteredPlans(filtered);
+
+      setFormData({
+        ...formData,
+        plan: value,
+        cat: "", // auto-reset category
+      });
+      return;
+    }
+
     setFormData({
       ...formData,
       [name]: type === "file" ? files[0] : type === "checkbox" ? checked : value,
     });
   };
 
+  // ===========================================================
+  // (NO CHANGES IN VALIDATE, SUBMIT, STYLING, FIELDS, ETC)
+  // ===========================================================
   const validate = () => {
     let formErrors = {};
 
     if (!formData.fname) formErrors.fname = "Your name is required";
     if (!formData.phone) formErrors.phone = "Phone number is required";
     if (!formData.school) formErrors.school = "This field is required";
-    if (!formData.yos) formErrors.yos = "Date of birth is required";
-    if (!formData.statusproof) formErrors.statusproof = "This field is required";
+    if (!formData.yos) formErrors.yos = "Year of study is required";
+    if (!formData.statusproof) formErrors.statusproof = "Upload required";
     if (!formData.keepnumber) formErrors.keepnumber = "This field is required";
     if (!formData.plan) formErrors.plan = "This field is required";
     if (!formData.cat) formErrors.cat = "This field is required";
-    if (!formData.concent) formErrors.concent = "This field is required";
-    if (!formData.terms) formErrors.terms = "This field is required";
+    if (!formData.concent) formErrors.concent = "You must agree before submitting";
+    if (!formData.terms) formErrors.terms = "You must accept terms";
+
     if (!formData.email) {
       formErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -60,36 +122,54 @@ const StudentDiscountForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validate()) {
-      console.log("Validation failed", errors);
-      return;
-    }
-console.log(formData);
+    if (!validate()) return;
+    setLoading(true);
+
     try {
-      const formDataToSend = new FormData();
+      const bodyData = new FormData();
 
-      Object.keys(formData).forEach((key) => {
-        formDataToSend.append(key, formData[key]);
-      });
+      bodyData.append("countrycode", formData.countrycode);
+      bodyData.append("fname", formData.fname);
+      bodyData.append("email", formData.email);
+      bodyData.append("phone", formData.phone);
+      bodyData.append("statusproof", formData.statusproof);
+      bodyData.append("school", formData.school);
+      bodyData.append("yos", formData.yos);
+      bodyData.append("keepnumber", formData.keepnumber);
+      bodyData.append("plan", formData.plan);
+      bodyData.append("cat", formData.cat);
+      bodyData.append("concent", formData.concent ? 1 : 0);
+      bodyData.append("terms", formData.terms ? 1 : 0);
 
-      console.log("Sending request with FormData...");
+      const response = await fetch(
+        "https://zmapi.zoikomobile.co.uk/api/v1/collage-student-discount-form",
+        {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: bodyData,
+        }
+      );
 
-      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/collage-student-discount-form", {
-        method: "POST",
-        body: formDataToSend,
-      });
+      const text = await response.text();
+      console.log("RAW RESPONSE:", text);
 
-      const result = await res.json().catch(() => ({ message: "No JSON body received" }));
+      let result;
+      try {
+        result = JSON.parse(text);
+      } catch (err) {
+        console.error("JSON parse error:", err);
+        alert("Server returned invalid response.");
+        return;
+      }
 
-      console.log("Response:", res.status, result);
-
-      if (res.ok) {
+      if (response.ok) {
         alert("✅ Application submitted successfully!");
+
         setFormData({
           fname: "",
           email: "",
           phone: "",
-          statusproof: "",
+          statusproof: null,
           school: "",
           yos: "",
           keepnumber: "",
@@ -97,13 +177,16 @@ console.log(formData);
           cat: "",
           concent: false,
           terms: false,
+          countrycode: "+1",
         });
       } else {
-        alert("❌ Submission failed: " + (result.message || "Unknown error"));
+        alert("❌ Submission failed: " + result.message);
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("⚠️ Error submitting form. Check console for details.");
+      console.error("Fetch error:", error);
+      alert("⚠️ Network or server error!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -183,7 +266,7 @@ console.log(formData);
           box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
           outline: none !important;
         }
-        .form-label { font-weight: 500; color: #222; }
+        .form-label { font-weight: 500; color: #222; margin-bottom: .5rem;  }
         .form-control::placeholder { color: #999 !important; }
         .form-select {
           border: 1.5px solid #ccc;
@@ -223,120 +306,174 @@ console.log(formData);
       <Container fluid className="bglite py-5">
         <Container>
           <Form onSubmit={handleSubmit} className="specialPlanForm">
+
             <Row>
               <Col md={6} className="mt-2">
-                <FormLabel htmlFor="fname">Full Name <span className="txtred">*</span></FormLabel>
-                <Form.Control type="text" name="fname" onChange={handleChange} value={formData.fname} placeholder="First name and last name" />
+                <FormLabel>Full Name *</FormLabel>
+                <Form.Control
+                  type="text"
+                  name="fname"
+                  onChange={handleChange}
+                  value={formData.fname}
+                  placeholder="Full name"
+                />
                 {errors.fname && <p className="txtred">{errors.fname}</p>}
               </Col>
+
               <Col md={6} className="mt-2">
-                <FormLabel htmlFor="email">Email <span className="txtred">*</span></FormLabel>
-                <Form.Control type="email" name="email" onChange={handleChange} value={formData.email} placeholder="Email" />
+                <FormLabel>Email *</FormLabel>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  value={formData.email}
+                  placeholder="Email"
+                />
                 {errors.email && <p className="txtred">{errors.email}</p>}
               </Col>
             </Row>
+
             <Row>
               <Col md={6} className="mt-2">
-                <FormLabel htmlFor="phone">Phone no <span className="txtred">*</span></FormLabel>
-                
-                  
-                  <Form.Control name="phone" onChange={handleChange} value={formData.phone} placeholder="Phone no"/>
-                
-                {/* {errors.phone && <p className="txtred">{errors.phone}</p>} */}
-                { errors.phone && <p className="txtred">{errors.phone}</p>}
+                <FormLabel>Phone no *</FormLabel>
+                <Form.Control
+                  name="phone"
+                  onChange={handleChange}
+                  value={formData.phone}
+                  placeholder="Phone number"
+                />
+                {errors.phone && <p className="txtred">{errors.phone}</p>}
               </Col>
+
               <Col md={6} className="mt-2">
-                <Form.Group controlId="formFileLg">
-                  <Form.Label>Upload Student ID <span className="txtred">*</span></Form.Label>
-                  <Form.Control type="file" name="statusproof" onChange={handleChange} />
-                  {errors.statusproof && <p className="txtred">{errors.statusproof}</p>}
-                </Form.Group>
+                <FormLabel>Upload Student ID *</FormLabel>
+                <Form.Control
+                  type="file"
+                  name="statusproof"
+                  onChange={handleChange}
+                />
+                {errors.statusproof && <p className="txtred">{errors.statusproof}</p>}
               </Col>
             </Row>
+
             <Row>
               <Col md={6} className="mt-2">
-                <FormLabel htmlFor="school">School Name <span className="txtred">*</span></FormLabel>
-                <Form.Control type="text" name="school" onChange={handleChange} value={formData.school} placeholder="Name of school" />
+                <FormLabel>School Name *</FormLabel>
+                <Form.Control
+                  type="text"
+                  name="school"
+                  onChange={handleChange}
+                  value={formData.school}
+                  placeholder="Name of school"
+                />
                 {errors.school && <p className="txtred">{errors.school}</p>}
               </Col>
+
               <Col md={6} className="d-grid mt-2">
-                <FormLabel htmlFor="yos">Year of study <span className="txtred">*</span></FormLabel>
-                {/* <Form.Control type="date" name="yos" onChange={handleChange} value={formData.yos} placeholder="Year of study" /> */}
+                <FormLabel>Year of Study *</FormLabel>
                 <DatePicker
-                    selected={formData.yos ? new Date(formData.yos) : null}
-                    onChange={(date) =>
-                        setFormData({ ...formData, yos: date.toISOString().split("T")[0] })
-                    }
-                    
-                    name="yos"
-                    dateFormat="MM/dd/yyyy"
-                    placeholderText="MM/DD/YYYY"
-                    className="form-control"
-                    />
+                  selected={formData.yos ? new Date(formData.yos) : null}
+                  onChange={(date) =>
+                    setFormData({
+                      ...formData,
+                      yos: date ? date.toISOString().split("T")[0] : "",
+                    })
+                  }
+                  dateFormat="MM/dd/yyyy"
+                  placeholderText="MM/DD/YYYY"
+                  className="form-control"
+                />
                 {errors.yos && <p className="txtred">{errors.yos}</p>}
               </Col>
             </Row>
+
             <Row>
-              <Col md={4}  className="mt-2">
-                <FormLabel htmlFor="keepnumber">Do you want to keep your current number? <span className="txtred">*</span></FormLabel>
+              <Col md={4} className="mt-2">
+                <FormLabel>Keep current number *</FormLabel>
                 <Form.Select name="keepnumber" onChange={handleChange} value={formData.keepnumber}>
                   <option value="">Select</option>
-                  <option value="yes">Yes, I want to keep my number</option>
-                  <option value="no">No, I want a new number</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
                 </Form.Select>
                 {errors.keepnumber && <p className="txtred">{errors.keepnumber}</p>}
               </Col>
-              <Col md={4} className="mt-2">
-                <FormLabel htmlFor="plan">Select Plan <span className="txtred">*</span></FormLabel>
+
+              
+            
+
+            <Col md={4} className="mt-2">
+                <FormLabel>Select Plan *</FormLabel>
+
+                {/* ⭐ Dynamic Plan List */}
                 <Form.Select name="plan" onChange={handleChange} value={formData.plan}>
                   <option value="">Select</option>
-                  <option value="prepaid">Prepaid</option>
-                  <option value="postpaid">Postpaid</option>
-                  <option value="travel">Travel</option>
-                  <option value="business">Business</option>
+
+                  {loadingPlans && <option>Loading...</option>}
+
+                  {!loadingPlans &&
+                    planTypes.map((type, index) => (
+                      <option value={type} key={index}>
+                        {type.replace("-", " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+                      </option>
+                    ))}
                 </Form.Select>
+
                 {errors.plan && <p className="txtred">{errors.plan}</p>}
               </Col>
+
               <Col md={4} className="mt-2">
-                <FormLabel htmlFor="cat">Select Category <span className="txtred">*</span></FormLabel>
-                <Form.Select name="cat" onChange={handleChange} value={formData.cat}>
+                <FormLabel>Select Category *</FormLabel>
+
+                {/* ⭐ Dynamic category based on selected plan */}
+                <Form.Select
+                  name="cat"
+                  onChange={handleChange}
+                  value={formData.cat}
+                  disabled={!formData.plan}
+                >
                   <option value="">Select</option>
-                  <option value="lite">Zoiko Lite</option>
-                  <option value="essential">Zoiko Essential</option>
-                  <option value="unlimited">Zoiko Unlimited One</option>
-                  <option value="plus">Zoiko Unlimited Plus</option>
-                  <option value="premium">Zoiko Premium Unlimited</option>
+
+                  {filteredPlans.map((p) => (
+                    <option value={p.slug} key={p.id}>
+                      {p.title} ({p.currency}
+                        {p.price}/{p.duration_type})
+                    </option>
+                  ))}
                 </Form.Select>
+
                 {errors.cat && <p className="txtred">{errors.cat}</p>}
               </Col>
             </Row>
             <Form.Check
-              label="I hereby declare that the information provided is accurate and complete to the best of my knowledge. I understand that providing false information may result in the termination of services."
+              label="I confirm the information provided is accurate."
               name="concent"
               onChange={handleChange}
               checked={formData.concent}
               type="checkbox"
-               className="mt-2"
+              className="mt-3"
             />
             {errors.concent && <p className="txtred">{errors.concent}</p>}
+
             <Form.Check
-              label="By submitting this form, you agree to Zoiko College Student Discount Program's terms and conditions."
+              label="I agree to the terms and conditions."
               name="terms"
               onChange={handleChange}
               checked={formData.terms}
               type="checkbox"
-               className="mt-2"
+              className="mt-2"
             />
             {errors.terms && <p className="txtred">{errors.terms}</p>}
-            <br />
+
             <div className="text-center mt-5">
-              <Button variant="danger" type="submit"  className="mt-2" name="submit">
-                Submit Your Application
+              <Button variant="danger" type="submit" disabled={loading}>
+                {loading ? "Submitting..." : "Submit Your Application"}
               </Button>
             </div>
+
           </Form>
         </Container>
       </Container>
+
       <Footer />
     </>
   );

@@ -36,6 +36,15 @@ const Login = () => {
     }
   }, []);
 
+  useEffect(() => {
+  // Redirect if already logged in
+  const token = localStorage.getItem("zoiko_token");
+  if (token) {
+    window.location.href = "/dashboard";
+  }
+ }, []);
+
+
   // Forgot Password States
   const [showForgot, setShowForgot] = useState(false);
   const [forgotStep, setForgotStep] = useState(1);

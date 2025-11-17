@@ -11,16 +11,25 @@ const HomeBanner = () => {
     return (
         <>
         <HeadBar text={<>Affordable Plans | No Credit Checks | No Hidden Fees | Unlimited Everything | Reliable Nationwide Coverage</>} />
-        <Carousel controls={false} indicators={true} className="homeBanner">
-            <Carousel.Item className="bannerItem banner1">
-                
-                <Carousel.Caption className="bannerContent">
-                    <div className="text-start">
+        <Carousel controls={false} indicators={true}>
+            <Carousel.Item>
+                <img className="d-none d-md-block w-100" src="/img/home-banner/Unbeatable-VALUE-banner.png" alt="Unbeatable Value" />
+                <img className="d-sm-block d-md-none" src="/img/home-banner/Unbeatable-VALUE-mobile-banner.png" alt="Unbeatable Value" />
+                <Carousel.Caption>
+                    <div className="bannertxt text-start d-none d-sm-none d-md-block">
                         <h1 className="verybig txtred">UNBEATABLE VALUE</h1>
                         <h2 className="py-2"><span className="txtred">ZOIKO MOBILE</span><span className="txtblack">: AMAZING BYOD DEALS | SUPPORTING<br />ANIMALS | ENJOYING MUSIC</span></h2>
                         <div className="d-flex flex-nowrap gap-3">
                             <Button href='/all-plans' variant="danger" size="lg">Show plans</Button>
                             <Button href='/about' variant="outline-danger" size="lg">Know More</Button>
+                        </div>
+                    </div>
+                    <div className="d-sm-block d-md-none" style={{marginTop:'-480px'}}>
+                        <h1 className="verybig txtred">UNBEATABLE VALUE</h1>
+                        <h2 className="py-2"><span className="txtred">ZOIKO MOBILE</span><span className="txtblack">: AMAZING BYOD DEALS | SUPPORTING<br />ANIMALS | ENJOYING MUSIC</span></h2>
+                        <div className="d-flex flex-nowrap gap-1">
+                            <Button href='/all-plans' variant="danger">Show plans</Button>
+                            <Button href='/about' variant="outline-danger">Know More</Button>
                         </div>
                     </div>
                 </Carousel.Caption>
