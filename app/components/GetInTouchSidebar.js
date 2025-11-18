@@ -131,7 +131,7 @@ ease;
         <Offcanvas.Body>
           <h5>Live chat</h5>
           <p>Click below to speak to a specialist on live chat.</p>
-          <p><strong>We're open 8am to 10pm, 7 days a week.</strong></p>
+          <p><strong>We're open 7 days a week to serve you!</strong></p>
           <Button variant="danger" onClick={openChat} className="chatNowBtn w-100 mb-4">Chat now</Button>
 
           <hr />
@@ -145,8 +145,8 @@ ease;
 
           <h5>Information</h5>
           <ul className="list-unstyled">
-            <li><a href="#">Returns policy</a></li>
-            <li><a href="#">Help and support</a></li>
+            <li><a href="/return-policy/">Returns policy</a></li>
+            <li><a href="/support/">Help and support</a></li>
             <li><a href="https://mvnoc.ai/coverage-map">Coverage checker</a></li>
           </ul>
         </Offcanvas.Body>
