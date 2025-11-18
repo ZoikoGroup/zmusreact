@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import { FaSimCard, FaMobileAlt, FaDatabase } from "react-icons/fa";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
@@ -10,7 +11,8 @@ import "../../Dashboard.css";
 import Link from "next/link";
 
 export default function DevicesPage({ params }) {
-  const { subscriber_id } = params; // dynamic subscriber_id from URL
+  //const { subscriber_id } = params; // dynamic subscriber_id from URL
+  const { subscriber_id } = useParams();
   const [loading, setLoading] = useState(true);
   const [subscriber, setSubscriber] = useState(null);
   const [planDetails, setPlanDetails] = useState(null);

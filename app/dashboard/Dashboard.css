@@ -164,6 +164,19 @@
   margin-bottom: 22px;
 }
 
+.cards-row1 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+@media (max-width: 768px) {
+  .cards-row1 {
+    grid-template-columns: 1fr; /* single column on mobile */
+  }
+}
+
 .card {
   background: #fff;
   border-radius: 12px;
