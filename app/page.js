@@ -5,7 +5,6 @@ import CarouselPlans from "./components/CarouselPlans";
 import Footer from "./components/Footer";
 import WhyChooseZoiko from "./components/WhyChooseZoiko";
 import RefurbishedSmartphones from "./components/RefurbishedSmartphones";
-import TopHeader from "./components/TopHeader";
 import PhoneSlider from "./components/PhoneSlider";
 import Testimonials from "./components/Testimonials";
 

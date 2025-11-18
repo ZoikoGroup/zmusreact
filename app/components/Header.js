@@ -1,6 +1,9 @@
 "use client";
 import { Container, Button, Nav, Navbar, NavDropdown, Modal, Badge } from "react-bootstrap";
 import Image from "next/image";
+import { FaSearch, FaTimes } from "react-icons/fa";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../globals.css';
 import { useState, useEffect, useRef } from "react";
@@ -41,7 +44,39 @@ const Header = () => {
   const pathname = usePathname();
   const navbarCollapseRef = useRef(null);
   const toggleButtonRef = useRef(null);
+// --- Add these states ---
+const [searchMounted, setSearchMounted] = useState(false);
+const [searchVisible, setSearchVisible] = useState(false);
+const searchTimeoutRef = useRef(null);
 
+const TRANSITION_MS = 350; // must match CSS
+
+// --- Show Search ---
+const handleShowSearch = () => {
+    setSearchMounted(true);
+
+    // wait 1 frame then animate
+    requestAnimationFrame(() => {
+        setSearchVisible(true);
+    });
+};
+
+
+
+// --- Hide Search ---
+const handleCloseSearch = () => {
+    setSearchVisible(false);
+
+    clearTimeout(searchTimeoutRef.current);
+    searchTimeoutRef.current = setTimeout(() => {
+        setSearchMounted(false);
+    }, TRANSITION_MS + 20);
+};
+
+// --- cleanup ---
+useEffect(() => {
+    return () => clearTimeout(searchTimeoutRef.current);
+}, []);
   useEffect(() => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("zoiko_token");
@@ -81,8 +116,8 @@ const Header = () => {
     window.location.href = "/login";
   };
 
-  const handleCloseSearch = () => setShowSearch(false);
-  const handleShowSearch = () => setShowSearch(true);
+  // const handleCloseSearch = () => setShowSearch(false);
+  // const handleShowSearch = () => setShowSearch(true);
 
   const handleOpenPlanModal = (title, slug, id, price, duration, bq_id, plan_type) => {
     setModalData({ title, slug, id, price, duration, bq_id, plan_type });
@@ -225,7 +260,12 @@ const Header = () => {
                             </Nav>
                         </div>
             <Nav className="ms-auto d-none d-lg-flex align-items-center gap-3">
-              <Nav.Link href="#" onClick={handleShowSearch}><i className="bi bi-search"></i></Nav.Link>
+              {/* <Nav.Link href="#" onClick={handleShowSearch}><i className="bi bi-search"></i></Nav.Link> */}
+
+              <Nav.Link href="#" onClick={(e)=>{ e.preventDefault(); handleShowSearch(); }}>
+    <i className="bi bi-search"></i>
+</Nav.Link>
+
               <Nav.Link href="/checkout" className="position-relative">
                 <i className="bi bi-cart"></i>
                 {cartCount > 0 && (
@@ -249,7 +289,7 @@ const Header = () => {
       </Navbar>
 
       {/* Search Modal */}
-      <Modal show={showSearch} onHide={handleCloseSearch} size="lg" centered>
+      {/* <Modal show={showSearch} onHide={handleCloseSearch} size="lg" centered>
         <Modal.Body>
           <div className="p-5">
             <h2 className="mb-3">Search Zoiko Products</h2>
@@ -259,7 +299,41 @@ const Header = () => {
             <Button variant="secondary" onClick={handleCloseSearch} className="mt-4">Cancel</Button>
           </div>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
+
+
+      {/* TOP FIXED SEARCH BAR */}
+      {searchMounted && (
+  <div
+    className={`zoiko-search-container ${searchVisible ? "show" : ""}`}
+    role="dialog"
+  >
+    <Container>
+      <InputGroup>
+        <Form.Control
+          placeholder="Search Zoiko AI..."
+          className="searchInput"
+        />
+
+        <Button className="zoikoSearchBtn">
+          <FaSearch size={18} />
+        </Button>
+
+        <Button
+          variant="link"
+          onClick={handleCloseSearch}
+          style={{
+            width: "50px",
+            border: "none",
+            textDecoration: "none",
+          }}
+        >
+          <FaTimes size={30} color="#1d0303ff" />
+        </Button>
+      </InputGroup>
+    </Container>
+  </div>
+)}
 
       <PlanPurchaseModal
         show={showPlanModal}

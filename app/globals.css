@@ -1535,7 +1535,7 @@ body {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   .homeBanner .bannerItem{
     background-size: cover;
     background-position: center;
@@ -1620,10 +1620,46 @@ body {
   .homeBanner .bannerContent button {
       display: flex;
   }
-           
-           
+        
+  .blackFridayBannerContent{
+    text-align: center;
+    padding: 5vw;
+  }
+  .bannerBtns{
+    justify-content: center;
+  }
+  .blackFridayBannerContent p{
+    padding: 1vw 10vw;
+  }
+  .blackFridayBanner img{
+    height: 65vw;
+    width: auto;
+    padding-bottom: 3vw;
+  }
+  .blackFridayCountdownText1, .blackFridayCountdownText3 {
+    justify-content: center;
+    padding: 2vw;
+  }
+  .blackFridayCountdownText3 {
+    font-size: 1.5vw !important;
+  }
 }
-@media (min-width: 769px) {
+
+@media (min-width: 768px) and (max-width: 1000px) {
+      .blackFridayCountdownText1 {
+        justify-content: start !important;
+        font-size: 1.5vw;
+        padding-left: 4vw;
+        padding-right: 4vw;
+    }
+    .blackFridayCountdownText3 {
+        justify-content: end !important;
+        padding-left: 4vw;
+        padding-right: 4vw;
+    }
+}
+
+@media (min-width: 768px) {
   .homeBanner .bannerItem{
     background-size: cover;
     background-position: center;
@@ -1660,8 +1696,6 @@ body {
   .homeBanner .banner1{
     background-image: url(/img/home-banner/Unbeatable-VALUE-banner.png) !important;
   }
-
-
   .homeBanner .banner6 .bannerContent{
     padding-top:7.25vw !important
   }
@@ -1688,12 +1722,9 @@ body {
     padding-top: 3vw;
     padding-bottom: 3vw;
   }
-
   .homeBanner .banner3 .bannerContent{
-
     padding-top: 7.25vw !important;
   }
-
   .homeBanner .banner2 .bannerContent{
     left: 15% !important;
         padding-top: 8.25vw !important;
@@ -1728,8 +1759,123 @@ body {
   .homeBanner .bannerContent a{
       width: 13vw;
       padding: 1vw;
-      font-size: 1.5vw;
-      
+      font-size: 1.5vw;      
+  }  
+  .blackFridayBanner  img{
+        height: 25vw;
+        width: auto;
   }
+  .blackFridayBannerContent{
+    padding-left: 10vw;
+    padding-top: 5vw;
+    padding-bottom: 5vw;;
+  }
+  .blackFridayBannerContent h1{
+    font-size: 2.5vw;
+  }
+  .blackFridayBannerContent p{
+    font-size: 1.5vw;
+  }
+  .blackFridayBannerContent button{
+    font-size: 1vw;
+    padding: .75vw 5vw;
+  }
+  .blackFridayCountdownText1{
+    justify-content: end;
+  }
+  .blackFridayCountdownText2{
+    justify-content: center;
+  }
+  .blackFridayCountdownText3{
+    justify-content: start;
+  }
+.blackFridayCountdownText3 {
+    font-size: 1vw !important;
+  }
+}
 
+.blackFridayBanner{
+    background-color:#d4145a;
+    color: #ffffff;
+}
+.blackFridayCountdown{
+  background-color: #1b1b1b;
+  padding: 1vw;
+}
+.count-box {
+  background: #2b2b2b;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 70px;
+}
+.count-num {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  display: block;
+}
+.count-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+.zoikoSearchBtn{
+  background: rgb(223, 30, 90);
+    border: none;
+    width: 60px;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+}
+
+.zoiko-search-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-bottom: 1px solid #df1e5a;
+
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+
+  transition: transform 350ms ease, opacity 350ms ease;
+}
+
+.zoiko-search-container.show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.searchInput{
+      background: #df1e5a1f;
+    border: 1px solid #df1e5a;
+}
+.icon-circle {
+  width: 90px;
+  height: 90px;
+  background: #ffe6ef;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.feature-item p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.blackFridayContactArea{
+  background-image: url('/img/contact page.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
