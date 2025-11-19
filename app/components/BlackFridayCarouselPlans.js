@@ -58,19 +58,19 @@ export default function CarouselSimPlan() {
               max-width: 50vw !important;
               
           }
-          .blackFridayCarouselPlanTab li .active  {
-              border-top: 3px solid #ee1717ff !important;
-              border-top-right-radius: 2vw;
-              border-top-left-radius: 2vw;
-          }
-          .blackFridayCarouselPlanTab li {
-              border-top: 3px solid #baaaaa !important;
-              border-top-right-radius: 2vw;
-              border-top-left-radius: 2vw;
-          }
-          .blackFridayCarouselPlanTab li:has(> a.active){
-          border-top: 3px solid #ee1717ff !important;
-          }
+          // .blackFridayCarouselPlanTab li .active  {
+          //     border-top: 3px solid #ee1717ff !important;
+          //     border-top-right-radius: 2vw;
+          //     border-top-left-radius: 2vw;
+          // }
+          // .blackFridayCarouselPlanTab li {
+          //     border-top: 3px solid #baaaaa !important;
+          //     border-top-right-radius: 2vw;
+          //     border-top-left-radius: 2vw;
+          // }
+          // .blackFridayCarouselPlanTab li:has(> a.active){
+          // border-top: 3px solid #ee1717ff !important;
+          // }
       `}
     </style>
       <Container className=" blackFridayCarouselPlanTab">

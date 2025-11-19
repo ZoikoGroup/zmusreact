@@ -1766,9 +1766,9 @@ body {
         width: auto;
   }
   .blackFridayBannerContent{
-    padding-left: 10vw;
-    padding-top: 5vw;
-    padding-bottom: 5vw;;
+    padding-left: 10vw !important;
+    padding-top: 5vw !important;
+    padding-bottom: 5vw !important;
   }
   .blackFridayBannerContent h1{
     font-size: 2.5vw;

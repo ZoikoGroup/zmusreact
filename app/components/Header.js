@@ -32,7 +32,7 @@ export function openPlanPurchaseModal(planTitle, planSlug, planId, planPrice, pl
 }
 
 const Header = () => {
-  const [showSearch, setShowSearch] = useState(false);
+  // const [showSearch, setShowSearch] = useState(false);
   const [showPlanModal, setShowPlanModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [paymentData, setPaymentData] = useState({ orderId: "", amount: 0 });
