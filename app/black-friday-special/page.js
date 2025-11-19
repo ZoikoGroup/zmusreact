@@ -236,7 +236,7 @@ console.error("Form submission error:", error);
       </div>
     </Container>
 
-    {/* <CarouselPlans /> */}
+    <CarouselPlans /> 
 
 <Container className="text-center my-5 py-5">
       <h2 className="fw-bold mb-5">Why Choose Zoiko Mobile?</h2>
@@ -498,7 +498,7 @@ margin-bottom: 2vw;}
     </Col>
   </Row>
 </Container>
-{/* <Testimonials/> */}
+ <Testimonials/> 
 <div style={{ backgroundColor: "#ffe0eb", padding: "60px 0" }}>
 <Container className="text-center">
 <h1 className="fw-bold">Your Plan Helps Fund Animal Rescues 🐾</h1>
