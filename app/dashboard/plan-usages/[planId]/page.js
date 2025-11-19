@@ -122,7 +122,7 @@ const billingCycle = formatBillingCycle();
           </div>
 
           {/* --- Usage Cards --- */}
-          <div className="cards-row">
+          <div className="cards-row1">
             {/* Mobile Data */}
             <div className="card card-highlight">
               <div className="card-top">
@@ -162,45 +162,7 @@ const billingCycle = formatBillingCycle();
                   </span>
                 </div>
               </div>
-            </div>
-
-            {/* Hotspot */}
-            <div className="card">
-              <div className="card-top">
-                <div className="card-icon">
-                  <FaWifi />
-                </div>
-                <div className="card-title">Mobile Hotspot</div>
-              </div>
-
-              <div className="card-value">
-                <span className="big">{usage.hotspot.used}</span>
-                <span className="small">
-                  MB / {usage.hotspot.total} MB
-                </span>
-              </div>
-
-              <div className="progress-wrap">
-                <div className="progress-track">
-                  <div
-                    className="progress-fill"
-                    style={{
-                      width: `${pct(usage.hotspot.used, usage.hotspot.total)}%`,
-                    }}
-                  />
-                </div>
-                <div className="progress-note">
-                  <span>
-                    {pct(usage.hotspot.used, usage.hotspot.total)}% used
-                  </span>
-                  <span className="muted">
-                    {" "}
-                    · {Math.max(0, usage.hotspot.total - usage.hotspot.used)} MB
-                    remaining
-                  </span>
-                </div>
-              </div>
-            </div>
+            </div>           
 
             {/* Talk & Text */}
             <div className="card">
