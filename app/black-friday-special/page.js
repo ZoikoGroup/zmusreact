@@ -51,7 +51,7 @@ setErrors(validationErrors);
 
 if (Object.keys(validationErrors).length === 0) {
 try {
-  alert('ok');
+  // alert('ok');
 const response = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/black-friday-form", {
 method: "POST",
 headers: { "Content-Type": "application/json" },
