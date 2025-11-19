@@ -45,6 +45,11 @@ const metaMap = {
     description:
       "Stay connected with Zoiko Mobile for the best mobile plans with unlimited data. Get the coverage & affordability you deserve with our top mobile plan options.",
   },
+  "/black-friday-mobile-sim-deals-2025": {
+    title: "Black Friday Mobile & SIM Card Deals 2025 | Zoiko Mobile",
+    description:
+      "Explore Zoiko Mobile Black Friday Mobile & SIM Card Deals 2025. Save big on SIM plans, device protection & phones, and help animal rescues today!",
+  },
   "/about": {
     title: "About SIM only deals UK | Free SIM Card Deals Provider | Zoiko",
     description:

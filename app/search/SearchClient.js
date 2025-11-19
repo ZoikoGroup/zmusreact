@@ -83,13 +83,7 @@ export default function SearchClient() {
     }
   }, [urlQuery]);
 
-  // -------------------------
-  // HANDLE FORM SUBMIT
-  // -------------------------
-  const onSubmit = (e) => {
-    e.preventDefault();
-    performSearch(searchTerm);
-  };
+
 
   return (
     <>

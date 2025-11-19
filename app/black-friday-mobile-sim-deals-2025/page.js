@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import CarouselPlans from "../components/BlackFridayCarouselPlans";
 import Testimonials from "../components/Testimonials";
 export default function blackFridaySpecialPage(){
+  
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
   firstName: "",
@@ -114,6 +115,7 @@ console.error("Form submission error:", error);
     return () => clearInterval(timer);
   }, []);
   return (
+    
     <>
       <Header />
       <HeadBar text="Join Buster and flock together with your buddies!" />
