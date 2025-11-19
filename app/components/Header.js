@@ -16,6 +16,7 @@ import GetInTouchSidebar from "./GetInTouchSidebar";
 import BlackFridaySidebar from "./BlackFridaySidebar";
 import { useRouter } from "next/navigation";
 
+
 let openPlanModalCallback = null;
 let openPaymentModalCallback = null;
 
