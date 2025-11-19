@@ -51,7 +51,7 @@ setErrors(validationErrors);
 
 if (Object.keys(validationErrors).length === 0) {
 try {
-  alert('ok');
+  // alert('ok');
 const response = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/black-friday-form", {
 method: "POST",
 headers: { "Content-Type": "application/json" },
@@ -123,10 +123,10 @@ console.error("Form submission error:", error);
             </p>
 
             <div className="d-flex gap-4 bannerBtns">
-              <Button variant="dark" size="lg">
+              <Button variant="dark" size="lg" href="/byod-plans">
                 Get Your SIM Today
               </Button>
-              <Button variant="light" size="lg">
+              <Button variant="light" size="lg"  href="/all-plans">
                 View Plans
               </Button>
             </div>
@@ -218,7 +218,7 @@ console.error("Form submission error:", error);
 
         <Row className="justify-content-center g-3">
           <Col xs="auto">
-            <Button variant="light" className="px-4 py-2" style={{ borderRadius: "30px" }}>
+            <Button variant="light" className="px-4 py-2" style={{ borderRadius: "30px" }} href="/all-plans">
               View Plans
             </Button>
           </Col>
@@ -228,6 +228,7 @@ console.error("Form submission error:", error);
               variant="danger"
               className="px-4 py-2"
               style={{ borderRadius: "30px" }}
+              href="https://phones.zoikomobile.com/"
             >
               View Smartphone Devices
             </Button>
@@ -236,7 +237,7 @@ console.error("Form submission error:", error);
       </div>
     </Container>
 
-    {/* <CarouselPlans /> */}
+    <CarouselPlans /> 
 
 <Container className="text-center my-5 py-5">
       <h2 className="fw-bold mb-5">Why Choose Zoiko Mobile?</h2>
@@ -387,18 +388,23 @@ Questions, comments, or suggestions? Simply fill in the form and we’ll be in t
 }
 .blackFridayLowerBox{
     width: 60vw;
-    height: 30vw;
+    // height: 30vw;
     display: inline-grid;
     justify-content: start;
     align-content: space-evenly;
 }
 .blackFridayLowerBox li{
 margin-bottom: 2vw;}
-.blackFridayLowerBoxBtn button{
+.blackFridayLowerBoxBtn a{
     border-radius: 30px;
     padding: 10px 30px;
     float: left;
-    background-color:#df1e5a}
+    background-color:#df1e5a;
+    border:1px solid red;
+    }
+    .blackFridayLowerBoxBtn a:hover, .blackFridayLowerBoxBtn a:active, .blackFridayLowerBoxBtn a:focus{
+    background-color:#dc3545 !important;
+    }
 `}</style>
     <Col md={6}>
       
@@ -498,7 +504,7 @@ margin-bottom: 2vw;}
     </Col>
   </Row>
 </Container>
-{/* <Testimonials/> */}
+ <Testimonials/> 
 <div style={{ backgroundColor: "#ffe0eb", padding: "60px 0" }}>
 <Container className="text-center">
 <h1 className="fw-bold">Your Plan Helps Fund Animal Rescues 🐾</h1>
@@ -525,7 +531,7 @@ margin-bottom: 2vw;}
 </Row>
 
 
-<Card className="p-4 mt-5 shadow-sm blackFridayLowerBox" style={{ borderRadius: "20px" }}>
+<Card className="p-4 mt-6 shadow-sm blackFridayLowerBox" style={{ borderRadius: "20px" }}>
 <h4 className="fw-bold mb-4 text-start">How Your Subscription Makes a Difference:</h4>
 <ul className="text-start" style={{ listStyle: "none", paddingLeft: 0 }}>
 <li>💵 $1 from every plan goes directly to animal rescue organizations</li>
@@ -536,7 +542,7 @@ margin-bottom: 2vw;}
 
 
 <div className="blackFridayLowerBoxBtn">
-<Button  size="lg">
+<Button  size="lg" href="/animal-charities">
 Learn More About Our Mission
 </Button>
 </div>

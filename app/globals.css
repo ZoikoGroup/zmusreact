@@ -1766,9 +1766,9 @@ body {
         width: auto;
   }
   .blackFridayBannerContent{
-    padding-left: 10vw;
-    padding-top: 5vw;
-    padding-bottom: 5vw;;
+    padding-left: 10vw !important;
+    padding-top: 5vw !important;
+    padding-bottom: 5vw !important;
   }
   .blackFridayBannerContent h1{
     font-size: 2.5vw;
@@ -1821,11 +1821,14 @@ body {
   opacity: 0.7;
 }
 .zoikoSearchBtn{
-  background: rgb(223, 30, 90);
-    border: none;
-    width: 60px;
+  background: rgb(223, 30, 90) !important;
+    border: none !important;
+    width: 60px !important;
     border-top-right-radius: 5px !important;
     border-bottom-right-radius: 5px !important;
+}
+.zoikoSearchBtn:hover, .zoikoSearchBtn:focus, .zoikoSearchBtn:active{
+  background: rgb(223, 30, 90) !important;
 }
 
 .zoiko-search-container {
