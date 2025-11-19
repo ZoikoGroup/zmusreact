@@ -6,13 +6,14 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../globals.css';
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import { usePathname } from 'next/navigation';
 import PlanPurchaseModal from "./PlanPurchaseModal";
 import TopHeader from "./TopHeader";
 import PaymentModal from "./PaymentModal";
 import CustomLanguageSwitcher from "./CustomLanguageSwitcher";
 import GetInTouchSidebar from "./GetInTouchSidebar";
-import { useRouter, useSearchParams, usePathname  } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 let openPlanModalCallback = null;
 let openPaymentModalCallback = null;
@@ -32,36 +33,13 @@ export function openPlanPurchaseModal(planTitle, planSlug, planId, planPrice, pl
 }
 
 const Header = () => {
-const searchParams = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
-  const pathname = usePathname();
-  
-  // Get the initial value from URL param `query` (or whatever you name it)
-  const initialQuery = searchParams.get("query") ?? "";
-
-  const [searchTerm, setSearchTerm] = useState(initialQuery);
-
-  // Keep state in sync when URL changes (if user navigates back / link used)
-  useEffect(() => {
-    setSearchTerm(initialQuery);
-  }, [initialQuery]);
-
-  const updateUrlQuery = useCallback(
-    (term) => {
-      const params = new URLSearchParams(searchParams.toString());
-      if (term) {
-        params.set("query", term);
-      } else {
-        params.delete("query");
-      }
-      router.replace(`${pathname}?${params.toString()}`);
-    },
-    [searchParams, pathname, router]
-  );
+  const inputRef = useRef(null);
 
   const handleSearch = async () => {
-    const term = searchTerm.trim();
-    if (!term) return;
+    if (!searchTerm.trim()) return;
+
     try {
       // const res = await fetch(
       //   "https://zmapi.zoikomobile.co.uk/api/v1/search",
@@ -115,7 +93,7 @@ const searchParams = useSearchParams();
   const [user, setUser] = useState(null);
   const [cartCount, setCartCount] = useState(0);
 
-  // const pathname = usePathname();
+  const pathname = usePathname();
   const navbarCollapseRef = useRef(null);
   const toggleButtonRef = useRef(null);
 // --- Add these states ---
