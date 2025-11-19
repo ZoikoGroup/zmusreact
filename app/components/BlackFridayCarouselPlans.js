@@ -72,7 +72,10 @@ export default function CarouselSimPlan() {
           // border-top: 3px solid #ee1717ff !important;
           // }
           .blackFridayCarouselPlanTab ul{
-              margin-bottom: 1vw !important;}
+              margin-bottom: 1vw !important;
+                  border-bottom: none !important;
+              
+              }
       `}
     </style>
       <Container className=" blackFridayCarouselPlanTab">
