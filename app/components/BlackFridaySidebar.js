@@ -18,7 +18,7 @@ const BlackFridaySidebar = () => {
       <style>{`
      
 /* Sticky vertical tab */
-.bftouch-tab a {color:white;}
+.bftouch-tab a {color:white;text-decoration: unset !important;}
 .bftouch-tab {
     position: fixed;
     left: 0;
