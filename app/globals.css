@@ -1821,11 +1821,14 @@ body {
   opacity: 0.7;
 }
 .zoikoSearchBtn{
-  background: rgb(223, 30, 90);
-    border: none;
-    width: 60px;
+  background: rgb(223, 30, 90) !important;
+    border: none !important;
+    width: 60px !important;
     border-top-right-radius: 5px !important;
     border-bottom-right-radius: 5px !important;
+}
+.zoikoSearchBtn:hover, .zoikoSearchBtn:focus, .zoikoSearchBtn:active{
+  background: rgb(223, 30, 90) !important;
 }
 
 .zoiko-search-container {
