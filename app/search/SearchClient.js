@@ -19,7 +19,15 @@ export default function SearchClient() {
   const searchParams = useSearchParams();
 
   const urlQuery = searchParams?.get("query") || "";
+const [loadedOnce, setLoadedOnce] = useState(false);
 
+useEffect(() => {
+  if (!loadedOnce && urlQuery) {
+    setLoadedOnce(true);
+    setSearchTerm(urlQuery);
+    performSearch(urlQuery);
+  }
+}, [urlQuery, loadedOnce]);
   const [searchTerm, setSearchTerm] = useState(urlQuery);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -35,7 +43,7 @@ export default function SearchClient() {
     setLoading(true);
     setError("");
     setResults([]);
-
+console.log(cleanedTerm);
     try {
       const response = await fetch(
         "https://zmapi.zoikomobile.co.uk/api/v1/search",
