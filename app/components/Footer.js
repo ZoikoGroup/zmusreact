@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Col, Container, Image, Row, Form, InputGroup, Button } from "react-bootstrap";
-
+import WhatsAppFloating from "./WhatsApp";
 const Footer = () => {
     const curyear = new Date().getFullYear();
     const [email, setEmail] = useState("");
@@ -50,6 +50,7 @@ const Footer = () => {
 
     return (
         <>
+        <WhatsAppFloating/>
         <Container fluid className="footerboxlarge">
             <Container className="py-5">
                 <Row>
