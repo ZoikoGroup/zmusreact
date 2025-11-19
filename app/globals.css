@@ -979,6 +979,7 @@ a {
   .navbar-collapse.mobile-overlay.show {
     visibility: visible;
     opacity: 1;
+    z-index: 99999999999;
   }
 
   /* Lock body scroll when menu is open */
