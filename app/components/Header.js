@@ -13,6 +13,7 @@ import TopHeader from "./TopHeader";
 import PaymentModal from "./PaymentModal";
 import CustomLanguageSwitcher from "./CustomLanguageSwitcher";
 import GetInTouchSidebar from "./GetInTouchSidebar";
+import BlackFridaySidebar from "./BlackFridaySidebar";
 import { useRouter } from "next/navigation";
 
 let openPlanModalCallback = null;
@@ -171,6 +172,7 @@ useEffect(() => {
         <TopHeader />
       </div>
       <GetInTouchSidebar />
+      <BlackFridaySidebar/>
       <Navbar expand="lg" className="bg-body-tertiary p-0 headnav">
         <Container fluid>
           <Navbar.Brand href="/">
