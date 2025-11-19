@@ -7,18 +7,20 @@ import { useEffect, useState } from "react";
 import CarouselPlans from "../components/BlackFridayCarouselPlans";
 import Testimonials from "../components/Testimonials";
 export default function blackFridaySpecialPage(){
-const [formData, setFormData] = useState({
-firstName: "",
-lastName: "",
-email: "",
-company: "",
-phone: "",
-message: "",
-});
+  
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+  firstName: "",
+  lastName: "",
+  email: "",
+  company: "",
+  phone: "",
+  message: "",
+  });
 
 
-const [errors, setErrors] = useState({});
-const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
 
 
 const validate = () => {
@@ -45,13 +47,15 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
 
 const handleSubmit = async (e) => {
 e.preventDefault();
+
 const validationErrors = validate();
+
 setErrors(validationErrors);
 
 
 if (Object.keys(validationErrors).length === 0) {
 try {
-  // alert('ok');
+  setLoading(true);
 const response = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/black-friday-form", {
 method: "POST",
 headers: { "Content-Type": "application/json" },
@@ -62,10 +66,16 @@ body: JSON.stringify(formData),
 if (response.ok) {
 setSubmitted(true);
 setFormData({ firstName: "", lastName: "", email: "", company: "", phone: "", message: "" });
+// Auto-hide success message after 3 seconds
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 3000);
 }
 } catch (error) {
 console.error("Form submission error:", error);
-}
+}finally {
+      setLoading(false);
+    }
 }
 };
 // Set your target date here
@@ -105,10 +115,18 @@ console.error("Form submission error:", error);
     return () => clearInterval(timer);
   }, []);
   return (
+    
     <>
       <Header />
       <HeadBar text="Join Buster and flock together with your buddies!" />
+<style>{`.fade-out {
+  animation: fadeOut 5s forwards;
+}
 
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}`}</style>
       <Container fluid className="blackFridayBanner" >
         <Row className="align-items-center">
           {/* LEFT TEXT */}
@@ -405,9 +423,27 @@ margin-bottom: 2vw;}
     .blackFridayLowerBoxBtn a:hover, .blackFridayLowerBoxBtn a:active, .blackFridayLowerBoxBtn a:focus{
     background-color:#dc3545 !important;
     }
+    .form-loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 12px;
+}
+
 `}</style>
     <Col md={6}>
-      
+      <div style={{ position: "relative" }}>
+
+  {loading && (
+    <div className="form-loading-overlay">
+      <div className="spinner-border" role="status"></div>
+    </div>
+  )}
         <Form onSubmit={handleSubmit}  className="blackFridayContactForm m-4">
           
 <div className="nameGroup d-flex">
@@ -499,8 +535,14 @@ margin-bottom: 2vw;}
           >
             Send Message
           </Button>
+          {submitted && (
+  <Alert variant="success" className="mt-3 fade-out">
+    Your message has been sent successfully!
+  </Alert>
+  
+)}
         </Form>
-      
+      </div>
     </Col>
   </Row>
 </Container>
