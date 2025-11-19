@@ -68,6 +68,9 @@ export default function CarouselSimPlan() {
               border-top-right-radius: 2vw;
               border-top-left-radius: 2vw;
           }
+          .blackFridayCarouselPlanTab li:has(> a.active){
+          border-top: 3px solid #ee1717ff !important;
+          }
       `}
     </style>
       <Container className=" blackFridayCarouselPlanTab">
