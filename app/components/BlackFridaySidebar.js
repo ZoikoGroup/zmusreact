@@ -29,8 +29,8 @@ const BlackFridaySidebar = () => {
     font-weight: bold;
     cursor: pointer;
     writing-mode: vertical-rl;
-    transform: rotate(360deg);
-    border-radius: 0px 8px 8px 0px;
+    transform: rotate(180deg);
+    border-radius: 8px 0px 0px 8px;
     z-index: 9999;
     display: flex;
     align-items: center;
