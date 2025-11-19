@@ -35,44 +35,14 @@ export function openPlanPurchaseModal(planTitle, planSlug, planId, planPrice, pl
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
-  const inputRef = useRef(null);
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) return;
 
     try {
-      const res = await fetch(
-        "https://zmapi.zoikomobile.co.uk/api/v1/search",
-        {
-          method: "POST", // or GET depending on your API
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ query: searchTerm })
-        }
-      );
 
-      if (!res.ok) {
-        // API returned an error status
-        console.error("Search API error", res.status);
-        return;
-      }
-
-      const data = await res.json();
-      console.log("Search response:", searchTerm);
-
-      // Decide what "valid" means. Example: if data.results exists and non-empty
-      if (data && data.results && data.results.length > 0) {
-        // Redirect to a results page, maybe passing the term or data
-        // Option A: pass as query param
         router.push(`/search?query=${encodeURIComponent(searchTerm)}`);
 
-        // Option B: navigate to a dynamic route
-        // router.push(`/search/${encodeURIComponent(searchTerm)}`);
-      } else {
-        // No result or invalid, maybe show message
-        alert("No results found.");
-      }
     } catch (err) {
       console.error("Error calling search API", err);
     }
