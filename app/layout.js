@@ -679,7 +679,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         {/* ✅ JSON-LD structured data (WebSite) */}
-        <Script
+        {/* <Script
           id="zoiko-website-jsonld"
           type="application/ld+json"
           strategy="afterInteractive"
@@ -691,7 +691,7 @@ export default function RootLayout({ children }) {
               url: "https://zoikomobile.com/",
             }),
           }}
-        />
+        /> */}
 
         {/* ✅ Open Graph site name */}
         <meta property="og:site_name" content="Zoiko Mobile" />
