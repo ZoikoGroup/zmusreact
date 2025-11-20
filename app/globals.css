@@ -979,6 +979,7 @@ a {
   .navbar-collapse.mobile-overlay.show {
     visibility: visible;
     opacity: 1;
+    z-index: 99999999999;
   }
 
   /* Lock body scroll when menu is open */
@@ -1881,4 +1882,19 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+.zoikoWA{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  text-decoration: none;
 }
