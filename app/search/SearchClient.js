@@ -130,7 +130,13 @@ console.log(cleanedTerm);
               {results.map((item, index) => (
                 <Card key={index} className="mb-3">
                   <Card.Body>
+                    <Button
+                      variant="link"
+                      href={item.url || "#"}
+                      target="_blank"
+                    >
                     <Card.Title>{item.title || item.name}</Card.Title>
+                    </Button>
                     <Card.Text>
                       {item.description || "No description available"}
                     </Card.Text>

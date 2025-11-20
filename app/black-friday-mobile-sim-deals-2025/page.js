@@ -354,7 +354,7 @@ console.error("Form submission error:", error);
     <div className="blackFridayContactContent">
 <h2 className="fw-bold mb-3">Need Help ?</h2>
 <p className="text-muted mb-4">
-Questions, comments, or suggestions? Simply fill in the form and we’ll be in touch shortly.
+Questions, comments, or suggestions? Simply fill in the form and we'll be in touch shortly.
 </p>
 
 
@@ -364,7 +364,7 @@ Questions, comments, or suggestions? Simply fill in the form and we’ll be in t
 </div>
 <div className="d-flex align-items-center">
 <span className="me-2"><img src="./img/icons/mail.svg"></img></span>
-<span className="fw-semibold">support@zoikomobile.com </span>
+<span className="fw-semibold"><a href="mailto:support@zoikomobile.com" style={{ color : "black !important",textDecoration:"none !important"}}>support@zoikomobile.com</a> </span>
 </div>
 </div>
 </Col>

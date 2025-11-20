@@ -152,6 +152,7 @@ export default function CheckoutPage() {
     try {
       const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
       // Normalize legacy or different cart item shapes so checkout can render them
+      console.log(storedCart);
       const normalized = (storedCart || []).map((item) => {
         // If already in expected shape, return as-is
         if (item && (item.planId || item.planTitle)) return item;
