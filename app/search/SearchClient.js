@@ -45,12 +45,13 @@ useEffect(() => {
     setResults([]);
 console.log(cleanedTerm);
     try {
+      const searchUrl = "https://zmapi.zoikomobile.co.uk/api/v1/search?query="+cleanedTerm;
+      alert(searchUrl);
       const response = await fetch(
-        "https://zmapi.zoikomobile.co.uk/api/v1/search",
+        searchUrl,
         {
-          method: "POST",
+          method: "GET",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: cleanedTerm }),
         }
       );
 
@@ -96,7 +97,7 @@ console.log(cleanedTerm);
   return (
     <>
       <Header />
-      <HeadBar text="Join Buster and flock together with your buddies!" />
+      <HeadBar text={`Search : ${searchTerm}`} />
 
       <Container className="py-5">
         
