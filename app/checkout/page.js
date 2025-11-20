@@ -19,6 +19,21 @@ import {
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function CheckoutPage() {
+const getItemPrice = (item) => {
+  if (item.type === "device") {
+    return Number(item.devicePrice?.price ?? 0);
+  } else if (item.type === "plan") {
+    return Number(item.planPrice ?? 0);
+  }
+
+  return 0;
+};
+  const shippingOptions = [
+  { label: "Standard (3-5 Days)", value: 9.99 },
+  { label: "Expedited (2-3 Days)", value: 14.99 },
+  { label: "Overnight", value: 24.99 },
+];
+const [shippingFee, setShippingFee] = useState(9.99); // default value
   const [showThankYou, setShowThankYou] = useState(false);
   const [cart, setCart] = useState([]);
   const [showShipping, setShowShipping] = useState(false);
@@ -276,7 +291,7 @@ export default function CheckoutPage() {
     return acc + price * qty;
   }, 0);
 
-  const shippingFee = 5;
+  // const shippingFee = 5;
 
   const discountAmount = discountData
     ? discountData.type === "percentage"
@@ -575,29 +590,33 @@ export default function CheckoutPage() {
             <div className="row">
               {/* Left Side - Cart & Form */}
               <div className="col-md-7 mb-4">
-                {cart.map((item, idx) => (
-                  <div className="card mb-3" key={idx}>
-                    <div className="card-body">
-                      <div className="d-flex justify-content-between align-items-center">
-                        <div>
-                          <h5 className="text-danger fw-bold">{item.planTitle}</h5>
-                          <small className="text-muted">Line Type: {item.lineType || "N/A"} | SIM Type: {item.simType || "N/A"}</small>
-                        </div>
-                        <button className="btn btn-sm btn-outline-danger" onClick={() => handleRemove(idx)} disabled={loading}>Remove</button>
-                      </div>
-                      <div className="d-flex align-items-center justify-content-between mt-3">
-                        <span className="fw-bold">
-                          ${(Number(item.planPrice ?? item.formData?.price ?? 0)).toFixed(2)} / {item.planDuration}
-                        </span>
-                        <div>
-                          <button className="btn btn-outline-secondary btn-sm" onClick={() => handleQuantity(idx, -1)} disabled={loading}>-</button>
-                          <span className="mx-2">{item.formData?.priceQty ?? 1}</span>
-                          <button className="btn btn-outline-secondary btn-sm" onClick={() => handleQuantity(idx, 1)} disabled={loading}>+</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+{cart.map((item, idx) => {
+  const price = getItemPrice(item);
+  return (
+    <div className="card mb-3" key={idx}>
+      <div className="card-body">
+        <div className="d-flex justify-content-between align-items-center">
+          <div>
+            <h5 className="text-danger fw-bold">{item.planTitle}</h5>
+            <small className="text-muted">Line Type: {item.lineType || "N/A"} | SIM Type: {item.simType || "N/A"}</small>
+          </div>
+          <button className="btn btn-sm btn-outline-danger" onClick={() => handleRemove(idx)} disabled={loading}>Remove</button>
+        </div>
+        <div className="d-flex align-items-center justify-content-between mt-3">
+          <span className="fw-bold">
+            {/* ${(Number(item.planPrice ?? item.formData?.price ?? 0)).toFixed(2)} / {item.planDuration} */}
+            ${price.toFixed(2)} / {item.planDuration ?? item.formData?.priceQty}
+          </span>
+          <div>
+            <button className="btn btn-outline-secondary btn-sm" onClick={() => handleQuantity(idx, -1)} disabled={loading}>-</button>
+            <span className="mx-2">{item.formData?.priceQty ?? 1}</span>
+            <button className="btn btn-outline-secondary btn-sm" onClick={() => handleQuantity(idx, 1)} disabled={loading}>+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+})}
 
                 {/* Coupon Section */}
                 <div className="card mb-4">
@@ -760,8 +779,25 @@ export default function CheckoutPage() {
                     })}
                     <hr />
                     <div className="d-flex justify-content-between">
+                      <div className="mb-3">
+                      <label className="form-label">Shipping Options</label>
+                      <select
+                        className="form-select"
+                        value={shippingFee}
+                        onChange={(e) => setShippingFee(parseFloat(e.target.value))}
+                      >
+                        {shippingOptions.map((opt, i) => (
+                          <option key={i} value={opt.value}>
+                            {opt.label} — ${opt.value}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                       <span>Shipping Fee</span>
                       <span>${shippingFee.toFixed(2)}</span>
+
+
+                      
                     </div>
                     {discountData && (
                       <div className="d-flex justify-content-between text-success">
