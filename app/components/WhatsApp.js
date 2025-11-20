@@ -37,7 +37,7 @@ export default function WhatsAppFloating() {
 
       {/* WhatsApp Button */}
       <a
-        href="https://wa.me/447438848851"
+        href="https://wa.me/15127434894"
         target="_blank"
         rel="noopener noreferrer"
         style={{

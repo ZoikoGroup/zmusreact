@@ -364,7 +364,7 @@ Questions, comments, or suggestions? Simply fill in the form and we’ll be in t
 </div>
 <div className="d-flex align-items-center">
 <span className="me-2"><img src="./img/icons/mail.svg"></img></span>
-<span className="fw-semibold">Support@zoikocommunication.com</span>
+<span className="fw-semibold">support@zoikomobile.com </span>
 </div>
 </div>
 </Col>
