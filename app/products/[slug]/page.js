@@ -68,7 +68,7 @@ export default function ProductDetail() {
     if (!product) return;
 
     const v = product.variants?.[0] || {};
-    const price = parseFloat(v.starting_price || 0);
+    const price = v.starting_price;
 
     if (!selectedColor || !selectedStorage || !selectedCondition) {
       alert("Please select Color, Storage and Condition.");
@@ -88,7 +88,6 @@ export default function ProductDetail() {
       deviceSlug: product.slug,
       deviceTitle: product.name,
       devicePrice: price,
-      formData: { priceQty: 1, price },
     };
 
     const existing = JSON.parse(localStorage.getItem("cart") || "[]");
