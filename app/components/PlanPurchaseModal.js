@@ -17,7 +17,7 @@ const [simType, setSimType] = useState("pSIM");
 const [addSPProtection, setAddSPProtection] = useState(true);
 const [addTProtection, setAddTProtection] = useState(false);
 const [addSWProtection, setAddSWProtection] = useState(false);
-
+ const type = 'plan';
 
 const [formData, setFormData] = useState({
 mdn: "",
@@ -63,6 +63,7 @@ let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 const alreadyAdded = cart.some((item) => item.planId === 19);
 if (!alreadyAdded) {
   const protectionPlan = {
+    type:"plan",
     planTitle: "Smart Phone Device Protection",
     planSlug: "device-protection",
     planId: 19,
@@ -111,6 +112,7 @@ let cart = JSON.parse(localStorage.getItem("cart") || "[]");
     const alreadyAdded = cart.some((item) => item.planId === 19);
     if (!alreadyAdded) {
       const protectionPlan = {
+        type:"plan",
         planTitle: "Smart Phone Device Protection",
         planSlug: "device-protection",
         planId: 19,
@@ -143,6 +145,7 @@ const handleSmartWatchProtectionToggle = (e) => {
     const alreadyAdded = cart.some((item) => item.planId === 27);
     if (!alreadyAdded) {
       const protectionPlan = {
+        type:"plan",
         planTitle: "Smart Watch Device Protection",
         planSlug: "smart-watch-device-protection",
         planId: 27,
@@ -175,6 +178,7 @@ const handleTabletProtectionToggle = (e) => {
     const alreadyAdded = cart.some((item) => item.planId === 26);
     if (!alreadyAdded) {
       const protectionPlan = {
+        type:"plan",
         planTitle: "Tablet Device Protection",
         planSlug: "tablet-device-protection",
         planId: 26,
@@ -294,6 +298,7 @@ if (lineType === "portNumber" && currentStep === 1) {
     else if (lineType === "portNumber" && simType === "eSIM") filteredData = { ...formData };
 
     const finalData = {
+      type,
       planTitle,
       planSlug,
       planId,

@@ -76,6 +76,7 @@ export default function ProductDetail() {
     }
 
     const cartItem = {
+      type:"device",
       id: product.id,
       slug: product.slug,
       name: product.name,
@@ -84,13 +85,9 @@ export default function ProductDetail() {
       storage: selectedStorage,
       condition: selectedCondition,
       qty: 1,
-
-      planId: product.id,
-      planSlug: product.slug,
-      planTitle: product.name,
-      planPrice: price,
-      lineType: "device",
-      simType: "N/A",
+      deviceSlug: product.slug,
+      deviceTitle: product.name,
+      devicePrice: price,
       formData: { priceQty: 1, price },
     };
 
