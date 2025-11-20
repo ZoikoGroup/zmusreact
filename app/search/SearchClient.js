@@ -46,7 +46,7 @@ useEffect(() => {
 console.log(cleanedTerm);
     try {
       const searchUrl = "https://zmapi.zoikomobile.co.uk/api/v1/search?query="+cleanedTerm;
-      alert(searchUrl);
+      
       const response = await fetch(
         searchUrl,
         {
