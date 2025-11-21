@@ -19,7 +19,7 @@ import {
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function CheckoutPage() {
-  const [shippingFee, setShippingFee] = useState(5.00); // default value
+  const [shippingFee, setShippingFee] = useState(9.99); // default value
 
 const shippingOptions = [
   { label: "Standard (3-5 Days)", value: 9.99 },
@@ -766,7 +766,7 @@ const shippingOptions = [
                     })}
                     <hr />
                     <div className="d-flex justify-content-between">
-                      {/* <div className="mb-3">
+                      <div className="mb-3">
                         <label className="form-label">Shipping Options</label>
                         <select
                           className="form-select"
@@ -779,7 +779,7 @@ const shippingOptions = [
                             </option>
                           ))}
                         </select>
-                      </div> */}
+                      </div>
                       <span>Shipping Fee</span>
                       <span>${shippingFee.toFixed(2)}</span>
                     </div>
