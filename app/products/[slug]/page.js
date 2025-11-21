@@ -68,7 +68,7 @@ export default function ProductDetail() {
     if (!product) return;
 
     const v = product.variants?.[0] || {};
-    const price = v.starting_price;
+    const price = parseFloat(v.starting_price || 0);
 
     if (!selectedColor || !selectedStorage || !selectedCondition) {
       alert("Please select Color, Storage and Condition.");
@@ -85,9 +85,14 @@ export default function ProductDetail() {
       storage: selectedStorage,
       condition: selectedCondition,
       qty: 1,
-      deviceSlug: product.slug,
-      deviceTitle: product.name,
-      devicePrice: price,
+
+      planId: product.id,
+      planSlug: product.slug,
+      planTitle: product.name,
+      planPrice: price,
+      lineType: "device",
+      simType: "N/A",
+      formData: { priceQty: 1, price },
     };
 
     const existing = JSON.parse(localStorage.getItem("cart") || "[]");
