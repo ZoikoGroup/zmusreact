@@ -21,11 +21,11 @@ import {
 export default function CheckoutPage() {
   const [shippingFee, setShippingFee] = useState(9.99); // default value
 
-const shippingOptions = [
-  { label: "Standard (3-5 Days)", value: 9.99 },
-  { label: "Expedited (2-3 Days)", value: 14.99 },
-  { label: "Overnight", value: 24.99 },
-];
+// const shippingOptions = [
+//   { label: "Standard (3-5 Days)", value: 9.99 },
+//   { label: "Expedited (2-3 Days)", value: 14.99 },
+//   { label: "Overnight", value: 24.99 },
+// ];
   const [showThankYou, setShowThankYou] = useState(false);
   const [cart, setCart] = useState([]);
   const [showShipping, setShowShipping] = useState(false);
@@ -766,7 +766,7 @@ const shippingOptions = [
                     })}
                     <hr />
                     <div className="d-flex justify-content-between">
-                      <div className="mb-3">
+                      {/* <div className="mb-3">
                         <label className="form-label">Shipping Options</label>
                         <select
                           className="form-select"
@@ -779,7 +779,7 @@ const shippingOptions = [
                             </option>
                           ))}
                         </select>
-                      </div>
+                      </div> */}
                       <span>Shipping Fee</span>
                       <span>${shippingFee.toFixed(2)}</span>
                     </div>
