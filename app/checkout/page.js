@@ -766,7 +766,7 @@ const shippingOptions = [
                     })}
                     <hr />
                     <div className="d-flex justify-content-between">
-                      <div className="mb-3">
+                      {/* <div className="mb-3">
                         <label className="form-label">Shipping Options</label>
                         <select
                           className="form-select"
@@ -779,7 +779,7 @@ const shippingOptions = [
                             </option>
                           ))}
                         </select>
-                      </div>
+                      </div> */}
                       <span>Shipping Fee</span>
                       <span>${shippingFee.toFixed(2)}</span>
                     </div>
