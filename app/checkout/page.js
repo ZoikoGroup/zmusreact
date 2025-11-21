@@ -22,8 +22,8 @@ export default function CheckoutPage() {
   const [shippingFee, setShippingFee] = useState(5.00); // default value
 
 const shippingOptions = [
-  { label: "Standard (3–5 Days)", value: 9.99 },
-  { label: "Expedited (2–3 Days)", value: 14.99 },
+  { label: "Standard (3-5 Days)", value: 9.99 },
+  { label: "Expedited (2-3 Days)", value: 14.99 },
   { label: "Overnight", value: 24.99 },
 ];
   const [showThankYou, setShowThankYou] = useState(false);
