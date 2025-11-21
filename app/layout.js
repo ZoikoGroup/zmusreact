@@ -678,6 +678,44 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <Script id="zoiko-breadcrumb-jsonld" type="application/ld+json" strategy="afterInteractive">
+{`{
+  "@context": "https://schema.org/",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Best Postpaid Phone Plans",
+      "item": "https://zoikomobile.com/postpaid-plans/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Best Travel Data Plan",
+      "item": "https://zoikomobile.com/travel-plans/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Refurbished Mobile Phone Deals",
+      "item": "https://zoikomobile.com/product-category/refurbished/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Best Phone Plans for Students",
+      "item": "https://zoikomobile.com/college-student/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "Best eSim Service Provider in USA",
+      "item": "https://zoikomobile.com/esim/"
+    }
+  ]
+}`}
+        </Script>
         {/* ✅ JSON-LD structured data (WebSite) */}
         {/* <Script
           id="zoiko-website-jsonld"
