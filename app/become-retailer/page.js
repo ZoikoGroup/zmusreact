@@ -41,7 +41,7 @@ const BecomeRetailerPage = () => {
             <Button
               variant="danger"
               size="lg"
-              href="/become-affiliate-form"  
+              href="/become-retailer-form"  
               className="mt-3 px-4"
               style={{ backgroundColor: "#DF1E5A", border: "none" }}
             >
