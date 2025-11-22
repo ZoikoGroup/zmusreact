@@ -51,9 +51,9 @@ const metaMap = {
       "Explore Zoiko Mobile Black Friday Mobile & SIM Card Deals 2025. Save big on SIM plans, device protection & phones, and help animal rescues today!",
   },
   "/about": {
-    title: "About SIM only deals UK | Free SIM Card Deals Provider | Zoiko",
+    title: "About Us | Zoiko Mobile’s Mission & Vision",
     description:
-      "Learn about our mission and find free SIM cards and cheap SIM only deals with unlimited data in UK. Stay connected!",
+      "Discover Zoiko Mobile’s purpose‑driven mission: fast 5G, flexible plans & giving back to animals & music. Join the network, making a positive impact daily.",
   },
   "/prepaid-plans": {
     title: "Prepaid Phone Plans | Unlimited High-Speed 5G Data",
