@@ -59,27 +59,27 @@ const artists = [
 const videos = [
   {
     id: "uIdD8aVArU0",
-    thumb: "https://assets.zoikomobile.com/wp-content/uploads/2024/08/maxresdefault.jpg",
+    thumb: "/img/maxresdefault.jpg",
     title: "Wake Up",
   },
   {
     id: "m-hQw7Bhhys",
-    thumb: "https://assets.zoikomobile.com/wp-content/uploads/2024/08/maxresdefault-1.jpg",
+    thumb: "/img/maxresdefault-1.jpg",
     title: "Playful Chimp",
   },
   {
     id: "zWabBqkMVhc",
-    thumb: "https://assets.zoikomobile.com/wp-content/uploads/2024/08/maxresdefault-2.jpg",
+    thumb: "/img/maxresdefault-2.jpg",
     title: "Cute Kittens",
   },
   {
     id: "e5I-LvVP0W0",
-    thumb: "https://assets.zoikomobile.com/wp-content/uploads/2024/08/maxresdefault-3.jpg",
+    thumb: "/img/maxresdefault-3.jpg",
     title: "Play Time",
   },
   {
     id: "eELa9KLGuMo",
-    thumb: "https://assets.zoikomobile.com/wp-content/uploads/2024/08/maxresdefault-4.jpg",
+    thumb: "/img/maxresdefault-4.jpg",
     title: "Adorable Pals",
   },
 ];
