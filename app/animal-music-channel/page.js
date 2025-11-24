@@ -104,23 +104,23 @@ const videos = [
 // ];
 const videos3 = [
   {
-    img: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Group-1144.webp",
+    img: "/img/Group-1144.webp",
     url: "https://www.youtube.com/embed/1Up_eIQejKU?autoplay=1&modestbranding=1&rel=0&showinfo=0",
   },
   {
-    img: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Rectangle-754.webp",
+    img: "/img/Rectangle-754.webp",
     url: "https://www.youtube.com/embed/jXHOHOYkbYc?autoplay=1&modestbranding=1&rel=0&showinfo=0",
   },
   {
-    img: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Rectangle-755.webp",
+    img: "/img/Rectangle-755.webp",
     url: "https://www.youtube.com/embed/qacnieKsz8k?autoplay=1&modestbranding=1&rel=0&showinfo=0",
   },
   {
-    img: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Rectangle-758-1.webp",
+    img: "/img/Rectangle-758-1.webp",
     url: "https://www.youtube.com/embed/UoOXLQYNsoQ?autoplay=1&modestbranding=1&rel=0&showinfo=0",
   },
   {
-    img: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Rectangle-756-1.webp",
+    img: "/img/Rectangle-756-1.webp",
     url: "https://www.youtube.com/embed/1GQWnKALmJI?autoplay=1&modestbranding=1&rel=0&showinfo=0",
   },
 ];
