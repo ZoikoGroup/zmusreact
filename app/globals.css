@@ -997,13 +997,14 @@ a {
     text-align: center !important;
     width: 100% !important;
   }
-.deviceProtectionCol2 button{
-      width: 100% !important;
+.deviceProtectionCol2 a{
+          width: 80vw !important;
 }
 .blkFrdSale{
   justify-content: center !important;
 }
 }
+
 .navbar>.container-fluid{
   flex-wrap: unset;
 }
@@ -1024,6 +1025,9 @@ a {
 
  /* Desktop-only spacing for Music Hub intro text */
 @media (min-width: 992px) {
+  .deviceProtectionCol2 a{
+          width: 35vw !important;
+}
   .music-hub-intro h4 {
     line-height: 1.5; /* Adjust as needed */
     margin-bottom: 20px; /* Space below heading */
