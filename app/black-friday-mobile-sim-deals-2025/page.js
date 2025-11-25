@@ -210,10 +210,10 @@ console.error("Form submission error:", error);
       </Container>
     </div>
             <div className="d-flex gap-4 bannerBtns">
-              <Button variant="dark" size="lg" href="/byod-plans">
+              <Button variant="dark" size="lg" href="/all-plans">
                 Shop Black Friday Deals
               </Button>
-              <Button variant="light" size="lg"  href="/all-plans">
+              <Button variant="light" size="lg"  href="/byod-plans">
                 Activate Your SIM Now
               </Button>
             </div>
