@@ -420,7 +420,7 @@ width: 35vw;
           <Button
             variant="outline-danger"
             size="lg"
-            className="mt-4 px-5 py-2"
+            className="mt-4 px-5 py-2" href="/device-protection"
           >
             Add Protection
           </Button>
