@@ -1003,6 +1003,13 @@ a {
 .blkFrdSale{
   justify-content: center !important;
 }
+.blackFridayBannerContent p{
+font-size: 6vw !important;
+}
+.blackFridayBannerContent .bannerBtns a{
+  font-size: 3vw !important;
+}
+
 }
 
 .navbar>.container-fluid{
