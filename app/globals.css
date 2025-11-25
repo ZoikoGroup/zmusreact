@@ -989,6 +989,20 @@ a {
   .banner8{
     bottom: 250px !important;
   }
+  .deviceProtectionCol2 ul{
+    text-align: center !important;
+    width: 100% !important;
+  }
+   .deviceProtectionCol2{
+    text-align: center !important;
+    width: 100% !important;
+  }
+.deviceProtectionCol2 button{
+      width: 100% !important;
+}
+.blkFrdSale{
+  justify-content: center !important;
+}
 }
 .navbar>.container-fluid{
   flex-wrap: unset;

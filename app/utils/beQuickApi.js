@@ -84,13 +84,13 @@ export async function processOrder(postData) {
     postData.bequick_order_amount = orderResponse.order.total;
 
     // // 5️⃣ Make payment
-    const orderPaymentResponse = await orderPayment(postData);
-    if (!orderPaymentResponse.status) return orderPaymentResponse;
+    // const orderPaymentResponse = await orderPayment(postData);
+    // if (!orderPaymentResponse.status) return orderPaymentResponse;
 
-    // 6️⃣ Submit order
-    const submitResponse = await submitOrder(postData.bequick_order_id);
-    if (!submitResponse.status) return submitResponse.response;
-
+    // // 6️⃣ Submit order
+    // const submitResponse = await submitOrder(postData.bequick_order_id);
+    // if (!submitResponse.status) return submitResponse.response;
+console.log(postData);
     return {
       status: true,
       message: "Order processed successfully",
@@ -310,10 +310,6 @@ export async function createDraftLine(postData) {
       };
       i++;
   }
-
- 
-
-
 }
 
 export async function createDraftOrder(postData) {
@@ -332,40 +328,42 @@ export async function createDraftOrder(postData) {
   let orderDetailsAttributes = []; // should be an array (since you're pushing per product)
 
   for (const product of cart) {
-    const simType = (product.simType || "").trim();
-    // console.log("simType:", simType);
+    if(product.type === 'plan'){
+      const simType = (product.simType || "").trim();
+      // console.log("simType:", simType);
 
-    // Add plan first
-    orderDetailsAttributes.push({
-      product_id: parseInt(product.planBqid),
-      line_id: product.line_id,
-    });
-    planCount++;
+      // Add plan first
+      orderDetailsAttributes.push({
+        product_id: parseInt(product.planBqid),
+        line_id: product.line_id,
+      });
+      planCount++;
 
-    // Then add SIM type
-    if (simType === "eSIM") {
-      orderDetailsAttributes.push({
-        product_id: ESIM_PRODUCT_ID,
-        line_id: product.line_id,
-      });
-      simCount++;
-      console.log("Added eSIM:", orderDetailsAttributes);
-    } else if (simType === "pSIM") {
-      orderDetailsAttributes.push({
-        product_id: PSIM_PRODUCT_ID,
-        line_id: product.line_id,
-      });
-      simCount++;
-      console.log("Added pSIM:", orderDetailsAttributes);
-    } else if (simType === "device_protection") {
-      orderDetailsAttributes.push({
-        product_id: DEVICE_PROTECTION_PRODUCT_ID,
-        line_id: product.line_id,
-      });
-      simCount++;
-      console.log("Added Device_Protection:", orderDetailsAttributes);
-    } else {
-      console.warn("Unknown SIM type:", simType);
+      // Then add SIM type
+      if (simType === "eSIM") {
+        orderDetailsAttributes.push({
+          product_id: ESIM_PRODUCT_ID,
+          line_id: product.line_id,
+        });
+        simCount++;
+        console.log("Added eSIM:", orderDetailsAttributes);
+      } else if (simType === "pSIM") {
+        orderDetailsAttributes.push({
+          product_id: PSIM_PRODUCT_ID,
+          line_id: product.line_id,
+        });
+        simCount++;
+        console.log("Added pSIM:", orderDetailsAttributes);
+      } else if (simType === "device_protection") {
+        orderDetailsAttributes.push({
+          product_id: DEVICE_PROTECTION_PRODUCT_ID,
+          line_id: product.line_id,
+        });
+        simCount++;
+        console.log("Added Device_Protection:", orderDetailsAttributes);
+      } else {
+        console.warn("Unknown SIM type:", simType);
+      }
     }
   }
   //  console.log("orderDetailsAttributes:", orderDetailsAttributes);

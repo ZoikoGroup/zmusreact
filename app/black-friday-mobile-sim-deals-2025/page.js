@@ -6,8 +6,42 @@ import { Container, Row, Col, Button, Alert, Form, Card } from "react-bootstrap"
 import { useEffect, useState } from "react";
 import CarouselPlans from "../components/BlackFridayCarouselPlans";
 import Testimonials from "../components/Testimonials";
+
+  import { QuestionCircleFill,BarChartFill,  LightningFill,  LaptopFill,  CreditCardFill,  HeartFill  } from "react-bootstrap-icons";
+  import { FaSitemap, FaQrcode,FaPercentage,FaSimCard, FaPaw,FaCheck,FaSignal, FaHeart, FaBolt, FaShieldAlt, FaGift, FaLeaf} from "react-icons/fa";
+
+
+  import { MdOutlineSimCard } from "react-icons/md";
+
 export default function blackFridaySpecialPage(){
-  
+
+const faqData = [
+    {
+      q: "What are the Black Friday deals?",
+      a: "Up to 60% off mobile plans, free SIM activation, and 40% off ZoikoCare™ device protection."
+    },
+    {
+      q: "How does my plan support animal rescue?",
+      a: "Every Zoiko Mobile plan contributes to the Zoiko Animal Rescue Network (ZARN) which supports shelters nationwide."
+    },
+    {
+      q: "What does ZoikoCare™ cover?",
+      a: "Protection covers theft, loss, accidental damage, and screen breaks with next-day replacement available."
+    },
+    {
+      q: "Can I bring my own device?",
+      a: "Yes, Zoiko Mobile supports most unlocked devices. Check compatibility on our website."
+    },
+    {
+      q: "When do Black Friday offers end?",
+      a: "Offers run from November 28 through December 1 (Cyber Monday), 2025."
+    },
+    {
+      q: "Is there a credit check?",
+      a: "We offer no credit check options for prepaid plans."
+    },
+  ];
+
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
   firstName: "",
@@ -79,41 +113,41 @@ console.error("Form submission error:", error);
 }
 };
 // Set your target date here
-  const targetDate = new Date("December 1, 2025 23:59:00").getTime();
+  // const targetDate = new Date("December 1, 2025 23:59:00").getTime();
 
-  const [timeLeft, setTimeLeft] = useState({
-    days: "00",
-    hours: "00",
-    minutes: "00",
-    seconds: "00",
-  });
+  // const [timeLeft, setTimeLeft] = useState({
+  //   days: "00",
+  //   hours: "00",
+  //   minutes: "00",
+  //   seconds: "00",
+  // });
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const diff = targetDate - now;
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     const now = new Date().getTime();
+  //     const diff = targetDate - now;
 
-      if (diff <= 0) {
-        clearInterval(timer);
-        setTimeLeft({
-          days: "00",
-          hours: "00",
-          minutes: "00",
-          seconds: "00",
-        });
-        return;
-      }
+  //     if (diff <= 0) {
+  //       clearInterval(timer);
+  //       setTimeLeft({
+  //         days: "00",
+  //         hours: "00",
+  //         minutes: "00",
+  //         seconds: "00",
+  //       });
+  //       return;
+  //     }
 
-      setTimeLeft({
-        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((diff / (1000 * 60)) % 60),
-        seconds: Math.floor((diff / 1000) % 60),
-      });
-    }, 1000);
+  //     setTimeLeft({
+  //       days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+  //       hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+  //       minutes: Math.floor((diff / (1000 * 60)) % 60),
+  //       seconds: Math.floor((diff / 1000) % 60),
+  //     });
+  //   }, 1000);
 
-    return () => clearInterval(timer);
-  }, []);
+  //   return () => clearInterval(timer);
+  // }, []);
   return (
     
     <>
@@ -122,7 +156,12 @@ console.error("Form submission error:", error);
 <style>{`.fade-out {
   animation: fadeOut 5s forwards;
 }
-
+  .blackFridayCarouselPlanTab {
+  padding-top:2vw;
+  }
+.benefit-item {
+  font-size: 16px;
+}
 @keyframes fadeOut {
   0% { opacity: 1; }
   100% { opacity: 0; }
@@ -132,20 +171,50 @@ console.error("Form submission error:", error);
           {/* LEFT TEXT */}
           <Col md={6} className="blackFridayBannerContent">
             <h1 className="fw-bold mb-4">
-              Connect, Care, and Make a Difference - The Animal & Music Loving Network
+              Black Friday Mobile Deals -  Save Big. Switch with Purpose
             </h1>
 
             <p>
-              Every plan supports animal welfare and young musicians while
-              keeping you connected nationwide.
+              Up to 60% off SIM & mobile bundles — and every plan supports animal rescues
             </p>
+<div  className="py-3">
+      <Container>
+        <Row className="text-white fw-semibold d-flex align-items-center g-4">
 
+          <Col md="auto" className="d-flex align-items-center gap-2">
+            <BarChartFill className="text-warning fs-4" />
+            <span>Tier-1 5G & LTE</span>
+          </Col>
+
+          <Col md="auto" className="d-flex align-items-center gap-2">
+            <LightningFill className="text-warning fs-4" />
+            <span>Free SIM Activation</span>
+          </Col>
+
+          <Col md="auto" className="d-flex align-items-center gap-2">
+            <FaPaw   className="text-warning fs-4" />
+            <span>Animal Rescue Support</span>
+          </Col>
+
+          <Col md="auto" className="d-flex align-items-center gap-2">
+            <LaptopFill className="text-warning fs-4" />
+            <span>Digital Onboarding</span>
+          </Col>
+
+          <Col md="auto" className="d-flex align-items-center gap-2">
+            <CreditCardFill className="text-warning fs-4" />
+            <span>No Credit Check Options</span>
+          </Col>
+
+        </Row>
+      </Container>
+    </div>
             <div className="d-flex gap-4 bannerBtns">
               <Button variant="dark" size="lg" href="/byod-plans">
-                Get Your SIM Today
+                Shop Black Friday Deals
               </Button>
               <Button variant="light" size="lg"  href="/all-plans">
-                View Plans
+                Activate Your SIM Now
               </Button>
             </div>
           </Col>
@@ -169,18 +238,125 @@ console.error("Form submission error:", error);
         </Row>
       </Container>
       
-   
-      <Container fluid className="blackFridayCountdown">
+   <Container className="py-5">
+      <Row className="text-center gy-4">
+        
+        <Col md={3}>
+          <FaSitemap size={40} color="#e50053" />
+          <h5 className="fw-bold mt-3">
+            Nationwide Tier-1 5G & LTE coverage
+          </h5>
+        </Col>
+
+        <Col md={3}>
+          <FaShieldAlt size={40} color="#e50053" />
+          <h5 className="fw-bold mt-3">
+            Exclusive Black Friday<br />accessory + protection bundles
+          </h5>
+        </Col>
+
+        <Col md={3}>
+          <MdOutlineSimCard   size={40} color="#e50053" />
+          <h5 className="fw-bold mt-3">
+            Flexible prepaid and<br />postpaid plans
+          </h5>
+        </Col>
+
+        <Col md={3}>
+          <FaQrcode size={40} color="#e50053" />
+          <h5 className="fw-bold mt-3">
+            Sustainable telecom — paperless billing, recyclable SIM packaging
+          </h5>
+        </Col>
+
+      </Row>
+    </Container>
+    <style>{`
+      .blkFrdExOff {
+  background: #f1faf5;
+  padding:5vw;
+}
+  .card{
+  border-radius:1vw !important;
+      padding: 3vw 3vw !important;
+  }
+      
+  .supportAnimal h1{
+font-size: 4vw;
+  }
+  .supportAnimal 9{
+font-size: 1.4vw;
+  }
+.deviceProtectionCol2 button, .deviceProtectionCol2 ul{
+width: 35vw;
+}
+.deviceProtectionCol2 button{
+    background: #ffffff;
+}
+.deviceProtectionCol2 li{
+    border-bottom: 2px solid #d7d7d76b;
+    padding: .5vw 0px 1vw 0;
+    }
+  `}
+    </style>
+    <Container fluid className="blkFrdExOff">
+      <h2 className="text-center mb-5 fw-bold">
+        Black Friday Exclusive Offers
+      </h2>
+
+      <Row className="g-4 mx-5">
+        <Col md={3}>
+          <Card className="text-center p-4 shadow-sm h-100">
+            <div className="text-center">
+            <FaPercentage size={40} color="#E61E5D" className="mb-3" />
+            </div>
+            <h5 className="fw-bold">Up to 60% Off Mobile + SIM Bundles</h5>
+          </Card>
+        </Col>
+
+        <Col md={3}>
+          <Card className="text-center p-4 shadow-sm h-100">
+            <div className="text-center">
+            <FaSimCard size={40} color="#E61E5D" className="mb-3" />
+            </div>
+            <h5 className="fw-bold">Free SIM Activation on select plans</h5>
+          </Card>
+        </Col>
+
+        <Col md={3}>
+          <Card className="text-center p-4 shadow-sm h-100">
+            <div className="text-center">
+            <FaPaw size={40} color="#E61E5D" className="mb-3" />
+            </div>
+            <h5 className="fw-bold">
+              Every Purchase Supports Animal Rescue (ZARN)
+            </h5>
+          </Card>
+        </Col>
+
+        <Col md={3}>
+          <Card className="text-center p-4 shadow-sm h-100">
+            <div className="text-center">
+            <FaShieldAlt size={40} color="#E61E5D" className="mb-3" />
+            </div>
+            <h5 className="fw-bold">
+              Up to 40% Off ZoikoCare™ Device Protection
+            </h5>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+      {/* <Container fluid className="blackFridayCountdown">
         <Row className="align-items-center text-white">
           <Col md="4" className="d-flex blackFridayCountdownText1">
             <span className="blackFridayFire">🔥</span>
             <span>
               BLACK FRIDAY DEALS END IN :
             </span>
-          </Col>
+          </Col> */}
 
           {/* Dynamic Counter */}
-          <Col md="4 blackFridayCountdownText2 ">
+          {/* <Col md="4 blackFridayCountdownText2 ">
             <div className="d-flex gap-3 justify-content-center">
               <div className="count-box">
                 <span className="count-num">{timeLeft.days}</span>
@@ -199,155 +375,148 @@ console.error("Form submission error:", error);
                 <span className="count-label">SEC</span>
               </div>
             </div>
-          </Col>
+          </Col> */}
 
-          <Col md="4" className="d-flex blackFridayCountdownText3">
+          {/* <Col md="4" className="d-flex blackFridayCountdownText3">
             <span>Ends: 1st December 2025, 11:59 PM</span>
           </Col>
         </Row>
-      </Container>
- <Container
-      fluid
-      className="my-5 d-flex justify-content-center background-white"
-      style={{ padding: "0 20px" }}
-    >
-      <div
-        className="p-5 text-center"
-        style={{
-          background: "linear-gradient(135deg, #ffe6ed, #fde6f1)",
-          borderRadius: "20px",
-          border: "3px solid #ff2c75",
-          maxWidth: "1200px",
-          width: "100%",
-        }}
-      >
-        <h2 className="fw-bold mb-3">
-          🎁 Black Friday Special
-        </h2>
+      </Container> */}
+       <CarouselPlans />
+       
+    <Container className="py-5" style={{ background: "#f0fff7" }}>
+      <Row className="align-items-center">
+        
+        {/* LEFT IMAGE */}
+        <Col md={6} className="deviceProtectionCol1">
+          <img
+            src="/img/DeviceProtection.png"
+            alt="Device Protection"
+            className="img-fluid rounded"
+          />
+        </Col>
 
-        <p className="fs-5 mb-2">
-          Purchase any device + 3 months Protection Plan =  
-          <strong> FREE Accessory Kit</strong> (Value $50)
+        {/* RIGHT CONTENT */}
+        <Col md={6} className="deviceProtectionCol2">
+          <h2 className="fw-bold mb-2">ZoikoCare™ Device Protection</h2>
+          <p className="text-muted">
+            Complete coverage for your mobile device
+          </p>
+
+          <ul className="list-unstyled fs-5 mt-4">
+            <li className="mb-2"><FaCheck className="text-danger me-2" /> Theft & loss protection</li>
+            <li className="mb-2"><FaCheck className="text-danger me-2" /> Accidental damage coverage</li>
+            <li className="mb-2"><FaCheck className="text-danger me-2" /> Screen crack repair</li>
+            <li className="mb-2"><FaCheck className="text-danger me-2" /> Next-day replacement</li>
+            <li className="mb-2"><FaCheck className="text-danger me-2" /> 24/7 claim support</li>
+          </ul>
+
+          <div className="d-flex align-items-center mt-4 blkFrdSale">
+            <span className="text-decoration-line-through me-3 fs-5">$12/mo</span>
+            <span className="fw-bold text-danger fs-3">$7/mo</span>
+            <span className="ms-2 text-muted">(40% off Black Friday)</span>
+          </div>
+
+          <Button
+            variant="outline-danger"
+            size="lg"
+            className="mt-4 px-5 py-2"
+          >
+            Add Protection
+          </Button>
+        </Col>
+
+      </Row>
+    </Container>
+    
+      <Container className="my-2"  style={{ backgroundColor: "#E81F64", color: "white", padding: "60px 0" }}>
+        <h1 className="text-center mb-4 fw-bold">
+          Every Plan Supports Animal Rescue
+        </h1>
+        <p className="text-center mb-5" style={{ maxWidth: 900, margin: "0 auto", fontSize:"1.5vw" }}>
+          A portion of every Zoiko Mobile plan goes directly to the Zoiko Animal
+          Rescue Network (ZARN), helping protect and care for animals across the
+          United States.
         </p>
 
-        <p className="mb-4">
-          Includes: Premium case, screen protector, charging cable & car charger
-        </p>
-
-        <Row className="justify-content-center g-3">
-          <Col xs="auto">
-            <Button variant="light" className="px-4 py-2" style={{ borderRadius: "30px" }} href="/all-plans">
-              View Plans
-            </Button>
+        <Row className="text-center ">
+          <Col md={4} className="mb-4 supportAnimal">
+            <h1 className="fw-bold">12,000+</h1>
+            <p className="mb-0">Animals helped</p>
           </Col>
 
-          <Col xs="auto">
-            <Button
-              variant="danger"
-              className="px-4 py-2"
-              style={{ borderRadius: "30px" }}
-              href="https://phones.zoikomobile.com/"
-            >
-              View Smartphone Devices
-            </Button>
+          <Col md={4} className="mb-4 supportAnimal">
+            <h1 className="fw-bold">45+</h1>
+            <p className="mb-0">Partner shelters</p>
+          </Col>
+
+          <Col md={4} className="mb-4 supportAnimal">
+            <h1 className="fw-bold">$2M+</h1>
+            <p className="mb-0">Donated</p>
           </Col>
         </Row>
-      </div>
-    </Container>
+      </Container>
+      <Container className="text-center my-5 py-5">
+        <h2 className="mb-5 fw-bold">
+          Why Choose Zoiko Mobile This Black Friday
+        </h2>
 
-    <CarouselPlans /> 
+        <Row className="g-5">
 
-<Container className="text-center my-5 py-5">
-      <h2 className="fw-bold mb-5">Why Choose Zoiko Mobile?</h2>
+          {/* 1. Nationwide Coverage */}
+          <Col md={4}>
+            <FaSignal size={50} color="#E63963" className="mb-3" />
+            <h4 className="fw-semibold">Nationwide Tier-1 Coverage</h4>
+            <p className="text-muted">Fast and reliable</p>
+          </Col>
 
-      <Row className="g-5 justify-content-center">
+          {/* 2. Purpose-Driven Connectivity */}
+          <Col md={4}>
+            <FaHeart size={50} color="#E63963" className="mb-3" />
+            <h4 className="fw-semibold">Purpose-Driven Connectivity</h4>
+            <p className="text-muted">Every plan helps protect animals</p>
+          </Col>
 
-        {/* Item 1 */}
-        <Col xs={12} md={6} lg={4}>
-          <div className="feature-item">
-            <div className="icon-circle">
-              <img src="/img/blkfriicon1.png" alt="phone" width="30" />
-            </div>
-            <h5 className="fw-bold mt-3">Prepaid and Postpaid Flexibility</h5>
-            <p>
-              Switch plans easily without commitment.<br/>
-              Choose prepaid for control or postpaid for convenience.
+          {/* 3. Instant Activation */}
+          <Col md={4}>
+            <FaBolt size={50} color="#E63963" className="mb-3" />
+            <h4 className="fw-semibold">Instant Digital Activation</h4>
+            <p className="text-muted">SIM and eSIM ready in minutes</p>
+          </Col>
+
+          {/* 4. Flexible Plans */}
+          <Col md={4}>
+            <FaShieldAlt size={50} color="#E63963" className="mb-3" />
+            <h4 className="fw-semibold">Flexible Plans</h4>
+            <p className="text-muted">
+              Prepaid, postpaid, family, and multi-device options.
             </p>
-          </div>
-        </Col>
+          </Col>
 
-        {/* Item 2 */}
-        <Col xs={12} md={6} lg={4}>
-          <div className="feature-item">
-            <div className="icon-circle">
-              <img src="/img/blkfriicon2.png" alt="world" width="30" />
-            </div>
-            <h5 className="fw-bold mt-3">Global Connectivity Network</h5>
-            <p>
-              Stay connected worldwide with free international<br/>
-              calling and roaming options. Reliable global service.
+          {/* 5. Holiday Bundles */}
+          <Col md={4}>
+            <FaGift size={50} color="#E63963" className="mb-3" />
+            <h4 className="fw-semibold">Holiday Bundles</h4>
+            <p className="text-muted">
+              Accessories + protection + bonus data
             </p>
-          </div>
-        </Col>
+          </Col>
 
-        {/* Item 3 */}
-        <Col xs={12} md={6} lg={4}>
-          <div className="feature-item">
-            <div className="icon-circle">
-              <img src="/img/blkfriicon3.png" alt="animal rescue" width="30" />
-            </div>
-            <h5 className="fw-bold mt-3">Sustainability and Animal Rescue</h5>
-            <p>
-              Every plan contributes to animal rescue organizations.<br/>
-              Your connectivity helps save lives.
+          {/* 6. Eco-Friendly */}
+          <Col md={4}>
+            <FaLeaf size={50} color="#E63963" className="mb-3" />
+            <h4 className="fw-semibold">Eco-Friendly</h4>
+            <p className="text-muted">
+              Recyclable SIM packaging and paperless billing
             </p>
-          </div>
-        </Col>
+          </Col>
 
-        {/* Item 4 */}
-        <Col xs={12} md={6} lg={4}>
-          <div className="feature-item">
-            <div className="icon-circle">
-              <img src="/img/blkfriicon4.png" alt="AI tools" width="30" />
-            </div>
-            <h5 className="fw-bold mt-3">AI-Powered Tools</h5>
-            <p>
-              Smart features that optimize your experience.<br/>
-              AI-driven network management.
-            </p>
-          </div>
-        </Col>
+        </Row>
+      </Container>
+ 
 
-        {/* Item 5 */}
-        <Col xs={12} md={6} lg={4}>
-          <div className="feature-item">
-            <div className="icon-circle">
-              <img src="/img/blkfriicon5.png" alt="compliance" width="30" />
-            </div>
-            <h5 className="fw-bold mt-3">Regulatory Compliance Assured</h5>
-            <p>
-              Fully licensed and compliant with all regulations.<br/>
-              Your data and privacy protected.
-            </p>
-          </div>
-        </Col>
-
-        {/* Item 6 */}
-        <Col xs={12} md={6} lg={4}>
-          <div className="feature-item">
-            <div className="icon-circle">
-              <img src="/img/blkfriicon6.png" alt="support" width="30" />
-            </div>
-            <h5 className="fw-bold mt-3">Customer Centric Support</h5>
-            <p>
-              24/7 support from real people who care.<br/>
-              Quick resolution and personalized assistance.
-            </p>
-          </div>
-        </Col>
-
-    </Row>
-  </Container>
+{/* 
+    
 <Container fluid className="py-5 blackFridayContactArea">
   <Row className="align-items-center">
     <Col md={6} className="px-5">
@@ -367,9 +536,13 @@ Questions, comments, or suggestions? Simply fill in the form and we'll be in tou
 <span className="fw-semibold"><a href="mailto:support@zoikomobile.com" style={{ color : "black !important",textDecoration:"none !important"}}>support@zoikomobile.com</a> </span>
 </div>
 </div>
-</Col>
+</Col> */}
 <style>{`
-
+@media (max-width: 991.98px) {
+.faq-card {
+height: 20vw !important;
+}
+}
 .blackFridayContactForm {
     box-shadow: 3px 4px 19px 14px rgba(0, 0, 0, 0.1) !important;
     border-radius: 15px !important;
@@ -434,9 +607,14 @@ margin-bottom: 2vw;}
   z-index: 10;
   border-radius: 12px;
 }
-
+.faq-card {
+  border-radius: 20px;
+  background: #ffffff;
+      height: 12vw;
+  border-left: 4px solid #e63946; /* Red left border like screenshot */
+}
 `}</style>
-    <Col md={6}>
+    {/* <Col md={6}>
       <div style={{ position: "relative" }}>
 
   {loading && (
@@ -545,52 +723,28 @@ margin-bottom: 2vw;}
       </div>
     </Col>
   </Row>
-</Container>
+</Container> */}
+
  <Testimonials/> 
-<div style={{ backgroundColor: "#ffe0eb", padding: "60px 0" }}>
-<Container className="text-center">
-<h1 className="fw-bold">Your Plan Helps Fund Animal Rescues 🐾</h1>
-<p className="mt-3">Every Zoiko Mobile customer directly contributes to saving animal lives</p>
+<Container className="py-5">
+      <h2 className="text-center mb-5 fw-bold">Frequently Asked Questions</h2>
 
-
-<Row className="mt-5">
-<Col md={4} className="mb-4">
-<h2 className="text-danger fw-bold">$250K+</h2>
-<p>Donated to Animal Shelters</p>
-</Col>
-
-
-<Col md={4} className="mb-4">
-<h2 className="text-danger fw-bold">5,000+</h2>
-<p>Animals Rescued</p>
-</Col>
-
-
-<Col md={4} className="mb-4">
-<h2 className="text-danger fw-bold">50+</h2>
-<p>Partner Shelters</p>
-</Col>
-</Row>
-
-
-<Card className="p-4 mt-6 shadow-sm blackFridayLowerBox" style={{ borderRadius: "20px" }}>
-<h4 className="fw-bold mb-4 text-start">How Your Subscription Makes a Difference:</h4>
-<ul className="text-start" style={{ listStyle: "none", paddingLeft: 0 }}>
-<li>💵 $1 from every plan goes directly to animal rescue organizations</li>
-<li className="mt-2">🏥 Funds medical care, food, and shelter for rescued animals</li>
-<li className="mt-2">❤️ Supports adoption programs and foster networks</li>
-<li className="mt-2">🌟 100% transparent donation tracking available</li>
-</ul>
-
-
-<div className="blackFridayLowerBoxBtn">
-<Button  size="lg" href="/animal-charities">
-Learn More About Our Mission
-</Button>
-</div>
-</Card>
-</Container>
-</div>
+      <Row className="g-4">
+        {faqData.map((item, index) => (
+          <Col md={6} key={index}>
+            <Card className="p-4 shadow-sm faq-card">
+              <div className="d-flex align-items-start gap-3">
+                <QuestionCircleFill className="text-danger fs-3" />
+                <div>
+                  <h5 className="fw-bold">{item.q}</h5>
+                  <p className="mt-2 mb-0 text-secondary">{item.a}</p>
+                </div>
+              </div>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Container>
       <Footer />
     </>
   );
