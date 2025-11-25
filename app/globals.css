@@ -1923,3 +1923,403 @@ body {
   font-size: 24px;
   text-decoration: none;
 }
+
+
+
+
+
+/* ================================
+   MAIN WRAPPER
+================================ */
+.product-html-wrapper {
+  font-family: Inter, Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* ================================
+   TITLES (GLOBAL)
+================================ */
+.product-html-wrapper h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #111;
+}
+
+.product-html-wrapper h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 4px 0 12px;
+  color: #555;
+}
+
+.product-html-wrapper h3 {
+  font-size: 20px;
+  margin-bottom: 14px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* ================================
+   PRODUCT SPECIFICATIONS SECTION
+================================ */
+.mobile-products-section {
+  background: #fff;
+  padding: 18px 20px;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  margin-bottom: 25px;
+}
+
+.mobile-products-section p {
+  margin-bottom: 14px;
+  color: #444;
+}
+
+.mobile-products-benefits {
+  margin-top: 14px;
+}
+
+.mobile-products-benefits ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  list-style: none;
+  margin: 0;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.mobile-products-benefits ul li {
+  width: 50%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-products-benefits ul li:first-child {
+  font-weight: 600;
+  color: #222;
+}
+
+.mobile-products-benefits ul li:last-child {
+  text-align: right;
+  color: #444;
+}
+
+.mobile-products-benefits > p {
+  font-size: 14px;
+  color: #777;
+  margin-top: 12px;
+}
+
+/* ================================
+   INCLUDED SERVICES (WARRANTY)
+================================ */
+.warranty-services-container {
+  background: #fff;
+  padding: 18px 20px;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  margin-bottom: 25px;
+}
+
+.warranty-services-container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.warranty-services-container li {
+  background: #fafafa;
+  margin-bottom: 12px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+.warranty-services-container h2 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #111;
+}
+
+.warranty-services-container p {
+  margin: 0;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ================================
+   WHAT'S INCLUDED (FREE BOX ITEMS)
+================================ */
+.test-included {
+  background: #fff;
+  padding: 18px 20px;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+}
+
+.test-included ul {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.test-included li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 10px;
+  color: #444;
+  font-size: 15px;
+}
+
+/* Custom checkmark icon */
+.test-included li::before {
+  content: "✔";
+  color: #0a8a2a;
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+
+
+        /* ---------- Frames & layout ---------- */
+        .product-main-frame {
+          width: 100%;
+          max-width: 520px;
+          height: 520px;
+          border-radius: 12px;
+          background: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          margin: auto;
+          position: relative;
+          cursor: zoom-in;
+        }
+
+        /* zoomable container uses css vars updated by mouse move */
+        .zoomable .main-img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          transition: transform 200ms ease;
+          transform-origin: var(--tx, 50%) var(--ty, 50%);
+        }
+
+        /* when hovered, scale up */
+        .zoomable:hover .main-img {
+          transform: scale(1.6);
+        }
+
+        .zoom-hint {
+          position: absolute;
+          bottom: 8px;
+          right: 10px;
+          background: rgba(0,0,0,0.55);
+          color: #fff;
+          padding: 6px 10px;
+          font-size: 12px;
+          border-radius: 6px;
+          display: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+          .zoom-hint { display: block; }
+        }
+
+        /* thumbnail column (md+) */
+        .thumbs-vertical {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          max-height: 520px;
+          overflow-y: auto;
+          padding-right: 4px;
+        }
+
+        .thumb-item {
+          width: 68px;
+          height: 68px;
+          border-radius: 8px;
+          overflow: hidden;
+          border: 1px solid #ddd;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          background: #fff;
+        }
+
+        .thumb-item img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+
+        .thumb-item.active {
+          border: 3px solid #000;
+        }
+
+        /* mobile thumbnails */
+        .product-thumb-frame.mobile-thumb {
+          width: 60px;
+          height: 60px;
+          border-radius: 8px;
+          background: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          margin: 5px;
+          cursor: pointer;
+        }
+
+        .product-thumb-frame.mobile-thumb img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+
+        /* related product image frame */
+        .related-product-frame {
+          width: 100%;
+          height: 180px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #fff;
+          overflow: hidden;
+          border-radius: 8px;
+        }
+
+        .related-product-frame img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+
+        /* ---------- Lightbox styles ---------- */
+        .lightbox-modal .modal-content {
+          background: transparent;
+          border: none;
+          overflow: hidden;
+          box-shadow: none;
+        }
+
+        .lightbox-body {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .lightbox-inner {
+          position: relative;
+          width: 100%;
+          max-width: 1000px;
+          background: #111;
+          border-radius: 8px;
+          padding: 20px;
+        }
+
+        .lightbox-image-wrap {
+          width: 100%;
+          height: 600px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          border-radius: 6px;
+          background: #000;
+        }
+
+        .lightbox-image-wrap img {
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain;
+        }
+
+        .lightbox-close {
+          position: absolute;
+          right: 12px;
+          top: 12px;
+          background: rgba(255,255,255,0.06);
+          color: #fff;
+          border: none;
+          font-size: 20px;
+          padding: 6px 10px;
+          border-radius: 6px;
+          cursor: pointer;
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: rgba(255,255,255,0.06);
+          color: #fff;
+          border: none;
+          font-size: 30px;
+          width: 44px;
+          height: 44px;
+          border-radius: 8px;
+          cursor: pointer;
+        }
+
+        .lightbox-prev { left: 8px; }
+        .lightbox-next { right: 8px; }
+
+        .lightbox-thumbs {
+          display: flex;
+          gap: 8px;
+          margin-top: 12px;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .lb-thumb {
+          width: 64px;
+          height: 64px;
+          border-radius: 6px;
+          overflow: hidden;
+          border: 2px solid transparent;
+          cursor: pointer;
+          background: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .lb-thumb img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .lb-thumb.active {
+          border-color: #000;
+        }
+
+        /* small screen adjustments */
+        @media (max-width: 991px) {
+          .product-main-frame { max-width: 420px; height: 420px; }
+          .thumbs-vertical { display: none; } /* hide vertical thumbs under md */
+          .lightbox-image-wrap { height: 70vh; }
+        }
+
+        @media (max-width: 576px) {
+          .product-main-frame { max-width: 320px; height: 320px; }
+          .lightbox-inner { padding: 12px; }
+          .lightbox-image-wrap { height: 60vh; }
+        }
