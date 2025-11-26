@@ -294,6 +294,14 @@ export default function ProductDetail() {
             {/* PRODUCT DETAILS */}
             <Col md={6} sm={12} className="p-4">
               <h2 className="green24bold">{product.name}</h2>
+              {product.model_number && (
+                 <p>Model Number: {product.model_number}</p>
+              )}
+
+              {product.network && (
+                 <p>Network: {product.network}</p>
+              )}
+
               <div className="midbigred">${variant.starting_price || "0.00"}</div>
               <hr />
 
