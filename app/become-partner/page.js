@@ -7,17 +7,17 @@ import { Container, Row, Col, Button, Card } from "react-bootstrap";
 const BecomePartnerPage = () => {
     const data = [
     {
-      icon: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Icon_1.png",
+      icon: "../img/icon_1.svg",
       title: "Quality Products:",
       text: "Access high-quality mobile devices, accessories, and services from leading brands in the industry.",
     },
     {
-      icon: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Icon_2.png",
+      icon: "../img/icon_2.svg",
       title: "Competitive Pricing:",
       text: "Benefit from competitive pricing and attractive discounts to maximize your profitability.",
     },
     {
-      icon: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Icon_3.png",
+      icon: "../img/icon_3.svg",
       title: "Dedicated Support:",
       text: "Receive personalized support and guidance from our experienced team to help you succeed in your partnership with Zoiko Mobile America.",
     },
