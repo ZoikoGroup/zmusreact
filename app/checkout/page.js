@@ -21,11 +21,11 @@ import {
 export default function CheckoutPage() {
   const [shippingFee, setShippingFee] = useState(9.99); // default value
 
-const shippingOptions = [
-  { label: "Standard (3-5 Days)", value: 9.99 },
-  { label: "Expedited (2-3 Days)", value: 14.99 },
-  { label: "Overnight", value: 24.99 },
-];
+  const shippingOptions = [
+    { label: "Standard (3-5 Days)", value: 9.99 },
+    { label: "Expedited (2-3 Days)", value: 14.99 },
+    { label: "Overnight", value: 24.99 },
+  ];
   const [showThankYou, setShowThankYou] = useState(false);
   const [cart, setCart] = useState([]);
   const [showShipping, setShowShipping] = useState(false);
@@ -37,7 +37,7 @@ const shippingOptions = [
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [showTermsPopup, setShowTermsPopup] = useState(false);
-
+const [selectedShippingOption, setSelectedShippingOption] = useState(shippingOptions[0]);
   // Validation errors
   const [errors, setErrors] = useState({
     billingEmail: "",
@@ -201,7 +201,7 @@ const shippingOptions = [
       setCart([]);
     }
   }, []);
-
+const hasDeviceItem = cart.some((item) => item.type === "device");
   const handleQuantity = (index, delta) => {
     const newCart = [...cart];
     const curQty = Number(newCart[index].formData?.priceQty || 1);
@@ -277,12 +277,11 @@ const shippingOptions = [
     setCouponMessage("Coupon cancelled.");
   };
 
-  const subtotal = cart.reduce((acc, item) => {
+   const subtotal = cart.reduce((acc, item) => {
     const price = Number(item.planPrice ?? item.formData?.price ?? 0);
     const qty = Number(item.formData?.priceQty ?? 1);
     return acc + price * qty;
   }, 0);
-
 
   const discountAmount = discountData
     ? discountData.type === "percentage"
@@ -290,7 +289,15 @@ const shippingOptions = [
       : Number(discountData.discount)
     : 0;
 
-  const total = Math.max(subtotal + shippingFee - discountAmount, shippingFee); // Total cannot be less than shipping
+useEffect(() => {
+  if (hasDeviceItem && selectedShippingOption) {
+    setShippingFee(selectedShippingOption.value);
+  } else {
+    setShippingFee(0);
+  }
+}, [selectedShippingOption, hasDeviceItem]);
+
+const total = Math.max(subtotal + shippingFee - discountAmount, 0);
 
   const prepareFinalData = (item) => ({
     planTitle: item.planTitle,
@@ -411,22 +418,30 @@ const shippingOptions = [
 
     // Calculate totals
     const subtotalLocal = products.reduce((sum, p) => sum + p.totalPrice, 0);
-    const shippingFeeLocal = 5;
+    // const shippingFeeLocal = 5;
     const discountAmountLocal = discountData
       ? discountData.type === "percentage"
         ? (subtotalLocal * Number(discountData.discount)) / 100
         : Number(discountData.discount)
       : 0;
-    const totalLocal = Math.max(subtotalLocal + shippingFeeLocal - discountAmountLocal, shippingFeeLocal);
+      
+const shippingFeeLocal = hasDeviceItem ? selectedShippingOption.value : 0;
+
+const totalLocal = Math.max(
+  subtotalLocal + shippingFeeLocal - discountAmountLocal,
+  0
+);
 
     // Collect full order data
     const orderData = {
       billingAddress,
       shippingAddress: showShipping ? shippingAddress : billingAddress,
+      shippingOption: selectedShippingOption ? { ...selectedShippingOption } : null,
       cardAddress: { ...cardAddress },
       cardDetails: { ...cardDetails },
       coupon: discountData ? { ...discountData } : null,
       cart,
+      
       totals: {
         subtotal: subtotalLocal,
         shipping: shippingFeeLocal,
@@ -444,7 +459,7 @@ const shippingOptions = [
       const response = await processOrder(orderData);
 
       // Log the response for debugging (safe to remove later)
-      console.log("processOrder response:", response);
+      console.log("processOrder response:", orderData);
 
       // Decide payload to send to internal API:
       // As requested, we will send the entire BeQuick response JSON (if available)
@@ -764,25 +779,32 @@ const shippingOptions = [
                         </div>
                       );
                     })}
-                    <hr />
-                    <div className="d-flex justify-content-between">
-                      {/* <div className="mb-3">
-                        <label className="form-label">Shipping Options</label>
-                        <select
-                          className="form-select"
-                          value={shippingFee}
-                          onChange={(e) => setShippingFee(parseFloat(e.target.value))}
-                        >
-                          {shippingOptions.map((opt, i) => (
-                            <option key={i} value={opt.value}>
-                              {opt.label} — ${opt.value}
-                            </option>
-                          ))}
-                        </select>
-                      </div> */}
-                      <span>Shipping Fee</span>
-                      <span>${shippingFee.toFixed(2)}</span>
-                    </div>
+                    
+                    {hasDeviceItem && (
+  <div className="d-flex justify-content-between">
+    <div className="mb-3">
+      <label className="form-label">Shipping Options</label>
+<select
+  className="form-select"
+  value={selectedShippingOption.value}
+  onChange={(e) => {
+    const selected = shippingOptions.find(
+      (opt) => opt.value === parseFloat(e.target.value)
+    );
+    setSelectedShippingOption(selected);
+  }}
+>
+  {shippingOptions.map((opt, i) => (
+    <option key={i} value={opt.value}>
+      {opt.label} — ${opt.value}
+    </option>
+  ))}
+</select>
+    </div>
+    <span>Shipping Fee</span>
+    <span>${shippingFee.toFixed(2)}</span>
+  </div>
+)}
                     {discountData && (
                       <div className="d-flex justify-content-between text-success">
                         <span>
