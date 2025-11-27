@@ -112,7 +112,7 @@ const Footer = () => {
             </Container>
             </Container>
 
-            <Container fluid className="">
+            <Container fluid className="footerbox">
     <Container className="py-5 footerbox">
 
         {/* TOP SECTION */}

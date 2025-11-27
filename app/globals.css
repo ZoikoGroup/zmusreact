@@ -341,7 +341,7 @@ a {
 .footerbox {
   background-color: #ededed;
   color: #171717;
-  margin-top: 30px;
+ /* margin-top: 30px;*/
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
   font-size: 16px;
