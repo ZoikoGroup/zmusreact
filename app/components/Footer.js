@@ -166,9 +166,9 @@ const Footer = () => {
             <i className="bi bi-facebook"></i>
         </Link>
 
-        <Link href="https://x.com/zoikomobileusa" target="_blank" className="socialicon">
+        {/* <Link href="https://x.com/zoikomobileusa" target="_blank" className="socialicon">
             <i className="bi bi-twitter-x"></i>
-        </Link>
+        </Link> */}
 
         <Link href="https://instagram.com/zoikomobileus" target="_blank" className="socialicon">
             <i className="bi bi-instagram"></i>
