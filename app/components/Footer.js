@@ -108,94 +108,154 @@ const Footer = () => {
                         </ul>
                     </Col>
                 </Row>
-                <Row>
-                    <Col md={3} sm={12} xs={12}>
-                        <Image src="/img/footer-logo.png" fluid className="w-75" alt="Footer Logo" />
-                    </Col>
-                    <Col md={4} sm={12} xs={12}>
-                        <p className="txtred">Partner Programs</p>
-                        <ul>
-                               <li><Link href={"/become-retailer"}>Become A Retailer</Link></li>
-                            <li><Link href={"/become-affiliate"}>Become an Affiliate</Link></li>
-                            <li><Link href={"/become-partner"}>Partner With Us</Link></li>
-                        </ul>
-                    </Col>
-                    <Col md={5} sm={12} xs={12}>
-                        <p className="txtred">Latest News &amp; Offers</p>
-                        <p>Receive the latest offers, updates, and unlock amazing savings on Zoiko Mobile plans and devices.</p>
-                        <InputGroup className="mb-2">
-                            <Form.Control
-                                placeholder="Enter your email address"
-                                aria-label="Enter your email address"
-                                aria-describedby="basic-addon2"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                            <Button
-                                variant="danger"
-                                size="lg"
-                                id="button-addon2"
-                                disabled={loading}
-                                onClick={handleSubscribe}
-                            >
-                                {loading ? "Subscribing..." : "Subscribe"}
-                            </Button>
-                        </InputGroup>
-
-                        {/* Message container with fixed height */}
-                        <div style={{ minHeight: "24px", marginBottom: "8px" }}>
-                            {message && (
-                                <p
-                                    style={{
-                                        color:
-                                            message.includes("✅") ||
-                                            message.includes("successful")
-                                                ? "#28a745"
-                                                : "#ff6666",
-                                        fontSize: "14px",
-                                        margin: 0,
-                                    }}
-                                >
-                                    {message}
-                                </p>
-                            )}
-                        </div>
-                        <Link href={'https://www.facebook.com/zoikomobileusa'} target="_blank"><i className="bi bi-facebook"></i></Link>
-                        <Link href={'https://instagram.com/zoikomobileus'} target="_blank" className="px-3"><i className="bi bi-instagram"></i></Link>
-                        <Link href={'https://uk.pinterest.com/zoikomobileusa/'} target="_blank"><i className="bi bi-pinterest"></i></Link>
-                        <Link href={'https://x.com/zoikomobileusa'} target="_blank" className="px-3"><i className="bi bi-twitter-x"></i></Link>
-                        <Link href={'https://www.linkedin.com/company/zoikomobileusa/'} target="_blank"><i className="bi bi-linkedin"></i></Link>
-                        <Link href={'https://www.threads.net/@zoikomobileus'} target="_blank" className="px-3"><i className="bi bi-threads"></i></Link>
-                        <Link href={'https://www.youtube.com/@ZoikoMobileUSA'} target="_blank"><i className="bi bi-youtube"></i></Link>
-                    </Col>
-                </Row>
+                
             </Container>
             </Container>
 
-            <Container fluid className="bgred">
-                <Container className="px-5 py-5 footerbox">
-                    <Row>
-                        <Col md={4} sm={12} xs={12}>
-                            <p><b>Head Office</b><br />5900 Balcones Drive, Suite 100 Austin,<br />TX 78731<br />Phone: 800-988-8116<br />Email: <Link href="mailto:info@zoikomobile.com">info@zoikomobile.com</Link></p>
-                            <p className="mt-4"><b>Washington DC Office</b><br />1717 N Street NW, Suite 1 Washington,<br />DC 20036<br />Phone: 800-988-8116<br />Email: <Link href={"mailto:info@zoikomobile.com"}>info@zoikomobile.com</Link></p>
-                        </Col>
-                        <Col md={4} sm={12} xs={12}>
-                            <p><b>California Office</b><br />1401 21st Street, Suite R Sacramento,<br />CA 95811<br />Phone: 800-988-8116<br />Email: <Link href={"mailto:info@zoikomobile.com"}>info@zoikomobile.com</Link></p>
-                            <p className="mt-4"><b>Illinois Office</b><br />2501 Chatham Rd, Suite R Springfield,<br />IL 62704<br />Phone: 847-728-6872<br />Email: <Link href={"mailto:info@zoikomobile.com"}>info@zoikomobile.com</Link></p>
-                        </Col>
-                        <Col md={4} sm={12} xs={12}>
-                            <p><b>Delaware Office</b><br />8 The Green, Suite A Dover,<br />DE 19901<br />Phone: 302-899-7312<br />Email: <Link href={"mailto:info@zoikomobile.com"}>info@zoikomobile.com</Link></p>
-                            <p className="mt-4"><b>Florida Office</b><br />12386 State Road 535, #302 Orlando,<br />FL 32836<br />Phone: 800-988-8116<br />Email: <Link href={"mailto:info@zoikomobile.com"}>info@zoikomobile.com</Link></p>
-                        </Col>
-                    </Row>
-                </Container>
-            </Container>
+            <Container fluid className="">
+    <Container className="py-5 footerbox">
 
-            <Container fluid className="bgred">
-                <Container className="py-3 text-center">
-                    &copy; {curyear} Zoiko Mobile. Zoiko Mobile is a trading name for Zoiko Mobile Inc. Headquartered at 5900 Balcones Drive, Austin, TX 78731. All rights reserved.
-                </Container>
-            </Container>
+        {/* TOP SECTION */}
+        <Row className="mb-4">
+            <Col md={6} sm={12}>
+                <h4 className="fw-bold mb-3">Latest News & Offers</h4>
+                <p>Receive the latest offers, updates, and unlock amazing savings on Zoiko Mobile plans and devices.</p>
+
+                <InputGroup className="mb-2">
+                    <Form.Control
+                        placeholder="Enter your email address"
+                        aria-label="Enter your email address"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <Button
+                        variant="danger"
+                        size="lg"
+                        disabled={loading}
+                        onClick={handleSubscribe}
+                    >
+                        {loading ? "Subscribing..." : "Subscribe"}
+                    </Button>
+                </InputGroup>
+
+                <div style={{ minHeight: "24px", marginBottom: "8px" }}>
+                    {message && (
+                        <p
+                            style={{
+                                color:
+                                    message.includes("successful") || message.includes("✅")
+                                        ? "#28a745"
+                                        : "#ff4444",
+                                fontSize: "14px",
+                                margin: 0,
+                            }}
+                        >
+                            {message}
+                        </p>
+                    )}
+                </div>
+            </Col>
+
+            {/* RIGHT TOP - SOCIAL LINKS */}
+            <Col md={6} sm={12} className="text-md-center mt-4 mt-md-0">
+    <h4 className="fw-bold mb-3">Connect with us</h4>
+
+    <div className="social-wrapper">
+
+        <Link href="https://www.facebook.com/zoikomobileusa" target="_blank" className="socialicon">
+            <i className="bi bi-facebook"></i>
+        </Link>
+
+        <Link href="https://x.com/zoikomobileusa" target="_blank" className="socialicon">
+            <i className="bi bi-twitter-x"></i>
+        </Link>
+
+        <Link href="https://instagram.com/zoikomobileus" target="_blank" className="socialicon">
+            <i className="bi bi-instagram"></i>
+        </Link>
+
+        <Link href="https://www.linkedin.com/company/zoikomobileusa/" target="_blank" className="socialicon">
+            <i className="bi bi-linkedin"></i>
+        </Link>
+
+        <Link href="https://www.youtube.com/@ZoikoMobileUSA" target="_blank" className="socialicon">
+            <i className="bi bi-youtube"></i>
+        </Link>
+
+    </div>
+</Col>
+
+
+        </Row>
+
+        <hr />
+
+        {/* OFFICES SECTION (3 Columns × 2 Rows) */}
+        <Row className="mt-4 office-row">
+            <Col md={4} sm={12} className="mb-4">
+                <h6 className="fw-bold">Head Office (Austin, TX)</h6>
+                <p className="mb-1">5900 Balcones Drive, #24685<br />Austin, TX 78731</p>
+                <p className="mb-1">📞 800-988-8116</p>
+                <p>✉ info@zoikomobile.com</p>
+
+                <div className="mt-4">
+                    <h6 className="fw-bold">Washington DC Office</h6>
+                    <p className="mb-1">1717 N Street NW, Suite 1<br />Washington, DC 20036</p>
+                    <p className="mb-1">📞 800-988-8116</p>
+                    <p>✉ info@zoikomobile.com</p>
+                </div>
+            </Col>
+
+            <Col md={4} sm={12} className="mb-4">
+                <h6 className="fw-bold">California Office (Sacramento, CA)</h6>
+                <p className="mb-1">1401 21st Street, Suite R<br />Sacramento, CA 95811</p>
+                <p className="mb-1">📞 800-988-8116</p>
+                <p>✉ info@zoikomobile.com</p>
+
+                <div className="mt-4">
+                    <h6 className="fw-bold">Illinois Office (Springfield, IL)</h6>
+                    <p className="mb-1">2501 Chatham Rd, Suite R<br />Springfield, IL 62704</p>
+                    <p className="mb-1">📞 847-728-6872</p>
+                    <p>✉ info@zoikomobile.com</p>
+                </div>
+            </Col>
+
+            <Col md={4} sm={12} className="mb-4">
+                <h6 className="fw-bold">Delaware Office (Dover, DE)</h6>
+                <p className="mb-1">8 The Green, Suite A<br />Dover, DE 19901</p>
+                <p className="mb-1">📞 302-899-7312</p>
+                <p>✉ info@zoikomobile.com</p>
+
+                <div className="mt-4">
+                    <h6 className="fw-bold">Florida Office (Orlando, FL)</h6>
+                    <p className="mb-1">12386 State Road 535, #302<br />Orlando, FL 32836</p>
+                    <p className="mb-1">📞 800-988-8116</p>
+                    <p>✉ info@zoikomobile.com</p>
+                </div>
+            </Col>
+        </Row>
+
+        {/* Partner Links */}
+        <Row className="text-center mt-5 footer-linkss">
+            <Col>
+                <Link href="/become-retailer" className="text-decoration-none mx-3">Become a Retailer</Link>
+                <Link href="/become-affiliate" className="text-decoration-none mx-3">Become an Affiliate</Link>
+                <Link href="/become-partner" className="text-decoration-none mx-3">Partner with Us</Link>
+            </Col>
+        </Row>
+
+    </Container>
+</Container>
+
+{/* Copyright */}
+<Container fluid className="cpoyrightbox">
+    <Container className="py-3 text-center">
+        © {curyear} Zoiko Mobile | A trading name of Zoiko Mobile Inc.  
+        Headquartered at 5900 Balcones Drive, Suite 100, Austin, TX 78731.  
+        All Rights Reserved.
+    </Container>
+</Container>
+
         </>
     );
 };
