@@ -2323,3 +2323,94 @@ body {
           .lightbox-inner { padding: 12px; }
           .lightbox-image-wrap { height: 60vh; }
         }
+
+
+
+
+
+
+
+.socialicon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 2px solid #e60044; /* red border */
+    border-radius: 50%; /* circle */
+    color: #e60044 !important; /* red icon */
+    font-size: 18px;
+    background: #fff;
+    transition: all 0.3s ease;
+    padding-top: 2px;
+
+}
+
+.socialicon:hover {
+    background: #e60044;
+    color: #ffffff !important; /* icon turns white on hover */
+    border-color: #e60044;
+}
+/* Social Row wrapper to fix wrapping issue */
+.social-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+
+.office-row h6 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.office-row p {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.bgred {
+    background: #e60044;
+    color: #fff;
+}
+
+.txtred {
+    font-weight: 600;
+    color: #e60044;
+}
+
+.footer-linkss a {
+    color: #e60044 !important;
+    font-weight: 500;
+    white-space: nowrap;
+    margin-right: 10px;
+    display: inline-block;
+    position: relative;
+}
+
+.footer-linkss a:hover {
+    color: #c4003a !important; /* darker red on hover */
+    text-decoration: underline;
+}
+
+.footer-linkss a:not(:last-child)::after {
+    content: "|";
+    margin-left: 30px;
+    color: #444;
+    font-weight: 600;
+}
+
+/* Mobile responsive */
+@media (max-width: 576px) {
+    .footer-linkss a {
+        display: block;      /* each link on separate line */
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .footer-linkss a:not(:last-child)::after {
+        content: "";
+    }
+}
+

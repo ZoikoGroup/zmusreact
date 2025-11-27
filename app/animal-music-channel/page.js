@@ -10,17 +10,17 @@ const videos5 = [
   {
     id: 1,
     link: "https://www.youtube.com/watch?v=XFb2yagnO8A",
-    thumbnail: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Group-1928.webp",
+    thumbnail: "../img/thumbnail_1.png",
   },
   {
     id: 2,
     link: "https://www.youtube.com/watch?v=uIdD8aVArU0",
-    thumbnail: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Rectangle-787.webp",
+    thumbnail: "../img/thumbnail_2.png",
   },
   {
     id: 3,
     link: "https://www.youtube.com/watch?v=m-hQw7Bhhys",
-    thumbnail: "https://assets.zoikomobile.com/wp-content/uploads/2025/02/Rectangle-788.webp",
+    thumbnail: "../img/thumbnail_3.png",
   },
 ];
 const artists = [
@@ -887,7 +887,7 @@ return (
     <div
         style={{
           backgroundImage:
-            "url('https://assets.zoikomobile.com/wp-content/uploads/2025/02/Rectangle-641.webp')",
+            "url('../img/img banner_1.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           color: "#000",
@@ -933,7 +933,7 @@ return (
       <div
         style={{
           backgroundImage:
-            "url('https://assets.zoikomobile.com/wp-content/uploads/2025/02/Rectangle-1228.webp')",
+            "url('../img/img banner_2.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           color: "#000",
