@@ -118,7 +118,6 @@ export default function ProductDetail() {
       lineType: "device",
       simType: "N/A",
       formData: { priceQty: 1, price },
-      shippingFee: 9.99,
     };
 
     const existing = JSON.parse(localStorage.getItem("cart") || "[]");
