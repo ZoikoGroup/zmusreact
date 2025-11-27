@@ -781,30 +781,32 @@ const totalLocal = Math.max(
                     })}
                     
                     {hasDeviceItem && (
-  <div className="d-flex justify-content-between">
-    <div className="mb-3">
-      <label className="form-label">Shipping Options</label>
-<select
-  className="form-select"
-  value={selectedShippingOption.value}
-  onChange={(e) => {
-    const selected = shippingOptions.find(
-      (opt) => opt.value === parseFloat(e.target.value)
-    );
-    setSelectedShippingOption(selected);
-  }}
->
-  {shippingOptions.map((opt, i) => (
-    <option key={i} value={opt.value}>
-      {opt.label} — ${opt.value}
-    </option>
-  ))}
-</select>
-    </div>
-    <span>Shipping Fee</span>
-    <span>${shippingFee.toFixed(2)}</span>
-  </div>
-)}
+                      <div className="d-flex justify-content-between align-items-center border mt-3 p-3">
+                        <div className="mb-3">
+                          <label className="form-label">Shipping Options</label>
+                          <select
+                          className="form-select"
+                          value={selectedShippingOption.value}
+                          onChange={(e) => {
+                          const selected = shippingOptions.find(
+                          (opt) => opt.value === parseFloat(e.target.value)
+                          );
+                          setSelectedShippingOption(selected);
+                          }}
+                          >
+                          {shippingOptions.map((opt, i) => (
+                          <option key={i} value={opt.value}>
+                          {opt.label} — ${opt.value}
+                          </option>
+                          ))}
+                          </select>
+                        </div>
+                        <div className="mb-0 text-end">
+                          <span>Shipping Fee</span>
+                          <span>${shippingFee.toFixed(2)}</span>
+                        </div>
+                      </div>
+                    )}
                     {discountData && (
                       <div className="d-flex justify-content-between text-success">
                         <span>
