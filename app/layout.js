@@ -394,14 +394,14 @@ const metaMap = {
       "Enjoy unlimited 5G data, talk, and text with ZoiKo Unlimited One. Get nationwide coverage and mobile hotspot access for just $30/month.",
   },
   "/plans/zoiko-max": {
-    title: "Zoiko Max Plan | Unlimited 5G Data",
+    title: "Affordable Zoiko Max Plans | Unlimited 5G Data",
     description:
       "Discover the Zoiko Max Plan – unlimited 5G, free global calling, and no contracts. Experience seamless connectivity with Zoiko Mobile’s prepaid plans.",
   },
   "/plans/zoiko-infinity": {
     title: "Zoiko Infinity Plan | Unlimited Free International Calls",
     description:
-      "Zoiko Infinity Plan offers unlimited 5G, free global calls, and budget-friendly prepaid plans with no contracts or credit checks required.",
+      "Stay connected with Zoiko Infinity Plan: unlimited 5G, free global calls, and budget-friendly prepaid plans with no contracts or credit checks required.",
   },
   "/plans/zoiko-business-advanced": {
     title: "Zoiko Business Advanced Plan | Advanced Connectivity",
@@ -447,10 +447,6 @@ const metaMap = {
     title: "Zoiko Lite Postpaid | Affordable Mobile Plan",
     description:
       "Get the Zoiko Lite Postpaid Plan for just $15/month. Enjoy unlimited talk, text, 5G data, mobile hotspot, and international calling to 200+ countries.",
-  },
-  "/plans/zoiko-max": {
-    title: "Zoiko Max Plan | Unlimited 5G Data",
-    description: "Top-tier unlimited 5G data plan for power users.",
   }
   // add more entries as needed...
 };
