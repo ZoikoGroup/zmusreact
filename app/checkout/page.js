@@ -257,9 +257,15 @@ const hasDeviceItem = cart.some((item) => item.type === "device");
       const data = await response.json();
 
       if (data.success) {
-        setDiscountData(data.data);
-        setCouponMessage(`Coupon applied! Discount: ${data.data.discount} (${data.data.type})`);
-      } else {
+      setDiscountData(data.data);
+
+      const discountText =
+        data.data.type === "percentage"
+          ? `${data.data.discount}%`
+          : `₹${data.data.discount} flat`;
+
+      setCouponMessage(`Coupon applied! Discount: ${discountText}`);
+      }else {
         setDiscountData(null);
         setCouponMessage(data.message || "Invalid coupon code");
       }
