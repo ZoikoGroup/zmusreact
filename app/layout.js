@@ -70,7 +70,7 @@ const metaMap = {
     description: "Affordable unlimited business mobile plans from Zoiko Mobile. Enjoy unlimited data, reliable service & flexible billing tailored for businesses. Sign up now.",
   },
   "/travel-plans": {
-    title: "Affordable Travel Data Plans Worldwide| Zoiko Mobile USA",
+    title: "Affordable Travel Data Plans Worldwide | Zoiko Mobile USA",
     description: "Experience the best travel data plans with ZoiKo Mobile. Enjoy seamless connectivity and affordable rates as you explore new destinations around the globe.",
   },
   "/animal-music-channel": {
