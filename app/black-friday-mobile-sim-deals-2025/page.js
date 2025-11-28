@@ -220,21 +220,39 @@ console.error("Form submission error:", error);
           </Col>
 
           {/* RIGHT IMAGES */}
-          <Col
-            md={6}
-            className="d-flex justify-content-center gap-4 mt-5 mt-md-0"
-          >
-            <div>
-              <img
-                src="/img/frames.png"
-                alt="Sample Pet 1"
-                style={{ width: "100%", borderRadius: "10px" }}
-              />
-              
-            </div>
+          {/* RIGHT IMAGES + COUPON */}
+<Col
+  md={6}
+  className="d-flex justify-content-center gap-4 mt-5 mt-md-0 position-relative"
+>
 
+  {/* Images */}
+  <div>
+    <img
+      src="/img/frames.png"
+      alt="Sample Pet 1"
+      style={{ width: "100%", borderRadius: "10px" }}
+    />
+  </div>
 
-          </Col>
+  {/* Coupon Card Positioned at Bottom Right */}
+  <div className="coupon-card-wrapper">
+    <div className="coupon-card">
+      <div className="coupon-left">BLACK FRIDAY</div>
+
+      <div className="coupon-right">
+        <p className="coupon-small">Use Promo Code</p>
+        <h2 className="coupon-code">ZOIKO50</h2>
+        <p className="coupon-small">at Checkout</p>
+
+        <p className="coupon-desc">Save 50% on all transactions.</p>
+        <p className="coupon-terms">*Terms & conditions</p>
+      </div>
+    </div>
+  </div>
+
+</Col>
+
         </Row>
       </Container>
       
@@ -272,6 +290,103 @@ console.error("Form submission error:", error);
       </Row>
     </Container>
     <style>{`
+
+
+/* Coupon wrapper for positioning */
+.coupon-card-wrapper {
+  position: absolute;
+  bottom: -50px;
+  right: 255px;
+}
+
+/* Coupon card design */
+.coupon-card {
+  display: flex;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  width: 250px;
+  font-family: Inter, sans-serif;
+  position: relative;
+}
+
+/* Green left strip */
+.coupon-left {
+  background: #35A753;
+  color: white;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  padding: 14px 8px;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+/* Right content */
+.coupon-right {
+  padding: 14px;
+  flex: 1;
+}
+
+.coupon-small {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.coupon-code {
+  margin: 4px 0 6px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+}
+
+.coupon-desc {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #444;
+}
+
+.coupon-terms {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: #999;
+}
+
+/* Ticket notches */
+.coupon-card::before,
+.coupon-card::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  position: absolute;
+  left: 50px;
+  border-radius: 50%;
+}
+
+.coupon-card::before {
+  top: -10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.coupon-card::after {
+  bottom: -10px;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+/* Responsive: center under images */
+@media (max-width: 768px) {
+  .coupon-card-wrapper {
+    position: static;
+    margin-top: 20px;
+  }
+}
+
+
+
+
       .blkFrdExOff {
   background: #f1faf5;
   padding:5vw;
