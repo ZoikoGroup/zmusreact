@@ -67,11 +67,11 @@ const metaMap = {
   },
   "/business-deals": {
     title: "Affordable Unlimited Business Plans | Zoiko Mobile",
-    description: "Discover affordable unlimited business plans with Zoiko Mobile.",
+    description: "Affordable unlimited business mobile plans from Zoiko Mobile. Enjoy unlimited data, reliable service & flexible billing tailored for businesses. Sign up now.",
   },
   "/travel-plans": {
-    title: "Affordable Travel Data Plans Worldwide | Zoiko Mobile",
-    description: "Experience the best travel data plans with Zoiko Mobile.",
+    title: "Affordable Travel Data Plans Worldwide| Zoiko Mobile USA",
+    description: "Experience the best travel data plans with ZoiKo Mobile. Enjoy seamless connectivity and affordable rates as you explore new destinations around the globe.",
   },
   "/animal-music-channel": {
     title: "Animal and Music Loving Network in USA | Zoiko Mobile",

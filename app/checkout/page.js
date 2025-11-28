@@ -257,15 +257,26 @@ const hasDeviceItem = cart.some((item) => item.type === "device");
       const data = await response.json();
 
       if (data.success) {
-      setDiscountData(data.data);
+  setDiscountData(data.data);
 
-      const discountText =
-        data.data.type === "percentage"
-          ? `${data.data.discount}%`
-          : `₹${data.data.discount} flat`;
+  // convert string/number to a proper float
+  let num = parseFloat(data.data.discount);
 
-      setCouponMessage(`Coupon applied! Discount: ${discountText}`);
-      }else {
+  // Format:
+  // - Whole numbers -> no decimals
+  // - Decimals -> always 2 digits
+  const cleanDiscount = Number.isInteger(num)
+    ? num.toString()               // 20 -> "20"
+    : num.toFixed(2);              // 50.5 -> "50.50"
+
+  const discountText =
+    data.data.type === "percentage"
+      ? `${cleanDiscount}%`
+      : `₹${cleanDiscount} flat`;
+
+  setCouponMessage(`Coupon applied! Discount: ${discountText}`);
+}
+ else {
         setDiscountData(null);
         setCouponMessage(data.message || "Invalid coupon code");
       }
@@ -516,6 +527,15 @@ const totalLocal = Math.max(
       setLoading(false);
     }
   };
+
+  const formatDiscount = (value) => {
+  const num = parseFloat(value);
+
+  // Whole number → no decimals
+  // Decimal → always 2 digits
+  return Number.isInteger(num) ? num.toString() : num.toFixed(2);
+};
+
 
   return (
     <>
@@ -816,7 +836,7 @@ const totalLocal = Math.max(
                     {discountData && (
                       <div className="d-flex justify-content-between text-success">
                         <span>
-                          Discount ({discountData.type === "percentage" ? discountData.discount + "%" : "$" + discountData.discount})
+                          Discount ({discountData.type === "percentage" ? formatDiscount(discountData.discount) + "%" : "$" + formatDiscount(discountData.discount)})
                         </span>
                         <span>- ${discountAmount.toFixed(2)}</span>
                       </div>
