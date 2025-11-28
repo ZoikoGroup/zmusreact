@@ -301,6 +301,7 @@ console.error("Form submission error:", error);
 
 /* Coupon card design */
 .coupon-card {
+transform: rotate(3deg);
   display: flex;
   background: #fff;
   border-radius: 14px;
