@@ -394,14 +394,14 @@ const metaMap = {
       "Enjoy unlimited 5G data, talk, and text with ZoiKo Unlimited One. Get nationwide coverage and mobile hotspot access for just $30/month.",
   },
   "/plans/zoiko-max": {
-    title: "Zoiko Max Plan | Unlimited 5G Data",
+    title: "Affordable Zoiko Max Plans | Unlimited 5G Data",
     description:
       "Discover the Zoiko Max Plan – unlimited 5G, free global calling, and no contracts. Experience seamless connectivity with Zoiko Mobile’s prepaid plans.",
   },
   "/plans/zoiko-infinity": {
     title: "Zoiko Infinity Plan | Unlimited Free International Calls",
     description:
-      "Zoiko Infinity Plan offers unlimited 5G, free global calls, and budget-friendly prepaid plans with no contracts or credit checks required.",
+      "Stay connected with Zoiko Infinity Plan: unlimited 5G, free global calls, and budget-friendly prepaid plans with no contracts or credit checks required.",
   },
   "/plans/zoiko-business-advanced": {
     title: "Zoiko Business Advanced Plan | Advanced Connectivity",
@@ -447,10 +447,6 @@ const metaMap = {
     title: "Zoiko Lite Postpaid | Affordable Mobile Plan",
     description:
       "Get the Zoiko Lite Postpaid Plan for just $15/month. Enjoy unlimited talk, text, 5G data, mobile hotspot, and international calling to 200+ countries.",
-  },
-  "/plans/zoiko-max": {
-    title: "Zoiko Max Plan | Unlimited 5G Data",
-    description: "Top-tier unlimited 5G data plan for power users.",
   }
   // add more entries as needed...
 };
@@ -764,6 +760,33 @@ export default function RootLayout({ children }) {
             {/* <script id="bp-wa-script" src="https://cdn.botpenguin.com/whatsapp-widget.js">1d7581d3-034a-4279-a26b-c3cac2106314</script> */}
           </>
         )}
+
+
+       {/* Meta Pixel Code */}
+        <Script id="meta-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '838514508768820');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+
+        {/* Meta Pixel noscript */}
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=838514508768820&ev=PageView&noscript=1"
+          />
+        </noscript>
       </head>
 
       <body className={roboto.className}>
