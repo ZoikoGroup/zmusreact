@@ -656,7 +656,7 @@ Questions, comments, or suggestions? Simply fill in the form and we'll be in tou
 <style>{`
 @media (max-width: 991.98px) {
 .faq-card {
-height: 20vw !important;
+height: 30vw !important;
 }
 }
 .blackFridayContactForm {
