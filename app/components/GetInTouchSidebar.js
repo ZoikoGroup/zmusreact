@@ -115,7 +115,25 @@ ease;
     height: 3vw;
   }
 
-      `}</style>
+        @media (max-width: 991.98px) {
+
+        .getintouch-sidebar {
+    width: 71vw !important;
+}
+
+.chatNowBtn {
+
+    width: 20vw !important;
+    height: 8vw  !important;
+}
+      }
+
+
+      `}
+      
+
+      
+      </style>
 
       {/* Sidebar */}
       <Offcanvas
