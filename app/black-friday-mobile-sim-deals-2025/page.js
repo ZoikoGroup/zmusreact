@@ -654,7 +654,7 @@ Questions, comments, or suggestions? Simply fill in the form and we'll be in tou
 </div>
 </Col> */}
 <style>{`
-@media (max-width: 991.98px) {
+@media (max-width: 991px) {
 .faq-card {
 height: auto !important
 }
