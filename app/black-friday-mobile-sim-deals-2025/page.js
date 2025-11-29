@@ -227,7 +227,7 @@ console.error("Form submission error:", error);
 >
 
   {/* Images */}
-  <div>
+  <div  className="d-none d-sm-block">
     <img
       src="/img/frames.png"
       alt="Sample Pet 1"
