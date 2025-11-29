@@ -54,10 +54,92 @@ const ByodPlans = () => {
     <>
       {/* <TopHeader /> */}
       <Header />
-      <HeadBar text={<>Bring Your Own Device (BYOD) to Zoiko Mobile</>} />
+      <style>{`
+        @media (max-width: 768px) {
+            .byodBanner{
+                background-image: url(/img/home-banner/byod-banner-m.png) !important;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 100vw;
+            }
+            .bannerText{
+                padding-top: 6vw;            
+            }
+            .byodBanner h1{
+                font-size: 4.5vw;
+                text-align: center;
+            }
+            .byodBanner h2{
+                font-size: 3vw;
+                text-align: center;
+            }
+            .byodBanner p{
+                font-size: 2vw;
+                text-align: center;
+                padding-bottom: 1vw;
+                margin-bottom: 0vw !important;
+            }
+            .byodBanner a{
+                width: 30vw;
+                padding: 2vw;
+                font-size: 2.5vw;
+            }
+            .zoiko-btn {
+                display: flex;
+                justify-content: center;
+            }
+            .byodBanner ul{
+                display:grid;
+                padding-left:0px;
+                justify-items: center;
+            }
+            .pinkboxwraper {
+            text-align: center;
+            }
+           
+        }
+        @media (min-width: 769px) {
+            .byodBanner {
+                background-image: url(/img/home-banner/byod-banner.png);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 35vw;
+            }
+            .bannerText{
+                padding-top: 2vw;            
+            }
+            .byodBanner h1{
+                font-size: 2.5vw;
+            }
+            .byodBanner h2{
+                font-size: 2vw;
+            }
+            .byodBanner p{
+                       font-size: 1.5vw;
+        padding-right: 1vw;
+            width: 50% !important;
+            }
+            .byodBanner a{
+                width: 20vw;
+                padding: 1vw;
+                font-size: 1.5vw;
+            }
+           
+            .byodBanner ul li{
+                font-size: 1.5rem;
+            }
+            .byodBanner ul{
+                width: 50%;
+            }
+                
+        }
+        `}</style>
+      <HeadBar className="byodPlans" text={<>Bring Your Own Device (BYOD) to Zoiko Mobile</>} />
 
       {/* Banner */}
-      <Container fluid className="p-0">
+      {/* <Container fluid className="p-0">
         <img className="d-none d-md-block w-100" src="/img/home-banner/byod-banner.png" alt="Student Banner" />
         <img className="d-sm-block d-md-none"  style={{ width: "inherit" }} src="/img/home-banner/byod-banner-m.png" alt="Student Banner" />
         <Container className="d-none d-md-block txtblack w-75">
@@ -82,7 +164,28 @@ const ByodPlans = () => {
             </DropdownButton>
           </div>
         </Container>
+      </Container> */}
+
+
+      <Container fluid className="p-0 byodBanner">
+
+        <Container className="w-75">
+          <div className="bannerText">
+            <h2 className="txtred">Bring Your Own Device (BYOD)<br/>to Zoiko Mobile</h2>
+            <p className="txtblack ">Ready to experience seamless connectivity on Zoiko Mobile&apos;s nationwide network? Bringing your own device is easy! Check the simple steps below to ensure your phone is compatible and ready to go.</p>
+            <div className="d-flex flex-nowrap gap-3 zoiko-btn">
+              <DropdownButton variant="danger" size="lg" title="Browse Plans Now">
+              <DropdownItem href="/prepaid-plans">Prepaid Plans</DropdownItem>
+              <DropdownItem href="/postpaid-plans">Postpaid Plans</DropdownItem>
+              <DropdownItem href="/business-deals">Business Deals</DropdownItem>
+            </DropdownButton>
+            </div>
+          </div>
+        </Container>
+
       </Container>
+
+
 
       {/* Compatibility Info */}
       <Container fluid className="p-5 bglite">

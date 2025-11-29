@@ -99,24 +99,47 @@ export default function PlanDetailsPage() {
       {/* <TopHeader /> */}
       <Header />
       <HeadBar text={plan.title} />
+<style>{`
+.planPrice .planPriceCur{
+  color:#d32f2f;
+  font-weight:700;
+font-size:3vw;
 
+}
+@media (max-width: 991.98px) {
+
+.detailsRow .planTitle{
+  text-align:center !important;
+  font-size:4vw !important;
+}
+  .detailsRow .planPrice .planPriceCur{
+  text-align:center !important;
+  font-size:7vw !important;
+}
+    .detailsRow .planPrice .planDur{
+  text-align:center !important;
+  font-size:5vw !important;
+}
+
+}
+@media (min-width: 992px) {
+
+
+
+}
+
+}`}</style>
       <Container fluid className="bglite">
         <Container className="py-5 w-75">
-          <Row className="align-items-start justify-content-between mb-4">
+          <Row className="align-items-start justify-content-between mb-4 detailsRow">
             <Col md="auto">
-              <h2 className="mb-0">{plan.title}</h2>
+              <h2 className="mb-0 planTitle">{plan.title}</h2>
             </Col>
-            <Col md="auto" className="text-end">
-              <div
-                style={{
-                  fontSize: "1.8rem",
-                  fontWeight: "700",
-                  color: "#d32f2f",
-                }}
-              >
+            <Col md="auto" className="text-end planPrice">
+              <div className="mb-0 planPriceCur">
                 {plan.currency}{plan.price}
               </div>
-              <div>/{plan.duration_type}/line</div>
+              <div  className="planDur">/{plan.duration_type}/line</div>
             </Col>
           </Row>
 
