@@ -114,6 +114,8 @@ transform: rotate(3deg);
   }
 
 }
+   .blkFriHomBnr{
+    padding:0 !important;}
 @media (max-width: 991.98px) {
     .blkFriHomBnr{
     height:240vw !important;}
