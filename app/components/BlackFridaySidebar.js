@@ -67,6 +67,12 @@ const BlackFridaySidebar = () => {
 .bftouch-tab:hover {
   background: #cd1650;
 }
+  @media (max-width: 991.98px) {
+  .close-btn {
+ 
+    font-size: 2vw;
+}
+  }
       `}</style>
     </>
   );
