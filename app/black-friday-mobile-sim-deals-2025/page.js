@@ -529,7 +529,7 @@ width: 35vw;
 
           <div className="d-flex align-items-center mt-4 blkFrdSale">
             <span className="text-decoration-line-through me-3 fs-5">$12/mo</span>
-            <span className="fw-bold text-danger fs-3">$7/mo</span>
+            <span className="fw-bold text-danger fs-3">$7.20/mo</span>
             <span className="ms-2 text-muted">(40% off Black Friday)</span>
           </div>
 
