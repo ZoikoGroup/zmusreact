@@ -57,7 +57,7 @@ const BlackFridaySidebar = () => {
   background: transparent;
     color: white;
     border: none;
-    font-size: 2vw;
+    font-size: 1vw;
     cursor: pointer;
     padding: 0;
     transform: rotate(180deg);
