@@ -135,7 +135,7 @@ console.log(cleanedTerm);
                       href={item.url || "#"}
                       target="_blank"
                     >
-                    <Card.Title>{item.title || item.name}</Card.Title>
+                    <Card.Title className="text-red">{item.title || item.name}</Card.Title>
                     </Button>
                     <Card.Text>
                       {item.description || "No description available"}

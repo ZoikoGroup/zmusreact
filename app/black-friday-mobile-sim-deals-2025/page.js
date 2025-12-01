@@ -22,7 +22,7 @@ const faqData = [
     },
     {
       q: "How does my plan support animal rescue?",
-      a: "Every Zoiko Mobile plan contributes to the Zoiko Animal Rescue Network (ZARN) which supports shelters nationwide."
+      a: "Every Zoiko Mobile plan contributes to the Zoiko Animal Rescue Network (ZARN) which supports pet shelters nationwide."
     },
     {
       q: "What does ZoikoCare™ cover?",
@@ -213,7 +213,7 @@ console.error("Form submission error:", error);
               <Button variant="dark" size="lg" href="/all-plans">
                 Shop Black Friday Deals
               </Button>
-              <Button variant="light" size="lg"  href="/byod-plans">
+              <Button variant="light" size="lg"  href="/byod-plans#deviceCompatibility">
                 Activate Your SIM Now
               </Button>
             </div>
