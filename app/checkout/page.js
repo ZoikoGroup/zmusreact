@@ -17,6 +17,8 @@ import {
   Router
 } from "react-bootstrap-icons"
 // import "bootstrap/dist/css/bootstrap.min.css";
+import GooglePayButton from "../components/GooglePayButton";
+
 
 export default function CheckoutPage() {
   const [shippingFee, setShippingFee] = useState(9.99); // default value
@@ -448,6 +450,7 @@ const totalLocal = Math.max(
   subtotalLocal + shippingFeeLocal - discountAmountLocal,
   0
 );
+  const [price, setPrice] = useState(totalLocal);
 
     // Collect full order data
     const orderData = {
@@ -990,6 +993,24 @@ const totalLocal = Math.max(
                         "Place Order"
                       )}
                     </button>
+                    <style>{`
+          #gpay-container button{
+          width:100%;
+          }
+          `}</style>
+                    
+<div style={{
+  textAlign:"center",
+}}>
+      <h2>OR</h2>
+
+      {/* Google Pay Button */}
+      <GooglePayButton amount={total} style={{width:"100%"}}/>
+
+    </div>
+
+
+
                   </div>
                 </div>
               </div>

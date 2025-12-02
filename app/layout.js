@@ -739,6 +739,7 @@ export default function RootLayout({ children }) {
         {/* Google Analytics using env var NEXT_PUBLIC_GA_ID */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
+          
             <Script
               async
               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
@@ -787,6 +788,7 @@ export default function RootLayout({ children }) {
             src="https://www.facebook.com/tr?id=838514508768820&ev=PageView&noscript=1"
           />
         </noscript>
+        <script async src="https://pay.google.com/gp/p/js/pay.js"></script>
       </head>
 
       <body className={roboto.className}>
