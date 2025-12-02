@@ -69,8 +69,8 @@ export default function BlogDetails() {
             {/* Publish Date */}
             <p className="text-muted" style={{ fontSize: "14px" }}>
               Published on:{" "}
-              {post.created_at
-                ? new Date(post.created_at).toLocaleDateString("en-GB", {
+              {post.published_at
+                ? new Date(post.published_at).toLocaleDateString("en-GB", {
                     day: "numeric",
                     month: "short",
                     year: "numeric",
