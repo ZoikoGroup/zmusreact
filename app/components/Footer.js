@@ -59,7 +59,7 @@ const Footer = () => {
                         <ul>
                             <li><Link href={"/about"}>Our Story</Link></li>
                             <li><Link href={"/news"}>Press &amp; Media</Link></li>
-                            <li><Link href={"#"}>Blogs</Link></li>
+                            <li><Link href={"/blog"}>Blogs</Link></li>
                             <li><Link href={"/sustainability"}>Sustainablity</Link></li>
                             <li><Link href={"/animal-charities"}>Animal Charities</Link></li>
                             <li><Link href={"/music-hub"}>Zoiko Music Hub</Link></li>

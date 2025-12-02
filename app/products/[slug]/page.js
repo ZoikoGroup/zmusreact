@@ -410,7 +410,7 @@ export default function ProductDetail() {
                 const v = p.variants?.[0] || {};
                 const img = resolveImageUrl(p.image_url);
                 return (
-                  <Col md={4} className="mb-4" key={p.id}>
+                  <Col md={3} className="mb-4" key={p.id}>
                     <Card className="p-3 h-100 shadow-sm">
                       <div
                         onClick={() => router.push(`/products/${p.slug}`)}
