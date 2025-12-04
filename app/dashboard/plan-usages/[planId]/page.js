@@ -6,200 +6,224 @@ import Footer from "../../../components/Footer";
 import HeadBar from "../../../components/HeadBar";
 import "../../Dashboard.css";
 import beQuick from "../../../utils/dasdbeQuickApi";
-import { FaMobileAlt, FaWifi, FaPhoneAlt } from "react-icons/fa";
+import { FaMobileAlt, FaWifi, FaPhoneAlt, FaRegCommentDots } from "react-icons/fa";
 import { useParams } from "next/navigation";
-
 
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
-  const [fullData, setFullData] = useState(null); // ✅ define state
+  const [fullData, setFullData] = useState(null);
   const params = useParams();
   const planId = params.planId;
   const [error, setError] = useState(null);
+
   const [usage, setUsage] = useState({
-    mobileData: { used: 0, total: 358466 },
-    hotspot: { used: 0, total: 0 },
-    talkText: { minutes: 0, texts: 0 },
+    usageBlocks: {},
     autoRenew: true,
     usageAlerts: true,
-    billingCycle: "Oct 10 - Nov 10, 2025",
+    billingCycle: "",
   });
 
   useEffect(() => {
-  async function fetchData() {
-    setLoading(true);
-    try {
-      const data = await beQuick.getPlanDetails([planId], true);
-      setFullData(data); // keep full JSON for debugging
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const data = await beQuick.getPlanDetails([planId], true);
+        setFullData(data);
 
-      const usageSummary = data.usage_summary || {};
+        const usageSummary = data.usage_summary || {};
 
-      const mobileData = {
-  used: Math.round(parseFloat(usageSummary.data?.used || 0) / 1024), // KB -> MB
-  total: Math.round(
-    (parseFloat(usageSummary.data?.used || 0) +
-      parseFloat(usageSummary.data?.remaining || 0)) /
-      1024
-  ),
-};
+        // Convert function (supports GB for data)
+        const convert = (used, remaining, isData = false) => {
+          let u = parseFloat(used || 0);
+          let r = parseFloat(remaining || 0);
+          let total = u + r;
 
-const hotspot = { used: 0, total: 0 }; // API doesn't provide hotspot
+          if (isData) {
+            // Convert KB → GB
+            u = u / (1024 * 1024);
+            r = r / (1024 * 1024);
+            total = u + r;
+          }
 
-const talkText = {
-  minutes: Math.round(parseFloat(usageSummary.voice?.total || 0)),
-  texts: Math.round(parseFloat(usageSummary.text?.total || 0)),
-};
+          return {
+            used: isData ? u.toFixed(2) : Math.round(u),
+            remaining: isData ? r.toFixed(2) : Math.round(r),
+            total: isData ? total.toFixed(2) : Math.round(total),
+            pct: total > 0 ? Math.round((u / total) * 100) : 0,
+            isData,
+          };
+        };
 
+        const usageBlocks = {
+          domestic_voice: convert(
+            usageSummary.voice?.used,
+            usageSummary.voice?.remaining
+          ),
+          international_voice: convert(
+            usageSummary.international_voice?.used,
+            usageSummary.international_voice?.remaining
+          ),
+          domestic_text: convert(
+            usageSummary.text?.used,
+            usageSummary.text?.remaining
+          ),
+          international_text: convert(
+            usageSummary.international_text?.used,
+            usageSummary.international_text?.remaining
+          ),
+          domestic_data: convert(
+            usageSummary.data?.used,
+            usageSummary.data?.remaining,
+            true
+          ),
+          roaming_data: convert(
+            usageSummary.international_data?.used,
+            usageSummary.international_data?.remaining,
+            true
+          ),
+        };
 
-// ✅ Safe billing cycle extraction
-const startDate = data?.service_period?.start_at;
-const endDate = data?.service_period?.end_at;
+        // Billing cycle
+        const startDate = data?.service_period?.start_at;
+        const endDate = data?.service_period?.end_at;
 
-const formatDate = (dateString) => {
-  if (!dateString) return "";
-  const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
-};
+        const formatDate = (dateString) => {
+          if (!dateString) return "";
+          const date = new Date(dateString);
+          return date.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+          });
+        };
 
-const formatBillingCycle = () => {
-  if (!startDate || !endDate) return "";
+        const formatBillingCycle = () => {
+          if (!startDate || !endDate) return "";
+          const start = formatDate(startDate);
+          const end = formatDate(endDate);
+          const year = new Date(endDate).getFullYear();
+          return `${start} - ${end}, ${year}`;
+        };
 
-  const start = formatDate(startDate);
-  const end = formatDate(endDate);
-  const year = new Date(endDate).getFullYear();
-
-  return `${start} - ${end}, ${year}`;
-};
-
-const billingCycle = formatBillingCycle();
-
-
-      setUsage({
-        mobileData,
-        hotspot,
-        talkText,
-        autoRenew: true, // default
-        usageAlerts: true, // default
-        billingCycle, // API has no service period
-      });
-    } catch (err) {
-      console.error("beQuick.getPlanDetails error:", err);
-    } finally {
-      setLoading(false);
+        setUsage({
+          usageBlocks,
+          autoRenew: true,
+          usageAlerts: true,
+          billingCycle: formatBillingCycle(),
+        });
+      } catch (err) {
+        console.error("beQuick.getPlanDetails error:", err);
+      } finally {
+        setLoading(false);
+      }
     }
-  }
 
-  fetchData();
-}, []);
-
-
-
-
-  const pct = (used, total) =>
-    total > 0 ? Math.min(100, Math.round((used / total) * 100)) : 0;
-
-
+    fetchData();
+  }, []);
 
   return (
     <>
-      {/* <TopHeader /> */}
       <Header />
       <HeadBar />
 
       <div className="page-shell">
-
-
         <div className="dashboard-wrapper">
           {loading && <div className="alert alert-info">Loading your data…</div>}
-        {error && <div className="alert alert-danger">{error}</div>}
+          {error && <div className="alert alert-danger">{error}</div>}
+
           {/* === Current Usage === */}
           <div className="usage-header">
             <h4 className="usage-heading">Current Usage Overview</h4>
             <div className="billing-cycle">{usage.billingCycle}</div>
           </div>
 
-          {/* --- Usage Cards --- */}
-          <div className="cards-row1">
-            {/* Mobile Data */}
-            <div className="card card-highlight">
-              <div className="card-top">
-                <div className="card-icon">
-                  <FaMobileAlt />
-                </div>
-                <div className="card-title">Mobile Data</div>
-              </div>
+          {/* === 3 BLOCKS PER LINE === */}
+          <div
+            className="cards-row1"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "20px",
+            }}
+          >
+            {usage.usageBlocks &&
+              Object.entries(usage.usageBlocks).map(([key, item]) => {
+                // Icon logic
+                let Icon = FaMobileAlt;
+                let unit = "";
 
-              <div className="card-value">
-                <span className="big">{usage.mobileData.used}</span>
-                <span className="small">
-                  MB / {usage.mobileData.total} MB
-                </span>
-              </div>
+                // Title mapping
+                const titleMap = {
+                  domestic_voice: "Domestic Voice",
+                  international_voice: "International Voice",
+                  domestic_text: "Domestic Texts",
+                  international_text: "International Texts",
+                  domestic_data: "Domestic Data",
+                  roaming_data: "Roaming Data",
+                };
 
-              <div className="progress-wrap">
-                <div className="progress-track">
-                  <div
-                    className="progress-fill"
-                    style={{
-                      width: `${pct(
-                        usage.mobileData.used,
-                        usage.mobileData.total
-                      )}%`,
-                    }}
-                  />
-                </div>
-                <div className="progress-note">
-                  <span>
-                    {pct(usage.mobileData.used, usage.mobileData.total)}% used
-                  </span>
-                  <span className="muted">
-                    {" "}
-                    · {Math.max(0, usage.mobileData.total - usage.mobileData.used)} MB
-                    remaining
-                  </span>
-                </div>
-              </div>
-            </div>           
+                const blockTitle = titleMap[key] || key;
 
-            {/* Talk & Text */}
-            <div className="card">
-              <div className="card-top">
-                <div className="card-icon">
-                  <FaPhoneAlt />
-                </div>
-                <div className="card-title">Talk & Text</div>
-              </div>
+                // Units per block
+                if (key.includes("voice")) {
+                  Icon = FaPhoneAlt;
+                  unit = "Minutes";
+                } else if (key.includes("text")) {
+                  Icon = FaRegCommentDots;
+                  unit = "SMS";
+                } else if (key.includes("data")) {
+                  Icon = FaWifi;
+                  unit = item.total < 1 ? "MB" : "GB";
+                }
 
-              <div className="card-value">
-                <span className="big">{usage.talkText.minutes}</span>
-                <span className="small">
-                  min / {usage.talkText.texts} texts
-                </span>
-              </div>
+                // Convert <1GB to MB
+                let usedLabel = item.used;
+                let totalLabel = item.total;
+                let remainingLabel = item.remaining;
 
-              <div className="progress-wrap">
-                <div className="progress-track">
-                  <div className="progress-fill" style={{ width: `0%` }} />
-                </div>
-                <div className="progress-note">
-                  <span>{usage.talkText.minutes} min this month</span>
-                  <span className="muted">
-                    {" "}
-                    · {usage.talkText.texts} messages sent
-                  </span>
-                </div>
-              </div>
-            </div>
+                if (item.isData && item.total < 1) {
+                  usedLabel = (item.used * 1024).toFixed(0);
+                  totalLabel = (item.total * 1024).toFixed(0);
+                  remainingLabel = (item.remaining * 1024).toFixed(0);
+                }
+
+                return (
+                  <div className="card card-highlight" key={key}>
+                    <div className="card-top">
+                      <div className="card-icon">
+                        <Icon />
+                      </div>
+                      <div className="card-title">{blockTitle}</div>
+                    </div>
+
+                    <div className="card-value">
+                      <span className="big">{usedLabel}</span>
+                      <span className="small"> / {totalLabel} {unit}</span>
+                    </div>
+
+                    <div className="progress-wrap">
+                      <div className="progress-track">
+                        <div
+                          className="progress-fill"
+                          style={{ width: `${item.pct}%` }}
+                        />
+                      </div>
+
+                      <div className="progress-note">
+                        <span>{item.pct}% used</span>
+                        <span className="muted">
+                          · {remainingLabel} {unit} remaining
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
           </div>
 
-          {/* === Plan Preferences (with visible toggles) === */}
+          {/* === Plan Preferences === */}
           <div className="section-card">
             <h5 className="section-title">Plan Preferences</h5>
 
-            {/* Auto Renewal */}
             <div className="pref-card">
               <div className="pref-header">
                 <div>
@@ -226,7 +250,6 @@ const billingCycle = formatBillingCycle();
               </p>
             </div>
 
-            {/* Usage Alerts */}
             <div className="pref-card">
               <div className="pref-header">
                 <div>
@@ -257,7 +280,6 @@ const billingCycle = formatBillingCycle();
             </div>
           </div>
 
-          {/* === Quick Actions === */}
           <div className="section-card">
             <h5 className="section-title">Quick Actions</h5>
             <div className="quick-actions">
