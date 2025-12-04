@@ -7,7 +7,7 @@ import Testimonials from "../components/Testimonials";
 import PhoneSlider from "../components/ChristmasPhoneSlider";
   import { QuestionCircleFill,BarChartFill,  LightningFill,  LaptopFill,  CreditCardFill,  HeartFill  } from "react-bootstrap-icons";
   import { FaSitemap, FaQrcode,FaPercentage,FaSimCard, FaPaw,FaCheck,FaSignal, FaHeart, FaBolt, FaShieldAlt, FaGift, FaLeaf} from "react-icons/fa";
-
+import { Check2 } from "react-bootstrap-icons";
 
   import { MdOutlineSimCard } from "react-icons/md";
 
@@ -73,6 +73,9 @@ const faqData = [
     }
     body {
         background-color: #ffffff;
+    }
+    .cardIcon{
+        width: 2vw;
     }
     `}</style>
       <Header />
@@ -252,22 +255,30 @@ const faqData = [
     
          <div className="refubrishDeal">
       <Container>
+<div className="text-center mb-4">
+        <h2
+        className="fw-bold"
+        style={{ color: "#0A6A35", fontSize: "2rem" }}
+      >
+        Refurbished Phone Marketplace
+      </h2>
 
-        {/* Title */}
-        <h5 className="text-center mb-2" style={{ color: "#555" }}>
-          Christmas refurbished phone deals USA - Up to 40% OFF
-        </h5>
+      {/* Gradient underline */}
+      <div
+        style={{
+          width: "120px",
+          height: "4px",
+          margin: "10px auto 20px",
+          borderRadius: "10px",
+          background: "linear-gradient(to right, #C61D32, #FFC300)",
+        }}
+      />
 
-        <div
-          style={{
-            width: "70px",
-            height: "4px",
-            background:
-              "linear-gradient(to right, #D93B3B, #FFB800, #9E2BD4)",
-            margin: "0 auto 45px auto",
-            borderRadius: "10px",
-          }}
-        />
+      <p className="text-muted" style={{ fontSize: "1rem" }}>
+        Christmas refurbished phone deals USA - Up to 40% OFF
+      </p>
+</div>
+        
           <PhoneSlider />
             </Container>
     </div>
@@ -277,7 +288,15 @@ const faqData = [
       <h2 className="text-center fw-bold mb-4" style={{ color: "#0A6A35" }}>
         SIM & eSIM Offers
       </h2>
-
+<div
+        style={{
+          width: "120px",
+          height: "4px",
+          margin: "10px auto 20px",
+          borderRadius: "10px",
+          background: "linear-gradient(to right, #C61D32, #FFC300)",
+        }}
+      />
       <Row className="g-4 justify-content-center">
 
         {/* FREE SIM Offer */}
@@ -286,7 +305,9 @@ const faqData = [
             className="p-4 text-center text-white rounded-4"
             style={{ background: "#C61D32" }}
           >
-            <div className="mb-3 fs-1">📱</div>
+            <div className="mb-3 fs-1">
+              <Image src="/img/mob.png" alt="SIM Card" className="cardIcon"/>
+            </div>
 
             <h4 className="fw-bold mb-4">FREE SIM Offer</h4>
 
@@ -310,7 +331,9 @@ const faqData = [
               background: "linear-gradient(180deg, #0C6B2A, #0A4F22)"
             }}
           >
-            <div className="mb-3 fs-1">⚡</div>
+            <div className="mb-3 fs-1">
+              <Image src="/img/thunder.png" alt="SIM Card"  className="cardIcon" />
+            </div>
 
             <h4 className="fw-bold mb-4">eSIM Christmas Offer</h4>
 
@@ -338,7 +361,9 @@ const faqData = [
               background: "linear-gradient(180deg, #1FAD59, #168B46)"
             }}
           >
-            <div className="mb-3 fs-1">🌱</div>
+            <div className="mb-3 fs-1">
+              <Image src="/img/plant.png" alt="SIM Card"  className="cardIcon" />
+            </div>
 
             <h4 className="fw-bold mb-4">Eco-Friendly SIM Offer</h4>
 
@@ -359,7 +384,161 @@ const faqData = [
 
       </Row>
     </Container>
+ <Container
+      className="p-5"
+      style={{ background: "#F0FAF5", borderRadius: "12px" }}
+    >
+      <Row className="align-items-center">
+        
+        {/* LEFT IMAGE */}
+        <Col md={5} className="text-center">
+          <div
+            style={{
+              background: "#F6F6F0",
+              borderRadius: "16px",
+              padding: "20px",
+              display: "inline-block",
+            }}
+          >
+            <img
+              src="/img/Device-protection.png" // replace with your image
+              alt="Protection Plan"
+              style={{ maxWidth: "100%", borderRadius: "12px" }}
+            />
+          </div>
+        </Col>
 
+        {/* RIGHT CONTENT */}
+        <Col md={7}>
+          <h2 className="fw-bold" style={{ color: "#0A3A2A" }}>
+            Christmas Protection Hub
+          </h2>
+
+          <p className="text-muted" style={{ marginTop: "-5px" }}>
+            Up to 30% OFF • Free Activation • Zero Deductible Bonus
+          </p>
+
+          {/* FEATURES LIST */}
+          <div className="mt-3">
+            {[
+              "Theft & loss protection",
+              "Accidental damage coverage",
+              "Screen crack repair",
+              "Next-day replacement",
+              "24/7 claim support",
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="d-flex align-items-center py-2"
+                style={{ borderBottom: "1px solid #E4E4E4" }}
+              >
+                <span style={{ color: "#E2003B" }}>
+                  <Check2 size={18} />
+                </span>
+                <span className="ms-2">{item}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* PRICING */}
+          <div className="mt-4">
+            <span
+              style={{
+                textDecoration: "line-through",
+                color: "#999",
+                marginRight: "10px",
+              }}
+            >
+              $12/mo
+            </span>
+
+            <span style={{ fontWeight: "700", color: "#E2003B", fontSize: "24px" }}>
+              $7/mo
+            </span>
+
+            <span className="ms-2" style={{ color: "#E2003B" }}>
+              (40% off Christmas Day)
+            </span>
+          </div>
+
+          {/* BUTTON */}
+          <Button
+            variant="outline-danger"
+            className="mt-4 px-5 py-2"
+            style={{
+              borderRadius: "8px",
+              fontWeight: "600",
+              borderWidth: "2px",
+            }}
+          >
+            Add Protection
+          </Button>
+        </Col>
+      </Row>
+    </Container>
+
+    <section style={{ backgroundColor: "#e91e63", padding: "70px 0" }}>
+      <Container>
+        <h2 className="text-center text-white mb-3">
+          Why Zoiko Mobile USA
+        </h2>
+        <div className="text-center mb-5">
+          <span style={{
+            display: "inline-block",
+            width: "60px",
+            height: "4px",
+            background: "yellow",
+            borderRadius: "5px"
+          }}></span>
+        </div>
+
+        <Row className="text-center text-white">
+          
+          <Col md={3} className="mb-4">
+            <img
+              src="/img/icons/paw.png"
+              alt=""
+              style={{ width: 40, marginBottom: 15 }}
+            />
+            <h5 className="text-warning">Supports Animal<br />Rescue Programs</h5>
+            <p>$1 animal rescue donation with eco-friendly SIM</p>
+          </Col>
+
+          <Col md={3} className="mb-4">
+            <img
+              src="/img/icons/eco.png"
+              alt=""
+              style={{ width: 40, marginBottom: 15 }}
+            />
+            <h5 className="text-warning">Eco-friendly SIM Cards</h5>
+            <p>Eco-conscious phone plan offers</p>
+          </Col>
+
+          <Col md={3} className="mb-4">
+            <img
+              src="/img/icons/check.png"
+              alt=""
+              style={{ width: 40, marginBottom: 15 }}
+            />
+            <h5 className="text-warning">
+              Certified Refurbished<br />Marketplace
+            </h5>
+            <p>Christmas refurbished phone deals USA with 1-Year Warranty</p>
+          </Col>
+
+          <Col md={3} className="mb-4">
+            <img
+              src="/img/icons/satellite.png"
+              alt=""
+              style={{ width: 40, marginBottom: 15 }}
+            />
+            <h5 className="text-warning">Nationwide 5G Coverage</h5>
+            <p>Holiday unlimited data deals across the USA</p>
+          </Col>
+
+        </Row>
+      </Container>
+    </section>
       <Footer />
     </>
   );
