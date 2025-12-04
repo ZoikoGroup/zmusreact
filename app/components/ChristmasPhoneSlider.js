@@ -31,7 +31,7 @@ const PhoneSlider = () => {
         arrows: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 3,
         responsive: [
             { breakpoint: 1024, settings: { slidesToShow: 3 } },
@@ -41,7 +41,7 @@ const PhoneSlider = () => {
     };
 
     return (
-        <Container fluid className="p-4">
+        <Container className="p-4">
             <div className="slider-container">
                 <Slider {...settings}>
 

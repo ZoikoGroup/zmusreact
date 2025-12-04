@@ -450,7 +450,7 @@ const totalLocal = Math.max(
   subtotalLocal + shippingFeeLocal - discountAmountLocal,
   0
 );
-  const [price, setPrice] = useState(totalLocal);
+  // const [price, setPrice] = useState(totalLocal);
 
     // Collect full order data
     const orderData = {
