@@ -41,7 +41,7 @@ const PhoneSlider = () => {
     };
 
     return (
-        <Container fluid className="p-4 bglite">
+        <Container fluid className="p-4">
             <div className="slider-container">
                 <Slider {...settings}>
 

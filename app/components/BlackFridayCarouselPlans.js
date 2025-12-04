@@ -49,7 +49,7 @@ export default function CarouselSimPlan() {
           border-top: 4px solid red;
           border-radius: 2vw;
           box-shadow: -1px 0px 14px 2px rgb(29 27 27 / 42%);
-          margin-bottom:2vw;
+          // margin-bottom:2vw;
       }
       .blackFridayCarouselPlanContent .text-center{
           padding: 2vw;
