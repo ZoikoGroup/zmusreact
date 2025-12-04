@@ -173,7 +173,7 @@ useEffect(() => {
         <TopHeader />
       </div>
       <GetInTouchSidebar />
-      <BlackFridaySidebar/>
+      {/* <BlackFridaySidebar/> */}
       <Navbar expand="lg" className="bg-body-tertiary p-0 headnav">
         <Container fluid>
           <Navbar.Brand href="/">
