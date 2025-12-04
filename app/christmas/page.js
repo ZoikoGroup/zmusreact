@@ -11,7 +11,7 @@ import PhoneSlider from "../components/ChristmasPhoneSlider";
 
   import { MdOutlineSimCard } from "react-icons/md";
 
-export default function blackFridaySpecialPage(){
+export default function christmasPage(){
 
 const faqData = [
     {
@@ -63,6 +63,16 @@ const faqData = [
         background: url(/img/section3.png);
         background-repeat: no-repeat;
         background-color: #fff8dc;
+    }
+    .refubrishDeal{
+        background: url(/img/section3.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position:center;
+        padding: 50px;
+    }
+    body {
+        background-color: #ffffff;
     }
     `}</style>
       <Header />
@@ -240,7 +250,7 @@ const faqData = [
     <CarouselPlans/>
     </div>
     
-         <div style={{ background: "#fff", padding: "50px 0" }}>
+         <div className="refubrishDeal">
       <Container>
 
         {/* Title */}
@@ -263,7 +273,92 @@ const faqData = [
     </div>
 
 
+ <Container className="my-5">
+      <h2 className="text-center fw-bold mb-4" style={{ color: "#0A6A35" }}>
+        SIM & eSIM Offers
+      </h2>
 
+      <Row className="g-4 justify-content-center">
+
+        {/* FREE SIM Offer */}
+        <Col md={4}>
+          <div
+            className="p-4 text-center text-white rounded-4"
+            style={{ background: "#C61D32" }}
+          >
+            <div className="mb-3 fs-1">📱</div>
+
+            <h4 className="fw-bold mb-4">FREE SIM Offer</h4>
+
+            <ul className="list-unstyled text-start opacity-75">
+              <li>✔ Free SIM</li>
+              <li>✔ Free Activation</li>
+              <li>✔ $10 Credit</li>
+            </ul>
+
+            <Button variant="light" className="fw-bold px-4 py-2 mt-3 rounded-3">
+              Get Free SIM
+            </Button>
+          </div>
+        </Col>
+
+        {/* eSIM Christmas Offer */}
+        <Col md={4}>
+          <div
+            className="p-4 text-center text-white rounded-4"
+            style={{
+              background: "linear-gradient(180deg, #0C6B2A, #0A4F22)"
+            }}
+          >
+            <div className="mb-3 fs-1">⚡</div>
+
+            <h4 className="fw-bold mb-4">eSIM Christmas Offer</h4>
+
+            <ul className="list-unstyled text-start opacity-75">
+              <li>✔ Instant activation</li>
+              <li>✔ Free Activation</li>
+              <li>✔ $10 Credit</li>
+              <li>✔ One-tap eSIM activation</li>
+            </ul>
+
+            <Button
+              style={{ background: "#E03A3E", border: "none" }}
+              className="fw-bold px-4 py-2 mt-3 rounded-3"
+            >
+              Activate eSIM
+            </Button>
+          </div>
+        </Col>
+
+        {/* Eco-Friendly SIM Offer */}
+        <Col md={4}>
+          <div
+            className="p-4 text-center text-white rounded-4"
+            style={{
+              background: "linear-gradient(180deg, #1FAD59, #168B46)"
+            }}
+          >
+            <div className="mb-3 fs-1">🌱</div>
+
+            <h4 className="fw-bold mb-4">Eco-Friendly SIM Offer</h4>
+
+            <ul className="list-unstyled text-start opacity-75">
+              <li>✔ $5 OFF</li>
+              <li>✔ $1 animal rescue donation</li>
+              <li>✔ Eco-conscious phone plan offers</li>
+            </ul>
+
+            <Button
+              style={{ background: "#D83434", border: "none" }}
+              className="fw-bold px-4 py-2 mt-3 rounded-3"
+            >
+              Get Eco SIM
+            </Button>
+          </div>
+        </Col>
+
+      </Row>
+    </Container>
 
       <Footer />
     </>
