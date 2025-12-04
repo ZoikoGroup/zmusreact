@@ -209,7 +209,7 @@ width: 35vw;
               <Button variant="dark" size="lg" href="/all-plans">
                 Shop Black Friday Deals
               </Button>
-              <Button variant="light" size="lg"  href="/byod-plans">
+              <Button variant="light" size="lg"  href="/activate">
                 Activate Your SIM Now
               </Button>
             </div>
