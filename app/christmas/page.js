@@ -264,6 +264,9 @@ const faqs = [
     .deviceProtectionContainer{
     margin-bottom: 2vw;
     }
+    .christmasBox a{
+      text-decoration: none !important;
+    }
     `}</style>
       <Header />
       {/* <HeadBar text="Join Buster and flock together with your buddies!" /> */}
