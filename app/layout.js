@@ -134,9 +134,9 @@ const metaMap = {
       "Join Zoiko Mobile for the best bring your own phone data plans. Enjoy seamless connectivity and savings while keeping your favorite device!",
   },
   "/blog": {
-    title: "Read Zoiko Mobile Blog | SIM Tips, News & Insights",
+    title: "Read Zoiko Mobile Blog | SIM Tips, News & Insights   uuuuuu",
     description:
-      "Read Zoiko Mobile Blog for the latest SIM-only and eSIM tips, mobile insights, plan comparisons, and expert advice on saving money and using tech smartly.",
+      "ggg  ggg Read Zoiko Mobile Blog for the latest SIM-only and eSIM tips, mobile insights, plan comparisons, and expert advice on saving money and using tech smartly.",
   },
   "/sustainability": {
     title: "Zoiko Mobile Sustainability | Commitment to Greener Future",
@@ -471,19 +471,19 @@ function generateDynamicMeta(pathname) {
   }
 
   // blog posts like /blog/some-post
-  // if (pathname.startsWith("/blog/")) {
-  //   const post = pathname.split("/").pop().replace(/[-_]/g, " ");
-  //   const pretty = post
-  //     .split(" ")
-  //     .filter(Boolean)
-  //     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-  //     .join(" ");
-  //   return {
-  //     title: `${pretty} | Zoiko Mobile Blog`,
-  //     description: `Read about ${pretty} and explore Zoiko Mobile news and insights.`,
-  //     image: defaultMeta.image,
-  //   };
-  // }
+  if (pathname.startsWith("/blog/")) {
+    const post = pathname.split("/").pop().replace(/[-_]/g, " ");
+    const pretty = post
+      .split(" ")
+      .filter(Boolean)
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+    return {
+      title: `${pretty} | Zoiko Mobile Blog`,
+      description: `Read about ${pretty} and explore Zoiko Mobile news and insights.`,
+      image: defaultMeta.image,
+    };
+  }
 
   // products like /product/samsung-galaxy-s25 or /product/sku
   if (pathname.startsWith("/product/")) {
@@ -501,9 +501,9 @@ function generateDynamicMeta(pathname) {
   }
 
   return {
-    title: defaultMeta.title,
-    description: defaultMeta.description,
-    image: defaultMeta.image,
+   // title: defaultMeta.title,
+    //description: defaultMeta.description,
+    //image: defaultMeta.image,
   };
 }
 
