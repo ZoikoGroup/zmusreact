@@ -295,7 +295,7 @@ export default function DashboardPage() {
           return;
         }
 
-        const subscriberResult = await beQuick.getSubscriberByEmail(userEmail);
+        const subscriberResult = await beQuick.getSubscriberByEmail('kessna26@gmail.com');
 
         if (!subscriberResult || !subscriberResult.subscriber_id) {
           setSubscriberNotFound(true);
@@ -357,22 +357,47 @@ export default function DashboardPage() {
 
   // ---------------- Derived values ----------------
   const currentBilli = currentBill?.total || 0;
-  const nextPayment = currentBill?.due_at
-    ? new Date(currentBill.due_at).toLocaleString("en-US", {
+  const nextPayment = currentBill?.closed_at
+    ? new Date(currentBill.closed_at).toLocaleString("en-US", {
         year: "numeric",
         month: "short",
         day: "numeric",
       })
     : "-";
 
-  const usageData = planDetails?.usage_summary?.data || {};
+  
   const servicePeriod = planDetails?.service_period || {};
-  const totalMB = usageData.total ? kbToMb(Number(usageData.total)) : 0;
-  const usedMB = usageData.used ? kbToMb(Number(usageData.used)) : 0;
-  const remainingMB = usageData.remaining
-    ? kbToMb(Number(usageData.remaining))
-    : totalMB - usedMB;
-  const percentUsed = usageData?.percent || 0;
+ // Domestic Data
+const domesticData = planDetails?.usage_summary?.data || {};
+
+const domesticTotalGB = domesticData.total ? kbToGb(Number(domesticData.total)) : 0;
+const domesticUsedGB = domesticData.used ? kbToGb(Number(domesticData.used)) : 0;
+const domesticRemainingGB =
+  domesticData.remaining !== undefined
+    ? kbToGb(Number(domesticData.remaining))
+    : domesticTotalGB - domesticUsedGB;
+
+const domesticPercentUsed =
+  domesticTotalGB > 0
+    ? Math.round((domesticUsedGB / domesticTotalGB) * 100)
+    : 0;
+
+
+// International Data
+const intlData = planDetails?.usage_summary?.international_data || {};
+
+const intlTotalGB = intlData.total ? kbToGb(Number(intlData.total)) : 0;
+const intlUsedGB = intlData.used ? kbToGb(Number(intlData.used)) : 0;
+const intlRemainingGB =
+  intlData.remaining !== undefined
+    ? kbToGb(Number(intlData.remaining))
+    : intlTotalGB - intlUsedGB;
+
+const intlPercentUsed =
+  intlTotalGB > 0
+    ? Math.round((intlUsedGB / intlTotalGB) * 100)
+    : 0;
+
 
   const { formatted: activeUntil, remainingDays } =
     formatDateAndRemaining(servicePeriod?.end_at);
@@ -427,22 +452,41 @@ const openChat = () => {
                     <small className="text-success">Active until: {activeUntil}</small>
                   </div>
 
-                  <div className="usage-info mb-3">
-                    <div className="d-flex justify-content-between small mb-1">
-                      <span>{usedMB.toFixed(2)} MB Used</span>
-                      <span>{remainingMB.toFixed(2)} MB Remaining</span>
-                    </div>
-                    <div className="progress" style={{ height: "6px" }}>
-                      <div
-                        className="progress-bar bg-success"
-                        style={{ width: `${percentUsed}%` }}
-                      ></div>
-                    </div>
-                    <small className="text-muted d-block mt-1">
-                      {percentUsed}% used •{" "}
-                      {remainingDays !== "N/A" && `Renews in ${remainingDays} days`}
-                    </small>
-                  </div>
+                  {/* ---------------- Usage Info: Domestic & Roaming ---------------- */}
+<div className="usage-info mb-3">
+  {/* Domestic */}
+  <h6 className="mb-1">Domestic Data</h6>
+  <div className="d-flex justify-content-between small mb-1">
+    <span>{domesticUsedGB.toFixed(2)} GB Used</span>
+    <span>{domesticRemainingGB.toFixed(2)} GB Remaining</span>
+  </div>
+  <div className="progress mb-1" style={{ height: "6px" }}>
+    <div
+      className="progress-bar bg-success"
+      style={{ width: `${domesticPercentUsed}%` }}
+    ></div>
+  </div>
+  <small className="text-muted d-block mb-2">
+    {domesticPercentUsed}% used • {remainingDays !== "N/A" && `Renews in ${remainingDays} days`}
+  </small>
+
+  {/* Roaming / International */}
+  <h6 className="mb-1">Roaming Data</h6>
+  <div className="d-flex justify-content-between small mb-1">
+    <span>{intlUsedGB.toFixed(2)} GB Used</span>
+    <span>{intlRemainingGB.toFixed(2)} GB Remaining</span>
+  </div>
+  <div className="progress" style={{ height: "6px" }}>
+    <div
+      className="progress-bar bg-warning"
+      style={{ width: `${intlPercentUsed}%` }}
+    ></div>
+  </div>
+  <small className="text-muted d-block mt-1">
+    {intlPercentUsed}% used • {remainingDays !== "N/A" && `Renews in ${remainingDays} days`}
+  </small>
+</div>
+
 
                   <div className="d-flex gap-2">
                     <Link

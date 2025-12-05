@@ -285,6 +285,14 @@ export default function DashboardPage() {
             <div className="quick-actions">
               <button className="btn-outline upgrade">Upgrade Plan</button>
               <button className="btn-outline buy">Buy More Data</button>
+
+              {/* New Back Button */}
+              <button
+                className="btn-outline back"
+                onClick={() => window.history.back()}
+              >
+                Back
+              </button>
             </div>
           </div>
         </div>
