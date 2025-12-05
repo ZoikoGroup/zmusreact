@@ -32,7 +32,7 @@ const PhoneSlider = () => {
         infinite: true,
         speed: 500,
         slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToScroll: 2,
         responsive: [
             { breakpoint: 1024, settings: { slidesToShow: 3 } },
             { breakpoint: 768, settings: { slidesToShow: 2 } },
@@ -48,7 +48,7 @@ const PhoneSlider = () => {
                     {products.map((item) => {
                         const variant = item.variants?.[0] || {};
                         return (
-                            <Card key={item.id} className="border-0">
+                            <Card key={item.id} className="border-0 christMobTab">
                                 <CardBody className="text-center">
 
                                     {/* Using normal <img> so NO next.config.js required */}
@@ -103,13 +103,13 @@ const PhoneSlider = () => {
             </div>
              {/* VIEW ALL BUTTON */}
         <div className="text-center mt-4">
-          <Button
+          <Button href="/product-category/refurbished"
             variant="light"
             style={{
               border: "1px solid #ff006f",
               color: "#ff006f",
               padding: "10px 25px",
-              borderRadius: "30px",
+              borderRadius: ".5vw",
               fontWeight: 600,
             }}
           >
