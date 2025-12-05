@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 /**
- * GooglePayButton (Production-ready debug)
+ * GooglePayButton (OR_BIBED_11 Fix)
  *
  * Expects:
  * - NEXT_PUBLIC_GOOGLEPAY_STRIPE_PUBLISHABLE_KEY (Stripe publishable key)
@@ -18,12 +18,14 @@ import { useState, useEffect, useCallback } from "react";
  *
  * IMPORTANT:
  * - Production requires HTTPS and an authorized domain configured for your Google Merchant.
+ * - OR_BIBED_11 fix: Updated Stripe API version, added billing address support, improved validation
  */
 
 const GooglePayButton = ({ amount = 1.0, currency = "USD", onSuccess, onCancel, onError }) => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [buttonAppended, setButtonAppended] = useState(false);
+  const [error, setError] = useState(null);
 
   // Force production per your request
   const googleEnvironment = "PRODUCTION";
@@ -31,6 +33,19 @@ const GooglePayButton = ({ amount = 1.0, currency = "USD", onSuccess, onCancel, 
   // Read keys from public env vars (Next.js)
   const publishableKey = typeof process !== "undefined" ? process.env.NEXT_PUBLIC_GOOGLEPAY_STRIPE_PUBLISHABLE_KEY : undefined;
   const merchantId = typeof process !== "undefined" ? process.env.NEXT_PUBLIC_GOOGLE_MERCHANT_ID : undefined;
+
+  // Validate configuration on mount
+  useEffect(() => {
+    if (!publishableKey) {
+      const msg = "GooglePayButton: NEXT_PUBLIC_GOOGLEPAY_STRIPE_PUBLISHABLE_KEY is missing. Payments will fail.";
+      console.error(msg);
+      setError(msg);
+    }
+    if (!merchantId) {
+      const msg = "GooglePayButton: NEXT_PUBLIC_GOOGLE_MERCHANT_ID is missing. Required for production.";
+      console.warn(msg);
+    }
+  }, [publishableKey, merchantId]);
 
   // load script
   useEffect(() => {
@@ -55,6 +70,7 @@ const GooglePayButton = ({ amount = 1.0, currency = "USD", onSuccess, onCancel, 
     s.onerror = (e) => {
       console.error("Failed to load Google Pay script", e);
       setScriptLoaded(false);
+      setError("Failed to load Google Pay script");
     };
     document.head.appendChild(s);
   }, []);
@@ -64,21 +80,28 @@ const GooglePayButton = ({ amount = 1.0, currency = "USD", onSuccess, onCancel, 
     return isFinite(value) ? value.toFixed(2) : "0.00";
   }, [amount]);
 
+  // Updated tokenization spec with latest Stripe API version
   const getTokenizationSpec = useCallback(() => {
     if (!publishableKey) {
-      console.warn("GooglePayButton: missing NEXT_PUBLIC_GOOGLEPAY_STRIPE_PUBLISHABLE_KEY");
+      console.error("GooglePayButton: missing NEXT_PUBLIC_GOOGLEPAY_STRIPE_PUBLISHABLE_KEY");
+      return null;
     }
     return {
       type: "PAYMENT_GATEWAY",
       parameters: {
         gateway: "stripe",
-        "stripe:version": "2022-11-15",
-        "stripe:publishableKey": publishableKey || "MISSING_PUBLISHABLE_KEY",
+        "stripe:version": "2024-11-20", // Updated to latest stable version
+        "stripe:publishableKey": publishableKey,
       },
     };
   }, [publishableKey]);
 
   const getPaymentRequest = useCallback(() => {
+    const tokenizationSpec = getTokenizationSpec();
+    if (!tokenizationSpec) {
+      return null;
+    }
+
     return {
       apiVersion: 2,
       apiVersionMinor: 0,
@@ -88,20 +111,27 @@ const GooglePayButton = ({ amount = 1.0, currency = "USD", onSuccess, onCancel, 
           parameters: {
             allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
             allowedCardNetworks: ["AMEX", "DISCOVER", "MASTERCARD", "VISA"],
+            billingAddressRequired: true,
+            billingAddressParameters: {
+              format: "FULL",
+              phoneNumberRequired: false,
+            },
           },
-          tokenizationSpecification: getTokenizationSpec(),
+          tokenizationSpecification: tokenizationSpec,
         },
       ],
       merchantInfo: {
         merchantName: "zoiko mobile",
-        ...(merchantId ? { merchantId } : {}),
+        merchantId: merchantId || undefined,
       },
       transactionInfo: {
         totalPriceStatus: "FINAL",
         totalPrice: formattedTotal(),
-        currencyCode: currency,
+        currencyCode: currency || "USD",
         countryCode: "US",
       },
+      shippingAddressRequired: false,
+      emailRequired: false,
     };
   }, [formattedTotal, currency, getTokenizationSpec, merchantId]);
 
@@ -111,12 +141,10 @@ const GooglePayButton = ({ amount = 1.0, currency = "USD", onSuccess, onCancel, 
       return;
     }
 
-    // Log helpful hints if config missing
-    if (!publishableKey) {
-      console.warn("GooglePayButton: publishable key not set (NEXT_PUBLIC_GOOGLEPAY_STRIPE_PUBLISHABLE_KEY). Payments may fail.");
-    }
-    if (!merchantId) {
-      console.warn("GooglePayButton: merchant ID not set (NEXT_PUBLIC_GOOGLE_MERCHANT_ID). Required for production.");
+    if (!publishableKey || !merchantId) {
+      console.warn("GooglePayButton: Missing configuration (key or merchantId). Button may not function properly.");
+      setIsReady(false);
+      return;
     }
 
     try {
@@ -148,27 +176,32 @@ const GooglePayButton = ({ amount = 1.0, currency = "USD", onSuccess, onCancel, 
                 onClick: () => handlePayClick(client),
                 buttonColor: "default",
                 buttonType: "long",
+                buttonSizeMode: "fill",
               });
               container.appendChild(button);
               setButtonAppended(true);
             }
           } else {
             setIsReady(false);
+            console.info("Device/browser not ready for Google Pay");
           }
         })
         .catch((err) => {
           setIsReady(false);
           console.error("isReadyToPay error:", err);
+          const errorMsg = `Google Pay availability check failed: ${err?.message || err}`;
+          setError(errorMsg);
           if (typeof onError === "function") onError(err);
         });
     } catch (err) {
       console.error("Google Pay initialization error:", err);
+      setError(`Google Pay initialization failed: ${err?.message || err}`);
       if (typeof onError === "function") onError(err);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scriptLoaded, buttonAppended, publishableKey, merchantId]);
 
-  // loadPaymentData handler (accepts an optional client instance)
+  // loadPaymentData handler
   const handlePayClick = async (paymentClientInstance) => {
     if (typeof window === "undefined" || !window.google) {
       console.warn("Google Pay not available");
@@ -178,9 +211,18 @@ const GooglePayButton = ({ amount = 1.0, currency = "USD", onSuccess, onCancel, 
     const client = paymentClientInstance || new window.google.payments.api.PaymentsClient({ environment: googleEnvironment });
     const request = getPaymentRequest();
 
+    if (!request) {
+      const errMsg = "Payment request could not be created (missing tokenization spec)";
+      console.error(errMsg);
+      setError(errMsg);
+      if (typeof onError === "function") onError(new Error(errMsg));
+      return;
+    }
+
     try {
       const paymentData = await client.loadPaymentData(request);
       console.info("Google Pay loadPaymentData returned:", paymentData);
+      setError(null);
       if (typeof onSuccess === "function") {
         try { onSuccess(paymentData); } catch (err) { console.warn("onSuccess callback threw:", err); }
       }
@@ -193,13 +235,24 @@ const GooglePayButton = ({ amount = 1.0, currency = "USD", onSuccess, onCancel, 
 
       if (isUserCanceled) {
         console.info("Google Pay cancelled by user:", err?.message || err);
+        setError(null);
         if (typeof onCancel === "function") {
           try { onCancel(); } catch (e) { console.warn("onCancel callback threw:", e); }
         }
         return;
       }
 
-      console.error("Google Pay loadPaymentData failed:", err);
+      // Log full error for debugging
+      console.error("Google Pay loadPaymentData failed:", {
+        errorCode: err?.statusCode,
+        errorMessage: err?.message,
+        errorName: err?.name,
+        fullError: err,
+      });
+
+      const errorMsg = `Payment failed: ${err?.message || err}`;
+      setError(errorMsg);
+
       if (typeof onError === "function") {
         try { onError(err); } catch (e) { console.warn("onError callback threw:", e); }
       }
@@ -208,6 +261,11 @@ const GooglePayButton = ({ amount = 1.0, currency = "USD", onSuccess, onCancel, 
 
   return (
     <div id="gpay-wrapper">
+      {error && (
+        <div style={{ color: "#d32f2f", fontSize: "0.875rem", marginBottom: "8px", padding: "8px", backgroundColor: "#ffebee", borderRadius: "4px" }}>
+          ⚠️ {error}
+        </div>
+      )}
       <div id="gpay-container" style={{ minHeight: 48 }} />
       <small style={{ color: "#666", display: "block", marginTop: 6 }}>
         {scriptLoaded ? (isReady ? `Google Pay available — ${currency} ${formattedTotal()}` : "Google Pay not available on this device/browser.") : "Loading Google Pay..."}
