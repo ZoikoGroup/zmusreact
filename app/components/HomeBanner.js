@@ -14,7 +14,9 @@ const HomeBanner = () => {
         <>
         <style>{`
         .christmasBanner{
-        height: auto !important;}
+        height: auto !important;
+        padding:unset !important;
+        }
     .banner-wrapper{
         background-size: cover !important;
         background-position: center;
