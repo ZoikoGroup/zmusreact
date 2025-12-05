@@ -1005,7 +1005,7 @@ const totalLocal = Math.max(
       <h2>OR</h2>
 
       {/* Google Pay Button */}
-      <GooglePayButton amount={total} style={{width:"100%"}}/>
+      {/* <GooglePayButton amount={total} style={{width:"100%"}}/> */}
 
     </div>
 
