@@ -101,14 +101,14 @@ const HomeBanner = () => {
                 
                             {/* CTA BUTTONS */}
                             <div className="mt-4 d-flex gap-3 bannerButtons">
-                              <Button variant="light" size="lg" href="#christmas-deals" >
+                              <Button variant="light" size="lg" href="/all-plans" >
                                 Shop Christmas Deals
                               </Button>
                               <Button
                                 variant="outline-light"
                                 size="lg"
                                 style={{ borderWidth: "2px" }}
-                                href="#refurbishedmobile"
+                                href="/product-category/refurbished"
                               >
                                 Shop Refurbished Phones
                               </Button>
