@@ -295,7 +295,7 @@ export default function DashboardPage() {
           return;
         }
 
-        const subscriberResult = await beQuick.getSubscriberByEmail('kessna26@gmail.com');
+        const subscriberResult = await beQuick.getSubscriberByEmail(userEmail);
 
         if (!subscriberResult || !subscriberResult.subscriber_id) {
           setSubscriberNotFound(true);
