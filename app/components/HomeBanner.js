@@ -1,10 +1,8 @@
 "use client"
 import { useEffect } from "react";
-import { Button, Carousel,Container, Row, Col } from "react-bootstrap";
+import { Button, Carousel,Container, Row, Col, Image } from "react-bootstrap";
+  import { IoMdCheckmark  } from "react-icons/io";
 
-
-  import { QuestionCircleFill,BarChartFill,  LightningFill,  LaptopFill,  CreditCardFill,  HeartFill  } from "react-bootstrap-icons";
-  import { FaSitemap, FaQrcode,FaPercentage,FaSimCard, FaPaw,FaCheck,FaSignal, FaHeart, FaBolt, FaShieldAlt, FaGift, FaLeaf} from "react-icons/fa";
 import HeadBar from "./HeadBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 const HomeBanner = () => {
@@ -14,9 +12,129 @@ const HomeBanner = () => {
     }, []);
     return (
         <>
+        <style>{`
+        .christmasBanner{
+        height: auto !important;}
+    .banner-wrapper{
+        background-size: cover !important;
+        background-position: center;
+        background: url(/img/Banner_image_1.jpg);
+        background-repeat: no-repeat;
+    }
+        @media (max-width: 768px) {
+            .banner-wrapper{
+        text-align: center;
+      }
+      .banner-wrapper h1{
+        font-size: 5.5vw;
+        padding: 0 1vw;
+      }
+      .banner-wrapper p{
+        line-height: 8vw;
+        font-size: 3.5vw;
+        padding: 0 6vw;
+      }
+      .bannerButtons{
+        display: block !important;
+        padding: 0 10vw;
+      }
+      .bannerButtons a{
+        margin-bottom: 3vw;
+        width: 100%;
+        font-size: 4vw;
+      }
+        }
+        `}</style>
         <HeadBar text={<>Affordable Plans | No Credit Checks | No Hidden Fees | Unlimited Everything | Reliable Nationwide Coverage</>} />
         <Carousel controls={false} indicators={true}  className="homeBanner">
-
+             
+            <Carousel.Item className="bannerItem christmasBanner">
+                
+                <div className="banner-wrapper py-5">
+                      <Container>
+                        <Row className="align-items-center">
+                          {/* LEFT CONTENT */}
+                          <Col md={7} className="text-white">
+                            <span
+                              className="px-3 py-1 rounded-pill fw-bold"
+                              style={{ background: "#FFD700", color: "#000", fontSize: "14px" }}
+                            >
+                              CHRISTMAS SALE 2025
+                            </span>
+                
+                            <h1 className="fw-bold mt-3">
+                              Christmas Phone Plan Deals 2025 <br />
+                              30% OFF for 3 Months + FREE Activation
+                            </h1>
+                
+                            <p className="mt-3">
+                              Holiday Smartphone Sale USA: refurbished iPhones, eSIM discounts,
+                              eco-friendly SIM offers, device protection plans.
+                            </p>
+                
+                            {/* Feature Boxes */}
+                            <Row className="mt-4 featuresBoxes">
+                              <Col xs={12} md={6} className="mb-3">
+                                <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
+                                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> FREE Activation (SIM + eSIM)
+                                </div>
+                              </Col>
+                
+                              <Col xs={12} md={6} className="mb-3">
+                                <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
+                                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> Christmas refurbished phone deals USA
+                                </div>
+                              </Col>
+                
+                              <Col xs={12} md={6} className="mb-3">
+                                <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
+                                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> Holiday unlimited data deals
+                                </div>
+                              </Col>
+                
+                              <Col xs={12} md={6} className="mb-3">
+                                <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
+                                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> Eco-conscious phone plan offers
+                                </div>
+                              </Col>
+                            </Row>
+                
+                            {/* CTA BUTTONS */}
+                            <div className="mt-4 d-flex gap-3 bannerButtons">
+                              <Button variant="light" size="lg" href="#christmas-deals" >
+                                Shop Christmas Deals
+                              </Button>
+                              <Button
+                                variant="outline-light"
+                                size="lg"
+                                style={{ borderWidth: "2px" }}
+                                href="#refurbishedmobile"
+                              >
+                                Shop Refurbished Phones
+                              </Button>
+                            </div>
+                          </Col>
+                
+                          {/* RIGHT IMAGE SECTION */}
+                          <Col md={5} className="text-center">
+                            
+                
+                 {/* RIGHT SIDE — ONLY ONE MOBILE IMAGE */}
+                          
+                            <Image
+                              src="img/phone_image.png"
+                              alt="Phone Image"
+                              width={380}
+                              height={600}
+                              className="img-fluid w-100"
+                            />
+                          
+                            
+                          </Col>
+                        </Row>
+                      </Container>
+                    </div>
+            </Carousel.Item>
            
 
             <Carousel.Item className="bannerItem banner1">

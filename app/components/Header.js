@@ -13,7 +13,7 @@ import TopHeader from "./TopHeader";
 import PaymentModal from "./PaymentModal";
 import CustomLanguageSwitcher from "./CustomLanguageSwitcher";
 import GetInTouchSidebar from "./GetInTouchSidebar";
-import BlackFridaySidebar from "./BlackFridaySidebar";
+import ChristmasSidebar from "./ChristmasSidebar";
 import { useRouter } from "next/navigation";
 
 
@@ -173,7 +173,7 @@ useEffect(() => {
         <TopHeader />
       </div>
       <GetInTouchSidebar />
-      {/* <BlackFridaySidebar/> */}
+      <ChristmasSidebar/>
       <Navbar expand="lg" className="bg-body-tertiary p-0 headnav">
         <Container fluid>
           <Navbar.Brand href="/">
