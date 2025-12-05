@@ -55,7 +55,7 @@ export default function CarouselSimPlan() {
           padding: 2vw;
           }
           .blackFridayCarouselPlanTab {
-              max-width: 50vw !important;
+              max-width: 50vw;
               
           }
           // .blackFridayCarouselPlanTab li .active  {

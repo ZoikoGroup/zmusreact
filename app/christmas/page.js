@@ -5,11 +5,11 @@ import { Container, Row, Col, Button, Alert, Form, Card, Image } from "react-boo
 import CarouselPlans from "../components/BlackFridayCarouselPlans";
 import Testimonials from "../components/Testimonials";
 import PhoneSlider from "../components/ChristmasPhoneSlider";
-  import { QuestionCircleFill,BarChartFill,  LightningFill,  LaptopFill,  CreditCardFill,  HeartFill  } from "react-bootstrap-icons";
-  import { FaSitemap, FaQrcode,FaPercentage,FaSimCard, FaPaw,FaCheck,FaSignal, FaHeart, FaBolt, FaShieldAlt, FaGift, FaLeaf} from "react-icons/fa";
+  import { IoMdCheckmark  } from "react-icons/io";
 import { Check2 } from "react-bootstrap-icons";
 
   import { MdOutlineSimCard } from "react-icons/md";
+// import { link } from "fs";
 
 export default function christmasPage(){
 
@@ -35,7 +35,47 @@ const faqs = [
       a: "YES - Perfect holiday gift! All plans can be gifted this Christmas.",
     },
   ];
-
+  const offers = [
+    {
+      bg: "#C6233C",
+      icon: "/img/mob.png",
+      title: "FREE SIM Offer",
+      items: ["Free SIM", "Free Activation", "$10 Credit"],
+      btnText: "Get Free SIM",
+      btnColor: "#ffffff",
+      btnTextColor: "#000",
+      link: "/all-plans",
+    },
+    {
+      bg: "linear-gradient(180deg, #0B5C2B, #148842)",
+      icon: "/img/thunder.png",
+      title: "eSIM Christmas Offer",
+      items: [
+        "Instant activation",
+        "Free Activation",
+        "$10 Credit",
+        "One-tap eSIM activation",
+      ],
+      btnText: "Activate eSIM",
+      btnColor: "#C6233C",
+      btnTextColor: "#fff",
+      link: "/how-to-activate-your-esim",
+    },
+    {
+      bg: "linear-gradient(180deg, #19844A, #34A86A)",
+      icon: "/img/plant.png",
+      title: "Eco-Friendly SIM Offer",
+      items: [
+        "$5 OFF",
+        "$1 animal rescue donation",
+        "Eco-conscious phone plan offers",
+      ],
+      btnText: "Get Eco SIM",
+      btnColor: "#C6233C",
+      btnTextColor: "#fff",
+      link: "#christmas-deals",
+    },
+  ];
   return (
     
     <>
@@ -88,9 +128,142 @@ const faqs = [
         background: url(/img/Banner_image_1.jpg);
         background-repeat: no-repeat;
         color: #fff;
-            padding: 5vw;
-        
-        }
+        padding: 5vw;        
+    }
+  .christMobTab{
+      background: transparent;
+    }
+
+    .esimOffer{
+      list-style: none;
+      padding: 0,
+      margin-bottom: 40px;
+      text-align: left;
+      color: #fff;
+      height: 15vw;
+    }
+      .refurbishedMarketplace{
+        color: #0A6A35;
+        font-size: 2rem;      
+      }
+        .refubrishedMobileSubHead{
+        font-size: 2rem;
+      }
+    @media (max-width: 768px) {
+      .esimOffer{      
+        color: #fff;
+        height: auto;
+      }
+      .refubrishDeal {
+        padding: unset;
+      }
+      .banner-wrapper{
+        text-align: center;
+      }
+      .banner-wrapper h1{
+        font-size: 5.5vw;
+        padding: 0 1vw;
+      }
+      .banner-wrapper p{
+        line-height: 8vw;
+        font-size: 3.5vw;
+        padding: 0 6vw;
+      }
+      .bannerButtons{
+        display: block !important;
+        padding: 0 10vw;
+      }
+      .bannerButtons a{
+        margin-bottom: 3vw;
+        width: 100%;
+        font-size: 4vw;
+      }
+      .featuresBoxes{
+        padding: 0 10vw;  
+        text-align: left !important;
+        font-size: 3vw;
+      }
+      .blackFridayCarouselPlanTab ul li a{
+        font-size: 3vw;
+      }
+      .blackFridayCarouselPlanTab {
+        max-width: 100vw !important;
+      }
+      .christmasBox{
+        margin: 0 15vw;
+        padding: 0 3vw !important;
+      }
+      .christmasDeal{
+        font-size: 5vw;
+      }
+      .christmasBox img{
+        height: 10vw;
+        width: auto;
+        margin-top: 5vw;
+      }
+      .christmasBox .offerTxt{
+        padding: unset !important;
+        font-size: 4vw;
+      }
+      .christmasBox h5{
+        padding: unset !important;
+        font-size: 4vw;
+      }
+      .christmasLink{
+        margin-top: 0vw !important;
+      }
+      .christmasLink a{
+        font-size: 4vw;
+      }
+      .refurbishedMarketplace{
+        color: #0A6A35;
+        font-size: 6vw !important;
+        margin-top: 10vw !important;      
+      }
+
+      .refubrishedMobileSubHead{
+        font-size: 4vw;
+        padding: 0 12vw;
+      }
+      .esimBox{
+        padding: 0 10vw;
+      }
+      .esimBox card{
+        min-height: auto !important;
+      }
+      .esimBox .card{
+        min-height: auto !important;
+      }
+      .esimBox .card{
+            padding: 40px 20px !important;
+      }
+      .esimOffer{
+        padding: 0 1vw;
+      }
+      .deviceProtectionRow h2{
+        font-size: 5vw !important;
+                padding-bottom: 3vw;
+      }
+      .deviceProtectionRow p{
+            width: 100%;
+      }
+      .whyZM{
+        font-size: 5vw !important;
+      }
+    }
+      .deviceProtectionRow a{
+        width: 100% !important;
+      }
+      .esimBox  .card{
+            background: #C6233C;
+    padding: 3vw 3vw;
+      }
+    .esimBox  .card h4{
+            color: #ffffffff;
+      }
+    .deviceProtectionContainer{
+    margin-bottom: 2vw;
+    }
     `}</style>
       <Header />
       {/* <HeadBar text="Join Buster and flock together with your buddies!" /> */}
@@ -117,41 +290,42 @@ const faqs = [
             </p>
 
             {/* Feature Boxes */}
-            <Row className="mt-4">
+            <Row className="mt-4 featuresBoxes">
               <Col xs={12} md={6} className="mb-3">
-                <div className="p-3 rounded text-white" style={{ background: "#C33838" }}>
-                  ✔ FREE Activation (SIM + eSIM)
+                <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
+                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> FREE Activation (SIM + eSIM)
                 </div>
               </Col>
 
               <Col xs={12} md={6} className="mb-3">
-                <div className="p-3 rounded text-white" style={{ background: "#C33838" }}>
-                  ✔ Christmas refurbished phone deals USA
+                <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
+                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> Christmas refurbished phone deals USA
                 </div>
               </Col>
 
               <Col xs={12} md={6} className="mb-3">
-                <div className="p-3 rounded text-white" style={{ background: "#C33838" }}>
-                  ✔ Holiday unlimited data deals
+                <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
+                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> Holiday unlimited data deals
                 </div>
               </Col>
 
               <Col xs={12} md={6} className="mb-3">
-                <div className="p-3 rounded text-white" style={{ background: "#C33838" }}>
-                  ✔ Eco-conscious phone plan offers
+                <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
+                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> Eco-conscious phone plan offers
                 </div>
               </Col>
             </Row>
 
             {/* CTA BUTTONS */}
-            <div className="mt-4 d-flex gap-3">
-              <Button variant="light" size="lg">
+            <div className="mt-4 d-flex gap-3 bannerButtons">
+              <Button variant="light" size="lg" href="#christmas-deals" >
                 Shop Christmas Deals
               </Button>
               <Button
                 variant="outline-light"
                 size="lg"
                 style={{ borderWidth: "2px" }}
+                href="#refurbishedmobile"
               >
                 Shop Refurbished Phones
               </Button>
@@ -182,7 +356,7 @@ const faqs = [
       <Container>
 
         {/* Heading */}
-        <h2 className="text-center mb-4" style={{ color: "#0B7A3E", fontWeight: "700" }}>
+        <h2 className="text-center mb-4 christmasDeal" style={{ color: "#0B7A3E", fontWeight: "700" }}>
           Christmas Deals 2025
         </h2>
 
@@ -201,18 +375,18 @@ const faqs = [
 
           {/* Card 1 */}
           <Col md={3}>
-            <Card className="p-4 shadow-sm" style={{ borderRadius: "20px" }}>
+            <Card className="p-4 shadow-sm christmasBox" style={{ borderRadius: "20px" }}>
               <div className="text-center mb-3">
                 <img src="/img/mobile.png" alt="" width="60" />
               </div>
               <h5 className="text-center" style={{ color: "#0B7A3E", fontWeight: "700" }}>
                 Plan Deals
               </h5>
-              <p className="text-center text-muted p-4">
+              <p className="text-center text-muted p-4 offerTxt">
                 30% OFF for 3 months + FREE Activation
               </p>
-              <p className="text-center mt-3">
-                <a href="#" style={{ color: "#E92C2C", fontWeight: "600" }}>
+              <p className="text-center mt-3 christmasLink">
+                <a  href="#christmas-deals" style={{ color: "#E92C2C", fontWeight: "600" }}>
                   View Plans →
                 </a>
               </p>
@@ -221,18 +395,18 @@ const faqs = [
 
           {/* Card 2 */}
           <Col md={3}>
-            <Card className="p-4 shadow-sm" style={{ borderRadius: "20px" }}>
+            <Card className="p-4 shadow-sm christmasBox" style={{ borderRadius: "20px" }}>
               <div className="text-center mb-3">
                 <img src="/img/gift.png" alt="" width="60" />
               </div>
               <h5 className="text-center" style={{ color: "#0B7A3E", fontWeight: "700" }}>
                 Refurbished Marketplace
               </h5>
-              <p className="text-center text-muted p-4">
+              <p className="text-center text-muted p-4 offerTxt">
                 Up to 40% OFF refurbished devices
               </p>
-              <p className="text-center mt-3">
-                <a href="#" style={{ color: "#E92C2C", fontWeight: "600" }}>
+              <p className="text-center mt-3 christmasLink ">
+                <a href="#refurbishedmobile" style={{ color: "#E92C2C", fontWeight: "600" }}>
                   Shop Devices →
                 </a>
               </p>
@@ -241,18 +415,18 @@ const faqs = [
 
           {/* Card 3 */}
           <Col md={3}>
-            <Card className="p-4 shadow-sm" style={{ borderRadius: "20px" }}>
+            <Card className="p-4 shadow-sm christmasBox" style={{ borderRadius: "20px" }}>
               <div className="text-center mb-3">
                 <img src="/img/card.png" alt="" width="60" />
               </div>
               <h5 className="text-center" style={{ color: "#0B7A3E", fontWeight: "700" }}>
                 SIM & eSIM Offers
               </h5>
-              <p className="text-center text-muted p-4">
+              <p className="text-center text-muted p-4 offerTxt">
                 Free SIM + Free Activation + $10 Credit
               </p>
-              <p className="text-center mt-3">
-                <a href="#" style={{ color: "#E92C2C", fontWeight: "600" }}>
+              <p className="text-center mt-3 christmasLink">
+                <a href="/all-plans" style={{ color: "#E92C2C", fontWeight: "600" }}>
                   Get Started →
                 </a>
               </p>
@@ -263,22 +437,22 @@ const faqs = [
       </Container>
       
     </div>
-    <div  style={{paddingTop:"2vw",}}>
+    <div  style={{paddingTop:"2vw",}}   id="christmas-deals">
     <CarouselPlans/>
     </div>
     
-         <div className="refubrishDeal">
+         <div className="refubrishDeal" >
       <Container>
 <div className="text-center mb-4">
         <h2
-        className="fw-bold"
+        className="fw-bold refurbishedMarketplace"
         style={{ color: "#0A6A35", fontSize: "2rem" }}
       >
         Refurbished Phone Marketplace
       </h2>
 
       {/* Gradient underline */}
-      <div
+      <div  id="refurbishedmobile"
         style={{
           width: "120px",
           height: "4px",
@@ -288,7 +462,7 @@ const faqs = [
         }}
       />
 
-      <p className="text-muted" style={{ fontSize: "1rem" }}>
+      <p className="text-muted refubrishedMobileSubHead">
         Christmas refurbished phone deals USA - Up to 40% OFF
       </p>
 </div>
@@ -297,112 +471,79 @@ const faqs = [
             </Container>
     </div>
 
-
- <Container className="my-5">
-      <h2 className="text-center fw-bold mb-4" style={{ color: "#0A6A35" }}>
+<Container className="text-center py-5">
+      <h2 className="fw-bold mb-2" style={{ color: "#0F5C2E" }}>
         SIM & eSIM Offers
       </h2>
-<div
-        style={{
-          width: "120px",
-          height: "4px",
-          margin: "10px auto 20px",
-          borderRadius: "10px",
-          background: "linear-gradient(to right, #C61D32, #FFC300)",
-        }}
-      />
-      <Row className="g-4 justify-content-center">
 
-        {/* FREE SIM Offer */}
-        <Col md={4}>
-          <div
-            className="p-4 text-center text-white rounded-4"
-            style={{ background: "#C61D32" }}
-          >
-            <div className="mb-3 fs-1">
-              <Image src="/img/mob.png" alt="SIM Card" className="cardIcon"/>
-            </div>
+      {/* Title underline */}
+      <div className="text-center mb-5">
+        <div
+          style={{
+            width: "80px",
+            height: "4px",
+            background: "linear-gradient(to right, #CC092F, #FFD84D)",
+            borderRadius: "5px",
+            margin: "0 auto",
+          }}
+        ></div>
+      </div>
 
-            <h4 className="fw-bold mb-4">FREE SIM Offer</h4>
-
-            <ul className="list-unstyled text-start opacity-75">
-              <li>✔ Free SIM</li>
-              <li>✔ Free Activation</li>
-              <li>✔ $10 Credit</li>
-            </ul>
-
-            <Button variant="light" className="fw-bold px-4 py-2 mt-3 rounded-3">
-              Get Free SIM
-            </Button>
-          </div>
-        </Col>
-
-        {/* eSIM Christmas Offer */}
-        <Col md={4}>
-          <div
-            className="p-4 text-center text-white rounded-4"
-            style={{
-              background: "linear-gradient(180deg, #0C6B2A, #0A4F22)"
-            }}
-          >
-            <div className="mb-3 fs-1">
-              <Image src="/img/thunder.png" alt="SIM Card"  className="cardIcon" />
-            </div>
-
-            <h4 className="fw-bold mb-4">eSIM Christmas Offer</h4>
-
-            <ul className="list-unstyled text-start opacity-75">
-              <li>✔ Instant activation</li>
-              <li>✔ Free Activation</li>
-              <li>✔ $10 Credit</li>
-              <li>✔ One-tap eSIM activation</li>
-            </ul>
-
-            <Button
-              style={{ background: "#E03A3E", border: "none" }}
-              className="fw-bold px-4 py-2 mt-3 rounded-3"
+      <Row className="g-4 justify-content-center esimBox">
+        {offers.map((offer, i) => (
+          <Col md={4} key={i}>
+            <Card
+              style={{
+                background: offer.bg,
+                
+              }}
+              className="shadow-sm"
             >
-              Activate eSIM
-            </Button>
-          </div>
-        </Col>
+              {/* Icon */}
+              <div className="mb-4">
+                <img src={offer.icon} alt="icon" style={{ width: "40px" }} />
+              </div>
 
-        {/* Eco-Friendly SIM Offer */}
-        <Col md={4}>
-          <div
-            className="p-4 text-center text-white rounded-4"
-            style={{
-              background: "linear-gradient(180deg, #1FAD59, #168B46)"
-            }}
-          >
-            <div className="mb-3 fs-1">
-              <Image src="/img/plant.png" alt="SIM Card"  className="cardIcon" />
-            </div>
+              {/* Title */}
+              <h4 className="fw-bold mb-4">{offer.title}</h4>
 
-            <h4 className="fw-bold mb-4">Eco-Friendly SIM Offer</h4>
+              {/* Features */}
+              <ul className="esimOffer">
+                {offer.items.map((item, idx) => (
+                  <li
+                    key={idx}
+                    className="mb-3 d-flex align-items-center"
+                    style={{ borderBottom: "1px solid rgba(255,255,255,0.3)", paddingBottom: "10px" }}
+                  >
+                    <span style={{ marginRight: "10px", fontSize: "18px" }}>✔</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
 
-            <ul className="list-unstyled text-start opacity-75">
-              <li>✔ $5 OFF</li>
-              <li>✔ $1 animal rescue donation</li>
-              <li>✔ Eco-conscious phone plan offers</li>
-            </ul>
-
-            <Button
-              style={{ background: "#D83434", border: "none" }}
-              className="fw-bold px-4 py-2 mt-3 rounded-3"
-            >
-              Get Eco SIM
-            </Button>
-          </div>
-        </Col>
-
+              {/* Button */}
+              <Button href={offer.link}
+                style={{
+                  background: offer.btnColor,
+                  color: offer.btnTextColor,
+                  border: "none",
+                  borderRadius: "10px",
+                  padding: "12px 30px",
+                  fontWeight: "bold",
+                }}
+              >
+                {offer.btnText}
+              </Button>
+            </Card>
+          </Col>
+        ))}
       </Row>
     </Container>
  <Container
-      className="p-5"
+      className="p-5 deviceProtectionContainer"
       style={{ background: "#F0FAF5", borderRadius: "12px" }}
     >
-      <Row className="align-items-center">
+      <Row className="align-items-center deviceProtectionRow">
         
         {/* LEFT IMAGE */}
         <Col md={5} className="text-center">
@@ -476,7 +617,7 @@ const faqs = [
           </div>
 
           {/* BUTTON */}
-          <Button
+          <Button href="/device-protection"
             variant="outline-danger"
             className="mt-4 px-5 py-2"
             style={{
@@ -493,7 +634,7 @@ const faqs = [
 
     <section style={{ backgroundColor: "#e91e63", padding: "70px 0" }}>
       <Container>
-        <h2 className="text-center text-white mb-3">
+        <h2 className="text-center text-white mb-3 whyZM">
           Why Zoiko Mobile USA
         </h2>
         <div className="text-center mb-5">
@@ -510,17 +651,17 @@ const faqs = [
           
           <Col md={3} className="mb-4">
             <img
-              src="/img/icons/paw.png"
+              src="/img/paw.png"
               alt=""
               style={{ width: 40, marginBottom: 15 }}
             />
-            <h5 className="text-warning">Supports Animal<br />Rescue Programs</h5>
+            <h5 className="text-warning">Supports Animal Rescue Programs</h5>
             <p>$1 animal rescue donation with eco-friendly SIM</p>
           </Col>
 
           <Col md={3} className="mb-4">
             <img
-              src="/img/icons/eco.png"
+              src="/img/plant.png"
               alt=""
               style={{ width: 40, marginBottom: 15 }}
             />
@@ -530,7 +671,7 @@ const faqs = [
 
           <Col md={3} className="mb-4">
             <img
-              src="/img/icons/check.png"
+              src="/img/tick.png"
               alt=""
               style={{ width: 40, marginBottom: 15 }}
             />
@@ -542,7 +683,7 @@ const faqs = [
 
           <Col md={3} className="mb-4">
             <img
-              src="/img/icons/satellite.png"
+              src="/img/rader.png"
               alt=""
               style={{ width: 40, marginBottom: 15 }}
             />
@@ -642,7 +783,7 @@ const faqs = [
         {/* CTA Buttons */}
         <Row className="justify-content-center mb-5">
           <Col xs="auto" className="mb-2">
-            <Button
+            <Button href="/all-plans"
               style={{
                 background: "#C4315C",
                 border: "none",
@@ -655,7 +796,7 @@ const faqs = [
           </Col>
 
           <Col xs="auto" className="mb-2">
-            <Button
+            <Button href="/how-to-activate-your-esim"
               style={{
                 background: "#FFD500",
                 border: "none",
@@ -669,7 +810,7 @@ const faqs = [
           </Col>
 
           <Col xs="auto" className="mb-2">
-            <Button
+            <Button href="/product-category/refurbished"
               style={{
                 background: "transparent",
                 border: "2px solid #fff",
@@ -688,7 +829,7 @@ const faqs = [
             Quick Checkout:
           </span>
 
-          <Button
+          <Button href="/checkout"
             variant="light"
             className="me-2"
             style={{
@@ -701,6 +842,7 @@ const faqs = [
           </Button>
 
           <Button
+          href="/checkout"
             variant="light"
             style={{
               fontSize: "14px",
