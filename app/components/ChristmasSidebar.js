@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const BlackFridaySidebar = () => {
+const ChristmasSidebar = () => {
   const [visible, setVisible] = useState(true);
 
   if (!visible) return null;
@@ -20,7 +20,7 @@ const BlackFridaySidebar = () => {
         </button>
 
         <span className="tab-text">
-          <a href="/black-friday-mobile-sim-deals-2025">Black Friday Sale</a>
+          <a href="/christmas-phone-plan-deals-2025">Christmas Sale</a>
         </span>
       </div>
 
@@ -78,4 +78,4 @@ const BlackFridaySidebar = () => {
   );
 };
 
-export default BlackFridaySidebar;
+export default ChristmasSidebar;
