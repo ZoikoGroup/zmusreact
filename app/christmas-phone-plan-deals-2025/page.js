@@ -277,7 +277,7 @@ const faqs = [
           <Col md={7} className="text-white">
             <span
               className="px-3 py-1 rounded-pill fw-bold"
-              style={{ background: "#FFD700", color: "#000", fontSize: "14px" }}
+              style={{ background: "#FFD700", color: "#097e2eff", fontSize: "14px" }}
             >
               CHRISTMAS SALE 2025
             </span>
