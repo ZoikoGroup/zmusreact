@@ -134,9 +134,9 @@ const metaMap = {
       "Join Zoiko Mobile for the best bring your own phone data plans. Enjoy seamless connectivity and savings while keeping your favorite device!",
   },
   "/blog": {
-    title: "Read Zoiko Mobile Blog | SIM Tips, News & Insights   uuuuuu",
+    title: "Read Zoiko Mobile Blog | SIM Tips, News & Insights",
     description:
-      "ggg  ggg Read Zoiko Mobile Blog for the latest SIM-only and eSIM tips, mobile insights, plan comparisons, and expert advice on saving money and using tech smartly.",
+      "Read Zoiko Mobile Blog for the latest SIM-only and eSIM tips, mobile insights, plan comparisons, and expert advice on saving money and using tech smartly.",
   },
   "/sustainability": {
     title: "Zoiko Mobile Sustainability | Commitment to Greener Future",
