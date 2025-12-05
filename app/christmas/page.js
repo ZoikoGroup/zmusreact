@@ -13,30 +13,26 @@ import { Check2 } from "react-bootstrap-icons";
 
 export default function christmasPage(){
 
-const faqData = [
+const faqs = [
     {
-      q: "What are the Black Friday deals?",
-      a: "Up to 60% off mobile plans, free SIM activation, and 40% off ZoikoCare™ device protection."
+      q: "Does free activation apply to all plans?",
+      a: "YES - FREE Activation applies to all plans, including SIM and eSIM.",
     },
     {
-      q: "How does my plan support animal rescue?",
-      a: "Every Zoiko Mobile plan contributes to the Zoiko Animal Rescue Network (ZARN) which supports pet shelters nationwide."
+      q: "Does 30% OFF apply to bundles?",
+      a: "YES - 30% OFF for 3 months applies to all bundles.",
     },
     {
-      q: "What does ZoikoCare™ cover?",
-      a: "Protection covers theft, loss, accidental damage, and screen breaks with next-day replacement available."
+      q: "Are refurbished phones covered by protection?",
+      a: "YES - Premium protection plan covers all refurbished devices.",
     },
     {
-      q: "Can I bring my own device?",
-      a: "Yes, Zoiko Mobile supports most unlocked devices. Check compatibility on our website."
+      q: "Are SIM & eSIM deals the same?",
+      a: "YES - Both SIM and eSIM get Free Activation + $10 Credit.",
     },
     {
-      q: "When do Black Friday offers end?",
-      a: "Offers run from November 28 through December 1 (Cyber Monday), 2025."
-    },
-    {
-      q: "Is there a credit check?",
-      a: "We offer no credit check options for prepaid plans."
+      q: "Can phone plans be gifted?",
+      a: "YES - Perfect holiday gift! All plans can be gifted this Christmas.",
     },
   ];
 
@@ -77,6 +73,24 @@ const faqData = [
     .cardIcon{
         width: 2vw;
     }
+    .testimonialSec{background: url(/img/section3.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position:center;
+      padding: 50px;
+    }
+    .testimonialSec .bglite{
+        background-color: #ffffff00;
+    }
+      .holidaySec{
+    background-size: cover !important;
+        background-position: center;
+        background: url(/img/Banner_image_1.jpg);
+        background-repeat: no-repeat;
+        color: #fff;
+            padding: 5vw;
+        
+        }
     `}</style>
       <Header />
       {/* <HeadBar text="Join Buster and flock together with your buddies!" /> */}
@@ -539,6 +553,166 @@ const faqData = [
         </Row>
       </Container>
     </section>
+      <div className="position-relative py-5 testimonialSec">
+     
+
+      <Container className="text-center">
+        <h2 className="fw-bold mb-3">Loved by Our Community</h2>
+        <p className="text-muted fs-5">
+          See how Zoiko Mobile keeps people connected while making a real difference.
+        </p>
+
+        <Row className="justify-content-center mt-4">
+          <Col md={8}>
+            <Card
+              className="py-4"
+              style={{
+                background: "#E51655",
+                borderRadius: "20px",
+                border: "none",
+              }}
+            >
+              <Card.Body>
+                <h5 className="text-white fw-bold mb-2">Live Orders:</h5>
+                <h3 className="text-white fw-bold">
+                  247 people activated plans today
+                </h3>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+      <Testimonials/>
+    </div>
+    <div style={{ background: "#FFF7DD", padding: "60px 0" }}>
+      <Container>
+        <h2 className="text-center fw-bold mb-2" style={{ color: "#0F5C2E" }}>
+          Holiday FAQ
+        </h2>
+
+        {/* Underline */}
+        <div className="text-center mb-5">
+          <div
+            style={{
+              width: "80px",
+              height: "4px",
+              background: "linear-gradient(to right, #CC092F, #FFD84D)",
+              borderRadius: "5px",
+              margin: "0 auto",
+            }}
+          ></div>
+        </div>
+
+        <Row className="g-4 justify-content-center">
+          {faqs.map((item, index) => (
+            <Col md={4} key={index}>
+              <Card
+                className="p-4 shadow-sm"
+                style={{
+                  borderRadius: "15px",
+                  borderLeft: "6px solid #CC092F",
+                  minHeight: "180px",
+                }}
+              >
+                <h5 className="fw-bold mb-3" style={{ color: "#0F5C2E" }}>
+                  {item.q}
+                </h5>
+
+                <p className="mb-0" style={{ color: "#555" }}>
+                  <span className="fw-bold" style={{ color: "#CC092F" }}>
+                    YES
+                  </span>{" "}
+                  - {item.a.replace("YES - ", "")}
+                </p>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </div>
+
+    <div className="holidaySec">
+      <Container className="text-center">
+        <h1 className="fw-bold mb-3">Your Holiday Savings Start Now.</h1>
+
+        <p className="fs-5 mb-4">
+          Christmas Phone Plan Deals 2025 – Don’t miss out on 30% OFF + FREE Activation
+        </p>
+
+        {/* CTA Buttons */}
+        <Row className="justify-content-center mb-5">
+          <Col xs="auto" className="mb-2">
+            <Button
+              style={{
+                background: "#C4315C",
+                border: "none",
+                padding: "12px 25px",
+                borderRadius: "10px",
+              }}
+            >
+              Shop Christmas Deals
+            </Button>
+          </Col>
+
+          <Col xs="auto" className="mb-2">
+            <Button
+              style={{
+                background: "#FFD500",
+                border: "none",
+                padding: "12px 25px",
+                color: "#000",
+                borderRadius: "10px",
+              }}
+            >
+              Activate SIM/eSIM Free
+            </Button>
+          </Col>
+
+          <Col xs="auto" className="mb-2">
+            <Button
+              style={{
+                background: "transparent",
+                border: "2px solid #fff",
+                padding: "12px 25px",
+                borderRadius: "10px",
+              }}
+            >
+              Browse Refurb Phones
+            </Button>
+          </Col>
+        </Row>
+
+        {/* Quick Checkout */}
+        <div className="text-center mt-4">
+          <span className="fw-bold me-2" style={{ color: "#fff" }}>
+            Quick Checkout:
+          </span>
+
+          <Button
+            variant="light"
+            className="me-2"
+            style={{
+              fontSize: "14px",
+              padding: "6px 14px",
+              borderRadius: "8px",
+            }}
+          >
+            Apple Pay
+          </Button>
+
+          <Button
+            variant="light"
+            style={{
+              fontSize: "14px",
+              padding: "6px 14px",
+              borderRadius: "8px",
+            }}
+          >
+            Google Pay
+          </Button>
+        </div>
+      </Container>
+    </div>
       <Footer />
     </>
   );
