@@ -11,13 +11,13 @@ const ChristmasSidebar = () => {
     <>
       {/* Sticky Tab */}
       <div className="bftouch-tab">
-        <button
+        {/* <button
           className="close-btn"
           onClick={() => setVisible(false)}
           aria-label="Close Black Friday Tab"
         >
           ✕
-        </button>
+        </button> */}
 
         <span className="tab-text">
           <a href="/christmas-phone-plan-deals-2025">Christmas Sale</a>
