@@ -6,6 +6,19 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const PhoneSlider = () => {
+    const NextArrow = ({ onClick }) => (
+  <i
+    className="bi bi-chevron-right slick-arrow slick-next custom-arrow"
+    onClick={onClick}
+  ></i>
+);
+
+const PrevArrow = ({ onClick }) => (
+  <i
+    className="bi bi-chevron-left slick-arrow slick-prev custom-arrow"
+    onClick={onClick}
+  ></i>
+);
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -32,7 +45,9 @@ const PhoneSlider = () => {
         infinite: true,
         speed: 500,
         slidesToShow: 3,
-        slidesToScroll: 2,
+        slidesToScroll: 1,
+        nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
         responsive: [
             { breakpoint: 1024, settings: { slidesToShow: 3 } },
             { breakpoint: 768, settings: { slidesToShow: 2 } },
@@ -41,6 +56,11 @@ const PhoneSlider = () => {
     };
 
     return (
+<>
+<style>{`
+
+`}</style>
+
         <Container className="p-4">
             <div className="slider-container">
                 <Slider {...settings}>
@@ -102,7 +122,7 @@ const PhoneSlider = () => {
                 </Slider>
             </div>
              {/* VIEW ALL BUTTON */}
-        <div className="text-center mt-4">
+        <div className="text-center mt-4 refubrishedMobileViewAllBtn">
           <Button href="/product-category/refurbished"
             variant="light"
             style={{
@@ -117,6 +137,7 @@ const PhoneSlider = () => {
           </Button>
         </div>
         </Container>
+       </>
     );
 };
 

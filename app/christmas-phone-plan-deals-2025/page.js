@@ -149,6 +149,16 @@ const faqs = [
         .refubrishedMobileSubHead{
         font-size: 2rem;
       }
+      .offerTxt{
+        font-weight: 600;
+        font-size: 1.2vw;
+      }
+      .blackFridayCarouselPlanTab ul li a{
+      font-size: 1.3vw;
+        }
+      .refubrishedMobileViewAllBtn a{
+        width:20vw !important;
+      }
     @media (max-width: 768px) {
       .esimOffer{      
         color: #fff;
@@ -267,6 +277,8 @@ const faqs = [
     .christmasBox a{
       text-decoration: none !important;
     }
+      .holidaySecSubheading{
+      font-size: 1vw !important;}
     `}</style>
       <Header />
       {/* <HeadBar text="Join Buster and flock together with your buddies!" /> */}
@@ -277,7 +289,7 @@ const faqs = [
           <Col md={7} className="text-white">
             <span
               className="px-3 py-1 rounded-pill fw-bold"
-              style={{ background: "#FFD700", color: "#097e2eff", fontSize: "14px" }}
+              style={{ background: "#FFD700", color: "#097e2eff", fontSize: "10px" }}
             >
               CHRISTMAS SALE 2025
             </span>
@@ -779,8 +791,8 @@ const faqs = [
       <Container className="text-center">
         <h1 className="fw-bold mb-3">Your Holiday Savings Start Now.</h1>
 
-        <p className="fs-5 mb-4">
-          Christmas Phone Plan Deals 2025 – Don’t miss out on 30% OFF + FREE Activation
+        <p className="fs-5 mb-4 holidaySecSubheading">
+          Christmas Phone Plan Deals 2025 - Don't miss out on 30% OFF + FREE Activation
         </p>
 
         {/* CTA Buttons */}

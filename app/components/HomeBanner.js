@@ -59,7 +59,7 @@ const HomeBanner = () => {
                           <Col md={7} className="text-white">
                             <span
                               className="px-3 py-1 rounded-pill fw-bold"
-                              style={{ background: "#FFD700", color: "#097e2eff", fontSize: "14px" }}
+                              style={{ background: "#FFD700", color: "#097e2eff", fontSize: "10px" }}
                             >
                               CHRISTMAS SALE 2025
                             </span>
