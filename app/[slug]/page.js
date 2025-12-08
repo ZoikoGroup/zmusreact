@@ -1,25 +1,16 @@
 import BlogClient from "./BlogClient";
 
-// Shared server fetch with caching per request
-async function getPostCached(slug) {
-  // Use a Map to cache per request in memory
-  if (!global.__POST_CACHE__) global.__POST_CACHE__ = new Map();
-
-  const cacheKey = slug;
-  if (global.__POST_CACHE__.has(cacheKey)) {
-    return global.__POST_CACHE__.get(cacheKey);
-  }
-
+// Simple fetch — NO CACHE ANYWHERE
+async function getPost(slug) {
   try {
     const res = await fetch(
       `https://zmapi.zoikomobile.co.uk/api/v1/posts/${slug}`,
-      { cache: "no-store" } // or 'force-cache' if you want long-term caching
+      { cache: "no-store" } // always fetch fresh
     );
+
     if (!res.ok) return null;
 
-    const post = await res.json();
-    global.__POST_CACHE__.set(cacheKey, post);
-    return post;
+    return await res.json();
   } catch (error) {
     console.error("Failed to fetch post:", error);
     return null;
@@ -28,7 +19,7 @@ async function getPostCached(slug) {
 
 // SERVER — SEO Metadata
 export async function generateMetadata({ params }) {
-  const post = await getPostCached(params.slug);
+  const post = await getPost(params.slug);
 
   if (!post) {
     return {
@@ -45,9 +36,10 @@ export async function generateMetadata({ params }) {
     "Read this amazing blog post.";
   const seoKeywords = post.meta_keywords?.join(", ") || "";
 
-  const imageUrl = post.og_image || post.cover_image
-    ? `https://zmapi.zoikomobile.co.uk/storage/${post.og_image || post.cover_image}`
-    : "/no-image.jpg";
+  const imageUrl =
+    post.og_image || post.cover_image
+      ? `https://zmapi.zoikomobile.co.uk/storage/${post.og_image || post.cover_image}`
+      : "/no-image.jpg";
 
   const pageUrl = `https://zoikomobile.co.uk/${params.slug}`;
 
@@ -74,7 +66,7 @@ export async function generateMetadata({ params }) {
 
 // SERVER — Return CLIENT component
 export default async function BlogPage({ params }) {
-  const post = await getPostCached(params.slug);
+  const post = await getPost(params.slug);
 
   if (!post) return <p>Post not found.</p>;
   return <BlogClient post={post} />;
