@@ -839,7 +839,7 @@ const faqs = [
         </Row>
 
         {/* Quick Checkout */}
-        <div className="text-center mt-4">
+        {/* <div className="text-center mt-4">
           <span className="fw-bold me-2" style={{ color: "#fff" }}>
             Quick Checkout:
           </span>
@@ -867,7 +867,7 @@ const faqs = [
           >
             Google Pay
           </Button>
-        </div>
+        </div> */}
       </Container>
     </div>
       <Footer />
