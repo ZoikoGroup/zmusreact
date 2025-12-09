@@ -160,6 +160,20 @@ const faqs = [
         width:20vw !important;
       }
     @media (max-width: 768px) {
+      .holidaySecSubheading{
+          font-size: 2.5vw !important;
+      }
+      .testimonialSec p.txtgreen{
+        font-size: 3vw;      
+      }
+      .refubrishedMobileViewAllBtn a{
+        width: 70vw !important;
+      }
+      .slick-dots
+        {
+          position: unset !important;
+        }
+
       .esimOffer{      
         color: #fff;
         height: auto;
