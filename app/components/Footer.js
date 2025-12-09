@@ -234,10 +234,17 @@ const Footer = () => {
                 </div>
             </Col>
         </Row>
-
+<style>{`
+@media (max-width: 768px) {
+    .footer-linkss a:not(:last-child)::after{
+        margin-left: unset !important;    
+    }
+}
+    `}
+</style>
         {/* Partner Links */}
         <Row className="text-center mt-5 footer-linkss">
-            <Col>
+            <Col className="text-center">
                 <Link href="/become-retailer" className="text-decoration-none mx-3">Become a Retailer</Link>
                 <Link href="/become-affiliate" className="text-decoration-none mx-3">Become an Affiliate</Link>
                 <Link href="/become-partner" className="text-decoration-none mx-3">Partner with Us</Link>
