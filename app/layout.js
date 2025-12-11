@@ -447,6 +447,11 @@ const metaMap = {
     title: "Zoiko Lite Postpaid | Affordable Mobile Plan",
     description:
       "Get the Zoiko Lite Postpaid Plan for just $15/month. Enjoy unlimited talk, text, 5G data, mobile hotspot, and international calling to 200+ countries.",
+  },
+  "/christmas-phone-plan-deals-2025": {
+    title: "Christmas Phone Plan Deals 2025 | Holiday Savings",
+    description:
+      "Grab festive Christmas Phone Plan Deals 2025 with 30% OFF for 3 months + FREE activation and Refurbished Phones up to 40% OFF. Shop now!",
   }
   // add more entries as needed...
 };
