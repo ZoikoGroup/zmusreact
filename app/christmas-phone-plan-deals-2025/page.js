@@ -147,7 +147,7 @@ const faqs = [
         font-size: 2rem;      
       }
         .refubrishedMobileSubHead{
-        font-size: 2rem;
+        font-size: 1.2vw;
       }
       .offerTxt{
         font-weight: 600;
