@@ -2414,3 +2414,6 @@ body {
     }
 }
 
+.text-decoration-line-through{
+  text-decoration-color: red !important;
+}
