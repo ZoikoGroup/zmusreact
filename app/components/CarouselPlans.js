@@ -87,7 +87,7 @@ export default function CarouselSimPlan() {
                             </Col>
                             <Col>
                               <p style={{ textAlign: "right" }}>
-                                <span className="text-decoration-line-through price-line-red" style={{ textDecorationColor: 'red !important' }}>
+                                <span className="price-line-red" style={{ textDecorationColor: 'red !important' }}>
                                   ${item.price}
                                   
                                 </span>
