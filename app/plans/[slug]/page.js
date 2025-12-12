@@ -136,8 +136,11 @@ font-size:3vw;
               <h2 className="mb-0 planTitle">{plan.title}</h2>
             </Col>
             <Col md="auto" className="text-end planPrice">
+              <span className="text-decoration-line-through text-muted">
+                              {plan.currency}{plan.price}
+                                </span>
               <div className="mb-0 planPriceCur">
-                {plan.currency}{plan.price}
+                {plan.currency}{plan.sale_price}
               </div>
               <div  className="planDur">/{plan.duration_type}/line</div>
             </Col>
@@ -176,6 +179,7 @@ font-size:3vw;
                   plan.slug,
                   plan.id,
                   plan.price,
+                  plan.sale_price,                  
                   plan.duration_type,
                   plan.bq_id,
                   plan.plan_type

@@ -107,8 +107,11 @@ const PostpaidSlider = ({ planType = "postpaid-plans" }) => {
                   <Row>
                     <Col className="data">{item.sub_title || "Unlimited Data"}</Col>
                     <Col className="text-end">
+                    <span className="text-decoration-line-through text-muted">
+                                  {item.currency}{item.price}
+                                </span>
                       <span className="curprice">
-                        {item.currency}{item.price}
+                        {item.currency}{item.sale_price}
                       </span>
                       <br />
                       /{item.duration_type || "month"}/line
@@ -139,6 +142,7 @@ const PostpaidSlider = ({ planType = "postpaid-plans" }) => {
                         item.slug,
                         item.id,
                         item.price,
+                        item.sale_price,
                         item.duration_type,
                         item.bq_id,
                         item.plan_type

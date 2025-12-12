@@ -28,9 +28,9 @@ export function openPaymentModal(orderId, amount) {
 }
 
 // ✅ Global Plan Purchase Modal trigger
-export function openPlanPurchaseModal(planTitle, planSlug, planId, planPrice, planDuration, planBqid, planType) {
+export function openPlanPurchaseModal(planTitle, planSlug, planId, planPrice, planSalePrice, planDuration, planBqid, planType) {
   if (openPlanModalCallback) {
-    openPlanModalCallback(planTitle, planSlug, planId, planPrice, planDuration, planBqid, planType);
+    openPlanModalCallback(planTitle, planSlug, planId, planPrice, planSalePrice, planDuration, planBqid, planType);
   }
 }
 
@@ -143,8 +143,8 @@ useEffect(() => {
   // const handleCloseSearch = () => setShowSearch(false);
   // const handleShowSearch = () => setShowSearch(true);
 
-  const handleOpenPlanModal = (title, slug, id, price, duration, bq_id, plan_type) => {
-    setModalData({ title, slug, id, price, duration, bq_id, plan_type });
+  const handleOpenPlanModal = (title, slug, id, price, sale_price, duration, bq_id, plan_type) => {
+    setModalData({ title, slug, id, price, sale_price, duration, bq_id, plan_type });
     setShowPlanModal(true);
   };
   openPlanModalCallback = handleOpenPlanModal;
@@ -369,7 +369,7 @@ useEffect(() => {
         planTitle={modalData.title}
         planSlug={modalData.slug}
         planId={modalData.id}
-        planPrice={modalData.price}
+        planPrice={modalData.sale_price ? modalData.sale_price : modalData.price}
         planDuration={modalData.duration}
         planBqid={modalData.bq_id}
         planType={modalData.plan_type}

@@ -5,7 +5,7 @@ import { Modal, Button, Spinner, Form } from "react-bootstrap";
 import { useRouter } from "next/navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const PlanPurchaseModal = ({ show, handleClose, onClose, planTitle, planSlug, planId, planPrice, planDuration, planBqid, planType }) => {
+const PlanPurchaseModal = ({ show, handleClose, onClose, planTitle, planSlug, planId, planPrice, planSalePrice, planDuration, planBqid, planType }) => {
 const closeFn = typeof handleClose === "function" ? handleClose : (typeof onClose === "function" ? onClose : () => {});
 const router = useRouter();
 
@@ -303,6 +303,7 @@ if (lineType === "portNumber" && currentStep === 1) {
       planSlug,
       planId,
       planPrice,
+      planSalePrice,
       planDuration,
       planBqid,
       planType,
