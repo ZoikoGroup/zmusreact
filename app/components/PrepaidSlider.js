@@ -97,7 +97,7 @@ const PrepaidSlider = ({ planType = "prepaid-plans" }) => {
                                 <Row>
                                     <Col className="data">{item.sub_title || "Unlimited Data"}</Col>
                                     <Col style={{ textAlign: "right" }}>
-                                    <span className="text-decoration-line-through text-muted">
+                                    <span className="text-decoration-line-through price-line-red">
                                   {item.currency}{item.price}
                                 </span>
                                         <span className="curprice">{item.currency}{item.sale_price}</span>

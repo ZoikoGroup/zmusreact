@@ -136,7 +136,7 @@ font-size:3vw;
               <h2 className="mb-0 planTitle">{plan.title}</h2>
             </Col>
             <Col md="auto" className="text-end planPrice">
-              <span className="text-decoration-line-through text-muted">
+              <span className="text-decoration-line-through price-line-red">
                               {plan.currency}{plan.price}
                                 </span>
               <div className="mb-0 planPriceCur">

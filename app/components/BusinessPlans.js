@@ -87,7 +87,7 @@ const BusinessPlans = () => {
                     <Row>
                       <Col className="data">{plan.sub_title || "Unlimited Data"}</Col>
                       <Col className="text-end">
-                      <span className="text-decoration-line-through text-muted">
+                      <span className="text-decoration-line-through price-line-red">
                                   {plan.currency}{plan.price}
                                 </span>
                         <span className="curprice">

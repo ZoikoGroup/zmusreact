@@ -301,7 +301,7 @@ export default function ProductDetail() {
               {product.network && (
                  <p>Network: {product.network}</p>
               )}
-             <span className="text-decoration-line-through text-muted">
+             <span className="text-decoration-line-through price-line-red">
                 ${variant.starting_price || "0.00"}
              </span>
               <div className="midbigred">${variant.sale_price || "0.00"}</div>
@@ -428,7 +428,7 @@ export default function ProductDetail() {
                       <Row className="mt-2">
                         <Col md={6}>
                           <div className="text-muted small">Starting From:</div>
-                          <span className="text-decoration-line-through text-muted">
+                          <span className="text-decoration-line-through price-line-red">
                               ${v.starting_price}
                           </span>
                           <div className="txtred fw-bold">${v.sale_price}</div>
