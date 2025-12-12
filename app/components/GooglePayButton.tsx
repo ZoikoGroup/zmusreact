@@ -1,60 +1,46 @@
 "use client";
+
+import {
+  PaymentRequestButtonElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
-import { loadStripe, PaymentRequest } from "@stripe/stripe-js";
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-);
+export default function GooglePayButton() {
+  const stripe = useStripe();
+  const elements = useElements();
 
-export default function GooglePayButton({ amount }) {
-  const [paymentRequest, setPaymentRequest] = useState(null);
+  const [paymentRequest, setPaymentRequest] = useState<any>(null);
 
   useEffect(() => {
-    async function init() {
-      const stripe = await stripePromise;
+    if (!stripe) return;
 
-      if (!stripe) return;
+    const pr = stripe.paymentRequest({
+      country: "US",
+      currency: "usd",
+      total: {
+        label: "Sample Product",
+        amount: 1999,
+      },
+      requestPayerName: true,
+      requestPayerEmail: true,
+    });
 
-      const pr = stripe.paymentRequest({
-        country: "US",
-        currency: "usd",
-        total: {
-          label: "Order Amount",
-          amount: amount,
-        },
-        requestPayerName: true,
-        requestPayerEmail: true,
-      });
-
-      const canPay = await pr.canMakePayment();
-
-      // 🔥 ADD THIS LOG HERE
-      console.log("canMakePayment result =>", canPay);
-
-      if (canPay && canPay.googlePay) {
+    pr.canMakePayment().then((result) => {
+      if (result) {
         setPaymentRequest(pr);
-      } else {
-        console.log("Google Pay not supported:", canPay);
       }
-    }
+    });
+  }, [stripe]);
 
-    init();
-  }, [amount]);
-
-  if (!paymentRequest) {
-    return (
-      <p className="text-red-500 text-sm">
-        Google Pay not available on this device.
-      </p>
-    );
-  }
+  if (!paymentRequest) return null;
 
   return (
-    <button
-      onClick={() => console.log("Payment button clicked")}
-      className="bg-black text-white p-3 rounded-lg"
-    >
-      Pay with Google Pay
-    </button>
+    <div className="w-full flex justify-center mt-4">
+      <PaymentRequestButtonElement
+        options={{ paymentRequest, style: { paymentRequestButton: { theme: "dark", height: "48px" } }}}
+      />
+    </div>
   );
 }
