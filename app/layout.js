@@ -50,6 +50,11 @@ const metaMap = {
     description:
       "Explore Zoiko Mobile Black Friday Mobile & SIM Card Deals 2025. Save big on SIM plans, device protection & phones, and help animal rescues today!",
   },
+  "/christmas-phone-plan-deals-2025":{
+    title: "Christmas Phone Plan Deals 2025 | Holiday Savings",
+    description:
+      "Grab festive Christmas Phone Plan Deals 2025 with 30% OFF for 3 months + FREE activation and Refurbished Phones up to 40% OFF. Shop now!",
+  },
   "/about": {
     title: "About Us | Zoiko Mobile’s Mission & Vision",
     description:
