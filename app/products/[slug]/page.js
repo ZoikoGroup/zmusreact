@@ -94,7 +94,7 @@ export default function ProductDetail() {
     if (!product) return;
 
     const v = product.variants?.[0] || {};
-    const price = parseFloat(v.starting_price || 0);
+    const price = parseFloat(v.sale_price || 0);
 
     if (!selectedColor || !selectedStorage || !selectedCondition) {
       alert("Please select Color, Storage and Condition.");
@@ -301,8 +301,11 @@ export default function ProductDetail() {
               {product.network && (
                  <p>Network: {product.network}</p>
               )}
-
-              <div className="midbigred">${variant.starting_price || "0.00"}</div>
+             <span className="text-decoration-line-through text-muted">
+                ${variant.starting_price || "0.00"}
+             </span>
+              <div className="midbigred">${variant.sale_price || "0.00"}</div>
+              
               <hr />
 
               {/* COLORS */}
@@ -425,8 +428,13 @@ export default function ProductDetail() {
                       <Row className="mt-2">
                         <Col md={6}>
                           <div className="text-muted small">Starting From:</div>
-                          <div className="txtred fw-bold">${v.starting_price}</div>
+                          <span className="text-decoration-line-through text-muted">
+                              ${v.starting_price}
+                          </span>
+                          <div className="txtred fw-bold">${v.sale_price}</div>
                         </Col>
+
+
                         <Col md={6}>
                           <div className="text-muted small">Condition:</div>
                           <div>{(v.device_conditions || []).join(", ")}</div>

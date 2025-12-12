@@ -249,6 +249,55 @@ export async function getCurrentBill(subscriberId) {
   }
 }
 
+async function createDeviceLine(payload) {
+  return await fetch("https://zoiko-atom-api.bequickapps.com/lines", {
+    method: "POST",
+    headers: {
+      "X-AUTH-TOKEN": process.env.NEXT_PUBLIC_BEQUICK_API_KEY,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      line: payload,
+    }),
+  }).then((res) => res.json());
+}
+
+async function getSubscriberLines(subscriber_id) {
+  const url = `https://zoiko-atom-api.bequickapps.com/lines?by_subscriber_id=${subscriber_id}`;
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      "X-AUTH-TOKEN": process.env.NEXT_PUBLIC_BEQUICK_API_KEY,
+      "Content-Type": "application/json",
+    },
+  });
+
+  // 1️⃣ If API returned error status, show readable error
+  if (!res.ok) {
+    const text = await res.text();
+    console.error("Error fetching lines:", text);
+    return { lines: [] };
+  }
+
+  // 2️⃣ FIX: Avoid JSON parsing crash
+  const text = await res.text();
+
+  if (!text || text.trim() === "") {
+    console.warn("Empty lines response");
+    return { lines: [] };
+  }
+
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    console.error("Invalid JSON in lines response:", text);
+    return { lines: [] };
+  }
+}
+
+
+
 export default {
   request,
   getSubscriberDetails,
@@ -262,4 +311,6 @@ export default {
   getSingleLineDetails,
   refreshDevicesSection,
   getCurrentBill,
+  createDeviceLine,
+  getSubscriberLines,
 };
