@@ -87,8 +87,11 @@ const BusinessPlans = () => {
                     <Row>
                       <Col className="data">{plan.sub_title || "Unlimited Data"}</Col>
                       <Col className="text-end">
+                      <span className="text-decoration-line-through text-muted">
+                                  {plan.currency}{plan.price}
+                                </span>
                         <span className="curprice">
-                          {plan.currency}{plan.price}
+                          {plan.currency}{plan.sale_price}
                         </span>
                         <br />
                         /{plan.duration_type || "month"}/line
@@ -120,6 +123,7 @@ const BusinessPlans = () => {
                           plan.slug,
                           plan.id,
                           plan.price,
+                          plan.sale_price,
                           plan.duration_type,
                           plan.bq_id,
                           plan.plan_type

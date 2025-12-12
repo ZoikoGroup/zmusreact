@@ -12,8 +12,8 @@
     "@next/font": "^14.2.15",
     "@paypal/react-paypal-js": "^8.9.2",
     "@reduxjs/toolkit": "^2.9.0",
-    "@stripe/react-stripe-js": "^5.2.0",
-    "@stripe/stripe-js": "^8.3.0",
+    "@stripe/react-stripe-js": "^5.4.1",
+    "@stripe/stripe-js": "^8.5.3",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.11.3",
     "date-fns": "^4.1.0",
@@ -32,7 +32,8 @@
     "react-slick": "^0.30.3",
     "recharts": "^3.3.0",
     "redux": "^5.0.1",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "stripe": "^20.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -140,8 +140,11 @@ export default function CarouselSimPlan() {
                             </Col>
                             <Col>
                               <p style={{ textAlign: "right" }}>
-                                <span className="curprice">
+                                <span className="text-decoration-line-through text-muted">
                                   ${item.price}
+                                </span>
+                                <span className="curprice">
+                                  ${item.sale_price}
                                 </span>
                                 <br />
                                 /{item.duration_type}/line
@@ -170,6 +173,7 @@ export default function CarouselSimPlan() {
                                   item.slug,
                                   item.id,
                                   item.price,
+                                  item.sale_price,
                                   item.duration_type,
                                   item.bq_id,
                                   item.plan_type

@@ -97,7 +97,10 @@ const PrepaidSlider = ({ planType = "prepaid-plans" }) => {
                                 <Row>
                                     <Col className="data">{item.sub_title || "Unlimited Data"}</Col>
                                     <Col style={{ textAlign: "right" }}>
-                                        <span className="curprice">{item.currency}{item.price}</span>
+                                    <span className="text-decoration-line-through text-muted">
+                                  {item.currency}{item.price}
+                                </span>
+                                        <span className="curprice">{item.currency}{item.sale_price}</span>
                                         <br />
                                         /{item.duration_type || "month"}/line
                                     </Col>
@@ -122,7 +125,7 @@ const PrepaidSlider = ({ planType = "prepaid-plans" }) => {
                                 <div className="gap-3 d-flex justify-content-center">
                                 <Button
                                     variant="danger"
-                                    onClick={() => openPlanPurchaseModal(item.title, item.slug, item.id, item.price, item.duration_type, item.bq_id, item.plan_type)}
+                                    onClick={() => openPlanPurchaseModal(item.title, item.slug, item.id, item.price, item.sale_price, item.duration_type, item.bq_id, item.plan_type)}
                                 >
                                     Buy this plan
                                 </Button>
