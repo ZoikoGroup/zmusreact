@@ -140,7 +140,7 @@ export default function CarouselSimPlan() {
                             </Col>
                             <Col>
                               <p style={{ textAlign: "right" }}>
-                                <span className="text-decoration-line-through price-line-red">
+                                <span className="price-line-red">
                                   ${item.price}
                                 </span>
                                 <span className="curprice">

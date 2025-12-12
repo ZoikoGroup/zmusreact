@@ -65,7 +65,7 @@ const PhoneSlider = () => {
 
                                     <div className="mb-3">
                                         Starting From:
-                                        <span className="text-decoration-line-through price-line-red">
+                                        <span className="price-line-red">
                                                 ${variant.starting_price}
                                                 </span> &nbsp;
                                         <span className="txtred body22">
