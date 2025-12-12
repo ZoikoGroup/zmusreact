@@ -100,7 +100,7 @@ const TravelPlanSlider = ({ planType = "travel-plans" }) => {
                   <Row>
                     <Col className="data">{item.sub_title || "Global Roaming Data"}</Col>
                     <Col className="text-end">
-                    <span className="text-decoration-line-through text-muted">
+                    <span className="text-decoration-line-through price-line-red">
                                   {item.currency}{item.price}
                                 </span>
                       <span className="curprice">{item.currency}{item.sale_price}</span>

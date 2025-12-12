@@ -2414,7 +2414,7 @@ body {
     }
 }
 
-.text-decoration-line-through{
+.price-line-red {
+  text-decoration: line-through;
   text-decoration-color: red !important;
-  
 }
