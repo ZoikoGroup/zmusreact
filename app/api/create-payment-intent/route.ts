@@ -7,6 +7,7 @@ export async function POST() {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: 1999,
     currency: "usd",
+    payment_method_types: ["card"],
     automatic_payment_methods: {
       enabled: true, // REQUIRED for GPay / ApplePay
     },
