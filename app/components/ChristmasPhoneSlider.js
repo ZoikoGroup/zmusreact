@@ -124,6 +124,7 @@ const PrevArrow = ({ onClick }) => (
              {/* VIEW ALL BUTTON */}
         <div className="text-center mt-4 refubrishedMobileViewAllBtn">
           <Button href="/product-category/refurbished"
+          className=" mt-4 "
             variant="light"
             style={{
               border: "1px solid #ff006f",
