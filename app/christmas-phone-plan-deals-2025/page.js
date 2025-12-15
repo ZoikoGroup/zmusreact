@@ -293,10 +293,135 @@ const faqs = [
     }
       .holidaySecSubheading{
       font-size: 1vw !important;}
+
+      /* 🎄 Christmas Banner Effects */
+.christmasBanner {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Layer container */
+.effects-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ❄️ Snow layers */
+.snow-layer {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  animation: snowFall linear infinite;
+}
+
+.snow-1 {
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+    radial-gradient(2px 2px at 80px 120px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 160px 200px, #fff, transparent);
+  background-size: 300px 300px;
+  animation-duration: 18s;
+  opacity: 0.7;
+}
+
+.snow-2 {
+  background-image:
+    radial-gradient(1.5px 1.5px at 40px 60px, #fff, transparent),
+    radial-gradient(2px 2px at 120px 180px, #fff, transparent);
+  background-size: 400px 400px;
+  animation-duration: 28s;
+  opacity: 0.5;
+}
+
+.snow-3 {
+  background-image:
+    radial-gradient(1px 1px at 100px 150px, #fff, transparent);
+  background-size: 500px 500px;
+  animation-duration: 40s;
+  opacity: 0.3;
+}
+
+@keyframes snowFall {
+  from {
+    background-position: 0 -300px;
+  }
+  to {
+    background-position: 0 300px;
+  }
+}
+/* ✨ Star Sparkles */
+.sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(45deg, #fff, #ffe680);
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  animation: starTwinkle 3s infinite ease-in-out;
+  opacity: 0.8;
+}
+
+/* Different sizes for natural look */
+.sparkle-1 { top: 15%; left: 20%; animation-delay: 0s; transform: scale(0.6); }
+.sparkle-2 { top: 30%; left: 70%; animation-delay: 1s; transform: scale(0.8); }
+.sparkle-3 { top: 50%; left: 40%; animation-delay: 2s; transform: scale(0.5); }
+.sparkle-4 { top: 10%; left: 85%; animation-delay: 1.5s; transform: scale(0.7); }
+.sparkle-5 { top: 65%; left: 15%; animation-delay: 2.5s; transform: scale(0.9); }
+
+@keyframes starTwinkle {
+  0% {
+    transform: scale(0.4) rotate(0deg);
+    opacity: 0.3;
+    filter: drop-shadow(0 0 0 rgba(255,255,255,0));
+  }
+  50% {
+    transform: scale(1) rotate(180deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(255,255,255,0.9));
+  }
+  100% {
+    transform: scale(0.4) rotate(360deg);
+    opacity: 0.3;
+    filter: drop-shadow(0 0 0 rgba(255,255,255,0));
+  }
+}
+
+
+/* Ensure content stays above effects */
+.banner-wrapper > .container {
+  position: relative;
+  z-index: 3;
+}
+.snow-layer { outline: 1px dashed red; }
+
     `}</style>
       <Header />
       {/* <HeadBar text="Join Buster and flock together with your buddies!" /> */}
-<div className="banner-wrapper py-5">
+<div className="banner-wrapper py-5 christmasBanner">
+  {/* ❄️ Snow + ✨ Sparkles */}
+  <div className="effects-layer">
+    <div className="snow-layer snow-1"></div>
+    <div className="snow-layer snow-2"></div>
+    <div className="snow-layer snow-3"></div>
+
+    <span className="sparkle sparkle-1"></span>
+    <span className="sparkle sparkle-2"></span>
+    <span className="sparkle sparkle-3"></span>
+    <span className="sparkle sparkle-4"></span>
+    <span className="sparkle sparkle-5"></span>
+  </div>
       <Container>
         <Row className="align-items-center">
           {/* LEFT CONTENT */}

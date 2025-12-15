@@ -104,11 +104,11 @@ const HomeBanner = () => {
              
             <Carousel.Item className="bannerItem christmasBanner">
                 {/* ❄️ Snow Effect Layer */}
-  <div className="snow-container">
-    <span className="snow"></span>
-    <span className="snow"></span>
-    <span className="snow"></span>
-  </div>
+                <div className="snow-container">
+                  <span className="snow"></span>
+                  <span className="snow"></span>
+                  <span className="snow"></span>
+                </div>
                 <div className="banner-wrapper py-5">
                       <Container>
                         <Row className="align-items-center">
