@@ -1,46 +1,38 @@
 "use client";
 
-import {
-  PaymentRequestButtonElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
+import StripePaymentForm from "../components/StripePaymentForm";
 
-export default function GooglePayButton() {
-  const stripe = useStripe();
-  const elements = useElements();
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+);
 
-  const [paymentRequest, setPaymentRequest] = useState<any>(null);
+export default function CheckoutGpay() {
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!stripe) return;
+    fetch("/api/create-payment-intent", {
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret));
+  }, []);
 
-    const pr = stripe.paymentRequest({
-      country: "US",
-      currency: "usd",
-      total: {
-        label: "Sample Product",
-        amount: 1999,
-      },
-      requestPayerName: true,
-      requestPayerEmail: true,
-    });
-
-    pr.canMakePayment().then((result) => {
-      if (result) {
-        setPaymentRequest(pr);
-      }
-    });
-  }, [stripe]);
-
-  if (!paymentRequest) return null;
+  if (!clientSecret) return <p>Loading payment form…</p>;
 
   return (
-    <div className="w-full flex justify-center mt-4">
-      <PaymentRequestButtonElement
-        options={{ paymentRequest, style: { paymentRequestButton: { theme: "dark", height: "48px" } }}}
-      />
-    </div>
+    <Elements
+      stripe={stripePromise}
+      options={{ clientSecret }}
+    >
+      <div className="p-10 max-w-md mx-auto">
+        <h2 className="text-2xl font-bold mb-4">
+          Secure Payment
+        </h2>
+        <StripePaymentForm />
+      </div>
+    </Elements>
   );
 }
