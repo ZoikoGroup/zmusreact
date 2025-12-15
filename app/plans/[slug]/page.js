@@ -108,27 +108,23 @@ font-size:3vw;
 }
 @media (max-width: 991.98px) {
 
-.detailsRow .planTitle{
-  text-align:center !important;
-  font-size:4vw !important;
-}
-  .detailsRow .planPrice .planPriceCur{
-  text-align:center !important;
-  font-size:7vw !important;
-}
-    .detailsRow .planPrice .planDur{
-  text-align:center !important;
-  font-size:5vw !important;
-}
-
-}
-@media (min-width: 992px) {
-
-
+  .detailsRow .planTitle{
+    text-align:center !important;
+    font-size:4vw !important;
+  }
+    .detailsRow .planPrice .planPriceCur{
+    text-align:center !important;
+    font-size:7vw !important;
+  }
+      .detailsRow .planPrice .planDur{
+    text-align:center !important;
+    font-size:5vw !important;
+  }
 
 }
 
-}`}</style>
+
+`}</style>
       <Container fluid className="bglite">
         <Container className="py-5 w-75">
           <Row className="align-items-start justify-content-between mb-4 detailsRow">
