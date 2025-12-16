@@ -12,13 +12,24 @@ const stripePromise = loadStripe(
 export default function CheckoutGpay() {
   const [clientSecret, setClientSecret] = useState<string | null>(null);
 
+  // 🔁 Dynamic values (can come from props, URL, plan selection, etc.)
+  const amount = 1999; // $19.99 in cents
+  const currency = "usd";
+
   useEffect(() => {
     fetch("/api/create-payment-intent", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        amount,
+        currency,
+      }),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
-  }, []);
+  }, [amount]);
 
   if (!clientSecret) return <p>Loading payment form…</p>;
 
@@ -29,7 +40,7 @@ export default function CheckoutGpay() {
     >
       <div className="p-10 max-w-md mx-auto">
         <h2 className="text-2xl font-bold mb-4">
-          Secure Payment
+          Pay ${amount / 100}
         </h2>
         <StripePaymentForm />
       </div>

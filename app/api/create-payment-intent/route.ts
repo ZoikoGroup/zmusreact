@@ -7,13 +7,21 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2025-08-27.basil",
 });
 
-export async function POST() {
+export async function POST(req: Request) {
   try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1999,
-      currency: "usd",
+    const { amount, currency = "usd" } = await req.json();
 
-      // ✅ THIS ALONE is enough
+    // 🔐 Always validate on server
+    if (!amount || amount < 50) {
+      return NextResponse.json(
+        { error: "Invalid amount" },
+        { status: 400 }
+      );
+    }
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount, // ← dynamic amount in cents
+      currency,
       automatic_payment_methods: {
         enabled: true,
       },
@@ -23,7 +31,7 @@ export async function POST() {
       clientSecret: paymentIntent.client_secret,
     });
   } catch (err: any) {
-    console.error("Stripe error:", err.message);
+    console.error("Stripe error:", err);
     return NextResponse.json(
       { error: err.message },
       { status: 500 }
