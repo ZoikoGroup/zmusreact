@@ -16,9 +16,9 @@ const RoamFree = () => {
                     <Col md={8} sm={12} xs={12}>
                         <h2 className="txtred">Hey there, fellow adventurers! It&apos;s Benny the Badger here!</h2>
                         <ul className="redbullet body22">
-                            <li>Especially when you travel to Canada or Mexico, you can&apos;t avoid expensive roaming charges or need to buy an expensive roaming plan, otherwise, your line will be blocked. Well, if you want to access your current data, make calls, and send texts to US numbers, switch today to Zoiko Mobile's Canada &amp; Mexico roaming plans. It lets you enjoy great roaming allowance in Canada and Mexico just like you&apos;re in your home country (U.S.).</li>
-                            <li>That&apos;s right, folks! Our North America's best international roaming plans keep you connected on international land, keep mobile bills at ease, and share your travel experience with friends and family without the extra fees. Our fastest 5G network allows you to upload your photos, videos, and large important files as quickly as possible!</li>
-                            <li>So why wait? Switch to Zoiko Mobile's geographically-tuned Canada & Mexico roaming plans today and start exploring Canada and Mexico without incurring any expensive roaming costs!</li>
+                            <li>Especially when you travel to Canada or Mexico, you can&apos;t avoid expensive roaming charges or need to buy an expensive roaming plan, otherwise, your line will be blocked. Well, if you want to access your current data, make calls, and send texts to US numbers, switch today to Zoiko Mobile&apos;s Canada &amp; Mexico roaming plans. It lets you enjoy great roaming allowance in Canada and Mexico just like you&apos;re in your home country (U.S.).</li>
+                            <li>That&apos;s right, folks! Our North America&apos;s best international roaming plans keep you connected on international land, keep mobile bills at ease, and share your travel experience with friends and family without the extra fees. Our fastest 5G network allows you to upload your photos, videos, and large important files as quickly as possible!</li>
+                            <li>So why wait? Switch to Zoiko Mobile&apos;s geographically-tuned Canada &amp; Mexico roaming plans today and start exploring Canada and Mexico without incurring any expensive roaming costs!</li>
                         </ul>
                     </Col>
                     <Col md={4} sm={12} xs={12}>
