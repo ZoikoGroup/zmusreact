@@ -5,42 +5,40 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { forwardRef, useImperativeHandle } from "react";
 
-export default function StripePaymentForm() {
+export type StripePaymentFormRef = {
+  submitPayment: () => Promise<void>;
+};
+
+const StripePaymentForm = forwardRef<StripePaymentFormRef>((_, ref) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!stripe || !elements) return;
+  useImperativeHandle(ref, () => ({
+    async submitPayment() {
+      if (!stripe || !elements) return;
 
-    setLoading(true);
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${window.location.origin}/success`,
+        },
+      });
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${window.location.origin}/success`,
-      },
-    });
-
-    if (error) {
-      alert(error.message);
-    }
-
-    setLoading(false);
-  };
+      if (error) {
+        alert(error.message);
+        throw error;
+      }
+    },
+  }));
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="space-y-4">
       <PaymentElement />
-      <button
-        disabled={!stripe || loading}
-        className="w-full bg-black text-white py-3 rounded"
-      >
-        {loading ? "Processing..." : "Pay"}
-      </button>
-    </form>
+    </div>
   );
-}
+});
+
+StripePaymentForm.displayName = "StripePaymentForm";
+export default StripePaymentForm;
