@@ -13,7 +13,7 @@ export default function Home() {
     <>
     {/* <TopHeader /> */}
     <Header />
-    {/* <HomeBanner /> */}
+    <HomeBanner />
     <HomeSecA />
     <CarouselPlans />
     <WhyChooseZoiko />
