@@ -46,69 +46,21 @@ const HomeBanner = () => {
         font-size: 4vw;
       }
         }
-      /* 🎄 Snow Container */
-.christmasBanner {
-  position: relative;
-  overflow: hidden;
-}
-
-/* Snow overlay */
-.snow-container {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Snow layers */
-.snow {
-  position: absolute;
-  inset: -100%;
-  background-image: radial-gradient(
-      2px 2px at 20px 30px,
-      #fff,
-      transparent
-    ),
-    radial-gradient(2px 2px at 40px 70px, #fff, transparent),
-    radial-gradient(1.5px 1.5px at 90px 40px, #fff, transparent),
-    radial-gradient(2px 2px at 130px 80px, #fff, transparent),
-    radial-gradient(1.5px 1.5px at 160px 30px, #fff, transparent);
-  background-size: 200px 200px;
-  animation: snowFall 15s linear infinite;
-  opacity: 0.8;
-}
-
-/* Different speeds for depth */
-.snow:nth-child(2) {
-  animation-duration: 22s;
-  opacity: 0.5;
-}
-
-.snow:nth-child(3) {
-  animation-duration: 30s;
-  opacity: 0.3;
-}
-
-@keyframes snowFall {
-  from {
-    transform: translateY(-10%);
-  }
-  to {
-    transform: translateY(110%);
-  }
-}
+   
 
         `}</style>
+        
+      
         <HeadBar text={<>Affordable Plans | No Credit Checks | No Hidden Fees | Unlimited Everything | Reliable Nationwide Coverage</>} />
         <Carousel controls={false} indicators={true}  className="homeBanner">
              
             <Carousel.Item className="bannerItem christmasBanner">
                 {/* ❄️ Snow Effect Layer */}
-                <div className="snow-container">
+                {/* <div className="snow-container">
                   <span className="snow"></span>
                   <span className="snow"></span>
                   <span className="snow"></span>
-                </div>
+                </div> */}
                 <div className="banner-wrapper py-5">
                       <Container>
                         <Row className="align-items-center">
