@@ -3,7 +3,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import { usStates } from "../utils/usStates";
 import { processOrder } from "../utils/beQuickApi"; // adjust path if needed
 import { Modal, Button, Container, Row, Col } from "react-bootstrap";
@@ -18,7 +18,7 @@ import {
 } from "react-bootstrap-icons"
 
 
-import { Elements } from "@stripe/react-stripe-js";
+import { Elements,PaymentElement, useStripe,  useElements, } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 // import { useEffect, useState } from "react";
 import StripePaymentForm from "../components/StripePaymentForm";
