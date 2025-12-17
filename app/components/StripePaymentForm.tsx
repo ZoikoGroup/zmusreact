@@ -8,45 +8,78 @@ import {
 import { forwardRef, useImperativeHandle, useState } from "react";
 
 export type StripePaymentFormRef = {
-  submitPayment: () => Promise<void>;
+  submitPayment: () => Promise<{ success: boolean; error?: string }>;
 };
 
-const StripePaymentForm = forwardRef<StripePaymentFormRef>((_, ref) => {
-  const stripe = useStripe();
-  const elements = useElements();
-  const [loading, setLoading] = useState(false);
+interface StripePaymentFormProps {
+  onPaymentSuccess?: () => void;
+  onPaymentError?: (error: string) => void;
+}
 
-  useImperativeHandle(ref, () => ({
-    async submitPayment() {
-      if (!stripe || !elements) return;
+const StripePaymentForm = forwardRef<StripePaymentFormRef, StripePaymentFormProps>(
+  ({ onPaymentSuccess, onPaymentError }, ref) => {
+    const stripe = useStripe();
+    const elements = useElements();
+    const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string>("");
 
-      setLoading(true);
-      try {
-        const { error } = await stripe.confirmPayment({
-          elements,
-          confirmParams: {
-            return_url: `${window.location.origin}/success`,
-          },
-        });
-
-        if (error) {
-          alert(error.message);
-          throw error;
+    useImperativeHandle(ref, () => ({
+      async submitPayment() {
+        if (!stripe || !elements) {
+          const error = "Stripe is not loaded yet";
+          setErrorMessage(error);
+          onPaymentError?.(error);
+          return { success: false, error };
         }
-      } finally {
-        setLoading(false);
-      }
-    },
-  }));
 
-  return (
-    <div className="space-y-4">
-      <PaymentElement />
-      {/* <button disabled={!stripe || loading} className="w-full bg-black text-white py-3 rounded" > 
-        {loading ? "Processing..." : "Pay"} </button> */}
-    </div>
-  );
-});
+        setLoading(true);
+        setErrorMessage("");
+
+        try {
+          const { error } = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+              return_url: `${window.location.origin}/payment-success`,
+            },
+            redirect: "if_required",
+          });
+
+          if (error) {
+            const errorMsg = error.message || "Payment failed";
+            setErrorMessage(errorMsg);
+            onPaymentError?.(errorMsg);
+            return { success: false, error: errorMsg };
+          }
+
+          onPaymentSuccess?.();
+          return { success: true };
+        } catch (err: any) {
+          const errorMsg = err.message || "An unexpected error occurred";
+          setErrorMessage(errorMsg);
+          onPaymentError?.(errorMsg);
+          return { success: false, error: errorMsg };
+        } finally {
+          setLoading(false);
+        }
+      },
+    }));
+
+    return (
+      <div>
+        <PaymentElement
+          options={{
+            layout: "tabs",
+          }}
+        />
+        {errorMessage && (
+          <div className="alert alert-danger mt-3" role="alert">
+            {errorMessage}
+          </div>
+        )}
+      </div>
+    );
+  }
+);
 
 StripePaymentForm.displayName = "StripePaymentForm";
 export default StripePaymentForm;
