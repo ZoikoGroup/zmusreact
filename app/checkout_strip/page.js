@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import { useEffect, useState, useRef } from "react";
 import { usStates } from "../utils/usStates";
-import { processOrder } from "../utils/beQuickApi";
+import { processOrder } from "../utils/beQuickWebPaymentApi";
 import { Modal, Button, Container, Row, Col } from "react-bootstrap";
 import {
   Phone,
@@ -104,9 +104,6 @@ export default function CheckoutPage() {
     phone: "",
     email: "",
   });
-
-  const [sameAsBilling, setSameAsBilling] = useState(false);
-
   useEffect(() => {
     try {
       const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
