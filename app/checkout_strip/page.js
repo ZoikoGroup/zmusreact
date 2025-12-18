@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import { useEffect, useState, useRef } from "react";
 import { usStates } from "../utils/usStates";
-import { processOrder } from "../utils/beQuickWebPaymentApi";
+import { processOrder } from "../utils/beQuickTestWebPaymentApi";
 import { Modal, Button, Container, Row, Col } from "react-bootstrap";
 import {
   Phone,
@@ -104,9 +104,11 @@ export default function CheckoutPage() {
     phone: "",
     email: "",
   });
+  
   useEffect(() => {
     try {
       const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+      console.log("Stored cart:", storedCart);
       const normalized = (storedCart || []).map((item) => {
         if (item && (item.planId || item.planTitle)) return item;
 
@@ -157,6 +159,7 @@ export default function CheckoutPage() {
     };
     setCart(newCart);
     localStorage.setItem("cart", JSON.stringify(newCart));
+    
   };
 
   const handleRemove = (index) => {
@@ -164,6 +167,7 @@ export default function CheckoutPage() {
     newCart.splice(index, 1);
     setCart(newCart);
     localStorage.setItem("cart", JSON.stringify(newCart));
+   
   };
 
   const handleClearCart = () => {
