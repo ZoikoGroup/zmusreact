@@ -371,7 +371,7 @@ export default function CheckoutPage() {
       // Process order with your backend
       const response = await processOrder(orderData);
       const bequickPayload = response && response.data ? response.data : response;
-
+console.log("processOrder response:", bequickPayload);
       // Save to internal API
       await fetch("https://zmapi.zoikomobile.co.uk/api/v1/bqorders", {
         method: "POST",
