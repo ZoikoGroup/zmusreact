@@ -286,12 +286,12 @@ console.log("Creating draft order with postData:", postData.cart);
         orderDetailsAttributes.push({
           product_id: parseInt(product.planBqid),
           line_id: parseInt(postData.line_id),
-          warehouse_id : 2,
+          warehouse_id : 1,
         });
         orderDetailsAttributes.push({
           product_id: PSIM_PRODUCT_ID,
           line_id: parseInt(postData.line_id),
-          warehouse_id : 2,
+          warehouse_id : 1,
         });
         simCount++;
         console.log("Added pSIM:", orderDetailsAttributes);
@@ -299,7 +299,6 @@ console.log("Creating draft order with postData:", postData.cart);
       orderDetailsAttributes.push({
         product_id: parseInt(product.planBqid),
         line_id: parseInt(postData.line_id),
-        warehouse_id : 2,
       });
       simCount++;
       console.log("Added Device_Protection:", orderDetailsAttributes);
