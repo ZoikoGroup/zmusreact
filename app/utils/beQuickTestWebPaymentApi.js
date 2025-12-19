@@ -129,6 +129,7 @@ export async function storeServiceAddress(
         name:name,
         phone_number: phone,
         zip:zip,
+        zip_plus_4: validateResp.zip4,
         country_code: country,
         usps_validated: true,
         subscriber_id: subscriberId,
@@ -170,7 +171,7 @@ export async function createSubscriberAndFetch(postData) {
         first_name: firstName,
         last_name: lastName,
         email,
-        company_id: "1",
+        company_id: 1,
         phone,
         addresses_attributes:[
           {
@@ -264,36 +265,41 @@ console.log("Creating draft order with postData:", postData.cart);
     // console.log("product attr:", product);
 
     // Add plan first
-   
+   console.log("Adding plan:", parseInt(product.planBqid));
     
 
     // Then add SIM type
     if (simType === "eSIM") {
       orderDetailsAttributes.push({
         product_id: ESIM_PRODUCT_ID,
-        line_id: postData.line_id,
+        line_id: parseInt(postData.line_id),
+        warehouse_id : 2,
       });
       simCount++;
       orderDetailsAttributes.push({
         product_id: parseInt(product.planBqid),
-        line_id: postData.line_id,
+        line_id: parseInt(postData.line_id),
+        warehouse_id : 2,
       });
       // console.log("Added eSIM:", orderDetailsAttributes);
     } else if (simType === "pSIM") {
         orderDetailsAttributes.push({
           product_id: parseInt(product.planBqid),
-          line_id: postData.line_id,
+          line_id: parseInt(postData.line_id),
+          warehouse_id : 2,
         });
         orderDetailsAttributes.push({
           product_id: PSIM_PRODUCT_ID,
-          line_id: postData.line_id,
+          line_id: parseInt(postData.line_id),
+          warehouse_id : 2,
         });
         simCount++;
         console.log("Added pSIM:", orderDetailsAttributes);
     } else if (simType === "device_protection") {
       orderDetailsAttributes.push({
         product_id: parseInt(product.planBqid),
-        line_id: postData.line_id,
+        line_id: parseInt(postData.line_id),
+        warehouse_id : 2,
       });
       simCount++;
       console.log("Added Device_Protection:", orderDetailsAttributes);
@@ -354,6 +360,7 @@ export async function orderPayment(postData) {
   };
   // console.log("Order Payment Data:", data);
   const response = await beQuickRequest("/order_payments", "POST", data);
+  console.log("Order Payment Data:", response);
   if (response?.errors)
     return { status: false, message: "Order payment failed", error: response.errors };
   return { status: true };
