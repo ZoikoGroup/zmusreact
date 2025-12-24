@@ -27,6 +27,9 @@ export default function DashboardPage() {
   const [devices, setDevices] = useState([]);
   const [userName, setUserName] = useState("Customer");
 
+  const [showSimModal, setShowSimModal] = useState(false);
+
+
   // --- Card management states (zmapi / Laravel endpoints) ---
   const [cards, setCards] = useState([]);
   const [savingCard, setSavingCard] = useState(false);
@@ -74,7 +77,7 @@ export default function DashboardPage() {
             planDetailsInfo?.line?.status === "active" ? "Active" : "Pending",
         }));
       }
-
+ 
       // fallback
       return [
         {
@@ -296,6 +299,7 @@ export default function DashboardPage() {
         }
 
         const subscriberResult = await beQuick.getSubscriberByEmail(userEmail);
+        //const subscriberResult = await beQuick.getSubscriberByEmail('info@golitemobile.com');
 
         if (!subscriberResult || !subscriberResult.subscriber_id) {
           setSubscriberNotFound(true);
@@ -415,17 +419,50 @@ const openChat = () => {
       <HeadBar text="Get Our Best Postpaid Mobile Plans & Pay Only for Every Need!" />
 
       <div className="dashboard-container container py-4">
-        {/* Welcome */}
-        <div className="alert alert-success text-center mb-4 fw-bold">
-          👋 Welcome, {userName}!
-        </div>
+        
 
         {/* Subscriber missing / loading / error */}
-        {subscriberNotFound && (
-          <div className="alert alert-danger text-center">
-            ⚠️ Subscriber not found for your account. Please contact support.
-          </div>
-        )}
+        
+
+
+        {!loading && subscriberNotFound && (
+  <div className="text-center py-5 specialPlanForm">
+    <div className="mb-4">
+      <img
+        src="/img/cuate.png"
+        alt="Welcome"
+        style={{ maxWidth: "340px" }}
+      />
+    </div>
+
+    <h3 className="fw-bold mb-2">
+      👋 Welcome to the Zoiko Network, {userName}!
+    </h3>
+
+    <p className="text-muted mb-4">
+      Your account is ready. To unlock high-speed 5G data, nationwide
+      talk, and global messaging, let’s choose your perfect plan.
+    </p>
+
+    <div className="d-flex justify-content-center gap-3">
+      <button
+  className="btn btn-dark px-4"
+  onClick={() => setShowSimModal(true)}
+>
+  Activate Your SIM
+</button>
+
+
+      <button
+        className="btn btn-danger px-4"
+        onClick={() => router.push("/all-plans")}
+      >
+        View Available Plans
+      </button>
+    </div>
+  </div>
+)}
+
 
         {loading && (
           <div className="text-center py-4">
@@ -434,8 +471,12 @@ const openChat = () => {
         )}
         {error && <div className="alert alert-danger">{error}</div>}
 
-        {!loading && (
+        {!loading && !subscriberNotFound && (
           <>
+          {/* Welcome */}
+        <div className="alert alert-success text-center mb-4 fw-bold">
+          👋 Welcome, {userName}!
+        </div>
             {/* First Row */}
             <div className="row g-4">
               {/* Plans & Usage */}
@@ -775,6 +816,101 @@ const openChat = () => {
           </Modal.Footer>
         </Form>
       </Modal>
+
+
+
+      <Modal
+  show={showSimModal}
+  onHide={() => setShowSimModal(false)}
+  centered
+  size="lg"
+>
+  {/* HEADER */}
+  <Modal.Header closeButton className="border-0 pb-0">
+    <div className="w-100 text-center">
+      <h4 className="fw-bold mb-1">Get Your SIM in 3 Simple Steps</h4>
+      <p className="text-muted small mb-0">
+        Quick activation. Seamless connectivity. No paperwork.
+      </p>
+    </div>
+  </Modal.Header>
+
+  {/* BODY */}
+  <Modal.Body className="pt-4">
+    <div className="row g-4">
+
+      {/* STEP 1 */}
+      <div className="col-md-6">
+        <div className="h-100 p-4 rounded border bg-light">
+          <div className="d-flex gap-3">
+            <div className="step-circle">1</div>
+            <div>
+              <h6 className="fw-semibold text-danger mb-1">
+                Choose a Plan
+              </h6>
+              <p className="text-muted small mb-0">
+                Pick a plan that fits your needs — Unlimited, Prepaid,
+                Postpaid, Business, or Travel plans available.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* STEP 2 */}
+      <div className="col-md-6">
+        <div className="h-100 p-4 rounded border bg-light">
+          <div className="d-flex gap-3">
+            <div className="step-circle">2</div>
+            <div>
+              <h6 className="fw-semibold text-danger mb-1">
+                Select SIM Type
+              </h6>
+              <p className="text-muted small mb-0">
+                Choose eSIM for instant activation or order a physical
+                SIM delivered to your doorstep.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* STEP 3 */}
+      <div className="col-12">
+        <div className="p-4 rounded border bg-light">
+          <div className="d-flex gap-3">
+            <div className="step-circle">3</div>
+            <div>
+              <h6 className="fw-semibold text-danger mb-1">
+                Activate & Go
+              </h6>
+              <p className="text-muted small mb-0">
+                Complete activation online and enjoy fast, reliable
+                4G/5G coverage within minutes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </Modal.Body>
+
+  {/* FOOTER */}
+  <Modal.Footer className="border-0 justify-content-center pt-3">
+    <button
+      className="btn btn-danger px-5 py-2 fw-semibold"
+      onClick={() => {
+        setShowSimModal(false);
+        router.push("/all-plans");
+      }}
+    >
+      View Plans & Activate
+    </button>
+  </Modal.Footer>
+</Modal>
+
+
     </>
   );
 }
