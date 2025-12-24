@@ -261,6 +261,7 @@ a {
 }
 .check-bullet {
   list-style-image: url('/img/icons/check2.svg');
+  min-height: 270px;
 }
 .check-bullet li {
   padding: 6px 0;
