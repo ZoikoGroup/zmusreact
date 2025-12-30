@@ -73,7 +73,7 @@ const faqs = [
       btnText: "Get Eco SIM",
       btnColor: "#C6233C",
       btnTextColor: "#fff",
-      link: "#christmas-deals",
+      link: "#new-year-deals",
     },
   ];
   return (
@@ -430,11 +430,11 @@ const faqs = [
               className="px-3 py-1 rounded-pill fw-bold"
               style={{ background: "#FFD700", color: "#097e2eff", fontSize: "10px" }}
             >
-              CHRISTMAS SALE 2025
+              New Year SALE 2026
             </span>
 
             <h1 className="fw-bold mt-3">
-              New Year Phone Plan Deals 2025 <br />
+              New Year Phone Plan Deals 2026 <br />
               30% OFF for 3 Months + FREE Activation
             </h1>
 
@@ -472,7 +472,7 @@ const faqs = [
 
             {/* CTA BUTTONS */}
             <div className="mt-4 d-flex gap-3 bannerButtons">
-              <Button variant="light" size="lg" href="#christmas-deals" >
+              <Button variant="light" size="lg" href="#new-year-deals" >
                 Shop New Year Deals
               </Button>
               <Button
@@ -511,7 +511,7 @@ const faqs = [
 
         {/* Heading */}
         <h2 className="text-center mb-4 christmasDeal" style={{ color: "#0B7A3E", fontWeight: "700" }}>
-          New Year Deals 2025
+          New Year Deals 2026
         </h2>
 
         {/* Underline */}
@@ -540,7 +540,7 @@ const faqs = [
                 30% OFF for 3 months + FREE Activation
               </p>
               <p className="text-center mt-3 christmasLink">
-                <a  href="#christmas-deals" style={{ color: "#E92C2C", fontWeight: "600" }}>
+                <a  href="#new-year-deals" style={{ color: "#E92C2C", fontWeight: "600" }}>
                   View Plans →
                 </a>
               </p>
@@ -574,7 +574,7 @@ const faqs = [
                 <img src="/img/card.png" alt="" width="60" />
               </div>
               <h5 className="text-center" style={{ color: "#0B7A3E", fontWeight: "700" }}>
-                SIM & eSIM Offers
+                SIM &amp; eSIM Offers
               </h5>
               <p className="text-center text-muted p-4 offerTxt">
                 Free SIM + Free Activation + $10 Credit
@@ -591,7 +591,7 @@ const faqs = [
       </Container>
       
     </div>
-    <div  style={{paddingTop:"2vw",}}   id="christmas-deals">
+    <div  style={{paddingTop:"2vw",}}   id="new-year-deals">
     <CarouselPlans/>
     </div>
     
@@ -627,7 +627,7 @@ const faqs = [
 
 <Container className="text-center py-5">
       <h2 className="fw-bold mb-2" style={{ color: "#0F5C2E" }}>
-        SIM & eSIM Offers
+        SIM &amp; eSIM Offers
       </h2>
 
       {/* Title underline */}
@@ -931,7 +931,7 @@ const faqs = [
         <h1 className="fw-bold mb-3">Your Holiday Savings Start Now.</h1>
 
         <p className="fs-5 mb-4 holidaySecSubheading">
-          New Year Phone Plan Deals 2025 - Don't miss out on 30% OFF + FREE Activation
+          New Year Phone Plan Deals 2026 - Don&apos;t miss out on 30% OFF + FREE Activation
         </p>
 
         {/* CTA Buttons */}
