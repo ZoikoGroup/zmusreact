@@ -70,11 +70,11 @@ const HomeBanner = () => {
                               className="px-3 py-1 rounded-pill fw-bold"
                               style={{ background: "#FFD700", color: "#097e2eff", fontSize: "10px" }}
                             >
-                              CHRISTMAS SALE 2025
+                              NEW YEAR SALE 2026
                             </span>
                 
                             <h1 className="fw-bold mt-3">
-                              Christmas Phone Plan Deals 2025 <br />
+                              New Year Phone Plan Deals 2026 <br />
                               30% OFF for 3 Months + FREE Activation
                             </h1>
                 
@@ -93,7 +93,7 @@ const HomeBanner = () => {
                 
                               <Col xs={12} md={6} className="mb-3">
                                 <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
-                                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> Christmas refurbished phone deals USA
+                                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> New Year refurbished phone deals USA
                                 </div>
                               </Col>
                 
@@ -113,7 +113,7 @@ const HomeBanner = () => {
                             {/* CTA BUTTONS */}
                             <div className="mt-4 d-flex gap-3 bannerButtons">
                               <Button variant="light" size="lg" href="/all-plans" >
-                                Shop Christmas Deals
+                                Shop New Year Deals
                               </Button>
                               <Button
                                 variant="outline-light"
