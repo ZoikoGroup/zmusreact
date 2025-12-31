@@ -20,7 +20,7 @@ const ChristmasSidebar = () => {
         </button> */}
 
         <span className="tab-text">
-          <a href="/christmas-phone-plan-deals-2025">Christmas Sale</a>
+          <a href="/new-year-phone-plans-deals-2026">New Year Sale</a>
         </span>
       </div>
 
