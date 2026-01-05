@@ -224,7 +224,7 @@ useEffect(() => {
               <NavDropdown title="Devices" id="collapsible-nav-dropdown">
                 <NavDropdown.Item href="https://phones.zoikomobile.com/" target="_blank">New Smartphones</NavDropdown.Item>
                 <NavDropdown.Item href="/product-category/refurbished">Refurbished Smartphones</NavDropdown.Item>
-                <NavDropdown.Item href="#">Accessories</NavDropdown.Item>
+               
               </NavDropdown>
               <Nav.Link href="/about" className={pathname === "/about" ? "active" : ""}>About Us</Nav.Link>
             </Nav>
