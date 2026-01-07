@@ -200,7 +200,7 @@ font-size:3vw;
             },
             {
               icon: "/img/icons/text.png",
-              title: "Unlimited Talk & Text",
+              title: "Unlimited Talk & Text messages",
               desc: "Stay connected to family and colleagues across the U.S. with unlimited calls and text messages.",
             },
             {
