@@ -199,7 +199,7 @@ font-size:3vw;
               desc: "Enjoy reliable, ultra-fast data, even during peak hours. Stream, browse, and work with confidence.",
             },
             {
-              icon: "/img/icons/text.png",
+              icon: "/img/icons/text1.png",
               title: "Unlimited Talk & Text messages",
               desc: "Stay connected to family and colleagues across the U.S. with unlimited calls and text messages.",
             },
