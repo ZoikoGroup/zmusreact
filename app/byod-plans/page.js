@@ -117,9 +117,9 @@ const ByodPlans = () => {
                 font-size: 2vw;
             }
             .byodBanner p{
-                       font-size: 1.5vw;
-        padding-right: 1vw;
-            width: 50% !important;
+              font-size: 1.5vw;
+              padding-right: 1.5vw;
+              width: 50% !important;
             }
             .byodBanner a{
                 width: 20vw;
