@@ -2,7 +2,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
-import { Button, Col, Container, Form, FormLabel, Row, InputGroup } from "react-bootstrap";
+import { Button, Col, Container, Form, FormLabel, Row } from "react-bootstrap";
 import React, { useState } from "react";
 import Countrycode from "../products/countrycode.json";
 
@@ -343,12 +343,16 @@ const MusicHubRegistration = () => {
                             </Form.Group>
                         </Col>
                     </Row>
+                    <Row>
                     <h4 className="pt-4">What type of benefits are you most interested in? (Select all that apply)</h4>
-                    <Form.Check label="Music streaming perks" name="perks" type="checkbox" onChange={handleChange} value={formData.perks} />
-                    <Form.Check label="Discounts on plans" name="discount" onChange={handleChange} value={formData.discount} type="checkbox" />
-                    <Form.Check label="Music production tools" name="tools" onChange={handleChange} value={formData.tools} type="checkbox" />
-                    <Form.Check label="Cloud storage for music files" name="storage" onChange={handleChange} value={formData.storage} type="checkbox" />
-                    <Form.Check label="Exclusive access to events and giveaways" name="access" onChange={handleChange} value={formData.access} type="checkbox" />
+                      <div className="pt-4 d-flex flex-wrap checkbox-group-center  stylish-checkboxes">
+                        <Form.Check label="Music streaming perks" name="perks" type="checkbox" onChange={handleChange} value={formData.perks} />
+                        <Form.Check label="Discounts on plans" name="discount" onChange={handleChange} value={formData.discount} type="checkbox" />
+                        <Form.Check label="Music production tools" name="tools" onChange={handleChange} value={formData.tools} type="checkbox" />
+                        <Form.Check label="Cloud storage for music files" name="storage" onChange={handleChange} value={formData.storage} type="checkbox" />
+                        <Form.Check label="Exclusive access to events and giveaways" name="access" onChange={handleChange} value={formData.access} type="checkbox" />
+                      </div>
+                    </Row>
                     <FormLabel className="mt-2" htmlFor="other" >If other please specify</FormLabel>
                     <Form.Control type="text" name="other" onChange={handleChange} value={formData.other} placeholder="Please specify" />
 
