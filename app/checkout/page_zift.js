@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import { useEffect, useState } from "react";
 import { usStates } from "../utils/usStates";
-import { processOrder } from "../utils/beQuickApi"; // adjust path if needed
+import { processOrderZift } from "../utils/beQuickApi"; // adjust path if needed
 import { Modal, Button, Container, Row, Col } from "react-bootstrap";
 import {
   Phone,
@@ -476,7 +476,7 @@ const totalLocal = Math.max(
       setLoading(true);
 
       // Call processOrder (your beQuick integration)
-      const response = await processOrder(orderData);
+      const response = await processOrderZift(orderData);
 
       // Log the response for debugging (safe to remove later)
       console.log("processOrder response:", orderData);
