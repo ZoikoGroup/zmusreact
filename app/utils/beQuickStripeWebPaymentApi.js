@@ -42,7 +42,7 @@ async function beQuickRequest(url, method = "GET", data = {}, headers = {}, time
 }
 
 /* -------------------- MAIN ORDER PROCESSOR -------------------- */
-export async function processOrder(postData) {
+export async function processOrderStripe(postData) {
   try {
     postData.payment_type_id = 9;
 

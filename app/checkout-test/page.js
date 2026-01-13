@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import { useEffect, useState } from "react";
 import { usStates } from "../utils/usStates";
-import { processOrder } from "../utils/beQuickApi"; // adjust path if needed
+import { processOrderZift } from "../utils/beQuickApi"; // adjust path if needed
 import { Modal, Button, Container, Row, Col } from "react-bootstrap";
 import {
   Phone,
@@ -19,9 +19,26 @@ import {
 // import "bootstrap/dist/css/bootstrap.min.css";
 import GooglePayButton from "../components/GooglePayButton";
 
+import { useRef } from "react";
+
+import { processOrderStripe } from "../utils/beQuickStripeWebPaymentApi";
+
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import StripePaymentForm from "../components/StripePaymentForm";
+//import { stripePromise } from "../utils/stripe";
+
+
 
 export default function CheckoutPage() {
   const [shippingFee, setShippingFee] = useState(9.99); // default value
+
+  // Initialize Stripe
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+
+const [paymentMethod, setPaymentMethod] = useState("zift"); // zift | stripe
+const [clientSecret, setClientSecret] = useState("");
+const stripeFormRef = useRef(null);
 
   const shippingOptions = [
     { label: "Standard (3-5 Days)", value: 9.99 },
@@ -329,6 +346,40 @@ const total = Math.max(subtotal + shippingFee - discountAmount, 0);
     formData: item.formData,
   });
 
+
+  // Create payment intent when total changes
+  useEffect(() => {
+    if (total > 0 && cart.length > 0) {
+      const createPaymentIntent = async () => {
+        try {
+          const response = await fetch("/api/create-payment-intent", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              amount: Math.round(total * 100), // Convert to cents
+              currency: "usd",
+              metadata: {
+                cartItems: cart.length,
+                subtotal: subtotal.toFixed(2),
+                shipping: shippingFee.toFixed(2),
+                discount: discountAmount.toFixed(2),
+              },
+            }),
+          });
+
+          const data = await response.json();
+          if (data.clientSecret) {
+            setClientSecret(data.clientSecret);
+          }
+        } catch (error) {
+          console.error("Failed to create payment intent:", error);
+        }
+      };
+
+      createPaymentIntent();
+    }
+  }, [total, cart.length]);
+
   // ---------------- Validation ----------------
   const validateFields = () => {
     const newErrors = {};
@@ -396,7 +447,36 @@ const total = Math.max(subtotal + shippingFee - discountAmount, 0);
     return !Object.values(newErrors).some((err) => err && err.length);
   };
 
-  const handlePlaceOrder = async () => {
+  const validateFieldsStripe = () => {
+    const newErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]{7,15}$/;
+
+    newErrors.billingFirstName = billingAddress.firstName ? "" : "First name is required";
+    newErrors.billingLastName = billingAddress.lastName ? "" : "Last name is required";
+    newErrors.billingState = billingAddress.state ? "" : "State is required";
+    newErrors.billingCity = billingAddress.city ? "" : "City is required";
+    newErrors.billingHouseNumber = billingAddress.houseNumber ? "" : "House number is required";
+    newErrors.billingZip = billingAddress.zip ? "" : "ZIP code is required";
+    newErrors.billingEmail = emailRegex.test(billingAddress.email) ? "" : "Invalid email address";
+    newErrors.billingPhone = phoneRegex.test(billingAddress.phone) ? "" : "Invalid phone number";
+
+    if (showShipping) {
+      newErrors.shippingFirstName = shippingAddress.firstName ? "" : "First name is required";
+      newErrors.shippingLastName = shippingAddress.lastName ? "" : "Last name is required";
+      newErrors.shippingState = shippingAddress.state ? "" : "State is required";
+      newErrors.shippingCity = shippingAddress.city ? "" : "City is required";
+      newErrors.shippingHouseNumber = shippingAddress.houseNumber ? "" : "House number is required";
+      newErrors.shippingZip = shippingAddress.zip ? "" : "ZIP code is required";
+      newErrors.shippingEmail = emailRegex.test(shippingAddress.email) ? "" : "Invalid email address";
+      newErrors.shippingPhone = phoneRegex.test(shippingAddress.phone) ? "" : "Invalid phone number";
+    }
+
+    setErrors(newErrors);
+    return !Object.values(newErrors).some((err) => err && err.length);
+  };
+
+  const handlePlaceOrderZift = async () => {
     if (!agreeTerms) {
       setShowTermsPopup(true);
       return;
@@ -476,7 +556,7 @@ const totalLocal = Math.max(
       setLoading(true);
 
       // Call processOrder (your beQuick integration)
-      const response = await processOrder(orderData);
+      const response = await processOrderZift(orderData);
 
       // Log the response for debugging (safe to remove later)
       console.log("processOrder response:", orderData);
@@ -531,6 +611,86 @@ const totalLocal = Math.max(
     }
   };
 
+
+const handlePlaceOrderStripe = async () => {
+    if (!agreeTerms) {
+      setShowTermsPopup(true);
+      return;
+    }
+
+    if (!validateFieldsStripe()) {
+      alert("Please fill all required fields correctly");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      // Submit Stripe payment
+      if (stripeFormRef.current) {
+        const paymentResult = await stripeFormRef.current.submitPayment();
+        
+        if (!paymentResult.success) {
+          alert(paymentResult.error || "Payment failed");
+          return;
+        }
+      }
+
+      // Prepare order data
+      const products = cart.map((item) => ({
+        id: item.planId,
+        title: item.planTitle,
+        slug: item.planSlug,
+        duration: item.planDuration,
+        lineType: item.lineType,
+        simType: item.simType,
+        quantity: Number(item.formData?.priceQty ?? 1),
+        pricePerUnit: Number(item.planPrice ?? item.formData?.price ?? 0),
+        totalPrice: Number(item.planPrice ?? item.formData?.price ?? 0) * Number(item.formData?.priceQty ?? 1),
+      }));
+
+      const orderData = {
+        billingAddress,
+        shippingAddress: showShipping ? shippingAddress : billingAddress,
+        shippingOption: selectedShippingOption ? { ...selectedShippingOption } : null,
+        coupon: discountData ? { ...discountData } : null,
+        cart,
+        totals: {
+          subtotal,
+          shipping: shippingFee,
+          discount: discountAmount,
+          total,
+        },
+        agreedToTerms: agreeTerms,
+        paymentMethod: "stripe",
+        createdAt: new Date().toISOString(),
+      };
+
+      // Process order with your backend
+      const response = await processOrderStripe(orderData);
+      const bequickPayload = response && response.data ? response.data : response;
+      console.log("processOrder response:", bequickPayload);
+      // Save to internal API
+      await fetch("https://zmapi.zoikomobile.co.uk/api/v1/bqorders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bequickPayload),
+      });
+
+      // Show success
+      setShowThankYou(true);
+      setCart([]);
+      localStorage.removeItem("cart");
+    } catch (error) {
+      console.error("❌ Order processing failed:", error);
+      alert("Something went wrong while processing your order. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
   const formatDiscount = (value) => {
   const num = parseFloat(value);
 
@@ -539,6 +699,12 @@ const totalLocal = Math.max(
   return Number.isInteger(num) ? num.toString() : num.toFixed(2);
 };
 
+const appearance = {
+    theme: "stripe",
+    variables: {
+      colorPrimary: "#dc3545",
+    },
+  };
 
   return (
     <>
@@ -855,11 +1021,44 @@ const totalLocal = Math.max(
                 {/* Payment Section */}
                 <div className="card">
                   <div className="card-body">
-                    <h5 className="fw-bold mb-3">Payment Method</h5>
-                    <div className="form-check mb-3">
-                      <input className="form-check-input" type="radio" name="paymentMethod" defaultChecked disabled={loading} />
-                      <label className="form-check-label">Credit Card</label>
-                    </div>
+                    
+
+
+<h5 className="fw-bold mb-3">Payment Method</h5>
+
+<div className="form-check mb-2">
+  <input
+    className="form-check-input"
+    type="radio"
+    name="paymentMethod"
+    checked={paymentMethod === "zift"}
+    onChange={() => setPaymentMethod("zift")}
+  />
+  <label className="form-check-label">
+    Pay with Zift
+  </label>
+</div>
+
+<div className="form-check mb-3">
+  <input
+    className="form-check-input"
+    type="radio"
+    name="paymentMethod"
+    checked={paymentMethod === "stripe"}
+    onChange={() => setPaymentMethod("stripe")}
+  />
+  <label className="form-check-label">
+    Credit / Debit Card (Stripe)
+  </label>
+</div>
+
+{paymentMethod === "zift" && (
+  <>
+    {/* YOUR EXISTING CARD NUMBER, EXPIRY, CVC, CARD ADDRESS UI */}
+  
+
+
+
                     <div className="mb-3">
                       <label className="form-label">Card Number *</label>
                       <input
@@ -963,6 +1162,21 @@ const totalLocal = Math.max(
                       </div>
                     </div>
 
+</>
+)}
+
+{paymentMethod === "stripe" && clientSecret && (
+  <Elements stripe={stripePromise} options={{ clientSecret, appearance }}>
+    <StripePaymentForm
+      ref={stripeFormRef}
+      onPaymentSuccess={() => console.log("Payment successful")}
+      onPaymentError={(error) => console.error("Payment error:", error)}
+    />
+  </Elements>
+)}
+
+
+
                     <div className="form-check mt-3">
                       <input
                         className="form-check-input"
@@ -979,20 +1193,37 @@ const totalLocal = Math.max(
                     </div>
 
                     <button
-                      className="btn btn-danger w-100 mt-3"
-                      onClick={handlePlaceOrder}
-                      disabled={loading}
-                      type="button"
-                    >
-                      {loading ? (
-                        <>
-                          <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                          Placing Order...
-                        </>
-                      ) : (
-                        "Place Order"
-                      )}
-                    </button>
+  className="btn btn-danger w-100 mt-3"
+  type="button"
+  onClick={
+    paymentMethod === "stripe"
+      ? handlePlaceOrderStripe
+      : handlePlaceOrderZift
+  }
+  disabled={
+    loading ||
+    (paymentMethod === "stripe" && !clientSecret)
+  }
+>
+  {loading ? (
+    <>
+      <span
+        className="spinner-border spinner-border-sm me-2"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      {paymentMethod === "stripe"
+        ? "Processing payment with Stripe..."
+        : "Placing order with Zift..."}
+    </>
+  ) : (
+    paymentMethod === "stripe"
+      ? "Place Order with Stripe"
+      : "Place Order with Zift"
+  )}
+</button>
+
+
                     <style>{`
           #gpay-container button{
           width:100%;
