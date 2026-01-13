@@ -3,61 +3,47 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { usStates } from "../utils/usStates";
-import { processOrderZift } from "../utils/beQuickApi"; // adjust path if needed
+import { processOrderStripe } from "../utils/beQuickStripeWebPaymentApi";
 import { Modal, Button, Container, Row, Col } from "react-bootstrap";
 import {
   Phone,
   PhoneFill,
   PhoneVibrate,
   PhoneLandscape,
-  Wifi,
-  Tablet,
-  Router
-} from "react-bootstrap-icons"
-// import "bootstrap/dist/css/bootstrap.min.css";
-import GooglePayButton from "../components/GooglePayButton";
-
-import { useRef } from "react";
-
-import { processOrderStripe } from "../utils/beQuickStripeWebPaymentApi";
-
+} from "react-bootstrap-icons";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import StripePaymentForm from "../components/StripePaymentForm";
-//import { stripePromise } from "../utils/stripe";
 
-
-
-export default function CheckoutPage() {
-  const [shippingFee, setShippingFee] = useState(9.99); // default value
-
-  // Initialize Stripe
+// Initialize Stripe
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-const [paymentMethod, setPaymentMethod] = useState("zift"); // zift | stripe
-const [clientSecret, setClientSecret] = useState("");
-const stripeFormRef = useRef(null);
+export default function CheckoutPage() {
+  const [shippingFee, setShippingFee] = useState(9.99);
+  const [clientSecret, setClientSecret] = useState("");
+  const stripeFormRef = useRef(null);
 
   const shippingOptions = [
     { label: "Standard (3-5 Days)", value: 9.99 },
     { label: "Expedited (2-3 Days)", value: 14.99 },
     { label: "Overnight", value: 24.99 },
   ];
+
   const [showThankYou, setShowThankYou] = useState(false);
   const [cart, setCart] = useState([]);
   const [showShipping, setShowShipping] = useState(false);
   const [coupon, setCoupon] = useState("");
   const [loading, setLoading] = useState(false);
   const [discountData, setDiscountData] = useState(null);
-  const [couponMessage, setCouponMessage] = useState(""); // Coupon feedback
+  const [couponMessage, setCouponMessage] = useState("");
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [showTermsPopup, setShowTermsPopup] = useState(false);
-const [selectedShippingOption, setSelectedShippingOption] = useState(shippingOptions[0]);
-  // Validation errors
+  const [selectedShippingOption, setSelectedShippingOption] = useState(shippingOptions[0]);
+
   const [errors, setErrors] = useState({
     billingEmail: "",
     billingPhone: "",
@@ -75,14 +61,6 @@ const [selectedShippingOption, setSelectedShippingOption] = useState(shippingOpt
     shippingCity: "",
     shippingHouseNumber: "",
     shippingZip: "",
-    cardFirstName: "",
-    cardLastName: "",
-    cardState: "",
-    cardCity: "",
-    cardZip: "",
-    cardNumber: "",
-    cardExpiry: "",
-    cardCvc: "",
   });
 
   const billingFieldMeta = {
@@ -126,64 +104,14 @@ const [selectedShippingOption, setSelectedShippingOption] = useState(shippingOpt
     phone: "",
     email: "",
   });
-
-  const [cardAddress, setCardAddress] = useState({
-    firstName: "",
-    lastName: "",
-    street: "",
-    city: "",
-    state: "",
-    zip: "",
-    region: "United States (US)",
-    phone: "",
-  });
-
-  const [cardDetails, setCardDetails] = useState({
-    cardNumber: "",
-    expiry: "",
-    cvc: "",
-  });
-
-  const [sameAsBilling, setSameAsBilling] = useState(false);
-  const handleSameAsBilling = (checked) => {
-    setSameAsBilling(checked);
-    if (checked) {
-      setCardAddress((prev) => ({
-        ...prev,
-        firstName: billingAddress.firstName || "",
-        lastName: billingAddress.lastName || "",
-        street: billingAddress.street || "",
-        city: billingAddress.city || "",
-        state: billingAddress.state || "",
-        zip: billingAddress.zip || "",
-        region: billingAddress.region || "United States (US)",
-        phone: billingAddress.phone || "",
-      }));
-    } else {
-      setCardAddress({
-        firstName: "",
-        lastName: "",
-        street: "",
-        city: "",
-        state: "",
-        zip: "",
-        region: "United States (US)",
-        phone: "",
-      });
-    }
-  };
-
-  // Load cart & check login
+  
   useEffect(() => {
     try {
       const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-      // Normalize legacy or different cart item shapes so checkout can render them
-      console.log(storedCart);
+      console.log("Stored cart:", storedCart);
       const normalized = (storedCart || []).map((item) => {
-        // If already in expected shape, return as-is
         if (item && (item.planId || item.planTitle)) return item;
 
-        // Otherwise, map common product fields into checkout shape
         const numericPrice = (() => {
           if (!item) return 0;
           if (typeof item.price === "number") return item.price;
@@ -206,7 +134,6 @@ const [selectedShippingOption, setSelectedShippingOption] = useState(shippingOpt
             priceQty: item.qty || (item.formData && item.formData.priceQty) || 1,
             price: (item.formData && item.formData.price) || numericPrice,
           },
-          // keep original fields for reference
           _raw: item,
         };
       });
@@ -220,7 +147,9 @@ const [selectedShippingOption, setSelectedShippingOption] = useState(shippingOpt
       setCart([]);
     }
   }, []);
-const hasDeviceItem = cart.some((item) => item.type === "device");
+
+  const hasDeviceItem = cart.some((item) => item.type === "device");
+
   const handleQuantity = (index, delta) => {
     const newCart = [...cart];
     const curQty = Number(newCart[index].formData?.priceQty || 1);
@@ -230,6 +159,7 @@ const hasDeviceItem = cart.some((item) => item.type === "device");
     };
     setCart(newCart);
     localStorage.setItem("cart", JSON.stringify(newCart));
+    
   };
 
   const handleRemove = (index) => {
@@ -237,6 +167,7 @@ const hasDeviceItem = cart.some((item) => item.type === "device");
     newCart.splice(index, 1);
     setCart(newCart);
     localStorage.setItem("cart", JSON.stringify(newCart));
+   
   };
 
   const handleClearCart = () => {
@@ -244,7 +175,6 @@ const hasDeviceItem = cart.some((item) => item.type === "device");
     localStorage.removeItem("cart");
   };
 
-  // ---------------- Coupon Functionality ----------------
   const handleApplyCoupon = async () => {
     const user = JSON.parse(localStorage.getItem("user") || "null");
     if (!user) {
@@ -276,26 +206,13 @@ const hasDeviceItem = cart.some((item) => item.type === "device");
       const data = await response.json();
 
       if (data.success) {
-  setDiscountData(data.data);
-
-  // convert string/number to a proper float
-  let num = parseFloat(data.data.discount);
-
-  // Format:
-  // - Whole numbers -> no decimals
-  // - Decimals -> always 2 digits
-  const cleanDiscount = Number.isInteger(num)
-    ? num.toString()               // 20 -> "20"
-    : num.toFixed(2);              // 50.5 -> "50.50"
-
-  const discountText =
-    data.data.type === "percentage"
-      ? `${cleanDiscount}%`
-      : `${cleanDiscount} flat`;
-
-  setCouponMessage(`Coupon applied! Discount: ${discountText}`);
-}
- else {
+        setDiscountData(data.data);
+        let num = parseFloat(data.data.discount);
+        const cleanDiscount = Number.isInteger(num) ? num.toString() : num.toFixed(2);
+        const discountText =
+          data.data.type === "percentage" ? `${cleanDiscount}%` : `₹${cleanDiscount} flat`;
+        setCouponMessage(`Coupon applied! Discount: ${discountText}`);
+      } else {
         setDiscountData(null);
         setCouponMessage(data.message || "Invalid coupon code");
       }
@@ -313,7 +230,7 @@ const hasDeviceItem = cart.some((item) => item.type === "device");
     setCouponMessage("Coupon cancelled.");
   };
 
-   const subtotal = cart.reduce((acc, item) => {
+  const subtotal = cart.reduce((acc, item) => {
     const price = Number(item.planPrice ?? item.formData?.price ?? 0);
     const qty = Number(item.formData?.priceQty ?? 1);
     return acc + price * qty;
@@ -325,27 +242,15 @@ const hasDeviceItem = cart.some((item) => item.type === "device");
       : Number(discountData.discount)
     : 0;
 
-useEffect(() => {
-  if (hasDeviceItem && selectedShippingOption) {
-    setShippingFee(selectedShippingOption.value);
-  } else {
-    setShippingFee(0);
-  }
-}, [selectedShippingOption, hasDeviceItem]);
+  useEffect(() => {
+    if (hasDeviceItem && selectedShippingOption) {
+      setShippingFee(selectedShippingOption.value);
+    } else {
+      setShippingFee(0);
+    }
+  }, [selectedShippingOption, hasDeviceItem]);
 
-const total = Math.max(subtotal + shippingFee - discountAmount, 0);
-
-  const prepareFinalData = (item) => ({
-    planTitle: item.planTitle,
-    planSlug: item.planSlug,
-    planId: item.planId,
-    planPrice: Number(item.planPrice ?? item.formData?.price ?? 0),
-    planDuration: item.planDuration,
-    lineType: item.lineType,
-    simType: item.simType,
-    formData: item.formData,
-  });
-
+  const total = Math.max(subtotal + shippingFee - discountAmount, 0);
 
   // Create payment intent when total changes
   useEffect(() => {
@@ -380,74 +285,7 @@ const total = Math.max(subtotal + shippingFee - discountAmount, 0);
     }
   }, [total, cart.length]);
 
-  // ---------------- Validation ----------------
   const validateFields = () => {
-    const newErrors = {};
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^[0-9]{7,15}$/; // Basic phone validation
-
-    // Billing
-    newErrors.billingFirstName = billingAddress.firstName ? "" : "First name is required";
-    newErrors.billingLastName = billingAddress.lastName ? "" : "Last name is required";
-    newErrors.billingState = billingAddress.state ? "" : "State is required";
-    newErrors.billingCity = billingAddress.city ? "" : "City is required";
-    newErrors.billingHouseNumber = billingAddress.houseNumber ? "" : "House number is required";
-    newErrors.billingZip = billingAddress.zip ? "" : "ZIP code is required";
-    newErrors.billingEmail = emailRegex.test(billingAddress.email) ? "" : "Invalid email address";
-    newErrors.billingPhone = phoneRegex.test(billingAddress.phone) ? "" : "Invalid phone number";
-
-    // Shipping (if different)
-    if (showShipping) {
-      newErrors.shippingFirstName = shippingAddress.firstName ? "" : "First name is required";
-      newErrors.shippingLastName = shippingAddress.lastName ? "" : "Last name is required";
-      newErrors.shippingState = shippingAddress.state ? "" : "State is required";
-      newErrors.shippingCity = shippingAddress.city ? "" : "City is required";
-      newErrors.shippingHouseNumber = shippingAddress.houseNumber ? "" : "House number is required";
-      newErrors.shippingZip = shippingAddress.zip ? "" : "ZIP code is required";
-      newErrors.shippingEmail = emailRegex.test(shippingAddress.email) ? "" : "Invalid email address";
-      newErrors.shippingPhone = phoneRegex.test(shippingAddress.phone) ? "" : "Invalid phone number";
-    } else {
-      // Ensure shipping errors are empty if not using shipping
-      newErrors.shippingFirstName = "";
-      newErrors.shippingLastName = "";
-      newErrors.shippingState = "";
-      newErrors.shippingCity = "";
-      newErrors.shippingHouseNumber = "";
-      newErrors.shippingZip = "";
-      newErrors.shippingEmail = "";
-      newErrors.shippingPhone = "";
-    }
-
-    // Card
-    newErrors.cardFirstName = cardAddress.firstName ? "" : "First name is required";
-    newErrors.cardLastName = cardAddress.lastName ? "" : "Last name is required";
-    newErrors.cardState = cardAddress.state ? "" : "State is required";
-    newErrors.cardCity = cardAddress.city ? "" : "City is required";
-    newErrors.cardZip = cardAddress.zip ? "" : "ZIP code is required";
-
-    // Card fields validation
-    const cardNumberRegex = /^[0-9]{13,19}$/; // typical card length
-    const expiryRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/; // MM/YY
-    const cvcRegex = /^[0-9]{3,4}$/;
-
-    newErrors.cardNumber = cardNumberRegex.test(cardDetails.cardNumber.replace(/\s+/g, "")) ? "" : "Invalid card number";
-    newErrors.cardExpiry = expiryRegex.test(cardDetails.expiry.trim()) ? "" : "Invalid expiry format (MM/YY)";
-    newErrors.cardCvc = cvcRegex.test(cardDetails.cvc.trim()) ? "" : "Invalid CVC code";
-
-    // Ensure any keys missing in newErrors get an empty string so setErrors shape remains consistent
-    const allKeys = Object.keys(errors);
-    allKeys.forEach((k) => {
-      if (typeof newErrors[k] === "undefined") newErrors[k] = "";
-    });
-
-    setErrors(newErrors);
-
-    // Check if any errors exist (non-empty strings)
-    return !Object.values(newErrors).some((err) => err && err.length);
-  };
-
-  const validateFieldsStripe = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^[0-9]{7,15}$/;
@@ -476,149 +314,13 @@ const total = Math.max(subtotal + shippingFee - discountAmount, 0);
     return !Object.values(newErrors).some((err) => err && err.length);
   };
 
-  const handlePlaceOrderZift = async () => {
-    if (!agreeTerms) {
-      setShowTermsPopup(true);
-      return;
-    }
-    if (!validateFields()) return;
-
-    // Define required fields per section
-    const billingRequired = ["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"];
-    const shippingRequired = ["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"];
-    const cardRequired = ["firstName", "lastName", "state", "city", "zip", "phone"];
-
-    const checkMissing = (data, required, label) => {
-      const missing = required.filter((key) => !data[key]?.toString().trim());
-      if (missing.length > 0) {
-        alert(`Please fill all required ${label} fields:\n${missing.join(", ")}`);
-        return false;
-      }
-      return true;
-    };
-
-    // Validate all sections
-    if (!checkMissing(billingAddress, billingRequired, "Billing Address")) return;
-    if (showShipping && !checkMissing(shippingAddress, shippingRequired, "Shipping Address")) return;
-    if (!checkMissing(cardAddress, cardRequired, "Card Address")) return;
-
-    // Prepare formatted product data
-    const products = cart.map((item) => ({
-      id: item.planId,
-      title: item.planTitle,
-      slug: item.planSlug,
-      duration: item.planDuration,
-      lineType: item.lineType,
-      simType: item.simType,
-      quantity: Number(item.formData?.priceQty ?? 1),
-      pricePerUnit: Number(item.planPrice ?? item.formData?.price ?? 0),
-      totalPrice: Number(item.planPrice ?? item.formData?.price ?? 0) * Number(item.formData?.priceQty ?? 1),
-    }));
-
-    // Calculate totals
-    const subtotalLocal = products.reduce((sum, p) => sum + p.totalPrice, 0);
-    // const shippingFeeLocal = 5;
-    const discountAmountLocal = discountData
-      ? discountData.type === "percentage"
-        ? (subtotalLocal * Number(discountData.discount)) / 100
-        : Number(discountData.discount)
-      : 0;
-      
-const shippingFeeLocal = hasDeviceItem ? selectedShippingOption.value : 0;
-
-const totalLocal = Math.max(
-  subtotalLocal + shippingFeeLocal - discountAmountLocal,
-  0
-);
-  // const [price, setPrice] = useState(totalLocal);
-
-    // Collect full order data
-    const orderData = {
-      billingAddress,
-      shippingAddress: showShipping ? shippingAddress : billingAddress,
-      shippingOption: selectedShippingOption ? { ...selectedShippingOption } : null,
-      cardAddress: { ...cardAddress },
-      cardDetails: { ...cardDetails },
-      coupon: discountData ? { ...discountData } : null,
-      cart,
-      
-      totals: {
-        subtotal: subtotalLocal,
-        shipping: shippingFeeLocal,
-        discount: discountAmountLocal,
-        total: totalLocal,
-      },
-      agreedToTerms: agreeTerms,
-      createdAt: new Date().toISOString(),
-    };
-
-    try {
-      setLoading(true);
-
-      // Call processOrder (your beQuick integration)
-      const response = await processOrderZift(orderData);
-
-      // Log the response for debugging (safe to remove later)
-      console.log("processOrder response:", orderData);
-
-      // Decide payload to send to internal API:
-      // As requested, we will send the entire BeQuick response JSON (if available)
-      const bequickPayload = response && response.data ? response.data : response;
-
-      // Send BeQuick response to internal API to save it
-      try {
-        const bqResponse = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/bqorders", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(bequickPayload),
-        });
-
-        const bqResult = await bqResponse.json();
-        console.log("Internal bqorders response:", bqResult);
-
-        // If backend saved successfully, continue; else log it but still show success if beQuick succeeded
-        if (!bqResponse.ok) {
-          console.warn("Saving BeQuick response to internal API returned non-OK status", bqResult);
-        }
-      } catch (err) {
-        console.error("Failed to save BeQuick response to internal API:", err);
-      }
-
-      // Determine whether to show success:
-      // check response.status OR response.success OR response.data.success (covering common shapes)
-      const success =
-        (response && (response.status === true || response.status === "success" || response.status === 1)) ||
-        (response && response.success === true) ||
-        (response && response.data && (response.data.success === true || response.data.status === "success"));
-
-      if (success) {
-        setShowThankYou(true);
-        setCart([]);
-        localStorage.removeItem("cart");
-      } else {
-        // If not successful, try to surface message (if available)
-        const msg =
-          (response && response.message) ||
-          (response && response.data && response.data.message) ||
-          "Failed to place order. Please check details or try again.";
-        alert(msg);
-      }
-    } catch (error) {
-      console.error("❌ processOrder() failed:", error);
-      alert("Something went wrong while processing your order. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
-const handlePlaceOrderStripe = async () => {
+  const handlePlaceOrder = async () => {
     if (!agreeTerms) {
       setShowTermsPopup(true);
       return;
     }
 
-    if (!validateFieldsStripe()) {
+    if (!validateFields()) {
       alert("Please fill all required fields correctly");
       return;
     }
@@ -669,7 +371,7 @@ const handlePlaceOrderStripe = async () => {
       // Process order with your backend
       const response = await processOrderStripe(orderData);
       const bequickPayload = response && response.data ? response.data : response;
-      console.log("processOrder response:", bequickPayload);
+console.log("processOrder response:", bequickPayload);
       // Save to internal API
       await fetch("https://zmapi.zoikomobile.co.uk/api/v1/bqorders", {
         method: "POST",
@@ -689,17 +391,12 @@ const handlePlaceOrderStripe = async () => {
     }
   };
 
-
-
   const formatDiscount = (value) => {
-  const num = parseFloat(value);
+    const num = parseFloat(value);
+    return Number.isInteger(num) ? num.toString() : num.toFixed(2);
+  };
 
-  // Whole number → no decimals
-  // Decimal → always 2 digits
-  return Number.isInteger(num) ? num.toString() : num.toFixed(2);
-};
-
-const appearance = {
+  const appearance = {
     theme: "stripe",
     variables: {
       colorPrimary: "#dc3545",
@@ -708,88 +405,58 @@ const appearance = {
 
   return (
     <>
-      {/* <TopHeader /> */}
       <Header />
       <HeadBar text="Get Our Best Postpaid Mobile Plans & Pay Only for Every Need!" />
 
       <div className="container my-5">
         {cart.length === 0 ? (
           <div className="d-flex flex-column justify-content-center align-items-center text-center" style={{ minHeight: "60vh" }}>
-            <img src="/img/empty-cart.png" alt="Empty Cart" style={{ width: "180px", opacity: 0.8 }} onError={(e) => (e.target.style.display = "none")} />
+            <img src="/img/empty-cart.png" alt="Empty Cart" style={{ width: "180px", opacity: 0.8 }} />
             <h3 className="mt-3 text-secondary">Your cart is empty</h3>
             <p className="text-muted">Looks like you haven't added anything to your cart yet.</p>
-             
-    <Container className="py-4">
-      <Row className="g-3">
-        <Col md={3} sm={6} xs={12}>
-          <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white"
-            style={{ background: "#DF1E5A" }} href="/prepaid-plans">
-            <Phone className="me-2" />
-            Prepaid plans
-          </Button>
-        </Col>
-
-        <Col md={3} sm={6} xs={12}>
-          <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white"
-            style={{ background: "#DF1E5A" }} href="/postpaid-plans">
-            <PhoneFill className="me-2" />
-            Postpaid plans
-          </Button>
-        </Col>
-
-        <Col md={3} sm={6} xs={12}>
-          <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white"
-            style={{ background: "#DF1E5A" }} href="/business-deals">
-            <PhoneVibrate className="me-2" />
-            Business Deals
-          </Button>
-        </Col>
-
-        <Col md={3} sm={6} xs={12}>
-          <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white"
-            style={{ background: "#DF1E5A" }} href="/travel-plans">
-            <PhoneLandscape className="me-2" />
-            Travel Plans
-          </Button>
-        </Col>
-
-        
-      </Row>
-    </Container>
-
+            <Container className="py-4">
+              <Row className="g-3">
+                <Col md={3} sm={6} xs={12}>
+                  <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white" style={{ background: "#DF1E5A" }} href="/prepaid-plans">
+                    <Phone className="me-2" />Prepaid plans
+                  </Button>
+                </Col>
+                <Col md={3} sm={6} xs={12}>
+                  <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white" style={{ background: "#DF1E5A" }} href="/postpaid-plans">
+                    <PhoneFill className="me-2" />Postpaid plans
+                  </Button>
+                </Col>
+                <Col md={3} sm={6} xs={12}>
+                  <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white" style={{ background: "#DF1E5A" }} href="/business-deals">
+                    <PhoneVibrate className="me-2" />Business Deals
+                  </Button>
+                </Col>
+                <Col md={3} sm={6} xs={12}>
+                  <Button className="w-100 py-3 fw-semibold rounded-3 border-0 text-white" style={{ background: "#DF1E5A" }} href="/travel-plans">
+                    <PhoneLandscape className="me-2" />Travel Plans
+                  </Button>
+                </Col>
+              </Row>
+            </Container>
           </div>
         ) : (
           <>
-          <style>{`
-          // .btn-outline-red{
-          // border:1px solid #df1e5b8d;
-          // coloer:#DF1E5A;
-          // }
-          .btn-red{
-            color:#fff;
-            background-color: #dc3545;
-            }
-            .btn-red:hover{
-            color:#fff;
-            background-color: #dc3545;
-            }
-            .form-check-input:checked {
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
-          `}</style>
+            <style>{`
+              .btn-red { color: #fff; background-color: #dc3545; }
+              .btn-red:hover { color: #fff; background-color: #dc3545; }
+              .form-check-input:checked { background-color: #dc3545; border-color: #dc3545; }
+            `}</style>
+
             <div className="d-flex justify-content-between align-items-center mb-4">
               <h3 className="text-danger">
                 Checkout <small className="text-muted">Connecting Every Possibility with Zoiko Mobile!</small>
               </h3>
               <div>
                 <button className="btn btn-danger me-2" onClick={handleClearCart} disabled={loading}>Clear Cart</button>
-                {/* <a href="/" className="btn btn-outline-red">+ Continue Shopping</a> */}
               </div>
             </div>
 
             <div className="row">
-              {/* Left Side - Cart & Form */}
               <div className="col-md-7 mb-4">
                 {cart.map((item, idx) => (
                   <div className="card mb-3" key={idx}>
@@ -802,9 +469,7 @@ const appearance = {
                         <button className="btn btn-sm btn-outline-danger" onClick={() => handleRemove(idx)} disabled={loading}>Remove</button>
                       </div>
                       <div className="d-flex align-items-center justify-content-between mt-3">
-                        <span className="fw-bold">
-                          ${(Number(item.planPrice ?? item.formData?.price ?? 0)).toFixed(2)} / {item.planDuration}
-                        </span>
+                        <span className="fw-bold">${(Number(item.planPrice ?? item.formData?.price ?? 0)).toFixed(2)} / {item.planDuration}</span>
                         <div>
                           <button className="btn btn-outline-secondary btn-sm" onClick={() => handleQuantity(idx, -1)} disabled={loading}>-</button>
                           <span className="mx-2">{item.formData?.priceQty ?? 1}</span>
@@ -820,91 +485,47 @@ const appearance = {
                   <div className="card-body">
                     <h5 className="card-title">Have a Coupon?</h5>
                     <div className="input-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter coupon code"
-                        value={coupon}
-                        onChange={(e) => setCoupon(e.target.value)}
-                        disabled={loading}
-                      />
-                      <button className="btn btn-red" onClick={handleApplyCoupon} disabled={loading}>
-                        {loading ? "Applying..." : "Apply Coupon"}
-                      </button>
-                      {discountData && (
-                        <button className="btn btn-outline-danger ms-2" onClick={handleCancelCoupon} disabled={loading}>
-                          Cancel Coupon
-                        </button>
-                      )}
+                      <input type="text" className="form-control" placeholder="Enter coupon code" value={coupon} onChange={(e) => setCoupon(e.target.value)} disabled={loading} />
+                      <button className="btn btn-red" onClick={handleApplyCoupon} disabled={loading}>{loading ? "Applying..." : "Apply Coupon"}</button>
+                      {discountData && <button className="btn btn-outline-danger ms-2" onClick={handleCancelCoupon} disabled={loading}>Cancel Coupon</button>}
                     </div>
                     {couponMessage && <p className={`mt-2 ${discountData ? "text-success" : "text-danger"}`}>{couponMessage}</p>}
-                    {!isLoggedIn && <p className="text-danger mt-2 small">You need to login to apply coupon.</p>}
                   </div>
                 </div>
 
                 {/* Billing Form */}
                 <div className="card mb-4">
                   <div className="card-body">
-                    <div className="card mb-4">
-                      <div className="card-body">
-                        <h5 className="fw-bold mb-3">Service/Billing Details</h5>
-                        <div className="row g-3">
-                          {Object.keys(billingAddress).map((key, i) => {
-                            const meta = billingFieldMeta[key] || {};
-                            const errorKey = `billing${key.charAt(0).toUpperCase() + key.slice(1)}`;
-                            return (
-                              <div className="col-md-6" key={i}>
-                                <label className="form-label fw-semibold">
-                                  {meta.label || key.replace(/([A-Z])/g, " $1")}
-                                  {["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"].includes(key) && (
-                                    <span className="text-danger ms-1">*</span>
-                                  )}
-                                </label>
-
-                                {key === "state" ? (
-                                  <select
-                                    className={`form-select ${errors[errorKey] ? "is-invalid" : ""}`}
-                                    value={billingAddress.state}
-                                    onChange={(e) => setBillingAddress({ ...billingAddress, state: e.target.value })}
-                                    disabled={loading}
-                                  >
-                                    <option value="">Select state</option>
-                                    {usStates.map((s) => (
-                                      <option key={s.code} value={s.code}>
-                                        {s.name}
-                                      </option>
-                                    ))}
-                                  </select>
-                                ) : (
-                                  <input
-                                    type="text"
-                                    className={`form-control ${errors[errorKey] ? "is-invalid" : ""}`}
-                                    placeholder={meta.placeholder || `Enter ${key}`}
-                                    value={billingAddress[key]}
-                                    disabled={meta.disabled || loading}
-                                    onChange={(e) => setBillingAddress({ ...billingAddress, [key]: e.target.value })}
-                                  />
-                                )}
-                                {errors[errorKey] && <div className="text-danger small mt-1">{errors[errorKey]}</div>}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
+                    <h5 className="fw-bold mb-3">Service/Billing Details</h5>
+                    <div className="row g-3">
+                      {Object.keys(billingAddress).map((key, i) => {
+                        const meta = billingFieldMeta[key] || {};
+                        const errorKey = `billing${key.charAt(0).toUpperCase() + key.slice(1)}`;
+                        return (
+                          <div className="col-md-6" key={i}>
+                            <label className="form-label fw-semibold">
+                              {meta.label || key.replace(/([A-Z])/g, " $1")}
+                              {["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"].includes(key) && <span className="text-danger ms-1">*</span>}
+                            </label>
+                            {key === "state" ? (
+                              <select className={`form-select ${errors[errorKey] ? "is-invalid" : ""}`} value={billingAddress.state} onChange={(e) => setBillingAddress({ ...billingAddress, state: e.target.value })} disabled={loading}>
+                                <option value="">Select state</option>
+                                {usStates.map((s) => (
+                                  <option key={s.code} value={s.code}>{s.name}</option>
+                                ))}
+                              </select>
+                            ) : (
+                              <input type="text" className={`form-control ${errors[errorKey] ? "is-invalid" : ""}`} placeholder={meta.placeholder || `Enter ${key}`} value={billingAddress[key]} disabled={meta.disabled || loading} onChange={(e) => setBillingAddress({ ...billingAddress, [key]: e.target.value })} />
+                            )}
+                            {errors[errorKey] && <div className="text-danger small mt-1">{errors[errorKey]}</div>}
+                          </div>
+                        );
+                      })}
                     </div>
 
                     <div className="form-check mt-3">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id="shipDifferent"
-                        checked={showShipping}
-                        onChange={(e) => setShowShipping(e.target.checked)}
-                        disabled={loading}
-                      />
-                      <label className="form-check-label" htmlFor="shipDifferent">
-                        Ship to a different address?
-                      </label>
+                      <input className="form-check-input" type="checkbox" id="shipDifferent" checked={showShipping} onChange={(e) => setShowShipping(e.target.checked)} disabled={loading} />
+                      <label className="form-check-label" htmlFor="shipDifferent">Ship to a different address?</label>
                     </div>
 
                     {showShipping && (
@@ -918,34 +539,17 @@ const appearance = {
                               <div className="col-md-6" key={i}>
                                 <label className="form-label fw-semibold">
                                   {meta.label || key.replace(/([A-Z])/g, " $1")}
-                                  {["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"].includes(key) && (
-                                    <span className="text-danger ms-1">*</span>
-                                  )}
+                                  {["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"].includes(key) && <span className="text-danger ms-1">*</span>}
                                 </label>
-
                                 {key === "state" ? (
-                                  <select
-                                    className={`form-select ${errors[errorKey] ? "is-invalid" : ""}`}
-                                    value={shippingAddress.state}
-                                    onChange={(e) => setShippingAddress({ ...shippingAddress, state: e.target.value })}
-                                    disabled={loading}
-                                  >
+                                  <select className={`form-select ${errors[errorKey] ? "is-invalid" : ""}`} value={shippingAddress.state} onChange={(e) => setShippingAddress({ ...shippingAddress, state: e.target.value })} disabled={loading}>
                                     <option value="">Select state</option>
                                     {usStates.map((s) => (
-                                      <option key={s.code} value={s.code}>
-                                        {s.name}
-                                      </option>
+                                      <option key={s.code} value={s.code}>{s.name}</option>
                                     ))}
                                   </select>
                                 ) : (
-                                  <input
-                                    type="text"
-                                    className={`form-control ${errors[errorKey] ? "is-invalid" : ""}`}
-                                    placeholder={meta.placeholder || `Enter ${key}`}
-                                    value={shippingAddress[key]}
-                                    disabled={meta.disabled || loading}
-                                    onChange={(e) => setShippingAddress({ ...shippingAddress, [key]: e.target.value })}
-                                  />
+                                  <input type="text" className={`form-control ${errors[errorKey] ? "is-invalid" : ""}`} placeholder={meta.placeholder || `Enter ${key}`} value={shippingAddress[key]} disabled={meta.disabled || loading} onChange={(e) => setShippingAddress({ ...shippingAddress, [key]: e.target.value })} />
                                 )}
                                 {errors[errorKey] && <div className="text-danger small mt-1">{errors[errorKey]}</div>}
                               </div>
@@ -963,50 +567,33 @@ const appearance = {
                 <div className="card mb-4">
                   <div className="card-body">
                     <h5 className="fw-bold mb-3">Your Order</h5>
-                    {cart.map((item, idx) => {
-                      const data = prepareFinalData(item);
-                      return (
-                        <div key={idx} className="d-flex justify-content-between">
-                          <span>
-                            {data.planTitle} ({data.simType}) x {(item.formData?.priceQty || 1)}
-                          </span>
-                          <span>${(data.planPrice * (item.formData?.priceQty || 1)).toFixed(2)}</span>
-                        </div>
-                      );
-                    })}
-                    
+                    {cart.map((item, idx) => (
+                      <div key={idx} className="d-flex justify-content-between">
+                        <span>{item.planTitle} ({item.simType}) x {item.formData?.priceQty || 1}</span>
+                        <span>${(item.planPrice * (item.formData?.priceQty || 1)).toFixed(2)}</span>
+                      </div>
+                    ))}
+
                     {hasDeviceItem && (
-                      <div className="d-flex justify-content-between align-items-center border mt-3 p-3">
+                      <div className="border mt-3 p-3">
                         <div className="mb-3">
                           <label className="form-label">Shipping Options</label>
-                          <select
-                          className="form-select"
-                          value={selectedShippingOption.value}
-                          onChange={(e) => {
-                          const selected = shippingOptions.find(
-                          (opt) => opt.value === parseFloat(e.target.value)
-                          );
-                          setSelectedShippingOption(selected);
-                          }}
-                          >
-                          {shippingOptions.map((opt, i) => (
-                          <option key={i} value={opt.value}>
-                          {opt.label} — ${opt.value}
-                          </option>
-                          ))}
+                          <select className="form-select" value={selectedShippingOption.value} onChange={(e) => setSelectedShippingOption(shippingOptions.find((opt) => opt.value === parseFloat(e.target.value)))}>
+                            {shippingOptions.map((opt, i) => (
+                              <option key={i} value={opt.value}>{opt.label} — ${opt.value}</option>
+                            ))}
                           </select>
                         </div>
-                        <div className="mb-0 text-end">
+                        <div className="d-flex justify-content-between">
                           <span>Shipping Fee</span>
                           <span>${shippingFee.toFixed(2)}</span>
                         </div>
                       </div>
                     )}
+
                     {discountData && (
                       <div className="d-flex justify-content-between text-success">
-                        <span>
-                          Discount ({discountData.type === "percentage" ? formatDiscount(discountData.discount) + "%" : "$" + formatDiscount(discountData.discount)})
-                        </span>
+                        <span>Discount ({discountData.type === "percentage" ? formatDiscount(discountData.discount) + "%" : "$" + formatDiscount(discountData.discount)})</span>
                         <span>- ${discountAmount.toFixed(2)}</span>
                       </div>
                     )}
@@ -1018,230 +605,38 @@ const appearance = {
                   </div>
                 </div>
 
-                {/* Payment Section */}
+                {/* Stripe Payment */}
                 <div className="card">
                   <div className="card-body">
+                    <h5 className="fw-bold mb-3">Payment Method</h5>
                     
-
-
-<h5 className="fw-bold mb-3">Payment Method</h5>
-
-<div className="form-check mb-2">
-  <input
-    className="form-check-input"
-    type="radio"
-    name="paymentMethod"
-    checked={paymentMethod === "zift"}
-    onChange={() => setPaymentMethod("zift")}
-  />
-  <label className="form-check-label">
-    Pay with Zift
-  </label>
-</div>
-
-<div className="form-check mb-3">
-  <input
-    className="form-check-input"
-    type="radio"
-    name="paymentMethod"
-    checked={paymentMethod === "stripe"}
-    onChange={() => setPaymentMethod("stripe")}
-  />
-  <label className="form-check-label">
-    Credit / Debit Card (Stripe)
-  </label>
-</div>
-
-{paymentMethod === "zift" && (
-  <>
-    {/* YOUR EXISTING CARD NUMBER, EXPIRY, CVC, CARD ADDRESS UI */}
-  
-
-
-
-                    <div className="mb-3">
-                      <label className="form-label">Card Number *</label>
-                      <input
-                        className={`form-control ${errors.cardNumber ? "is-invalid" : ""}`}
-                        type="text"
-                        placeholder="1234 5678 9012 3456"
-                        value={cardDetails.cardNumber}
-                        onChange={(e) => setCardDetails({ ...cardDetails, cardNumber: e.target.value })}
-                        disabled={loading}
-                      />
-                      {errors.cardNumber && <div className="text-danger small mt-1">{errors.cardNumber}</div>}
-                    </div>
-                    <div className="row g-3">
-                      <div className="col-md-6">
-                        <label className="form-label">Expiry Date *</label>
-                        <input
-                          className={`form-control ${errors.cardExpiry ? "is-invalid" : ""}`}
-                          type="text"
-                          placeholder="MM / YY"
-                          value={cardDetails.expiry}
-                          onChange={(e) => setCardDetails({ ...cardDetails, expiry: e.target.value })}
-                          disabled={loading}
+                    {clientSecret && (
+                      <Elements stripe={stripePromise} options={{ clientSecret, appearance }}>
+                        <StripePaymentForm
+                          ref={stripeFormRef}
+                          onPaymentSuccess={() => console.log("Payment successful")}
+                          onPaymentError={(error) => console.error("Payment error:", error)}
                         />
-                        {errors.cardExpiry && <div className="text-danger small mt-1">{errors.cardExpiry}</div>}
-                      </div>
-
-                      <div className="col-md-6">
-                        <label className="form-label">CVC *</label>
-                        <input
-                          className={`form-control ${errors.cardCvc ? "is-invalid" : ""}`}
-                          type="text"
-                          placeholder="CVC"
-                          value={cardDetails.cvc}
-                          onChange={(e) => setCardDetails({ ...cardDetails, cvc: e.target.value })}
-                          disabled={loading}
-                        />
-                        {errors.cardCvc && <div className="text-danger small mt-1">{errors.cardCvc}</div>}
-                      </div>
-                    </div>
-
-                    <div className="card mt-4">
-                      <div className="card-body">
-                        <h5 className="fw-bold mb-3">Credit Card Address</h5>
-
-                        <div className="form-check mb-3">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="sameAsBilling"
-                            checked={sameAsBilling}
-                            onChange={(e) => handleSameAsBilling(e.target.checked)}
-                            disabled={loading}
-                          />
-                          <label className="form-check-label" htmlFor="sameAsBilling">
-                            Same as Service/Billing Address
-                          </label>
-                        </div>
-
-                        <div className="row g-3">
-                          {Object.keys(cardAddress).map((key, i) => {
-                            const meta = billingFieldMeta[key] || {};
-                            const errorKey = `card${key.charAt(0).toUpperCase() + key.slice(1)}`;
-                            return (
-                              <div className="col-md-6" key={i}>
-                                <label className="form-label fw-semibold">
-                                  {meta.label || key.replace(/([A-Z])/g, " $1")}
-                                  {["firstName", "lastName", "state", "city", "zip"].includes(key) && (
-                                    <span className="text-danger ms-1">*</span>
-                                  )}
-                                </label>
-
-                                {key === "state" ? (
-                                  <select
-                                    className={`form-select ${errors[errorKey] ? "is-invalid" : ""}`}
-                                    value={cardAddress.state}
-                                    onChange={(e) => setCardAddress({ ...cardAddress, state: e.target.value })}
-                                    disabled={loading}
-                                  >
-                                    <option value="">Select state</option>
-                                    {usStates.map((s) => (
-                                      <option key={s.code} value={s.code}>
-                                        {s.name}
-                                      </option>
-                                    ))}
-                                  </select>
-                                ) : (
-                                  <input
-                                    type="text"
-                                    className={`form-control ${errors[errorKey] ? "is-invalid" : ""}`}
-                                    placeholder={meta.placeholder || `Enter ${key}`}
-                                    value={cardAddress[key]}
-                                    disabled={meta.disabled || loading}
-                                    onChange={(e) => setCardAddress({ ...cardAddress, [key]: e.target.value })}
-                                  />
-                                )}
-                                {errors[errorKey] && <div className="text-danger small mt-1">{errors[errorKey]}</div>}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-
-</>
-)}
-
-{paymentMethod === "stripe" && clientSecret && (
-  <Elements stripe={stripePromise} options={{ clientSecret, appearance }}>
-    <StripePaymentForm
-      ref={stripeFormRef}
-      onPaymentSuccess={() => console.log("Payment successful")}
-      onPaymentError={(error) => console.error("Payment error:", error)}
-    />
-  </Elements>
-)}
-
-
+                      </Elements>
+                    )}
 
                     <div className="form-check mt-3">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id="terms"
-                        checked={agreeTerms}
-                        onChange={(e) => setAgreeTerms(e.target.checked)}
-                        disabled={loading}
-                      />
-
+                      <input className="form-check-input" type="checkbox" id="terms" checked={agreeTerms} onChange={(e) => setAgreeTerms(e.target.checked)} disabled={loading} />
                       <label className="form-check-label" htmlFor="terms">
                         I have read and agree to the website <a href="/terms-and-conditions">terms and conditions</a>.
                       </label>
                     </div>
 
-                    <button
-  className="btn btn-danger w-100 mt-3"
-  type="button"
-  onClick={
-    paymentMethod === "stripe"
-      ? handlePlaceOrderStripe
-      : handlePlaceOrderZift
-  }
-  disabled={
-    loading ||
-    (paymentMethod === "stripe" && !clientSecret)
-  }
->
-  {loading ? (
-    <>
-      <span
-        className="spinner-border spinner-border-sm me-2"
-        role="status"
-        aria-hidden="true"
-      ></span>
-      {paymentMethod === "stripe"
-        ? "Processing payment with Stripe..."
-        : "Placing order with Zift..."}
-    </>
-  ) : (
-    paymentMethod === "stripe"
-      ? "Place Order with Stripe"
-      : "Place Order with Zift"
-  )}
-</button>
-
-
-                    <style>{`
-          #gpay-container button{
-          width:100%;
-          }
-          `}</style>
-                    
-<div style={{
-  textAlign:"center",
-}}>
-      {/* <h2>OR</h2> */}
-
-      {/* Google Pay Button */}
-      {/* <GooglePayButton amount={total} style={{width:"100%"}}/> */}
-
-    </div>
-
-
-
+                    <button className="btn btn-danger w-100 mt-3" onClick={handlePlaceOrder} disabled={loading || !clientSecret} type="button">
+                      {loading ? (
+                        <>
+                          <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                          Processing Order...
+                        </>
+                      ) : (
+                        "Place Order"
+                      )}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -1251,6 +646,8 @@ const appearance = {
       </div>
 
       <Footer />
+
+    
 
       {/* Login Required Popup */}
       {showLoginPopup && (
