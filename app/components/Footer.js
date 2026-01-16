@@ -195,13 +195,13 @@ const Footer = () => {
             <Col md={4} sm={12} className="mb-4">
                 <h6 className="fw-bold">Head Office (Austin, TX)</h6>
                 <p className="mb-1">5900 Balcones Drive, #24685<br />Austin, TX 78731</p>
-                <p className="mb-1">📞 1-800-477-1477</p>
+                <p className="mb-1">📞 800-988-8116</p>
                 <p>✉ info@zoikomobile.com</p>
 
                 <div className="mt-4">
                     <h6 className="fw-bold">Washington DC Office</h6>
                     <p className="mb-1">1717 N Street NW, Suite 1<br />Washington, DC 20036</p>
-                    <p className="mb-1">📞 1-800-477-1477</p>
+                    <p className="mb-1">📞 800-988-8116</p>
                     <p>✉ info@zoikomobile.com</p>
                 </div>
             </Col>
@@ -209,7 +209,7 @@ const Footer = () => {
             <Col md={4} sm={12} className="mb-4">
                 <h6 className="fw-bold">California Office (Sacramento, CA)</h6>
                 <p className="mb-1">1401 21st Street, Suite R<br />Sacramento, CA 95811</p>
-                <p className="mb-1">📞 1-800-477-1477</p>
+                <p className="mb-1">📞 800-988-8116</p>
                 <p>✉ info@zoikomobile.com</p>
 
                 <div className="mt-4">
@@ -229,7 +229,7 @@ const Footer = () => {
                 <div className="mt-4">
                     <h6 className="fw-bold">Florida Office (Orlando, FL)</h6>
                     <p className="mb-1">12386 State Road 535, #302<br />Orlando, FL 32836</p>
-                    <p className="mb-1">📞 1-800-477-1477</p>
+                    <p className="mb-1">📞 800-988-8116</p>
                     <p>✉ info@zoikomobile.com</p>
                 </div>
             </Col>
