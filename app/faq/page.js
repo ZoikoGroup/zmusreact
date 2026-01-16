@@ -8,7 +8,7 @@ export default function FaqPage() {
     return (
         <>
         <Header />
-        <HeadBar text={<>Got Questions? Zoiko&apos;s Got Answers!</>} />
+        <HeadBar text={<>Got Questions? Zoikos Got Answers!</>} />
         <Container fluid className="p-0 bglite">
             <Container className="py-4">
                 <Accordion>
@@ -37,8 +37,8 @@ export default function FaqPage() {
                         <AccordionBody>Zoiko Mobile is available nationwide! We provide coverage in most areas, so you can enjoy reliable service no matter where you are.</AccordionBody>
                     </AccordionItem>
                     <AccordionItem eventKey="6">
-                        <AccordionHeader>What is the meaning of Zoiko Mobile&apos;s tagline, &qout;Connecting Every Possibility&quot;?</AccordionHeader>
-                        <AccordionBody>&quot;Connecting Every Possibility&quot; reflects our mission to offer affordable and innovative mobile technology that helps you stay connected to what matters most, whether that&apos;s family, work, or your passions.</AccordionBody>
+                        <AccordionHeader>What is the meaning of Zoiko Mobiles tagline, Connecting Every Possibility?</AccordionHeader>
+                        <AccordionBody>Connecting Every Possibility reflects our mission to offer affordable and innovative mobile technology that helps you stay connected to what matters most, whether thats family, work, or your passions.</AccordionBody>
                     </AccordionItem>
                     <AccordionItem eventKey="7">
                         <AccordionHeader>How do I activate my Zoiko Mobile SIM card?</AccordionHeader>
@@ -46,7 +46,7 @@ export default function FaqPage() {
                     </AccordionItem>
                     <AccordionItem eventKey="8">
                         <AccordionHeader>What should I do if I need help or support?</AccordionHeader>
-                        <AccordionBody>If you need assistance, our customer support team is here to help! You can reach us via phone, email, or live chat on our website. We&apos;re committed to providing excellent service and support to all our customers.</AccordionBody>
+                        <AccordionBody>If you need assistance, our customer support team is here to help! You can reach us via phone, email, or live chat on our website. Were committed to providing excellent service and support to all our customers.</AccordionBody>
                     </AccordionItem>
                     <AccordionItem eventKey="9">
                         <AccordionHeader>Are there any special discounts or promotions available?</AccordionHeader>
@@ -66,7 +66,7 @@ export default function FaqPage() {
                     </AccordionItem>
                     <AccordionItem eventKey="13">
                         <AccordionHeader>What is your return policy?</AccordionHeader>
-                        <AccordionBody>We have a 30-day return policy for unused SIM cards and devices. If you&apos;re not satisfied with your purchase, please contact our customer support team to initiate a return and receive a refund.</AccordionBody>
+                        <AccordionBody>We have a 30-day return policy for unused SIM cards and devices. If youre not satisfied with your purchase, please contact our customer support team to initiate a return and receive a refund.</AccordionBody>
                     </AccordionItem>
                     <AccordionItem eventKey="14">
                         <AccordionHeader>How can I stay updated on Zoiko Mobile news and offers?</AccordionHeader>
@@ -86,7 +86,7 @@ export default function FaqPage() {
                     </AccordionItem>
                     <AccordionItem eventKey="18">
                         <AccordionHeader>How do I contact Zoiko Mobile customer support?</AccordionHeader>
-                        <AccordionBody>You can contact our customer support team via phone, email, or live chat on our website. We&apos;re here to assist you with any questions or issues you may have.</AccordionBody>
+                        <AccordionBody>You can contact our customer support team via phone, email, or live chat on our website. Were here to assist you with any questions or issues you may have.</AccordionBody>
                     </AccordionItem>
                     <AccordionItem eventKey="19">
                         <AccordionHeader>What should I do if I lose my phone or it gets stolen?</AccordionHeader>
