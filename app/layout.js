@@ -830,6 +830,7 @@ export default function RootLayout({ children }) {
 
 
         <script async src="https://pay.google.com/gp/p/js/pay.js"></script>
+        <meta name='citylocalpro-verification' content='217056aJQYGBOVSgfu1gUa' />
       </head>
 
       <body className={roboto.className}>

@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import { useEffect, useState } from "react";
 import { usStates } from "../utils/usStates";
-import { processOrderZift } from "../utils/beQuickApi"; // adjust path if needed
+import { processOrderZift } from "../utils/beQuickApi"; // adjust path if
 import { Modal, Button, Container, Row, Col } from "react-bootstrap";
 import {
   Phone,
