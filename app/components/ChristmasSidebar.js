@@ -9,20 +9,13 @@ const ChristmasSidebar = () => {
 
   return (
     <>
-      {/* Sticky Tab */}
+      {/* Sticky Tab 
       <div className="bftouch-tab">
-        {/* <button
-          className="close-btn"
-          onClick={() => setVisible(false)}
-          aria-label="Close Black Friday Tab"
-        >
-          ✕
-        </button> */}
-
         <span className="tab-text">
           <a href="/new-year-phone-plans-deals-2026">New Year Sale</a>
         </span>
       </div>
+      */}
 
       <style>{`
      
