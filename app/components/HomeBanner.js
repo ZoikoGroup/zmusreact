@@ -54,98 +54,98 @@ const HomeBanner = () => {
         <HeadBar text={<>Affordable Plans | No Credit Checks | No Hidden Fees | Unlimited Everything | Reliable Nationwide Coverage</>} />
         <Carousel controls={false} indicators={true}  className="homeBanner">
              
-            <Carousel.Item className="bannerItem christmasBanner">
-                {/* ❄️ Snow Effect Layer */}
-                {/* <div className="snow-container">
-                  <span className="snow"></span>
-                  <span className="snow"></span>
-                  <span className="snow"></span>
-                </div> */}
-                <div className="banner-wrapper py-5">
-                      <Container>
-                        <Row className="align-items-center">
-                          {/* LEFT CONTENT */}
-                          <Col md={7} className="text-white">
-                            <span
-                              className="px-3 py-1 rounded-pill fw-bold"
-                              style={{ background: "#FFD700", color: "#097e2eff", fontSize: "10px" }}
-                            >
-                              NEW YEAR SALE 2026
-                            </span>
-                
-                            <h1 className="fw-bold mt-3">
-                              New Year Phone Plan Deals 2026 <br />
-                              30% OFF for 3 Months + FREE Activation
-                            </h1>
-                
-                            <p className="mt-3">
-                              Holiday Smartphone Sale USA: refurbished iPhones, eSIM discounts,
-                              eco-friendly SIM offers, device protection plans.
-                            </p>
-                
-                            {/* Feature Boxes */}
-                            <Row className="mt-4 featuresBoxes">
-                              <Col xs={12} md={6} className="mb-3">
-                                <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
-                                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> FREE Activation (SIM + eSIM)
-                                </div>
-                              </Col>
-                
-                              <Col xs={12} md={6} className="mb-3">
-                                <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
-                                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> New Year refurbished phone deals USA
-                                </div>
-                              </Col>
-                
-                              <Col xs={12} md={6} className="mb-3">
-                                <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
-                                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> Holiday unlimited data deals
-                                </div>
-                              </Col>
-                
-                              <Col xs={12} md={6} className="mb-3">
-                                <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
-                                  <IoMdCheckmark  style={{ color: "#FFD43B", fontSize: "20px" }} /> Eco-conscious phone plan offers
-                                </div>
-                              </Col>
-                            </Row>
-                
-                            {/* CTA BUTTONS */}
-                            <div className="mt-4 d-flex gap-3 bannerButtons">
-                              <Button variant="light" size="lg" href="/all-plans" >
-                                Shop New Year Deals
-                              </Button>
-                              <Button
-                                variant="outline-light"
-                                size="lg"
-                                style={{ borderWidth: "2px" }}
-                                href="/product-category/refurbished"
-                              >
-                                Shop Refurbished Phones
-                              </Button>
-                            </div>
-                          </Col>
-                
-                          {/* RIGHT IMAGE SECTION */}
-                          <Col md={5} className="text-center">
-                            
-                
-                 {/* RIGHT SIDE — ONLY ONE MOBILE IMAGE */}
-                          
-                            <Image
-                              src="img/phone_image.png"
-                              alt="Phone Image"
-                              width={380}
-                              height={600}
-                              className="img-fluid w-100"
-                            />
-                          
-                            
-                          </Col>
-                        </Row>
-                      </Container>
-                    </div>
-            </Carousel.Item>
+            {/*
+<Carousel.Item className="bannerItem christmasBanner">
+  
+  <div className="banner-wrapper py-5">
+    <Container>
+      <Row className="align-items-center">
+
+        <Col md={7} className="text-white">
+
+          <span
+            className="px-3 py-1 rounded-pill fw-bold"
+            style={{ background: "#FFD700", color: "#097e2eff", fontSize: "10px" }}
+          >
+            NEW YEAR SALE 2026
+          </span>
+
+          <h1 className="fw-bold mt-3">
+            New Year Phone Plan Deals 2026 <br />
+            30% OFF for 3 Months + FREE Activation
+          </h1>
+
+          <p className="mt-3">
+            Holiday Smartphone Sale USA: refurbished iPhones, eSIM discounts,
+            eco-friendly SIM offers, device protection plans.
+          </p>
+
+          <Row className="mt-4 featuresBoxes">
+
+            <Col xs={12} md={6} className="mb-3">
+              <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
+                <IoMdCheckmark style={{ color: "#FFD43B", fontSize: "20px" }} />
+                FREE Activation (SIM + eSIM)
+              </div>
+            </Col>
+
+            <Col xs={12} md={6} className="mb-3">
+              <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
+                <IoMdCheckmark style={{ color: "#FFD43B", fontSize: "20px" }} />
+                New Year refurbished phone deals USA
+              </div>
+            </Col>
+
+            <Col xs={12} md={6} className="mb-3">
+              <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
+                <IoMdCheckmark style={{ color: "#FFD43B", fontSize: "20px" }} />
+                Holiday unlimited data deals
+              </div>
+            </Col>
+
+            <Col xs={12} md={6} className="mb-3">
+              <div className="p-3 rounded text-white" style={{ background: "#c33838ab" }}>
+                <IoMdCheckmark style={{ color: "#FFD43B", fontSize: "20px" }} />
+                Eco-conscious phone plan offers
+              </div>
+            </Col>
+
+          </Row>
+
+          <div className="mt-4 d-flex gap-3 bannerButtons">
+            <Button variant="light" size="lg" href="/all-plans">
+              Shop New Year Deals
+            </Button>
+
+            <Button
+              variant="outline-light"
+              size="lg"
+              style={{ borderWidth: "2px" }}
+              href="/product-category/refurbished"
+            >
+              Shop Refurbished Phones
+            </Button>
+          </div>
+
+        </Col>
+
+        <Col md={5} className="text-center">
+          <Image
+            src="img/phone_image.png"
+            alt="Phone Image"
+            width={380}
+            height={600}
+            className="img-fluid w-100"
+          />
+        </Col>
+
+      </Row>
+    </Container>
+  </div>
+
+</Carousel.Item>
+*/}
+
            
 
             <Carousel.Item className="bannerItem banner1">
