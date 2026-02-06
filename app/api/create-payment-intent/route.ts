@@ -10,16 +10,13 @@ export async function POST(req: Request) {
     const { amount, currency = "usd" } = await req.json();
 
     if (!amount || amount < 50) {
-      return NextResponse.json(
-        { error: "Invalid amount" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency,
-      automatic_payment_methods: { enabled: true },
+      payment_method_types: ["card"], // safest
     });
 
     return NextResponse.json({
