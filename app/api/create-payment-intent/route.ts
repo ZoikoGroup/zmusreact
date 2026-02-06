@@ -3,15 +3,12 @@ import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-08-27.basil",
-});
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: Request) {
   try {
     const { amount, currency = "usd" } = await req.json();
 
-    // 🔐 Always validate on server
     if (!amount || amount < 50) {
       return NextResponse.json(
         { error: "Invalid amount" },
@@ -20,11 +17,9 @@ export async function POST(req: Request) {
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount, // ← dynamic amount in cents
+      amount,
       currency,
-      automatic_payment_methods: {
-        enabled: true,
-      },
+      automatic_payment_methods: { enabled: true },
     });
 
     return NextResponse.json({
@@ -32,6 +27,7 @@ export async function POST(req: Request) {
     });
   } catch (err: any) {
     console.error("Stripe error:", err);
+
     return NextResponse.json(
       { error: err.message },
       { status: 500 }
