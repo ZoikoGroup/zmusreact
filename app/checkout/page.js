@@ -30,7 +30,7 @@ export default function CheckoutPage() {
     { label: "Expedited (2-3 Days)", value: 14.99 },
     { label: "Overnight", value: 24.99 },
   ];
-
+  const ACTIVATION_FEE_PER_LINE = 13.99;
   const [showThankYou, setShowThankYou] = useState(false);
   const [cart, setCart] = useState([]);
   const [showShipping, setShowShipping] = useState(false);
@@ -236,6 +236,24 @@ export default function CheckoutPage() {
     return acc + price * qty;
   }, 0);
 
+
+  // Calculate activation fees for prepaid plans
+  const totalActivationFees = cart.reduce((acc, item) => {
+    if (item.planType === "prepaid-plans") {
+      const qty = Number(item.formData?.priceQty ?? 1);
+      return acc + (ACTIVATION_FEE_PER_LINE * qty);
+    }
+    return acc;
+  }, 0);
+
+  // Count prepaid lines for display
+  const prepaidLineCount = cart.reduce((acc, item) => {
+    if (item.planType === "prepaid-plans") {
+      return acc + Number(item.formData?.priceQty ?? 1);
+    }
+    return acc;
+  }, 0);
+
   const discountAmount = discountData
     ? discountData.type === "percentage"
       ? (subtotal * Number(discountData.discount)) / 100
@@ -250,7 +268,7 @@ export default function CheckoutPage() {
     }
   }, [selectedShippingOption, hasDeviceItem]);
 
-  const total = Math.max(subtotal + shippingFee - discountAmount, 0);
+  const total = Math.max(subtotal + shippingFee + totalActivationFees - discountAmount, 0);
 
   // Create payment intent when total changes
   useEffect(() => {
@@ -266,6 +284,7 @@ export default function CheckoutPage() {
               metadata: {
                 cartItems: cart.length,
                 subtotal: subtotal.toFixed(2),
+                activationFees: totalActivationFees.toFixed(2),
                 shipping: shippingFee.toFixed(2),
                 discount: discountAmount.toFixed(2),
               },
@@ -359,6 +378,7 @@ export default function CheckoutPage() {
         cart,
         totals: {
           subtotal,
+          activationFees: totalActivationFees,
           shipping: shippingFee,
           discount: discountAmount,
           total,
@@ -574,6 +594,18 @@ console.log("processOrder response:", bequickPayload);
                       </div>
                     ))}
 
+{/* Activation Fees */}
+                    {totalActivationFees > 0 && (
+                      <div className="d-flex justify-content-between text-info mt-2">
+                        <span>
+                          Activation Fees
+                          <small className="d-block text-muted">
+                            {prepaidLineCount} prepaid line{prepaidLineCount > 1 ? 's' : ''} × ${ACTIVATION_FEE_PER_LINE.toFixed(2)}
+                          </small>
+                        </span>
+                        <span>${totalActivationFees.toFixed(2)}</span>
+                      </div>
+                    )}
                     {hasDeviceItem && (
                       <div className="border mt-3 p-3">
                         <div className="mb-3">
