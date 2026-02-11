@@ -25,7 +25,7 @@ const PostalWorkersForm = () => {
   const [formData, setFormData] = useState({
     fname: "",
     email: "",
-    dob: "",
+    dob: null,
     phone: "",
     statusproof: "",
     plan: "",
@@ -35,6 +35,12 @@ const PostalWorkersForm = () => {
     familyFriends: [{ famname: "", famemail: "" }], // ✅ Initialize properly
   });
 
+  const handleDateChange = (date) => {
+     setFormData({ ...formData, dob: date });
+     if (date && errors.dob) {
+       setErrors({ ...errors, dob: "" });
+     }
+   };
   // Fetch all plans
   useEffect(() => {
     const fetchPlans = async () => {
@@ -151,11 +157,17 @@ const handleSubmit = async (e) => {
   if (!validate()) return;
 
   try {
+
+    const formattedDob = formData.dob 
+      ? formData.dob.toISOString().split("T")[0] 
+      : "";
+
+
     // Build JSON data exactly like your Postman body
     const jsonData = {
       fname: formData.fname,
       email: formData.email,
-      dob: formData.dob,
+      dob: formattedDob,
       phone: formData.phone,
       statusproof: formData.statusproof?.name || "",
       plan: formData.plan,
@@ -427,17 +439,22 @@ const handleSubmit = async (e) => {
                 <FormLabel htmlFor="yos">Date of Birth *</FormLabel>
 
                 <DatePicker
-                                    selected={formData.yos ? new Date(formData.yos) : null}
-                                    onChange={(date) =>
-                                        setFormData({ ...formData, yos: date.toISOString().split("T")[0] })
-                                    }
+                                    selected={formData.dob}
+                                    onChange={handleDateChange}
                                     
                                     name="dob"
                                     dateFormat="MM/dd/yyyy"
                                     placeholderText="MM/DD/YYYY"
-                                    className="form-control"
+                                    className={`form-control ${errors.dob ? "is-invalid" : ""}`}
+                                    showMonthDropdown
+                  showYearDropdown
+                  dropdownMode="select"
+                  maxDate={new Date()}
+                  yearDropdownItemNumber={100}
                                     />
-                <div className="form-error">{errors.dob || ""}</div>
+                {errors.dob && (
+                  <div className="invalid-feedback d-block">{errors.dob}</div>
+                )}
               </Col>
             </Row>
 
