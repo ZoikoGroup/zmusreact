@@ -469,7 +469,7 @@ const handleSubmit = async (e) => {
                     value={formData.phone}
                     onChange={handleChange}
                     maxLength={10}
-                    style={{width:"60%"}}
+                    // style={{width:"60%"}}
                   />
            
                 <div className="form-error">
