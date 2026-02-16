@@ -95,29 +95,129 @@ const StudentDiscountForm = () => {
   // ===========================================================
   // (NO CHANGES IN VALIDATE, SUBMIT, STYLING, FIELDS, ETC)
   // ===========================================================
-  const validate = () => {
-    let formErrors = {};
+  
 
-    if (!formData.fname) formErrors.fname = "Your name is required";
-    if (!formData.phone) formErrors.phone = "Phone number is required";
-    if (!formData.school) formErrors.school = "This field is required";
-    if (!formData.yos) formErrors.yos = "Year of study is required";
-    if (!formData.statusproof) formErrors.statusproof = "Upload required";
-    if (!formData.keepnumber) formErrors.keepnumber = "This field is required";
-    if (!formData.plan) formErrors.plan = "This field is required";
-    if (!formData.cat) formErrors.cat = "This field is required";
-    if (!formData.concent) formErrors.concent = "You must agree before submitting";
-    if (!formData.terms) formErrors.terms = "You must accept terms";
+const validate = () => {
+  let formErrors = {};
 
-    if (!formData.email) {
-      formErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      formErrors.email = "Email address is invalid";
+  // =========================
+  // Full Name Validation
+  // =========================
+  if (!formData.fname.trim()) {
+    formErrors.fname = "Full name is required";
+  } else if (formData.fname.trim().length < 3) {
+    formErrors.fname = "Name must be at least 3 characters";
+  } else if (!/^[a-zA-Z\s]+$/.test(formData.fname)) {
+    formErrors.fname = "Name can contain only letters";
+  }
+
+  // =========================
+  // Email Validation
+  // =========================
+  if (!formData.email.trim()) {
+    formErrors.email = "Email is required";
+  } else if (
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)
+  ) {
+    formErrors.email = "Enter valid email address";
+  }
+
+  // =========================
+  // Phone Validation
+  // =========================
+  if (!formData.phone.trim()) {
+    formErrors.phone = "Phone number is required";
+  } else if (!/^[0-9]+$/.test(formData.phone)) {
+    formErrors.phone = "Phone must contain only numbers";
+  } else if (formData.phone.length < 8 || formData.phone.length > 15) {
+    formErrors.phone = "Phone must be between 8 and 15 digits";
+  }
+
+  // =========================
+  // School Validation
+  // =========================
+  if (!formData.school.trim()) {
+    formErrors.school = "School name is required";
+  } else if (formData.school.length < 3) {
+    formErrors.school = "School name too short";
+  }
+
+  // =========================
+  // Year of Study Validation
+  // =========================
+  if (!formData.yos) {
+    formErrors.yos = "Year of study is required";
+  } else {
+    const selectedDate = new Date(formData.yos);
+    const today = new Date();
+
+    if (selectedDate > today) {
+      formErrors.yos = "Future date not allowed";
+    }
+  }
+
+  // =========================
+  // File Validation
+  // =========================
+  if (!formData.statusproof) {
+    formErrors.statusproof = "Student ID is required";
+  } else {
+    const allowedTypes = ["image/jpeg", "image/png", "application/pdf"];
+
+    if (!allowedTypes.includes(formData.statusproof.type)) {
+      formErrors.statusproof =
+        "Only JPG, PNG, or PDF allowed";
     }
 
-    setErrors(formErrors);
-    return Object.keys(formErrors).length === 0;
-  };
+    const maxSize = 2 * 1024 * 1024; // 2MB
+
+    if (formData.statusproof.size > maxSize) {
+      formErrors.statusproof =
+        "File size must be less than 2MB";
+    }
+  }
+
+  // =========================
+  // Keep Number Validation
+  // =========================
+  if (!formData.keepnumber) {
+    formErrors.keepnumber = "Please select option";
+  }
+
+  // =========================
+  // Plan Validation
+  // =========================
+  if (!formData.plan) {
+    formErrors.plan = "Please select plan";
+  }
+
+  // =========================
+  // Category Validation
+  // =========================
+  if (!formData.cat) {
+    formErrors.cat = "Please select category";
+  }
+
+  // =========================
+  // Consent Validation
+  // =========================
+  if (!formData.concent) {
+    formErrors.concent =
+      "You must confirm the information";
+  }
+
+  // =========================
+  // Terms Validation
+  // =========================
+  if (!formData.terms) {
+    formErrors.terms =
+      "You must accept terms and conditions";
+  }
+
+  setErrors(formErrors);
+
+  return Object.keys(formErrors).length === 0;
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();

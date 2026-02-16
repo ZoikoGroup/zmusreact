@@ -57,7 +57,7 @@ const AnimalPartnership = () => {
     });
   };
 
-  const validate = () => {
+  const validateyyy = () => {
     let formErrors = {};
     if (!formData.orgname) formErrors.orgname = "Organization name is required";
     if (!formData.orgtype) formErrors.orgtype = "Organization type is required";
@@ -82,6 +82,120 @@ const AnimalPartnership = () => {
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
   };
+
+  const validate = () => {
+  let formErrors = {};
+
+  // Organization Name
+  if (!formData.orgname || formData.orgname.trim() === "") {
+    formErrors.orgname = "Organization name is required";
+  } else if (formData.orgname.trim().length < 2) {
+    formErrors.orgname = "Organization name must be at least 2 characters";
+  }
+
+  // Organization Type
+  if (!formData.orgtype || formData.orgtype.trim() === "") {
+    formErrors.orgtype = "Organization type is required";
+  }
+
+  // Focus
+  if (!formData.focus || formData.focus.trim() === "") {
+    formErrors.focus = "This field is required";
+  }
+
+  // Website
+  if (!formData.website || formData.website.trim() === "") {
+    formErrors.website = "Website URL is required";
+  } else {
+    const urlPattern =
+      /^(https?:\/\/)?([\w\-])+\.{1}[a-zA-Z]{2,}(\/.*)?$/;
+    if (!urlPattern.test(formData.website.trim())) {
+      formErrors.website = "Enter a valid website URL";
+    }
+  }
+
+  // Street
+  if (!formData.street || formData.street.trim() === "") {
+    formErrors.street = "Street address is required";
+  }
+
+  // City
+  if (!formData.city || formData.city.trim() === "") {
+    formErrors.city = "City is required";
+  }
+
+  // State
+  if (!formData.state || formData.state.trim() === "") {
+    formErrors.state = "State is required";
+  }
+
+  // Zipcode
+  if (!formData.zipcode || formData.zipcode.trim() === "") {
+    formErrors.zipcode = "Zipcode is required";
+  } else if (!/^[0-9]{4,10}$/.test(formData.zipcode.trim())) {
+    formErrors.zipcode = "Enter valid zipcode";
+  }
+
+  // Mission
+  if (!formData.mission || formData.mission.trim() === "") {
+    formErrors.mission = "Mission is required";
+  } else if (formData.mission.trim().length < 10) {
+    formErrors.mission = "Mission must be at least 10 characters";
+  }
+
+  // Contact Name
+  if (!formData.name || formData.name.trim() === "") {
+    formErrors.name = "Name is required";
+  }
+
+  // Role
+  if (!formData.role || formData.role.trim() === "") {
+    formErrors.role = "Role is required";
+  }
+
+  // Phone
+  if (!formData.phone || formData.phone.trim() === "") {
+    formErrors.phone = "Phone number is required";
+  } else if (!/^[0-9]{10,15}$/.test(formData.phone.trim())) {
+    formErrors.phone = "Enter valid phone number";
+  }
+
+  // Email
+  if (!formData.email || formData.email.trim() === "") {
+    formErrors.email = "Email is required";
+  } else {
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(formData.email.trim())) {
+      formErrors.email = "Enter valid email address";
+    }
+  }
+
+  // File upload
+  if (!formData.statusproof) {
+    formErrors.statusproof = "Please upload proof document";
+  } else {
+    const allowedTypes = [
+      "application/pdf",
+      "image/jpeg",
+      "image/png"
+    ];
+
+    if (!allowedTypes.includes(formData.statusproof.type)) {
+      formErrors.statusproof =
+        "Only PDF, JPG, PNG files allowed";
+    }
+
+    if (formData.statusproof.size > 5 * 1024 * 1024) {
+      formErrors.statusproof =
+        "File size must be less than 5MB";
+    }
+  }
+
+  setErrors(formErrors);
+
+  return Object.keys(formErrors).length === 0;
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
