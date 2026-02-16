@@ -44,6 +44,89 @@ a {
   color: #df1e5a !important;
   font-weight: 600;
 }
+
+/* ===== TICKER BAR ===== */
+
+.ticker-wrapper {
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(
+    90deg,
+    #e31b5f 0%,
+    #f0327a 35%,
+    #f25c6b 65%,
+    #ff7a45 100%
+  );
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Optional subtle glow overlay */
+.ticker-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 20% 50%,
+    rgba(255, 255, 255, 0.15),
+    transparent 40%
+  );
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Moving container */
+.ticker {
+  display: flex;
+  width: max-content;
+  animation: scrollTicker 30s linear infinite;
+}
+
+/* Each item */
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 40px;
+  white-space: nowrap;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Icons */
+.ticker-icon {
+  width: 14px;
+  height: 14px;
+  filter: brightness(0) invert(1);
+}
+
+/* Divider */
+.ticker-item::after {
+  content: "|";
+  margin-left: 40px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.ticker-item:last-child::after {
+  content: "";
+}
+
+/* Infinite smooth animation */
+@keyframes scrollTicker {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause on hover (premium effect) */
+/* .ticker-wrapper:hover .ticker {
+  animation-play-state: paused;
+} */
+
 /* .topnav {
   font-size: 14px !important;
   font-weight: 700 !important;
