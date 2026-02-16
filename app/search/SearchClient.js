@@ -138,9 +138,11 @@ console.log(cleanedTerm);
                     >
                     <Card.Title className="text-danger" style={{textDecoration:"unset !important"}}>{item.title || item.name}</Card.Title>
                     </Button>
-                    <Card.Text style={{padding:"1vw",}}>
-                      {item.description || "No description available"}
-                    </Card.Text>
+                    {item.description?.trim() && (
+                      <Card.Text style={{ padding: "1vw" }}>
+                        {item.description}
+                      </Card.Text>
+                    )}
                     <Button
                       variant="link"
                       href={item.url || "#"}
