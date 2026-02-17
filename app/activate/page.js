@@ -13,8 +13,10 @@ import {
   InputGroup,
   OverlayTrigger,
   Tooltip,
+  Modal,
+  Spinner,
 } from "react-bootstrap";
-import { InfoCircle } from "react-bootstrap-icons";
+import { InfoCircle, CheckCircleFill, XCircleFill } from "react-bootstrap-icons";
 
 export default function ActivateSim() {
   const [formData, setFormData] = useState({
@@ -25,24 +27,80 @@ export default function ActivateSim() {
   });
 
   const [validated, setValidated] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // Modal state
+  const [modal, setModal] = useState({
+    show: false,
+    type: null, // "success" | "error"
+    message: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleCloseModal = () => {
+    setModal({ show: false, type: null, message: "" });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
 
     if (form.checkValidity() === false) {
       e.stopPropagation();
-    } else {
-      activateSim(formData);
-      // console.log("Submitted:", formData);
+      setValidated(true);
+      return;
     }
 
     setValidated(true);
+    setLoading(true);
+
+    try {
+      const response = await activateSim(formData);
+
+      if (response?.error) {
+        // Map specific API error messages to user-friendly text
+        const rawError =
+          typeof response.error === "string"
+            ? response.error
+            : JSON.stringify(response.error);
+
+        const friendlyMessage = rawError.includes(
+          "Couldn't find Delivery with"
+        )
+          ? "Invalid Delivery ID. Please check and try again."
+          : "Invalid inputs. Please review your details and try again.";
+
+        setModal({
+          show: true,
+          type: "error",
+          message: friendlyMessage,
+        });
+      } else {
+        // Success
+        setModal({
+          show: true,
+          type: "success",
+          message: "Your Zoiko SIM has been successfully activated! Welcome aboard.",
+        });
+        // Reset form on success
+        setFormData({ iccid: "", deliveriesID: "", trackingNumber: "", imei: "" });
+        setValidated(false);
+      }
+    } catch (error) {
+      setModal({
+        show: true,
+        type: "error",
+        message:
+          error?.message ||
+          "Something went wrong while activating your SIM. Please try again.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -229,21 +287,70 @@ export default function ActivateSim() {
               </Row>
 
               {/* Submit Button */}
+              {/* Submit Button */}
               <div className="text-center">
                 <Button
                   type="submit"
                   variant="danger"
                   size="lg"
                   className="px-5 py-2 fw-semibold"
+                  disabled={loading}
                 >
-                  Activate Your SIM
+                  {loading ? (
+                    <>
+                      <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                        className="me-2"
+                      />
+                      Activating...
+                    </>
+                  ) : (
+                    "Activate Your SIM"
+                  )}
                 </Button>
               </div>
             </Form>
           </Col>
         </Row>
       </Container>
-
+{/* ── Success / Error Modal ── */}
+      <Modal
+        show={modal.show}
+        onHide={handleCloseModal}
+        centered
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton className="border-0 pb-0" />
+        <Modal.Body className="text-center px-5 pb-4">
+          {modal.type === "success" ? (
+            <>
+              <CheckCircleFill className="modal-icon-success mb-3" />
+              <h4 className="modal-title-success mb-3">Activation Successful!</h4>
+              <p className="text-muted">{modal.message}</p>
+            </>
+          ) : (
+            <>
+              <XCircleFill className="modal-icon-error mb-3" />
+              <h4 className="modal-title-error mb-3">Activation Failed</h4>
+              <p className="text-muted">{modal.message}</p>
+            </>
+          )}
+        </Modal.Body>
+        <Modal.Footer className="border-0 justify-content-center pt-0 pb-4">
+          <Button
+            variant={modal.type === "success" ? "success" : "danger"}
+            onClick={handleCloseModal}
+            className="px-5 fw-semibold rounded-pill"
+          >
+            {modal.type === "success" ? "Great, thanks!" : "Try Again"}
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Footer />
     </>
   );
