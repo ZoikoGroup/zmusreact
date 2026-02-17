@@ -352,7 +352,7 @@ const Header = () => {
                 className="personal-dropdown"
               >
                 <div className="personal-menu">
-                  <Nav.Link href="/#" className="plan-card active-plan">
+                  <Nav.Link href="/business-deals" className="plan-card active-plan">
                     <img
                       src="/img/icons/small-business.svg"
                       alt="small business"
@@ -364,7 +364,7 @@ const Header = () => {
                     </div>
                   </Nav.Link>
 
-                  <Nav.Link href="/#" className="plan-card">
+                  <Nav.Link href="/business-deals" className="plan-card">
                     <img
                       src="/img/icons/enterprices.svg"
                       alt="enterprices"
@@ -542,7 +542,7 @@ const Header = () => {
                     </div>
                   </Nav.Link>
 
-                  <Nav.Link href="/#" className="plan-card">
+                  <Nav.Link href="/about" className="plan-card">
                     <img
                       src="/img/icons/leadership.svg"
                       alt="Leadership"
@@ -554,7 +554,7 @@ const Header = () => {
                     </div>
                   </Nav.Link>
 
-                  <Nav.Link href="/#" className="plan-card">
+                  <Nav.Link href="/news" className="plan-card">
                     <img
                       src="/img/icons/press-media.svg"
                       alt="Press & Media"
@@ -565,7 +565,7 @@ const Header = () => {
                       <p>News releases and Info</p>
                     </div>
                   </Nav.Link>
-                  <Nav.Link href="/#" className="plan-card">
+                  <Nav.Link href="/become-partner" className="plan-card">
                     <img
                       src="/img/icons/careers.svg"
                       alt="careers"
