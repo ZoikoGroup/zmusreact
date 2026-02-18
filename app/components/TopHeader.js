@@ -14,10 +14,7 @@ const TopHeader = () => {
             COVERAGE MAP
           </Nav.Link>
 
-          <Nav.Link
-            href="https://ee.co.uk/help/mobile-coverage-checker"
-            target="_blank"
-          >
+          <Nav.Link href="/network-service" target="_blank">
             NETWORK STATUS
           </Nav.Link>
 
