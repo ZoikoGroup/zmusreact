@@ -36,7 +36,7 @@ export default function PostalFaqs () {
                             </AccordionItem>
                             <AccordionItem eventKey="2">
                                 <AccordionHeader>Is there a specific BYOD plan I need to choose?</AccordionHeader>
-                                <AccordionBody>You can select any of our affordable BYOD plans. Pick the one that best suits your needs!<br />For more information, contact us at 800-988-8116 or su*****@zo*********.com. We&apos;re here to help!</AccordionBody>
+                                <AccordionBody>You can select any of our affordable BYOD plans. Pick the one that best suits your needs!<br />For more information, contact us at 800-988-8116 or support@zoikomobile.com. We&apos;re here to help!</AccordionBody>
                             </AccordionItem>
                         </Accordion>
                     </Col>
