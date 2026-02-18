@@ -271,7 +271,7 @@ export default function ActivateSim() {
             }}
           >
             <img
-              src="/img/sim_number.png"
+              src="/img/sim_number1.png"
               alt="SIM Example"
               style={{ width: "120px", borderRadius: "10px" }}
             />
