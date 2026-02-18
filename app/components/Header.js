@@ -358,11 +358,11 @@ const Header = () => {
                   >
                     <img
                       src="/img/icons/small-business.svg"
-                      alt="small business"
+                      alt="small businesses"
                       className="plan-icon"
                     />
                     <div className="plan-text">
-                      <h6>Small Business</h6>
+                      <h6>Small Businesses</h6>
                       <p>2-25 lines . Dedicated Support</p>
                     </div>
                   </Nav.Link>
@@ -370,11 +370,11 @@ const Header = () => {
                   <Nav.Link href="/business-deals" className="plan-card">
                     <img
                       src="/img/icons/enterprices.svg"
-                      alt="enterprices"
+                      alt="Enterprises"
                       className="plan-icon"
                     />
                     <div className="plan-text">
-                      <h6>Enterprices</h6>
+                      <h6>Enterprises</h6>
                       <p>Custom Solutions</p>
                     </div>
                   </Nav.Link>
