@@ -214,17 +214,22 @@ export default function ActivateSim() {
                       IMEI <span className="text-danger">*</span>
                     </Form.Label>
                     <Form.Control
-                      required
-                      type="text"
-                      name="imei"
-                      placeholder="Enter IMEI Number"
-                      value={formData.imei}
-                      onChange={handleChange}
-                      className="form-control rounded fancy-input form-with-fixed-feedback"
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      Please enter your IMEI number.
-                    </Form.Control.Feedback>
+                        required
+                        type="text"
+                        name="imei"
+                        placeholder="Enter IMEI Number"
+                        value={formData.imei}
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/\D/g, "");
+                          setFormData({ ...formData, imei: val });
+                        }}
+                        pattern="\d+"
+                        inputMode="numeric"
+                        className="form-control rounded fancy-input form-with-fixed-feedback"
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        Please enter a valid IMEI number.
+                      </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
 
@@ -246,7 +251,13 @@ export default function ActivateSim() {
         name="iccid"
         placeholder="Enter 19-digit SIM serial number"
         value={formData.iccid}
-        onChange={handleChange}
+        onChange={(e) => {
+    const val = e.target.value.replace(/\D/g, "");
+    setFormData({ ...formData, iccid: val });
+  }}
+  pattern="\d{19}"
+  inputMode="numeric"
+  maxLength={19}
         className="form-control rounded fancy-input form-with-fixed-feedback"
       />
       <OverlayTrigger
@@ -277,7 +288,7 @@ export default function ActivateSim() {
         </InputGroup.Text>
       </OverlayTrigger>
       <Form.Control.Feedback type="invalid">
-        Please enter your SIM serial number (ICCID).
+        Please enter SIM serial number.
       </Form.Control.Feedback>
     </InputGroup>
   </div>
