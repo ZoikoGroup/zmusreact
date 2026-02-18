@@ -352,7 +352,10 @@ const Header = () => {
                 className="personal-dropdown"
               >
                 <div className="personal-menu">
-                  <Nav.Link href="/business-deals" className="plan-card active-plan">
+                  <Nav.Link
+                    href="/business-deals"
+                    className="plan-card active-plan"
+                  >
                     <img
                       src="/img/icons/small-business.svg"
                       alt="small business"
@@ -737,7 +740,7 @@ const Header = () => {
                 <Nav.Link href="#">Store Locator</Nav.Link>
               </Nav>
             </div>
-            <Nav className="ms-auto d-none d-lg-flex align-items-center gap-3">
+            <Nav className="ms-auto d-none d-lg-flex align-items-center auth-section">
               {/* <Nav.Link href="#" onClick={handleShowSearch}><i className="bi bi-search"></i></Nav.Link> */}
 
               <Nav.Link
@@ -775,8 +778,17 @@ const Header = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <Nav.Link href="/login">Login</Nav.Link>
+                <div className="d-flex align-items-center gap-3">
+                  <Nav.Link href="/login" className="signin-link">
+                    Sign In
+                  </Nav.Link>
+
+                  <Nav.Link href="/register" className="signup-btn">
+                    Sign Up
+                  </Nav.Link>
+                </div>
               )}
+
               {/* <CustomLanguageSwitcher /> */}
             </Nav>
           </Navbar.Collapse>
