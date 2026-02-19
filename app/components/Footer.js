@@ -70,10 +70,10 @@ const Footer = () => {
                         <ul>
                             <li><Link href={"/all-plans"}>Mobile Plans</Link></li>
                             <li><Link href={"/byod-plans"}>BYOD</Link></li>
-                            <li><Link href={"https://phones.zoikomobile.com"} target="_blank">New Smart Phones</Link></li>
-                            <li><Link href={"/accessories"}>Accessories</Link></li>
+                            <li><Link href={"https://phones.zoikomobile.com"} target="_blank">New Smart Phones</Link></li>                            
                             {/* <li><Link href={"#"}>Tablets</Link></li> */}
                             <li><Link href={"/product-category/refurbished"}>Refurbished Smartphones</Link></li>
+                            <li><Link href={"/accessories"}>Accessories</Link></li>
                             <li><Link href={"/offer-page"}>Special Offers</Link></li>
                         </ul>
                     </Col>
