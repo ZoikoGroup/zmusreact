@@ -685,7 +685,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <title>Zoiko Mobile</title>
+        <title>Zoiko Mobile - Affordable Prepaid & eSIM Plans in USA</title>
         <Script id="zoiko-breadcrumb-jsonld" type="application/ld+json" strategy="afterInteractive">
 {`{
   "@context": "https://schema.org/",
