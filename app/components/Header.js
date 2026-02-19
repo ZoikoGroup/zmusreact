@@ -629,7 +629,7 @@ const Header = () => {
                 About Us
               </Nav.Link> */}
             </Nav>
-            {/* Mobile-only Explore section */}
+            {/* Mobile-only Explore section -- */}
             <div className="d-lg-none px-3 mt-4 mb-3">
               <h6 className="border-bottom pb-2 text-center text-center">
                 Explore More
