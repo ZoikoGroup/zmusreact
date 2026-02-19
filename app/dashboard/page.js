@@ -711,16 +711,41 @@ const openChat = () => {
                   <div className="alert alert-warning py-2 small mb-3">
                     Need help? Our driver support team is available 24/7
                   </div>
-                  <div className="d-grid gap-2">
-                    <button className="btn btn-outline-success btn-sm"  onClick={openChat}>Live Chat</button>
-                    <button className="btn btn-outline-success btn-sm">Call Support</button>
-                    <button className="btn btn-outline-success btn-sm">Email Help</button>
-                    <button className="btn btn-outline-secondary btn-sm">FAQ</button>
-                  </div>
-                  <div className="d-flex gap-2 mt-3">
-                    <button className="btn btn-success btn-sm">Contact Support</button>
-                    <button className="btn btn-outline-warning btn-sm text-dark">Browse Help Center</button>
-                  </div>
+
+<div className="d-grid gap-2">
+
+  <button
+    className="btn btn-outline-success btn-sm"
+    onClick={openChat}
+  >
+    Live Chat
+  </button>
+
+  <Link href="/customer-service">
+    <button className="btn btn-outline-success btn-sm w-100">
+      Call Support
+    </button>
+  </Link>
+
+  <Link href="/faq">
+    <button className="btn btn-outline-secondary btn-sm w-100">
+      FAQ
+    </button>
+  </Link>
+
+</div>
+
+
+<div className="d-flex gap-2 mt-3">
+
+  <Link href="/contact-us">
+    <button className="btn btn-success btn-sm">
+      Contact Support
+    </button>
+  </Link>
+
+</div>
+
                 </div>
               </div>
             </div>

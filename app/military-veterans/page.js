@@ -121,7 +121,7 @@ const MilitaryVeterans = () => {
                         <p>Extend the benefits to your loved ones. Nominate up to 5 family members or friends to receive a 15% lifetime discount on their bring-your-own-device (BYOD) plans.</p>
                     </div>
                     <div className="protbox">
-                        <Image src="/img/icons/text.png" className="w-25" alt="Text" />
+                        <Image src="/img/icons/text1.png" className="w-25" alt="Text" />
                         <h4 className="txtred pt-2">Unlimited Talk and Text:</h4>
                         <p>Stay connected with unlimited talk and text to standard phone numbers in the United States, Canada, and Mexico. Keep in touch with family or coordinate with fellow service members effortlessly.</p>
                     </div>
