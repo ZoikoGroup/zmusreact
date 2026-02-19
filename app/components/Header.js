@@ -638,7 +638,7 @@ const Header = () => {
                 <Nav.Link href="/top-up-plan">Top-Up</Nav.Link>
                 <Nav.Link href="/byod-plans">BYOD</Nav.Link>
                 <Nav.Link href="/device-protection">Device Protection</Nav.Link>
-                <NavDropdown title="Special Plans">
+                <NavDropdown title="Community Plans">
                   <NavDropdown.Item href="/college-student">
                     College Students
                   </NavDropdown.Item>
