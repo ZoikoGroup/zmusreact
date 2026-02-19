@@ -834,7 +834,7 @@ export default function RootLayout({ children }) {
         "@type": "Organization",
         "name": "Zoiko Mobile",
         "url": "https://zoikomobile.com/",
-        "logo": "https://zoikomobile.com/_next/image?url=%2Fimg%2Fzmuslogo-new.png&w=256&q=75"
+        "logo": "hhttps://zoikomobile.com/img/zmuslogo-new.png"
       }`}
       </script>
 
