@@ -62,15 +62,12 @@ export default function ActivateSim() {
       const response = await activateSim(formData);
 
       if (response?.error) {
-        // Map specific API error messages to user-friendly text
         const rawError =
           typeof response.error === "string"
             ? response.error
             : JSON.stringify(response.error);
 
-        const friendlyMessage = rawError.includes(
-          "Couldn't find Delivery with"
-        )
+        const friendlyMessage = rawError.includes("Couldn't find Delivery with")
           ? "Invalid Delivery ID. Please check and try again."
           : "Invalid inputs. Please review your details and try again.";
 
@@ -80,13 +77,11 @@ export default function ActivateSim() {
           message: friendlyMessage,
         });
       } else {
-        // Success
         setModal({
           show: true,
           type: "success",
           message: "Your Zoiko SIM has been successfully activated! Welcome aboard.",
         });
-        // Reset form on success
         setFormData({ iccid: "", deliveriesID: "", trackingNumber: "", imei: "" });
         setValidated(false);
       }
@@ -112,39 +107,77 @@ export default function ActivateSim() {
           border-radius: 20px !important;
         }
 
-        /* ✅ Keep error messages from shifting layout */
-        .form-group-fixed {
-          position: relative;
-          margin-bottom: 1rem;
+        /* When inside InputGroup, only round left side */
+        .input-group .fancy-input {
+          border-radius: 20px 0 0 20px !important;
         }
 
-        .form-group-fixed .invalid-feedback {
-          position: absolute;
-          bottom: -5px;
-          left: 45px;
-          font-size: 0.85rem;
+        /* Round the right side of the info icon button */
+        .input-group .input-group-text {
+          border-radius: 0 20px 20px 0 !important;
+          border: 1px solid black;
+          background: #f8f9fa;
+        }
+
+        /* Each form group has natural bottom margin — NO absolute positioning */
+        .sim-form-group {
+          margin-bottom: 1.5rem;
+        }
+
+        /* Feedback text sits naturally below the input */
+        .sim-form-group .invalid-feedback,
+        .sim-feedback {
+          display: none;
+          font-size: 0.83rem;
+          color: #dc3545;
+          padding-left: 14px;
+          margin-top: 5px;
+        }
+
+        /* Show feedback when form is validated */
+        .was-validated .sim-form-group .invalid-feedback {
+          display: block;
+        }
+
+        /* Manual feedback for ICCID outside InputGroup */
+        .sim-feedback.show {
+          display: block;
+        }
+
+        /* Modal icons */
+        .modal-icon-success {
+          font-size: 3.5rem;
+          color: #28a745;
+        }
+        .modal-icon-error {
+          font-size: 3.5rem;
           color: #dc3545;
         }
+        .modal-title-success {
+          color: #28a745;
+          font-weight: 700;
+        }
+        .modal-title-error {
+          color: #dc3545;
+          font-weight: 700;
+        }
 
-        /* Add padding so feedback fits inside layout */
-        .input-group .invalid-feedback {
-  // display: block;
-  position: absolute;
-  font-size: 0.85rem;
-  color: #dc3545;
-      bottom: -30px;
-    left: 30px;
-}
+        /* Responsive: ensure inputs don't overflow on small screens */
+        @media (max-width: 576px) {
+          .sim-form-wrapper {
+            padding: 1rem !important;
+            margin: 0.5rem !important;
+          }
+        }
       `}</style>
 
-      {/* <TopHeader /> */}
       <Header />
       <HeadBar text="Zoiko Mobile SIM Activation" />
 
-      <Container className="my-12">
+      <Container className="my-5">
         <Row className="justify-content-center">
-          <Col md={6} lg={12}>
-            <h2 className="text-center fw-bold mb-8">
+          <Col xs={12} lg={10} xl={8}>
+            <h2 className="text-center fw-bold mb-4">
               Now Activate Your Zoiko SIM Card
             </h2>
 
@@ -152,16 +185,13 @@ export default function ActivateSim() {
               noValidate
               validated={validated}
               onSubmit={handleSubmit}
-              className="p-4 shadow rounded m-4"
+              className="p-4 shadow rounded sim-form-wrapper"
             >
-              {/* Delivery ID + Tracking Number */}
+              {/* Row 1: Delivery ID + Tracking Number */}
               <Row>
-                <Col md={6}>
-                  <Form.Group
-                    controlId="deliveryId"
-                    className="p-4 form-label fw-semibold form-group-fixed"
-                  >
-                    <Form.Label className="ms-3 mb-2">
+                <Col xs={12} md={6}>
+                  <Form.Group controlId="deliveryId" className="sim-form-group px-2">
+                    <Form.Label className="ms-1 mb-2 fw-semibold">
                       Delivery ID <span className="text-danger">*</span>
                     </Form.Label>
                     <Form.Control
@@ -171,7 +201,7 @@ export default function ActivateSim() {
                       placeholder="Enter Delivery ID"
                       value={formData.deliveriesID}
                       onChange={handleChange}
-                      className="form-control rounded fancy-input form-with-fixed-feedback"
+                      className="fancy-input"
                     />
                     <Form.Control.Feedback type="invalid">
                       Please enter your Delivery ID.
@@ -179,12 +209,9 @@ export default function ActivateSim() {
                   </Form.Group>
                 </Col>
 
-                <Col md={6}>
-                  <Form.Group
-                    controlId="trackingNumber"
-                    className="p-4 form-label fw-semibold form-group-fixed"
-                  >
-                    <Form.Label className="ms-3 mb-2">
+                <Col xs={12} md={6}>
+                  <Form.Group controlId="trackingNumber" className="sim-form-group px-2">
+                    <Form.Label className="ms-1 mb-2 fw-semibold">
                       Tracking Number <span className="text-danger">*</span>
                     </Form.Label>
                     <Form.Control
@@ -194,7 +221,7 @@ export default function ActivateSim() {
                       placeholder="Enter Tracking Number"
                       value={formData.trackingNumber}
                       onChange={handleChange}
-                      className="form-control rounded fancy-input form-with-fixed-feedback"
+                      className="fancy-input"
                     />
                     <Form.Control.Feedback type="invalid">
                       Please enter your Tracking Number.
@@ -203,103 +230,99 @@ export default function ActivateSim() {
                 </Col>
               </Row>
 
-              {/* IMEI + ICCID */}
+              {/* Row 2: IMEI + ICCID */}
               <Row>
-                <Col md={6}>
-                  <Form.Group
-                    controlId="imei"
-                    className="p-4 form-label fw-semibold form-group-fixed"
-                  >
-                    <Form.Label className="ms-3 mb-2">
+                <Col xs={12} md={6}>
+                  <Form.Group controlId="imei" className="sim-form-group px-2">
+                    <Form.Label className="ms-1 mb-2 fw-semibold">
                       IMEI <span className="text-danger">*</span>
                     </Form.Label>
                     <Form.Control
-                        required
-                        type="text"
-                        name="imei"
-                        placeholder="Enter IMEI Number"
-                        value={formData.imei}
-                        onChange={(e) => {
-                          const val = e.target.value.replace(/\D/g, "");
-                          setFormData({ ...formData, imei: val });
-                        }}
-                        pattern="\d+"
-                        inputMode="numeric"
-                        className="form-control rounded fancy-input form-with-fixed-feedback"
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please enter a valid IMEI number.
-                      </Form.Control.Feedback>
+                      required
+                      type="text"
+                      name="imei"
+                      placeholder="Enter IMEI Number"
+                      value={formData.imei}
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/\D/g, "");
+                        setFormData({ ...formData, imei: val });
+                      }}
+                      pattern="\d+"
+                      inputMode="numeric"
+                      className="fancy-input"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please enter a valid IMEI number.
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
 
-                <Col md={6}>
-                  <Form.Group
-  controlId="iccid"
-  className="p-4 form-label fw-semibold form-group-fixed"
->
-  <Form.Label className="ms-3 mb-2">
-    ICCID/SIM Serial Number (as shown on your SIM Card)
-    <span className="text-danger">*</span>
-  </Form.Label>
+                <Col xs={12} md={6}>
+                  <Form.Group controlId="iccid" className="sim-form-group px-2">
+                    <Form.Label className="ms-1 mb-2 fw-semibold">
+                      ICCID/SIM Serial Number (as shown on your SIM Card)
+                      <span className="text-danger">*</span>
+                    </Form.Label>
 
-  <div>
-    <InputGroup hasValidation>
-      <Form.Control
-        required
-        type="text"
-        name="iccid"
-        placeholder="Enter 19-digit SIM serial number"
-        value={formData.iccid}
-        onChange={(e) => {
-    const val = e.target.value.replace(/\D/g, "");
-    setFormData({ ...formData, iccid: val });
-  }}
-  pattern="\d{19}"
-  inputMode="numeric"
-  maxLength={19}
-        className="form-control rounded fancy-input form-with-fixed-feedback"
-      />
-      <OverlayTrigger
-        placement="top"
-        overlay={
-          <Tooltip
-            id="sim-tooltip"
-            style={{
-              backgroundColor: "white",
-              padding: "0",
-            }}
-          >
-            <img
-              src="/img/sim_number1.png"
-              alt="SIM Example"
-              style={{ width: "120px", borderRadius: "10px" }}
-            />
-          </Tooltip>
-        }
-      >
-        <InputGroup.Text
-          style={{
-            cursor: "pointer",
-            background: "#f8f9fa",
-          }}
-        >
-          <InfoCircle color="black" />
-        </InputGroup.Text>
-      </OverlayTrigger>
-      <Form.Control.Feedback type="invalid">
-        Please enter SIM serial number.
-      </Form.Control.Feedback>
-    </InputGroup>
-  </div>
-</Form.Group>
+                    {/* InputGroup for input + info icon side by side */}
+                    <InputGroup>
+                      <Form.Control
+                        required
+                        type="text"
+                        name="iccid"
+                        placeholder="Enter 19-digit SIM serial number"
+                        value={formData.iccid}
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/\D/g, "");
+                          setFormData({ ...formData, iccid: val });
+                        }}
+                        pattern="\d{19}"
+                        inputMode="numeric"
+                        maxLength={19}
+                        className="fancy-input"
+                      />
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={
+                          <Tooltip
+                            id="sim-tooltip"
+                            style={{ backgroundColor: "white", padding: "0" }}
+                          >
+                            <img
+                              src="/img/sim_number1.png"
+                              alt="SIM Example"
+                              style={{ width: "120px", borderRadius: "10px" }}
+                            />
+                          </Tooltip>
+                        }
+                      >
+                        <InputGroup.Text style={{ cursor: "pointer" }}>
+                          <InfoCircle color="black" />
+                        </InputGroup.Text>
+                      </OverlayTrigger>
+                    </InputGroup>
 
+                    {/*
+                      Bootstrap's .invalid-feedback only works as a direct sibling
+                      of the invalid input. Because InputGroup wraps the input,
+                      we use a manual div that reads the validated state instead.
+                    */}
+                    <div
+                      className={`sim-feedback ${
+                        validated &&
+                        (!formData.iccid || !/^\d{19}$/.test(formData.iccid))
+                          ? "show"
+                          : ""
+                      }`}
+                    >
+                      Please enter a valid 19-digit SIM serial number.
+                    </div>
+                  </Form.Group>
                 </Col>
               </Row>
 
               {/* Submit Button */}
-              {/* Submit Button */}
-              <div className="text-center">
+              <div className="text-center mt-2">
                 <Button
                   type="submit"
                   variant="danger"
@@ -328,7 +351,8 @@ export default function ActivateSim() {
           </Col>
         </Row>
       </Container>
-{/* ── Success / Error Modal ── */}
+
+      {/* Success / Error Modal */}
       <Modal
         show={modal.show}
         onHide={handleCloseModal}
@@ -362,6 +386,7 @@ export default function ActivateSim() {
           </Button>
         </Modal.Footer>
       </Modal>
+
       <Footer />
     </>
   );
