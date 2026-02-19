@@ -685,6 +685,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <title>Zoiko Mobile</title>
         <Script id="zoiko-breadcrumb-jsonld" type="application/ld+json" strategy="afterInteractive">
 {`{
   "@context": "https://schema.org/",
@@ -826,8 +827,27 @@ export default function RootLayout({ children }) {
           alt=""
         />
       </noscript>
+{/* organisation schema code */}
+      <script type="application/ld+json">
+      {`{
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Zoiko Mobile",
+        "url": "https://zoikomobile.com/",
+        "logo": "https://zoikomobile.com/_next/image?url=%2Fimg%2Fzmuslogo-new.png&w=256&q=75"
+      }`}
+      </script>
 
-
+{/* Website Alternate Name */}
+<script type="application/ld+json">
+{`{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Zoiko Mobile",
+  "alternateName": "Zoiko Mobile",
+  "url": "https://zoikomobile.com/"
+}`}
+</script>
 
         <script async src="https://pay.google.com/gp/p/js/pay.js"></script>
         <meta name='citylocalpro-verification' content='217056aJQYGBOVSgfu1gUa' />
