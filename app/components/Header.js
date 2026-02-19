@@ -232,7 +232,7 @@ const Header = () => {
               src="/img/zmuslogo-new.png"
               width={160}
               height={70}
-              alt="Logo"
+              alt="Zoiko Mobile Logo"
             />
           </Navbar.Brand>
 
