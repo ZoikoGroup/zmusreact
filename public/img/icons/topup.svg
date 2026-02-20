@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+  <!-- Background -->
+  <rect width="32" height="32" rx="8" fill="#FDE8EF"></rect>
+  
+  <!-- Mobile Body -->
+  <rect x="10" y="7" width="12" height="18" rx="3" fill="#E01C5B"></rect>
+  
+  <!-- Screen -->
+  <rect x="11.5" y="9" width="9" height="12" rx="1.5" fill="#FDE8EF"></rect>
+  
+  <!-- Speaker -->
+  <rect x="14" y="8" width="4" height="1" rx="0.5" fill="#FDE8EF"></rect>
+  
+  <!-- Plus Badge -->
+  <circle cx="22" cy="20" r="4" fill="#E01C5B"></circle>
+  <path d="M22 17.8V22.2M19.8 20H24.2" stroke="#FDE8EF" stroke-width="1.5" stroke-linecap="round"></path>
+</svg>
