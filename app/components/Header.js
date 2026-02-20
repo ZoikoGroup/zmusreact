@@ -471,7 +471,7 @@ const Header = () => {
                       className="plan-icon"
                     />
                     <div className="plan-text">
-                      <h6>International Call</h6>
+                      <h6>International Calls</h6>
                       <p>Latest Value plans</p>
                     </div>
                   </Nav.Link>
