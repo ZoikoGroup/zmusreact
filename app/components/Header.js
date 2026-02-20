@@ -186,6 +186,33 @@ const Header = () => {
     bq_id,
     plan_type,
   ) => {
+
+    // ✅ If plan_type is "topup", skip the modal and add directly to cart
+    if (plan_type === "topup") {
+      const cartItem = {
+          type: "topup", // ✅ keep type consistent
+          planTitle: title,
+          planSlug: slug,
+          planId: id,
+          planPrice: sale_price || price,
+          planDuration: duration,
+          planBqid: bq_id,
+          planType: "topup",
+          lineType: null,
+          simType: 'topup',
+          formData: {
+            priceQty: 1,
+          },
+        };
+      const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+      existingCart.push(cartItem);
+      localStorage.setItem("cart", JSON.stringify(existingCart));
+      window.dispatchEvent(new Event("cartUpdated"));
+      router.push('/checkout'); // ✅ redirect to checkout
+      return; // Exit early — no modal shown
+    }
+
+
     setModalData({
       title,
       slug,
