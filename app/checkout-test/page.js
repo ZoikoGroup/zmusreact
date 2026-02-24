@@ -868,7 +868,7 @@ const appearance = {
                                     onChange={(e) => setBillingAddress({ ...billingAddress, state: e.target.value })}
                                     disabled={loading}
                                   >
-                                    <option value="">Select state</option>
+                                   
                                     {usStates.map((s) => (
                                       <option key={s.code} value={s.code}>
                                         {s.name}

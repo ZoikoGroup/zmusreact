@@ -529,7 +529,7 @@ console.log("processOrder response:", bequickPayload);
                             </label>
                             {key === "state" ? (
                               <select className={`form-select ${errors[errorKey] ? "is-invalid" : ""}`} value={billingAddress.state} onChange={(e) => setBillingAddress({ ...billingAddress, state: e.target.value })} disabled={loading}>
-                                <option value="">Select state</option>
+                                
                                 {usStates.map((s) => (
                                   <option key={s.code} value={s.code}>{s.name}</option>
                                 ))}
