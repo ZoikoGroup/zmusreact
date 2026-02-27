@@ -302,13 +302,6 @@ console.log("Creating draft order with postData:", postData.cart);
       });
       simCount++;
       console.log("Added Device_Protection:", orderDetailsAttributes);
-    } else if (simType === "topup") {
-      orderDetailsAttributes.push({
-        product_id: parseInt(product.planBqid),
-        line_id: parseInt(postData.line_id),
-      });
-      simCount++;
-      console.log("Added Device_Protection:", orderDetailsAttributes);
     } else {
       console.warn("Unknown SIM type:", simType);
     }

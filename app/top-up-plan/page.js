@@ -3,8 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import TopupFaqs from "../components/TopupFaqs";
-import { openPlanPurchaseModal } from "../components/Header";
-import { Container, Image, Row, Col, Card, CardBody, CardHeader, Button, } from "react-bootstrap";
+import { Container, Image, Row, Col, Card, CardBody, CardHeader } from "react-bootstrap";
 import Link from "next/link";
 
 const TopUpPlan = () => {
@@ -47,7 +46,7 @@ const TopUpPlan = () => {
                                     <li>$6.50 for 30 Days</li>
                                 </ul>
                                 <hr className="separator" />
-                                <div className="text-center"><Button onClick={() => openPlanPurchaseModal('Zoiko Top-up', 'zoiko-top-up', 25, 6.50, 0, '30 Days', 18, 'topup')} className="btn btn-danger">Buy this Top-up plan</Button></div>
+                                <div className="text-center"><Link href="#" className="btn btn-danger">Buy this Top-up plan</Link></div>
                             </CardBody>
                         </Card>
                     </Col>
@@ -73,7 +72,7 @@ const TopUpPlan = () => {
                                     <li>$9.99 for 30 Days</li>
                                 </ul>
                                 <hr className="separator" />
-                                <div className="text-center"><Button onClick={() => openPlanPurchaseModal('Zoiko Top-up+', 'zoiko-top-up-plus', 26, 9.99, 0, '30 Days', 25, 'topup')} className="btn btn-danger">Buy this Top-up plan</Button></div>
+                                <div className="text-center"><Link href="#" className="btn btn-danger">Buy this Top-up plan</Link></div>
                             </CardBody>
                         </Card>
                     </Col>
