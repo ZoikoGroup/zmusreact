@@ -93,7 +93,7 @@ const [selectedShippingOption, setSelectedShippingOption] = useState(shippingOpt
     state: { label: "State", placeholder: "Enter your state" },
     city: { label: "City", placeholder: "Enter your city" },
     street: { label: "Street Address", placeholder: "Enter your street address" },
-    houseNumber: { label: "Apartment, suite, unit, etc.", placeholder: "Apartment or suite" },
+    houseNumber: { label: "Apartment, suite, unit, etc. (optional)", placeholder: "Apartment or suite" },
     zip: { label: "ZIP Code", placeholder: "Enter your ZIP code" },
     phone: { label: "Phone Number", placeholder: "Enter your phone number" },
     email: { label: "Email Address", placeholder: "Enter your email address" },
@@ -868,7 +868,7 @@ const appearance = {
                                     onChange={(e) => setBillingAddress({ ...billingAddress, state: e.target.value })}
                                     disabled={loading}
                                   >
-                                   
+                                    <option value="">Select state</option>
                                     {usStates.map((s) => (
                                       <option key={s.code} value={s.code}>
                                         {s.name}
