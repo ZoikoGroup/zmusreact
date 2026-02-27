@@ -156,7 +156,7 @@ const HomeBanner = () => {
         <Carousel.Item className="bannerItem banner1">
           <Carousel.Caption className="bannerContent">
             <div className="text-start">
-              <h1 className="verybig txtred">UNBEATABLE VALUE</h1>
+              <h1 className="verybig txtred">UNBEATABLE VALUES</h1>
               <h2 className="py-2">
                 <span className="txtred">ZOIKO MOBILE</span>
                 <span className="txtblack">
