@@ -1041,11 +1041,12 @@ const appearance = {
     onChange={() => setPaymentMethod("zift")}
   />
   <label className="form-check-label">
-    Pay with Zift
+    {/* Pay with Zift */}
+    Pay with Credit / Debit Card 
   </label>
 </div>
 
-<div className="form-check mb-3">
+{/* <div className="form-check mb-3">
   <input
     className="form-check-input"
     type="radio"
@@ -1056,7 +1057,7 @@ const appearance = {
   <label className="form-check-label">
     Credit / Debit Card (Stripe)
   </label>
-</div>
+</div> */}
 
 {paymentMethod === "zift" && (
   <>
