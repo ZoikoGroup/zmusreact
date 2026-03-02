@@ -71,7 +71,7 @@ export async function tokenizationCard(
     "accountId" : "7225001",
     "accountType" : "R",
     "accountNumber" : cardNumber,
-    "accountAccessory" : `${cardExpiry.replace("/", "")}`,
+    "accountAccessory" : `${cardExpiry.replace(" / ", "")}`,
     "holderType" : "P",
     "holderName" : name,
     "transactionIndustryType" : "RE",
