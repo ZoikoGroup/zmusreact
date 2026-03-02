@@ -343,6 +343,18 @@ const Header = () => {
                       <p>Up to 10 lines · Save more</p>
                     </div>
                   </Nav.Link>
+
+                  <Nav.Link href="/top-up-plan" className="plan-card">
+                    <img
+                      src="/img/icons/topup.svg"
+                      alt="Family"
+                      className="plan-icon"
+                    />
+                    <div className="plan-text">
+                      <h6>Top-up Plans</h6>
+                      <p>Quick and easy top-ups</p>
+                    </div>
+                  </Nav.Link>
                 </div>
               </NavDropdown>
 
