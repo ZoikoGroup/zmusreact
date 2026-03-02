@@ -303,6 +303,7 @@ export async function createDraftLine(postData) {
       if (response?.errors)
         return { status: false, message: "Unable to create draft line", error: response.errors };
       postData.cart[i].line_id = response.lines?.[0]?.id; 
+      console.log("Draft Line Response ID:", response.lines?.[0]?.id);
       return {
         status: true,
         line: response.lines?.[0],
