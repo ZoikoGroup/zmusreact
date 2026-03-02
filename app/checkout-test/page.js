@@ -16,8 +16,8 @@ import {
   Tablet,
   Router
 } from "react-bootstrap-icons"
-// import "bootstrap/dist/css/bootstrap.min.css";
-import GooglePayButton from "../components/GooglePayButton";
+// // import "bootstrap/dist/css/bootstrap.min.css";
+// import GooglePayButton from "../components/GooglePayButton";
 
 import { useRef } from "react";
 
