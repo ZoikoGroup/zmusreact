@@ -685,6 +685,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <title>Zoiko Mobile - Affordable Prepaid & eSIM Plans in USA</title>
         <Script id="zoiko-breadcrumb-jsonld" type="application/ld+json" strategy="afterInteractive">
 {`{
   "@context": "https://schema.org/",
@@ -827,7 +828,27 @@ export default function RootLayout({ children }) {
         />
       </noscript>
 
+{/* organisation schema code */}
+      <script type="application/ld+json">
+      {`{
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Zoiko Mobile",
+        "url": "https://zoikomobile.com/",
+        "logo": "hhttps://zoikomobile.com/img/zmuslogo-new.png"
+      }`}
+      </script>
 
+{/* Website Alternate Name */}
+<script type="application/ld+json">
+{`{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Zoiko Mobile",
+  "alternateName": "Zoiko Mobile",
+  "url": "https://zoikomobile.com/"
+}`}
+</script>
 
         <script async src="https://pay.google.com/gp/p/js/pay.js"></script>
         <meta name='citylocalpro-verification' content='217056aJQYGBOVSgfu1gUa' />
