@@ -303,7 +303,6 @@ export async function createDraftLine(postData) {
       if (response?.errors)
         return { status: false, message: "Unable to create draft line", error: response.errors };
       postData.cart[i].line_id = response.lines?.[0]?.id; 
-      console.log("Draft Line Response ID:", response.lines?.[0]?.id);
       return {
         status: true,
         line: response.lines?.[0],
@@ -323,7 +322,6 @@ export async function createDraftOrder(postData) {
 
   const ESIM_PRODUCT_ID = 20; // replace with real ID
   const PSIM_PRODUCT_ID = 19; // replace with real ID
-  const DEVICE_PROTECTION_PRODUCT_ID = 19; 
 
   const cart = postData.cart || [];
   if (cart.length === 0) {
@@ -334,15 +332,16 @@ export async function createDraftOrder(postData) {
 
   for (const product of cart) {
     const simType = (product.simType || "").trim();
+    const item_type = (product.type || "").trim();
     // console.log("simType:", simType);
 
-    // Add plan first
-    // orderDetailsAttributes.push({
-    //   product_id: parseInt(product.planBqid),
-    //   line_id: product.line_id,
-    // });
-    planCount++;
-
+    if(item_type === "plan" || item_type === "device" || item_type === "topup") {  
+      orderDetailsAttributes.push({
+        product_id: parseInt(product.planBqid),
+        line_id: product.line_id,
+      });
+      planCount++;
+    }
     // Then add SIM type
     if (simType === "eSIM") {
       orderDetailsAttributes.push({
