@@ -336,10 +336,10 @@ export async function createDraftOrder(postData) {
     // console.log("simType:", simType);
 
     // Add plan first
-    orderDetailsAttributes.push({
-      product_id: parseInt(product.planBqid),
-      line_id: product.line_id,
-    });
+    // orderDetailsAttributes.push({
+    //   product_id: parseInt(product.planBqid),
+    //   line_id: product.line_id,
+    // });
     planCount++;
 
     // Then add SIM type
@@ -359,12 +359,19 @@ export async function createDraftOrder(postData) {
       console.log("Added pSIM:", orderDetailsAttributes);
     } else if (simType === "device_protection") {
       orderDetailsAttributes.push({
-        product_id: DEVICE_PROTECTION_PRODUCT_ID,
+        product_id: parseInt(product.planBqid),
         line_id: product.line_id,
       });
       simCount++;
       console.log("Added Device_Protection:", orderDetailsAttributes);
-    } else {
+    } else if( simType === "topup") {
+      orderDetailsAttributes.push({
+        product_id: parseInt(product.planBqid),
+        line_id: product.line_id,
+      });
+      simCount++;
+      console.log("Added Topup:", orderDetailsAttributes);
+    }else {
       console.warn("Unknown SIM type:", simType);
     }
   }
