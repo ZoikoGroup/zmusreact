@@ -344,39 +344,40 @@ export async function createDraftOrder(postData) {
         product_id: parseInt(product.planBqid),
         line_id: postData.line_id,
       });
+      
+      // Then add SIM type
+      if (simType === "eSIM") {
+        orderDetailsAttributes.push({
+          product_id: ESIM_PRODUCT_ID,
+          line_id: postData.line_id,
+        });
+        simCount++;
+        console.log("Added eSIM:", orderDetailsAttributes);
+      } else if (simType === "pSIM") {
+        orderDetailsAttributes.push({
+          product_id: PSIM_PRODUCT_ID,
+          line_id: postData.line_id,
+        });
+        simCount++;
+        console.log("Added pSIM:", orderDetailsAttributes);
+      } else if (simType === "device_protection") {
+        orderDetailsAttributes.push({
+          product_id: parseInt(product.planBqid),
+          line_id: postData.line_id,
+        });
+        simCount++;
+        console.log("Added Device_Protection:", orderDetailsAttributes);
+      } else if( simType === "topup") {
+        orderDetailsAttributes.push({
+          product_id: parseInt(product.planBqid),
+          line_id: postData.line_id,
+        });
+        simCount++;
+        console.log("Added Topup:", orderDetailsAttributes);
+      }else {
+        console.warn("Unknown SIM type:", simType);
+      }
       planCount++;
-    }
-    // Then add SIM type
-    if (simType === "eSIM") {
-      orderDetailsAttributes.push({
-        product_id: ESIM_PRODUCT_ID,
-        line_id: postData.line_id,
-      });
-      simCount++;
-      console.log("Added eSIM:", orderDetailsAttributes);
-    } else if (simType === "pSIM") {
-      orderDetailsAttributes.push({
-        product_id: PSIM_PRODUCT_ID,
-        line_id: postData.line_id,
-      });
-      simCount++;
-      console.log("Added pSIM:", orderDetailsAttributes);
-    } else if (simType === "device_protection") {
-      orderDetailsAttributes.push({
-        product_id: parseInt(product.planBqid),
-        line_id: postData.line_id,
-      });
-      simCount++;
-      console.log("Added Device_Protection:", orderDetailsAttributes);
-    } else if( simType === "topup") {
-      orderDetailsAttributes.push({
-        product_id: parseInt(product.planBqid),
-        line_id: postData.line_id,
-      });
-      simCount++;
-      console.log("Added Topup:", orderDetailsAttributes);
-    }else {
-      console.warn("Unknown SIM type:", simType);
     }
   }
   //  console.log("orderDetailsAttributes:", orderDetailsAttributes);
