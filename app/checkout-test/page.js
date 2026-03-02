@@ -428,11 +428,17 @@ const total = Math.max(subtotal + shippingFee - discountAmount, 0);
 
     // Card fields validation
     const cardNumberRegex = /^[0-9]{13,19}$/; // typical card length
-    const expiryRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/; // MM/YY
+    const expiryRegex = /^(0[1-9]|1[0-2])\s*\/\s*([0-9]{2})$/; // MM/YY
     const cvcRegex = /^[0-9]{3,4}$/;
 
     newErrors.cardNumber = cardNumberRegex.test(cardDetails.cardNumber.replace(/\s+/g, "")) ? "" : "Invalid card number";
-    newErrors.cardExpiry = expiryRegex.test(cardDetails.expiry.trim()) ? "" : "Invalid expiry format (MM/YY)";
+    // newErrors.cardExpiry = expiryRegex.test(cardDetails.expiry.trim()) ? "" : "Invalid expiry format (MM/YY)";
+
+    const cleanExpiry = cardDetails.expiry.replace(/\s+/g, ""); // remove all spaces
+
+    newErrors.cardExpiry = expiryRegex.test(cleanExpiry)  ? "" : "Invalid expiry format (MM/YY)";
+
+
     newErrors.cardCvc = cvcRegex.test(cardDetails.cvc.trim()) ? "" : "Invalid CVC code";
 
     // Ensure any keys missing in newErrors get an empty string so setErrors shape remains consistent
@@ -1079,7 +1085,15 @@ const appearance = {
                           type="text"
                           placeholder="MM / YY"
                           value={cardDetails.expiry}
-                          onChange={(e) => setCardDetails({ ...cardDetails, expiry: e.target.value })}
+                          onChange={(e) => {
+  let value = e.target.value.replace(/\D/g, ""); // remove non-digits
+
+  if (value.length >= 3) {
+    value = value.slice(0, 2) + " / " + value.slice(2, 4);
+  }
+
+  setCardDetails({ ...cardDetails, expiry: value });
+}}
                           disabled={loading}
                         />
                         {errors.cardExpiry && <div className="text-danger small mt-1">{errors.cardExpiry}</div>}
