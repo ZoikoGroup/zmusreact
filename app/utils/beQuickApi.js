@@ -90,6 +90,9 @@ export async function processOrderZift(postData) {
     // 6️⃣ Submit order
     const submitResponse = await submitOrder(postData.bequick_order_id);
     if (!submitResponse.status) return submitResponse.response;
+    if (submitResponse?.errors?.base?.length) {
+    alert(submitResponse.errors.base.join("\n"));
+}
 
     return {
       status: true,
