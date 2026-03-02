@@ -300,8 +300,11 @@ export async function createDraftLine(postData) {
      console.log("Draft Line Data:", data);
        // Send to API
       const response = await beQuickRequest("/lines", "POST", data);
-      if (response?.errors)
+      if (response?.errors){
         return { status: false, message: "Unable to create draft line", error: response.errors };
+      }
+      
+
       postData.cart[i].line_id = response.lines?.[0]?.id; 
       return {
         status: true,
@@ -311,7 +314,8 @@ export async function createDraftLine(postData) {
       i++;
   }
 
- 
+ console.log("Draft Line Data (no port):", data);
+  
 
 
 }
@@ -335,44 +339,45 @@ export async function createDraftOrder(postData) {
     const item_type = (product.type || "").trim();
     // console.log("simType:", simType);
 
-    if(item_type === "plan" || item_type === "device" || item_type === "topup") {  
+    if(item_type === "plan" || item_type === "topup") {  
       orderDetailsAttributes.push({
         product_id: parseInt(product.planBqid),
-        line_id: product.line_id,
+        line_id: postData.line_id,
       });
+      
+      // Then add SIM type
+      if (simType === "eSIM") {
+        orderDetailsAttributes.push({
+          product_id: ESIM_PRODUCT_ID,
+          line_id: postData.line_id,
+        });
+        simCount++;
+        console.log("Added eSIM:", orderDetailsAttributes);
+      } else if (simType === "pSIM") {
+        orderDetailsAttributes.push({
+          product_id: PSIM_PRODUCT_ID,
+          line_id: postData.line_id,
+        });
+        simCount++;
+        console.log("Added pSIM:", orderDetailsAttributes);
+      } else if (simType === "device_protection") {
+        orderDetailsAttributes.push({
+          product_id: parseInt(product.planBqid),
+          line_id: postData.line_id,
+        });
+        simCount++;
+        console.log("Added Device_Protection:", orderDetailsAttributes);
+      } else if( simType === "topup") {
+        orderDetailsAttributes.push({
+          product_id: parseInt(product.planBqid),
+          line_id: postData.line_id,
+        });
+        simCount++;
+        console.log("Added Topup:", orderDetailsAttributes);
+      }else {
+        console.warn("Unknown SIM type:", simType);
+      }
       planCount++;
-    }
-    // Then add SIM type
-    if (simType === "eSIM") {
-      orderDetailsAttributes.push({
-        product_id: ESIM_PRODUCT_ID,
-        line_id: product.line_id,
-      });
-      simCount++;
-      console.log("Added eSIM:", orderDetailsAttributes);
-    } else if (simType === "pSIM") {
-      orderDetailsAttributes.push({
-        product_id: PSIM_PRODUCT_ID,
-        line_id: product.line_id,
-      });
-      simCount++;
-      console.log("Added pSIM:", orderDetailsAttributes);
-    } else if (simType === "device_protection") {
-      orderDetailsAttributes.push({
-        product_id: parseInt(product.planBqid),
-        line_id: product.line_id,
-      });
-      simCount++;
-      console.log("Added Device_Protection:", orderDetailsAttributes);
-    } else if( simType === "topup") {
-      orderDetailsAttributes.push({
-        product_id: parseInt(product.planBqid),
-        line_id: product.line_id,
-      });
-      simCount++;
-      console.log("Added Topup:", orderDetailsAttributes);
-    }else {
-      console.warn("Unknown SIM type:", simType);
     }
   }
   //  console.log("orderDetailsAttributes:", orderDetailsAttributes);
