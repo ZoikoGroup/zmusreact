@@ -32,15 +32,15 @@ const TopUpPlan = () => {
                             </CardHeader>
                             <CardBody>
                                 <Row>
-                                    <Col>
+                                    <Col  md={8}>
                                         <h3>Zoiko Top-up</h3>
                                     </Col>
-                                    <Col>
+                                    <Col  md={4}>
                                         <p style={{textAlign:'right'}}><span className="curprice">$6.50</span></p>
                                     </Col>
                                 </Row>
                                 <hr className="separator" />
-                                <ul className='check-bullet'>
+                                <ul className='check-bullet' style={{minHeight:'auto !important'}}>
                                     <li>1GB of High-Speed Data</li>
                                     <li>500 Minutes</li>
                                     <li>1000 Texts</li>
