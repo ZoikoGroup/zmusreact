@@ -862,7 +862,7 @@ const appearance = {
                               <div className="col-md-6" key={i}>
                                 <label className="form-label fw-semibold">
                                   {meta.label || key.replace(/([A-Z])/g, " $1")}
-                                  {["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"].includes(key) && (
+                                  {["firstName", "lastName", "state", "city", "houseNumber", "zip", "email","phone"].includes(key) && (
                                     <span className="text-danger ms-1">*</span>
                                   )}
                                 </label>
