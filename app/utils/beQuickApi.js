@@ -277,7 +277,7 @@ export async function createDraftLine(postData) {
   let data = {
     line: {
       subscriber_id: postData.subscriber_id,
-      warehouse_id: 2,
+      carrier_id: 1,
       service_address_id: postData.address_id,
       status: "draft",
     },
