@@ -832,17 +832,6 @@ export default function RootLayout({ children }) {
         <script async src="https://pay.google.com/gp/p/js/pay.js"></script>
         <meta name='citylocalpro-verification' content='217056aJQYGBOVSgfu1gUa' />
 
-        {/* Google tag (gtag.js) */}
-
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LPLSNT77BZ"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-LPLSNT77BZ');
-        </script>
-
         <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
@@ -909,6 +898,20 @@ export default function RootLayout({ children }) {
             });
           `}
           </Script>
+
+          <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-LPLSNT77BZ"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-LPLSNT77BZ');
+          `}
+        </Script>
 
       </body>
     </html>
