@@ -354,6 +354,7 @@ export async function createDraftOrder(postData) {
         orderDetailsAttributes.push({
           product_id: ESIM_PRODUCT_ID,
           line_id: postData.line_id,
+          warehouse_id : 2,
         });
         simCount++;
         console.log("Added eSIM:", orderDetailsAttributes);
@@ -361,6 +362,7 @@ export async function createDraftOrder(postData) {
         orderDetailsAttributes.push({
           product_id: PSIM_PRODUCT_ID,
           line_id: postData.line_id,
+          warehouse_id : 2,
         });
         simCount++;
         console.log("Added pSIM:", orderDetailsAttributes);
