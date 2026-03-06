@@ -373,14 +373,7 @@ export async function createDraftOrder(postData) {
         });
         simCount++;
         console.log("Added Device_Protection:", orderDetailsAttributes);
-      } else if( simType === "topup") {
-        orderDetailsAttributes.push({
-          product_id: parseInt(product.planBqid),
-          line_id: postData.line_id,
-        });
-        simCount++;
-        console.log("Added Topup:", orderDetailsAttributes);
-      }else {
+      } else {
         console.warn("Unknown SIM type:", simType);
       }
       planCount++;
