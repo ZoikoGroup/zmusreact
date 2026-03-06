@@ -833,10 +833,15 @@ export default function RootLayout({ children }) {
         <meta name='citylocalpro-verification' content='217056aJQYGBOVSgfu1gUa' />
 
         {/* Google tag (gtag.js) */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-LPLSNT77BZ"
-          strategy="afterInteractive"
-        />
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LPLSNT77BZ"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-LPLSNT77BZ');
+        </script>
 
         <Script id="google-analytics" strategy="afterInteractive">
         {`
