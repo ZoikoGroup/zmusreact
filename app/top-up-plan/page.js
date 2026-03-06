@@ -17,8 +17,8 @@ const TopUpPlan = () => {
                 <Container className="py-5">
 
                     {/* Hero Section */}
-                    <Row className="align-items-center mb-5 flex-column-reverse flex-md-row">
-                        <Col md={6} sm={12} xs={12} className="mt-4 mt-md-0">
+                    <Row className="align-items-center mb-5 flex-column-reverse flex-md-row" style={{ background: "#fbe8e8" }}>
+                        <Col md={6} sm={12} xs={12} className="mt-4 mt-md-0" style={{padding:"0 3rem"}}>
                             <h2 className="fw-bold">Need extra talk, text, or data?</h2>
                             <p className="body22">
                                 Zoiko Mobile Top-up Plans give you more of what you need, whenever you need it.

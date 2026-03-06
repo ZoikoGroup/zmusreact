@@ -1229,12 +1229,12 @@ const appearance = {
       ></span>
       {paymentMethod === "stripe"
         ? "Processing payment with Stripe..."
-        : "Placing order with Zift..."}
+        : "Placing order..."}
     </>
   ) : (
     paymentMethod === "stripe"
       ? "Place Order with Stripe"
-      : "Place Order with Zift"
+      : "Place Order with "
   )}
 </button>
 
