@@ -1234,7 +1234,7 @@ const appearance = {
   ) : (
     paymentMethod === "stripe"
       ? "Place Order with Stripe"
-      : "Place Order with "
+      : "Place Your Order"
   )}
 </button>
 
