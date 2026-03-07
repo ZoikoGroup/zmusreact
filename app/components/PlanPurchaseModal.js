@@ -610,7 +610,7 @@ if (lineType === "portNumber" && currentStep === 1) {
 
   <div className="text-start">
     <h6 className="m-0 text-danger fw-bold">TABLET PROTECTION</h6>
-    <small className="text-muted">Starting at just <b>$8.99</b>/month per device</small>
+    <small className="text-muted">Starting at just <b>$6.99</b>/month per device</small>
   </div>
 
 

@@ -2796,3 +2796,17 @@ body {
 .active-plan {
   background: #f8d7df;
 }
+@media (max-width: 767px) {
+  .mobile-hero-text .dropdown {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .mobile-hero-text .dropdown .btn,
+  .mobile-hero-text .dropdown button,
+  .mobile-hero-text .dropdown .dropdown-toggle {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+}
