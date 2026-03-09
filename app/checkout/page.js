@@ -220,7 +220,7 @@ export default function CheckoutPage() {
 
   // ─── STEP 2: Count prepaid eSIM items for activation fee ───────────────────
   const prepaidEsimItems = cart.filter(
-    (item) => item.planType === "prepaid-plans" && item.simType === "eSIM"
+    (item) => item.planType === "prepaid-plans"
   );
   const activationFeeTotal = prepaidEsimItems.reduce((acc, item) => {
   const qty = Number(item.formData?.priceQty ?? item.qty ?? 1);
@@ -777,7 +777,7 @@ export default function CheckoutPage() {
                             {item.simType || "N/A"}
                           </small>
                           {/* ─── Show activation fee badge for prepaid eSIM items ─── */}
-                          {item.planType === "prepaid-plans" && item.simType === "eSIM" && (
+                          {item.planType === "prepaid-plans" && (
                             <div className="mt-1">
                               <span className="badge bg-warning text-dark">
                                 + ${ACTIVATION_FEE_PER_ESIM.toFixed(2)} Activation Fee
