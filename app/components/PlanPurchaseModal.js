@@ -543,6 +543,7 @@ if (lineType === "portNumber" && currentStep === 1) {
     {/* ✅ Always show the result message */}
     {deviceCheckStatus === "compatible" && (
       <>
+      <div className="close-button" onClick={closeFn} aria-label="Close">x</div>
         <img src="/img/success.gif"></img>
         <p style={{ color: "green", marginTop: 8 }}>Congratulations Your Device is Compatible to Use Zoiko Mobile eSIM Service</p>
       </>
