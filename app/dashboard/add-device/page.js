@@ -73,7 +73,7 @@ const openChat = () => {
       const data = await res.json();
       setApiResult(data);
 
-      if (data.success && data.compatibility) {
+      if (data.success && data.esim_compatible) {
         setValidationMsg("✅ Device is compatible!");
       } else {
         setValidationMsg("❌ Device is not compatible.");
