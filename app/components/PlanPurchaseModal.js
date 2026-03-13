@@ -223,7 +223,7 @@ const formatLabel = (field) => {
         body: JSON.stringify({ device_serial: formData.imei })
       });
       const data = await res.json();
-      setDeviceCheckStatus(data.compatibility ? "compatible" : "incompatible");
+      setDeviceCheckStatus(data.esim_compatible ? "compatible" : "incompatible");
     } catch (err) {
       setDeviceCheckStatus("error");
     }
