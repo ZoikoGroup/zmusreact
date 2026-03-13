@@ -342,7 +342,7 @@ if (lineType === "portNumber" && currentStep === 1) {
       <Modal.Body>
         {currentStep < 3 && (
           <>
-        <div className="close-button" onClick={closeFn} aria-label="Close">×</div>
+        <div className="close-button" onClick={closeFn} aria-label="Close">x</div>
         <div className="few-steps-header">
           <h1>Few Easy Steps and You’re Good To Go</h1>
         </div>
@@ -511,6 +511,7 @@ if (lineType === "portNumber" && currentStep === 1) {
     {/* ✅ Only show the compatibility input + button if not yet compatible */}
     {deviceCheckStatus !== "compatible" && (
       <>
+      <div className="close-button" onClick={closeFn} aria-label="Close">x</div>
         <h2>Check If Phone is Compatible</h2>
         <p>Enter your IMEI or MEID below to see if your device is compatible with eSIMs</p>
         <div
