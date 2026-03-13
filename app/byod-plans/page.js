@@ -35,7 +35,7 @@ const ByodPlans = () => {
       const data = await res.json();
 
       // ✅ Compatibility Check Logic
-      if (res.ok && data && data.compatibility === true) {
+      if (res.ok && data && data.esim_compatible === true) {
         setResult({ status: "success", message: "✅ Your device is compatible with Zoiko Mobile network!" });
       } else if (res.ok && data && data.compatible === false) {
         setResult({ status: "error", message: "❌ Not Compatible with Zoiko Mobile network." });
