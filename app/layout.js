@@ -5,7 +5,6 @@ import BootstrapClient from "./components/BootstrapClient";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
-import Script from "next/script";
 
 
 /**
