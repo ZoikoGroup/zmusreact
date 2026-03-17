@@ -40,11 +40,6 @@ const defaultMeta = {
    Add / edit entries here. This is a large map built from your doc.
 ------------------------- */
 const metaMap = {
-  "/": {
-    title: "Zoiko Mobile | Best Mobile Plans with Unlimited Data",
-    description:
-      "Stay connected with Zoiko Mobile for the best mobile plans with unlimited data. Get the coverage & affordability you deserve with our top mobile plan options.",
-  },
   "/black-friday-mobile-sim-deals-2025": {
     title: "Black Friday Mobile & SIM Card Deals 2025 | Zoiko Mobile",
     description:
