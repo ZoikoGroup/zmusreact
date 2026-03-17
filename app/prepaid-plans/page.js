@@ -1,26 +1,11 @@
-"use client"
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import HeadBar from "../components/HeadBar";
-import PrepaidBanner from "../components/PrepaidBanner";
-import PrepaidSlider from "../components/PrepaidSlider";
-import PrepaidBox from "../components/PrepaidBox";
-import PrepaidFaqs from "../components/PrepaidFaqs";
-import Testimonials from "../components/Testimonials";
+import PrepaidPlans from "./prepaid";
 
-const PrepaidPlans = () => {
-    return (
-        <>
-        {/* <TopHeader /> */}
-        <Header />
-        <HeadBar text="No Contract Best Prepaid Mobile Phone Deals" />
-        <PrepaidBanner />
-        <PrepaidSlider />
-        <PrepaidBox />
-        <PrepaidFaqs />
-        <Testimonials />
-        <Footer />
-        </>
-    );
+export const metadata = {
+  title: "Prepaid Phone Plans | Unlimited High-Speed 5G Data",
+  description:
+    "Get the best prepaid phone plans at Zoiko Mobile. Affordable, flexible prepaid plans with unlimited high-speed 5G data and reliable coverage.",
+};
+
+export default function Page() {
+  return <PrepaidPlans />;
 }
-export default PrepaidPlans;

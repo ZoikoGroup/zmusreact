@@ -50,11 +50,6 @@ const metaMap = {
     description:
       "Grab festive Christmas Phone Plan Deals 2025 with 30% OFF for 3 months + FREE activation and Refurbished Phones up to 40% OFF. Shop now!",
   },
-  "/prepaid-plans": {
-    title: "Prepaid Phone Plans | Unlimited High-Speed 5G Data",
-    description:
-      "Get the best prepaid phone plans at Zoiko Mobile. Affordable, flexible prepaid plans with unlimited high-speed 5G data and reliable coverage.",
-  },
   "/postpaid-plans": {
     title: "Best Postpaid Phone Plans | Reliable Mobile Coverage",
     description:
@@ -537,19 +532,19 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     // Title
-    if (metaObj?.title) document.title = metaObj.title;
+    //if (metaObj?.title) document.title = metaObj.title;
 
     // Description
-    const descSelector = 'meta[name="description"]';
-    setMetaTag({
-      selector: descSelector,
-      attr: "content",
-      value: metaObj.description || defaultMeta.description,
-      create: true,
-      element: "meta",
-      attrName: "name",
-      attrValue: "description",
-    });
+    // const descSelector = 'meta[name="description"]';
+    // setMetaTag({
+    //   selector: descSelector,
+    //   attr: "content",
+    //   value: metaObj.description || defaultMeta.description,
+    //   create: true,
+    //   element: "meta",
+    //   attrName: "name",
+    //   attrValue: "description",
+    // });
 
     // Canonical
     const canonicalHref = `${window.location.origin}${pathname}`;
