@@ -843,9 +843,9 @@ export default function RootLayout({ children }) {
 
 
         {/* Google tag (gtag.js) */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=GT-PHX25QL" strategy="afterInteractive" />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=GT-PHX25QL" />
 
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
