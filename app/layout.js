@@ -55,11 +55,6 @@ const metaMap = {
     description:
       "Grab festive Christmas Phone Plan Deals 2025 with 30% OFF for 3 months + FREE activation and Refurbished Phones up to 40% OFF. Shop now!",
   },
-  "/about": {
-    title: "About Us | Zoiko Mobile’s Mission & Vision",
-    description:
-      "Discover Zoiko Mobile’s purpose‑driven mission: fast 5G, flexible plans & giving back to animals & music. Join the network, making a positive impact daily.",
-  },
   "/prepaid-plans": {
     title: "Prepaid Phone Plans | Unlimited High-Speed 5G Data",
     description:
