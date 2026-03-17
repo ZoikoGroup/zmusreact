@@ -5,6 +5,7 @@ import BootstrapClient from "./components/BootstrapClient";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
+import Script from "next/script";
 
 
 /**
@@ -839,6 +840,19 @@ export default function RootLayout({ children }) {
           gtag('js', new Date());
           gtag('config', 'G-LPLSNT77BZ');
         `}
+        </Script>
+
+
+        {/* Google tag (gtag.js) */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=GT-PHX25QL" strategy="afterInteractive" />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'GT-PHX25QL');
+          `}
         </Script>
       </head>
 
