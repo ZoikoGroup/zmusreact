@@ -162,7 +162,7 @@ const Footer = () => {
 
     <div className="social-wrapper">
 
-        <Link href="https://www.facebook.com/zoikomobileusa" target="_blank" className="socialicon">
+        <Link href="https://www.facebook.com/zoikomobile" target="_blank" className="socialicon">
             <i className="bi bi-facebook"></i>
         </Link>
 
