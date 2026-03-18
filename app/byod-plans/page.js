@@ -13,7 +13,7 @@ const ByodPlans = () => {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
 
-const checkCompatibility = async () => {
+  const checkCompatibility = async () => {
   if (!imei.trim()) {
     setResult({ status: "error", message: "⚠️ Please enter a valid IMEI or MEID number." });
     return;
@@ -27,7 +27,7 @@ const checkCompatibility = async () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Secret-Key": "jSje2gyRQpi4SjYZ",
+        "X-Secret-Key": "jSje2gyRQpi4SjYZ", // ✅ use env
       },
       body: JSON.stringify({
         action: "esim_checker",
@@ -36,15 +36,25 @@ const checkCompatibility = async () => {
     });
 
     const data = await res.json();
+    console.log("API Response:", data);
 
-    console.log("FULL API RESPONSE 👉", data);
-
-    // 👉 SHOW FULL RESPONSE DIRECTLY
-    setResult({
-      status: "success",
-      message: JSON.stringify(data, null, 2), // pretty print gg
-    });
-
+    // ✅ Adjust based on API response structure
+    if (res.ok && data?.status === "success") {
+      setResult({
+        status: "success",
+        message: "✅ Your device is compatible with Zoiko Mobile network!",
+      });
+    } else if (res.ok && data?.status === "not_compatible") {
+      setResult({
+        status: "error",
+        message: "❌ Not Compatible with Zoiko Mobile network.",
+      });
+    } else {
+      setResult({
+        status: "error",
+        message: data?.message || "❌ Not Compatible with Zoiko Mobile network.",
+      });
+    }
   } catch (error) {
     console.error("API Error:", error);
     setResult({
