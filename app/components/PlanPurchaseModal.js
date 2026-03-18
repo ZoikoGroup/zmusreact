@@ -208,7 +208,7 @@ const formatLabel = (field) => {
     .join(" ");
 };
 
-  const checkDeviceCompatibility = async () => {
+  const checkDeviceCompatibility_old = async () => {
     if (!formData.imei) return;
     setCheckingDevice(true);
     setDeviceCheckStatus(null);
@@ -229,6 +229,49 @@ const formatLabel = (field) => {
     }
     setCheckingDevice(false);
   };
+
+  const checkDeviceCompatibility = async () => {
+  if (!formData.imei?.trim()) return;
+
+  setCheckingDevice(true);
+  setDeviceCheckStatus(null);
+
+  try {
+    const res = await fetch(
+      "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Secret-Key": "jSje2gyRQpi4SjYZ", // ⚠️ move to env later
+        },
+        body: JSON.stringify({
+          action: "esim_checker",
+          imei: formData.imei.trim(),
+        }),
+      }
+    );
+
+    const data = await res.json();
+    console.log("API Response:", data);
+
+    // ✅ Correct handling based on new API
+    if (res.ok && data?.success) {
+      if (data?.compatible) {
+        setDeviceCheckStatus("compatible");
+      } else {
+        setDeviceCheckStatus("incompatible");
+      }
+    } else {
+      setDeviceCheckStatus("error");
+    }
+  } catch (err) {
+    console.error("Device Check Error:", err);
+    setDeviceCheckStatus("error");
+  } finally {
+    setCheckingDevice(false);
+  }
+};
 
 const validatePortingFields = () => {
   const requiredFields = [
