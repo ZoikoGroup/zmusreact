@@ -42,7 +42,7 @@ const checkCompatibility = async () => {
     // 👉 SHOW FULL RESPONSE DIRECTLY
     setResult({
       status: "success",
-      message: JSON.stringify(data, null, 2), // pretty print
+      message: JSON.stringify(data, null, 2), // pretty print gg
     });
 
   } catch (error) {
