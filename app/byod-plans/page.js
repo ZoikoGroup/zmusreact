@@ -15,7 +15,10 @@ const ByodPlans = () => {
 
   const checkCompatibility = async () => {
   if (!imei.trim()) {
-    setResult({ status: "error", message: "⚠️ Please enter a valid IMEI or MEID number." });
+    setResult({
+      status: "error",
+      message: "⚠️ Please enter a valid IMEI or MEID number.",
+    });
     return;
   }
 
@@ -23,36 +26,43 @@ const ByodPlans = () => {
   setResult(null);
 
   try {
-    const res = await fetch("https://goliteapi.golitemobile.com/api/device_compatibility_checker/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Secret-Key": "jSje2gyRQpi4SjYZ", // ✅ use env
-      },
-      body: JSON.stringify({
-        action: "esim_checker",
-        imei: imei.trim(),
-      }),
-    });
+    const res = await fetch(
+      "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Secret-Key": "jSje2gyRQpi4SjYZ", // ⚠️ move to env later
+        },
+        body: JSON.stringify({
+          action: "esim_checker",
+          imei: imei.trim(),
+        }),
+      }
+    );
 
     const data = await res.json();
     console.log("API Response:", data);
 
-    // ✅ Adjust based on API response structure
-    if (res.ok && data?.status === "success") {
-      setResult({
-        status: "success",
-        message: "✅ Your device is compatible with Zoiko Mobile network!",
-      });
-    } else if (res.ok && data?.status === "not_compatible") {
-      setResult({
-        status: "error",
-        message: "❌ Not Compatible with Zoiko Mobile network.",
-      });
+    // ✅ Correct logic based on REAL API response
+    if (res.ok && data?.success) {
+      if (data?.compatible) {
+        setResult({
+          status: "success",
+          message: `✅ ${data.message || "Device is compatible!"}`,
+          data: data, // optional: store full response
+        });
+      } else {
+        setResult({
+          status: "error",
+          message: `❌ ${data.message || "Device is NOT compatible."}`,
+          data: data,
+        });
+      }
     } else {
       setResult({
         status: "error",
-        message: data?.message || "❌ Not Compatible with Zoiko Mobile network.",
+        message: data?.message || "❌ Unable to verify device.",
       });
     }
   } catch (error) {
