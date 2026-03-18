@@ -51,7 +51,7 @@ const openChat = () => {
       alert("Chat is loading... please try again in a moment!");
     }
   };
-  const validateAndCheckDevice_old = async () => {
+  const validateAndCheckDevice = async () => {
     if (!validateIMEI()) return;
 
     setLoading(true);
@@ -84,51 +84,6 @@ const openChat = () => {
       setLoading(false);
     }
   };
-
-
-  const validateAndCheckDevice = async () => {
-  if (!validateIMEI()) return;
-
-  setLoading(true);
-  setApiResult(null);
-  setValidationMsg("Checking device compatibility...");
-
-  try {
-    const res = await fetch(
-      "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Secret-Key": "jSje2gyRQpi4SjYZ",
-        },
-        body: JSON.stringify({
-          action: "esim_checker",
-          imei: imei,
-        }),
-      }
-    );
-
-    const data = await res.json();
-    console.log("API Response:", data);
-
-    setApiResult(data);
-
-    // ✅ Handle response properly
-    if (data.success && data.compatible) {
-      setValidationMsg("✅ Device is compatible!");
-    } else if (data.success && !data.compatible) {
-      setValidationMsg("❌ Device is NOT compatible.");
-    } else {
-      setValidationMsg("❌ Unable to verify device.");
-    }
-  } catch (error) {
-    console.error(error);
-    setValidationMsg("❌ Error checking device. Try again.");
-  } finally {
-    setLoading(false);
-  }
-};
 
   const ProgressBar = () => (
     <div className="progress mb-3" style={{ height: "6px" }}>
@@ -216,22 +171,15 @@ const openChat = () => {
         </div>
 
         {/* Show device info only if compatible */}
-        {apiResult && apiResult.compatible && (
-          <div
-            className="device-info p-3 rounded mb-3"
-            style={{
-              color: "green",
-              borderColor: "green",
-              borderWidth: "2px",
-              borderStyle: "solid",
-            }}
-          >
+        {apiResult && apiResult.compatibility && (
+          <div className="device-info p-3 rounded mb-3" style={{ color: "green", borderColor: "green", borderWidth: "2px", borderStyle: "solid" }}>
             <p><strong>Manufacturer:</strong> {apiResult.manufacturer}</p>
-            <p><strong>Model:</strong> {apiResult.device}</p>
-            <p><strong>eSIM Compatible:</strong> {apiResult.esimCompatible ? "Yes" : "No"}</p>
-            <p><strong>LTE Compatible:</strong> {apiResult.lteCompatible ? "Yes" : "No"}</p>
-            <p><strong>Blacklisted:</strong> {apiResult.blacklisted ? "Yes" : "No"}</p>
-            <p><strong>Category:</strong> {apiResult.deviceCategory}</p>
+            <p><strong>Model:</strong> {apiResult.model}</p>
+            <p><strong>Marketing Name:</strong> {apiResult.marketing_name}</p>
+            <p><strong>Operating System:</strong> {apiResult.operating_system}</p>
+            <p><strong>5G Compatible:</strong> {apiResult.device_5g ? "Yes" : "No"}</p>
+            <p><strong>VoLTE:</strong> {apiResult.volte_compatible ? "Yes" : "No"}</p>
+            <p><strong>WiFi Calling:</strong> {apiResult.wifi_calling_capable ? "Yes" : "No"}</p>
           </div>
         )}
 
@@ -246,7 +194,7 @@ const openChat = () => {
           <button
             className="btn btn-success px-4"
             onClick={handleNext}
-            disabled={!apiResult || !apiResult.compatible}
+            disabled={!apiResult || !apiResult.compatibility}
           >
             Continue to Review →
           </button>
