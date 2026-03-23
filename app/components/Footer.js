@@ -17,7 +17,7 @@ const Footer = () => {
         }
     }, [message]);
 
-    const handleSubscribe = async () => {
+    const handleSubscribe_old = async () => {
         if (!email) {
             setMessage("⚠️ Please enter a valid email address.");
             return;
@@ -48,6 +48,39 @@ const Footer = () => {
         }
     };
 
+    const handleSubscribe = async () => {
+    // Email regex validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email || !emailRegex.test(email)) {
+        setMessage("⚠️ Please enter a valid email address.");
+        return;
+    }
+
+    setLoading(true);
+    setMessage("");
+
+    try {
+        const response = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/subscribe", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: email.trim() }), // trim extra spaces
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            setMessage("✅ Subscription successful! Thank you for subscribing.");
+            setEmail("");
+        } else {
+            setMessage(data?.message || "❌ Subscription failed. Please try again.");
+        }
+    } catch (error) {
+        setMessage("⚠️ Network error. Please try again later.");
+    } finally {
+        setLoading(false);
+    }
+};
     return (
         <>
         <WhatsAppFloating/>
