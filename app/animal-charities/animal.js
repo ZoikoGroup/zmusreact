@@ -1,0 +1,164 @@
+"use client";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import HeadBar from "../components/HeadBar";
+import { Button,  Container, Image } from "react-bootstrap";
+import Testimonials from "../components/Testimonials";
+import AnimalFaqs from "../components/AnimalFaqs";
+
+const AnimalCharities = () => {
+    return (
+        <>
+         <style>{`
+        @media (max-width: 768px) {
+            .specialBanner{
+                background-image: url(/img/home-banner/Animal-Charities-Banner-mobile.png) !important;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 100vw;
+            }
+            .bannerText{
+                padding-top: 6vw;            
+            }
+            .specialBanner h1{
+                font-size: 4.5vw;
+                text-align: center;
+            }
+            .specialBanner h2{
+                font-size: 3vw;
+                text-align: center;
+            }
+            .specialBanner p{
+                font-size: 4vw;
+                text-align: center;
+                padding-bottom: 1vw;
+                margin-bottom: 0vw !important;
+            }
+            .specialBanner a{
+                width: 30vw;
+                padding: 2vw;
+                font-size: 2.5vw;
+            }
+            .zoiko-btn {
+                display: flex;
+                justify-content: center;
+            }
+            .specialBanner ul{
+                display:grid;
+                padding-left:0px;
+                justify-items: center;
+            }
+            .pinkboxwraper {
+            text-align: center;
+            }
+           
+        }
+        @media (min-width: 769px) {
+            .specialBanner {
+                background-image: url(/img/home-banner/Animal-Charities-Banner.png);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 35vw;
+            }
+            .bannerText{
+                padding-top: 6vw;            
+            }
+            .specialBanner h1{
+                font-size: 2.5vw;
+            }
+            .specialBanner h2{
+                font-size: 2vw;
+            }
+            .specialBanner p{
+                font-size: 2vw;
+                        width: 50%;
+            }
+            .specialBanner a{
+                width: 20vw;
+                padding: 1vw;
+                font-size: 1.5vw;
+            }
+           
+            .specialBanner ul li{
+                font-size: 1.5rem;
+            }
+            .specialBanner ul{
+                width: 50%;
+            }
+                
+        }
+        `}</style>
+        {/* <TopHeader /> */}
+        <Header />
+        <HeadBar text={<>Zoiko Mobile - Animal Charities Discount Program</>} />
+        <Container fluid className="p-0 specialBanner">
+            
+            <Container className="w-75">
+                <div className="bannerText">
+                    <h1 className="txtred">Your Connecton Saves Lives</h1>
+                    <p className="txtblack">Join Zoiko Mobile - We are supporting animals and animal charities whilst keep you connected!</p>
+                    
+                    <div className="d-flex flex-nowrap gap-3 zoiko-btn">
+                        <Button href='/zoiko-mobile-animal-welfare-partnership/' variant="danger" size="lg">Partner With Us Today</Button>
+                    
+                    </div>
+                </div>
+            </Container>
+            <Container className="d-sm-block d-md-none" style={{marginTop:'-460px', marginBottom:'250px'}}>
+                <div>
+                    <h1 className="txtred">Your Connecton Saves Lives</h1>
+                    <p className="txtblack py-2">Join Zoiko Mobile - We are supporting animals<br />and animal charities whilst keep you connected!</p>
+                    <div className="d-flex flex-nowrap gap-3">
+                        <Button href='/zoiko-mobile-animal-welfare-partnership/' variant="danger" size="lg">Register Now</Button>
+                        {/* <Button href='#' variant="outline-danger" size="lg">Learn more</Button> */}
+                    </div>
+                </div>
+            </Container>
+        </Container>
+        <Container fluid className="bglite">
+            <Container className="py-5">
+                <h2 className="text-center pb-4">Exclusive Discounts for Charity Workers</h2>
+                <div className="pinkboxwraper justify-content-center gap-5">
+                    <div className="d-flex flex-row animalchbox">
+                        <div>
+                            <Image src="/img/animal-charity1.webp" fluid alt="Animal Charity" />
+                            <p>Animal charity employees receive a 20% discount on our plans for as long as they are employed in the sector.</p>
+                            <Button variant="outline-danger" size="sm" href="/animal-charity-worker-registration">Register Now <i className="bi bi-chevron-right"></i></Button>
+                        </div>
+                    </div>
+                    <div className="d-flex flex-row animalchbox">
+                        <div>
+                            <Image src="/img/animal-charity2.webp" fluid alt="Animal Charity" />
+                            <p>Up to 5 family members of eligible workers are entitled to the same discount, ensuring the whole family stays connected affordably.</p>
+                            <Button variant="outline-danger" size="sm" href="/animal-charity-worker-registration">Register Now <i className="bi bi-chevron-right"></i></Button>
+                        </div>
+                    </div>
+                </div>
+            </Container>
+        </Container>
+        <Container fluid className="puppybanner d-flex align-items-center">
+            <Container>
+                <h2 className="bigblack w-50 w-sm-100">Making Every Call Count</h2>
+                <p className="w-50 w-sm-100 body22">Up to 2% of our annual profits are donated to animal welfare causes. From rescuing pets to supporting shelters, your partnership helps us make a difference.</p>
+                <Button variant="danger" href="/zoiko-mobile-animal-welfare-partnership">Partner With Us Today</Button>
+            </Container>
+        </Container>
+        <Container fluid className="bglite py-4">
+            <Container className="d-flex flex-row align-items-center gap-5">
+                <Image src="/img/kitten.webp" fluid alt="Kitten" className="w-50" />
+                <div>
+                    <h2 className="bigblack">Be Part of the Network That Cares</h2>
+                    <p className="body22">Together, we can make a bigger impact for animals in need.</p>
+                    <Button variant="danger" href="/zoiko-mobile-animal-welfare-partnership">Partner With Us Today</Button>
+                </div>
+            </Container>
+        </Container>
+        <AnimalFaqs />
+        <Testimonials />
+        <Footer />
+        </>
+    );
+};
+export default AnimalCharities;
