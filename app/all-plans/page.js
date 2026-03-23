@@ -1,29 +1,13 @@
-"use client";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import HeadBar from "../components/HeadBar";
-import PostpaidSlider  from "../components/POstpaidSlider";
-import PrepaidSlider from "../components/PrepaidSlider";
-import Testimonials from "../components/Testimonials";
-import BusinessPlans from "../components/BusinessPlans";
-import TravelPlanSlider from "../components/TravelPlanSlider";
+import AllPlans from "./allplans";
 
-const PrepaidPlans = () => {
-    return (
-        <>
-        {/* <TopHeader /> */}
-        <Header />
-        <HeadBar text="Affordable Plans | No Credit Checks | No Hidden Fees | Unlimited Everything | Reliable Nationwide Coverage" />
-        <PrepaidSlider />
-        <HeadBar text="Zoiko Mobile Postpaid Plans" />
-        <PostpaidSlider />
-        <HeadBar text="Zoiko Mobile Postpaid Business Plans" />
-        <BusinessPlans />
-        <HeadBar text="Stay Connected Globally - Simple, Affordable Travel Plans" />
-        <TravelPlanSlider />
-        <Testimonials />
-        <Footer />
-        </>
-    );
+
+export const metadata = {
+  title: "All Zoiko Mobile Plans | 5G Data and No Hidden Charges",
+  description:
+    "Browse Zoiko Mobile's all plans featuring high-speed 5G, unlimited everything, flexible pricing, hotspot access, and secure device protection.",
+
 };
-export default PrepaidPlans;
+
+export default function Page() {
+  return <AllPlans />;
+}
