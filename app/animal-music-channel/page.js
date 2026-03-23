@@ -1,4 +1,4 @@
-import Animal from "./animal";
+import Animalmusic from "./animalmusic";
 
 export const metadata = {
   title: "Animal and Music Loving Network in USA | Zoiko Mobile",
@@ -7,5 +7,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <Animal />;
+  return <Animalmusic />;
 }
