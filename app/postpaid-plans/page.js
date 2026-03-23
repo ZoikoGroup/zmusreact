@@ -1,26 +1,13 @@
-"use client"
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import HeadBar from "../components/HeadBar";
-import PostpaidBanner from "../components/PostpaidBanner";
-import POstpaidSlider from "../components/POstpaidSlider";
-import PostpaidBox from "../components/PostpaidBox";
-import Testimonials from "../components/Testimonials";
-import PostpaidFaqs from "../components/PostpaidFaqs";
+import Postpaid from "./postpaid";
 
-const PostpaidPlans = () => {
-    return (
-        <>
-        {/* <TopHeader /> */}
-        <Header />
-        <HeadBar text="Get Our Best Postpaid Mobile Plans & Pay Only for Every Need!" />
-        <PostpaidBanner />
-        <POstpaidSlider />
-        <PostpaidBox />
-        <PostpaidFaqs />
-        <Testimonials />
-        <Footer />
-        </>
-    );
+
+export const metadata = {
+  title: "Best Postpaid Phone Plans | Reliable Mobile Coverage",
+  description:
+    "Choose Zoiko Mobile for the best postpaid plans. Enjoy affordable, flexible options with nationwide coverage to fit your mobile communication needs.",
+
+};
+
+export default function Page() {
+  return <Postpaid />;
 }
-export default PostpaidPlans;
