@@ -695,6 +695,22 @@ a {
   background-size: cover;
   height: 400px;
 }
+@media (max-width: 767px) {
+    .aboutbg {
+        background-image: none;
+        height: auto;
+        padding: 20px 0;
+        position: relative; /* ensure stacking context resets */
+    }
+
+    .aboutbg .position-absolute {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        padding: 16px !important;
+    }
+}
 .collegestudent {
   background-image: url("/img/college-student-banner.webp");
   background-position: center;
