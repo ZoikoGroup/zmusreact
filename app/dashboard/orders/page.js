@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 import HeadBar from "../../components/HeadBar";
 import { Spinner, Form } from "react-bootstrap";
 import Link from "next/link";
+import Head from "next/head";
 import beQuick from "../../utils/dasdbeQuickApi";
 
 export default function OrdersPage() {
@@ -13,7 +14,6 @@ export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
 
-  // UI States
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
@@ -46,7 +46,6 @@ export default function OrdersPage() {
         const ord = await beQuick.getOrders(SUBSCRIBER_ID);
         setOrders(ord?.orders || ord?.data || []);
       } catch (err) {
-        console.error(err);
         setError("Failed to load orders");
       } finally {
         setLoading(false);
@@ -54,7 +53,7 @@ export default function OrdersPage() {
     })();
   }, []);
 
-  // ---------------- Filtering + Search ----------------
+  // ---------------- Filter + Search ----------------
   const filteredOrders = useMemo(() => {
     return orders.filter((order) => {
       const matchesSearch =
@@ -81,44 +80,61 @@ export default function OrdersPage() {
     currentPage * ITEMS_PER_PAGE
   );
 
-  // ---------------- UI ----------------
   return (
     <>
+      {/* ✅ SEO META (client side) */}
+      <Head>
+        <title>My Orders | Zoiko Mobile Dashboard</title>
+        <meta
+          name="description"
+          content="View all your Zoiko Mobile orders, billing history, and transactions in one place."
+        />
+        <meta name="robots" content="noindex,nofollow" />
+      </Head>
+
       <Header />
       <HeadBar text="Your Orders & Transactions" />
 
       <div className="container py-4">
-        <h4 className="fw-bold mb-4">All Orders</h4>
+        {/* Title */}
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <h4 className="fw-bold mb-0">All Orders</h4>
+          <span className="text-muted small">
+            Total: {filteredOrders.length} orders
+          </span>
+        </div>
 
         {/* Filters */}
-        <div className="row g-3 mb-4">
-          <div className="col-md-6">
-            <Form.Control
-              type="text"
-              placeholder="Search by Order ID or description..."
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-                setCurrentPage(1);
-              }}
-            />
-          </div>
+        <div className="card p-3 shadow-sm border-0 mb-4 rounded-4">
+          <div className="row g-3">
+            <div className="col-md-6">
+              <Form.Control
+                type="text"
+                placeholder="🔍 Search orders..."
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setCurrentPage(1);
+                }}
+              />
+            </div>
 
-          <div className="col-md-3">
-            <Form.Select
-              value={statusFilter}
-              onChange={(e) => {
-                setStatusFilter(e.target.value);
-                setCurrentPage(1);
-              }}
-            >
-              <option value="all">All Status</option>
-              <option value="completed">Completed</option>
-              <option value="pending">Pending</option>
-              <option value="draft">Draft</option>
-              <option value="processing">Processing</option>
-              <option value="failed">Failed</option>
-            </Form.Select>
+            <div className="col-md-3">
+              <Form.Select
+                value={statusFilter}
+                onChange={(e) => {
+                  setStatusFilter(e.target.value);
+                  setCurrentPage(1);
+                }}
+              >
+                <option value="all">All Status</option>
+                <option value="completed">Completed</option>
+                <option value="processing">Processing</option>
+                <option value="draft">Draft</option>
+                <option value="pending">Pending</option>
+                <option value="failed">Failed</option>
+              </Form.Select>
+            </div>
           </div>
         </div>
 
@@ -136,21 +152,20 @@ export default function OrdersPage() {
         {!loading && filteredOrders.length === 0 && (
           <div className="text-center py-5">
             <h5>No Orders Found</h5>
-            <p className="text-muted">Try changing filters or search.</p>
-            <Link href="/all-plans" className="btn btn-success">
-              Explore Plans
-            </Link>
+            <p className="text-muted">Try changing filters or search</p>
           </div>
         )}
 
-        {/* Orders Grid */}
+        {/* Orders */}
         <div className="row g-4">
-          {paginatedOrders.map((order, index) => {
+          {paginatedOrders.map((order, i) => {
             const status = (order.status || "").toLowerCase();
 
             const badgeClass =
               status === "completed"
                 ? "bg-success"
+                : status === "processing"
+                ? "bg-info text-dark"
                 : status === "pending"
                 ? "bg-warning text-dark"
                 : status === "failed"
@@ -158,29 +173,30 @@ export default function OrdersPage() {
                 : "bg-secondary";
 
             return (
-              <div className="col-md-6 col-lg-4" key={index}>
-                <div className="card shadow-sm border-0 h-100 rounded-4">
+              <div className="col-md-6 col-lg-4" key={i}>
+                <div className="card border-0 shadow-sm rounded-4 h-100 order-card">
                   <div className="card-body d-flex flex-column">
-                    <h6 className="fw-bold mb-1">
-                      Order #{order.id || order.order_id}
-                    </h6>
+
+                    <div className="d-flex justify-content-between mb-2">
+                      <h6 className="fw-bold">
+                        Order #{order.id || order.order_id}
+                      </h6>
+                      <span className={`badge ${badgeClass}`}>
+                        {status || "unknown"}
+                      </span>
+                    </div>
 
                     <small className="text-muted mb-2">
                       {order.date || order.created_at}
                     </small>
 
-                    <p className="flex-grow-1">
+                    <p className="flex-grow-1 text-muted">
                       {order.description || "Plan Purchase"}
                     </p>
 
                     <h5 className="text-success fw-bold">
                       ${Number(order.amount || order.total || 0).toFixed(2)}
                     </h5>
-
-                    <span className={`badge ${badgeClass} mt-2`}>
-                      {status || "unknown"}
-                    </span>
-                    
                   </div>
                 </div>
               </div>
@@ -190,13 +206,13 @@ export default function OrdersPage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="d-flex justify-content-center mt-4 gap-2 flex-wrap">
+          <div className="d-flex justify-content-center mt-5 gap-2 flex-wrap">
             <button
               className="btn btn-outline-secondary btn-sm"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => p - 1)}
             >
-              Prev
+              ← Prev
             </button>
 
             {[...Array(totalPages)].map((_, i) => (
@@ -218,7 +234,7 @@ export default function OrdersPage() {
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => p + 1)}
             >
-              Next
+              Next →
             </button>
           </div>
         )}
