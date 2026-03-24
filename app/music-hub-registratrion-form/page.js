@@ -309,7 +309,7 @@ const MusicHubRegistration = () => {
                             {errors.fname && <p className="txtred">{errors.fname}</p>}
                         </Col>
                         <Col md={4} sm={12} xs={12} className="mt-2">
-                            <FormLabel htmlFor="email">Eamil <span className="txtred">*</span></FormLabel>
+                            <FormLabel htmlFor="email">Email <span className="txtred">*</span></FormLabel>
                             <Form.Control type="email" name="email" onChange={handleChange} value={formData.email} placeholder="Email" />
                             {errors.email && <p className="txtred">{errors.email}</p>}
                         </Col>
