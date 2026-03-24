@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import HeadBar from "../../components/HeadBar";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Form } from "react-bootstrap";
 import Link from "next/link";
 import beQuick from "../../utils/dasdbeQuickApi";
 
@@ -13,6 +13,14 @@ export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
 
+  // UI States
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const ITEMS_PER_PAGE = 6;
+
+  // ---------------- Fetch Orders ----------------
   useEffect(() => {
     (async () => {
       try {
@@ -36,7 +44,6 @@ export default function OrdersPage() {
         const SUBSCRIBER_ID = subscriberResult.subscriber_id;
 
         const ord = await beQuick.getOrders(SUBSCRIBER_ID);
-
         setOrders(ord?.orders || ord?.data || []);
       } catch (err) {
         console.error(err);
@@ -47,75 +54,172 @@ export default function OrdersPage() {
     })();
   }, []);
 
+  // ---------------- Filtering + Search ----------------
+  const filteredOrders = useMemo(() => {
+    return orders.filter((order) => {
+      const matchesSearch =
+        (order.id || order.order_id || "")
+          .toString()
+          .includes(search) ||
+        (order.description || "")
+          .toLowerCase()
+          .includes(search.toLowerCase());
+
+      const matchesStatus =
+        statusFilter === "all" ||
+        (order.status || "").toLowerCase() === statusFilter;
+
+      return matchesSearch && matchesStatus;
+    });
+  }, [orders, search, statusFilter]);
+
+  // ---------------- Pagination ----------------
+  const totalPages = Math.ceil(filteredOrders.length / ITEMS_PER_PAGE);
+
+  const paginatedOrders = filteredOrders.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  // ---------------- UI ----------------
   return (
     <>
       <Header />
       <HeadBar text="Your Orders & Transactions" />
 
       <div className="container py-4">
-        <h4 className="mb-4 fw-bold">All Orders</h4>
+        <h4 className="fw-bold mb-4">All Orders</h4>
 
+        {/* Filters */}
+        <div className="row g-3 mb-4">
+          <div className="col-md-6">
+            <Form.Control
+              type="text"
+              placeholder="Search by Order ID or description..."
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setCurrentPage(1);
+              }}
+            />
+          </div>
+
+          <div className="col-md-3">
+            <Form.Select
+              value={statusFilter}
+              onChange={(e) => {
+                setStatusFilter(e.target.value);
+                setCurrentPage(1);
+              }}
+            >
+              <option value="all">All Status</option>
+              <option value="completed">Completed</option>
+              <option value="pending">Pending</option>
+              <option value="draft">Draft</option>
+              <option value="processing">Processing</option>
+              <option value="failed">Failed</option>
+            </Form.Select>
+          </div>
+        </div>
+
+        {/* Loading */}
         {loading && (
-          <div className="text-center py-4">
+          <div className="text-center py-5">
             <Spinner />
           </div>
         )}
 
+        {/* Error */}
         {error && <div className="alert alert-danger">{error}</div>}
 
-        {!loading && orders.length === 0 && (
+        {/* Empty */}
+        {!loading && filteredOrders.length === 0 && (
           <div className="text-center py-5">
             <h5>No Orders Found</h5>
-            <p className="text-muted">You haven’t placed any orders yet.</p>
+            <p className="text-muted">Try changing filters or search.</p>
             <Link href="/all-plans" className="btn btn-success">
               Explore Plans
             </Link>
           </div>
         )}
 
-        {!loading && orders.length > 0 && (
-          <div className="row g-4">
-            {orders.map((order, index) => (
+        {/* Orders Grid */}
+        <div className="row g-4">
+          {paginatedOrders.map((order, index) => {
+            const status = (order.status || "").toLowerCase();
+
+            const badgeClass =
+              status === "completed"
+                ? "bg-success"
+                : status === "pending"
+                ? "bg-warning text-dark"
+                : status === "failed"
+                ? "bg-danger"
+                : "bg-secondary";
+
+            return (
               <div className="col-md-6 col-lg-4" key={index}>
-                <div className="card shadow-sm h-100">
-                  <div className="card-body">
-                    <h6 className="fw-bold mb-2">
+                <div className="card shadow-sm border-0 h-100 rounded-4">
+                  <div className="card-body d-flex flex-column">
+                    <h6 className="fw-bold mb-1">
                       Order #{order.id || order.order_id}
                     </h6>
 
-                    <p className="text-muted small mb-2">
+                    <small className="text-muted mb-2">
                       {order.date || order.created_at}
-                    </p>
+                    </small>
 
-                    <p className="mb-2">
+                    <p className="flex-grow-1">
                       {order.description || "Plan Purchase"}
                     </p>
 
-                    <h5 className="text-success mb-3">
+                    <h5 className="text-success fw-bold">
                       ${Number(order.amount || order.total || 0).toFixed(2)}
                     </h5>
 
-                    <span
-                      className={`badge ${
-                        order.status === "completed"
-                          ? "bg-success"
-                          : order.status === "pending"
-                          ? "bg-warning text-dark"
-                          : "bg-secondary"
-                      }`}
-                    >
-                      {order.status || "Unknown"}
+                    <span className={`badge ${badgeClass} mt-2`}>
+                      {status || "unknown"}
                     </span>
-
-                    <div className="mt-3">
-                      <button className="btn btn-outline-success btn-sm w-100">
-                        View Details
-                      </button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
+            );
+          })}
+        </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="d-flex justify-content-center mt-4 gap-2 flex-wrap">
+            <button
+              className="btn btn-outline-secondary btn-sm"
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((p) => p - 1)}
+            >
+              Prev
+            </button>
+
+            {[...Array(totalPages)].map((_, i) => (
+              <button
+                key={i}
+                className={`btn btn-sm ${
+                  currentPage === i + 1
+                    ? "btn-success"
+                    : "btn-outline-secondary"
+                }`}
+                onClick={() => setCurrentPage(i + 1)}
+              >
+                {i + 1}
+              </button>
             ))}
+
+            <button
+              className="btn btn-outline-secondary btn-sm"
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((p) => p + 1)}
+            >
+              Next
+            </button>
           </div>
         )}
       </div>
