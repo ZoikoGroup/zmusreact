@@ -98,7 +98,7 @@ const AboutUs = () => {
             </Container>
             <Container>
                 <Row className="align-items-center">
-                    <Col md={6} sm={12} xs={12} className="d-none d-md-block">
+                    <Col md={6} sm={12} xs={12}>
                         <Image src="/img/aboutimg.webp" fluid alt="About" />
                     </Col>
                     <Col md={6} sm={12} xs={12}>
