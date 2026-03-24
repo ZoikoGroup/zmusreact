@@ -697,7 +697,11 @@ const openChat = () => {
                     </div>
                   ))}
                   <div className="d-flex gap-2">
-                    <button className="btn btn-outline-success btn-sm">View All Orders</button>
+                    <Link href="/dashboard/orders">
+                      <button className="btn btn-outline-success btn-sm">
+                        View All Orders
+                      </button>
+                    </Link>
                     <button className="btn btn-outline-secondary btn-sm">Track Shipment</button>
                   </div>
                 </div>
