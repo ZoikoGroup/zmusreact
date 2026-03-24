@@ -6,9 +6,10 @@ import Footer from "../../components/Footer";
 import HeadBar from "../../components/HeadBar";
 import { Spinner, Form } from "react-bootstrap";
 import Link from "next/link";
+import Head from "next/head";
 import beQuick from "../../utils/dasdbeQuickApi";
 
-export default function OrdersClient() {
+export default function OrdersPage() {
   const [loading, setLoading] = useState(true);
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
@@ -19,6 +20,7 @@ export default function OrdersClient() {
 
   const ITEMS_PER_PAGE = 6;
 
+  // ---------------- Fetch Orders ----------------
   useEffect(() => {
     (async () => {
       try {
@@ -51,6 +53,7 @@ export default function OrdersClient() {
     })();
   }, []);
 
+  // ---------------- Filter + Search ----------------
   const filteredOrders = useMemo(() => {
     return orders.filter((order) => {
       const matchesSearch =
@@ -69,6 +72,7 @@ export default function OrdersClient() {
     });
   }, [orders, search, statusFilter]);
 
+  // ---------------- Pagination ----------------
   const totalPages = Math.ceil(filteredOrders.length / ITEMS_PER_PAGE);
 
   const paginatedOrders = filteredOrders.slice(
@@ -78,85 +82,162 @@ export default function OrdersClient() {
 
   return (
     <>
+      {/* ✅ SEO META (client side) */}
+      <Head>
+        <title>My Orders | Zoiko Mobile Dashboard</title>
+        <meta
+          name="description"
+          content="View all your Zoiko Mobile orders, billing history, and transactions in one place."
+        />
+        <meta name="robots" content="noindex,nofollow" />
+      </Head>
+
       <Header />
       <HeadBar text="Your Orders & Transactions" />
 
       <div className="container py-4">
-        <h4 className="fw-bold mb-4">All Orders</h4>
+        {/* Title */}
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <h4 className="fw-bold mb-0">All Orders</h4>
+          <span className="text-muted small">
+            Total: {filteredOrders.length} orders
+          </span>
+        </div>
 
         {/* Filters */}
-        <div className="row g-3 mb-4">
-          <div className="col-md-6">
-            <Form.Control
-              type="text"
-              placeholder="Search..."
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-                setCurrentPage(1);
-              }}
-            />
-          </div>
+        <div className="card p-3 shadow-sm border-0 mb-4 rounded-4">
+          <div className="row g-3">
+            <div className="col-md-6">
+              <Form.Control
+                type="text"
+                placeholder="🔍 Search orders..."
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setCurrentPage(1);
+                }}
+              />
+            </div>
 
-          <div className="col-md-3">
-            <Form.Select
-              value={statusFilter}
-              onChange={(e) => {
-                setStatusFilter(e.target.value);
-                setCurrentPage(1);
-              }}
-            >
-              <option value="all">All</option>
-              <option value="completed">Completed</option>
-              <option value="processing">Processing</option>
-              <option value="draft">Draft</option>
-              <option value="pending">Pending</option>
-              <option value="failed">Failed</option>
-            </Form.Select>
+            <div className="col-md-3">
+              <Form.Select
+                value={statusFilter}
+                onChange={(e) => {
+                  setStatusFilter(e.target.value);
+                  setCurrentPage(1);
+                }}
+              >
+                <option value="all">All Status</option>
+                <option value="completed">Completed</option>
+                <option value="processing">Processing</option>
+                <option value="draft">Draft</option>
+                <option value="pending">Pending</option>
+                <option value="failed">Failed</option>
+              </Form.Select>
+            </div>
           </div>
         </div>
 
-        {loading && <Spinner />}
+        {/* Loading */}
+        {loading && (
+          <div className="text-center py-5">
+            <Spinner />
+          </div>
+        )}
 
+        {/* Error */}
         {error && <div className="alert alert-danger">{error}</div>}
 
+        {/* Empty */}
+        {!loading && filteredOrders.length === 0 && (
+          <div className="text-center py-5">
+            <h5>No Orders Found</h5>
+            <p className="text-muted">Try changing filters or search</p>
+          </div>
+        )}
+
+        {/* Orders */}
         <div className="row g-4">
-          {paginatedOrders.map((order, i) => (
-            <div className="col-md-6 col-lg-4" key={i}>
-              <div className="card p-3 shadow-sm">
-                <h6>Order #{order.id || order.order_id}</h6>
-                <p className="small text-muted">
-                  {order.date || order.created_at}
-                </p>
-                <p>{order.description}</p>
-                <strong>
-                  ${Number(order.amount || order.total || 0).toFixed(2)}
-                </strong>
+          {paginatedOrders.map((order, i) => {
+            const status = (order.status || "").toLowerCase();
+
+            const badgeClass =
+              status === "completed"
+                ? "bg-success"
+                : status === "processing"
+                ? "bg-info text-dark"
+                : status === "pending"
+                ? "bg-warning text-dark"
+                : status === "failed"
+                ? "bg-danger"
+                : "bg-secondary";
+
+            return (
+              <div className="col-md-6 col-lg-4" key={i}>
+                <div className="card border-0 shadow-sm rounded-4 h-100 order-card">
+                  <div className="card-body d-flex flex-column">
+
+                    <div className="d-flex justify-content-between mb-2">
+                      <h6 className="fw-bold">
+                        Order #{order.id || order.order_id}
+                      </h6>
+                      <span className={`badge ${badgeClass}`}>
+                        {status || "unknown"}
+                      </span>
+                    </div>
+
+                    <small className="text-muted mb-2">
+                      {order.date || order.created_at}
+                    </small>
+
+                    <p className="flex-grow-1 text-muted">
+                      {order.description || "Plan Purchase"}
+                    </p>
+
+                    <h5 className="text-success fw-bold">
+                      ${Number(order.amount || order.total || 0).toFixed(2)}
+                    </h5>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Pagination */}
-        <div className="mt-4 text-center">
-          <button
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((p) => p - 1)}
-          >
-            Prev
-          </button>
+        {totalPages > 1 && (
+          <div className="d-flex justify-content-center mt-5 gap-2 flex-wrap">
+            <button
+              className="btn btn-outline-secondary btn-sm"
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((p) => p - 1)}
+            >
+              ← Prev
+            </button>
 
-          <span className="mx-2">
-            {currentPage} / {totalPages}
-          </span>
+            {[...Array(totalPages)].map((_, i) => (
+              <button
+                key={i}
+                className={`btn btn-sm ${
+                  currentPage === i + 1
+                    ? "btn-success"
+                    : "btn-outline-secondary"
+                }`}
+                onClick={() => setCurrentPage(i + 1)}
+              >
+                {i + 1}
+              </button>
+            ))}
 
-          <button
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage((p) => p + 1)}
-          >
-            Next
-          </button>
-        </div>
+            <button
+              className="btn btn-outline-secondary btn-sm"
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((p) => p + 1)}
+            >
+              Next →
+            </button>
+          </div>
+        )}
       </div>
 
       <Footer />
