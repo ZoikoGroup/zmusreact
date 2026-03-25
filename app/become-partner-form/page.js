@@ -58,8 +58,22 @@ const BecomePartnerForm = () => {
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.zip) newErrors.zip = "ZIP is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.phone) newErrors.phone = "Phone number is required";
+    //if (!formData.email) newErrors.email = "Email is required";
+
+    if (!formData.email) {
+        newErrors.email = "Email is required";
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        newErrors.email = "Enter a valid email address";
+      }
+
+    //if (!formData.phone) newErrors.phone = "Phone number is required";
+
+    if (!formData.phone) {
+        newErrors.phone = "Phone number is required";
+      } else if (!/^[0-9]{7,15}$/.test(formData.phone)) {
+        newErrors.phone = "Enter a valid phone number (7–15 digits)";
+      }
+
     if (!formData.yearsInBusiness) newErrors.yearsInBusiness = "Select years in business";
     if (!formData.monthlySales) newErrors.monthlySales = "Select monthly sales volume";
     if (!formData.agreeEligibility) newErrors.agreeEligibility = "Required";
