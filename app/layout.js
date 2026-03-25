@@ -50,24 +50,6 @@ const metaMap = {
     description:
       "Grab festive Christmas Phone Plan Deals 2025 with 30% OFF for 3 months + FREE activation and Refurbished Phones up to 40% OFF. Shop now!",
   },
-  "/postpaid-plans": {
-    title: "Best Postpaid Phone Plans | Reliable Mobile Coverage",
-    description:
-      "Choose Zoiko Mobile for the best postpaid plans. Enjoy affordable, flexible options with nationwide coverage to fit your mobile communication needs.",
-  },
-  "/business-deals": {
-    title: "Affordable Unlimited Business Plans | Zoiko Mobile",
-    description: "Affordable unlimited business mobile plans from Zoiko Mobile. Enjoy unlimited data, reliable service & flexible billing tailored for businesses. Sign up now.",
-  },
-  "/travel-plans": {
-    title: "Affordable Travel Data Plans Worldwide | Zoiko Mobile USA",
-    description: "Experience the best travel data plans with ZoiKo Mobile. Enjoy seamless connectivity and affordable rates as you explore new destinations around the globe.",
-  },
-  "/animal-music-channel": {
-    title: "Animal and Music Loving Network in USA | Zoiko Mobile",
-    description:
-      "Join the vibrant community of the animal and music loving network in USA. Zoiko Mobile offers a unique experience for pet enthusiasts.",
-  },
   "/product-category/refurbished": {
     title: "Premium Refurbished Mobile Phone Deals | Zoiko Mobile USA",
     description:
