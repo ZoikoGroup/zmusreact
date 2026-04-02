@@ -273,7 +273,7 @@ const formatLabel = (field) => {
   }
 };
 
-const validatePortingFields = () => {
+const validatePortingFields_old = () => {
   const requiredFields = [
     "mdn",
     "first_name",
@@ -299,6 +299,41 @@ const validatePortingFields = () => {
   return Object.keys(newErrors).length === 0;
 };
 
+const validatePortingFields = () => {
+  const requiredFields = [
+    "mdn",
+    "first_name",
+    "last_name",
+    "carrier_account",
+    "carrier_password",
+    "state",
+    "city",
+    "address1",
+    "zip",
+  ];
+
+  const newErrors = {};
+
+  requiredFields.forEach((field) => {
+    const val = formData[field];
+    if (!val || !String(val).trim()) {
+      newErrors[field] = "This field is required";
+    }
+  });
+
+  // ✅ MDN: numbers only + exactly 10 digits
+  if (formData.mdn) {
+    const mdn = String(formData.mdn).trim();
+    if (!/^\d+$/.test(mdn)) {
+      newErrors.mdn = "Phone number must contain numbers only.";
+    } else if (mdn.length !== 10) {
+      newErrors.mdn = "Phone number must be exactly 10 digits.";
+    }
+  }
+
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
 
   const nextStep = () => {
   // If eSIM user and currently at device check step
@@ -426,112 +461,133 @@ if (lineType === "portNumber" && currentStep === 1) {
           )}
 
           {currentStep === 1 && lineType === "portNumber" && (
-            <div>
-              <h4>Enter Details For Porting Number</h4>
-              <div className="form_wrapper">
-                {["mdn","first_name","last_name","carrier_account","carrier_password","city","address1","address2","zip"].map((field) => (
-                  <div key={field} className="form_field_group-half validate-required" style={{  }}>
-  <label style={{ display: "block" }}>
-    {formatLabel(field)}
-  </label>
-  <input
-   placeholder={field === 'mdn' ? "Enter 10 digit Phone Number (MDN)" : `Enter ${formatLabel(field)}`}
-    type="text"
-    name={field}
-    value={formData[field] || ""}
-    onChange={handleChange}
-    className={`form-control ${errors[field] ? "is-invalid" : ""}`}
-  />
+            
 
-  {/* ✅ Reserve space even if there's no error */}
-  <div
-    className="invalid-feedback"
-    style={{
-      display: "block",
-      minHeight: "20px", // reserve consistent height
-      marginTop: "4px",
-      visibility: errors[field] ? "visible" : "hidden", // hide text, keep space
-    }}
-  >
-    {errors[field] || "placeholder"} {/* placeholder text just to hold height */}
-  </div>
-</div>
-                ))}
-                <div className="form_field_group-half validate-required" style={{ marginBottom: 12 }}>
-  <label style={{ display: "block", marginBottom: 6 }}>STATE</label>
-                  <select name="state" value={formData.state} onChange={handleChange}>
-                    <option value="">Select state</option>
-                    <option value="AL">Alabama</option>
-                    <option value="AK">Alaska</option>
-                    <option value="AZ">Arizona</option>
-                    <option value="AR">Arkansas</option>
-                    <option value="CA">California</option>
-                    <option value="CO">Colorado</option>
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="DC">District of Columbia</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="HI">Hawaii</option>
-                    <option value="ID">Idaho</option>
-                    <option value="IL">Illinois</option>
-                    <option value="IN">Indiana</option>
-                    <option value="IA">Iowa</option>
-                    <option value="KS">Kansas</option>
-                    <option value="KY">Kentucky</option>
-                    <option value="LA">Louisiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
-                    <option value="MA">Massachusetts</option>
-                    <option value="MI">Michigan</option>
-                    <option value="MN">Minnesota</option>
-                    <option value="MS">Mississippi</option>
-                    <option value="MO">Missouri</option>
-                    <option value="MT">Montana</option>
-                    <option value="NE">Nebraska</option>
-                    <option value="NV">Nevada</option>
-                    <option value="NH">New Hampshire</option>
-                    <option value="NJ">New Jersey</option>
-                    <option value="NM">New Mexico</option>
-                    <option value="NY">New York</option>
-                    <option value="NC">North Carolina</option>
-                    <option value="ND">North Dakota</option>
-                    <option value="OH">Ohio</option>
-                    <option value="OK">Oklahoma</option>
-                    <option value="OR">Oregon</option>
-                    <option value="PA">Pennsylvania</option>
-                    <option value="RI">Rhode Island</option>
-                    <option value="SC">South Carolina</option>
-                    <option value="SD">South Dakota</option>
-                    <option value="TN">Tennessee</option>
-                    <option value="TX">Texas</option>
-                    <option value="UT">Utah</option>
-                    <option value="VT">Vermont</option>
-                    <option value="VA">Virginia</option>
-                    <option value="WA">Washington</option>
-                    <option value="WV">West Virginia</option>
-                    <option value="WI">Wisconsin</option>
-                    <option value="WY">Wyoming</option>
-                    <option value="AA">Armed Forces (AA)</option>
-                    <option value="AE">Armed Forces (AE)</option>
-                    <option value="AP">Armed Forces (AP)</option>`
-                  </select>
-                   {errors.state && (
-        <div
-    className="invalid-feedback"
-    style={{
-      display: "block",
-      minHeight: "20px",
-      marginTop: "4px",
-      visibility: errors.state ? "visible" : "hidden",
-    }}
-  >
-    {errors.state || "placeholder"}
-  </div>
-      )}
+
+        <div>
+          <h4>Enter Details For Porting Number</h4>
+          <div className="form_wrapper">
+
+            {["mdn", "first_name", "last_name", "carrier_account", "carrier_password", "city", "address1", "address2", "zip"].map((field) => (
+              <div key={field} className="form_field_group-half validate-required">
+                <label style={{ display: "block" }}>
+                  {formatLabel(field)}
+                </label>
+
+                <input
+                  placeholder={field === "mdn" ? "Enter 10 digit Phone Number (MDN)" : `Enter ${formatLabel(field)}`}
+                  type="text"
+                  name={field}
+                  value={formData[field] || ""}
+                  maxLength={field === "mdn" ? 10 : undefined}
+                  onChange={(e) => {
+                    // ✅ MDN: block non-numeric input
+                    if (field === "mdn") {
+                      const val = e.target.value;
+                      if (!/^\d*$/.test(val)) return;
+                    }
+                    handleChange(e);
+                  }}
+                  className={`form-control ${errors[field] ? "is-invalid" : ""}`}
+                />
+
+                {/* ✅ Reserve space even if no error */}
+                <div
+                  className="invalid-feedback"
+                  style={{
+                    display: "block",
+                    minHeight: "20px",
+                    marginTop: "4px",
+                    visibility: errors[field] ? "visible" : "hidden",
+                  }}
+                >
+                  {errors[field] || "placeholder"}
                 </div>
               </div>
+            ))}
+
+            {/* State Dropdown */}
+            <div className="form_field_group-half validate-required" style={{ marginBottom: 12 }}>
+              <label style={{ display: "block", marginBottom: 6 }}>STATE</label>
+              <select
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+                className={`form-control ${errors.state ? "is-invalid" : ""}`}
+              >
+                <option value="">Select state</option>
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="DC">District of Columbia</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="IA">Iowa</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="ME">Maine</option>
+                <option value="MD">Maryland</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MS">Mississippi</option>
+                <option value="MO">Missouri</option>
+                <option value="MT">Montana</option>
+                <option value="NE">Nebraska</option>
+                <option value="NV">Nevada</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NY">New York</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WA">Washington</option>
+                <option value="WV">West Virginia</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WY">Wyoming</option>
+                <option value="AA">Armed Forces (AA)</option>
+                <option value="AE">Armed Forces (AE)</option>
+                <option value="AP">Armed Forces (AP)</option>
+              </select>
+
+              {/* ✅ Consistent error display same as other fields */}
+              <div
+                className="invalid-feedback"
+                style={{
+                  display: "block",
+                  minHeight: "20px",
+                  marginTop: "4px",
+                  visibility: errors.state ? "visible" : "hidden",
+                }}
+              >
+                {errors.state || "placeholder"}
+              </div>
             </div>
+
+          </div>
+        </div>
           )}
 
           {currentStep === 2 && (
