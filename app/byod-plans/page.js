@@ -211,8 +211,6 @@ const ByodPlans = () => {
 
       </Container>
 
-
-
       {/* Compatibility Info */}
       <Container fluid className="p-5 bglite">
         <h2 className="text-center">Is My Phone Compatible?</h2>
