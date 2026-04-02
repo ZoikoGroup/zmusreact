@@ -132,7 +132,7 @@ const MusicHubRegistration = () => {
     
 .checkbox-group-center {
 
-  justify-content: center;
+  justify-content: left;
 
 }
 
