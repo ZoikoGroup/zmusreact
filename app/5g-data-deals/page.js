@@ -1,6 +1,5 @@
 import Gdata from "./5gdata";
 
-
 export const metadata = {
   title: "Affordable 5G Mobile Data Plans | Zoiko Mobile",
   description:

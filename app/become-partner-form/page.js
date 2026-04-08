@@ -51,7 +51,7 @@ const BecomePartnerForm = () => {
     }
   };
 
-  const validate = () => {
+  const validate_old = () => {
     const newErrors = {};
     if (!formData.companyName) newErrors.companyName = "Enter Your Full registered name of your organization";
     if (!formData.street) newErrors.street = "Street is required";
@@ -59,7 +59,9 @@ const BecomePartnerForm = () => {
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.zip) newErrors.zip = "ZIP is required";
     if (!formData.email) newErrors.email = "Email is required";
+
     if (!formData.phone) newErrors.phone = "Phone number is required";
+
     if (!formData.yearsInBusiness) newErrors.yearsInBusiness = "Select years in business";
     if (!formData.monthlySales) newErrors.monthlySales = "Select monthly sales volume";
     if (!formData.agreeEligibility) newErrors.agreeEligibility = "Required";
@@ -75,6 +77,80 @@ const BecomePartnerForm = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
+  const validate = () => {
+  const newErrors = {};
+
+  // Required fields
+  if (!formData.companyName)
+    newErrors.companyName = "Enter your registered company name";
+
+  if (!formData.street) newErrors.street = "Street is required";
+  if (!formData.city) newErrors.city = "City is required";
+  if (!formData.state) newErrors.state = "State is required";
+  if (!formData.zip) newErrors.zip = "ZIP is required";
+
+  // Email regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Primary Email
+  if (!formData.email) {
+    newErrors.email = "Email is required";
+  } else if (!emailRegex.test(formData.email)) {
+    newErrors.email = "Enter a valid email address";
+  }
+
+  // Billing Email
+  if (!formData.billingEmail) {
+    newErrors.billingEmail = "Billing email is required";
+  } else if (!emailRegex.test(formData.billingEmail)) {
+    newErrors.billingEmail = "Enter a valid billing email";
+  }
+
+  // Phone (numeric only)
+  const phoneRegex = /^[0-9]{7,15}$/;
+
+  if (!formData.phone) {
+    newErrors.phone = "Phone number is required";
+  } else if (!phoneRegex.test(formData.phone)) {
+    newErrors.phone = "Phone must be 7–15 digits only (numbers only)";
+  }
+
+  // Other fields
+  if (!formData.yearsInBusiness)
+    newErrors.yearsInBusiness = "Select years in business";
+
+  if (!formData.monthlySales)
+    newErrors.monthlySales = "Select monthly sales volume";
+
+  if (!formData.agreeEligibility)
+    newErrors.agreeEligibility = "Required";
+
+  if (!formData.agreeTerms)
+    newErrors.agreeTerms = "Required";
+
+  if (!formData.name) newErrors.name = "Name is required";
+
+  if (!formData.job) newErrors.job = "Job title is required";
+
+  if (!formData.billingContact)
+    newErrors.billingContact = "Billing contact is required";
+
+  if (!formData.preferredShippingMethod)
+    newErrors.preferredShippingMethod = "This field is required.";
+
+  if (!formData.saleOtherCarriers)
+    newErrors.saleOtherCarriers = "This field is required.";
+
+  if (!formData.targetMarket)
+    newErrors.targetMarket = "This field is required.";
+
+  if (!formData.preferredPartnershipModel)
+    newErrors.preferredPartnershipModel = "This field is required.";
+
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -348,11 +424,15 @@ const BecomePartnerForm = () => {
                     ))}
                   </Form.Select>
                   <Form.Control
-                    name="phone"
-                    onChange={handleChange}
-                    value={formData.phone}
-                    placeholder="Enter phone number"
-                  />
+  name="phone"
+  value={formData.phone}
+  onChange={handleChange}
+  placeholder="Enter phone number"
+  maxLength={15}
+  onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, "");
+  }}
+/>
                 </InputGroup>
                 {errors.phone && <p className="txtred">{errors.phone}</p>}
               </Col>
