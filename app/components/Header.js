@@ -673,29 +673,8 @@ const Header = () => {
                 Explore More
               </h6>
               <Nav className="flex-column">
-                <Nav.Link href="/top-up-plan">Top-Up</Nav.Link>
-                <Nav.Link href="/byod-plans">BYOD</Nav.Link>
                 <Nav.Link href="/device-protection">Device Protection</Nav.Link>
-                <NavDropdown title="Community Plans">
-                  <NavDropdown.Item href="/college-student">
-                    College Students
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/military-veterans">
-                    Military &amp; Veterans
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/postal-service-workers">
-                    Postal Service Workers
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/animal-charities">
-                    Animal Charities
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/family-plans">
-                    Family Plans
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/music-hub">
-                    Zoiko Music Hub
-                  </NavDropdown.Item>
-                </NavDropdown>
+                
                 <Nav.Link href="/international-callings">
                   International Calls
                 </Nav.Link>
