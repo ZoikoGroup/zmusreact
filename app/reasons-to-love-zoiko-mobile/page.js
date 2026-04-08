@@ -97,7 +97,7 @@ const LoveZoiko = () => {
                 </Card>
             </Container>
             <hr />
-            <Container className="w-50 w-sm-100">
+            <Container className="w-100 w-md-50">
                 <div className="d-flex flex-row gap-4 align-items-center">
                     <Image src="/img/pinkchip.png" fluid alt="Chip" className="d-none d-md-block" />
                     <div>
