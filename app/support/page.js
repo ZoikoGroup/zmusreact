@@ -10,18 +10,7 @@ const HelpSupport = () => {
         {/* <TopHeader /> */}
         <Header />
         <HeadBar text="Zoiko Mobile - Support You May Find Here" />
-        <Container fluid className="bglite p-0">
-            <Container className="py-5">
-                <Row className="justify-content-center">
-                    <Col md={6}>
-                        <InputGroup className="mb-3">
-                            <Form.Control placeholder="Search For Articles" aria-label="Search For Articles" aria-describedby="basic-addon2" />
-                            <Button variant="outline-danger" size="lg" id="button-addon2">Search</Button>
-                        </InputGroup>
-                    </Col>
-                </Row>
-            </Container>
-        </Container>
+        
         <Container fluid className="bglite pb-5">
             <Container className="pinkboxwraper gap-3 justify-content-center">
                 <Card className="zoikolovecard">
