@@ -28,12 +28,12 @@ const MusicHubRegistration = () => {
     });
 
     const handleChange = (e) => {
-        const { name, value, type, checked, files } = e.target;
-        setFormData({
-            ...formData,
-            [name]: type === "checkbox" ? checked : type === "file" ? files[0] : value,
-        });
-    };
+    const { name, value, type, checked, files } = e.target;
+    setFormData((prev) => ({
+        ...prev,
+        [name]: type === "checkbox" ? checked : type === "file" ? files[0] : value,
+    }));
+};
 
     const validate = () => {
         let formErrors = {};
@@ -56,57 +56,54 @@ const MusicHubRegistration = () => {
     };
 
     const handelSubmit = async (e) => {
-        e.preventDefault();
-        if (!validate()) return;
+    e.preventDefault();
+    if (!validate()) return;
 
-        try {
-            const jsonData = {
-                fname: formData.fname,
-                email: formData.email,
-                countrycode: formData.countrycode,
-                phone: formData.phone,
-                desc: formData.desc,
-                statusproof: formData.statusproof?.name || "",
-                perks: formData.perks,
-                discount: formData.discount,
-                tools: formData.tools,
-                storage: formData.storage,
-                access: formData.access,
-                other: formData.other,
-                musicjourney: formData.musicjourney,
-                concent: formData.concent,
-                terms: formData.terms,
-            };
+    try {
+        const fd = new FormData();
 
-            const fd = new FormData();
-            fd.append("data", JSON.stringify(jsonData));
+        fd.append("fname", formData.fname);
+        fd.append("email", formData.email);
+        fd.append("countrycode", formData.countrycode);
+        fd.append("phone", formData.phone);
+        fd.append("desc", formData.desc);
+        fd.append("perks", formData.perks ? 1 : 0);
+        fd.append("discount", formData.discount ? 1 : 0);
+        fd.append("tools", formData.tools ? 1 : 0);
+        fd.append("storage", formData.storage ? 1 : 0);
+        fd.append("access", formData.access ? 1 : 0);
+        fd.append("other", formData.other);
+        fd.append("musicjourney", formData.musicjourney);
+        fd.append("concent", formData.concent ? 1 : 0);
+        fd.append("terms", formData.terms ? 1 : 0);
 
-            if (formData.statusproof) {
-                fd.append("file", formData.statusproof);
-            }
-
-            const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/music-hub-registration", {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                },
-                body: fd,
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                alert("✅ Application submitted successfully!");
-                console.log("Response:", data);
-            } else {
-                alert(`⚠️ ${data.message || "Submission failed. Please try again."}`);
-                console.error("Server response:", data);
-            }
-        } catch (err) {
-            console.error("Error:", err);
-            alert("⚠️ Something went wrong. Please try again.");
+        // Append file separately
+        if (formData.statusproof) {
+            fd.append("statusproof", formData.statusproof);
         }
-    };
+
+        const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/music-hub-registration", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+            },
+            body: fd,
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            alert("✅ Application submitted successfully!");
+            console.log("Response:", data);
+        } else {
+            alert(`⚠️ ${data.message || "Submission failed. Please try again."}`);
+            console.error("Server response:", data);
+        }
+    } catch (err) {
+        console.error("Error:", err);
+        alert("⚠️ Something went wrong. Please try again.");
+    }
+};
 
     return (
         <>
