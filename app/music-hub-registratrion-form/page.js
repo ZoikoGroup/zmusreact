@@ -86,7 +86,7 @@ const MusicHubRegistration = () => {
       fd.append("file", formData.statusproof);
     }
 
-    const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/postal-service-workers", {
+    const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/music-hub-registration", {
       method: "POST",
       headers: {
         Accept: "application/json",
