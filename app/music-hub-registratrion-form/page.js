@@ -314,13 +314,31 @@ const MusicHubRegistration = () => {
                             {errors.email && <p className="txtred">{errors.email}</p>}
                         </Col>
                         <Col md={4} sm={12} xs={12} className="mt-2">
-                            <FormLabel htmlFor="phnoe">Phone no <span className="txtred">*</span></FormLabel>
-                            
-                               
-                                <Form.Control name="phone" onChange={handleChange} value={formData.phone} placeholder="Phone no" />
-                           
-                            {errors.phone && <p className="txtred">{errors.phone}</p>} {errors.countrycode && <p className="txtred">{errors.countrycode}</p>}
-                        </Col>
+    <FormLabel htmlFor="phone">Phone no <span className="txtred">*</span></FormLabel>
+    <div className="d-flex gap-2">
+        <Form.Select
+            name="countrycode"
+            onChange={handleChange}
+            value={formData.countrycode}
+            style={{ width: "140px", flexShrink: 0 }}
+        >
+            <option value="">Code</option>
+            {Countrycode.map((item, index) => (
+                <option key={index} value={item.dial_code}>
+                    {item.flag} {item.dial_code}
+                </option>
+            ))}
+        </Form.Select>
+        <Form.Control
+            name="phone"
+            onChange={handleChange}
+            value={formData.phone}
+            placeholder="Phone no"
+        />
+    </div>
+    {errors.countrycode && <p className="txtred">{errors.countrycode}</p>}
+    {errors.phone && <p className="txtred">{errors.phone}</p>}
+</Col>
                     </Row>
                     <Row>
                         <Col md={6} sm={12} xs={12} className="mt-2">
