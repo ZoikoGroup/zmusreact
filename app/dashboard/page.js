@@ -403,15 +403,13 @@ const intlPercentUsed =
     : 0;
 
 
-  const { formatted: activeUntil, remainingDays } =
-    formatDateAndRemaining(servicePeriod?.end_at);
-const openChat = () => {
-    if (window.Tawk_API) {
-      window.Tawk_API.maximize(); // Opens chat box
-    } else {
-      alert("Chat is loading... please try again in a moment!");
-    }
-  };
+  const { formatted: activeUntil, remainingDays } = formatDateAndRemaining(servicePeriod?.end_at);
+  const openChat = () => {
+      window.open(
+        "https://zoikon-722985113446.europe-west1.run.app/ui/",
+        "_blank",
+      );
+    };
   // ---------------- Render ----------------
   return (
     <>
