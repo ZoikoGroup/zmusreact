@@ -786,6 +786,7 @@ const Header = () => {
                 <NavDropdown
                   title={user?.name || "Account"}
                   id="user-nav-dropdown"
+                  align="end"
                 >
                   <NavDropdown.Item href="/dashboard">
                     Dashboard
