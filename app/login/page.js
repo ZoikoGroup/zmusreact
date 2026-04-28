@@ -95,7 +95,7 @@ const Login = () => {
 
       if (!response.ok || !data.success) {
         setErrors({
-          api: "⚠️ No account found with these details. Try again or register a new account.",
+          api: "⚠️ Invalid email or password. Please try again.",
         });
         return;
       }
@@ -280,7 +280,7 @@ const Login = () => {
                 )}
 
                 <Form onSubmit={handleSubmit}>
-                  <label>Username or Email</label>
+                  <label>Email</label>
                   <input
                     type="text"
                     name="username"
