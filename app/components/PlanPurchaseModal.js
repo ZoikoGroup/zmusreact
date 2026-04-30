@@ -780,7 +780,7 @@ if (lineType === "portNumber" && currentStep === 1) {
         <Button
           variant="primary btn-danger"
           onClick={checkDeviceCompatibility}
-          // disabled={checkingDevice}
+          disabled={checking}
         >
           {/* {checkingDevice ? (
             <Spinner animation="border" size="sm" />
@@ -925,7 +925,7 @@ if (lineType === "portNumber" && currentStep === 1) {
           <Button
             variant="primary btn-danger"
             onClick={nextStep}
-            disabled={simType === "eSIM" && currentStep === steps.length-1 && compatResult.compatible === false}
+            disabled={simType === "eSIM" && currentStep === steps.length-1 && deviceCheckStatus !== "compatible"}
           >
             Continue <i className="fas fa-chevron-right"></i>
           </Button>
