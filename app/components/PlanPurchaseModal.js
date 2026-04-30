@@ -17,6 +17,12 @@ const [simType, setSimType] = useState("pSIM");
 const [addSPProtection, setAddSPProtection] = useState(true);
 const [addTProtection, setAddTProtection] = useState(false);
 const [addSWProtection, setAddSWProtection] = useState(false);
+
+const [compatResult, setCompatResult] = useState(null);
+const [checking, setChecking] = useState(false);
+  const [imeiError, setImeiError] = useState(null);
+
+
  const type = 'plan';
 
 const [formData, setFormData] = useState({
@@ -208,69 +214,215 @@ const formatLabel = (field) => {
     .join(" ");
 };
 
-  const checkDeviceCompatibility_old = async () => {
-    if (!formData.imei) return;
-    setCheckingDevice(true);
-    setDeviceCheckStatus(null);
-
-    try {
-      const res = await fetch("https://zoiko-atom-api.bequickapps.com/carriers/3/query_device_info", {
-        method: "POST",
-        headers: {
-          "X-AUTH-TOKEN": "09ff2d85-a451-47e6-86bc-aba98e1e4629",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ device_serial: formData.imei })
-      });
-      const data = await res.json();
-      setDeviceCheckStatus(data.esim_compatible ? "compatible" : "incompatible");
-    } catch (err) {
-      setDeviceCheckStatus("error");
-    }
-    setCheckingDevice(false);
-  };
-
   const checkDeviceCompatibility = async () => {
   if (!formData.imei?.trim()) return;
+  const cleanedImei = formData.imei.replace(/\s/g, "").trim();
 
-  setCheckingDevice(true);
-  setDeviceCheckStatus(null);
+// -------------------------------
+// Validation
+// -------------------------------
+if (!cleanedImei) {
+  setImeiError("Please enter your IMEI/MEID number.");
+  return;
+}
 
-  try {
-    const res = await fetch(
+if (!/^\d{14,16}$/.test(cleanedImei)) {
+  setImeiError("Please enter a valid 14-16 digit IMEI number.");
+  return;
+}
+
+setImeiError(null);
+setChecking(true);
+setCompatResult(null);
+
+try {
+  // =========================================================
+  // STEP 1: CHECK LOCAL STORAGE FIRST
+  // =========================================================
+  const storageKeys = Object.keys(localStorage).filter((key) =>
+    key.startsWith("device_serial_")
+  );
+
+  let localMatch = null;
+
+  for (const key of storageKeys) {
+    const item = localStorage.getItem(key);
+    if (!item) continue;
+
+    const parsed = JSON.parse(item);
+
+    if (parsed.device_serial === cleanedImei) {
+      localMatch = parsed;
+      break;
+    }
+  }
+
+  const nextIndex = storageKeys.length + 1;
+
+  // IF FOUND IN LOCAL STORAGE
+  if (localMatch && localMatch.esim_compatible === true) {
+    setCompatResult({
+      compatible: true,
+      message: cleanedImei + " is compatible with eSIM.",
+    });
+    return;
+  }
+
+  if (localMatch && localMatch.esim_compatible === false) {
+    setCompatResult({
+      compatible: false,
+      message: cleanedImei + " is not compatible with eSIM.",
+    });
+    return;
+  }
+
+  // =========================================================
+  // STEP 2: CHECK GOLITE API
+  // =========================================================
+  const goliteRes = await fetch(
+    "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
+      },
+      body: JSON.stringify({
+        action: "esim_check",
+        imei: cleanedImei,
+      }),
+    }
+  );
+
+  const goliteData = await goliteRes.json();
+
+  if (goliteData.compatible === true) {
+    setCompatResult({
+      compatible: true,
+      message: cleanedImei + " is compatible with eSIM.",
+    });
+
+    localStorage.setItem(
+      `device_serial_${nextIndex}`,
+      JSON.stringify({
+        device_serial: cleanedImei,
+        esim_compatible: true,
+      })
+    );
+
+    return;
+  }
+
+  // =========================================================
+  // STEP 3: CALL BEQUICK API
+  // =========================================================
+  const bequickRes = await fetch(
+    "https://zoiko-atom-api.bequickapps.com/carriers/3/query_device_info",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": process.env.NEXT_PUBLIC_BEQUICK_TOKEN,
+      },
+      body: JSON.stringify({ device_serial: cleanedImei }),
+    }
+  );
+
+  const bequickData = await bequickRes.json();
+  console.log("Bequick API response:", bequickData);
+
+  const isEsimCompatible = bequickData?.esim_compatible;
+
+  if (isEsimCompatible === true) {
+    setCompatResult({
+      compatible: true,
+      message: cleanedImei + " is compatible with eSIM.",
+    });
+
+    localStorage.setItem(
+      `device_serial_${nextIndex}`,
+      JSON.stringify({
+        device_serial: cleanedImei,
+        esim_compatible: true,
+      })
+    );
+
+    await fetch(
       "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Secret-Key": "jSje2gyRQpi4SjYZ", // ⚠️ move to env later
+          "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
         },
         body: JSON.stringify({
-          action: "esim_checker",
-          imei: formData.imei.trim(),
+          action: "esim_update",
+          imei: cleanedImei,
         }),
       }
     );
 
-    const data = await res.json();
-    console.log("API Response:", data);
-
-    // ✅ Correct handling based on new API
-    if (res.ok && data?.success) {
-      if (data?.compatible) {
-        setDeviceCheckStatus("compatible");
-      } else {
-        setDeviceCheckStatus("incompatible");
-      }
-    } else {
-      setDeviceCheckStatus("error");
-    }
-  } catch (err) {
-    console.error("Device Check Error:", err);
-    setDeviceCheckStatus("error");
-  } finally {
-    setCheckingDevice(false);
+    return;
   }
+
+  // =========================================================
+  // STEP 4: FINAL FALLBACK CHECK
+  // =========================================================
+  const goliteVRes = await fetch(
+    "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
+      },
+      body: JSON.stringify({
+        action: "esim_v_check",
+        imei: cleanedImei,
+      }),
+    }
+  );
+
+  const goliteVData = await goliteVRes.json();
+
+  if (goliteVData.esimCompatible === true) {
+    setCompatResult({
+      compatible: true,
+      message: cleanedImei + " is compatible with eSIM.",
+    });
+
+    localStorage.setItem(
+      `device_serial_${nextIndex}`,
+      JSON.stringify({
+        device_serial: cleanedImei,
+        esim_compatible: true,
+      })
+    );
+  } else {
+    localStorage.setItem(
+      `device_serial_${nextIndex}`,
+      JSON.stringify({
+        device_serial: cleanedImei,
+        esim_compatible: false,
+      })
+    );
+
+    setCompatResult({
+      compatible: false,
+      message: cleanedImei + " is not compatible with eSIM.",
+    });
+  }
+} catch (err) {
+  setCompatResult({
+    compatible: false,
+    message:
+      err instanceof Error
+        ? err.message
+        : "Unable to verify device. Please try again.",
+  });
+} finally {
+  setChecking(false);
+}
 };
 
 const validatePortingFields_old = () => {
@@ -630,29 +782,39 @@ if (lineType === "portNumber" && currentStep === 1) {
           onClick={checkDeviceCompatibility}
           disabled={checkingDevice}
         >
-          {checkingDevice ? (
+          {/* {checkingDevice ? (
             <Spinner animation="border" size="sm" />
           ) : (
             "Check My Device"
-          )}
+          )} */}
+          {checking
+              ? <><svg className="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" /></svg>Checking…</>
+              : compatResult?.compatible
+                ? <><svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>Compatible</>
+                : "Check My Device"}
         </Button>
       </>
     )}
 
-    {/* ✅ Always show the result message */}
-    {deviceCheckStatus === "compatible" && (
-      <>
-      <div className="close-button" onClick={closeFn} aria-label="Close">x</div>
-        <img src="/img/success.gif"></img>
-        <p style={{ color: "green", marginTop: 8 }}>Congratulations Your Device is Compatible to Use Zoiko Mobile eSIM Service</p>
-      </>
-    )}
-    {deviceCheckStatus === "incompatible" && (
-      <p style={{ color: "red", marginTop: 8 }}>Your Device is NOT Compatible for eSIM.</p>
-    )}
-    {deviceCheckStatus === "error" && (
-      <p style={{ color: "orange", marginTop: 8 }}>Error checking device.</p>
-    )}
+    {imeiError && <p className="text-red-500 text-xs mt-1.5">{imeiError}</p>}
+
+        {compatResult && (
+          <div className={`mt-3 rounded-xl p-3 text-sm ${
+            compatResult.compatible
+              ? "bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700"
+              : "bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700"
+          }`}>
+            {compatResult.compatible ? (
+              <>
+                <p className="font-bold text-green-800 dark:text-green-400 mb-1.5">{compatResult.message}</p>
+              </>
+            ) : (
+              <p className="text-red-700 dark:text-red-400 font-medium">
+                {compatResult.message || "Your device may not be compatible. Please contact support."}
+              </p>
+            )}
+          </div>
+        )}
   </div>
 )}
 
