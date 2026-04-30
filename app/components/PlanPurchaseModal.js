@@ -925,7 +925,7 @@ if (lineType === "portNumber" && currentStep === 1) {
           <Button
             variant="primary btn-danger"
             onClick={nextStep}
-            disabled={simType === "eSIM" && currentStep === steps.length-1 && deviceCheckStatus !== "compatible"}
+            disabled={simType === "eSIM" && currentStep === steps.length-1 && compatResult.compatible === false}
           >
             Continue <i className="fas fa-chevron-right"></i>
           </Button>
