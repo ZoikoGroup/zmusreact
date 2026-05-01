@@ -672,7 +672,7 @@ const intlPercentUsed =
                     Two-factor authentication {subscriber?.two_fa ? "enabled" : "disabled"}
                   </p>
                   <div className="d-flex gap-2">
-                    <button className="btn btn-outline-secondary btn-sm">Edit Profile</button>
+                    <Link href={`/dashboard/edit-profile`} className="btn btn-outline-secondary btn-sm">Edit Profile</Link>
                     {/* <button className="btn btn-outline-success btn-sm">Security Settings</button> */}
                   </div>
                 </div>
