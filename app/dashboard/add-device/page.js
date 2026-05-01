@@ -117,7 +117,7 @@ const openChat = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Secret-Key": "YOUR_SECRET_KEY",
+          "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
         },
         body: JSON.stringify({
           action: "esim_check",
@@ -154,7 +154,7 @@ const openChat = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-AUTH-TOKEN": "YOUR_SECRET_KEY",
+          "X-AUTH-TOKEN": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
         },
         body: JSON.stringify({ device_serial: cleanedImei }),
       }
@@ -184,7 +184,7 @@ const openChat = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "X-Secret-Key": "YOUR_SECRET_KEY",
+            "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
           },
           body: JSON.stringify({
             action: "esim_update",
@@ -205,7 +205,7 @@ const openChat = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Secret-Key": "YOUR_SECRET_KEY",
+          "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
         },
         body: JSON.stringify({
           action: "esim_v_check",
