@@ -9,10 +9,13 @@ import "../Dashboard.css";
 export default function AddDevicePage() {
   const [step, setStep] = useState(1);
   const [selectedDevice, setSelectedDevice] = useState("");
-  const [imei, setImei] = useState("");
   const [validationMsg, setValidationMsg] = useState("");
   const [apiResult, setApiResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [imei, setImei] = useState("");
+  const [checking, setChecking] = useState(false);
+  const [compatResult, setCompatResult] = useState(null);
+  const [imeiError, setImeiError] = useState(null);
 
   const devices = [
     { id: "smartphone", title: "Smartphone", desc: "For calls, texts, data, and apps on the road", icon: "📱" },
@@ -51,82 +54,193 @@ const openChat = () => {
       alert("Chat is loading... please try again in a moment!");
     }
   };
-  const validateAndCheckDevice_old = async () => {
-    if (!validateIMEI()) return;
-
-    setLoading(true);
-    setApiResult(null);
-    setValidationMsg("Checking device compatibility...");
-
-    try {
-      const res = await fetch(
-        "https://zoiko-atom-api.bequickapps.com/carriers/3/query_device_info",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-AUTH-TOKEN": "09ff2d85-a451-47e6-86bc-aba98e1e4629",
-          },
-          body: JSON.stringify({ device_serial: imei }),
-        }
-      );
-      const data = await res.json();
-      setApiResult(data);
-
-      if (data.success && data.esim_compatible) {
-        setValidationMsg("✅ Device is compatible!");
-      } else {
-        setValidationMsg("❌ Device is not compatible.");
-      }
-    } catch (error) {
-      setValidationMsg("❌ Error checking device. Try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  
 
 
-  const validateAndCheckDevice = async () => {
-  if (!validateIMEI()) return;
+ const validateAndCheckDevice = async () => {
+  const cleanedImei = imei.replace(/\s/g, "").trim();
 
-  setLoading(true);
-  setApiResult(null);
-  setValidationMsg("Checking device compatibility...");
+  // Validation
+  if (!cleanedImei) {
+    setImeiError("Please enter your IMEI/MEID number.");
+    return;
+  }
+
+  if (!/^\d{14,16}$/.test(cleanedImei)) {
+    setImeiError("Please enter a valid 14-16 digit IMEI number.");
+    return;
+  }
+
+  setImeiError(null);
+  setChecking(true);
+  setCompatResult(null);
 
   try {
-    const res = await fetch(
+    // ===============================
+    // STEP 1: CHECK LOCAL STORAGE
+    // ===============================
+    const storageKeys = Object.keys(localStorage).filter((key) =>
+      key.startsWith("device_serial_")
+    );
+
+    let localMatch = null;
+
+    for (const key of storageKeys) {
+      const item = localStorage.getItem(key);
+      if (!item) continue;
+
+      const parsed = JSON.parse(item);
+      if (parsed.device_serial === cleanedImei) {
+        localMatch = parsed;
+        break;
+      }
+    }
+
+    const nextIndex = storageKeys.length + 1;
+
+    if (localMatch) {
+      setCompatResult({
+        compatible: localMatch.esim_compatible,
+        message: `${cleanedImei} is ${
+          localMatch.esim_compatible ? "" : "not "
+        }compatible with eSIM.`,
+      });
+      return;
+    }
+
+    // ===============================
+    // STEP 2: GOLITE CHECK
+    // ===============================
+    const goliteRes = await fetch(
       "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Secret-Key": "jSje2gyRQpi4SjYZ",
+          "X-Secret-Key": "YOUR_SECRET_KEY",
         },
         body: JSON.stringify({
-          action: "esim_checker",
-          imei: imei,
+          action: "esim_check",
+          imei: cleanedImei,
         }),
       }
     );
 
-    const data = await res.json();
-    console.log("API Response:", data);
+    const goliteData = await goliteRes.json();
 
-    setApiResult(data);
+    if (goliteData.compatible === true) {
+      setCompatResult({
+        compatible: true,
+        message: `${cleanedImei} is compatible with eSIM.`,
+      });
 
-    // ✅ Handle response properly
-    if (data.success && data.compatible) {
-      setValidationMsg("✅ Device is compatible!");
-    } else if (data.success && !data.compatible) {
-      setValidationMsg("❌ Device is NOT compatible.");
-    } else {
-      setValidationMsg("❌ Unable to verify device.");
+      localStorage.setItem(
+        `device_serial_${nextIndex}`,
+        JSON.stringify({
+          device_serial: cleanedImei,
+          esim_compatible: true,
+        })
+      );
+
+      return;
     }
-  } catch (error) {
-    console.error(error);
-    setValidationMsg("❌ Error checking device. Try again.");
+
+    // ===============================
+    // STEP 3: BEQUICK API
+    // ===============================
+    const bequickRes = await fetch(
+      "https://zoiko-atom-api.bequickapps.com/carriers/3/query_device_info",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-AUTH-TOKEN": "YOUR_SECRET_KEY",
+        },
+        body: JSON.stringify({ device_serial: cleanedImei }),
+      }
+    );
+
+    const bequickData = await bequickRes.json();
+    const isCompatible = bequickData?.esim_compatible;
+
+    if (isCompatible === true) {
+      setCompatResult({
+        compatible: true,
+        message: `${cleanedImei} is compatible with eSIM.`,
+      });
+
+      localStorage.setItem(
+        `device_serial_${nextIndex}`,
+        JSON.stringify({
+          device_serial: cleanedImei,
+          esim_compatible: true,
+        })
+      );
+
+      // Update Golite DB
+      await fetch(
+        "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Secret-Key": "YOUR_SECRET_KEY",
+          },
+          body: JSON.stringify({
+            action: "esim_update",
+            imei: cleanedImei,
+          }),
+        }
+      );
+
+      return;
+    }
+
+    // ===============================
+    // STEP 4: FINAL CHECK
+    // ===============================
+    const finalRes = await fetch(
+      "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Secret-Key": "YOUR_SECRET_KEY",
+        },
+        body: JSON.stringify({
+          action: "esim_v_check",
+          imei: cleanedImei,
+        }),
+      }
+    );
+
+    const finalData = await finalRes.json();
+    const finalResult = finalData.esimCompatible === true;
+
+    localStorage.setItem(
+      `device_serial_${nextIndex}`,
+      JSON.stringify({
+        device_serial: cleanedImei,
+        esim_compatible: finalResult,
+      })
+    );
+
+    setCompatResult({
+      compatible: finalResult,
+      message: `${cleanedImei} is ${
+        finalResult ? "" : "not "
+      }compatible with eSIM.`,
+    });
+  } catch (err) {
+    setCompatResult({
+      compatible: false,
+      message:
+        err instanceof Error
+          ? err.message
+          : "Unable to verify device. Please try again.",
+    });
   } finally {
-    setLoading(false);
+    setChecking(false);
   }
 };
 
@@ -192,31 +306,32 @@ const openChat = () => {
           <label className="form-label fw-semibold">Device IMEI or EID Number</label>
           <div className="d-flex gap-2">
             <input
-  type="text"
-  value={imei}
-  onChange={(e) => setImei(e.target.value)}
-  className="form-control"
-  placeholder="Enter 15/16-digit IMEI or 32-digit EID"
-  style={{ width: "70%" }}
-/>
+              type="text"
+              value={imei}
+              onChange={(e) => setImei(e.target.value)}
+              className="form-control"
+              placeholder="Enter 15/16-digit IMEI or 32-digit EID"
+              style={{ width: "70%" }}
+            />
 
             <button
               className="btn btn-success fw-semibold"
               onClick={validateAndCheckDevice}
               disabled={!isValidIMEI || loading}
             >
-              {loading ? "Checking..." : "Check Compatibility"}
+              {checking ? "Checking..." : "Check Compatibility"}
+
             </button>
           </div>
-          {validationMsg && (
-            <p className={`small mt-2 ${validationMsg.startsWith("✅") ? "text-success" : "text-danger"}`}>
-              {validationMsg}
-            </p>
-          )}
+            
+            {imeiError && (
+              <p className={`small mt-2 ${ !imeiError ? "text-success" : "text-danger"}`}>{imeiError}</p>
+            )}
+          
         </div>
 
         {/* Show device info only if compatible */}
-        {apiResult && apiResult.compatible && (
+        {compatResult && compatResult.compatible && (
           <div
             className="device-info p-3 rounded mb-3"
             style={{
@@ -226,12 +341,12 @@ const openChat = () => {
               borderStyle: "solid",
             }}
           >
-            <p><strong>Manufacturer:</strong> {apiResult.manufacturer}</p>
-            <p><strong>Model:</strong> {apiResult.device}</p>
-            <p><strong>eSIM Compatible:</strong> {apiResult.esimCompatible ? "Yes" : "No"}</p>
-            <p><strong>LTE Compatible:</strong> {apiResult.lteCompatible ? "Yes" : "No"}</p>
-            <p><strong>Blacklisted:</strong> {apiResult.blacklisted ? "Yes" : "No"}</p>
-            <p><strong>Category:</strong> {apiResult.deviceCategory}</p>
+            <p><strong>Manufacturer:</strong> {compatResult.manufacturer}</p>
+            <p><strong>Model:</strong> {compatResult.device}</p>
+            <p><strong>eSIM Compatible:</strong> {compatResult.esimCompatible ? "Yes" : "No"}</p>
+            <p><strong>LTE Compatible:</strong> {compatResult.lteCompatible ? "Yes" : "No"}</p>
+            <p><strong>Blacklisted:</strong> {compatResult.blacklisted ? "Yes" : "No"}</p>
+            <p><strong>Category:</strong> {compatResult.deviceCategory}</p>
           </div>
         )}
 
@@ -246,7 +361,7 @@ const openChat = () => {
           <button
             className="btn btn-success px-4"
             onClick={handleNext}
-            disabled={!apiResult || !apiResult.compatible}
+            disabled={!compatResult || !compatResult.compatible}
           >
             Continue to Review →
           </button>
@@ -276,12 +391,12 @@ const openChat = () => {
         <button
           className="btn btn-success"
           onClick={() => {
-            alert("✅ Device successfully added!");
+            // alert("✅ Device successfully added!");
             setStep(1);
             setSelectedDevice("");
             setImei("");
             setValidationMsg("");
-            setApiResult(null);
+            setCompatResult(null);
           }}
         >
           Confirm & Activate
