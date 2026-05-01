@@ -9,6 +9,9 @@ import beQuick from "../../../utils/dasdbeQuickApi";
 import { FaMobileAlt, FaWifi, FaPhoneAlt, FaRegCommentDots } from "react-icons/fa";
 import { useParams } from "next/navigation";
 
+import Link from "next/link";
+
+
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [fullData, setFullData] = useState(null);
@@ -283,8 +286,8 @@ export default function DashboardPage() {
           <div className="section-card">
             <h5 className="section-title">Quick Actions</h5>
             <div className="quick-actions">
-              <button className="btn-outline upgrade">Upgrade Plan</button>
-              <button className="btn-outline buy">Buy More Data</button>
+              <Link className="btn-outline upgrade" href={`/all-plans`}>Upgrade Plan</Link>
+              <Link className="btn-outline buy" href={`/top-up-plan`}>Buy More Data</Link>
 
               {/* New Back Button */}
               <button
