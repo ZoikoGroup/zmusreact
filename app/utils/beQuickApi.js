@@ -483,3 +483,23 @@ export async function activateSim(simDetails) {
     throw error;
   }
 }
+
+
+export async function getLinesBySubscriberID(subID) {
+  const result = await beQuickRequest(
+    `/lines?by_subscriber_id=${54}`,
+    "GET"
+  );
+  console.log(`Lines for Subscriber ID ${subID}:`, result?.lines);
+  return result?.lines || [];
+}
+
+export async function changeDevice(lineID, deviceDetails) {
+  const data = {
+      device_serial: deviceDetails.device_serial,
+      iccid: deviceDetails.iccid,
+  };
+  console.log("Order Payment Data:", data);
+  const response = await beQuickRequest(`/lines/${lineID}/change_device`, "PUT", data);
+  return response;
+}
