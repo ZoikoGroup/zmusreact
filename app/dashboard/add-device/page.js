@@ -79,11 +79,11 @@ export default function AddDevicePage() {
   const handleBack = () => setStep(step - 1);
 
   const openChat = () => {
-    if (window.Tawk_API) {
-      window.Tawk_API.maximize();
-    } else {
-      alert("Chat is loading... please try again in a moment!");
-    }
+    window.open(
+      "https://zoikon-722985113446.europe-west1.run.app/ui/",
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   const validateAndCheckDevice = async () => {
