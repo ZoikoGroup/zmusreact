@@ -154,7 +154,7 @@ const openChat = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-AUTH-TOKEN": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
+          "X-AUTH-TOKEN": process.env.NEXT_PUBLIC_BEQUICK_TOKEN,
         },
         body: JSON.stringify({ device_serial: cleanedImei }),
       }
