@@ -487,7 +487,7 @@ export async function activateSim(simDetails) {
 
 export async function getLinesBySubscriberID(subID) {
   const result = await beQuickRequest(
-    `/lines?by_subscriber_id=${54}`,
+    `/lines?by_subscriber_id=${subID}`,
     "GET"
   );
   console.log(`Lines for Subscriber ID ${subID}:`, result?.lines);
