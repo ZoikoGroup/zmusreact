@@ -79,7 +79,7 @@ export default function AddDevicePage() {
   const handleBack = () => setStep(step - 1);
 
   const openChat = () => {
-    window.open(
+     window.open(
       "https://zoikon-722985113446.europe-west1.run.app/ui/",
       "_blank",
       "noopener,noreferrer"
