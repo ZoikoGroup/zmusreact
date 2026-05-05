@@ -618,41 +618,53 @@ export default function RootLayout({ children }) {
     // Cleanup function is optional: we keep tags updated rather than removing.
   }, [pathname, metaObj]);
 
-  // JSON-LD structured data
-  const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "Zoiko Mobile",
-      url: typeof window !== "undefined" ? window.location.origin : "https://zoikomobile.com",
-      logo: `${typeof window !== "undefined" ? window.location.origin : "https://zoikomobile.com"}/img/zmuslogo-new.png`,
-      contactPoint: [
-        {
-          "@type": "ContactPoint",
-          telephone: "800-988-8116",
-          contactType: "customer service",
-          areaServed: "US",
-          availableLanguage: ["English"],
-        },
-      ],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: "Zoiko Mobile",
-      url: typeof window !== "undefined" ? window.location.origin : "https://zoikomobile.com",
-      potentialAction: {
-        "@type": "SearchAction",
-        target: `${typeof window !== "undefined" ? window.location.origin : "https://zoikomobile.com"}/?s={search_term_string}`,
-        "query-input": "required name=search_term_string",
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Zoiko Mobile",
+    url: typeof window !== "undefined"
+      ? window.location.origin
+      : "https://zoikomobile.com",
+    logo: `${typeof window !== "undefined"
+      ? window.location.origin
+      : "https://zoikomobile.com"}/img/zmuslogo-new.png`,
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: "800-988-8116",
+        contactType: "customer service",
+        areaServed: "US",
+        availableLanguage: ["English"],
       },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Zoiko Mobile",
+    alternateName: "Zoiko Mobile", 
+    url: typeof window !== "undefined"
+      ? window.location.origin
+      : "https://zoikomobile.com",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${typeof window !== "undefined"
+        ? window.location.origin
+        : "https://zoikomobile.com"}/?s={search_term_string}`,
+      "query-input": "required name=search_term_string",
     },
-  ];
+  },
+];
 
   return (
     <html lang="en">
       <head>
+        <meta name="application-name" content="Zoiko Mobile" />
+        <meta name="apple-mobile-web-app-title" content="Zoiko Mobile" />
+
         <link rel="icon" href="/img/zmuslogo-new.png" type="image/png" />
+        <link rel="shortcut icon" href="/img/zmuslogo-new.png" />
         <Script id="zoiko-breadcrumb-jsonld" type="application/ld+json" strategy="afterInteractive">
 {`{
   "@context": "https://schema.org/",
