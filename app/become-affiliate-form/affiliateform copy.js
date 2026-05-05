@@ -43,7 +43,7 @@ const BecomeAffiliateForm = () => {
     }
   };
 
-  const validate_old = () => {
+  const validate = () => {
     const newErrors = {};
      if (!formData.companyName) newErrors.companyName = "Enter Your Full registered name of your organization";
       if (!formData.website) newErrors.website = "Enter Company Website URL";
@@ -68,90 +68,6 @@ const BecomeAffiliateForm = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
-  const validate = () => {
-  const newErrors = {};
-
-  // Company
-  if (!formData.companyName.trim()) {
-    newErrors.companyName = "Enter your company/organization name.";
-  }
-
-  if (!formData.website.trim()) {
-    newErrors.website = "Enter company website URL.";
-  } else if (!/^https?:\/\/.+\..+/.test(formData.website)) {
-    newErrors.website = "Enter a valid URL (e.g. https://example.com).";
-  }
-
-  // Contact
-  if (!formData.name.trim()) {
-    newErrors.name = "Enter your full name.";
-  }
-
-  if (!formData.job.trim()) {
-    newErrors.job = "Enter your job title.";
-  }
-
-  if (!formData.email.trim()) {
-    newErrors.email = "Email is required.";
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-    newErrors.email = "Enter a valid email address.";
-  }
-
-  if (!formData.countrycode) {
-    newErrors.countrycode = "Select country code.";
-  }
-
-  if (!formData.phone.trim()) {
-    newErrors.phone = "Phone number is required.";
-  } else if (!/^[0-9]{7,15}$/.test(formData.phone)) {
-    newErrors.phone = "Enter valid phone (7–15 digits).";
-  }
-
-  // Address
-  if (!formData.street.trim()) newErrors.street = "Street is required.";
-  if (!formData.city.trim()) newErrors.city = "City is required.";
-  if (!formData.state.trim()) newErrors.state = "State is required.";
-  if (!formData.zip.trim()) newErrors.zip = "ZIP/Postal code is required.";
-
-  // Arrays (IMPORTANT FIX)
-  if (formData.businessTypes.length === 0) {
-    newErrors.businessTypes = "Select at least one business type.";
-  }
-
-  if (formData.marketingChannels.length === 0) {
-    newErrors.marketingChannels = "Select at least one marketing channel.";
-  }
-
-  if (formData.planToPromotes.length === 0) {
-    newErrors.planToPromotes = "Select at least one promotion method.";
-  }
-
-  // Dropdowns
-  if (!formData.monthlyTraffic) {
-    newErrors.monthlyTraffic = "Select monthly traffic.";
-  }
-
-  if (!formData.monthlyActivations) {
-    newErrors.monthlyActivations = "Select monthly activations.";
-  }
-
-  if (!formData.promotoBrands) {
-    newErrors.promotoBrands = "Select an option.";
-  }
-
-  // Agreements
-  if (!formData.agreeEligibility) {
-    newErrors.agreeEligibility = "You must accept this condition.";
-  }
-
-  if (!formData.agreeTerms) {
-    newErrors.agreeTerms = "You must agree to Terms & Conditions.";
-  }
-
-  setErrors(newErrors);
-  return Object.keys(newErrors).length === 0;
-};
 
   const handleSubmit = async (e) => {
   e.preventDefault();
@@ -430,7 +346,6 @@ const BecomeAffiliateForm = () => {
                       </option>
                     ))}
                   </Form.Select>
-                  {errors.countrycode && <p className="txtred">{errors.countrycode}</p>}
                   <Form.Control
                     name="phone"
                     onChange={handleChange}
@@ -487,7 +402,7 @@ const BecomeAffiliateForm = () => {
                 />
               ))}
             </div>
-            {errors.businessTypes && <p className="txtred text-center">{errors.businessTypes}</p>}
+
             <h4 className="mt-5 mb-3 fw-bold text-center">Primary Marketing Channel(s): (Check all that apply)</h4>
             <div className="d-flex flex-wrap checkbox-group-center  stylish-checkboxes border-bottom mb-4" style={{ borderColor: "#ff0000" }}>
               {[
@@ -510,7 +425,7 @@ const BecomeAffiliateForm = () => {
                 />
               ))}
             </div>
-           {errors.marketingChannels && <p className="txtred text-center">{errors.marketingChannels}</p>}
+
             <h4 className="mt-5 mb-3 fw-bold text-center">How do you plan to promote Zoiko Mobile?</h4>
             <div className="d-flex flex-wrap checkbox-group-center  stylish-checkboxes border-bottom mb-4" style={{ borderColor: "#ff0000" }}>
               {[
@@ -533,7 +448,7 @@ const BecomeAffiliateForm = () => {
                 />
               ))}
             </div>
-           {errors.planToPromotes && <p className="txtred text-center">{errors.planToPromotes}</p>}
+
            
             <Row>
               <Col md={4} className="mt-3">
