@@ -13,7 +13,7 @@ import React, { useEffect } from "react";
  * - Uses metaMap for static pages + dynamic handler for /plans/, /product/, /blog/
  * - JSON-LD (Organization + WebSite)
  * - Tawk.to chat included
- * - Default OG image: /img/zoikomobile_logo.png
+ * - Default OG image: /img/zmuslogo-new.png
  */
 
 /* -------------------------
@@ -32,7 +32,7 @@ const defaultMeta = {
   title: "Zoiko Mobile | Best Mobile Plans with Unlimited Data",
   description:
     "Stay connected with Zoiko Mobile for affordable plans, free international calling and nationwide 5G coverage.",
-  image: "/img/zoikomobile_logo.png",
+  image: "/img/zmuslogo-new.png",
 };
 
 /* -------------------------
@@ -625,7 +625,7 @@ export default function RootLayout({ children }) {
       "@type": "Organization",
       name: "Zoiko Mobile",
       url: typeof window !== "undefined" ? window.location.origin : "https://zoikomobile.com",
-      logo: `${typeof window !== "undefined" ? window.location.origin : "https://zoikomobile.com"}/img/zoikomobile_logo.png`,
+      logo: `${typeof window !== "undefined" ? window.location.origin : "https://zoikomobile.com"}/img/zmuslogo-new.png`,
       contactPoint: [
         {
           "@type": "ContactPoint",
@@ -652,6 +652,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/img/zmuslogo-new.png" type="image/png" />
         <Script id="zoiko-breadcrumb-jsonld" type="application/ld+json" strategy="afterInteractive">
 {`{
   "@context": "https://schema.org/",
