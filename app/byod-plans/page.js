@@ -9,70 +9,149 @@ import Link from "next/link";
 import { useState } from "react";
 
 const ByodPlans = () => {
-  const [imei, setImei] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
+const [imei, setImei] = useState("");
+const [loading, setLoading] = useState(false);
+const [result, setResult] = useState(null);
 
-  const checkCompatibility = async () => {
-  if (!imei.trim()) {
-    setResult({
-      status: "error",
-      message: "⚠️ Please enter a valid IMEI or MEID number.",
-    });
+const [compatResult, setCompatResult] = useState(null);
+const [checking, setChecking] = useState(false);
+const [imeiError, setImeiError] = useState(null);
+
+
+const checkCompatibility = async () => {
+  if (!imei?.trim()) return;
+  const cleanedImei = imei.replace(/\s/g, "").trim();
+
+  if (!cleanedImei) {
+    setImeiError("Please enter your IMEI/MEID number.");
     return;
   }
 
-  setLoading(true);
-  setResult(null);
+  if (!/^\d{14,16}$/.test(cleanedImei)) {
+    setImeiError("Please enter a valid 14-16 digit IMEI number.");
+    return;
+  }
+
+  setImeiError(null);
+  setChecking(true);
+  // ✅ Reset previous result before new check
+  setCompatResult(null);
+  // setConfirmedImei(null);
 
   try {
-    const res = await fetch(
+    const storageKeys = Object.keys(localStorage).filter((key) =>
+      key.startsWith("device_serial_")
+    );
+
+    let localMatch = null;
+
+    for (const key of storageKeys) {
+      const item = localStorage.getItem(key);
+      if (!item) continue;
+      const parsed = JSON.parse(item);
+      if (parsed.device_serial === cleanedImei) {
+        localMatch = parsed;
+        break;
+      }
+    }
+
+    const nextIndex = storageKeys.length + 1;
+
+    if (localMatch && localMatch.esim_compatible === true) {
+      setCompatResult({ compatible: true, message: cleanedImei + " is compatible with eSIM." });
+      // setConfirmedImei(cleanedImei);
+      return;
+    }
+
+    if (localMatch && localMatch.esim_compatible === false) {
+      setCompatResult({ compatible: false, message: cleanedImei + " is not compatible with eSIM." });
+      return;
+    }
+
+    const goliteRes = await fetch(
       "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Secret-Key": "jSje2gyRQpi4SjYZ", // ⚠️ move to env later
+          "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
         },
-        body: JSON.stringify({
-          action: "esim_checker",
-          imei: imei.trim(),
-        }),
+        body: JSON.stringify({ action: "esim_check", imei: cleanedImei }),
       }
     );
 
-    const data = await res.json();
-    console.log("API Response:", data);
+    const goliteData = await goliteRes.json();
 
-    // ✅ Correct logic based on REAL API response
-    if (res.ok && data?.success) {
-      if (data?.compatible) {
-        setResult({
-          status: "success",
-          message: `✅ ${data.message || "Device is compatible!"}`,
-          data: data, // optional: store full response
-        });
-      } else {
-        setResult({
-          status: "error",
-          message: `❌ ${data.message || "Device is NOT compatible."}`,
-          data: data,
-        });
-      }
-    } else {
-      setResult({
-        status: "error",
-        message: data?.message || "❌ Unable to verify device.",
-      });
+    if (goliteData.compatible === true) {
+      setCompatResult({ compatible: true, message: cleanedImei + " is compatible with eSIM." });
+      // setConfirmedImei(cleanedImei);
+      localStorage.setItem(`device_serial_${nextIndex}`, JSON.stringify({ device_serial: cleanedImei, esim_compatible: true }));
+      return;
     }
-  } catch (error) {
-    console.error("API Error:", error);
-    setResult({
-      status: "error",
-      message: "❌ Something went wrong. Please try again.",
+
+    const bequickRes = await fetch(
+      "https://zoiko-atom-api.bequickapps.com/carriers/3/query_device_info",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-AUTH-TOKEN": process.env.NEXT_PUBLIC_BEQUICK_TOKEN,
+        },
+        body: JSON.stringify({ device_serial: cleanedImei }),
+      }
+    );
+
+    const bequickData = await bequickRes.json();
+    const isEsimCompatible = bequickData?.esim_compatible;
+
+    if (isEsimCompatible === true) {
+      setCompatResult({ compatible: true, message: cleanedImei + " is compatible with eSIM." });
+      // setConfirmedImei(cleanedImei);
+      localStorage.setItem(`device_serial_${nextIndex}`, JSON.stringify({ device_serial: cleanedImei, esim_compatible: true }));
+
+      await fetch(
+        "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
+          },
+          body: JSON.stringify({ action: "esim_update", imei: cleanedImei }),
+        }
+      );
+      return;
+    }
+
+    const goliteVRes = await fetch(
+      "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
+        },
+        body: JSON.stringify({ action: "esim_v_check", imei: cleanedImei }),
+      }
+    );
+
+    const goliteVData = await goliteVRes.json();
+
+    if (goliteVData.esimCompatible === true) {
+      setCompatResult({ compatible: true, message: cleanedImei + " is compatible with eSIM." });
+      // setConfirmedImei(cleanedImei);
+      localStorage.setItem(`device_serial_${nextIndex}`, JSON.stringify({ device_serial: cleanedImei, esim_compatible: true }));
+    } else {
+      localStorage.setItem(`device_serial_${nextIndex}`, JSON.stringify({ device_serial: cleanedImei, esim_compatible: false }));
+      setCompatResult({ compatible: false, message: cleanedImei + " is not compatible with eSIM." });
+    }
+  } catch (err) {
+    setCompatResult({
+      compatible: false,
+      message: err instanceof Error ? err.message : "Unable to verify device. Please try again.",
     });
   } finally {
-    setLoading(false);
+    setChecking(false);
   }
 };
 
@@ -234,23 +313,32 @@ const ByodPlans = () => {
             value={imei}
             onChange={(e) => setImei(e.target.value)}
           />
-          <Button variant="danger" size="lg" onClick={checkCompatibility} disabled={loading}>
-            {loading ? (
-              <>
-                <Spinner animation="border" size="sm" /> Checking...
-              </>
-            ) : (
-              "Check My Device"
-            )}
+          <Button variant="danger" size="lg" onClick={checkCompatibility}  disabled={checking}>
+           {checking ? "Checking…" : "Check My Device"}
           </Button>
+         
         </InputGroup>
 
-        {/* ✅ Compatibility Message */}
-        {result && (
-          <div className="pt-4">
-            <Alert variant={result.status === "success" ? "success" : "danger"}>{result.message}</Alert>
-          </div>
-        )}
+        {imeiError && <p className="text-danger" style={{ marginTop: 8 }}>{imeiError}</p>}
+
+              {compatResult && (
+                <div
+                  className={`mt-3 rounded-xl p-3 text-sm ${
+                    compatResult.compatible
+                      ? "bg-green-50 border border-green-200"
+                      : "bg-red-50 border border-red-200"
+                  }`}
+                  style={{ marginTop: 12 }}
+                >
+                  {compatResult.compatible ? (
+                    <p className="font-bold text-success mb-0">{compatResult.message}</p>
+                  ) : (
+                    <p className="text-danger font-medium mb-0">
+                      {compatResult.message || "Your device may not be compatible. Please contact support."}
+                    </p>
+                  )}
+                </div>
+              )}
 
         <p className="body22 pt-4">
           Here&apos;s how to check your IMEI or MEID: This unique number identifies your phone. You can usually find it
