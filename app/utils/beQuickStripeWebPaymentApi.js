@@ -212,7 +212,10 @@ export async function createDraftLine(postData) {
   const i = 0;
   for (const item of cart) {
     if (item.lineType === "portNumber") {
-      data.line.device_serial = item.formData.imei;
+      if (item.formData?.imei) {
+        data.line.device_serial = item.formData.imei;
+      }
+      // data.line.device_serial = item.formData.imei;
       const number_port_attributes = {
         mdn: item.formData.mdn,
         first_name: item.formData.firstName || "Unknown",

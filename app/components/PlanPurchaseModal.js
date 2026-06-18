@@ -6,55 +6,27 @@ import { useRouter } from "next/navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const PlanPurchaseModal = ({ show, handleClose, onClose, planTitle, planSlug, planId, planPrice, planSalePrice, planDuration, planBqid, planType }) => {
-const closeFn = typeof handleClose === "function" ? handleClose : (typeof onClose === "function" ? onClose : () => {});
-const router = useRouter();
+  const closeFn = typeof handleClose === "function" ? handleClose : (typeof onClose === "function" ? onClose : () => {});
+  const router = useRouter();
 
-const [currentStep, setCurrentStep] = useState(0);
-const steps = ["Plan Selected", "Enter Details", "Choose Your SIM Preference",""];
+  const [currentStep, setCurrentStep] = useState(0);
+  const steps = ["Plan Selected", "Enter Details", "Choose Your SIM Preference", ""];
 
-const [lineType, setLineType] = useState("newLine");
-const [simType, setSimType] = useState("pSIM");
-const [addSPProtection, setAddSPProtection] = useState(true);
-const [addTProtection, setAddTProtection] = useState(false);
-const [addSWProtection, setAddSWProtection] = useState(false);
+  const [lineType, setLineType] = useState("newLine");
+  const [simType, setSimType] = useState("pSIM");
+  const [addSPProtection, setAddSPProtection] = useState(true);
+  const [addTProtection, setAddTProtection] = useState(false);
+  const [addSWProtection, setAddSWProtection] = useState(false);
 
-const [compatResult, setCompatResult] = useState(null);
-const [checking, setChecking] = useState(false);
-const [imeiError, setImeiError] = useState(null);
-// ✅ NEW: track whether a compatible IMEI has been confirmed
-const [confirmedImei, setConfirmedImei] = useState(null);
+  const [compatResult, setCompatResult] = useState(null);
+  const [checking, setChecking] = useState(false);
+  const [imeiError, setImeiError] = useState(null);
+  const [confirmedImei, setConfirmedImei] = useState(null);
+  const [imeiCheckAttempted, setImeiCheckAttempted] = useState(false);
 
-const type = 'plan';
+  const type = "plan";
 
-const [formData, setFormData] = useState({
-mdn: "",
-first_name: "",
-last_name: "",
-carrier_account: "",
-carrier_password: "",
-state: "",
-city: "",
-address1: "",
-address2: "",
-zip: "",
-imei: ""
-});
-
-const [deviceCheckStatus, setDeviceCheckStatus] = useState(null);
-const [checkingDevice, setCheckingDevice] = useState(false);
-const [errors, setErrors] = useState({});
-
-useEffect(() => {
-if (show) {
-  setCurrentStep(0);
-  setLineType("newLine");
-  setSimType("pSIM");
-  setAddSPProtection(true);
-  // ✅ Reset IMEI state on modal open
-  setCompatResult(null);
-  setImeiError(null);
-  setConfirmedImei(null);
-  setFormData({
+  const [formData, setFormData] = useState({
     mdn: "",
     first_name: "",
     last_name: "",
@@ -65,249 +37,239 @@ if (show) {
     address1: "",
     address2: "",
     zip: "",
-    imei: ""
+    imei: "",
   });
-  setDeviceCheckStatus(null);
-  setCheckingDevice(false);
 
-  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
-  const alreadyAdded = cart.some((item) => item.planId === 19);
-  if (!alreadyAdded) {
-    const protectionPlan = {
-      type:"plan",
-      planTitle: "Smart Phone Device Protection",
-      planSlug: "device-protection",
-      planId: 19,
-      planPrice: 8.99,
-      planDuration: "month",
-      planBqid: 22,
-      planType: "addon",
-      lineType: "addon",
-      simType: "device_protection",
-      formData: {},
-    };
-    cart.push(protectionPlan);
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
-}
-}, [show, planId]);
+  const [deviceCheckStatus, setDeviceCheckStatus] = useState(null);
+  const [checkingDevice, setCheckingDevice] = useState(false);
+  const [errors, setErrors] = useState({});
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  setFormData((p) => ({ ...p, [name]: value }));
+  useEffect(() => {
+    if (show) {
+      setCurrentStep(0);
+      setLineType("newLine");
+      setSimType("pSIM");
+      setAddSPProtection(true);
+      setCompatResult(null);
+      setImeiError(null);
+      setConfirmedImei(null);
+      setImeiCheckAttempted(false);
+      setFormData({
+        mdn: "",
+        first_name: "",
+        last_name: "",
+        carrier_account: "",
+        carrier_password: "",
+        state: "",
+        city: "",
+        address1: "",
+        address2: "",
+        zip: "",
+        imei: "",
+      });
+      setDeviceCheckStatus(null);
+      setCheckingDevice(false);
 
-  // ✅ When user edits IMEI, reset the compatibility result so they must re-check
-  if (name === "imei") {
-    setCompatResult(null);
-    setImeiError(null);
-    setConfirmedImei(null);
-  }
-
-  if (errors[name]) {
-    setErrors((prev) => {
-      const copy = { ...prev };
-      delete copy[name];
-      return copy;
-    });
-  }
-};
-
-const handleLineToggle = () => setLineType(lineType === "newLine" ? "portNumber" : "newLine");
-const handleSimToggle = () => setSimType(simType === "pSIM" ? "eSIM" : "pSIM");
-
-const handleSmartPhoneProtectionToggle = (e) => {
-const newValue = e.target.checked;
-setAddSPProtection(newValue);
-
-let cart = JSON.parse(localStorage.getItem("cart") || "[]");
-
-  if (newValue) {
-    const alreadyAdded = cart.some((item) => item.planId === 19);
-    if (!alreadyAdded) {
-      const protectionPlan = {
-        type:"plan",
-        planTitle: "Smart Phone Device Protection",
-        planSlug: "device-protection",
-        planId: 19,
-        planPrice: 8.99,
-        planDuration: "month",
-        planBqid: 22,
-        planType: "addon",
-        lineType: "addon",
-        simType: "device_protection",
-        formData: {},
-      };
-      cart.push(protectionPlan);
-      localStorage.setItem("cart", JSON.stringify(cart));
+      let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const alreadyAdded = cart.some((item) => item.planId === 19);
+      if (!alreadyAdded) {
+        const protectionPlan = {
+          type: "plan",
+          planTitle: "Smart Phone Device Protection",
+          planSlug: "device-protection",
+          planId: 19,
+          planPrice: 8.99,
+          planDuration: "month",
+          planBqid: 22,
+          planType: "addon",
+          lineType: "addon",
+          simType: "device_protection",
+          formData: {},
+        };
+        cart.push(protectionPlan);
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
     }
+  }, [show, planId]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((p) => ({ ...p, [name]: value }));
+
+    if (name === "imei") {
+      setCompatResult(null);
+      setImeiError(null);
+      setConfirmedImei(null);
+      setImeiCheckAttempted(false);
+    }
+
+    if (errors[name]) {
+      setErrors((prev) => {
+        const copy = { ...prev };
+        delete copy[name];
+        return copy;
+      });
+    }
+  };
+
+  const handleLineToggle = () => setLineType(lineType === "newLine" ? "portNumber" : "newLine");
+  const handleSimToggle = () => setSimType(simType === "pSIM" ? "eSIM" : "pSIM");
+
+  const handleSmartPhoneProtectionToggle = (e) => {
+    const newValue = e.target.checked;
+    setAddSPProtection(newValue);
+
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+    if (newValue) {
+      const alreadyAdded = cart.some((item) => item.planId === 19);
+      if (!alreadyAdded) {
+        const protectionPlan = {
+          type: "plan",
+          planTitle: "Smart Phone Device Protection",
+          planSlug: "device-protection",
+          planId: 19,
+          planPrice: 8.99,
+          planDuration: "month",
+          planBqid: 22,
+          planType: "addon",
+          lineType: "addon",
+          simType: "device_protection",
+          formData: {},
+        };
+        cart.push(protectionPlan);
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
     } else {
       cart = cart.filter((item) => item.planId !== 19);
       localStorage.setItem("cart", JSON.stringify(cart));
-  }
-};
+    }
+  };
 
-const handleSmartWatchProtectionToggle = (e) => {
-  const newValue = e.target.checked;
-  setAddSWProtection(newValue);
+  const handleSmartWatchProtectionToggle = (e) => {
+    const newValue = e.target.checked;
+    setAddSWProtection(newValue);
 
-  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-  if (newValue) {
-    const alreadyAdded = cart.some((item) => item.planId === 27);
-    if (!alreadyAdded) {
-      const protectionPlan = {
-        type:"plan",
-        planTitle: "Smart Watch Device Protection",
-        planSlug: "smart-watch-device-protection",
-        planId: 27,
-        planPrice: 5.99,
-        planDuration: "month",
-        planBqid: 27,
-        planType: "addon",
-        lineType: "addon",
-        simType: "device_protection",
-        formData: {},
-      };
-      cart.push(protectionPlan);
+    if (newValue) {
+      const alreadyAdded = cart.some((item) => item.planId === 27);
+      if (!alreadyAdded) {
+        const protectionPlan = {
+          type: "plan",
+          planTitle: "Smart Watch Device Protection",
+          planSlug: "smart-watch-device-protection",
+          planId: 27,
+          planPrice: 5.99,
+          planDuration: "month",
+          planBqid: 27,
+          planType: "addon",
+          lineType: "addon",
+          simType: "device_protection",
+          formData: {},
+        };
+        cart.push(protectionPlan);
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
+    } else {
+      cart = cart.filter((item) => item.planId !== 27);
       localStorage.setItem("cart", JSON.stringify(cart));
     }
-  } else {
-    cart = cart.filter((item) => item.planId !== 27);
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
-};
+  };
 
-const handleTabletProtectionToggle = (e) => {
-  const newValue = e.target.checked;
-  setAddTProtection(newValue);
+  const handleTabletProtectionToggle = (e) => {
+    const newValue = e.target.checked;
+    setAddTProtection(newValue);
 
-  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-  if (newValue) {
-    const alreadyAdded = cart.some((item) => item.planId === 26);
-    if (!alreadyAdded) {
-      const protectionPlan = {
-        type:"plan",
-        planTitle: "Tablet Device Protection",
-        planSlug: "tablet-device-protection",
-        planId: 26,
-        planPrice: 6.99,
-        planDuration: "month",
-        planBqid: 26,
-        planType: "addon",
-        lineType: "addon",
-        simType: "device_protection",
-        formData: {},
-      };
-      cart.push(protectionPlan);
+    if (newValue) {
+      const alreadyAdded = cart.some((item) => item.planId === 26);
+      if (!alreadyAdded) {
+        const protectionPlan = {
+          type: "plan",
+          planTitle: "Tablet Device Protection",
+          planSlug: "tablet-device-protection",
+          planId: 26,
+          planPrice: 6.99,
+          planDuration: "month",
+          planBqid: 26,
+          planType: "addon",
+          lineType: "addon",
+          simType: "device_protection",
+          formData: {},
+        };
+        cart.push(protectionPlan);
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
+    } else {
+      cart = cart.filter((item) => item.planId !== 26);
       localStorage.setItem("cart", JSON.stringify(cart));
     }
-  } else {
-    cart = cart.filter((item) => item.planId !== 26);
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
-};
+  };
 
-const formatLabel = (field) => {
-  return field
-    .replace(/_/g, " ")
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-};
+  const formatLabel = (field) => {
+    return field
+      .replace(/_/g, " ")
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
 
   const checkDeviceCompatibility = async () => {
-  if (!formData.imei?.trim()) return;
-  const cleanedImei = formData.imei.replace(/\s/g, "").trim();
-
-  if (!cleanedImei) {
-    setImeiError("Please enter your IMEI/MEID number.");
-    return;
-  }
-
-  if (!/^\d{14,16}$/.test(cleanedImei)) {
-    setImeiError("Please enter a valid 14-16 digit IMEI number.");
-    return;
-  }
-
-  setImeiError(null);
-  setChecking(true);
-  // ✅ Reset previous result before new check
-  setCompatResult(null);
-  setConfirmedImei(null);
-
-  try {
-    const storageKeys = Object.keys(localStorage).filter((key) =>
-      key.startsWith("device_serial_")
-    );
-
-    let localMatch = null;
-
-    for (const key of storageKeys) {
-      const item = localStorage.getItem(key);
-      if (!item) continue;
-      const parsed = JSON.parse(item);
-      if (parsed.device_serial === cleanedImei) {
-        localMatch = parsed;
-        break;
-      }
+    if (!formData.imei?.trim()) {
+      setImeiError("Please enter your IMEI/MEID number.");
+      return;
     }
+    const cleanedImei = formData.imei.replace(/\s/g, "").trim();
 
-    const nextIndex = storageKeys.length + 1;
-
-    if (localMatch && localMatch.esim_compatible === true) {
-      setCompatResult({ compatible: true, message: cleanedImei + " is compatible with eSIM." });
-      setConfirmedImei(cleanedImei);
+    if (!cleanedImei) {
+      setImeiError("Please enter your IMEI/MEID number.");
       return;
     }
 
-    if (localMatch && localMatch.esim_compatible === false) {
-      setCompatResult({ compatible: false, message: cleanedImei + " is not compatible with eSIM." });
+    if (!/^\d{14,16}$/.test(cleanedImei)) {
+      setImeiError("Please enter a valid 14-16 digit IMEI number.");
       return;
     }
 
-    const goliteRes = await fetch(
-      "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
-        },
-        body: JSON.stringify({ action: "esim_check", imei: cleanedImei }),
+    setImeiError(null);
+    setChecking(true);
+    setCompatResult(null);
+    setConfirmedImei(null);
+    setImeiCheckAttempted(true);
+
+    try {
+      const storageKeys = Object.keys(localStorage).filter((key) =>
+        key.startsWith("device_serial_")
+      );
+
+      let localMatch = null;
+
+      for (const key of storageKeys) {
+        const item = localStorage.getItem(key);
+        if (!item) continue;
+        const parsed = JSON.parse(item);
+        if (parsed.device_serial === cleanedImei) {
+          localMatch = parsed;
+          break;
+        }
       }
-    );
 
-    const goliteData = await goliteRes.json();
+      const nextIndex = storageKeys.length + 1;
 
-    if (goliteData.compatible === true) {
-      setCompatResult({ compatible: true, message: cleanedImei + " is compatible with eSIM." });
-      setConfirmedImei(cleanedImei);
-      localStorage.setItem(`device_serial_${nextIndex}`, JSON.stringify({ device_serial: cleanedImei, esim_compatible: true }));
-      return;
-    }
-
-    const bequickRes = await fetch(
-      "https://zoiko-atom-api.bequickapps.com/carriers/3/query_device_info",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-AUTH-TOKEN": process.env.NEXT_PUBLIC_BEQUICK_TOKEN,
-        },
-        body: JSON.stringify({ device_serial: cleanedImei }),
+      if (localMatch && localMatch.esim_compatible === true) {
+        setCompatResult({ compatible: true, message: cleanedImei + " is compatible with eSIM." });
+        setConfirmedImei(cleanedImei);
+        return;
       }
-    );
 
-    const bequickData = await bequickRes.json();
-    const isEsimCompatible = bequickData?.esim_compatible;
+      if (localMatch && localMatch.esim_compatible === false) {
+        setCompatResult({ compatible: false, message: cleanedImei + " is not compatible with eSIM." });
+        return;
+      }
 
-    if (isEsimCompatible === true) {
-      setCompatResult({ compatible: true, message: cleanedImei + " is compatible with eSIM." });
-      setConfirmedImei(cleanedImei);
-      localStorage.setItem(`device_serial_${nextIndex}`, JSON.stringify({ device_serial: cleanedImei, esim_compatible: true }));
-
-      await fetch(
+      const goliteRes = await fetch(
         "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
         {
           method: "POST",
@@ -315,84 +277,131 @@ const formatLabel = (field) => {
             "Content-Type": "application/json",
             "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
           },
-          body: JSON.stringify({ action: "esim_update", imei: cleanedImei }),
+          body: JSON.stringify({ action: "esim_check", imei: cleanedImei }),
         }
       );
-      return;
-    }
 
-    const goliteVRes = await fetch(
-      "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
-        },
-        body: JSON.stringify({ action: "esim_v_check", imei: cleanedImei }),
+      const goliteData = await goliteRes.json();
+
+      if (goliteData.compatible === true) {
+        setCompatResult({ compatible: true, message: cleanedImei + " is compatible with eSIM." });
+        setConfirmedImei(cleanedImei);
+        localStorage.setItem(`device_serial_${nextIndex}`, JSON.stringify({ device_serial: cleanedImei, esim_compatible: true }));
+        return;
       }
-    );
 
-    const goliteVData = await goliteVRes.json();
+      const bequickRes = await fetch(
+        "https://zoiko-atom-api.bequickapps.com/carriers/3/query_device_info",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-AUTH-TOKEN": process.env.NEXT_PUBLIC_BEQUICK_TOKEN,
+          },
+          body: JSON.stringify({ device_serial: cleanedImei }),
+        }
+      );
 
-    if (goliteVData.esimCompatible === true) {
-      setCompatResult({ compatible: true, message: cleanedImei + " is compatible with eSIM." });
-      setConfirmedImei(cleanedImei);
-      localStorage.setItem(`device_serial_${nextIndex}`, JSON.stringify({ device_serial: cleanedImei, esim_compatible: true }));
-    } else {
-      localStorage.setItem(`device_serial_${nextIndex}`, JSON.stringify({ device_serial: cleanedImei, esim_compatible: false }));
-      setCompatResult({ compatible: false, message: cleanedImei + " is not compatible with eSIM." });
+      const bequickData = await bequickRes.json();
+      const isEsimCompatible = bequickData?.esim_compatible;
+
+      if (isEsimCompatible === true) {
+        setCompatResult({ compatible: true, message: cleanedImei + " is compatible with eSIM." });
+        setConfirmedImei(cleanedImei);
+        localStorage.setItem(`device_serial_${nextIndex}`, JSON.stringify({ device_serial: cleanedImei, esim_compatible: true }));
+
+        await fetch(
+          "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
+            },
+            body: JSON.stringify({ action: "esim_update", imei: cleanedImei }),
+          }
+        );
+        return;
+      }
+
+      const goliteVRes = await fetch(
+        "https://goliteapi.golitemobile.com/api/device_compatibility_checker/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Secret-Key": process.env.NEXT_PUBLIC_ESIM_SECRET_KEY,
+          },
+          body: JSON.stringify({ action: "esim_v_check", imei: cleanedImei }),
+        }
+      );
+
+      const goliteVData = await goliteVRes.json();
+
+      if (goliteVData.esimCompatible === true) {
+        setCompatResult({ compatible: true, message: cleanedImei + " is compatible with eSIM." });
+        setConfirmedImei(cleanedImei);
+        localStorage.setItem(`device_serial_${nextIndex}`, JSON.stringify({ device_serial: cleanedImei, esim_compatible: true }));
+      } else {
+        localStorage.setItem(`device_serial_${nextIndex}`, JSON.stringify({ device_serial: cleanedImei, esim_compatible: false }));
+        setCompatResult({ compatible: false, message: cleanedImei + " is not compatible with eSIM." });
+      }
+    } catch (err) {
+      setCompatResult({
+        compatible: false,
+        message: err instanceof Error ? err.message : "Unable to verify device. Please try again.",
+      });
+    } finally {
+      setChecking(false);
     }
-  } catch (err) {
-    setCompatResult({
-      compatible: false,
-      message: err instanceof Error ? err.message : "Unable to verify device. Please try again.",
+  };
+
+  const validatePortingFields = () => {
+    const requiredFields = [
+      "mdn", "first_name", "last_name", "carrier_account",
+      "carrier_password", "state", "city", "address1", "zip",
+    ];
+
+    const newErrors = {};
+
+    requiredFields.forEach((field) => {
+      const val = formData[field];
+      if (!val || !String(val).trim()) {
+        newErrors[field] = "This field is required";
+      }
     });
-  } finally {
-    setChecking(false);
-  }
-};
 
-const validatePortingFields = () => {
-  const requiredFields = [
-    "mdn", "first_name", "last_name", "carrier_account",
-    "carrier_password", "state", "city", "address1", "zip",
-  ];
-
-  const newErrors = {};
-
-  requiredFields.forEach((field) => {
-    const val = formData[field];
-    if (!val || !String(val).trim()) {
-      newErrors[field] = "This field is required";
+    if (formData.mdn) {
+      const mdn = String(formData.mdn).trim();
+      if (!/^\d+$/.test(mdn)) {
+        newErrors.mdn = "Phone number must contain numbers only.";
+      } else if (mdn.length !== 10) {
+        newErrors.mdn = "Phone number must be exactly 10 digits.";
+      }
     }
-  });
 
-  if (formData.mdn) {
-    const mdn = String(formData.mdn).trim();
-    if (!/^\d+$/.test(mdn)) {
-      newErrors.mdn = "Phone number must contain numbers only.";
-    } else if (mdn.length !== 10) {
-      newErrors.mdn = "Phone number must be exactly 10 digits.";
-    }
-  }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-  setErrors(newErrors);
-  return Object.keys(newErrors).length === 0;
-};
-
-  // ✅ Compute the final step index based on sim/line type
   const getFinalStepIndex = () => {
-    // steps array has 4 items (indices 0–3), eSIM adds one more device check step
-    // Protection page is always the last step
     if (simType === "eSIM") return 4;
     return 3;
+  };
+
+  // Skip the eSIM device check step entirely
+  const handleSkipImeiCheck = () => {
+    setFormData((p) => ({ ...p, imei: "" }));
+    setCompatResult(null);
+    setImeiError(null);
+    setConfirmedImei(null);
+    setImeiCheckAttempted(true);
+    setCurrentStep((s) => s + 1);
   };
 
   const nextStep = () => {
     const finalStep = getFinalStepIndex();
 
-    // For newLine -> skip porting (step 1)
     if (lineType === "newLine" && currentStep === 0) {
       setCurrentStep(2);
       return;
@@ -403,17 +412,12 @@ const validatePortingFields = () => {
       return;
     }
 
-    // Validate when in porting step
     if (lineType === "portNumber" && currentStep === 1) {
       if (!validatePortingFields()) return;
     }
 
-    // ✅ Block Continue on eSIM device check step unless compatible IMEI confirmed
-    if (simType === "eSIM" && currentStep === 3) {
-      if (!confirmedImei) return;
-    }
+    // IMEI is now optional — no block here
 
-    // ✅ If we're on the final (protection) step, submit the cart and navigate
     if (currentStep === finalStep) {
       let filteredData = {};
 
@@ -423,9 +427,12 @@ const validatePortingFields = () => {
         const { imei, ...rest } = formData;
         filteredData = rest;
       } else if (lineType === "newLine" && simType === "eSIM") {
-        filteredData = { imei: confirmedImei || formData.imei };
+        // Include IMEI if user checked and confirmed it's compatible
+        filteredData = confirmedImei ? { imei: confirmedImei } : {};
       } else if (lineType === "portNumber" && simType === "eSIM") {
-        filteredData = { ...formData, imei: confirmedImei || formData.imei };
+        const { imei, ...rest } = formData;
+        // Include IMEI if user checked and confirmed it's compatible
+        filteredData = confirmedImei ? { ...rest, imei: confirmedImei } : rest;
       }
 
       const finalData = {
@@ -452,7 +459,6 @@ const validatePortingFields = () => {
       return;
     }
 
-    // Otherwise advance
     setCurrentStep((s) => s + 1);
   };
 
@@ -464,11 +470,8 @@ const validatePortingFields = () => {
     }
   };
 
-  // ✅ Helper: is the Continue button disabled?
-  const isContinueDisabled = () => {
-    if (simType === "eSIM" && currentStep === 3 && !confirmedImei) return true;
-    return false;
-  };
+  // Continue is never disabled — IMEI check is optional
+  const isContinueDisabled = () => false;
 
   return (
     <Modal show={show} onHide={closeFn} size="lg" centered dialogClassName="custom-modal">
@@ -498,12 +501,17 @@ const validatePortingFields = () => {
             </div>
 
             <div className="plan-info" style={{ textAlign: "center", marginBottom: 12 }}>
-              {planSlug && <small style={{ color: "#666" }}>New number or keep your current one — your call. We're here to make it effortless either way.</small>}
+              {planSlug && (
+                <small style={{ color: "#666" }}>
+                  New number or keep your current one — your call. We're here to make it effortless either way.
+                </small>
+              )}
             </div>
           </>
         )}
 
         <div className="step-content">
+          {/* Step 0: Line Type */}
           {currentStep === 0 && (
             <div>
               <h2>Select Line Type</h2>
@@ -518,6 +526,7 @@ const validatePortingFields = () => {
             </div>
           )}
 
+          {/* Step 1: Porting Details */}
           {currentStep === 1 && lineType === "portNumber" && (
             <div>
               <h4>Enter Details For Porting Number</h4>
@@ -624,6 +633,7 @@ const validatePortingFields = () => {
             </div>
           )}
 
+          {/* Step 2: SIM Preference */}
           {currentStep === 2 && (
             <div>
               <h2>Choose Your SIM Preference</h2>
@@ -638,6 +648,7 @@ const validatePortingFields = () => {
             </div>
           )}
 
+          {/* Step 3 (eSIM only): Device Compatibility Check — optional */}
           {simType === "eSIM" && currentStep === 3 && (
             <div className="buttons">
               <div className="close-button" onClick={closeFn} aria-label="Close">x</div>
@@ -645,7 +656,7 @@ const validatePortingFields = () => {
               <p>Enter your IMEI or MEID below to see if your device is compatible with eSIMs</p>
 
               <div className="form_field_group-half validate-required" style={{ textAlign: "center", marginBottom: 12 }}>
-                <label>IMEI/MEID number *</label>
+                <label>IMEI/MEID number (optional)</label>
                 <input
                   type="text"
                   name="imei"
@@ -654,28 +665,30 @@ const validatePortingFields = () => {
                 />
               </div>
 
-              <Button
-                variant="primary btn-danger"
-                onClick={checkDeviceCompatibility}
-                disabled={checking}
-              >
-                {checking ? "Checking…" : "Check My Device"}
-              </Button>
-
-              {/* ✅ "Check Another Device" button — only shown after a result */}
-              {compatResult && (
+              <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginTop: 8 }}>
                 <Button
-                  variant="outline-secondary"
-                  style={{ marginLeft: 10 }}
-                  onClick={() => {
-                    setFormData((p) => ({ ...p, imei: "" }));
-                    setCompatResult(null);
-                    setImeiError(null);
-                    setConfirmedImei(null);
-                  }}
+                  variant="primary btn-danger"
+                  onClick={checkDeviceCompatibility}
+                  disabled={checking}
                 >
-                  Check Another Device
+                  {checking ? "Checking…" : "Check My Device"}
                 </Button>
+              </div>
+
+              {compatResult && (
+                <div style={{ marginTop: 10, textAlign: "center" }}>
+                  <Button
+                    variant="outline-secondary"
+                    onClick={() => {
+                      setFormData((p) => ({ ...p, imei: "" }));
+                      setCompatResult(null);
+                      setImeiError(null);
+                      setConfirmedImei(null);
+                    }}
+                  >
+                    Check Another Device
+                  </Button>
+                </div>
               )}
 
               {imeiError && <p className="text-danger" style={{ marginTop: 8 }}>{imeiError}</p>}
@@ -701,6 +714,7 @@ const validatePortingFields = () => {
             </div>
           )}
 
+          {/* Protection Step */}
           {((simType === "pSIM" && currentStep === 3) || (simType === "eSIM" && currentStep === 4)) && (
             <>
               <p className="text-muted" style={{ textAlign: "left" }}>
@@ -769,10 +783,10 @@ const validatePortingFields = () => {
           </Button>
           <Button
             variant="primary btn-danger"
-            onClick={nextStep}
+            onClick={simType === "eSIM" && currentStep === 3 && !imeiCheckAttempted ? handleSkipImeiCheck : nextStep}
             disabled={isContinueDisabled()}
           >
-            Continue <i className="fas fa-chevron-right"></i>
+            {simType === "eSIM" && currentStep === 3 && !imeiCheckAttempted ? "Skip & Continue" : "Continue"} <i className="fas fa-chevron-right"></i>
           </Button>
         </div>
       </Modal.Body>
