@@ -725,7 +725,6 @@ const jsonLd = [
         <meta name="google-translate-customization" content="notranslate" />
 
         {/* Google Site Verification */}
-        <meta name="google-site-verification" content="U_E87KEtgWSC9YqTlXs8tN41X6j60af1_HXlKOYFrU4" />
 
         {/* Google Analytics using env var NEXT_PUBLIC_GA_ID */}
         {process.env.NEXT_PUBLIC_GA_ID && (
