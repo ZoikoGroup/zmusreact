@@ -29,7 +29,7 @@ export default function BillingPaymentPage({ params }) {
   const billsPerPage = 5;
 
   const API_URL = `https://zoiko-atom-api.bequickapps.com/billing_statements?by_subscriber_id=${subscriber_id}`;
-  const TOKEN = "09ff2d85-a451-47e6-86bc-aba98e1e4629";
+  const TOKEN = "d678fcd9-2a4a-40c1-9849-523f36d5bdbf";
 
   // Fetch Billing Data
   useEffect(() => {

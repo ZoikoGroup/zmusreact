@@ -65,7 +65,7 @@ const openChat = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "X-AUTH-TOKEN": "09ff2d85-a451-47e6-86bc-aba98e1e4629",
+            "X-AUTH-TOKEN": "d678fcd9-2a4a-40c1-9849-523f36d5bdbf",
           },
           body: JSON.stringify({ device_serial: imei }),
         }
