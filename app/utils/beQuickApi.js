@@ -2,8 +2,7 @@ import { tokenizationCard } from "./ziftApi";
 
 const API_BASE = "https://zoiko-atom-api.bequickapps.com";
 const BEQUICK_TOKEN = "d678fcd9-2a4a-40c1-9849-523f36d5bdbf";
-
-/* -------------------- Core Request Wrapper -------------------- */
+// -------------------- Core Request Wrapper -------------------- */
 async function beQuickRequest(url, method = "GET", data = {}, headers = {}, timeout = 30) {
   let fullUrl = API_BASE + url;
   method = method.toUpperCase();
@@ -60,16 +59,12 @@ export async function processOrderZift(postData) {
     postData.payment_method_id = paymentMethodResponse.payment_method_id;
     postData.address_id = paymentMethodResponse.service_address_id;
     postData.address_attributes = paymentMethodResponse.address_attributes;
-
-
     postData.service_address_id = paymentMethodResponse.service_address_id;
     postData.address_attributes = paymentMethodResponse.address_attributes;
     postData.payment_method_id = paymentMethodResponse.payment_method_id;
 
 
-
-
-    console.log("Payment Method Response:", paymentMethodResponse);
+  console.log("Payment Method Response:", paymentMethodResponse);
     
     // 3️⃣ Create draft line
     const draftLineResponse = await createDraftLine(postData);
@@ -234,7 +229,7 @@ export async function addPaymentMethod(postData) {
     `${postData.billingAddress?.firstName} ${postData.billingAddress?.lastName}`,
     phone,
     street,
-    "",
+      `${postData.billingAddress?.houseNumber || ""}`,
     city,
     state,
     zip,

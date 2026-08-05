@@ -56,18 +56,20 @@ export default function CheckoutPage() {
   const [errors, setErrors] = useState({
     billingEmail: "",
     billingPhone: "",
-    shippingEmail: "",
-    shippingPhone: "",
     billingFirstName: "",
     billingLastName: "",
     billingState: "",
     billingCity: "",
+    billingStreet: "",
     billingHouseNumber: "",
     billingZip: "",
     shippingFirstName: "",
     shippingLastName: "",
+    shippingEmail: "",
+    shippingPhone: "",
     shippingState: "",
     shippingCity: "",
+    shippingStreet: "",
     shippingHouseNumber: "",
     shippingZip: "",
     cardFirstName: "",
@@ -384,6 +386,7 @@ export default function CheckoutPage() {
     newErrors.billingState = billingAddress.state ? "" : "State is required";
     newErrors.billingCity = billingAddress.city ? "" : "City is required";
     newErrors.billingHouseNumber = billingAddress.houseNumber ? "" : "House number is required";
+    newErrors.billingStreet = billingAddress.street ? "" : "Street is required";
     newErrors.billingZip = billingAddress.zip ? "" : "ZIP code is required";
     newErrors.billingEmail = emailRegex.test(billingAddress.email) ? "" : "Invalid email address";
     newErrors.billingPhone = phoneRegex.test(billingAddress.phone) ? "" : "Invalid phone number";
@@ -394,6 +397,7 @@ export default function CheckoutPage() {
       newErrors.shippingState = shippingAddress.state ? "" : "State is required";
       newErrors.shippingCity = shippingAddress.city ? "" : "City is required";
       newErrors.shippingHouseNumber = shippingAddress.houseNumber ? "" : "House number is required";
+      newErrors.shippingStreet = shippingAddress.street ? "" : "Street is required";
       newErrors.shippingZip = shippingAddress.zip ? "" : "ZIP code is required";
       newErrors.shippingEmail = emailRegex.test(shippingAddress.email) ? "" : "Invalid email address";
       newErrors.shippingPhone = phoneRegex.test(shippingAddress.phone) ? "" : "Invalid phone number";
@@ -403,6 +407,7 @@ export default function CheckoutPage() {
       newErrors.shippingState = "";
       newErrors.shippingCity = "";
       newErrors.shippingHouseNumber = "";
+      newErrors.shippingStreet = "";
       newErrors.shippingZip = "";
       newErrors.shippingEmail = "";
       newErrors.shippingPhone = "";
@@ -877,7 +882,7 @@ export default function CheckoutPage() {
                               <div className="col-md-6" key={i}>
                                 <label className="form-label fw-semibold">
                                   {meta.label || key.replace(/([A-Z])/g, " $1")}
-                                  {["firstName", "lastName", "state", "city", "houseNumber", "zip", "email", "phone"].includes(key) && (
+                                  {["firstName", "lastName", "state", "city", "street", "houseNumber", "zip", "email", "phone"].includes(key) && (
                                     <span className="text-danger ms-1">*</span>
                                   )}
                                 </label>
@@ -943,7 +948,7 @@ export default function CheckoutPage() {
                               <div className="col-md-6" key={i}>
                                 <label className="form-label fw-semibold">
                                   {meta.label || key.replace(/([A-Z])/g, " $1")}
-                                  {["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"].includes(key) && (
+                                  {["firstName", "lastName", "state", "city", "street", "houseNumber", "zip", "email"].includes(key) && (
                                     <span className="text-danger ms-1">*</span>
                                   )}
                                 </label>
