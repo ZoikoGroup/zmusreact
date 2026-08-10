@@ -25,6 +25,61 @@ import StripePaymentForm from "../components/StripePaymentForm";
 // ─── STEP 2: Set your activation fee amount here ───────────────────────────
 const ACTIVATION_FEE_PER_ESIM = 13.99;
 
+// ─── Single-plan-type enforcement ──────────────────────────────────────────
+// The checkout may only ever contain ONE plan family at a time. If the stored
+// cart ends up with more than one plan type, we keep only the most recently
+// added plan family and drop the older ones. Non-plan items (e.g. physical
+// devices) are left untouched.
+const PLAN_TYPE_CATEGORIES = [
+  "prepaid-plans",
+  "postpaid-plans",
+  "business-deals",
+  "travel-plans",
+];
+
+const getPlanType = (item) => {
+  if (!item || !item.planType) return null;
+  return PLAN_TYPE_CATEGORIES.includes(item.planType) ? item.planType : null;
+};
+
+const isPlanItem = (item) => getPlanType(item) !== null;
+
+// Display metadata for the plan-type tag shown on each cart item.
+const PLAN_TYPE_TAGS = {
+  "prepaid-plans": { label: "Prepaid Plan", className: "bg-info text-dark" },
+  "postpaid-plans": { label: "Postpaid Plan", className: "bg-primary" },
+  "business-deals": { label: "Business Deal", className: "bg-dark" },
+  "travel-plans": { label: "Travel Plan", className: "bg-success" },
+};
+
+const getPlanTypeTag = (item) => {
+  const type = getPlanType(item);
+  return type ? PLAN_TYPE_TAGS[type] : null;
+};
+
+// Keeps only the newest plan family (the last plan item in the array is treated
+// as the most recently added). Devices / non-plan items always stay.
+const enforceSinglePlanType = (items) => {
+  const list = Array.isArray(items) ? items : [];
+
+  let latestPlanType = null;
+  for (let i = list.length - 1; i >= 0; i--) {
+    const type = getPlanType(list[i]);
+    if (type) {
+      latestPlanType = type;
+      break;
+    }
+  }
+
+  // No plan items at all → nothing to enforce.
+  if (!latestPlanType) return list;
+
+  return list.filter(
+    (item) => !isPlanItem(item) || getPlanType(item) === latestPlanType
+  );
+};
+
+
 export default function CheckoutPage() {
   const [shippingFee, setShippingFee] = useState(0);
 
@@ -205,7 +260,17 @@ export default function CheckoutPage() {
         };
       });
 
-      setCart(normalized);
+      // Enforce a single plan family in the checkout. If the stored cart holds
+      // more than one plan type, keep only the newest one (older plans removed).
+      const enforced = enforceSinglePlanType(normalized);
+
+      setCart(enforced);
+
+      // Persist back so the removed plans don't reappear on refresh.
+      if (enforced.length !== normalized.length) {
+        localStorage.setItem("cart", JSON.stringify(enforced));
+      }
+
       if (typeof window !== "undefined" && localStorage.getItem("zoiko_token")) {
         setIsLoggedIn(true);
       }
@@ -776,7 +841,14 @@ export default function CheckoutPage() {
                     <div className="card-body">
                       <div className="d-flex justify-content-between align-items-center">
                         <div>
-                          <h5 className="text-danger fw-bold">{item.planTitle}</h5>
+                          <div className="d-flex align-items-center gap-2 mb-1 flex-wrap">
+                            <h5 className="text-danger fw-bold mb-0">{item.planTitle}</h5>
+                            {getPlanTypeTag(item) && (
+                              <span className={`badge ${getPlanTypeTag(item).className}`}>
+                                {getPlanTypeTag(item).label}
+                              </span>
+                            )}
+                          </div>
                           <small className="text-muted">
                             Line Type: {item.lineType || "N/A"} | SIM Type:{" "}
                             {item.simType || "N/A"}

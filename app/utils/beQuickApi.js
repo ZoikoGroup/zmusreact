@@ -162,6 +162,14 @@ export async function createSubscriberAndFetch(postData) {
     let found = await getSubscriberByEmail(email);
     if (found && found.subscriber_id) return { status: true, subscriber_id: found.subscriber_id };
 
+    let companyId = 1; // Assuming a default company ID; adjust as necessary
+    if(cartItem && cartItem.planType === "prepaid-plans") {
+      companyId = 2; // Set company ID for prepaid plans
+    }else if(cartItem && cartItem.planType === "postpaid-plans") {
+      companyId = 1; // Set company ID for postpaid plans
+    }else{
+      companyId = 3; // Default to 7 if no specific plan type is found
+    }
     // Create if not exists
     const data = {
       action: "create",
@@ -169,7 +177,7 @@ export async function createSubscriberAndFetch(postData) {
         first_name: firstName,
         last_name: lastName,
         email,
-        company_id: "1",
+        company_id: companyId.toString(),
         phone,
         addresses_attributes:[
           {
