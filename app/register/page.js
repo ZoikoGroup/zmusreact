@@ -3,7 +3,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
 import MessageBox from "../components/MessageBox";
-import { Button, Card, CardBody, Container, Form, Row, Col } from "react-bootstrap";
+import ForgotPasswordModal from "../components/ForgotPasswordModal";
+import { Form } from "react-bootstrap";
 import React, { useState } from "react";
 import Link from "next/link";
 
@@ -17,6 +18,8 @@ const Register = () => {
   });
   const [message, setMessage] = useState({ type: "", text: "" });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showForgot, setShowForgot] = useState(false);
 
   const showMessage = (type, text) => setMessage({ type, text });
 
@@ -134,109 +137,152 @@ const Register = () => {
       {/* <TopHeader /> */}
       <Header />
       <HeadBar text="Join Buster and flock together with your buddies!" />
-      <Container className="p-5">
-        <Card>
-          <CardBody>
-            <Row className="gx-5 align-items-center">
-              <Col md={6} className="d-none d-md-block d-lg-block">
-                <div className="loginbg">
-                  <p className="txtwhite text-center body22">
-                    Hello Buddies! Our well-loved character 'Budgie', our
-                    first-of-its-kind animal-friendly network, is set to arrive
-                    at your place.
-                  </p>
-                </div>
-              </Col>
+      <section className="zl-hero">
+        <div className="zl-panel">
+          <div className="zl-tabs">
+            <Link className="zl-tab" href="/login">
+              Login
+            </Link>
+            <span className="zl-tab active">Register</span>
+            <button
+              type="button"
+              className="zl-tab"
+              onClick={() => setShowForgot(true)}
+            >
+              Reset Password
+            </button>
+          </div>
 
-              <Col md={6}>
-                <h2>Create Account</h2>
-                <p className="body22">Fill in the form to join Zoiko Mobile.</p>
+          <div className="zl-card">
+            <h1 className="zl-title">Create account</h1>
+            <p className="zl-subtitle">Fill in the form to join Zoiko Mobile.</p>
 
-                {/* Top Message */}
-                <MessageBox type={message.type} text={message.text} />
+            {/* Top Message */}
+            <MessageBox type={message.type} text={message.text} />
 
-                <Form onSubmit={handleSubmit}>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      isInvalid={!!errors.name}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.name}
-                    </Form.Control.Feedback>
-                  </Form.Group>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="zl-field" controlId="zl-name">
+                <Form.Label>Full name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  className="zl-input"
+                  placeholder="Enter your full name"
+                  autoComplete="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  isInvalid={!!errors.name}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.name}
+                </Form.Control.Feedback>
+              </Form.Group>
 
-                  <Form.Group className="mb-3">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      isInvalid={!!errors.email}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.email}
-                    </Form.Control.Feedback>
-                  </Form.Group>
+              <Form.Group className="zl-field" controlId="zl-email">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  className="zl-input"
+                  placeholder="name@company.com"
+                  autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  isInvalid={!!errors.email}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.email}
+                </Form.Control.Feedback>
+              </Form.Group>
 
-                  <Form.Group className="mb-3">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      name="password"
-                      value={formData.password}
-                      onChange={handleChange}
-                      isInvalid={!!errors.password}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.password}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-
-                  <Form.Group className="mb-3">
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      name="confirmPassword"
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
-                      isInvalid={!!errors.confirmPassword}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.confirmPassword}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-
-                  <Button
-                    type="submit"
-                    disabled={loading}
-                    className="btn btn-danger w-100"
+              <Form.Group className="zl-field" controlId="zl-password">
+                <Form.Label>Password</Form.Label>
+                <div className="zl-password">
+                  <Form.Control
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    className="zl-input"
+                    placeholder="Create a password"
+                    autoComplete="new-password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    isInvalid={!!errors.password}
+                  />
+                  <button
+                    type="button"
+                    className="zl-eye"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    onClick={() => setShowPassword(!showPassword)}
                   >
-                    {loading ? "Registering..." : "Register"}
-                  </Button>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                      {showPassword && <line x1="2" y1="2" x2="22" y2="22" />}
+                    </svg>
+                  </button>
+                </div>
+                {errors.password && (
+                  <div className="invalid-feedback d-block">{errors.password}</div>
+                )}
+              </Form.Group>
 
-                  <div className="text-center mt-3">
-                    <Button variant="danger" href="/api/auth/google">
-                      Sign in with Google
-                    </Button>
-                    <p className="mt-3">
-                      Already have an account?{" "}
-                      <Link href="/login" className="txtred fw-bold">
-                        Login
-                      </Link>
-                    </p>
-                  </div>
-                </Form>
-              </Col>
-            </Row>
-          </CardBody>
-        </Card>
-      </Container>
+              <Form.Group className="zl-field" controlId="zl-confirm">
+                <Form.Label>Confirm password</Form.Label>
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  className="zl-input"
+                  placeholder="Re-enter your password"
+                  autoComplete="new-password"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  isInvalid={!!errors.confirmPassword}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.confirmPassword}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <button type="submit" className="zl-submit mt-2" disabled={loading}>
+                {loading ? "Registering..." : "Create Account"}
+              </button>
+
+              <div className="zl-divider">
+                <span>or continue with</span>
+              </div>
+
+              <a className="zl-social" href="/api/auth/google">
+                <img
+                  src="https://developers.google.com/identity/images/g-logo.png"
+                  alt=""
+                />
+                <span>Continue with Google</span>
+                <span className="zl-chevron" aria-hidden="true">›</span>
+              </a>
+
+              <p className="zl-register">
+                Already have an account? <Link href="/login">Log in</Link>
+              </p>
+            </Form>
+          </div>
+
+          <div className="zl-footer">
+            <Link href="/privacy-policy">Privacy</Link>
+            <span aria-hidden="true">•</span>
+            <Link href="/terms-and-conditions">Terms</Link>
+            <span aria-hidden="true">•</span>
+            <Link href="/support">Help</Link>
+            <span className="zl-copy">
+              © {new Date().getFullYear()} Zoiko Mobile Inc.
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <ForgotPasswordModal
+        show={showForgot}
+        onHide={() => setShowForgot(false)}
+      />
       <Footer />
     </>
   );
