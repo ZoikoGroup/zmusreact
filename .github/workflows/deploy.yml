@@ -29,6 +29,7 @@ jobs:
             APP=/var/www/zoiko-zmus/app
             NAME=zoiko-zmus
             PORT=3003
+            BACKUP="$(dirname "$APP")/.next.backup"
             cd "$APP"
             apply_local_edits() {
               LOCAL=/var/www/zoiko-zmus/local-edits.patch
@@ -44,12 +45,12 @@ jobs:
             NEW=$(git rev-parse HEAD)
             echo "deploying ${PREV:0:7} -> ${NEW:0:7}"
             npm ci --legacy-peer-deps --no-audit --no-fund || npm install --legacy-peer-deps --no-audit --no-fund
-            rm -rf .next.prev
-            [ -d .next ] && cp -a .next .next.prev || true
+            rm -rf .next.prev "$BACKUP"
+            [ -d .next ] && cp -a .next "$BACKUP" || true
             rollback() {
               echo "ROLLING BACK to ${PREV:0:7}"
               rm -rf .next
-              [ -d .next.prev ] && mv .next.prev .next
+              [ -d "$BACKUP" ] && mv "$BACKUP" .next
               git reset --hard "$PREV"
               apply_local_edits
               pm2 restart "$NAME" --update-env || true
@@ -61,6 +62,6 @@ jobs:
             code=$(curl -s -o /dev/null -w "%{http_code}" "http://127.0.0.1:$PORT/")
             echo "health check: $code"
             [ "$code" = "200" ] || rollback
-            rm -rf .next.prev
+            rm -rf "$BACKUP"
             pm2 save
             echo "DEPLOY OK: ${NEW:0:7}"
