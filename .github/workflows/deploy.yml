@@ -1,27 +1,66 @@
-name: Deploy to Production
+name: Deploy Zoiko ZMUS
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-zoiko-zmus
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 45
     steps:
-      - name: Deploy to Server via SSH
+      - name: Deploy to the VM over SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USER }}
-          key: ${{ secrets.VM_SSH_KEY }}
+          host: ${{ secrets.GCP_SSH_HOST }}
+          username: ${{ secrets.GCP_SSH_USER }}
+          key: ${{ secrets.GCP_SSH_KEY }}
+          command_timeout: 35m
+          script_stop: true
           script: |
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            cd /home/lennox/zmusreact
-            git pull origin main
-            npm install --legacy-peer-deps
-            npm run build
-            pm2 restart zmusreact || pm2 start npm --name "zmusreact" -- start
+            set -e
+            exec 9>/tmp/zoiko-deploy.lock
+            flock 9
+            APP=/var/www/zoiko-zmus/app
+            NAME=zoiko-zmus
+            PORT=3003
+            cd "$APP"
+            apply_local_edits() {
+              LOCAL=/var/www/zoiko-zmus/local-edits.patch
+              if [ -f "$LOCAL" ]; then
+                if git apply --check "$LOCAL" 2>/dev/null; then git apply "$LOCAL" && echo "local edits re-applied"; else echo "WARNING: local-edits.patch no longer fits upstream; deploying plain main"; fi
+              fi
+              true
+            }
+            PREV=$(git rev-parse HEAD)
+            git fetch --quiet origin main
+            git reset --hard origin/main
+            apply_local_edits
+            NEW=$(git rev-parse HEAD)
+            echo "deploying ${PREV:0:7} -> ${NEW:0:7}"
+            npm ci --legacy-peer-deps --no-audit --no-fund || npm install --legacy-peer-deps --no-audit --no-fund
+            rm -rf .next.prev
+            [ -d .next ] && cp -a .next .next.prev || true
+            rollback() {
+              echo "ROLLING BACK to ${PREV:0:7}"
+              rm -rf .next
+              [ -d .next.prev ] && mv .next.prev .next
+              git reset --hard "$PREV"
+              apply_local_edits
+              pm2 restart "$NAME" --update-env || true
+              exit 1
+            }
+            npm run build || rollback
+            pm2 restart "$NAME" --update-env
+            sleep 6
+            code=$(curl -s -o /dev/null -w "%{http_code}" "http://127.0.0.1:$PORT/")
+            echo "health check: $code"
+            [ "$code" = "200" ] || rollback
+            rm -rf .next.prev
             pm2 save
+            echo "DEPLOY OK: ${NEW:0:7}"
