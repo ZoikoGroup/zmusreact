@@ -2,21 +2,14 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeadBar from "../components/HeadBar";
-import {
-  Button,
-  Card,
-  CardBody,
-  Container,
-  Form,
-  Row,
-  Col,
-  Modal,
-} from "react-bootstrap";
+import ForgotPasswordModal from "../components/ForgotPasswordModal";
+import { Form } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 
 const Login = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     passwd: "",
@@ -45,16 +38,7 @@ const Login = () => {
  }, []);
 
 
-  // Forgot Password States
   const [showForgot, setShowForgot] = useState(false);
-  const [forgotStep, setForgotStep] = useState(1);
-  const [forgotData, setForgotData] = useState({
-    email: "",
-    code: "",
-    password: "",
-    password_confirmation: "",
-  });
-  const [forgotMessage, setForgotMessage] = useState("");
 
   // Handle login form
   const handleChange = (e) => {
@@ -112,132 +96,31 @@ const Login = () => {
     }
   };
 
-  // Forgot Password Handlers
-  const handleForgotChange = (e) => {
-    const { name, value } = e.target;
-    setForgotData({
-      ...forgotData,
-      [name]: value,
-    });
-  };
-
-  const handleForgotEmail = async () => {
-    if (!forgotData.email)
-      return setForgotMessage("⚠️ Please complete all required fields before continuing.");
-    setForgotMessage("📩 Sending reset code...");
-    try {
-      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/password/email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({ email: forgotData.email }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setForgotStep(2);
-        setForgotMessage("📨 Verification code sent! Check your inbox.");
-      } else {
-        setForgotMessage(
-          data.message || "⚠️ Failed to send reset code. Please check and try again."
-        );
-      }
-    } catch (err) {
-      setForgotMessage("⚠️ Error sending email. Please try again.");
-    }
-  };
-
-  const handleForgotCodeCheck = async () => {
-    if (!forgotData.code)
-      return setForgotMessage("⚠️ Please complete all required fields before continuing.");
-    setForgotMessage("🔎 Verifying code...");
-    try {
-      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/password/code/check", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: forgotData.code }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setForgotStep(3);
-        setForgotMessage("✅ Code verified successfully. You can now reset your password.");
-      } else {
-        setForgotMessage(
-          data.message ||
-            "⚠️ That code is invalid or has expired. Please request a new verification code."
-        );
-      }
-    } catch (err) {
-      setForgotMessage("⚠️ Error verifying code. Please try again.");
-    }
-  };
-
-  const passwordPolicy = (password) => {
-    const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
-    return regex.test(password);
-  };
-
-  const handleForgotReset = async () => {
-    if (!forgotData.password || !forgotData.password_confirmation)
-      return setForgotMessage("⚠️ Please complete all required fields before continuing.");
-
-    if (!passwordPolicy(forgotData.password))
-      return setForgotMessage(
-        "⚠️ Password must be at least 8 characters long and include a number and special character."
-      );
-
-    if (forgotData.password !== forgotData.password_confirmation)
-      return setForgotMessage("⚠️ Passwords do not match. Please re-enter to confirm.");
-
-    setForgotMessage("🔐 Resetting password...");
-    try {
-      const res = await fetch("https://zmapi.zoikomobile.co.uk/api/v1/password/reset", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          code: forgotData.code,
-          password: forgotData.password,
-          password_confirmation: forgotData.password_confirmation,
-        }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setForgotMessage("🔐 Password updated successfully. You can now sign in with your new credentials.");
-        setTimeout(() => {
-          setShowForgot(false);
-          setForgotStep(1);
-        }, 2000);
-      } else {
-        setForgotMessage(data.message || "⚠️ Failed to reset password. Please try again.");
-      }
-    } catch (err) {
-      setForgotMessage("⚠️ Error resetting password. Please try again.");
-    }
-  };
-
   return (
     <>
       {/* <TopHeader /> */}
       <Header />
       <HeadBar text="Join Buster and flock together with your buddies!" />
-      <Container className="p-5">
-        <Card>
-          <CardBody>
-            <Row className="gx-5 align-items-center">
-              <Col md={6} className="d-none d-md-block d-lg-block">
-                <div className="loginbg">
-                  <p className="txtwhite text-center body22">
-                    Hello Buddies! Our well-loved character 'Budgie', our
-                    first-of-its-kind animal-friendly network, is set to arrive
-                    at your place.
-                  </p>
-                </div>
-              </Col>
-              <Col md={6}>
-                <h2>Welcome Back!</h2>
-                <p className="body22">
-                  Simply fill in the form below to get started.
+      <section className="zl-hero">
+        <div className="zl-panel">
+          <div className="zl-tabs">
+            <span className="zl-tab active">Login</span>
+            <a className="zl-tab" href="/register">
+              Register
+            </a>
+            <button
+              type="button"
+              className="zl-tab"
+              onClick={() => setShowForgot(true)}
+            >
+              Reset Password
+            </button>
+          </div>
+
+          <div className="zl-card">
+                <h1 className="zl-title">Welcome back!</h1>
+                <p className="zl-subtitle">
+                  Sign in to your Zoiko Mobile account.
                 </p>
 
                 {/* ✅ Verification message */}
@@ -280,158 +163,117 @@ const Login = () => {
                 )}
 
                 <Form onSubmit={handleSubmit}>
-                  <label>Email</label>
-                  <input
-                    type="text"
-                    name="username"
-                    className="form-control"
-                    onChange={handleChange}
-                    value={formData.username}
-                  />
-                  {errors.username && (
-                    <small className="txtred">{errors.username}</small>
-                  )}
-                  <br />
+                  <div className="zl-field">
+                    <label htmlFor="zl-email">Email address</label>
+                    <input
+                      id="zl-email"
+                      type="text"
+                      name="username"
+                      className="form-control zl-input"
+                      placeholder="name@company.com"
+                      autoComplete="email"
+                      onChange={handleChange}
+                      value={formData.username}
+                    />
+                    {errors.username && (
+                      <small className="txtred">{errors.username}</small>
+                    )}
+                  </div>
 
-                  <label>Password</label>
-                  <input
-                    type="password"
-                    name="passwd"
-                    className="form-control"
-                    onChange={handleChange}
-                    value={formData.passwd}
-                  />
-                  {errors.passwd && (
-                    <small className="txtred">{errors.passwd}</small>
-                  )}
-                  <br />
-
-                  <div className="d-flex justify-content-between align-items-center">
-                    <div>
+                  <div className="zl-field">
+                    <label htmlFor="zl-password">Password</label>
+                    <div className="zl-password">
                       <input
+                        id="zl-password"
+                        type={showPassword ? "text" : "password"}
+                        name="passwd"
+                        className="form-control zl-input"
+                        placeholder="Enter your password"
+                        autoComplete="current-password"
+                        onChange={handleChange}
+                        value={formData.passwd}
+                      />
+                      <button
+                        type="button"
+                        className="zl-eye"
+                        aria-label={showPassword ? "Hide password" : "Show password"}
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                          <circle cx="12" cy="12" r="3" />
+                          {showPassword && <line x1="2" y1="2" x2="22" y2="22" />}
+                        </svg>
+                      </button>
+                    </div>
+                    {errors.passwd && (
+                      <small className="txtred">{errors.passwd}</small>
+                    )}
+                  </div>
+
+                  <div className="zl-row">
+                    <div className="form-check m-0">
+                      <input
+                        id="zl-remember"
                         type="checkbox"
                         name="remember"
-                        className="form-check-input"
+                        className="form-check-input zl-check"
                         onChange={handleChange}
                         checked={formData.remember}
-                      />{" "}
-                      <label className="form-check-label">Remember me</label>
+                      />
+                      <label className="form-check-label" htmlFor="zl-remember">
+                        Remember me
+                      </label>
                     </div>
-                    <Button
-                      variant="link"
-                      className="p-0 text-danger"
+                    <button
+                      type="button"
+                      className="zl-link"
                       onClick={() => setShowForgot(true)}
                     >
-                      Forgot Password?
-                    </Button>
+                      Forgot password?
+                    </button>
                   </div>
 
-                  <div className="mt-3">
-                    <input
-                      type="submit"
-                      value={loading ? "Logging in..." : "Login"}
-                      className="btn btn-outline-danger"
-                      disabled={loading}
-                    />{" "}
-                    <Button variant="outline-danger" href="/register">
-                      Register
-                    </Button>{" "}
-                    <Button className="google-btn" href="/api/auth/google">
-                      <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" />
-                      Sign in with Google
-                    </Button>                    
+                  <button type="submit" className="zl-submit" disabled={loading}>
+                    {loading ? "Logging in..." : "Log In"}
+                  </button>
+
+                  <div className="zl-divider">
+                    <span>or continue with</span>
                   </div>
+
+                  <a className="zl-social" href="/api/auth/google">
+                    <img
+                      src="https://developers.google.com/identity/images/g-logo.png"
+                      alt=""
+                    />
+                    <span>Continue with Google</span>
+                    <span className="zl-chevron" aria-hidden="true">›</span>
+                  </a>
+
+                  <p className="zl-register">
+                    New to Zoiko Mobile? <a href="/register">Register</a>
+                  </p>
                 </Form>
-              </Col>
-            </Row>
-          </CardBody>
-        </Card>
-      </Container>
+          </div>
 
-      {/* Forgot Password Modal */}
-      <Modal show={showForgot} onHide={() => setShowForgot(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Forgot Password</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {forgotStep === 1 && (
-            <>
-              <Form.Group>
-                <label>Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  className="form-control"
-                  value={forgotData.email}
-                  onChange={handleForgotChange}
-                />
-              </Form.Group>
-              <Button
-                variant="danger"
-                className="mt-3"
-                onClick={handleForgotEmail}
-              >
-                Send Reset Code
-              </Button>
-            </>
-          )}
+          <div className="zl-footer">
+            <a href="/privacy-policy">Privacy</a>
+            <span aria-hidden="true">•</span>
+            <a href="/terms-and-conditions">Terms</a>
+            <span aria-hidden="true">•</span>
+            <a href="/support">Help</a>
+            <span className="zl-copy">
+              © {new Date().getFullYear()} Zoiko Mobile Inc.
+            </span>
+          </div>
+        </div>
+      </section>
 
-          {forgotStep === 2 && (
-            <>
-              <Form.Group>
-                <label>Enter Verification Code</label>
-                <input
-                  type="text"
-                  name="code"
-                  className="form-control"
-                  value={forgotData.code}
-                  onChange={handleForgotChange}
-                />
-              </Form.Group>
-              <Button
-                variant="danger"
-                className="mt-3"
-                onClick={handleForgotCodeCheck}
-              >
-                Verify Code
-              </Button>
-            </>
-          )}
-
-          {forgotStep === 3 && (
-            <>
-              <Form.Group>
-                <label>Enter New Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  className="form-control"
-                  value={forgotData.password}
-                  onChange={handleForgotChange}
-                />
-              </Form.Group>
-              <Form.Group className="mt-2">
-                <label>Confirm New Password</label>
-                <input
-                  type="password"
-                  name="password_confirmation"
-                  className="form-control"
-                  value={forgotData.password_confirmation}
-                  onChange={handleForgotChange}
-                />
-              </Form.Group>
-              <Button
-                variant="danger"
-                className="mt-3"
-                onClick={handleForgotReset}
-              >
-                Reset Password
-              </Button>
-            </>
-          )}
-          {forgotMessage && <p className="mt-3 text-danger">{forgotMessage}</p>}
-        </Modal.Body>
-      </Modal>
+      <ForgotPasswordModal
+        show={showForgot}
+        onHide={() => setShowForgot(false)}
+      />
 
       <Footer />
     </>
