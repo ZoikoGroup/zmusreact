@@ -92,7 +92,7 @@ const CustomLanguageSwitcher = () => {
         className="notranslate text-decoration-none text-dark p-0"
         onClick={toggleLanguage}
       >
-        <i className="bi bi-globe me-1 notranslate"></i>
+        {/* <i className="bi bi-globe me-1 notranslate"></i> */}
         <span className="notranslate">
           {currentLang === "en" ? "Español" : "English"}
         </span>

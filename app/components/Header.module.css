@@ -1,0 +1,300 @@
+/* ==========================================================================
+   ZOIKO MOBILE - HEADER & MEGA MENU (CSS MODULE)
+   ========================================================================== */
+
+/* Parent menu item with mega menu */
+.hasMegaMenu {
+  position: static !important;
+}
+
+/* Mega Menu Container Card (1120px) */
+.megaMenu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  width: 1120px;
+  max-width: calc(100vw - 40px);
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0px 18px 40px 0px rgba(120, 20, 60, 0.18);
+  border: 1px solid #F0D5DF;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.35fr;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1100;
+}
+
+/* Invisible bridge so mouse hover doesn't break when moving between button and dropdown */
+.megaMenu::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 14px;
+}
+
+/* Show mega menu on parent hover */
+.hasMegaMenu:hover .megaMenu,
+.megaMenu:hover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Link Columns */
+.megaCol {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 20px;
+}
+
+.megaColFirst {
+  padding-left: 6px;
+  padding-right: 20px;
+}
+
+.megaColDivider {
+  border-left: 0.8px solid #F0D5DF;
+}
+
+/* Column Header */
+.colHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  min-height: 28px;
+}
+
+.colHeaderTitle {
+  font-family: 'Poppins', sans-serif;
+  color: #22092C;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.colHeaderIcon {
+  color: #E11D48;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Links List */
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.linkItem {
+  min-height: 36px;
+  padding: 8px 6px 8px 8px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  color: #1A1A1A;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+  line-height: 20px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.linkItem:hover {
+  background-color: #FFF0F4;
+  color: #DF1E5A;
+}
+
+.chevronArrow {
+  color: #E11D48;
+  opacity: 0.8;
+  transition: transform 0.15s ease;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.linkItem:hover .chevronArrow {
+  transform: translateX(2px);
+  opacity: 1;
+}
+
+/* Right Promo Card */
+.promoCol {
+  padding-left: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.promoCard {
+  background: #FEF0F4;
+  border: 1px solid #F8DCE5;
+  border-radius: 20px;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.promoTitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 25px;
+  color: #22092C;
+  margin-bottom: 6px;
+}
+
+.promoHighlight {
+  color: #DF1E5A;
+}
+
+.promoSubtext {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: #6B7280;
+  line-height: 16px;
+  margin-top: 4px;
+}
+
+/* Bullets in business card */
+.bulletList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.bulletItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: #1A1A1A;
+  font-family: 'Poppins', sans-serif;
+}
+
+.greenDot {
+  width: 8px;
+  height: 8px;
+  background-color: #10B981;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Action Button & Link */
+.promoActionArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.promoBtn {
+  background: linear-gradient(180deg, #E11D48 0%, #DF1E5A 100%);
+  border: 1px solid #E11D48;
+  color: #ffffff !important;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 8px 22px;
+  border-radius: 9999px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.promoBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(225, 29, 72, 0.35);
+  color: #ffffff;
+}
+
+.promoDetailLink {
+  color: #DF1E5A;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.promoDetailLink:hover {
+  color: #BE123C;
+}
+
+/* Simple Standard Dropdown (for Community) */
+.simpleDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: #ffffff;
+  min-width: 260px;
+  border-radius: 16px;
+  padding: 10px 0;
+  box-shadow: 0px 16px 36px 0px rgba(120, 20, 60, 0.16);
+  border: 1px solid #F0D5DF;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  z-index: 1100;
+}
+
+.simpleDropdown::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 12px;
+}
+
+:global(.zk-menu-item):hover .simpleDropdown,
+.simpleDropdown:hover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.simpleItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  color: #1A1A1A;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13.5px;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.simpleItem:hover {
+  background: #FFF0F4;
+  color: #DF1E5A;
+}
+
+@media (max-width: 1200px) {
+  .megaMenu {
+    width: 960px;
+  }
+}

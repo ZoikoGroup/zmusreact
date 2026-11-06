@@ -32,7 +32,7 @@ const defaultMeta = {
   title: "Zoiko Mobile | Best Mobile Plans with Unlimited Data",
   description:
     "Stay connected with Zoiko Mobile for affordable plans, free international calling and nationwide 5G coverage.",
-  image: "/img/zmuslogo-new.png",
+  image: "/img/ZoikoMobileUS_Logo_PNG.png",
 };
 
 /* -------------------------
@@ -628,7 +628,7 @@ const jsonLd = [
       : "https://zoikomobile.com",
     logo: `${typeof window !== "undefined"
       ? window.location.origin
-      : "https://zoikomobile.com"}/img/zmuslogo-new.png`,
+      : "https://zoikomobile.com"}/img/ZoikoMobileUS_Logo_PNG.png`,
     contactPoint: [
       {
         "@type": "ContactPoint",
@@ -663,8 +663,11 @@ const jsonLd = [
         <meta name="application-name" content="Zoiko Mobile" />
         <meta name="apple-mobile-web-app-title" content="Zoiko Mobile" />
 
-        <link rel="icon" href="/img/zmuslogo-new.png" type="image/png" />
-        <link rel="shortcut icon" href="/img/zmuslogo-new.png" />
+        <link rel="icon" href="/img/zoikomobileus-icon-png.png" media="(prefers-color-scheme: light)" type="image/png" />
+        <link rel="icon" href="/img/zoikomobileus-icon-png-b.png" media="(prefers-color-scheme: dark)" type="image/png" />
+        <link rel="shortcut icon" href="/img/zoikomobileus-icon-png.png" />
+        <link rel="apple-touch-icon" href="/img/zoikomobileus-icon-png.png" />
+
         <Script id="zoiko-breadcrumb-jsonld" type="application/ld+json" strategy="afterInteractive">
 {`{
   "@context": "https://schema.org/",
