@@ -415,6 +415,11 @@ const metaMap = {
     description:
       "Stay connected with Zoiko Unlimited Plus. Enjoy unlimited 5G data, talk, and text with 20GB hotspot included for high-usage customers.",
   },
+  "/plans/zoiko-lite": {
+    title: "Zoiko Lite | Essential Wireless Plan ($15/mo)",
+    description:
+      "Stay connected and spend less with Zoiko Lite for just $15/month per line. Simple U.S. wireless with 5GB premium data, 2GB mobile hotspot, and international calling.",
+  },
   "/plans/zoiko-lite-postpaid": {
     title: "Zoiko Lite Postpaid | Affordable Mobile Plan",
     description:
