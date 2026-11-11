@@ -291,7 +291,7 @@ const Footer = () => {
                 <li><Link href="/music-hub">Zoiko Music Hub</Link></li>
                 <li><Link href="/blog">Community Stories</Link></li>
                 <li><Link href="/music-hub">Music Events &amp; Perks</Link></li>
-                <li><Link href="/become-partner">Get Involved</Link></li>
+                <li><Link href="/get-involved">Get Involved</Link></li>
               </ul>
             </div>
 

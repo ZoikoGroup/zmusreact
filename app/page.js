@@ -7,6 +7,7 @@ import WhyChooseZoiko from "./components/WhyChooseZoiko";
 import RefurbishedSmartphones from "./components/RefurbishedSmartphones";
 import PhoneSlider from "./components/PhoneSlider";
 import Testimonials from "./components/Testimonials";
+import BlackFridayPopup from "./components/BlackFridayPopup";
 
 // ✅ SEO Metadata
 export const metadata = {
@@ -28,6 +29,7 @@ export default function Home() {
     <PhoneSlider />
     <Testimonials />
     <Footer />
+    <BlackFridayPopup />
     </>
   );
 }
