@@ -417,15 +417,15 @@ const Header = () => {
                           <span>Compare All Plans</span>
                           <ChevronRight size={13} className={styles.chevronArrow} />
                         </Link>
-                        <Link href="/all-plans" className={styles.linkItem}>
+                        <Link href="/plans/zoiko-lite" className={styles.linkItem}>
                           <span>Zoiko Lite</span>
                           <ChevronRight size={13} className={styles.chevronArrow} />
                         </Link>
-                        <Link href="/all-plans" className={styles.linkItem}>
+                        <Link href="/plans/zoiko-core" className={styles.linkItem}>
                           <span>Zoiko Core</span>
                           <ChevronRight size={13} className={styles.chevronArrow} />
                         </Link>
-                        <Link href="/all-plans" className={styles.linkItem}>
+                        <Link href="/plans/zoiko-max" className={styles.linkItem}>
                           <span>Zoiko Max</span>
                           <ChevronRight size={13} className={styles.chevronArrow} />
                         </Link>

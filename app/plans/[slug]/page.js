@@ -1,8 +1,9 @@
 import PlanDetailsPage from "./PlanDetailsPage";
 
 export async function generateMetadata({ params }) {
-  const slug = params.slug;
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const { slug } = await params;
+  const API_BASE_URL =
+    process.env.NEXT_PUBLIC_API_BASE_URL || "https://zmapi.zoikomobile.co.uk";
 
   let meta = {
     title: "Plan Details",
@@ -31,6 +32,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function Page({ params }) {
-  return <PlanDetailsPage slug={params.slug} />;
+export default async function Page({ params }) {
+  const { slug } = await params;
+  return <PlanDetailsPage slug={slug} />;
 }

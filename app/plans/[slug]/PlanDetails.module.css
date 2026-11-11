@@ -1,0 +1,1206 @@
+ /* Plan Details Page — Dynamic Modern Zoiko Layout */
+.pageRoot {
+  background: #ffffff;
+  color: #2d0735;
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 100%;
+}
+
+.eyebrowRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eyebrowDash {
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #bd1c50 0%, #df1e5a 55%, #ea580c 100%);
+  flex-shrink: 0;
+}
+
+.eyebrow {
+  color: #df1e5a;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+/* ===========================
+   SECTION 1: HERO
+=========================== */
+.heroSection {
+  background: linear-gradient(180deg, #fbf9fb 0%, #ffffff 100%);
+  padding: 40px 0 64px;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.heroTitle {
+  color: #3b0a45;
+  font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+  font-weight: 900;
+  line-height: 1.06;
+  margin: 0;
+}
+
+.heroTagline {
+  color: #2d0735;
+  font-size: clamp(1.375rem, 2.2vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.heroDesc {
+  color: #5a4960;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.55;
+  max-width: 540px;
+  margin: 4px 0 0;
+}
+
+.specStrip {
+  margin-top: 10px;
+  max-width: 562px;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e5e3e8;
+  border-radius: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.specCell {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.specCellBordered {
+  border-left: 1px solid #e5e3e8;
+}
+
+.specLabel {
+  color: #5a4960;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.specValue {
+  color: #3b0a45;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.specValueSmall {
+  color: #3b0a45;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.eligibleNote {
+  font-size: 12px;
+  color: #5a4960;
+  margin: 2px 0 0;
+}
+
+.inlineActionLink {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #df1e5a;
+  font-size: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.inlineActionLink:hover {
+  color: #bd1c50;
+}
+
+/* Right Pricing Column & Plan Tier Switcher */
+.heroRightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.planSwitcherWrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.planSwitcherTrack {
+  background: #efecee;
+  padding: 4px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.planSwitcherPill {
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #5a4960;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.planSwitcherPill:hover {
+  color: #3b0a45;
+}
+
+.planSwitcherPillActive {
+  background: #ffffff;
+  color: #3b0a45;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(59, 10, 73, 0.1);
+}
+
+/* Right Pricing Card */
+.priceCard {
+  background: #ffffff;
+  border: 1px solid #e5e3e8;
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(59, 10, 73, 0.1);
+  overflow: hidden;
+}
+
+.priceCardTopBar {
+  height: 6px;
+  background: linear-gradient(90deg, #bd1c50 0%, #df1e5a 55%, #ea580c 100%);
+}
+
+.priceCardBody {
+  padding: 24px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.priceHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.priceAmount {
+  color: #3b0a45;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.priceStrike {
+  color: #8c7a92;
+  font-size: 22px;
+  font-weight: 600;
+  text-decoration: line-through;
+}
+
+.pricePeriod {
+  color: #5a4960;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.taxNote {
+  color: #5a4960;
+  font-size: 14px;
+  margin: 0;
+}
+
+.cardFeatureList {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardFeatureRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e3e8;
+}
+
+.cardFeatureLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #2d0735;
+  font-size: 16px;
+}
+
+.cardFeatureIcon {
+  color: #df1e5a;
+  flex-shrink: 0;
+}
+
+.cardFeatureValue {
+  color: #2d0735;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.cardFeatureMuted {
+  color: #5a4960;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: right;
+}
+
+.primaryBtn {
+  width: 100%;
+  min-height: 54px;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 16px;
+  background: #df1e5a;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.primaryBtn:hover {
+  background: #c5174d;
+}
+
+.primaryBtnInline {
+  width: auto;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: 14px;
+  font-size: 16px;
+}
+
+/* ===========================
+   SECTION 2: THREE QUICK CHECKS + ROADMAP
+=========================== */
+.greySection {
+  background: #f7f5f8;
+  padding: 64px 0;
+}
+
+.whiteSection {
+  background: #ffffff;
+  padding: 64px 0;
+}
+
+.sectionHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.sectionHeadingGroup {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sectionTitle {
+  color: #3b0a45;
+  font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+  font-weight: 900;
+  line-height: 1.12;
+  margin: 0;
+}
+
+.sectionSubtitle {
+  color: #5a4960;
+  font-size: 16px;
+  margin: 0;
+}
+
+.progressWrap {
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progressLabel {
+  color: #3b0a45;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.progressTrack {
+  height: 10px;
+  width: 100%;
+  background: #f9d5e1;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: #df1e5a;
+  border-radius: 5px;
+  transition: width 0.3s ease;
+}
+
+.twoColBalanced {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.checkCard {
+  background: #ffffff;
+  border: 1px solid #e5e3e8;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(59, 10, 73, 0.06);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.stepTabsGrid {
+  background: #efecee;
+  border-radius: 20px;
+  padding: 6px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.stepTab {
+  min-height: 60px;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 14px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #5a4960;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.stepTabActive {
+  background: #ffffff;
+  color: #3b0a45;
+  box-shadow: 0 6px 16px rgba(59, 10, 73, 0.1);
+}
+
+.stepBadge {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: #e2d4e6;
+  color: #3b0a45;
+  font-size: 14px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stepBadgeActive {
+  background: #df1e5a;
+  color: #ffffff;
+}
+
+.stepBadgeDone {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.stepTabText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.stepTabTitle {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.stepTabSub {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.checkFormRow {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.inputGroup {
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputLabel {
+  color: #2d0735;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.textInput {
+  height: 52px;
+  min-height: 52px;
+  padding: 0 16px;
+  background: #ffffff;
+  border: 1px solid #d5c8da;
+  border-radius: 16px;
+  font-size: 16px;
+  color: #2d0735;
+  outline: none;
+  width: 100%;
+}
+
+.textInput:focus {
+  border-color: #df1e5a;
+  box-shadow: 0 0 0 3px rgba(223, 30, 90, 0.12);
+}
+
+.checkResultBox {
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.checkResultSuccess {
+  background: #edf7f1;
+  border: 1px solid #b5e2c9;
+  color: #155734;
+}
+
+.checkResultError {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.checkFooter {
+  padding-top: 16px;
+  border-top: 1px solid #e5e3e8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.checkNextLabel {
+  color: #5a4960;
+  font-size: 14px;
+}
+
+.outlineBtn {
+  min-height: 44px;
+  padding: 10px 18px;
+  background: #ffffff;
+  border: 1px solid #f5bfd2;
+  border-radius: 12px;
+  color: #2d0735;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.outlineBtn:hover {
+  border-color: #df1e5a;
+  color: #df1e5a;
+}
+
+/* Right Roadmap Card */
+.roadmapCard {
+  background: #ffffff;
+  border: 1px solid #e5e3e8;
+  border-radius: 24px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.roadmapTitle {
+  color: #3b0a45;
+  font-size: 20px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.roadmapList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.roadmapItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 7px 0;
+}
+
+.roadmapNum {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #d5c8da;
+  color: #3b0a45;
+  font-size: 12px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.roadmapNumDone {
+  background: #edf7f1;
+  border-color: #16a34a;
+  color: #15803d;
+}
+
+.roadmapTextWrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.roadmapStepName {
+  color: #2d0735;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.roadmapStepMeta {
+  color: #5a4960;
+  font-size: 12px;
+}
+
+.roadmapBadge {
+  color: #5a4960;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.roadmapFootnote {
+  color: #5a4960;
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 4px 0 0;
+}
+
+/* ===========================
+   SECTION 3: INTERACTIVE DATA SLIDERS
+=========================== */
+.sliderGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 32px;
+}
+
+.detailCard {
+  padding: 28px;
+  border: 1px solid #e5e3e8;
+  border-radius: 20px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sliderTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.cardHeading {
+  color: #3b0a45;
+  font-size: 20px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.sliderReadoutPink {
+  color: #df1e5a;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.sliderReadoutDark {
+  color: #3b0a45;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.sliderSubLabel {
+  color: #5a4960;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.rangeInput {
+  width: 100%;
+  accent-color: #df1e5a;
+  cursor: pointer;
+  height: 6px;
+}
+
+.rangeInputHotspot {
+  accent-color: #3b0a45;
+}
+
+.usageBar {
+  height: 16px;
+  background: #efecee;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.usageFillPrimary {
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #bd1c50 0%, #df1e5a 55%, #ea580c 100%);
+  transition: width 0.15s ease;
+}
+
+.usageFillHotspot {
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #3b0a45 0%, #7a298a 100%);
+  transition: width 0.15s ease;
+}
+
+.scaleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #5a4960;
+}
+
+.scaleThreshold {
+  font-weight: 700;
+  color: #2d0735;
+}
+
+.allowanceAlert {
+  padding: 14px 16px;
+  border-radius: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.allowanceAlertOk {
+  background: #edf7f1;
+  color: #155734;
+}
+
+.allowanceAlertWarn {
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+/* ===========================
+   SECTION 4: CALLING AT HOME & ABROAD
+=========================== */
+.callingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 28px;
+  align-items: start;
+}
+
+.chipsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.countryChip {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #f7f5f8;
+  border: 1px solid #e1d4e6;
+  color: #2d0735;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.countryChip:hover,
+.countryChipActive {
+  border-color: #df1e5a;
+  background: #fdf2f6;
+  color: #df1e5a;
+}
+
+.countryResults {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+  border-top: 1px solid #e5e3e8;
+  padding-top: 10px;
+}
+
+.countryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #fbf9fb;
+}
+
+.summaryCard {
+  padding: 4px 28px;
+  border: 1px solid #e5e3e8;
+  border-radius: 20px;
+  background: #ffffff;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e5e3e8;
+}
+
+.summaryRowStack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e5e3e8;
+}
+
+.summaryRow:last-child {
+  border-bottom: none;
+}
+
+.summaryLabel {
+  color: #2d0735;
+  font-size: 16px;
+}
+
+.summaryValue {
+  color: #2d0735;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.summarySubText {
+  color: #5a4960;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* ===========================
+   SECTION 5: COMPARE TABLE
+=========================== */
+.compareTableWrapper {
+  margin-top: 28px;
+  background: #ffffff;
+  border: 1px solid #e5e3e8;
+  border-radius: 20px;
+  overflow-x: auto;
+}
+
+.compareTable {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+}
+
+.compareTable th,
+.compareTable td {
+  padding: 16px;
+  text-align: left;
+  border-top: 1px solid #e5e3e8;
+  vertical-align: middle;
+}
+
+.compareTable thead th {
+  border-top: none;
+  padding-top: 20px;
+  padding-bottom: 16px;
+}
+
+.compareActiveCol {
+  background: #fbf9fc;
+}
+
+.compareActiveHeader {
+  background: #fbf9fc;
+  border-top: 3px solid #df1e5a !important;
+}
+
+.comparePlanName {
+  color: #3b0a45;
+  font-size: 18px;
+  font-weight: 900;
+  display: block;
+}
+
+.viewingTag {
+  color: #df1e5a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.compareRowLabel {
+  color: #5a4960;
+  font-size: 14px;
+  font-weight: 500;
+  width: 25%;
+}
+
+.compareValueActive {
+  color: #2d0735;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.compareValue {
+  color: #2d0735;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.compareViewLink {
+  color: #2d0735;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.compareViewLink:hover {
+  color: #df1e5a;
+}
+
+.compareFootnote {
+  margin-top: 16px;
+  color: #5a4960;
+  font-size: 14px;
+}
+
+/* ===========================
+   SECTION 6: TRUST & FAQS (2-COLUMN)
+=========================== */
+.faqTwoCol {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.trustLeftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trustCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e3e8;
+  border-radius: 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.trustCard:hover {
+  border-color: #df1e5a;
+  box-shadow: 0 8px 24px rgba(59, 10, 73, 0.06);
+}
+
+.trustIconBox {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  border: 1px solid #dfd3e4;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #3b0a45;
+}
+
+.trustIconPink {
+  color: #df1e5a;
+}
+
+.trustCardTitle {
+  color: #2d0735;
+  font-size: 16px;
+  font-weight: 700;
+  display: block;
+}
+
+.trustCardSub {
+  color: #5a4960;
+  font-size: 14px;
+  display: block;
+}
+
+.faqCardsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faqCardItem {
+  background: #ffffff;
+  border: 1px solid #e5e3e8;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.faqCardItemOpen {
+  border-color: #f3bdd0;
+}
+
+.faqBtn {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.faqQuestion {
+  color: #3b0a45;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.faqPillBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f4f2f5;
+  color: #df1e5a;
+  font-size: 20px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.faqPillBadgeOpen {
+  background: #df1e5a;
+  color: #ffffff;
+}
+
+.faqAnswer {
+  padding: 0 20px 20px;
+  color: #5a4960;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+/* ===========================
+   SECTION 7: BOTTOM CTA BANNER
+=========================== */
+.ctaWrapper {
+  padding: 56px 0;
+  background: #ffffff;
+}
+
+.ctaBanner {
+  position: relative;
+  background: #3b0a45;
+  border-radius: 24px;
+  padding: 40px 44px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ctaLeftStrip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(180deg, #bd1c50 0%, #df1e5a 55%, #ea580c 100%);
+}
+
+.ctaTitle {
+  color: #ffffff;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 900;
+  margin: 0;
+}
+
+.ctaSub {
+  color: #e4e4e7;
+  font-size: 16px;
+  margin: 8px 0 0;
+}
+
+.ctaSubLink {
+  color: #f48fb1;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.ctaActions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ctaCompareLink {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.ctaWhiteBtn {
+  min-height: 52px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #df1e5a;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.ctaWhiteBtn:hover {
+  background: #fdf2f6;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .heroGrid,
+  .twoColBalanced,
+  .sliderGrid,
+  .callingGrid,
+  .faqTwoCol {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .stepTabsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .specStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .specCellBordered {
+    border-left: none;
+    border-top: 1px solid #e5e3e8;
+  }
+
+  .ctaBanner {
+    padding: 32px 24px;
+  }
+}

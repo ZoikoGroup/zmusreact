@@ -213,8 +213,9 @@ const Footer = () => {
               <ul className="zk-dir-list">
                 <li><Link href="/all-plans">All Wireless Plans</Link></li>
                 <li><Link href="/all-plans">Compare Plans</Link></li>
-                <li><Link href="/all-plans">Zoiko Lite</Link></li>
-                <li><Link href="/all-plans">Zoiko Core / Zoiko Max</Link></li>
+                <li><Link href="/plans/zoiko-lite">Zoiko Lite</Link></li>
+                <li><Link href="/plans/zoiko-core">Zoiko Core</Link></li>
+                <li><Link href="/plans/zoiko-max">Zoiko Max</Link></li>
                 <li><Link href="/family-plans">Family &amp; Multi-Line</Link></li>
                 <li><Link href="/prepaid-plans">Prepaid Plans</Link></li>
                 <li><Link href="/offer-page">Current Offers</Link></li>
