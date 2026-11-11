@@ -330,6 +330,11 @@ const metaMap = {
     description:
       "Join the Zoiko Mobile Community to connect, share ideas, and collaborate with fellow mobile enthusiasts. Engage, learn, and grow together today!",
   },
+  "/get-involved": {
+    title: "Get Involved – Zoiko Community | Support Animals & Music",
+    description:
+      "Help animals, support local music and creators, and connect with people who care. Explore opportunities, partner with Zoiko, and see our community impact.",
+  },
   "/plans/zoiko-core": {
     title: "Zoiko Core Plan with 5GB Unlimited Data | Save Money",
     description:
