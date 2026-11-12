@@ -211,14 +211,19 @@ const Footer = () => {
                 <h4>Plans &amp; Pricing</h4>
               </div>
               <ul className="zk-dir-list">
-                <li><Link href="/all-plans">All Wireless Plans</Link></li>
-                <li><Link href="/all-plans">Compare Plans</Link></li>
+                <li><Link href="/wireless-plans">All Wireless Plans</Link></li>
+                <li><Link href="/wireless-plans">Compare Plans</Link></li>
                 <li><Link href="/plans/zoiko-lite">Zoiko Lite</Link></li>
                 <li><Link href="/plans/zoiko-core">Zoiko Core</Link></li>
                 <li><Link href="/plans/zoiko-max">Zoiko Max</Link></li>
                 <li><Link href="/family-plans">Family &amp; Multi-Line</Link></li>
                 <li><Link href="/prepaid-plans">Prepaid Plans</Link></li>
                 <li><Link href="/offer-page">Current Offers</Link></li>
+                <li><Link href="/5g-data-deals">5G Data Deals</Link></li>
+                <li><Link href="/bundled-offers">Bundled Offers</Link></li>
+                <li><Link href="/black-friday">Black Friday Deals</Link></li>
+                <li><Link href="/christmas-phone-plan-deals-2025">Christmas Deals</Link></li>
+                <li><Link href="/new-year-phone-plans-deals-2026">New Year Deals</Link></li>
               </ul>
             </div>
 
@@ -235,8 +240,11 @@ const Footer = () => {
                 <li><Link href="/product-category/refurbished">Refurbished Phones</Link></li>
                 <li><Link href="/accessories">Accessories</Link></li>
                 <li><Link href="/byod-plans">Bring Your Own Phone</Link></li>
+                <li><Link href="/phone-unlock-help">Phone Unlock Help</Link></li>
                 <li><Link href="/device-protection">Device Protection</Link></li>
                 <li><Link href="/accessories">Tablets &amp; Hotspots</Link></li>
+                <li><Link href="/devices">All Devices</Link></li>
+                <li><Link href="/wi-fi-calling">Wi-Fi Calling</Link></li>
               </ul>
             </div>
 
@@ -256,6 +264,8 @@ const Footer = () => {
                 <li><Link href="/top-up-plan">Top Up / Add Data</Link></li>
                 <li><Link href="/dashboard">Manage My Account</Link></li>
                 <li><Link href="/activate">Track Activation</Link></li>
+                <li><Link href="/how-to-activate-sim">Activate Your SIM Guide</Link></li>
+                <li><Link href="/store-locator">Store Locator</Link></li>
               </ul>
             </div>
 
@@ -269,7 +279,11 @@ const Footer = () => {
               </div>
               <ul className="zk-dir-list">
                 <li><Link href="/business-deals">Business Plans</Link></li>
+                <li><Link href="/explore-international">Explore International</Link></li>
                 <li><Link href="/international-callings">International Calling</Link></li>
+                <li><Link href="/international-calling-country-list">Calling Country List</Link></li>
+                <li><Link href="/free-international-minutes">Free International Minutes</Link></li>
+                <li><Link href="/out-of-bundle-rates">Out-of-Bundle Rates</Link></li>
                 <li><Link href="/travel-plans">Travel &amp; Roaming</Link></li>
                 <li><Link href="/canada-mexico-roaming-plans">Canada &amp; Mexico Roaming</Link></li>
                 <li><Link href="/support">Business Support</Link></li>
@@ -290,7 +304,7 @@ const Footer = () => {
                 <li><Link href="/animal-charities">Animal Charities</Link></li>
                 <li><Link href="/music-hub">Zoiko Music Hub</Link></li>
                 <li><Link href="/blog">Community Stories</Link></li>
-                <li><Link href="/music-hub">Music Events &amp; Perks</Link></li>
+                <li><Link href="/music-events-perk">Music Events &amp; Perks</Link></li>
                 <li><Link href="/get-involved">Get Involved</Link></li>
               </ul>
             </div>
@@ -308,7 +322,7 @@ const Footer = () => {
                 <li><Link href="/news">Press &amp; Media</Link></li>
                 <li><Link href="/sustainability">Sustainability</Link></li>
                 <li><Link href="/blog">Blog</Link></li>
-                <li><Link href="/become-partner">Careers</Link></li>
+                <li><Link href="/careers">Careers</Link></li>
                 <li><Link href="/become-affiliate">Become an Affiliate</Link></li>
                 <li><Link href="/contact-us">Contact Us</Link></li>
               </ul>
@@ -333,6 +347,7 @@ const Footer = () => {
                 <li><Link href="/regularity-information">Regulatory Information</Link></li>
                 <li><Link href="/911-e911-disclosure">911 / E911 Disclosure</Link></li>
                 <li><Link href="/do-not-sell-my-personal-information">Your Privacy Choices</Link></li>
+                <li><Link href="/free-delivery-policy">Free Delivery Policy</Link></li>
               </ul>
             </div>
           </div>
@@ -539,7 +554,7 @@ const Footer = () => {
             <Col md={3} sm={12} xs={12}>
               <p className="txtred">Shop</p>
               <ul>
-                <li><Link href={"/all-plans"}>Mobile Plans</Link></li>
+                <li><Link href={"/wireless-plans"}>Mobile Plans</Link></li>
                 <li><Link href={"/byod-plans"}>BYOD</Link></li>
                 <li><Link href={"https://phones.zoikomobile.com"} target="_blank">New Smart Phones</Link></li>                            
                 <li><Link href={"/product-category/refurbished"}>Refurbished Smartphones</Link></li>

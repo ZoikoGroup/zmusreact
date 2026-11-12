@@ -1,0 +1,1992 @@
+/* Careers.module.css - Pixel-faithful to Figma export & screenshots */
+
+.pageWrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #FFFFFF;
+  color: #3A0B4D;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.pageWrapper *,
+.pageWrapper *::before,
+.pageWrapper *::after {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 1368px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* SECTION HEADER TYPOGRAPHY */
+.sectionBadgePill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  background-color: #FAF5F9;
+  border-radius: 9999px;
+  width: fit-content;
+  margin-bottom: 12px;
+}
+
+.sectionBadgeText {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #E50046;
+}
+
+.sectionTitle {
+  font-size: 46px;
+  font-weight: 900;
+  line-height: 1.12;
+  color: #3A0B4D;
+  margin-bottom: 12px;
+  letter-spacing: -0.025em;
+}
+
+.sectionSubtitle {
+  font-size: 17px;
+  color: #554A58;
+  line-height: 1.6;
+  max-width: 720px;
+  margin-bottom: 32px;
+}
+
+/* ===================================================
+   1. HERO SECTION
+   =================================================== */
+.heroSection {
+  background-color: #FAF8FA;
+  padding: 24px 0 64px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroGlow {
+  position: absolute;
+  top: -160px;
+  right: -60px;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, rgba(229, 0, 70, 0.16) 0%, rgba(229, 0, 70, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 540px 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+  min-height: 555px;
+}
+
+/* Left White Hero Card */
+.heroWhiteCard {
+  background: #FFFFFF;
+  border-radius: 32px;
+  box-shadow: 0px 30px 70px 0px rgba(59, 10, 73, 0.08);
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 555px;
+}
+
+.heroPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background-color: #FAF5F9;
+  border-radius: 9999px;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
+.heroPillIcon {
+  width: 14px;
+  height: 14px;
+  color: #E50046;
+}
+
+.heroPillText {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #E50046;
+}
+
+.heroTitle {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1.04;
+  color: #3A0B4D;
+  letter-spacing: -0.035em;
+}
+
+.heroTitleAccent {
+  color: #E50046;
+}
+
+.heroDescription {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #554A58;
+}
+
+/* Middle Tall Photo Card */
+.heroMiddleCard {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  height: 555px;
+  background-color: #EDE7EE;
+}
+
+.heroMiddleCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Right Column (Top Photo + Bottom Two Photos) */
+.heroRightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 555px;
+}
+
+.heroTopPhotoCard {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  height: 268px;
+  background-color: #EDE7EE;
+}
+
+.heroTopPhotoCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.heroBottomRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  height: 271px;
+}
+
+.heroSmallPhotoCard {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  background-color: #EDE7EE;
+}
+
+.heroSmallPhotoCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.heroFloatingTag {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #3A0B4D;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.heroTagDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #E50046;
+}
+
+/* ===================================================
+   2. OUR TEAMS SECTION
+   =================================================== */
+.teamsSection {
+  padding: 64px 0;
+  background-color: #FFFFFF;
+}
+
+.teamsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.teamCard {
+  background: #FFFFFF;
+  border-radius: 24px;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, outline-color 0.25s ease;
+  cursor: pointer;
+}
+
+.teamCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(31, 7, 40, 0.08);
+  outline-color: #E50046;
+}
+
+.teamCardActive {
+  outline-color: #E50046;
+  box-shadow: 0 0 0 2px rgba(229, 0, 70, 0.2);
+}
+
+.teamImageWrap {
+  width: 100%;
+  height: 192px;
+  position: relative;
+  background-color: #F0EAF2;
+  overflow: hidden;
+}
+
+.teamImageWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.teamCard:hover .teamImageWrap img {
+  transform: scale(1.04);
+}
+
+.teamFloatingIcon {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #E50046;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.teamCardBody {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 6px;
+}
+
+.teamName {
+  font-size: 20px;
+  font-weight: 700;
+  color: #3A0B4D;
+}
+
+.teamDesc {
+  font-size: 14px;
+  color: #554A58;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  flex: 1;
+}
+
+.teamOpenBadge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 6px 14px;
+  background-color: #FAF5F9;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #E50046;
+}
+
+/* ===================================================
+   3. ALL JOBS (FIND YOUR NEXT ROLE)
+   =================================================== */
+.jobsSection {
+  padding: 72px 0;
+  background-color: #FAF5F9;
+  border-top: 1px solid #EFE7F2;
+}
+
+.jobsHeaderRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.jobsSortWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sortLabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: #3A0B4D;
+}
+
+.sortSelect {
+  width: 192px;
+  min-height: 48px;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3A0B4D;
+  background: #FFFFFF;
+  border-radius: 16px;
+  outline: 1px solid #D5C8D8;
+  outline-offset: -1px;
+  border: none;
+  cursor: pointer;
+}
+
+.sortSelect:focus {
+  outline-color: #E50046;
+}
+
+.jobsLayout {
+  display: grid;
+  grid-template-columns: 288px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* SIDEBAR FILTERS */
+.filterSidebar {
+  background: #FFFFFF;
+  border-radius: 24px;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filterTitle {
+  font-size: 14px;
+  font-weight: 800;
+  color: #3A0B4D;
+}
+
+.filterSearchWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border-radius: 16px;
+  outline: 1px solid #D5C8D8;
+  outline-offset: -1px;
+  background: #FFFFFF;
+}
+
+.filterSearchInput {
+  width: 100%;
+  height: 44px;
+  font-size: 14px;
+  color: #3A0B4D;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.checkboxList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.checkboxItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #4B3F50;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkboxItem input {
+  accent-color: #E50046;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.checkboxLabelWrap {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.checkboxCount {
+  font-size: 11px;
+  font-weight: 700;
+  color: #8C7C92;
+  background: #F3EDF5;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.filterSelect {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  font-size: 14px;
+  color: #3A0B4D;
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  outline: 1px solid #D5C8D8;
+  outline-offset: -1px;
+  border: none;
+  cursor: pointer;
+}
+
+.filterSelect:focus {
+  outline-color: #E50046;
+}
+
+.pillOptions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filterPill {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  background: #FAF5F9;
+  border: 1px solid #D5C8D8;
+  color: #4B3F50;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filterPill:hover {
+  background: #F2ECF5;
+}
+
+.filterPillActive {
+  background: #3A0B4D;
+  border-color: #3A0B4D;
+  color: #FFFFFF;
+}
+
+.clearFiltersBtn {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #3A0B4D;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 4px;
+}
+
+.clearFiltersBtn:hover {
+  background: #F8F3FA;
+  color: #E50046;
+  border-color: #E50046;
+}
+
+/* RIGHT COLUMN - GROUPED JOBS */
+.jobsMainList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.jobsCountBanner {
+  font-size: 16px;
+  font-weight: 700;
+  color: #3A0B4D;
+}
+
+.teamJobGroup {
+  background: #FFFFFF;
+  border-radius: 24px;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+  overflow: hidden;
+}
+
+.teamJobGroupHeader {
+  padding: 18px 24px;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.teamJobGroupTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3A0B4D;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.teamJobCountTag {
+  font-size: 13px;
+  font-weight: 400;
+  color: #554A58;
+}
+
+.accordionToggleCircle {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background: #FAF5F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #E50046;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* TABLE-LIKE 5-COLUMN JOB ROW */
+.jobTableRow {
+  padding: 18px 24px;
+  border-top: 1px solid #E5E7EB;
+  display: grid;
+  grid-template-columns: 2.2fr 1.3fr 1fr 1fr 0.8fr;
+  align-items: center;
+  gap: 16px;
+  transition: background 0.2s ease;
+}
+
+.jobTableRow:hover {
+  background: #FCF9FD;
+}
+
+.jobColTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.jobTitleText {
+  font-size: 16px;
+  font-weight: 700;
+  color: #3A0B4D;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.jobTitleText:hover {
+  color: #E50046;
+}
+
+.jobPostedSub {
+  font-size: 12px;
+  color: #6D6072;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.jobNewTag {
+  color: #1E7E34;
+  font-weight: 800;
+  font-size: 11px;
+}
+
+.jobColLocation {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #3A0B4D;
+}
+
+.jobPinIcon {
+  color: #554A58;
+  font-size: 14px;
+}
+
+.jobColArrangement {
+  display: inline-flex;
+}
+
+.arrangementPill {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+.arrangementRemote {
+  background: #EAF7EC;
+  color: #1E7E34;
+}
+
+.arrangementHybrid {
+  background: #F3EDF5;
+  color: #3A0B4D;
+}
+
+.arrangementOnsite {
+  background: #FFF3EB;
+  color: #D9531E;
+}
+
+.jobColType {
+  font-size: 14px;
+  color: #554A58;
+}
+
+.jobColAction {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.viewJobBtn {
+  background: transparent;
+  border: none;
+  color: #E50046;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.15s;
+}
+
+.viewJobBtn:hover {
+  transform: translateX(2px);
+}
+
+.noJobsNotice {
+  background: #FFFFFF;
+  border: 1px dashed #D5C8D8;
+  border-radius: 24px;
+  padding: 48px;
+  text-align: center;
+  color: #6D6072;
+}
+
+/* ===================================================
+   4. WHY ZOIKO & WHERE WE WORK
+   =================================================== */
+.whySection {
+  padding: 72px 0;
+  background-color: #FFFFFF;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.valueCard {
+  background: #FAF5F9;
+  border-radius: 24px;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.valueIconBox {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #E50046 0%, #EE2836 55%, #FF7A45 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.valueTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3A0B4D;
+  margin-bottom: 8px;
+}
+
+.valueDesc {
+  font-size: 15px;
+  color: #554A58;
+  line-height: 1.5;
+}
+
+/* WHERE WE WORK BANNER */
+.whereWeWorkBanner {
+  background: linear-gradient(135deg, #3A0B4D 0%, #4A1060 100%);
+  border-radius: 30px;
+  padding: 36px 40px;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+}
+
+.whereRadialGlow {
+  position: absolute;
+  top: -80px;
+  right: -40px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(229, 0, 70, 0.45) 0%, rgba(229, 0, 70, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.whereHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.officesCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+.officeCardBox {
+  background: rgba(255, 255, 255, 0.06);
+  outline: 1px solid rgba(255, 255, 255, 0.16);
+  outline-offset: -1px;
+  border-radius: 16px;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.officeBoxTop {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.officePinDot {
+  color: #F8B4D4;
+  font-size: 14px;
+}
+
+.officeCityName {
+  font-size: 15px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.officeRolesSub {
+  font-size: 12px;
+  color: #E2E8F0;
+  padding-left: 20px;
+}
+
+/* ===================================================
+   5. LIFE AT ZOIKO
+   =================================================== */
+.lifeSection {
+  padding: 72px 0;
+  background-color: #FFFFFF;
+  border-top: 1px solid #EFE7F2;
+}
+
+.lifeTopGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.lifeBigCard {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  height: 384px;
+  background-color: #EDE4EE;
+}
+
+.lifeBigCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.lifeOverlayBanner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, rgba(31, 7, 40, 0) 0%, rgba(31, 7, 40, 0.85) 100%);
+  padding: 24px 28px;
+  color: #FFFFFF;
+}
+
+.lifeOverlayTitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.lifeOverlayDesc {
+  font-size: 15px;
+  color: #F1F5F9;
+  line-height: 1.5;
+}
+
+.lifeSideCard {
+  background: #3A0B4D;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+  height: 384px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #FFFFFF;
+}
+
+.lifeSideBgImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.lifeSideFloatingIcon {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #F8B4D4;
+  margin-bottom: 12px;
+}
+
+.lifeSideContent {
+  position: relative;
+  z-index: 1;
+}
+
+.lifeBottomGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.benefitCard {
+  background: #FAF5F9;
+  border-radius: 24px;
+  padding: 24px;
+}
+
+.benefitTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3A0B4D;
+  margin-bottom: 6px;
+}
+
+.benefitDesc {
+  font-size: 14px;
+  color: #554A58;
+  line-height: 1.5;
+}
+
+/* ===================================================
+   6. HOW WE HIRE (STEPS)
+   =================================================== */
+.hireSection {
+  padding: 72px 0;
+  background-color: #FAF5F9;
+  border-top: 1px solid #EFE7F2;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.stepCard {
+  background: #FFFFFF;
+  border-radius: 24px;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+  padding: 24px;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.stepBadgeCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background: #FAF5F9;
+  color: #E50046;
+  font-size: 16px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.stepWatermark {
+  position: absolute;
+  top: 5px;
+  right: 18px;
+  font-size: 72px;
+  font-weight: 900;
+  color: rgba(31, 7, 40, 0.07);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.stepTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3A0B4D;
+  margin-bottom: 8px;
+}
+
+.stepDesc {
+  font-size: 14px;
+  color: #554A58;
+  line-height: 1.5;
+}
+
+/* Step 3 (Interview) highlighted */
+.stepCardActive {
+  background: #3A0B4D;
+  outline-color: #3A0B4D;
+  color: #FFFFFF;
+}
+
+.stepCardActive .stepBadgeCircle {
+  background: linear-gradient(135deg, #E50046 0%, #EE2836 55%, #FF7A45 100%);
+  color: #FFFFFF;
+}
+
+.stepCardActive .stepWatermark {
+  color: rgba(255, 255, 255, 0.1);
+}
+
+.stepCardActive .stepTitle {
+  color: #FFFFFF;
+}
+
+.stepCardActive .stepDesc {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ===================================================
+   7. MY APPLICATION STATUS CHECKER
+   =================================================== */
+.statusSection {
+  padding: 72px 0;
+  background-color: #FFFFFF;
+  border-top: 1px solid #EFE7F2;
+}
+
+.statusCardGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.statusFormCard {
+  background: #FAF5F9;
+  border-radius: 24px;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.statusInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.statusLabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: #3A0B4D;
+}
+
+.statusInput {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 16px;
+  font-size: 15px;
+  color: #3A0B4D;
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  outline: 1px solid #D5C8D8;
+  outline-offset: -1px;
+  border: none;
+}
+
+.statusInput:focus {
+  outline-color: #E50046;
+}
+
+.statusButtonRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.primaryCheckBtn {
+  min-height: 48px;
+  padding: 12px 24px;
+  background-color: #E50046;
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 800;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.primaryCheckBtn:hover {
+  background-color: #C7003D;
+}
+
+.sampleBtn {
+  min-height: 48px;
+  padding: 12px 20px;
+  background-color: #FFFFFF;
+  color: #3A0B4D;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 9999px;
+  outline: 1px solid #D5C8D8;
+  outline-offset: -1px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sampleBtn:hover {
+  background-color: #FAF5FA;
+}
+
+.statusSubtext {
+  font-size: 12px;
+  color: #554A58;
+}
+
+.statusResultBox {
+  margin-top: 8px;
+  padding: 18px 20px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+}
+
+.statusResultTitle {
+  font-size: 14px;
+  font-weight: 800;
+  color: #3A0B4D;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.statusPill {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: #E50046;
+  color: #FFFFFF;
+}
+
+.statusResultDetail {
+  font-size: 13px;
+  color: #554A58;
+  line-height: 1.5;
+}
+
+.statusImageCard {
+  background: #FFFFFF;
+  border-radius: 24px;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.statusImageWrap {
+  width: 100%;
+  height: 384px;
+  position: relative;
+  background-color: #EDE5EF;
+}
+
+.statusImageWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.statusImageCaption {
+  padding: 20px;
+  font-size: 15px;
+  color: #554A58;
+  line-height: 1.5;
+}
+
+/* ===================================================
+   8. INCLUSIVE & SAFE HIRING
+   =================================================== */
+.inclusiveSection {
+  padding: 72px 0;
+  background-color: #FAF5F9;
+  border-top: 1px solid #EFE7F2;
+}
+
+.inclusiveGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.inclusiveCard {
+  background: #FFFFFF;
+  border-radius: 24px;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 240px;
+}
+
+.inclusiveCardDark {
+  background: #3A0B4D;
+  outline-color: #3A0B4D;
+  color: #FFFFFF;
+}
+
+.inclusiveIcon {
+  font-size: 26px;
+  color: #E50046;
+}
+
+.inclusiveCardDark .inclusiveIcon {
+  color: #F8B4D4;
+}
+
+.inclusiveTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3A0B4D;
+}
+
+.inclusiveCardDark .inclusiveTitle {
+  color: #FFFFFF;
+}
+
+.inclusiveDesc {
+  font-size: 14px;
+  color: #554A58;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.inclusiveCardDark .inclusiveDesc {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.scamReportLink {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #F8B4D4;
+  text-decoration: underline;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.scamReportLink:hover {
+  color: #FFFFFF;
+}
+
+/* ===================================================
+   9. HIRING FAQS
+   =================================================== */
+.faqSection {
+  padding: 72px 0;
+  background-color: #FFFFFF;
+  border-top: 1px solid #EFE7F2;
+}
+
+.faqLayout {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.faqSideCard {
+  background: #FAF5F9;
+  border-radius: 24px;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+  overflow: hidden;
+}
+
+.faqSideImgWrap {
+  width: 100%;
+  height: 384px;
+  background: #EDE5EF;
+}
+
+.faqSideImgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.faqSideBody {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.faqSideTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #3A0B4D;
+}
+
+.faqSideText {
+  font-size: 14px;
+  color: #554A58;
+  line-height: 1.5;
+}
+
+/* FAQ ACCORDION */
+.accordionList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accordionItem {
+  background: #FFFFFF;
+  border-radius: 20px;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+  overflow: hidden;
+  transition: outline-color 0.2s;
+}
+
+.accordionItemOpen {
+  outline-color: #E50046;
+}
+
+.accordionHeader {
+  width: 100%;
+  min-height: 64px;
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  color: #3A0B4D;
+  gap: 16px;
+}
+
+.accordionIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 12px;
+  background: #FAF5F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: #E50046;
+  flex-shrink: 0;
+}
+
+.accordionItemOpen .accordionIcon {
+  background: #E50046;
+  color: #FFFFFF;
+}
+
+.accordionBody {
+  padding: 0 20px 18px 20px;
+  font-size: 15px;
+  color: #554A58;
+  line-height: 1.6;
+}
+
+/* PHOTO CREDITS STRIP */
+.photoCreditsStrip {
+  border-top: 1px solid #E5E7EB;
+  padding: 20px 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #554A58;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #FFFFFF;
+}
+
+/* ===================================================
+   10. MODALS (JOB DETAILS & APPLY FLOW)
+   =================================================== */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(22, 4, 30, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.modalWindow {
+  background: #FFFFFF;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  padding: 36px 40px;
+  position: relative;
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #F6F1F8;
+  border: none;
+  font-size: 18px;
+  color: #3A0B4D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modalCloseBtn:hover {
+  background: #EDE4F0;
+}
+
+.modalTopCategory {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #E50046;
+  margin-bottom: 6px;
+}
+
+.modalJobTitle {
+  font-size: 28px;
+  font-weight: 900;
+  color: #3A0B4D;
+  margin-bottom: 24px;
+}
+
+.modalStepper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stepProgressItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stepProgressBar {
+  height: 4px;
+  background: #EDE6F0;
+  border-radius: 2px;
+}
+
+.stepProgressBarActive {
+  background: #E50046;
+}
+
+.stepProgressLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: #8C7D92;
+}
+
+.stepProgressLabelActive {
+  color: #3A0B4D;
+}
+
+.modalTwoCol {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.modalSectionHeading {
+  font-size: 15px;
+  font-weight: 800;
+  color: #3A0B4D;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.modalSectionHeading:first-child {
+  margin-top: 0;
+}
+
+.modalParagraph {
+  font-size: 13px;
+  color: #5D5063;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.modalBulletList {
+  margin-left: 18px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modalBulletList li {
+  font-size: 13px;
+  color: #5D5063;
+  line-height: 1.55;
+}
+
+.modalSideCard {
+  background: #FAF5F9;
+  border: 1px solid #EFE6F2;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.modalSideRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #F1E9F4;
+  font-size: 12px;
+}
+
+.modalSideRow:last-of-type {
+  border-bottom: none;
+}
+
+.modalSideLabel {
+  color: #796B7F;
+  font-weight: 500;
+}
+
+.modalSideValue {
+  color: #3A0B4D;
+  font-weight: 700;
+  text-align: right;
+}
+
+.modalApplyCTA {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 12px;
+  padding: 13px;
+  background-color: #E50046;
+  color: #FFFFFF;
+  border-radius: 9999px;
+  border: none;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.modalLegalNote {
+  font-size: 11px;
+  color: #887A8E;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.applyAlertBox {
+  background: #FAF5F9;
+  border: 1px solid #ECE2EF;
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 13px;
+  color: #4B3F50;
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+
+.applyQuestionTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #3A0B4D;
+  margin-bottom: 12px;
+}
+
+.applyRadioGroup {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.applyRadioBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 1px solid #D9CFDF;
+  border-radius: 9999px;
+  background: #FFFFFF;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  color: #3A0B4D;
+  transition: all 0.2s;
+}
+
+.applyRadioBtnActive {
+  border-color: #E50046;
+  background: #FEE8F0;
+  color: #E50046;
+}
+
+.applyFormGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.applyFormFull {
+  grid-column: 1 / -1;
+}
+
+.uploadBox {
+  border: 2px dashed #D2C4D7;
+  background: #FAF5F9;
+  border-radius: 14px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  display: block;
+}
+
+.uploadBox:hover {
+  border-color: #E50046;
+}
+
+.uploadIcon {
+  font-size: 24px;
+  color: #E50046;
+  margin-bottom: 8px;
+}
+
+.uploadTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #3A0B4D;
+  margin-bottom: 4px;
+}
+
+.uploadHelp {
+  font-size: 11px;
+  color: #8C7D92;
+}
+
+.reviewBox {
+  background: #FAF5F9;
+  border: 1px solid #ECE2EF;
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reviewName {
+  font-size: 16px;
+  font-weight: 800;
+  color: #3A0B4D;
+}
+
+.reviewMeta {
+  font-size: 13px;
+  color: #5D5063;
+}
+
+.reviewResume {
+  font-size: 13px;
+  color: #3A0B4D;
+  font-weight: 600;
+}
+
+.reviewRole {
+  font-size: 13px;
+  color: #5D5063;
+}
+
+.consentItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #4B3F50;
+  margin-bottom: 12px;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.consentItem input {
+  accent-color: #E50046;
+  margin-top: 3px;
+}
+
+.consentLink {
+  color: #E50046;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.modalActionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid #F0E8F2;
+  margin-top: 24px;
+}
+
+.modalBackBtn {
+  padding: 10px 22px;
+  background: #FFFFFF;
+  border: 1px solid #D5C8D8;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.modalSubmitBtn {
+  padding: 10px 24px;
+  background: #E50046;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 9999px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.successBox {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.successIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #EAF7EC;
+  color: #1E7E34;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin: 0 auto 20px auto;
+}
+
+.successTitle {
+  font-size: 24px;
+  font-weight: 900;
+  color: #3A0B4D;
+  margin-bottom: 10px;
+}
+
+.successDesc {
+  font-size: 14px;
+  color: #5D5063;
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto 24px auto;
+}
+
+.refTagBox {
+  background: #FEE8F0;
+  border: 1px dashed #E50046;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #E50046;
+}
+
+/* ===================================================
+   RESPONSIVE BREAKPOINTS
+   =================================================== */
+@media (max-width: 1200px) {
+  .officesCardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .heroWhiteCard,
+  .heroMiddleCard,
+  .heroRightCol {
+    height: auto;
+    min-height: 380px;
+  }
+  .teamsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .jobsLayout {
+    grid-template-columns: 1fr;
+  }
+  .valuesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .lifeTopGrid {
+    grid-template-columns: 1fr;
+  }
+  .lifeBigCard,
+  .lifeSideCard {
+    height: 320px;
+  }
+  .stepsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    height: auto;
+  }
+  .statusCardGrid {
+    grid-template-columns: 1fr;
+  }
+  .inclusiveGrid {
+    grid-template-columns: 1fr;
+  }
+  .faqLayout {
+    grid-template-columns: 1fr;
+  }
+  .modalTwoCol {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 38px;
+  }
+  .sectionTitle {
+    font-size: 32px;
+  }
+  .teamsGrid {
+    grid-template-columns: 1fr;
+  }
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+  .officesCardsGrid {
+    grid-template-columns: 1fr;
+  }
+  .lifeBottomGrid {
+    grid-template-columns: 1fr;
+  }
+  .stepsGrid {
+    grid-template-columns: 1fr;
+  }
+  .jobTableRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .jobColAction {
+    justify-content: flex-start;
+  }
+  .modalWindow {
+    padding: 24px 20px;
+  }
+}
+
+
+/* ===== fixes: classes referenced by the page but previously undefined ===== */
+.sectionBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  background: #FDE7F0;
+  color: #E50046;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.sectionBadgeLight { background: transparent; padding: 0; color: #FF5C93; margin-bottom: 6px; }
+.sectionTitleLight { color: #FFFFFF; }
+.sectionSubtitleLight { color: #E8D9EE; }
+.heroFloatingTag svg { color: #E50046; flex: none; }
+.teamFloatingIcon { color: #E50046; }
+.valueIconBox svg { color: #FFFFFF; }
+.officePinDot { display: inline-flex; color: #FF5C93; }
+.jobPinIcon { display: inline-flex; color: #554A58; }
+.toggleAccordionBtn {
+  width: 32px; height: 32px; border-radius: 50%; border: 0; cursor: pointer;
+  background: #FDE7F0; color: #E50046; display: inline-flex; align-items: center; justify-content: center;
+}
+.faqContactBtn {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 8px;
+  color: #FFFFFF; font-weight: 700; text-decoration: none;
+}
+.teamJobGroupTitle { padding-left: 0; }
+
+/* ===== layout fixes vs. design ===== */
+.whereHeaderRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "badge badge" "title note";
+  align-items: end;
+  gap: 4px 16px;
+}
+.whereHeaderRow > :nth-child(1) { grid-area: badge; justify-self: start; }
+.whereHeaderRow > :nth-child(2) { grid-area: title; text-align: left; margin: 0; }
+.whereHeaderRow > :nth-child(3) { grid-area: note; text-align: right; margin: 0; }
+.statusCardGrid { align-items: start; }
+.statusFormCard { justify-content: flex-start; }
+.sectionTitle + div { margin-top: 24px; }
+.faqContactBtn { color: #E50046; margin-top: 4px; }
+.inclusiveIcon { color: #E50046; display: inline-flex; }
+.inclusiveCardDark .inclusiveIcon { color: #FFFFFF; }
+@media (max-width: 900px) {
+  .whereHeaderRow { grid-template-columns: 1fr; grid-template-areas: "badge" "title" "note"; }
+  .whereHeaderRow > :nth-child(3) { text-align: left; }
+}
+
+.submitError { color: #B3123B; background: #FDECF1; border-radius: 10px; padding: 10px 14px; font-size: 14px; margin: 0 0 12px; }
+.modalSubmitBtn:disabled { opacity: .6; cursor: not-allowed; }
