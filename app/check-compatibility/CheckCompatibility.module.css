@@ -1,0 +1,1169 @@
+.pageWrapper {
+  width: 100%;
+  background-color: #ffffff;
+  color: #1e0b1a;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.desktopOnly {
+  display: block;
+}
+
+.mobileOnly {
+  display: none !important;
+}
+
+.mobileBreadcrumb {
+  display: none;
+}
+
+/* =========================================
+   SECTION 1A: HERO & IMEI CHECKER
+========================================= */
+.heroSection {
+  padding: 46px 0 32px;
+  background: linear-gradient(180deg, #fdf6f9 0%, #ffffff 72%);
+  text-align: center;
+}
+
+.heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c81e5a;
+}
+
+.heroTitle {
+  margin: 10px auto 10px;
+  font-size: clamp(32px, 3.8vw, 44px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #21061c;
+}
+
+.heroTitleAccent {
+  color: #ea483c;
+}
+
+.heroSubtitle {
+  margin: 0 auto 28px;
+  max-width: 440px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #6b6570;
+}
+
+.imeiCard {
+  max-width: 610px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border: 1px solid #f0e8ed;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 12px 34px rgba(33, 6, 28, 0.06);
+  text-align: left;
+}
+
+.imeiLabel {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1e0b1a;
+  margin-bottom: 8px;
+}
+
+.imeiInputRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.imeiInputBox {
+  flex: 1;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e4dce2;
+  border-radius: 10px;
+  padding: 0 12px;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.imeiInputBox:focus-within {
+  border-color: #e11d5a;
+}
+
+.imeiInputIcon {
+  color: #7a727e;
+  flex-shrink: 0;
+}
+
+.imeiInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 13.5px;
+  color: #1e0b1a;
+  background: transparent;
+  min-width: 0;
+}
+
+.imeiInput::placeholder {
+  color: #8c8290;
+}
+
+.imeiCounter {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8c8290;
+  flex-shrink: 0;
+}
+
+.imeiSubmitBtn {
+  height: 44px;
+  padding: 0 22px;
+  border: none;
+  border-radius: 10px;
+  background-color: #e11d5a;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.imeiSubmitBtn:hover {
+  background-color: #c81e5a;
+}
+
+.imeiError {
+  margin: 8px 0 0;
+  font-size: 11.5px;
+  color: #c81e5a;
+  font-weight: 600;
+}
+
+.imeiHelpers {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.imeiHelperLine {
+  margin: 0;
+  font-size: 11px;
+  color: #6b6570;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.imeiHelpLink {
+  color: #c81e5a;
+  font-weight: 600;
+  text-decoration: underline;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.imeiShieldIcon {
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+.featurePillsRow {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.featurePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background-color: #ffffff;
+  border: 1px solid #efe7ec;
+  color: #2c1828;
+  font-size: 11.5px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.featurePillIcon {
+  color: #c81e5a;
+  flex-shrink: 0;
+}
+
+/* =========================================
+   SECTION 1B: WIDE BANNER IMAGE
+========================================= */
+.bannerSection {
+  padding: 6px 0 24px;
+}
+
+.bannerWrap {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 265px;
+  background-color: #1e0b1a;
+}
+
+.bannerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 6, 18, 0.04) 35%,
+    rgba(16, 4, 14, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+.bannerPillsRow {
+  position: absolute;
+  left: 18px;
+  bottom: 16px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bannerPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background-color: #ffffff;
+  color: #1e0b1a;
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.bannerPillIcon {
+  color: #c81e5a;
+  flex-shrink: 0;
+}
+
+/* =========================================
+   SECTION 1C: YOUR COMPATIBILITY RESULT
+========================================= */
+.resultSection {
+  padding: 28px 0 56px;
+}
+
+.resultHeading {
+  margin: 0 0 18px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e0b1a;
+}
+
+.resultCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #efe7ec;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 6px 22px rgba(30, 11, 26, 0.04);
+}
+
+.resultImgWrap {
+  width: 100%;
+  height: 100%;
+  min-height: 255px;
+}
+
+.resultImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.resultBody {
+  padding: 36px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.resultTitle {
+  margin: 0 0 8px;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #1e0b1a;
+}
+
+.resultDesc {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #6b6570;
+  max-width: 390px;
+}
+
+.resultStatusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background-color: #dcfce7;
+  color: #15803d;
+  font-size: 11.5px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.resultResetBtn {
+  margin-top: 14px;
+  width: fit-content;
+  background: transparent;
+  border: 1px solid #e4dce2;
+  color: #1e0b1a;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .imeiInputRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .resultCard {
+    grid-template-columns: 1fr;
+  }
+
+  .resultBody {
+    padding: 24px 20px;
+  }
+}
+
+/* =========================================
+   SECTION 2A: SIM OPTIONS
+========================================= */
+.simSection {
+  padding: 56px 0 64px;
+  background-color: #faf6f8;
+}
+
+.sectionEyebrow {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c81e5a;
+}
+
+.sectionHeading {
+  margin: 6px 0 6px;
+  font-size: clamp(24px, 2.8vw, 32px);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: #21061c;
+}
+
+.sectionSubtext {
+  margin: 0 0 20px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6b6570;
+}
+
+.simInfoBar {
+  background-color: #f3eff4;
+  border: 1px solid #e8e1ea;
+  border-radius: 10px;
+  padding: 11px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #3d2a3a;
+  margin-bottom: 20px;
+}
+
+.simGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.simCard {
+  background-color: #ffffff;
+  border: 1px solid #efe7ec;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.simCardImgWrap {
+  width: 100%;
+  height: 118px;
+  overflow: hidden;
+}
+
+.simCardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.simCardBody {
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.simCardTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.simCardTitle {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #1e0b1a;
+}
+
+.simStatusPill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: #f3f0f4;
+  color: #6b6570;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.simStatusPillReady {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.simCardDesc {
+  margin: 0 0 18px;
+  font-size: 12px;
+  line-height: 1.48;
+  color: #6b6570;
+}
+
+.simBtnPinkMuted {
+  margin-top: auto;
+  width: fit-content;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  background-color: #f4b6cd;
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.simBtnPinkActive {
+  background-color: #e11d5a;
+}
+
+.simBtnOutlineMuted {
+  margin-top: auto;
+  width: fit-content;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid #e4dce2;
+  background-color: #ffffff;
+  color: #b5acb5;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.simBtnOutlineActive {
+  color: #1e0b1a;
+  border-color: #1e0b1a;
+}
+
+/* =========================================
+   SECTION 2B: WHERE TO FIND YOUR 15-DIGIT IMEI
+========================================= */
+.findImeiSection {
+  padding: 64px 0;
+  background-color: #ffffff;
+}
+
+.findImeiGrid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 38px;
+  align-items: center;
+}
+
+.imeiCollage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.imeiTallCard {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #ece6eb;
+  background-color: #f6f3f6;
+}
+
+.imeiTallImg {
+  width: 100%;
+  height: 100%;
+  min-height: 295px;
+  object-fit: cover;
+  display: block;
+}
+
+.imeiRightStack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.imeiDialCard {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #ece6eb;
+  height: 155px;
+}
+
+.imeiDialImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.imeiQuickCard {
+  flex: 1;
+  border-radius: 14px;
+  background-color: #2f0629;
+  color: #ffffff;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.imeiQuickEyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 6px;
+}
+
+.imeiQuickCode {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.imeiQuickCaption {
+  margin: 0;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.deviceTabs {
+  background-color: #f3eff4;
+  border-radius: 10px;
+  padding: 4px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  margin: 16px 0 18px;
+}
+
+.deviceTabBtn {
+  border: none;
+  background: transparent;
+  color: #524a56;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.deviceTabBtnActive {
+  background-color: #ffffff;
+  color: #1e0b1a;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.imeiStepsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.imeiStepItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: #2c1828;
+}
+
+.imeiStepBadge {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #c81e5a;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dualSimNote {
+  margin: 18px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #6b6570;
+}
+
+/* =========================================
+   SECTION 2C: GOOD TO KNOW
+========================================= */
+.goodToKnowSection {
+  padding: 64px 0;
+  background-color: #faf6f8;
+}
+
+.goodToKnowHeader {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.goodToKnowHeading {
+  margin: 8px auto 0;
+  max-width: 560px;
+  font-size: clamp(24px, 2.8vw, 32px);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: #21061c;
+}
+
+.checksGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.checksCard {
+  background-color: #ffffff;
+  border: 1px solid #efe7ec;
+  border-radius: 16px;
+  padding: 24px 26px;
+}
+
+.checksCardTitleGreen {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #15803d;
+}
+
+.checksCardTitleDark {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #21061c;
+}
+
+.checksList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checksItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  color: #3d2a3a;
+  line-height: 1.45;
+}
+
+.checksIconGreen {
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+.checksIconMuted {
+  color: #8c8290;
+  flex-shrink: 0;
+}
+
+@media (max-width: 992px) {
+  .simGrid,
+  .findImeiGrid,
+  .checksGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .imeiCollage {
+    grid-template-columns: 1fr;
+  }
+
+  .deviceTabs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================
+   SECTION 3A: WHERE TO GO FROM HERE
+========================================= */
+.nextStepsSection {
+  padding: 56px 0 64px;
+  background-color: #ffffff;
+}
+
+.nextStepsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.nextStepCard {
+  background-color: #ffffff;
+  border: 1px solid #efe7ec;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 14px rgba(30, 11, 26, 0.03);
+}
+
+.nextStepImgWrap {
+  width: 100%;
+  height: 122px;
+  overflow: hidden;
+}
+
+.nextStepImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.nextStepBody {
+  padding: 16px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.nextStepTitle {
+  margin: 0 0 6px;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #1e0b1a;
+}
+
+.nextStepDesc {
+  margin: 0 0 14px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #6b6570;
+}
+
+.nextStepLink {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #c81e5a;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nextStepLink:hover {
+  color: #a81548;
+  text-decoration: underline;
+}
+
+/* =========================================
+   SECTION 3B: COMPATIBILITY QUESTIONS (FAQS)
+========================================= */
+.faqSection {
+  padding: 64px 0 76px;
+  background-color: #faf6f8;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 36px;
+  align-items: flex-start;
+}
+
+.faqPhotoCard {
+  margin-top: 22px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(33, 6, 28, 0.12);
+}
+
+.faqPhotoImg {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+
+.faqPhotoFooter {
+  background-color: #2f0629;
+  color: #ffffff;
+  padding: 20px 22px;
+}
+
+.faqPhotoTitle {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.faqPhoneLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+
+.faqPhoneLink:hover {
+  color: #f3c4d8;
+}
+
+.faqPhotoCaption {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faqItem {
+  background-color: #ffffff;
+  border: 1px solid #efe7ec;
+  border-radius: 12px;
+  padding: 15px 18px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faqItemOpen {
+  border-color: #f4b6cd;
+  padding: 16px 18px;
+  box-shadow: 0 4px 14px rgba(225, 29, 90, 0.05);
+}
+
+.faqQuestionBtn {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e0b1a;
+}
+
+.faqToggleCircle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #fde8ef;
+  color: #c81e5a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.faqToggleCircleOpen {
+  background-color: #e11d5a;
+  color: #ffffff;
+}
+
+.faqAnswer {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #6b6570;
+  padding-right: 32px;
+}
+
+@media (max-width: 992px) {
+  .nextStepsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .nextStepsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   MOBILE-ONLY OVERRIDES (<= 768px)
+   Desktop (> 768px) remains 100% untouched
+========================================= */
+@media (max-width: 768px) {
+  .desktopOnly {
+    display: none !important;
+  }
+
+  .mobileOnly {
+    display: block !important;
+  }
+
+  .heroSection {
+    padding: 18px 0 28px;
+  }
+
+  .mobileBreadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #6b6570;
+    margin-bottom: 18px;
+    text-align: left;
+  }
+
+  .mobileBreadcrumbLink {
+    color: #6b6570;
+    text-decoration: underline;
+  }
+
+  .mobileBreadcrumbCurrent {
+    color: #1e0b1a;
+    font-weight: 700;
+  }
+
+  .imeiCard {
+    padding: 18px 16px;
+  }
+
+  .imeiInputRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .imeiSubmitBtn {
+    width: fit-content;
+    padding: 0 24px;
+  }
+
+  .bannerWrap {
+    height: 320px;
+  }
+
+  .bannerPillsRow {
+    flex-direction: column;
+    align-items: flex-start;
+    left: 14px;
+    bottom: 14px;
+    gap: 6px;
+  }
+
+  .resultCard {
+    border: 1.5px dashed #e4dce2;
+  }
+
+  .resultImgWrap {
+    min-height: 200px;
+  }
+
+  .simSection {
+    padding: 40px 0 48px;
+  }
+
+  .simGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .simCardImgWrap {
+    height: 150px;
+  }
+
+  /* Mobile Section 2: Find Your IMEI, Good to Know & Next Steps */
+  .findImeiSection {
+    padding: 44px 0;
+  }
+
+  .findImeiGrid {
+    gap: 24px;
+  }
+
+  .imeiCollage {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .imeiTallImg {
+    min-height: 265px;
+  }
+
+  .imeiDialCard {
+    height: 132px;
+  }
+
+  .imeiQuickCard {
+    padding: 16px 14px;
+  }
+
+  .imeiQuickCode {
+    font-size: 22px;
+  }
+
+  .deviceTabs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .goodToKnowSection {
+    padding: 48px 0;
+  }
+
+  .checksGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .nextStepsSection {
+    padding: 44px 0 48px;
+  }
+
+  .nextStepsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .nextStepImgWrap {
+    height: 160px;
+  }
+
+  /* Mobile Section 3: Compatibility Questions (FAQs) */
+  .faqSection {
+    padding: 48px 0 56px;
+  }
+
+  .faqGrid {
+    gap: 24px;
+  }
+
+  .faqPhotoImg {
+    height: 195px;
+  }
+
+  .faqPhotoFooter {
+    padding: 18px 20px;
+  }
+}
