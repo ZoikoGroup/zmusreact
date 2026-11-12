@@ -413,7 +413,7 @@ const Header = () => {
                         <span className={styles.colHeaderTitle}>Shop Plans</span>
                       </div>
                       <div className={styles.linkList}>
-                        <Link href="/all-plans" className={styles.linkItem}>
+                        <Link href="/wireless-plans" className={styles.linkItem}>
                           <span>Compare All Plans</span>
                           <ChevronRight size={13} className={styles.chevronArrow} />
                         </Link>
@@ -509,10 +509,10 @@ const Header = () => {
                           </div>
                         </div>
                         <div className={styles.promoActionArea}>
-                          <Link href="/all-plans" className={styles.promoBtn}>
+                          <Link href="/wireless-plans" className={styles.promoBtn}>
                             Compare Plans ›
                           </Link>
-                          <Link href="/all-plans" className={styles.promoDetailLink}>
+                          <Link href="/wireless-plans" className={styles.promoDetailLink}>
                             View plan details
                           </Link>
                         </div>
@@ -577,6 +577,10 @@ const Header = () => {
                         </Link>
                         <Link href="/byod-plans" className={styles.linkItem}>
                           <span>Check Compatibility</span>
+                          <ChevronRight size={13} className={styles.chevronArrow} />
+                        </Link>
+                        <Link href="/phone-unlock-help" className={styles.linkItem}>
+                          <span>Phone Unlock Help</span>
                           <ChevronRight size={13} className={styles.chevronArrow} />
                         </Link>
                         <Link href="/esim" className={styles.linkItem}>
@@ -670,7 +674,7 @@ const Header = () => {
                           <span>How BYOD Works</span>
                           <ChevronRight size={13} className={styles.chevronArrow} />
                         </Link>
-                        <Link href="/all-plans" className={styles.linkItem}>
+                        <Link href="/wireless-plans" className={styles.linkItem}>
                           <span>Choose a Plan</span>
                           <ChevronRight size={13} className={styles.chevronArrow} />
                         </Link>
@@ -1009,7 +1013,7 @@ const Header = () => {
                           </div>
                         </div>
                         <div className={styles.promoActionArea}>
-                          <Link href="/travel-plans" className={styles.promoBtn}>
+                          <Link href="/explore-international" className={styles.promoBtn}>
                             Explore International ›
                           </Link>
                         </div>
@@ -1081,11 +1085,11 @@ const Header = () => {
                           <span>Artists &amp; Creators</span>
                           <ChevronRight size={13} className={styles.chevronArrow} />
                         </Link>
-                        <Link href="/music-hub" className={styles.linkItem}>
+                        <Link href="/music-events-perk#perks" className={styles.linkItem}>
                           <span>Music Perks</span>
                           <ChevronRight size={13} className={styles.chevronArrow} />
                         </Link>
-                        <Link href="/music-hub" className={styles.linkItem}>
+                        <Link href="/music-events-perk" className={styles.linkItem}>
                           <span>Events &amp; Experiences</span>
                           <ChevronRight size={13} className={styles.chevronArrow} />
                         </Link>
@@ -1164,7 +1168,7 @@ const Header = () => {
                 {false && (
                   <li className="zk-menu-item">
                     <div className="zk-dropdown-pane">
-                      <Link href="/all-plans" className="zk-dropdown-item">All Wireless Plans</Link>
+                      <Link href="/wireless-plans" className="zk-dropdown-item">All Wireless Plans</Link>
                       <Link href="/prepaid-plans" className="zk-dropdown-item">Prepaid Plans</Link>
                       <Link href="/postpaid-plans" className="zk-dropdown-item">Postpaid Plans</Link>
                       <Link href="/family-plans" className="zk-dropdown-item">Family &amp; Multi-Line</Link>
@@ -1353,7 +1357,7 @@ const Header = () => {
                 }}
               >
                 <Link
-                  href="/all-plans"
+                  href="/wireless-plans"
                   onClick={() => setMobileMenuOpen(false)}
                   style={{ color: "#1A1A1A", padding: "8px 0" }}
                 >
@@ -1693,7 +1697,7 @@ const Header = () => {
                       <p>News releases and Info</p>
                     </div>
                   </Nav.Link>
-                  <Nav.Link href="/become-partner" className="plan-card">
+                  <Nav.Link href="/careers" className="plan-card">
                     <img src="/img/icons/careers.svg" alt="careers" className="plan-icon" />
                     <div className="plan-text">
                       <h6>Careers</h6>

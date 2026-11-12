@@ -335,6 +335,11 @@ const metaMap = {
     description:
       "Help animals, support local music and creators, and connect with people who care. Explore opportunities, partner with Zoiko, and see our community impact.",
   },
+  "/music-events-perk": {
+    title: "Music Events & Perks | Zoiko Music Community",
+    description:
+      "Discover live music, member perks you can actually use, and share your sound with the Animal & Music Loving Network.™ Explore events, artist spotlights and community programs.",
+  },
   "/plans/zoiko-core": {
     title: "Zoiko Core Plan with 5GB Unlimited Data | Save Money",
     description:
