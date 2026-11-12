@@ -1,0 +1,1235 @@
+.pageWrapper {
+  width: 100%;
+  background-color: #ffffff;
+  color: #0f172a;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.desktopOnly {
+  display: block;
+}
+
+.mobileOnly {
+  display: none !important;
+}
+
+.mobileBreadcrumb {
+  display: none;
+}
+
+/* =========================================
+   SECTION 1A: HERO BANNER
+========================================= */
+.heroSection {
+  padding: 40px 0 28px;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 80%);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #15803d;
+  margin-bottom: 12px;
+}
+
+.heroTitle {
+  margin: 0 0 12px;
+  font-size: clamp(32px, 3.8vw, 44px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #0f172a;
+}
+
+.heroSubtitle {
+  margin: 0 0 22px;
+  max-width: 400px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.heroPrimaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 10px;
+  background-color: #c8104f;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.heroPrimaryBtn:hover {
+  background-color: #a80d42;
+  color: #ffffff;
+}
+
+.heroSecondaryLink {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #0f172a;
+  text-decoration: underline;
+}
+
+.heroSecondaryLink:hover {
+  color: #c8104f;
+}
+
+.heroVisualWrap {
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  margin-left: auto;
+}
+
+.heroImg {
+  width: 100%;
+  height: 245px;
+  border-radius: 18px;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.14);
+}
+
+.checklistFloatCard {
+  position: absolute;
+  bottom: 14px;
+  left: -18px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 14px 18px;
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+  min-width: 175px;
+}
+
+.checklistFloatEyebrow {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.checklistFloatPercent {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.1;
+  margin-bottom: 3px;
+}
+
+.checklistFloatSub {
+  margin: 0;
+  font-size: 10.5px;
+  color: #64748b;
+}
+
+.emergencyBar {
+  margin-top: 26px;
+  background-color: #fff9eb;
+  border: 1px solid #f5d89a;
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.emergencyIcon {
+  color: #b45309;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.emergencyTitle {
+  margin: 0 0 2px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.emergencyDesc {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #475569;
+}
+
+.quickNavGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.quickNavCard {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quickNavCard:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+.quickNavIconPink {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background-color: #fde8ef;
+  color: #c8104f;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.quickNavIconGreen {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background-color: #e6f7ee;
+  color: #15803d;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.quickNavTitle {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.quickNavSub {
+  display: block;
+  font-size: 10.5px;
+  color: #64748b;
+}
+
+/* =========================================
+   SECTION 1B: YOUR PRE-TRAVEL CHECKLIST
+========================================= */
+.checklistSection {
+  padding: 40px 0 68px;
+  background-color: #ffffff;
+}
+
+.checklistGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 36px;
+  align-items: flex-start;
+}
+
+.sectionEyebrow {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c8104f;
+}
+
+.sectionHeading {
+  margin: 6px 0 6px;
+  font-size: clamp(24px, 2.8vw, 30px);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+.checklistSubtitle {
+  margin: 0 0 14px;
+  font-size: 12.5px;
+  color: #475569;
+  line-height: 1.45;
+}
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.progressTrack {
+  flex: 1;
+  height: 5px;
+  border-radius: 999px;
+  background-color: #e2e8f0;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 999px;
+  background-color: #c8104f;
+  transition: width 0.25s ease;
+}
+
+.progressCount {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.checklistItems {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checklistItemCard {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 13px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.checklistItemCardChecked {
+  border-color: #f4b6cd;
+  background-color: #fff9fb;
+}
+
+.checklistCheckbox {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  accent-color: #c8104f;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.checklistItemTitle {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+.checklistItemDesc {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #475569;
+}
+
+.checklistItemLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #c8104f;
+  text-decoration: none;
+}
+
+.checklistItemLink:hover {
+  text-decoration: underline;
+}
+
+.checklistActionsRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.printBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.clearBtn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.clearBtn:hover {
+  color: #c8104f;
+}
+
+/* Right Collage */
+.checklistCollage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: stretch;
+  margin-top: 28px;
+}
+
+.collageTallWrap {
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #f3f1ed;
+}
+
+.collageTallImg {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.collageRightStack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.collageTopImg {
+  width: 100%;
+  height: 165px;
+  border-radius: 16px;
+  object-fit: cover;
+  display: block;
+}
+
+.ratesLiveCard {
+  flex: 1;
+  border-radius: 16px;
+  background-color: #0d1b36;
+  color: #ffffff;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ratesLiveTitle {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.ratesLiveDesc {
+  margin: 0 0 12px;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.ratesLiveLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fb923c;
+  text-decoration: none;
+}
+
+.ratesLiveLink:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 992px) {
+  .heroGrid,
+  .checklistGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroVisualWrap {
+    margin: 0 auto;
+  }
+
+  .quickNavGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .quickNavGrid,
+  .checklistCollage {
+    grid-template-columns: 1fr;
+  }
+
+  .checklistFloatCard {
+    left: 12px;
+  }
+}
+
+/* =========================================
+   SECTION 2A: PHONE SETUP
+========================================= */
+.setupSection {
+  padding: 60px 0 64px;
+  background-color: #f8fafc;
+}
+
+.setupSubtitle {
+  margin: 6px 0 18px;
+  max-width: 500px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.deviceTabsRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.deviceTabBtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.deviceTabBtnActive {
+  background-color: #0d1b36;
+  border-color: #0d1b36;
+  color: #ffffff;
+}
+
+.setupGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: flex-start;
+  margin-top: 18px;
+}
+
+.setupWarningBar {
+  background-color: #fff9eb;
+  border: 1px solid #f5d89a;
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #5c4314;
+  margin-bottom: 12px;
+}
+
+.setupAccordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.setupAccItem {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.setupAccBtn {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.setupAccLeft {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.setupAccNum {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background-color: #fde8ef;
+  color: #c8104f;
+  font-size: 11px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.setupAccSteps {
+  list-style: decimal;
+  margin: 10px 0 0 28px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #475569;
+}
+
+.setupReviewedNote {
+  margin: 12px 0 0;
+  font-size: 10.5px;
+  color: #64748b;
+}
+
+.setupReviewedLink {
+  color: #0f172a;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.setupRightImg {
+  width: 100%;
+  height: 225px;
+  border-radius: 16px;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.setupInfoCard {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+}
+
+.setupInfoCard:last-child {
+  margin-bottom: 0;
+}
+
+.setupInfoHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.setupInfoText {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.48;
+  color: #475569;
+}
+
+.setupBulletList {
+  margin: 0;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #475569;
+}
+
+/* =========================================
+   SECTION 2B: UNDERSTAND CHARGES
+========================================= */
+.chargesSection {
+  padding: 64px 0;
+  background-color: #ffffff;
+}
+
+.chargesSubtitle {
+  margin: 6px 0 0;
+  max-width: 520px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.chargesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.chargeCard {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.chargeIconPink {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background-color: #fde8ef;
+  color: #c8104f;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.chargeIconAmber {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background-color: #fff4d6;
+  color: #b45309;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.chargeTitle {
+  margin: 0 0 6px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.chargeDesc {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.48;
+  color: #475569;
+}
+
+.wifiBannerGrid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 18px;
+  margin-top: 22px;
+  align-items: stretch;
+}
+
+.wifiBannerImg {
+  width: 100%;
+  height: 200px;
+  border-radius: 16px;
+  object-fit: cover;
+  display: block;
+}
+
+.wifiBannerCard {
+  background-color: #0d1b36;
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 28px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.wifiBannerTitle {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.wifiBannerDesc {
+  margin: 0 0 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 420px;
+}
+
+.wifiBannerBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background-color: #c8104f;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.wifiBannerBtn:hover {
+  background-color: #a80d42;
+  color: #ffffff;
+}
+
+@media (max-width: 992px) {
+  .setupGrid,
+  .wifiBannerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .chargesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .chargesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   SECTION 3A: GET HELP ABROAD
+========================================= */
+.helpSection {
+  padding: 60px 0 64px;
+  background-color: #f8fafc;
+}
+
+.helpEyebrowGreen {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #15803d;
+}
+
+.helpSubtitle {
+  margin: 6px 0 18px;
+  font-size: 12.5px;
+  color: #475569;
+}
+
+.helpGrid {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 36px;
+  align-items: flex-start;
+}
+
+.helpImg {
+  width: 100%;
+  height: 225px;
+  border-radius: 16px;
+  object-fit: cover;
+  display: block;
+}
+
+.helpCard {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.helpCardTitle {
+  margin: 0 0 14px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.helpOptionsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.helpOptionBtn {
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.helpOptionBtn:hover {
+  border-color: #cbd5e1;
+  background-color: #f8fafc;
+}
+
+.helpOptionBtnActive {
+  border-color: #c8104f;
+  background-color: #fff6f9;
+  color: #c8104f;
+}
+
+.helpTipBox {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #334155;
+}
+
+/* =========================================
+   SECTION 3B: TRAVEL QUESTIONS (FAQS)
+========================================= */
+.faqSection {
+  padding: 64px 0 76px;
+  background-color: #ffffff;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 36px;
+  align-items: flex-start;
+  margin-top: 18px;
+}
+
+.faqPhotoCard {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+}
+
+.faqPhotoImg {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+
+.faqPhotoFooter {
+  background-color: #0d1b36;
+  color: #ffffff;
+  padding: 20px 22px;
+}
+
+.faqPhotoTitle {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.faqPhotoCaption {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faqItem {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 15px 18px;
+}
+
+.faqItemOpen {
+  border-color: #f4b6cd;
+  padding: 16px 18px;
+  box-shadow: 0 4px 14px rgba(200, 16, 79, 0.05);
+}
+
+.faqQuestionBtn {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.faqToggleCircle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #fde8ef;
+  color: #c8104f;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.faqToggleCircleOpen {
+  background-color: #c8104f;
+  color: #ffffff;
+}
+
+.faqAnswer {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #475569;
+  padding-right: 32px;
+}
+
+@media (max-width: 992px) {
+  .helpGrid,
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .helpOptionsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   MOBILE-ONLY OVERRIDES (<= 768px)
+   Desktop (> 768px) remains 100% untouched
+========================================= */
+@media (max-width: 768px) {
+  .desktopOnly {
+    display: none !important;
+  }
+
+  .mobileOnly {
+    display: block !important;
+  }
+
+  .heroSection {
+    padding: 18px 0 24px;
+  }
+
+  .mobileBreadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #64748b;
+    margin-bottom: 18px;
+  }
+
+  .mobileBreadcrumbLink {
+    color: #64748b;
+    text-decoration: underline;
+  }
+
+  .mobileBreadcrumbCurrent {
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  .heroActions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .heroImg {
+    height: 290px;
+  }
+
+  .checklistFloatCard {
+    left: 0;
+    bottom: 14px;
+  }
+
+  .emergencyBar {
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+  }
+
+  .quickNavGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .checklistSection {
+    padding: 28px 0 48px;
+  }
+
+  .checklistCollage {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .collageTallImg {
+    min-height: 285px;
+  }
+
+  .collageTopImg {
+    height: 130px;
+  }
+
+  .ratesLiveCard {
+    padding: 16px 14px;
+  }
+
+  /* Mobile Section 2: Phone Setup & Understand Charges */
+  .setupSection {
+    padding: 44px 0 48px;
+  }
+
+  .setupRightImg {
+    height: 200px;
+  }
+
+  .chargesSection {
+    padding: 44px 0 48px;
+  }
+
+  .chargesGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .wifiBannerImg {
+    height: 215px;
+  }
+
+  .wifiBannerCard {
+    padding: 24px 20px;
+  }
+
+  /* Mobile Section 3: Get Help Abroad & FAQs */
+  .helpSection {
+    padding: 44px 0 48px;
+  }
+
+  .helpGrid {
+    gap: 22px;
+  }
+
+  .helpImg {
+    height: 205px;
+  }
+
+  .helpCard {
+    padding: 20px 18px;
+  }
+
+  .helpOptionsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .faqSection {
+    padding: 48px 0 56px;
+  }
+
+  .faqGrid {
+    gap: 24px;
+  }
+
+  .faqPhotoImg {
+    height: 205px;
+  }
+
+  .mobileMetaCard {
+    margin-top: 24px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #475569;
+  }
+
+  .mobileMetaCard p {
+    margin: 0 0 4px;
+  }
+
+  .mobileMetaLink {
+    display: inline-block;
+    margin-top: 4px;
+    color: #0f172a;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  .mobilePhotoCredits {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11px;
+    color: #64748b;
+    text-decoration: none;
+  }
+}

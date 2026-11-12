@@ -1,0 +1,1080 @@
+.pageWrapper {
+  width: 100%;
+  background-color: #ffffff;
+  color: #1e0b1a;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.desktopOnly {
+  display: block;
+}
+
+.mobileOnly {
+  display: none !important;
+}
+
+.mobileBreadcrumb {
+  display: none;
+}
+
+.mobileProgramTermsLink {
+  display: none;
+}
+
+.sectionEyebrow {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c81e5a;
+}
+
+.sectionHeading {
+  margin: 6px 0 6px;
+  font-size: clamp(24px, 2.8vw, 32px);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: #21061c;
+}
+
+/* =========================================
+   SECTION 1A: HERO BANNER
+========================================= */
+.heroSection {
+  padding: 44px 0 56px;
+  background: linear-gradient(180deg, #fdf6f9 0%, #ffffff 78%);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.heroPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background-color: #e6f7ee;
+  color: #15803d;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.heroTitle {
+  margin: 0 0 14px;
+  font-size: clamp(32px, 3.8vw, 44px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #21061c;
+}
+
+.heroTitleAccent {
+  color: #c81e5a;
+}
+
+.heroSubtitle {
+  margin: 0 0 20px;
+  max-width: 440px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #524a56;
+}
+
+.heroNoticeBox {
+  background-color: #f5f2f7;
+  border: 1px solid #e9e2ee;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.heroNoticeIcon {
+  color: #524a56;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.heroNoticeTitle {
+  margin: 0 0 2px;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #1e0b1a;
+}
+
+.heroNoticeDesc {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #524a56;
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.heroPrimaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 22px;
+  border-radius: 999px;
+  background-color: #e11d5a;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.heroPrimaryBtn:hover {
+  background-color: #c81e5a;
+  color: #ffffff;
+}
+
+.heroSecondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 22px;
+  border-radius: 999px;
+  background-color: #ffffff;
+  border: 1px solid #e4dce2;
+  color: #1e0b1a;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+
+.heroSecondaryBtn:hover {
+  border-color: #c81e5a;
+  color: #c81e5a;
+}
+
+/* Right Collage */
+.heroCollage {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: 340px;
+  margin-left: auto;
+}
+
+.collageMainImg {
+  width: 72%;
+  height: 225px;
+  border-radius: 16px;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.collageTopRightImg {
+  position: absolute;
+  top: 44px;
+  right: 0;
+  width: 35%;
+  height: 135px;
+  border-radius: 14px;
+  object-fit: cover;
+  border: 4px solid #ffffff;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+}
+
+.collageBottomLeftImg {
+  position: absolute;
+  bottom: 0;
+  left: 42px;
+  width: 40%;
+  height: 125px;
+  border-radius: 14px;
+  object-fit: cover;
+  border: 4px solid #ffffff;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+}
+
+.howValueCard {
+  position: absolute;
+  bottom: 12px;
+  right: 10px;
+  width: 52%;
+  background-color: #ffffff;
+  border: 1px solid #efe7ec;
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 14px 32px rgba(33, 6, 28, 0.12);
+  z-index: 3;
+}
+
+.howValueEyebrow {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b6570;
+  margin-bottom: 8px;
+}
+
+.howValueRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: #524a56;
+  margin-bottom: 4px;
+}
+
+.howValueRow:last-child {
+  margin-bottom: 0;
+}
+
+.howValueStrong {
+  font-weight: 700;
+  color: #1e0b1a;
+}
+
+/* =========================================
+   SECTION 1B: FOUR STEPS, WITH NO SURPRISES
+========================================= */
+.stepsSection {
+  padding: 52px 0 60px;
+  background-color: #ffffff;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.stepCard {
+  background-color: #ffffff;
+  border: 1px solid #efe7ec;
+  border-radius: 16px;
+  padding: 22px 20px;
+  box-shadow: 0 4px 14px rgba(30, 11, 26, 0.03);
+  display: flex;
+  flex-direction: column;
+}
+
+.stepCardDark {
+  background-color: #2f0629;
+  border-color: #2f0629;
+  color: #ffffff;
+}
+
+.stepCardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.stepIconBox {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background-color: #fde8ef;
+  color: #c81e5a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepIconBoxDark {
+  background-color: #e11d5a;
+  color: #ffffff;
+}
+
+.stepNumWatermark {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  color: #f0eaef;
+}
+
+.stepNumWatermarkDark {
+  color: rgba(255, 255, 255, 0.14);
+}
+
+.stepTitle {
+  margin: 0 0 6px;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #1e0b1a;
+}
+
+.stepTitleDark {
+  color: #ffffff;
+}
+
+.stepDesc {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.48;
+  color: #6b6570;
+}
+
+.stepDescDark {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.disclaimerBar {
+  margin-top: 22px;
+  background-color: #fff9eb;
+  border: 1px solid #f5e2b8;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #5c4314;
+}
+
+.disclaimerIcon {
+  color: #b45309;
+  flex-shrink: 0;
+}
+
+/* =========================================
+   SECTION 1C: TRADE-IN CHECKER
+========================================= */
+.checkerSection {
+  padding: 64px 0;
+  background-color: #faf6f8;
+}
+
+.checkerSubtitle {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #6b6570;
+}
+
+.checkerGrid {
+  display: grid;
+  grid-template-columns: 0.34fr 1fr;
+  gap: 24px;
+  align-items: flex-start;
+  margin-top: 26px;
+}
+
+.checkerSidebar {
+  background-color: #ffffff;
+  border: 1px solid #efe7ec;
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checkerStepRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
+.checkerStepRowActive {
+  background-color: #fdf2f6;
+}
+
+.checkerStepBadge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #ece6eb;
+  color: #6b6570;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.checkerStepBadgeActive {
+  background-color: #e11d5a;
+  color: #ffffff;
+}
+
+.checkerStepName {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1e0b1a;
+}
+
+.checkerStepSub {
+  display: block;
+  font-size: 11px;
+  color: #6b6570;
+}
+
+.checkerFormCard {
+  background-color: #ffffff;
+  border: 1px solid #efe7ec;
+  border-radius: 18px;
+  padding: 28px 30px;
+  box-shadow: 0 8px 24px rgba(30, 11, 26, 0.04);
+}
+
+.checkerCardTitle {
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: 800;
+  color: #1e0b1a;
+}
+
+.checkerModeTabs {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 10px;
+  background-color: #f3eff4;
+  margin-bottom: 18px;
+}
+
+.checkerModeBtn {
+  border: none;
+  background: transparent;
+  color: #524a56;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.checkerModeBtnActive {
+  background-color: #ffffff;
+  color: #1e0b1a;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.checkerSelectGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.fieldLabel {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1e0b1a;
+  margin-bottom: 6px;
+}
+
+.fieldControl {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #e4dce2;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 13px;
+  color: #1e0b1a;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.fieldControl:focus {
+  border-color: #e11d5a;
+}
+
+.zipWrap {
+  max-width: 220px;
+}
+
+.checkerSubmitBtn {
+  margin-top: 18px;
+  background-color: #e11d5a;
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.checkerSubmitBtn:hover {
+  background-color: #c81e5a;
+}
+
+.checkerStatusNote {
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background-color: #fdf2f6;
+  border: 1px solid #f7d0df;
+  font-size: 12px;
+  color: #1e0b1a;
+}
+
+@media (max-width: 992px) {
+  .heroGrid,
+  .checkerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroCollage {
+    margin: 0 auto;
+  }
+
+  .stepsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .stepsGrid,
+  .checkerSelectGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .zipWrap {
+    max-width: 100%;
+  }
+}
+
+/* =========================================
+   SECTION 2A: PROTECT YOUR DATA
+========================================= */
+.protectSection {
+  padding: 56px 0 60px;
+  background-color: #ffffff;
+}
+
+.protectHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.readyBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background-color: #e6f7ee;
+  color: #15803d;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.protectGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.protectCard {
+  background-color: #ffffff;
+  border: 1px solid #efe7ec;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 14px rgba(30, 11, 26, 0.03);
+}
+
+.protectImgWrap {
+  position: relative;
+  width: 100%;
+  height: 112px;
+  overflow: hidden;
+}
+
+.protectImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.protectNumBadge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #c81e5a;
+  font-size: 11px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 22px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
+}
+
+.protectBody {
+  padding: 16px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.protectTitle {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #1e0b1a;
+}
+
+.protectDesc {
+  margin: 0 0 14px;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #6b6570;
+}
+
+.markDoneLabel {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e0b1a;
+  cursor: pointer;
+  user-select: none;
+}
+
+.markDoneCheckbox {
+  width: 15px;
+  height: 15px;
+  accent-color: #e11d5a;
+  cursor: pointer;
+}
+
+.shippingBar {
+  margin-top: 18px;
+  background-color: #f5f2f7;
+  border: 1px solid #ebe4ef;
+  border-radius: 10px;
+  padding: 11px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+  color: #3d2a3a;
+}
+
+/* =========================================
+   SECTION 2B: RELATED WAYS TO SWITCH AND SAVE
+========================================= */
+.relatedSection {
+  padding: 56px 0 64px;
+  background-color: #faf6f8;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.relatedCard {
+  background-color: #ffffff;
+  border: 1px solid #efe7ec;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 14px rgba(30, 11, 26, 0.03);
+}
+
+.relatedImgWrap {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+}
+
+.relatedImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.relatedBody {
+  padding: 16px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.relatedTitle {
+  margin: 0 0 6px;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #1e0b1a;
+}
+
+.relatedDesc {
+  margin: 0 0 14px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #6b6570;
+}
+
+.relatedGoLink {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #c81e5a;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.relatedGoLink:hover {
+  color: #a81548;
+  text-decoration: underline;
+}
+
+/* =========================================
+   SECTION 2C: TRADE-IN QUESTIONS (FAQS)
+========================================= */
+.faqSection {
+  padding: 64px 0 76px;
+  background-color: #ffffff;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 36px;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.faqPhotoCard {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(33, 6, 28, 0.12);
+}
+
+.faqPhotoImg {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  display: block;
+}
+
+.faqPhotoFooter {
+  background-color: #2f0629;
+  color: #ffffff;
+  padding: 20px 22px;
+}
+
+.faqPhotoTitle {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.faqPhoneLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+
+.faqPhoneLink:hover {
+  color: #f3c4d8;
+}
+
+.faqPhotoCaption {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faqItem {
+  background-color: #ffffff;
+  border: 1px solid #efe7ec;
+  border-radius: 12px;
+  padding: 15px 18px;
+}
+
+.faqItemOpen {
+  border-color: #f4b6cd;
+  padding: 16px 18px;
+  box-shadow: 0 4px 14px rgba(225, 29, 90, 0.05);
+}
+
+.faqQuestionBtn {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e0b1a;
+}
+
+.faqToggleCircle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #fde8ef;
+  color: #c81e5a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.faqToggleCircleOpen {
+  background-color: #e11d5a;
+  color: #ffffff;
+}
+
+.faqAnswer {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #6b6570;
+  padding-right: 32px;
+}
+
+@media (max-width: 992px) {
+  .protectGrid,
+  .relatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .protectHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .protectGrid,
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   MOBILE-ONLY OVERRIDES (<= 768px)
+   Desktop (> 768px) remains 100% untouched
+========================================= */
+@media (max-width: 768px) {
+  .desktopOnly {
+    display: none !important;
+  }
+
+  .mobileOnly {
+    display: block !important;
+  }
+
+  .heroSection {
+    padding: 18px 0 40px;
+  }
+
+  .mobileBreadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #6b6570;
+    margin-bottom: 18px;
+  }
+
+  .mobileBreadcrumbLink {
+    color: #6b6570;
+    text-decoration: underline;
+  }
+
+  .mobileBreadcrumbCurrent {
+    color: #1e0b1a;
+    font-weight: 700;
+  }
+
+  .mobileProgramTermsLink {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #c81e5a;
+    text-decoration: underline;
+    margin-left: 4px;
+  }
+
+  .heroCollage {
+    height: 310px;
+    max-width: 340px;
+    margin: 12px auto 0;
+  }
+
+  .collageMainImg {
+    width: 74%;
+    height: 195px;
+  }
+
+  .collageTopRightImg {
+    top: 38px;
+    width: 36%;
+    height: 118px;
+  }
+
+  .collageBottomLeftImg {
+    left: 24px;
+    width: 42%;
+    height: 116px;
+  }
+
+  .howValueCard {
+    width: 58%;
+    right: 0;
+    bottom: 8px;
+    padding: 12px 14px;
+  }
+
+  .stepsSection {
+    padding: 40px 0 48px;
+  }
+
+  .stepsGrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .checkerSection {
+    padding: 48px 0;
+  }
+
+  .checkerFormCard {
+    padding: 22px 18px;
+  }
+
+  .checkerModeTabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .checkerSelectGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .zipWrap {
+    max-width: 100%;
+  }
+
+  /* Mobile Section 2: Protect Data, Related Ways & FAQs */
+  .protectSection {
+    padding: 44px 0 48px;
+  }
+
+  .protectHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .protectGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .protectImgWrap {
+    background-color: #ede9e2;
+    height: 115px;
+  }
+
+  .protectImg {
+    display: none;
+  }
+
+  .relatedSection {
+    padding: 44px 0 48px;
+  }
+
+  .relatedGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .relatedImgWrap {
+    height: 155px;
+  }
+
+  .faqSection {
+    padding: 48px 0 56px;
+  }
+
+  .faqGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .faqPhotoImg {
+    height: 205px;
+  }
+}
