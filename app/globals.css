@@ -623,7 +623,7 @@ a {
   justify-content: flex-end;
   min-height: max(780px, 55vw);
   padding: 40px 4.5%;
-  background: #fdf6ef url("/img/login-bg.png") no-repeat left center / cover;
+  background: #fdf6ef url("/img/login-bg-new.webp") no-repeat left center / cover;
 }
 .zl-panel {
   width: 100%;
