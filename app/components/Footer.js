@@ -6,35 +6,181 @@ import Image from "next/image";
 import WhatsAppFloating from "./WhatsApp";
 import {
   Smartphone,
-  Calendar,
-  UserCheck,
-  Briefcase,
-  Heart,
+  UserRound,
+  BriefcaseBusiness,
   Music,
-  Users,
-  Shield,
+  UsersRound,
+  ShieldCheck,
   Phone,
   Mail,
   Headphones,
   ChevronRight,
-  Radio,
-  ArrowLeftRight,
-  PlusCircle,
-  HelpCircle,
+  ChevronDown,
+  ArrowRightLeft,
+  CreditCard,
   PawPrint,
-  Layers2,
-  PawPrintIcon,
-  ShieldCheck,
+  Layers3,
+  MapPin,
+  MessageCircleMore,
+  Clock3,
+  Lock,
+  Shield,
+  Signal,
+  SmartphoneNfc,
+  Play,
+  Facebook,
+  Instagram,
+  X,
+  Youtube,
+  Linkedin,
 } from "lucide-react";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaXTwitter,
-  FaYoutube,
-  FaLinkedinIn,
-  FaTiktok,
-} from "react-icons/fa6";
+import { FaApple } from "react-icons/fa6";
 import "../globals.css";
+import "./Footer.css";
+
+// TODO: replace with the real store listing URLs once the apps are published.
+const APP_LINKS = {
+  googlePlay: "#",
+  appStore: "#",
+};
+
+const NAV_COLUMNS = [
+  {
+    title: ["Plans &", "Pricing"],
+    icon: Layers3,
+    links: [
+      ["All Wireless Plans", "/wireless-plans"],
+      ["Compare Plans", "/all-plans"],
+      ["Zoiko Lite", "/plans/zoiko-lite"],
+      ["Zoiko Core", "/plans/zoiko-core"],
+      ["Zoiko Max", "/plans/zoiko-max"],
+      ["Family & Multi-Line", "/multi-line-options"],
+      ["Prepaid Plans", "/prepaid-plans"],
+      ["Current Offers", "/offer-page"],
+    ],
+  },
+  {
+    title: ["Phones &", "Devices"],
+    icon: Smartphone,
+    links: [
+      ["Shop Smartphones", "/shop-phones"],
+      ["Refurbished Phones", "/product-category/refurbished"],
+      ["Accessories", "/accessories"],
+      ["Bring Your Own Phone", "/byod-plans"],
+      ["Device Protection", "/device-protection"],
+      ["Tablets & Hotspots", "/devices"],
+      ["Check Compatibility", "/check-compatibility"],
+    ],
+  },
+  {
+    title: ["Activation &", "Account"],
+    icon: UserRound,
+    links: [
+      ["Activate SIM /eSIM", "/activate"],
+      ["Switch & Save", "/switch"],
+      ["Transfer Your Number", "/switch"],
+      ["Top Up / Add Data", "/top-up-plan"],
+      ["Manage My Account", "/dashboard"],
+      ["Track Activation", "/activate"],
+      ["Keep Your Number", "/switch"],
+    ],
+  },
+  {
+    title: ["Business &", "International"],
+    icon: BriefcaseBusiness,
+    links: [
+      ["Business Plans", "/business-deals"],
+      ["International Calling", "/international-callings"],
+      ["Travel & Roaming", "/travel-plans"],
+      ["Check a Destination", "/international-calling-country-list"],
+      ["International Usage Tips", "/international-usage-tips"],
+      ["Canada & Mexico Roaming", "/canada-mexico-roaming-plans"],
+      ["Partner With Us", "/become-partner"],
+    ],
+  },
+  {
+    title: ["Animal & Music", "Community"],
+    icon: PawPrint,
+    iconFill: true,
+    links: [
+      ["Animal Charities", "/animal-charities"],
+      ["Zoiko Music Hub", "/music-hub"],
+      ["Music Events & Perks", "/music-events-perk"],
+      ["Get Involved", "/get-involved"],
+      ["How Giving Works", "/zoiko-mobile-animal-welfare-partnership"],
+      ["Stories & Impact", "/explore-community"],
+      ["Artists & Creators", "/music-hub"],
+      ["Events & Experiences", "/music-events-perk"],
+    ],
+  },
+  {
+    title: ["About Zoiko"],
+    icon: UsersRound,
+    links: [
+      ["Our Story", "/about"],
+      ["Press & Media", "/news"],
+      ["Sustainability", "/sustainability"],
+      ["Blog", "/blog"],
+      ["Careers", "/careers"],
+      ["Become an Affiliate", "/become-affiliate"],
+      ["Contact Us", "/contact-us"],
+    ],
+  },
+  {
+    title: ["Help, Legal &", "Privacy"],
+    icon: ShieldCheck,
+    links: [
+      ["Help & Support", "/support"],
+      ["FAQs", "/faq"],
+      ["Coverage Map", "https://mvnoc.ai/coverage-map", true],
+      ["Network & Service", "/network-service"],
+      ["911 / E911 Disclosure", "/911-e911-disclosure"],
+      ["Privacy Choices", "/do-not-sell-my-personal-information"],
+      ["Accessibility", "/terms-and-conditions"],
+      ["Broadband Consumer Labels", "/consumer-information"],
+    ],
+  },
+];
+
+const QUICK_ACTIONS = [
+  { label: "Check Coverage", href: "https://mvnoc.ai/coverage-map", icon: Signal, external: true },
+  { label: "Activate SIM /eSIM", href: "/activate", icon: SmartphoneNfc },
+  { label: "Transfer Your Number", href: "/switch", icon: ArrowRightLeft },
+  { label: "Top Up Account", href: "/top-up-plan", icon: CreditCard },
+  { label: "Get Support", href: "/support", icon: Headphones },
+];
+
+const OFFICES = [
+  { title: "Head Office – Austin, TX", lines: ["5900 Balcones Drive, Suite 24685", "Austin, TX 78731, USA"] },
+  { title: "California – Sacramento, CA", lines: ["1401 21st Street, Suite R", "Sacramento, CA 95811, USA"] },
+  { title: "Delaware – Dover, DE", lines: ["8 The Green, Suite A", "Dover, DE 19901, USA"] },
+  { title: "Illinois – Springfield, IL", lines: ["2501 Chatham Road, Suite R", "Springfield, IL 62704, USA"] },
+  { title: "Florida – Orlando, FL", lines: ["12386 State Road 535, #302", "Orlando, FL 32836, USA"] },
+];
+
+const SOCIALS = [
+  { label: "Facebook", href: "https://www.facebook.com/zoikomobile", icon: Facebook },
+  { label: "Instagram", href: "https://instagram.com/zoikomobileus", icon: Instagram },
+  { label: "X (Twitter)", href: "https://x.com/zoikomobileusa", icon: X },
+  { label: "YouTube", href: "https://www.youtube.com/@ZoikoMobileUSA", icon: Youtube },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/zoikomobileusa/", icon: Linkedin },
+];
+
+const LEGAL_LINKS = [
+  ["Terms & Conditions", "/terms-and-conditions"],
+  ["Privacy Policy", "/privacy-policy"],
+  ["Cookies Policy", "/cookie-policy"],
+  ["Accessibility", "/terms-and-conditions"],
+  ["Network Management", "/network-service"],
+  ["Broadband Consumer Label", "/consumer-information"],
+  ["Regulatory Information", "/regularity-information"],
+  ["Your Privacy Choices", "/do-not-sell-my-personal-information"],
+  ["911 / E911", "/911-e911-disclosure"],
+];
+
+const openChat = () => {
+  window.open("https://zoikon-722985113446.europe-west1.run.app/ui/", "_blank");
+};
 
 const Footer = () => {
   const curyear = new Date().getFullYear();
@@ -88,612 +234,306 @@ const Footer = () => {
     <>
       <WhatsAppFloating />
 
-      <footer className="zk-footer-wrapper">
-        {/* ==============================================================
-            SECTION 1: "STAY IN THE ZOIKO LOOP" BANNER & ON THE GO CARD
-            ============================================================== */}
-        <section className="zk-footer-loop">
-          <div className="zk-loop-container">
-            {/* Col 1: Title & Tagline */}
-            <div className="zk-loop-left">
-              <h2>Stay in the Zoiko Loop</h2>
-              <p>
-                Get plan offers, device news, music<br />
-                updates and animal-welfare stories.
+      <footer className="zf">
+        {/* ============ 1. NEWSLETTER + APP BANNER ============ */}
+        <section className="zf-loop">
+          <div className="zf-container zf-loop-inner">
+            <div className="zf-loop-intro">
+              <span className="zf-loop-mail" aria-hidden="true">
+                <Mail size={66} strokeWidth={1.9} />
+              </span>
+              <div className="zf-loop-copy">
+                <h2>Stay in the Zoiko Loop</h2>
+                <p>
+                  Get exclusive plan offers, new devices, music events and animal charity
+                  updates.
+                </p>
+              </div>
+            </div>
+
+            <form onSubmit={handleSubscribe} className="zf-loop-form">
+              <label className="zf-loop-label" htmlFor="zf-footer-email">
+                Email address
+              </label>
+              <div className="zf-loop-capsule">
+                <Mail size={18} strokeWidth={1.75} className="zf-loop-input-icon" aria-hidden="true" />
+                <input
+                  id="zf-footer-email"
+                  type="email"
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="zf-loop-input"
+                  required
+                />
+                <button type="submit" disabled={loading} className="zf-loop-btn">
+                  {loading ? "Subscribing..." : "Subscribe"}
+                  {!loading && <ChevronRight size={16} strokeWidth={2.75} />}
+                </button>
+              </div>
+
+              <div className="zf-loop-consent">
+                <input
+                  type="checkbox"
+                  id="zf-consent"
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                />
+                <label htmlFor="zf-consent">
+                  I agree to receive marketing communications from Zoiko Mobile. You can
+                  unsubscribe at any time. <Link href="/privacy-policy">Privacy Policy</Link>
+                </label>
+              </div>
+
+              {message && (
+                <div
+                  className="zf-loop-msg"
+                  style={{ color: message.includes("✅") ? "#D1FAE5" : "#FFE4E6" }}
+                >
+                  {message}
+                </div>
+              )}
+            </form>
+
+            <div className="zf-app">
+              <span className="zf-app-phone" aria-hidden="true">
+                <span className="zf-app-phone-bar" />
+              </span>
+              <div className="zf-app-copy">
+                <h3>Get the Zoiko Mobile App</h3>
+                <p>Manage your plan, usage, and payments on the go.</p>
+                <div className="zf-app-btns">
+                  <a href={APP_LINKS.googlePlay} className="zf-store-btn">
+                    <Play size={15} fill="currentColor" strokeWidth={1} /> Google Play
+                  </a>
+                  <a href={APP_LINKS.appStore} className="zf-store-btn">
+                    <FaApple size={14} /> App Store
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============ 2. NAVIGATION DIRECTORY ============ */}
+        <section className="zf-dir">
+          <div className="zf-container zf-dir-grid">
+            <div className="zf-brand">
+              <Link href="/" aria-label="Zoiko Mobile home" className="zf-brand-logo-link">
+                <Image
+                  src="/img/zoiko-footer-logo.webp"
+                  alt="Zoiko Mobile Logo"
+                  width={176}
+                  height={61}
+                  className="zf-brand-logo"
+                />
+              </Link>
+              <div className="zf-brand-tagline">
+                The Animal &amp; Music
+                <br />
+                Loving Network.™
+              </div>
+              <svg
+                className="zf-brand-underline"
+                viewBox="0 0 196 10"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <defs>
+                  <linearGradient id="zfUnderline" x1="0" x2="1">
+                    <stop offset="0%" stopColor="#E0115F" />
+                    <stop offset="100%" stopColor="#F26A2A" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M1 8.5 C40 4.5 120 2 195 1.2 L195 3.6 C120 4.6 50 6.6 2 9.6 Z"
+                  fill="url(#zfUnderline)"
+                />
+              </svg>
+              <p className="zf-brand-desc">
+                Affordable, flexible wireless for people who love their pets, their music and
+                the freedom to stay connected across the USA.
               </p>
             </div>
 
-            {/* Col 2: Email Subscribe Form */}
-            <div className="zk-loop-center">
-              <form onSubmit={handleSubscribe} className="zk-loop-form">
-                <label className="zk-loop-form-label" htmlFor="zk-footer-email">
-                  Email address
-                </label>
-                <div className="zk-loop-input-capsule">
-                  <input
-                    id="zk-footer-email"
-                    type="email"
-                    placeholder="you@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="zk-loop-input"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="zk-loop-btn"
-                  >
-                    {loading ? "Subscribing..." : "Subscribe"}
-                  </button>
-                </div>
+            {NAV_COLUMNS.map(({ title, icon: Icon, iconFill, links }) => (
+              <div className="zf-col" key={title.join(" ")}>
+                <Icon
+                  size={32}
+                  strokeWidth={1.75}
+                  className="zf-col-icon"
+                  aria-hidden="true"
+                  {...(iconFill ? { fill: "currentColor" } : {})}
+                />
+                <h4 className="zf-col-title">
+                  {title.map((t, i) => (
+                    <span key={t}>
+                      {t}
+                      {i < title.length - 1 && <br />}
+                    </span>
+                  ))}
+                </h4>
+                <ul className="zf-col-list">
+                  {links.map(([label, href, external]) => (
+                    <li key={label}>
+                      <Link href={href} {...(external ? { target: "_blank" } : {})}>
+                        <span>{label}</span>
+                        <ChevronRight size={12} strokeWidth={3} className="zf-chev" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
 
-                <div className="zk-loop-consent">
-                  <input
-                    type="checkbox"
-                    id="zk-consent"
-                    checked={agreed}
-                    onChange={(e) => setAgreed(e.target.checked)}
-                  />
-                  <label htmlFor="zk-consent" style={{ cursor: "pointer" }}>
-                    I agree to receive marketing emails from Zoiko Mobile. Unsubscribe any time.{" "}
-                    <Link href="/privacy-policy">Privacy Policy</Link>
-                  </label>
-                </div>
+          {/* Quick actions */}
+          <div className="zf-container zf-quick">
+            <div className="zf-quick-mark" aria-hidden="true">
+              <PawPrint size={40} fill="currentColor" strokeWidth={1} />
+              <span className="zf-quick-mark-sep" />
+              <Music size={44} strokeWidth={2.4} />
+            </div>
+            <nav className="zf-quick-pill" aria-label="Quick actions">
+              {QUICK_ACTIONS.map(({ label, href, icon: Icon, external }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  className="zf-quick-item"
+                  {...(external ? { target: "_blank" } : {})}
+                >
+                  <Icon size={24} strokeWidth={2} className="zf-quick-icon" />
+                  <span>{label}</span>
+                  <ChevronRight size={16} strokeWidth={2.75} className="zf-quick-chev" />
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </section>
 
-                {message && (
-                  <div
-                    style={{
-                      marginTop: "4px",
-                      fontSize: "12px",
-                      fontWeight: 600,
-                      color: message.includes("✅") ? "#A7F3D0" : "#FEE2E2",
-                    }}
-                  >
-                    {message}
-                  </div>
-                )}
-              </form>
+        {/* ============ 3. DARK FOOTER ============ */}
+        <section className="zf-dark">
+          <div className="zf-container">
+            {/* Offices */}
+            <div className="zf-offices">
+              <div className="zf-offices-head">
+                <MapPin size={34} strokeWidth={1.75} />
+                <h4>
+                  Our Offices
+                  <br />
+                  (USA)
+                </h4>
+              </div>
+              {OFFICES.map((o) => (
+                <div className="zf-office" key={o.title}>
+                  <h5>{o.title}</h5>
+                  {o.lines.map((l) => (
+                    <p key={l}>{l}</p>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div className="zf-offices-all">
+              <Link href="/contact-us">
+                <MapPin size={22} strokeWidth={1.75} className="zf-pink" />
+                All Locations &amp; Offices
+                <ChevronRight size={16} strokeWidth={2.75} className="zf-pink" />
+              </Link>
             </div>
 
-            {/* Col 3: Manage on the go Card */}
-            <div className="zk-manage-card">
-              <div className="zk-manage-card-icon">
-                <Smartphone size={32} strokeWidth={1.75} />
-              </div>
-              <div className="zk-manage-card-content">
-                <h4>Manage on the go</h4>
-                <p>Plan, usage and payments from your phone’s browser.</p>
-                <Link href="/dashboard" className="zk-manage-card-btn">
-                  Open my account
+            {/* Contact + socials */}
+            <div className="zf-contact">
+              <div className="zf-contact-links">
+                <a href="tel:8009888116" className="zf-contact-phone">
+                  <Phone size={32} strokeWidth={1.75} className="zf-pink" />
+                  800-988-8116
+                </a>
+                <button type="button" onClick={openChat} className="zf-contact-link">
+                  <MessageCircleMore size={28} strokeWidth={1.75} className="zf-pink" />
+                  Live Chat
+                </button>
+                <a href="mailto:info@zoikomobile.com" className="zf-contact-link">
+                  <Mail size={28} strokeWidth={1.75} className="zf-pink" />
+                  Email Us
+                </a>
+                <Link href="/customer-service" className="zf-contact-link">
+                  <Clock3 size={30} strokeWidth={1.75} className="zf-pink" />
+                  Customer Support
                 </Link>
               </div>
-            </div>
-          </div>
-        </section>
 
-        {/* ==============================================================
-            SECTION 2: 8-COLUMN NAVIGATION DIRECTORY
-            ============================================================== */}
-        <section className="zk-footer-directory">
-          <div className="zk-directory-container">
-            {/* Column 1: Brand & Identity */}
-            <div className="zk-dir-col zk-dir-brand-col">
-              <Link href="/">
-                <Image
-                  src="/img/ZoikoMobileUS_Logo_PNG.png"
-                  alt="Zoiko Mobile Logo"
-                  width={140}
-                  height={50}
-                  className="zk-dir-logo"
-                />
-              </Link>
-              <div className="zk-dir-tagline">
-                The Animal &amp; Music Loving Network.™
-              </div>
-              <div className="zk-dir-desc">
-                Affordable, flexible wireless for people who love their pets,
-                their music and the freedom to stay connected across the USA.
-              </div>
-              <div className="zk-dir-paws">
-                <PawPrint size={20} />
-                <Music size={18} />
-                <Heart size={18} />
-              </div>
-            </div>
-
-            {/* Column 2: Plans & Pricing */}
-            <div className="zk-dir-col">
-              <div className="zk-dir-header">
-                <div className="zk-dir-iconbox">
-                  <Layers2 size={18} />
-                </div>
-                <h4>Plans &amp; Pricing</h4>
-              </div>
-              <ul className="zk-dir-list">
-                <li><Link href="/wireless-plans">All Wireless Plans</Link></li>
-                <li><Link href="/wireless-plans">Compare Plans</Link></li>
-                <li><Link href="/plans/zoiko-lite">Zoiko Lite</Link></li>
-                <li><Link href="/plans/zoiko-core">Zoiko Core</Link></li>
-                <li><Link href="/plans/zoiko-max">Zoiko Max</Link></li>
-                <li><Link href="/family-plans">Family &amp; Multi-Line</Link></li>
-                <li><Link href="/prepaid-plans">Prepaid Plans</Link></li>
-                <li><Link href="/offer-page">Current Offers</Link></li>
-                <li><Link href="/5g-data-deals">5G Data Deals</Link></li>
-                <li><Link href="/bundled-offers">Bundled Offers</Link></li>
-                <li><Link href="/black-friday">Black Friday Deals</Link></li>
-                <li><Link href="/christmas-phone-plan-deals-2025">Christmas Deals</Link></li>
-                <li><Link href="/new-year-phone-plans-deals-2026">New Year Deals</Link></li>
-              </ul>
-            </div>
-
-            {/* Column 3: Phones & Devices */}
-            <div className="zk-dir-col">
-              <div className="zk-dir-header">
-                <div className="zk-dir-iconbox">
-                  <Smartphone size={18} />
-                </div>
-                <h4>Phones &amp; Devices</h4>
-              </div>
-              <ul className="zk-dir-list">
-                <li><Link href="https://phones.zoikomobile.com" target="_blank">Shop Smartphones</Link></li>
-                <li><Link href="/product-category/refurbished">Refurbished Phones</Link></li>
-                <li><Link href="/accessories">Accessories</Link></li>
-                <li><Link href="/byod-plans">Bring Your Own Phone</Link></li>
-                <li><Link href="/phone-unlock-help">Phone Unlock Help</Link></li>
-                <li><Link href="/device-protection">Device Protection</Link></li>
-                <li><Link href="/accessories">Tablets &amp; Hotspots</Link></li>
-                <li><Link href="/devices">All Devices</Link></li>
-                <li><Link href="/wi-fi-calling">Wi-Fi Calling</Link></li>
-              </ul>
-            </div>
-
-            {/* Column 4: Activation & Account */}
-            <div className="zk-dir-col">
-              <div className="zk-dir-header">
-                <div className="zk-dir-iconbox">
-                  <UserCheck size={18} />
-                </div>
-                <h4>Activation &amp; Account</h4>
-              </div>
-              <ul className="zk-dir-list">
-                <li><Link href="/activate">Activate SIM</Link></li>
-                <li><Link href="/how-to-activate-your-esim">eSIM Activation Guide</Link></li>
-                <li><Link href="/switch">Switch &amp; Save</Link></li>
-                <li><Link href="/switch">Transfer Your Number</Link></li>
-                <li><Link href="/top-up-plan">Top Up / Add Data</Link></li>
-                <li><Link href="/dashboard">Manage My Account</Link></li>
-                <li><Link href="/activate">Track Activation</Link></li>
-                <li><Link href="/how-to-activate-sim">Activate Your SIM Guide</Link></li>
-                <li><Link href="/store-locator">Store Locator</Link></li>
-              </ul>
-            </div>
-
-            {/* Column 5: Business & International */}
-            <div className="zk-dir-col">
-              <div className="zk-dir-header">
-                <div className="zk-dir-iconbox">
-                  <Briefcase size={18} />
-                </div>
-                <h4>Business &amp; International</h4>
-              </div>
-              <ul className="zk-dir-list">
-                <li><Link href="/business-deals">Business Plans</Link></li>
-                <li><Link href="/explore-international">Explore International</Link></li>
-                <li><Link href="/international-callings">International Calling</Link></li>
-                <li><Link href="/international-calling-country-list">Calling Country List</Link></li>
-                <li><Link href="/free-international-minutes">Free International Minutes</Link></li>
-                <li><Link href="/out-of-bundle-rates">Out-of-Bundle Rates</Link></li>
-                <li><Link href="/travel-plans">Travel &amp; Roaming</Link></li>
-                <li><Link href="/canada-mexico-roaming-plans">Canada &amp; Mexico Roaming</Link></li>
-                <li><Link href="/support">Business Support</Link></li>
-                <li><Link href="/become-retailer">Become a Retailer</Link></li>
-                <li><Link href="/become-partner">Partner With Us</Link></li>
-              </ul>
-            </div>
-
-            {/* Column 6: Animal & Music Community */}
-            <div className="zk-dir-col">
-              <div className="zk-dir-header">
-                <div className="zk-dir-iconbox">
-                  <PawPrintIcon size={18} />
-                </div>
-                <h4>Animal &amp; Music Community</h4>
-              </div>
-              <ul className="zk-dir-list">
-                <li><Link href="/animal-charities">Animal Charities</Link></li>
-                <li><Link href="/music-hub">Zoiko Music Hub</Link></li>
-                <li><Link href="/blog">Community Stories</Link></li>
-                <li><Link href="/music-events-perk">Music Events &amp; Perks</Link></li>
-                <li><Link href="/get-involved">Get Involved</Link></li>
-              </ul>
-            </div>
-
-            {/* Column 7: About Zoiko */}
-            <div className="zk-dir-col">
-              <div className="zk-dir-header">
-                <div className="zk-dir-iconbox">
-                  <Users size={18} />
-                </div>
-                <h4>About Zoiko</h4>
-              </div>
-              <ul className="zk-dir-list">
-                <li><Link href="/about">Our Story</Link></li>
-                <li><Link href="/news">Press &amp; Media</Link></li>
-                <li><Link href="/sustainability">Sustainability</Link></li>
-                <li><Link href="/blog">Blog</Link></li>
-                <li><Link href="/careers">Careers</Link></li>
-                <li><Link href="/become-affiliate">Become an Affiliate</Link></li>
-                <li><Link href="/contact-us">Contact Us</Link></li>
-              </ul>
-            </div>
-
-            {/* Column 8: Help, Legal & Privacy */}
-            <div className="zk-dir-col">
-              <div className="zk-dir-header">
-                <div className="zk-dir-iconbox">
-                  <ShieldCheck size={18} />
-                </div>
-                <h4>Help, Legal &amp; Privacy</h4>
-              </div>
-              <ul className="zk-dir-list">
-                <li><Link href="/support">Help &amp; Support</Link></li>
-                <li><Link href="/faq">FAQs</Link></li>
-                <li><Link href="https://mvnoc.ai/coverage-map" target="_blank">Coverage Map</Link></li>
-                <li><Link href="/network-service">Network &amp; Service</Link></li>
-                <li className="zk-dir-spacer" style={{ height: "8px" }} />
-                <li><Link href="/terms-and-conditions">Terms &amp; Conditions</Link></li>
-                <li><Link href="/privacy-policy">Privacy Policy</Link></li>
-                <li><Link href="/regularity-information">Regulatory Information</Link></li>
-                <li><Link href="/911-e911-disclosure">911 / E911 Disclosure</Link></li>
-                <li><Link href="/do-not-sell-my-personal-information">Your Privacy Choices</Link></li>
-                <li><Link href="/free-delivery-policy">Free Delivery Policy</Link></li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* ==============================================================
-            SECTION 3: QUICK ACTION CAPSULE BAR
-            ============================================================== */}
-        <section className="zk-actionbar-section">
-          <div className="zk-actionbar-pill">
-            <Link href="https://mvnoc.ai/coverage-map" target="_blank" className="zk-actionbar-item">
-              <span className="zk-actionbar-icon">
-                <Radio size={19} />
-              </span>
-              Check Coverage
-            </Link>
-
-            <div className="zk-actionbar-divider" />
-
-            <Link href="/activate" className="zk-actionbar-item">
-              <span className="zk-actionbar-icon">
-                <Smartphone size={19} />
-              </span>
-              Activate SIM / eSIM
-            </Link>
-
-            <div className="zk-actionbar-divider" />
-
-            <Link href="/switch" className="zk-actionbar-item">
-              <span className="zk-actionbar-icon">
-                <ArrowLeftRight size={19} />
-              </span>
-              Transfer Your Number
-            </Link>
-
-            <div className="zk-actionbar-divider" />
-
-            <Link href="/top-up-plan" className="zk-actionbar-item">
-              <span className="zk-actionbar-icon">
-                <PlusCircle size={19} />
-              </span>
-              Top Up Account
-            </Link>
-
-            <div className="zk-actionbar-divider" />
-
-            <Link href="/support" className="zk-actionbar-item">
-              <span className="zk-actionbar-icon">
-                <HelpCircle size={19} />
-              </span>
-              Get Support
-            </Link>
-          </div>
-        </section>
-
-        {/* ==============================================================
-            SECTION 4: DEEP DARK PLUM / VIOLET FOOTER
-            ============================================================== */}
-        <section className="zk-footer-dark">
-          <div className="zk-dark-container">
-            {/* Top area */}
-            <div className="zk-dark-top">
-              {/* Left Column: Talk to us & Socials */}
-              <div>
-                <div className="zk-dark-label">Talk to us</div>
-                <div className="zk-talk-contacts">
-                  <a href="tel:8009888116" className="zk-talk-phone">
-                    <span className="zk-talk-icon">
-                      <Phone size={18} />
-                    </span>
-                    800-988-8116
-                  </a>
-
-                  <a href="mailto:info@zoikomobile.com" className="zk-talk-link">
-                    <span className="zk-talk-icon">
-                      <Mail size={16} />
-                    </span>
-                    Email us
-                  </a>
-
-                  <Link href="/customer-service" className="zk-talk-link">
-                    <span className="zk-talk-icon">
-                      <Headphones size={16} />
-                    </span>
-                    Customer support
-                  </Link>
-                </div>
-
-                <div className="zk-dark-label">Follow Zoiko Mobile</div>
-                <div className="zk-socials-row">
-                  <Link
-                    href="https://www.facebook.com/zoikomobile"
-                    target="_blank"
-                    className="zk-social-btn"
-                    aria-label="Facebook"
-                  >
-                    <FaFacebookF size={15} />
-                  </Link>
-                  <Link
-                    href="https://instagram.com/zoikomobileus"
-                    target="_blank"
-                    className="zk-social-btn"
-                    aria-label="Instagram"
-                  >
-                    <FaInstagram size={16} />
-                  </Link>
-                  <Link
-                    href="https://x.com/zoikomobileusa"
-                    target="_blank"
-                    className="zk-social-btn"
-                    aria-label="X (Twitter)"
-                  >
-                    <FaXTwitter size={15} />
-                  </Link>
-                  <Link
-                    href="https://www.youtube.com/@ZoikoMobileUSA"
-                    target="_blank"
-                    className="zk-social-btn"
-                    aria-label="YouTube"
-                  >
-                    <FaYoutube size={16} />
-                  </Link>
-                  <Link
-                    href="https://www.linkedin.com/company/zoikomobileusa/"
-                    target="_blank"
-                    className="zk-social-btn"
-                    aria-label="LinkedIn"
-                  >
-                    <FaLinkedinIn size={16} />
-                  </Link>
-                  <Link
-                    href="https://www.tiktok.com/@zoikomobile"
-                    target="_blank"
-                    className="zk-social-btn"
-                    aria-label="TikTok"
-                  >
-                    <FaTiktok size={15} />
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right Column: Office Address */}
-              <div>
-                <div className="zk-dark-label">Our offices (USA)</div>
-                <div className="zk-office-card">
-                  <div className="zk-office-info">
-                    <h5>Head Office – Austin, TX</h5>
-                    <p>
-                      5900 Balcones Drive, Suite 24685<br />
-                      Austin, TX 78731, USA
-                    </p>
-                  </div>
-                  <Link href="/contact-us" className="zk-office-btn">
-                    All Locations &amp; Offices
-                    <ChevronRight size={14} />
-                  </Link>
+              <div className="zf-follow">
+                <span className="zf-follow-label">Follow Zoiko Mobile</span>
+                <div className="zf-socials">
+                  {SOCIALS.map(({ label, href, icon: Icon }) => (
+                    <Link
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      className="zf-social"
+                      aria-label={label}
+                    >
+                      <Icon size={20} strokeWidth={1.5} />
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
 
-            {/* Bottom Legal Links & Copyright */}
-            <div className="zk-dark-bottom">
-              <div className="zk-legal-links">
-                <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
-                <Link href="/privacy-policy">Privacy Policy</Link>
-                <Link href="/do-not-sell-my-personal-information">Your Privacy Choices</Link>
-                <Link href="/terms-and-conditions">Accessibility</Link>
-                <Link href="/network-service">Network Management</Link>
-                <Link href="/consumer-information">Broadband Consumer Labels</Link>
-                <Link href="/regularity-information">Regulatory Information</Link>
-                <Link href="/911-e911-disclosure">911 / E911 Disclosure</Link>
-              </div>
+            {/* Legal links */}
+            <div className="zf-legal">
+              {LEGAL_LINKS.map(([label, href]) => (
+                <Link key={label} href={href}>
+                  {label}
+                </Link>
+              ))}
+            </div>
 
-              <div className="zk-copyright">
-                © {curyear} Zoiko Mobile. All rights reserved.
+            {/* Bottom bar */}
+            <div className="zf-bottom">
+              <div className="zf-copyright">
+                © {curyear} Zoiko Mobile | A trading name of Zoiko Mobile Inc. All rights reserved.
+              </div>
+              <div className="zf-badges">
+                <Link href="/regularity-information" className="zf-badge">
+                  <span className="zf-badge-fcc">FCC</span>
+                  <span className="zf-badge-text">
+                    <strong>FCC information</strong>
+                    <small>Regulatory disclosures</small>
+                  </span>
+                </Link>
+                <div className="zf-badge">
+                  <Lock size={24} strokeWidth={1.9} />
+                  <span className="zf-badge-text">
+                    <strong>Secure &amp;</strong>
+                    <strong>Encrypted</strong>
+                  </span>
+                </div>
+                <div className="zf-badge">
+                  <Shield size={24} strokeWidth={1.9} />
+                  <span className="zf-badge-text">
+                    <strong>PCI DSS Compliant</strong>
+                  </span>
+                </div>
+                <div className="zf-lang" aria-label="Language: English (US)">
+                  <svg width="30" height="20" viewBox="0 0 30 20" aria-hidden="true">
+                    <rect width="30" height="20" fill="#B22234" />
+                    {[1, 3, 5, 7, 9, 11].map((i) => (
+                      <rect key={i} y={(i * 20) / 13} width="30" height={20 / 13} fill="#fff" />
+                    ))}
+                    <rect width="13" height={(7 * 20) / 13} fill="#3C3B6E" />
+                  </svg>
+                  English (US)
+                  <ChevronDown size={18} strokeWidth={2.75} />
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Rainbow Gradient Line Accent */}
-          <div className="zk-footer-rainbow" />
+          {/* Gradient wave */}
+          <img src="/img/zoiko-footer-wave.webp" alt="" aria-hidden="true" className="zf-wave" />
         </section>
       </footer>
-
-      {/* =========================================================================
-          OLD FOOTER CODE (COMMENTED OUT AS REQUESTED)
-          ========================================================================= */}
-      {false && (
-      <div>
-      <Container fluid className="footerboxlarge">
-        <Container className="py-5">
-          <Row>
-            <Col md={3} sm={12} xs={12}>
-              <p className="txtred">About Us</p>
-              <ul>
-                <li><Link href={"/about"}>Our Story</Link></li>
-                <li><Link href={"/news"}>Press &amp; Media</Link></li>
-                <li><Link href={"/blog"}>Blogs</Link></li>
-                <li><Link href={"/sustainability"}>Sustainability</Link></li>
-                <li><Link href={"/animal-charities"}>Animal Charities</Link></li>
-                <li><Link href={"/music-hub"}>Zoiko Music Hub</Link></li>
-              </ul>
-            </Col>
-            <Col md={3} sm={12} xs={12}>
-              <p className="txtred">Shop</p>
-              <ul>
-                <li><Link href={"/wireless-plans"}>Mobile Plans</Link></li>
-                <li><Link href={"/byod-plans"}>BYOD</Link></li>
-                <li><Link href={"https://phones.zoikomobile.com"} target="_blank">New Smart Phones</Link></li>                            
-                <li><Link href={"/product-category/refurbished"}>Refurbished Smartphones</Link></li>
-                <li><Link href={"/accessories"}>Accessories</Link></li>
-                <li><Link href={"/offer-page"}>Special Offers</Link></li>
-              </ul>
-            </Col>
-            <Col md={3} sm={12} xs={12}>
-              <p className="txtred">Help &amp; Support</p>
-              <ul>
-                <li><Link href={"/customer-service"}>Customer Service</Link></li>
-                <li><Link href={"/faq"}>FAQs</Link></li>
-                <li><Link href={"https://mvnoc.ai/coverage-map"} target="_blank">Coverage Map</Link></li>
-                <li><Link href={"/network-service"}>Network &amp; Service</Link></li>
-                <li><Link href={"/device-protection"}>Device Protection</Link></li>
-                <li><Link href={"/return-policy"}>Return &amp; Warranty Policy</Link></li>
-                <li><Link href={"/contact-us"}>Contact Us</Link></li>
-              </ul>
-            </Col>
-            <Col md={3} sm={12} xs={12}>
-              <p className="txtred">Zoiko Legal</p>
-              <ul>
-                <li><Link href={"/terms-and-conditions"}>Terms &amp; Conditions</Link></li>
-                <li><Link href={"/privacy-policy"}>Privacy Policy</Link></li>
-                <li><Link href={"/cookie-policy"}>Cookies Policy</Link></li>
-                <li><Link href={"/intellectual-property-notice"}>Intellectual Property</Link></li>
-                <li><Link href={"/consumer-information"}>Consumer Information</Link></li>
-                <li><Link href={"/regularity-information"}>Regulatory Information</Link></li>
-                <li><Link href={"/california-consumer-privacy-act"}>California Consumer Privacy Act (CCPA)</Link>
-                  <ul>
-                    <li><Link href={"/do-not-sell-my-personal-information"}>Do Not Sell My Personal Information </Link></li>
-                    <li><Link href={"/california-consumer-privacy-act"}>CCPA Privacy Notice</Link></li>
-                    <li><Link href={"/911-e911-disclosure"}>911 &amp; E911 Disclosure </Link></li>
-                  </ul>
-                </li>
-              </ul>
-            </Col>
-          </Row>
-        </Container>
-      </Container>
-
-      <Container fluid className="footerbox">
-        <Container className="py-5 footerbox">
-          <Row className="mb-4">
-            <Col md={6} sm={12}>
-              <h4 className="fw-bold mb-3">Latest News & Offers</h4>
-              <p>Receive the latest offers, updates, and unlock amazing savings on Zoiko Mobile plans and devices.</p>
-              <InputGroup className="mb-2">
-                <Form.Control
-                  placeholder="Enter your email address"
-                  aria-label="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <Button
-                  variant="danger"
-                  size="lg"
-                  disabled={loading}
-                  onClick={handleSubscribe}
-                >
-                  {loading ? "Subscribing..." : "Subscribe"}
-                </Button>
-              </InputGroup>
-              <div style={{ minHeight: "24px", marginBottom: "8px" }}>
-                {message && (
-                  <p style={{ color: message.includes("successful") || message.includes("✅") ? "#28a745" : "#ff4444", fontSize: "14px", margin: 0 }}>
-                    {message}
-                  </p>
-                )}
-              </div>
-            </Col>
-            <Col md={6} sm={12} className="text-md-center mt-4 mt-md-0">
-              <h4 className="fw-bold mb-3">Connect with us</h4>
-              <div className="social-wrapper">
-                <Link href="https://www.facebook.com/zoikomobile" target="_blank" className="socialicon"><i className="bi bi-facebook"></i></Link>
-                <Link href="https://instagram.com/zoikomobileus" target="_blank" className="socialicon"><i className="bi bi-instagram"></i></Link>
-                <Link href="https://www.linkedin.com/company/zoikomobileusa/" target="_blank" className="socialicon"><i className="bi bi-linkedin"></i></Link>
-                <Link href="https://www.youtube.com/@ZoikoMobileUSA" target="_blank" className="socialicon"><i className="bi bi-youtube"></i></Link>
-              </div>
-            </Col>
-          </Row>
-          <hr />
-          <Row className="mt-4 office-row">
-            <Col md={4} sm={12} className="mb-4">
-              <h6 className="fw-bold">Head Office (Austin, TX)</h6>
-              <p className="mb-1">5900 Balcones Drive, #24685<br />Austin, TX 78731</p>
-              <p className="mb-1">📞 800-988-8116</p>
-              <p>✉ info@zoikomobile.com</p>
-              <div className="mt-4">
-                <h6 className="fw-bold">Washington DC Office</h6>
-                <p className="mb-1">1717 N Street NW, Suite 1<br />Washington, DC 20036</p>
-                <p className="mb-1">📞 800-988-8116</p>
-                <p>✉ info@zoikomobile.com</p>
-              </div>
-            </Col>
-            <Col md={4} sm={12} className="mb-4">
-              <h6 className="fw-bold">California Office (Sacramento, CA)</h6>
-              <p className="mb-1">1401 21st Street, Suite R<br />Sacramento, CA 95811</p>
-              <p className="mb-1">📞 800-988-8116</p>
-              <p>✉ info@zoikomobile.com</p>
-              <div className="mt-4">
-                <h6 className="fw-bold">Illinois Office (Springfield, IL)</h6>
-                <p className="mb-1">2501 Chatham Rd, Suite R<br />Springfield, IL 62704</p>
-                <p className="mb-1">📞 847-728-6872</p>
-                <p>✉ info@zoikomobile.com</p>
-              </div>
-            </Col>
-            <Col md={4} sm={12} className="mb-4">
-              <h6 className="fw-bold">Delaware Office (Dover, DE)</h6>
-              <p className="mb-1">8 The Green, Suite A<br />Dover, DE 19901</p>
-              <p className="mb-1">📞 302-899-7312</p>
-              <p>✉ info@zoikomobile.com</p>
-              <div className="mt-4">
-                <h6 className="fw-bold">Florida Office (Orlando, FL)</h6>
-                <p className="mb-1">12386 State Road 535, #302<br />Orlando, FL 32836</p>
-                <p className="mb-1">📞 800-988-8116</p>
-                <p>✉ info@zoikomobile.com</p>
-              </div>
-            </Col>
-          </Row>
-          <Row className="text-center mt-5 footer-linkss">
-            <Col className="text-center">
-              <Link href="/become-retailer" className="text-decoration-none mx-3">Become a Retailer</Link>
-              <Link href="/become-affiliate" className="text-decoration-none mx-3">Become an Affiliate</Link>
-              <Link href="/become-partner" className="text-decoration-none mx-3">Partner with Us</Link>
-            </Col>
-          </Row>
-        </Container>
-      </Container>
-
-      <Container fluid className="cpoyrightbox">
-        <Container className="py-3 text-center">
-          © {curyear} Zoiko Mobile | A trading name of Zoiko Mobile Inc.  
-          Headquartered at 5900 Balcones Drive, Suite 100, Austin, TX 78731.  
-          All Rights Reserved.
-        </Container>
-      </Container>
-      </div>
-      )}
     </>
   );
 };
